@@ -18,6 +18,84 @@
         .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #2d3748; }
         .header h1 { font-size: 32px; color: #3b82f6; margin-bottom: 10px; }
         .header p { color: #94a3b8; }
+        
+        /* 时间标签 */
+        .time-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .time-tab {
+            padding: 10px 20px;
+            background: #1a1f2e;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .time-tab:hover { background: #252b3b; }
+        .time-tab.active { 
+            background: #3b82f6; 
+            border-color: #3b82f6;
+            color: white;
+        }
+        .time-tab .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            font-size: 11px;
+            margin-left: 6px;
+        }
+        
+        /* 变更记录 */
+        .changelog {
+            background: #1a1f2e;
+            border: 1px solid #2d3748;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .changelog h3 {
+            color: #f59e0b;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .changelog-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #2d3748;
+            font-size: 13px;
+        }
+        .changelog-item:last-child { border-bottom: none; }
+        .changelog-time {
+            color: #64748b;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+        .changelog-type {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+        .changelog-type.add { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .changelog-type.update { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .changelog-type.remove { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .changelog-content { color: #94a3b8; }
+        
+        /* 内容面板 */
+        .content-panel { display: none; }
+        .content-panel.active { display: block; }
+        
         .card { 
             background: #1a1f2e; 
             border: 1px solid #2d3748;
@@ -64,7 +142,7 @@
         .tag.policy { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
         .tag.important { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
         
-        /* 预期差清单样式 */
+        /* 预期差清单 */
         .gap-list {
             display: flex;
             flex-direction: column;
@@ -84,6 +162,15 @@
         .gap-item:hover {
             border-color: #3b82f6;
             background: #2d3748;
+        }
+        .gap-item .version-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 8px;
         }
         .gap-header {
             display: flex;
@@ -113,7 +200,7 @@
             font-size: 18px;
         }
         
-        /* 二级页面样式 */
+        /* 详情页 */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -178,26 +265,102 @@
             color: #64748b;
         }
         
+        /* 对比样式 */
+        .compare-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .compare-item {
+            background: #252b3b;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .compare-item h4 {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .compare-item.before { border-left: 3px solid #ef4444; }
+        .compare-item.after { border-left: 3px solid #22c55e; }
+        
         .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #2d3748; color: #64748b; font-size: 14px; }
         
         @media (max-width: 768px) {
             .header h1 { font-size: 24px; }
             .card { padding: 16px; }
-            .news-header { flex-direction: column; }
-            .news-time { margin-left: 0; margin-top: 4px; }
+            .time-tabs { flex-wrap: wrap; }
+            .compare-box { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 主页 -->
-        <div id="main-page">
-            <div class="header">
-                <h1>📊 羿学交易智囊团仪表盘</h1>
-                <p>数据日期：2026-03-19 | 系统版本：v2.1</p>
+        
+        <!-- 变更记录 -->
+        <div class="changelog">
+            <h3>📋 更新记录 <small style="color:#64748b;font-weight:normal;">显示各版本变化</small></h3>
+            <div class="changelog-item">
+                <span class="changelog-time">12:00</span>
+                <span class="changelog-type update">更新</span>
+                <span class="changelog-content">添加午间简报，验证AI算力、存储芯片板块</span>
+            </div>
+            <div class="changelog-item">
+                <span class="changelog-time">09:15</span>
+                <span class="changelog-type update">更新</span>
+                <span class="changelog-content">LPR报价出炉，维持不变</span>
+            </div>
+            <div class="changelog-item">
+                <span class="changelog-time">07:30</span>
+                <span class="changelog-type add">新增</span>
+                <span class="changelog-content">发布今日观察清单（北方稀土、士兰微、云天化）</span>
+            </div>
+        </div>
+
+        <!-- 时间标签 -->
+        <div class="time-tabs">
+            <button class="time-tab active" onclick="switchTime('morning')">
+                ☀️ 盘前 07:30
+            </button>
+            <button class="time-tab" onclick="switchTime('noon')">
+                🌤️ 午间 12:00 <span class="badge">更新</span>
+            </button>
+            <button class="time-tab" onclick="switchTime('evening')">
+                🌙 盘后 20:30
+            </button>
+        </div>
+
+        <!-- 盘前内容 -->
+        <div id="morning" class="content-panel active">
+            
+            <div class="card">
+                <h2>📝 今日观察清单（07:30版）</h2>                
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">🔥 1. 北方稀土（600111）</span>
+                        <span class="news-time">高置信度</span>
+                    </div>
+                    <div class="news-content">突破位21.80元，止损19.50元，目标26.50元 | 板块：稀土永磁</div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">🔥 2. 士兰微（600460）</span>
+                        <span class="news-time">高置信度</span>
+                    </div>
+                    <div class="news-content">突破位28.60元，止损25.80元，目标34.50元 | 板块：半导体</div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">3. 云天化（600096）</span>
+                        <span class="news-time">中置信度</span>
+                    </div>
+                    <div class="news-content">关键位21.00元，等待突破22.50元确认 | 板块：磷化工</div>
+                </div>
             </div>
 
-            <!-- 政策/监管动态 -->
             <div class="card">
                 <h2>🏛️ 政策/监管动态</h2>
                 <div class="news-item">
@@ -214,16 +377,8 @@
                     </div>
                     <div class="news-content">维持利率不变，符合市场预期，点阵图显示年内降息两次...</div>
                 </div>
-                <div class="news-item">
-                    <div class="news-header">
-                        <span class="news-title">🟢 中国3月LPR报价出炉</span>
-                        <span class="news-time">2026-03-19 09:15</span>
-                    </div>
-                    <div class="news-content">1年期LPR维持3.45%，5年期维持3.95%，符合预期...</div>
-                </div>
             </div>
 
-            <!-- 行业要闻 -->
             <div class="card">
                 <h2>🏭 行业要闻</h2>
                 <div class="news-item">
@@ -244,309 +399,173 @@
                         </div>
                         <span class="news-time">2026-03-18 16:45</span>
                     </div>
-                    <div class="news-content">存储芯片供给持续受限，2026年价格延续上涨预期，兆易创新等受益</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-header">
-                        <div>
-                            <span class="tag">商业航天</span>
-                            <span class="news-title">英伟达入局轨道AI</span>
-                        </div>
-                        <span class="news-time">2026-03-18 10:20</span>
-                    </div>
-                    <div class="news-content">英伟达宣布太空计算平台VeraRubinSpace-1，布局卫星AI计算</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-header">
-                        <div>
-                            <span class="tag">固态电池</span>
-                            <span class="news-title">奔驰固态电池首次量产</span>
-                        </div>
-                        <span class="news-time">2026-03-17 22:15</span>
-                    </div>
-                    <div class="news-content">奔驰宣布固态电池首次应用于量产车，能量密度提升40%</div>
+                    <div class="news-content">存储芯片供给持续受限，2026年价格延续上涨预期</div>
                 </div>
             </div>
 
-            <!-- 预期差清单 -->
             <div class="card">
                 <h2>🔥 预期差清单 <small style="color:#64748b;font-size:14px;">(点击查看推导过程)</small></h2>
                 <div class="gap-list">
                     <a href="#" class="gap-item" onclick="showDetail('ai');return false;">
                         <div class="gap-header">
                             <div>
-                                <span class="gap-title">1. AI算力产业链</span>
+                                <span class="version-tag">07:30</span>
+                                <span class="gap-title">AI算力产业链</span>
                                 <div class="gap-stocks">润泽科技 · 奥飞数据 · 光环新网</div>
                             </div>
                             <span class="gap-size large">预期差：大</span>
-                        </div>
-                        <div style="margin-top:8px;">
-                            <span class="tag">涨价落地</span>
-                            <span style="color:#64748b;font-size:12px;">验证节点：4月18日</span>
-                            <span class="gap-arrow" style="float:right;">→</span>
                         </div>
                     </a>
                     
                     <a href="#" class="gap-item" onclick="showDetail('storage');return false;">
                         <div class="gap-header">
                             <div>
-                                <span class="gap-title">2. 存储芯片</span>
+                                <span class="version-tag">07:30</span>
+                                <span class="gap-title">存储芯片</span>
                                 <div class="gap-stocks">兆易创新 · 普冉股份 · 东芯股份</div>
                             </div>
                             <span class="gap-size large">预期差：大</span>
-                        </div>
-                        <div style="margin-top:8px;">
-                            <span class="tag">涨价周期</span>
-                            <span style="color:#64748b;font-size:12px;">验证节点：月度价格数据</span>
-                            <span class="gap-arrow" style="float:right;">→</span>
                         </div>
                     </a>
                     
                     <a href="#" class="gap-item" onclick="showDetail('battery');return false;">
                         <div class="gap-header">
                             <div>
-                                <span class="gap-title">3. 固态电池设备</span>
+                                <span class="version-tag">07:30</span>
+                                <span class="gap-title">固态电池设备</span>
                                 <div class="gap-stocks">先导智能 · 海目星 · 利元亨</div>
                             </div>
                             <span class="gap-size medium">预期差：中偏大</span>
-                        </div>
-                        <div style="margin-top:8px;">
-                            <span class="tag">展会催化</span>
-                            <span style="color:#64748b;font-size:12px;">验证节点：3.20-22展会</span>
-                            <span class="gap-arrow" style="float:right;">→</span>
                         </div>
                     </a>
                     
                     <a href="#" class="gap-item" onclick="showDetail('space');return false;">
                         <div class="gap-header">
                             <div>
-                                <span class="gap-title">4. 商业航天</span>
+                                <span class="version-tag">07:30</span>
+                                <span class="gap-title">商业航天</span>
                                 <div class="gap-stocks">中国卫星 · 铖昌科技 · 航天电子</div>
                             </div>
                             <span class="gap-size medium">预期差：中</span>
                         </div>
-                        <div style="margin-top:8px;">
-                            <span class="tag">发射频率</span>
-                            <span style="color:#64748b;font-size:12px;">验证节点：卫星发射数据</span>
-                            <span class="gap-arrow" style="float:right;">→</span>
-                        </div>
                     </a>
                 </div>
             </div>
+        </div>
 
-            <!-- 智囊团状态 -->
+        <!-- 午间内容 -->
+        <div id="noon" class="content-panel">
+            
             <div class="card">
-                <h2>👥 智囊团状态</h2>
-                <h3>📊 选股智囊团 (7人)</h3>
-                <p><span class="tag">本杰明</span> <span class="tag">菲利普</span> <span class="tag">霍华德</span> <span class="tag highlight">马克(首席)</span></p>
-                
-                <h3>⏰ 择时智囊团 (5人)</h3>
-                <p><span class="tag">查尔斯·道</span> <span class="tag highlight">艾略特(首席)</span> <span class="tag highlight">缠论大师</span></p>
-                
-                <h3>🔮 奇门遁甲组</h3>
-                <p><span class="tag">奇门君</span></p>
-            </div>
-
-            <div class="footer">
-                <p>羿学交易 · 智囊团系统 v2.1 | 部署平台：GitHub Pages</p>
-            </div>
-        </div>
-
-        <!-- 详情页：AI算力 -->
-        <div id="detail-ai" style="display:none;">
-            <a href="#" class="back-btn" onclick="showMain();return false;">← 返回清单</a>
-            <div class="header">
-                <h1>🔍 AI算力产业链推导过程</h1>
-                <p>预期差等级：大 | 相关标的：润泽科技、奥飞数据、光环新网</p>
-            </div>
-
-            <div class="detail-section">
-                <h3>📋 信息源收集</h3>
-                <div class="logic-flow">
-                    <div class="logic-step">
-                        <span class="step-num">1</span>
-                        <div class="step-content">
-                            <div class="step-title">阿里云官宣涨价</div>
-                            <div class="step-desc">2026-03-18 20:00，阿里云宣布AI算力涨价34%，即日起生效</div>
-                        </div>
+                <h2>📊 上午盘面验证（12:00版）</h2>                
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">📈 指数表现</span>
+                        <span class="news-time">成交额7700亿</span>
                     </div>
-                    <div class="logic-step">
-                        <span class="step-num">2</span>
-                        <div class="step-content">
-                            <div class="step-title">百度跟进涨价</div>
-                            <div class="step-desc">同日，百度智能云宣布涨价30%，行业涨价趋势确立</div>
-                        </div>
-                    </div>
-                    <div class="logic-step">
-                        <span class="step-num">3</span>
-                        <div class="step-content">
-                            <div class="step-title">Token调用量数据</div>
-                            <div class="step-desc">阿里云披露日均Token调用量达30万亿，环比增长300%</div>
-                        </div>
-                    </div>
+                    <div class="news-content">上证指数+0.3%，深证+0.5%，创业板+0.8%，量能健康</div>
                 </div>
             </div>
 
-            <div class="detail-section">
-                <h3>🧮 预期差分析</h3>
-                <ul>
-                    <li><strong>市场共识：</strong>AI算力供需紧张是短期现象，随着产能释放会缓解</li>
-                    <li><strong>实际情况：</strong>头部云厂商同步大幅涨价，且AI应用爆发导致需求持续超预期</li>
-                    <li><strong>矛盾点：</strong>市场未充分定价涨价的持续性和幅度</li>
-                </ul>
-            </div>
-
-            <div class="detail-section">
-                <h3>🎯 受益标的筛选</h3>
-                <ul>
-                    <li><strong>润泽科技：</strong>AI数据中心龙头，直接受益于算力租赁涨价</li>
-                    <li><strong>奥飞数据：</strong>绑定阿里云，IDC业务量价齐升</li>
-                    <li><strong>光环新网：</strong>AWS国内合作伙伴，AI算力布局领先</li>
-                </ul>
-            </div>
-
-            <div class="detail-section">
-                <h3>⚠️ 风险与验证</h3>
-                <ul>
-                    <li><strong>验证节点：</strong>4月18日涨价正式执行后，观察客户接受度和续费情况</li>
-                    <li><strong>潜在风险：</strong>下游AI应用需求不及预期；新产能快速释放压制价格</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 详情页：存储芯片 -->
-        <div id="detail-storage" style="display:none;">
-            <a href="#" class="back-btn" onclick="showMain();return false;">← 返回清单</a>
-            <div class="header">
-                <h1>🔍 存储芯片推导过程</h1>
-                <p>预期差等级：大 | 相关标的：兆易创新、普冉股份、东芯股份</p>
-            </div>
-
-            <div class="detail-section">
-                <h3>📋 信息源收集</h3>
-                <div class="logic-flow">
-                    <div class="logic-step">
-                        <span class="step-num">1</span>
-                        <div class="step-content">
-                            <div class="step-title">NAND闪存涨价</div>
-                            <div class="step-desc">2026-03-18，产业链传出NAND闪存合约价上涨10%</div>
-                        </div>
+            <div class="card">
+                <h2>✅ 预期差验证结果</h2>
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">🟢 AI算力产业链</span>
+                        <span class="news-time" style="color:#22c55e;">验证通过</span>
                     </div>
-                    <div class="logic-step">
-                        <span class="step-num">2</span>
-                        <div class="step-content">
-                            <div class="step-title">供给受限</div>
-                            <div class="step-desc">三星、SK海力士等原厂持续减产，库存去化至健康水平</div>
-                        </div>
+                    <div class="news-content">润泽科技、奥飞数据冲高，阿里云涨价消息持续发酵，预期差确认</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">🟢 存储芯片</span>
+                        <span class="news-time" style="color:#22c55e;">验证通过</span>
                     </div>
-                    <div class="logic-step">
-                        <span class="step-num">3</span>
-                        <div class="step-content">
-                            <div class="step-title">需求回暖</div>
-                            <div class="step-desc">AI服务器、边缘AI设备拉动存储需求，DRAM价格已率先反弹</div>
-                        </div>
+                    <div class="news-content">兆易创新、普冉股份跟涨，涨价预期被市场认可</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">🟡 固态电池设备</span>
+                        <span class="news-time" style="color:#f59e0b;">待观察</span>
                     </div>
+                    <div class="news-content">板块震荡，资金观望明日展会催化，预期差维持</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">🟡 商业航天</span>
+                        <span class="news-time" style="color:#f59e0b;">待观察</span>
+                    </div>
+                    <div class="news-content">表现一般，需等发射数据验证，预期差维持</div>
                 </div>
             </div>
 
-            <div class="detail-section">
-                <h3>🧮 预期差分析</h3>
-                <ul>
-                    <li><strong>市场共识：</strong>存储周期反转尚需时日，涨价不可持续</li>
-                    <li><strong>实际情况：</strong>原厂控产坚决，AI端侧创新拉动需求，涨价已从DRAM传导至NAND</li>
-                    <li><strong>矛盾点：</strong>市场未充分认知涨价周期的持续性</li>
-                </ul>
-            </div>
-
-            <div class="detail-section">
-                <h3>🎯 受益标的筛选</h3>
-                <ul>
-                    <li><strong>兆易创新：</strong>国内存储芯片龙头，NOR Flash受益AI终端</li>
-                    <li><strong>普冉股份：</strong>利基型存储弹性大，涨价传导灵敏</li>
-                    <li><strong>东芯股份：</strong>SLC NAND专家，国产替代加速</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 详情页：固态电池 -->
-        <div id="detail-battery" style="display:none;">
-            <a href="#" class="back-btn" onclick="showMain();return false;">← 返回清单</a>
-            <div class="header">
-                <h1>🔍 固态电池设备推导过程</h1>
-                <p>预期差等级：中偏大 | 相关标的：先导智能、海目星、利元亨</p>
-            </div>
-
-            <div class="detail-section">
-                <h3>📋 信息源收集</h3>
-                <div class="logic-flow">
-                    <div class="logic-step">
-                        <span class="step-num">1</span>
-                        <div class="step-content">
-                            <div class="step-title">全固态电池大会</div>
-                            <div class="step-desc">3.20-22召开，宁德时代、比亚迪等头部企业参会</div>
-                        </div>
+            <div class="card">
+                <h2>📌 观察清单上午表现</h2>
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">北方稀土</span>
+                        <span class="news-time">+2.5%</span>
                     </div>
-                    <div class="logic-step">
-                        <span class="step-num">2</span>
-                        <div class="step-content">
-                            <div class="step-title">奔驰量产突破</div>
-                            <div class="step-desc">奔驰宣布固态电池首次应用于量产车，能量密度提升40%</div>
-                        </div>
+                    <div class="news-content">冲高但未突破21.80元，继续观察突破确认</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">士兰微</span>
+                        <span class="news-time">平盘</span>
                     </div>
-                    <div class="logic-step">
-                        <span class="step-num">3</span>
-                        <div class="step-content">
-                            <div class="step-title">设备招标启动</div>
-                            <div class="step-desc">头部电池厂启动固态电池产线设备招标，国产设备份额提升</div>
-                        </div>
+                    <div class="news-content">震荡整理，成交量一般，等待放量信号</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <span class="news-title">云天化</span>
+                        <span class="news-time">+1.2%</span>
                     </div>
+                    <div class="news-content">接近21元，可小仓位试盘</div>
                 </div>
             </div>
         </div>
 
-        <!-- 详情页：商业航天 -->
-        <div id="detail-space" style="display:none;">
-            <a href="#" class="back-btn" onclick="showMain();return false;">← 返回清单</a>
-            <div class="header">
-                <h1>🔍 商业航天推导过程</h1>
-                <p>预期差等级：中 | 相关标的：中国卫星、铖昌科技、航天电子</p>
+        <!-- 盘后内容 -->
+        <div id="evening" class="content-panel">
+            <div class="card">
+                <h2>🌙 盘后数据整理中</h2>
+                <p style="color:#64748b;">20:30 更新今日完整复盘、预期差验证总结、明日观察清单</p>
             </div>
+        </div>
 
-            <div class="detail-section">
-                <h3>📋 信息源收集</h3>
-                <div class="logic-flow">
-                    <div class="logic-step">
-                        <span class="step-num">1</span>
-                        <div class="step-content">
-                            <div class="step-title">英伟达入局</div>
-                            <div class="step-desc">英伟达发布VeraRubinSpace-1平台，布局卫星AI计算</div>
-                        </div>
-                    </div>
-                    <div class="logic-step">
-                        <span class="step-num">2</span>
-                        <div class="step-content">
-                            <div class="step-title">国内发射加速</div>
-                            <div class="step-desc">2026年规划发射卫星数量同比翻倍，低轨星座建设提速</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- 智囊团状态 -->
+        <div class="card">
+            <h2>👥 智囊团状态</h2>
+            <h3>📊 选股智囊团 (7人)</h3>
+            <p><span class="tag">本杰明</span> <span class="tag">菲利普</span> <span class="tag">霍华德</span> <span class="tag highlight">马克(首席)</span></p>
+            
+            <h3>⏰ 择时智囊团 (5人)</h3>
+            <p><span class="tag">查尔斯·道</span> <span class="tag highlight">艾略特(首席)</span> <span class="tag highlight">缠论大师</span></p>
+            
+            <h3>🔮 奇门遁甲组</h3>
+            <p><span class="tag">奇门君</span></p>
+        </div>
+
+        <div class="footer">
+            <p>羿学交易 · 智囊团系统 v2.1 | 当前版本：12:00</p>
         </div>
     </div>
 
     <script>
-        function showDetail(type) {
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById('detail-' + type).style.display = 'block';
-            window.scrollTo(0, 0);
+        // 切换时间标签
+        function switchTime(timeId) {
+            // 移除所有active
+            document.querySelectorAll('.time-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.content-panel').forEach(panel => panel.classList.remove('active'));
+            
+            // 添加当前active
+            event.target.closest('.time-tab').classList.add('active');
+            document.getElementById(timeId).classList.add('active');
         }
         
-        function showMain() {
-            document.getElementById('main-page').style.display = 'block';
-            ['ai', 'storage', 'battery', 'space'].forEach(function(type) {
-                document.getElementById('detail-' + type).style.display = 'none';
-            });
-            window.scrollTo(0, 0);
+        // 显示详情
+        function showDetail(type) {
+            alert('预期差推导详情页面 - ' + type + '\n\n这里将显示完整的推导逻辑、信息源、矛盾点分析等内容。');
         }
     </script>
 </body>
