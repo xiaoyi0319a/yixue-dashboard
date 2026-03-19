@@ -1,0 +1,37 @@
+{
+  "date": "2026-03-20",
+  "gaps": [
+    {
+      "id": "xxx",
+      "title": "预期差标题",
+      "stocks": "相关标的1、相关标的2",
+      "size": "large",
+      "stars": "⭐⭐⭐⭐⭐",
+      "tag": "标签名称",
+      "tag_class": "policy",
+      "summary": "一句话描述预期差",
+      "icon": "📊",
+      "consensus": [
+        "市场共识1",
+        "市场共识2",
+        "市场共识3"
+      ],
+      "facts": [
+        {"time": "时间1", "content": "事实内容1"},
+        {"time": "时间2", "content": "事实内容2"}
+      ],
+      "analysis": [
+        {"dimension": "维度1", "market": "市场假设", "reality": "实际情况"},
+        {"dimension": "维度2", "market": "市场假设", "reality": "实际情况"}
+      ],
+      "conclusion": [
+        "结论1",
+        "结论2"
+      ],
+      "validation": [
+        "验证节点1",
+        "验证节点2"
+      ]
+    }
+  ]
+}
