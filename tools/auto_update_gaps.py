@@ -132,7 +132,8 @@ def generate_stocks_detail_items(stocks_detail_list):
     """生成个股详情列表"""
     items = []
     for stock in stocks_detail_list:
-        items.append(f'                    <li><strong>{stock["name"]} ({stock["code"]})</strong>：{stock["logic"]}</li>')
+        stars = stock.get('stars', '')
+        items.append(f'                    <li><strong>{stock["name"]} ({stock["code"]})</strong> <span style="color:#fbbf24;">{stars}</span><br/><span style="color:#94a3b8;font-size:13px;margin-left:20px;">{stock["logic"]}</span></li>')
     return '\n'.join(items)
 
 def get_size_color(size):
