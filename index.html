@@ -261,6 +261,67 @@
             color: #64748b;
         }
         
+        /* 变更记录对比样式 */
+        .changelog-item {
+            border-bottom: 1px solid #2d3748;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .changelog-item:hover { background: rgba(59, 130, 246, 0.05); }
+        .changelog-item:last-child { border-bottom: none; }
+        .changelog-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 13px;
+        }
+        .changelog-arrow {
+            color: #64748b;
+            font-size: 12px;
+            transition: transform 0.2s;
+            margin-right: 4px;
+        }
+        .changelog-item.expanded .changelog-arrow {
+            transform: rotate(90deg);
+        }
+        .changelog-diff {
+            display: none;
+            padding: 12px 0 12px 32px;
+            margin-top: 4px;
+        }
+        .changelog-item.expanded .changelog-diff {
+            display: block;
+        }
+        .diff-box {
+            background: #0f1525;
+            border: 1px solid #2d3748;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .diff-row {
+            display: flex;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .diff-label {
+            width: 60px;
+            padding: 4px 8px;
+            text-align: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .diff-label.before { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        .diff-label.after { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+        .diff-content {
+            padding: 4px 12px;
+            flex: 1;
+            border-left: 1px solid #2d3748;
+        }
+        .diff-content.before { color: #ef4444; text-decoration: line-through; }
+        .diff-content.after { color: #22c55e; }
+        .diff-content.neutral { color: #94a3b8; text-decoration: none; }
+        
         .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #2d3748; color: #64748b; font-size: 14px; }
         
         @media (max-width: 768px) {
@@ -282,25 +343,89 @@
 
             <!-- 变更记录 -->
             <div class="card" style="padding:16px 20px;background:#0f1525;border:1px solid #2d3748;">
-                <h3 style="color:#f59e0b;font-size:14px;margin-bottom:12px;">📋 更新记录</h3>
+                <h3 style="color:#f59e0b;font-size:14px;margin-bottom:12px;">📋 更新记录 <small style="color:#64748b;font-weight:normal;">点击展开查看变更对比</small></h3>
                 
-                <!-- 更新记录条目（新条目添加在最上方） -->
-                <div style="display:flex;align-items:flex-start;gap:12px;padding:6px 0;font-size:13px;border-bottom:1px solid #2d3748;">
-                    <span style="color:#64748b;white-space:nowrap;font-size:12px;">12:00</span>
-                    <span style="padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(59,130,246,0.2);color:#3b82f6;">更新</span>
-                    <span style="color:#94a3b8;">AI算力、存储芯片预期差验证通过，添加午间盘面数据</span>
+                <!-- 更新记录条目 1：午间更新 -->
+                <div class="changelog-item" onclick="toggleChangelog(this)">
+                    <div class="changelog-header">
+                        <span class="changelog-arrow">▶</span>
+                        <span style="color:#64748b;white-space:nowrap;font-size:12px;">12:00</span>
+                        <span style="padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(59,130,246,0.2);color:#3b82f6;">更新</span>
+                        <span style="color:#94a3b8;">AI算力、存储芯片预期差验证通过</span>
+                    </div>
+                    <div class="changelog-diff">
+                        <div class="diff-box">
+                            <div class="diff-row">
+                                <div class="diff-label before">07:30</div>
+                                <div class="diff-content before">AI算力产业链 — 预期差：大 — 状态：待验证</div>
+                            </div>
+                            <div class="diff-row">
+                                <div class="diff-label after">12:00</div>
+                                <div class="diff-content after">AI算力产业链 — 预期差：大 — 状态：✅ 验证通过（润泽+5.2%、奥飞+3.8%）</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:8px;"></div>
+                        <div class="diff-box">
+                            <div class="diff-row">
+                                <div class="diff-label before">07:30</div>
+                                <div class="diff-content before">存储芯片 — 预期差：大 — 状态：待验证</div>
+                            </div>
+                            <div class="diff-row">
+                                <div class="diff-label after">12:00</div>
+                                <div class="diff-content after">存储芯片 — 预期差：大 — 状态：✅ 验证通过（兆易+4.1%、普冉+2.9%）</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div style="display:flex;align-items:flex-start;gap:12px;padding:6px 0;font-size:13px;border-bottom:1px solid #2d3748;">
-                    <span style="color:#64748b;white-space:nowrap;font-size:12px;">09:15</span>
-                    <span style="padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(245,158,11,0.2);color:#f59e0b;">动态</span>
-                    <span style="color:#94a3b8;">LPR报价出炉，1年期和5年期均维持不变</span>
+                <!-- 更新记录条目 2：LPR动态 -->
+                <div class="changelog-item" onclick="toggleChangelog(this)">
+                    <div class="changelog-header">
+                        <span class="changelog-arrow">▶</span>
+                        <span style="color:#64748b;white-space:nowrap;font-size:12px;">09:15</span>
+                        <span style="padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(245,158,11,0.2);color:#f59e0b;">动态</span>
+                        <span style="color:#94a3b8;">LPR报价出炉，维持不变</span>
+                    </div>
+                    <div class="changelog-diff">
+                        <div class="diff-box">
+                            <div class="diff-row">
+                                <div class="diff-label before">预期</div>
+                                <div class="diff-content before">1年期LPR 3.45% → 3.40%（降息5bp）</div>
+                            </div>
+                            <div class="diff-row">
+                                <div class="diff-label after">实际</div>
+                                <div class="diff-content after">1年期LPR 3.45% → 3.45%（维持不变）</div>
+                            </div>
+                            <div class="diff-row">
+                                <div class="diff-label before">预期</div>
+                                <div class="diff-content before">5年期LPR 3.95% → 3.90%（降息5bp）</div>
+                            </div>
+                            <div class="diff-row">
+                                <div class="diff-label after">实际</div>
+                                <div class="diff-content after">5年期LPR 3.95% → 3.95%（维持不变）</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:8px;color:#64748b;font-size:11px;">市场反应：利率维持不变符合部分预期，地产板块小幅回落</div>
+                    </div>
                 </div>
                 
-                <div style="display:flex;align-items:flex-start;gap:12px;padding:6px 0;font-size:13px;">
-                    <span style="color:#64748b;white-space:nowrap;font-size:12px;">07:30</span>
-                    <span style="padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(34,197,94,0.2);color:#22c55e;">新增</span>
-                    <span style="color:#94a3b8;">发布预期差清单（AI算力、存储芯片、固态电池、商业航天）</span>
+                <!-- 更新记录条目 3：盘前新增 -->
+                <div class="changelog-item" onclick="toggleChangelog(this)">
+                    <div class="changelog-header">
+                        <span class="changelog-arrow">▶</span>
+                        <span style="color:#64748b;white-space:nowrap;font-size:12px;">07:30</span>
+                        <span style="padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(34,197,94,0.2);color:#22c55e;">新增</span>
+                        <span style="color:#94a3b8;">发布预期差清单（AI算力、存储芯片、固态电池、商业航天）</span>
+                    </div>
+                    <div class="changelog-diff">
+                        <div class="diff-box">
+                            <div class="diff-row">
+                                <div class="diff-label before">—</div>
+                                <div class="diff-content neutral">初始版本，无对比数据</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:8px;color:#64748b;font-size:11px;">包含4个预期差方向，按预期差大小排序</div>
+                    </div>
                 </div>
             </div>
 
@@ -724,6 +849,11 @@
     </div>
 
     <script>
+        // 切换变更记录展开/折叠
+        function toggleChangelog(item) {
+            item.classList.toggle('expanded');
+        }
+        
         // 切换时间标签
         function switchTime(timeId) {
             document.querySelectorAll('.time-tab').forEach(tab => tab.classList.remove('active'));
