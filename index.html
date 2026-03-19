@@ -2124,6 +2124,8 @@
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('detail-' + type).classList.add('active');
             window.scrollTo(0, 0);
+            // 更新URL，支持浏览器返回键
+            history.pushState({detail: type}, '', '?detail=' + type);
         }
         
         // 返回主页
@@ -2131,7 +2133,43 @@
             document.getElementById('main-page').style.display = 'block';
             document.querySelectorAll('.detail-page').forEach(page => page.classList.remove('active'));
             window.scrollTo(0, 0);
+            // 返回时更新URL
+            history.pushState({}, '', window.location.pathname);
         }
+        
+        // 监听浏览器返回/前进键
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.detail) {
+                // 有详情页状态，显示对应详情
+                document.getElementById('main-page').style.display = 'none';
+                document.querySelectorAll('.detail-page').forEach(page => page.classList.remove('active'));
+                var detailPage = document.getElementById('detail-' + event.state.detail);
+                if (detailPage) {
+                    detailPage.classList.add('active');
+                }
+            } else {
+                // 无状态，返回主页
+                document.getElementById('main-page').style.display = 'block';
+                document.querySelectorAll('.detail-page').forEach(page => page.classList.remove('active'));
+            }
+            window.scrollTo(0, 0);
+        });
+        
+        // 页面加载时检查URL参数
+        window.addEventListener('load', function() {
+            var params = new URLSearchParams(window.location.search);
+            var detail = params.get('detail');
+            if (detail) {
+                var detailPage = document.getElementById('detail-' + detail);
+                if (detailPage) {
+                    document.getElementById('main-page').style.display = 'none';
+                    detailPage.classList.add('active');
+                    window.scrollTo(0, 0);
+                    // 同步history状态
+                    history.replaceState({detail: detail}, '', '?detail=' + detail);
+                }
+            }
+        });
     </script>
 </body>
 </html>
