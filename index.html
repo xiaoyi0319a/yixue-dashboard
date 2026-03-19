@@ -618,6 +618,29 @@
             <div class="card" style="padding:16px 20px;background:#0f1525;border:1px solid #2d3748;">
                 <h3 style="color:#f59e0b;font-size:14px;margin-bottom:12px;">📋 更新记录 <small style="color:#64748b;font-weight:normal;">点击展开查看变更对比</small></h3>
                 
+                <!-- 更新记录条目 0：晚间更新 -->
+                <div class="changelog-item" onclick="toggleChangelog(this)">
+                    <div class="changelog-header">
+                        <span class="changelog-arrow">▶</span>
+                        <span style="color:#64748b;white-space:nowrap;font-size:12px;">20:30</span>
+                        <span style="padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(168,85,247,0.2);color:#a855f7;">复盘</span>
+                        <span style="color:#94a3b8;">晚间深度复盘：美伊冲突、美联储降息、港股分化、存储芯片</span>
+                    </div>
+                    <div class="changelog-diff">
+                        <div class="diff-box">
+                            <div class="diff-row">
+                                <div class="diff-label before">07:30</div>
+                                <div class="diff-content before">预期差清单：AI算力、存储芯片、固态电池、商业航天</div>
+                            </div>
+                            <div class="diff-row">
+                                <div class="diff-label after">20:30</div>
+                                <div class="diff-content after">晚间复盘更新：霍尔木兹封锁、港股软硬分化、存储芯片缺口、滞胀风险、美联储降息</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:8px;color:#64748b;font-size:11px;">新增美伊冲突、港股结构性分化、美联储全年仅降息1次等重大信息差</div>
+                    </div>
+                </div>
+                
                 <!-- 更新记录条目 1：午间更新 -->
                 <div class="changelog-item" onclick="toggleChangelog(this)">
                     <div class="changelog-header">
@@ -704,7 +727,7 @@
 
             <!-- 奇门君预测 -->
             <div class="qimen-section">
-                <h2>🔮 奇门君预测（3月19日）</h2>
+                <h2>🔮 奇门君预测（3月20日）</h2>
                 <div class="qimen-grid">
                         <div class="qimen-item">
                             <div class="qimen-label">今日旬首</div>
@@ -733,7 +756,7 @@
                 <!-- 预期差清单 -->
                 <div class="card">
                     <h2>
-                        🔥 今日预期差清单 
+                        🔥 今日核心预期差清单 
                         <span class="live-indicator">
                             <span class="live-dot"></span>
                             动态更新
@@ -741,62 +764,77 @@
                         <small style="color:#64748b;font-size:14px;">(点击查看推导过程)</small>
                     </h2>
                     <div class="gap-list">
-                        <div class="gap-item" onclick="showDetail('ai')">
+                        <div class="gap-item" onclick="showDetail(' Hormuz')">
                             <div class="gap-header">
                                 <div>
-                                    <span class="gap-title">AI算力产业链</span>
-                                    <div class="gap-stocks">润泽科技 · 奥飞数据 · 光环新网</div>
+                                    <span class="gap-title">霍尔木兹海峡封锁规模</span>
+                                    <div class="gap-stocks">石油、航运、军工</div>
                                 </div>
-                                <span class="gap-size large">预期差：大</span>
+                                <span class="gap-size large">预期差：⭐⭐⭐⭐⭐</span>
                             </div>
                             <div style="margin-top:8px;">
-                                <span class="tag">涨价落地</span>
-                                <span style="color:#64748b;font-size:12px;">验证节点：4月18日</span>
+                                <span class="tag policy">地缘政治</span>
+                                <span style="color:#64748b;font-size:12px;">市场认知：短期事件 → 真实：可能持续数周</span>
                                 <span class="gap-arrow" style="float:right;">→</span>
                             </div>
                         </div>
                         
-                        <div class="gap-item" onclick="showDetail('storage')">
+                        <div class="gap-item" onclick="showDetail('hk')">
                             <div class="gap-header">
                                 <div>
-                                    <span class="gap-title">存储芯片</span>
-                                    <div class="gap-stocks">兆易创新 · 普冉股份 · 东芯股份</div>
+                                    <span class="gap-title">港股软硬分化</span>
+                                    <div class="gap-stocks">能源、煤炭、有色、工程机械（港股）</div>
                                 </div>
-                                <span class="gap-size large">预期差：大</span>
+                                <span class="gap-size large">预期差：⭐⭐⭐⭐</span>
                             </div>
                             <div style="margin-top:8px;">
-                                <span class="tag">涨价周期</span>
-                                <span style="color:#64748b;font-size:12px;">验证节点：月度价格数据</span>
+                                <span class="tag highlight">结构性机会</span>
+                                <span style="color:#64748b;font-size:12px;">市场认知：科技股拖累大盘 → 真实：硬实力资产独立走强</span>
                                 <span class="gap-arrow" style="float:right;">→</span>
                             </div>
                         </div>
                         
-                        <div class="gap-item" onclick="showDetail('battery')">
+                        <div class="gap-item" onclick="showDetail('storage2')">
                             <div class="gap-header">
                                 <div>
-                                    <span class="gap-title">固态电池设备</span>
-                                    <div class="gap-stocks">先导智能 · 海目星 · 利元亨</div>
+                                    <span class="gap-title">存储芯片供应缺口</span>
+                                    <div class="gap-stocks">半导体（存储）、AI算力</div>
                                 </div>
-                                <span class="gap-size medium">预期差：中偏大</span>
+                                <span class="gap-size large">预期差：⭐⭐⭐⭐</span>
                             </div>
                             <div style="margin-top:8px;">
-                                <span class="tag">展会催化</span>
-                                <span style="color:#64748b;font-size:12px;">验证节点：3.20-22展会</span>
+                                <span class="tag highlight">涨价周期</span>
+                                <span style="color:#64748b;font-size:12px;">市场认知：AI芯片需求强劲 → 真实：传统芯片缺口更大</span>
                                 <span class="gap-arrow" style="float:right;">→</span>
                             </div>
                         </div>
                         
-                        <div class="gap-item" onclick="showDetail('space')">
+                        <div class="gap-item" onclick="showDetail('stagflation')">
                             <div class="gap-header">
                                 <div>
-                                    <span class="gap-title">商业航天</span>
-                                    <div class="gap-stocks">中国卫星 · 铖昌科技 · 航天电子</div>
+                                    <span class="gap-title">滞胀风险上升</span>
+                                    <div class="gap-stocks">银行、公用事业（防御）</div>
                                 </div>
-                                <span class="gap-size medium">预期差：中</span>
+                                <span class="gap-size medium">预期差：⭐⭐⭐</span>
                             </div>
                             <div style="margin-top:8px;">
-                                <span class="tag">发射频率</span>
-                                <span style="color:#64748b;font-size:12px;">验证节点：卫星发射数据</span>
+                                <span class="tag">宏观风险</span>
+                                <span style="color:#64748b;font-size:12px;">油价飙升+利率维持高位，全球经济面临滞胀</span>
+                                <span class="gap-arrow" style="float:right;">→</span>
+                            </div>
+                        </div>
+                        
+                        <div class="gap-item" onclick="showDetail('fed')">
+                            <div class="gap-header">
+                                <div>
+                                    <span class="gap-title">美联储全年仅降息一次</span>
+                                    <div class="gap-stocks">银行、科技（承压）</div>
+                                </div>
+                                <span class="gap-size medium">预期差：⭐⭐⭐</span>
+                            </div>
+                            <div style="margin-top:8px;">
+                                <span class="tag policy">货币政策</span>
+                                <span style="color:#64748b;font-size:12px;">点阵图确认，市场可能未充分定价长期影响</span>
                                 <span class="gap-arrow" style="float:right;">→</span>
                             </div>
                         </div>
