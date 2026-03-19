@@ -82,6 +82,14 @@ TEMPLATES = {
 {validation_items}
                 </ul>
             </div>
+
+            <div class="detail-section">
+                <h3>📈 受益个股</h3>
+                <ul>
+{stocks_detail_items}
+                </ul>
+                <p style="color:#94a3b8;font-size:12px;margin-top:12px;">⚠️ 个股仅供参考，不构成投资建议</p>
+            </div>
         </div>
 '''
 }
@@ -120,6 +128,13 @@ def generate_validation_items(validation_list):
     """生成验证节点列表"""
     return '\n'.join([f'                    <li>{item}</li>' for item in validation_list])
 
+def generate_stocks_detail_items(stocks_detail_list):
+    """生成个股详情列表"""
+    items = []
+    for stock in stocks_detail_list:
+        items.append(f'                    <li><strong>{stock["name"]} ({stock["code"]})</strong>：{stock["logic"]}</li>')
+    return '\n'.join(items)
+
 def get_size_color(size):
     """根据预期差大小返回颜色"""
     colors = {
@@ -155,7 +170,8 @@ def generate_detail_page(gap):
         color=get_size_color(gap['size']),
         stars=gap['stars'],
         conclusion_items=generate_conclusion_items(gap['conclusion']),
-        validation_items=generate_validation_items(gap['validation'])
+        validation_items=generate_validation_items(gap['validation']),
+        stocks_detail_items=generate_stocks_detail_items(gap.get('stocks_detail', []))
     )
 
 def update_index_html(json_file, index_file='index.html'):
