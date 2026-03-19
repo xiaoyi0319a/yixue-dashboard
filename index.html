@@ -207,6 +207,21 @@
             cursor: pointer;
         }
         .back-btn:hover { color: #3b82f6; }
+        
+        /* 详情页新版样式 - 报告原版格式 */
+        .detail-page .header {
+            text-align: left;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 16px;
+        }
+        .detail-page .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .detail-page .header p {
+            font-size: 14px;
+        }
+        
         .detail-section {
             background: #252b3b;
             border-radius: 8px;
@@ -215,17 +230,126 @@
         }
         .detail-section h3 {
             color: #3b82f6;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             font-size: 16px;
+            border-bottom: 1px solid #2d3748;
+            padding-bottom: 8px;
         }
-        .detail-section p, .detail-section li {
+        
+        /* 报告原版格式样式 */
+        .consensus-box {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 0 8px 8px 0;
+        }
+        .consensus-box h4 {
+            color: #ef4444;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .consensus-box ul {
+            padding-left: 20px;
             color: #94a3b8;
             font-size: 14px;
             line-height: 1.8;
         }
-        .detail-section ul {
-            padding-left: 20px;
+        .consensus-box li {
+            margin-bottom: 8px;
         }
+        
+        .change-box {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 0 8px 8px 0;
+        }
+        .change-box h4 {
+            color: #22c55e;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .change-box ul {
+            padding-left: 20px;
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .change-box li {
+            margin-bottom: 8px;
+        }
+        
+        .gap-assessment {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .gap-assessment h4 {
+            color: #3b82f6;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .gap-size-display {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .gap-size-display.large { 
+            background: rgba(34, 197, 94, 0.2); 
+            color: #22c55e; 
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .gap-size-display.medium { 
+            background: rgba(245, 158, 11, 0.2); 
+            color: #f59e0b; 
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .gap-reason {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.8;
+            padding-left: 16px;
+            border-left: 2px solid #3b82f6;
+            margin-top: 12px;
+        }
+        
+        .verification-box {
+            background: rgba(100, 116, 139, 0.1);
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .verification-box h4 {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .verification-box table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .verification-box th,
+        .verification-box td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #2d3748;
+        }
+        .verification-box th {
+            color: #64748b;
+            font-weight: 600;
+        }
+        .verification-box td {
+            color: #94a3b8;
+        }
+        
         .logic-flow {
             display: flex;
             flex-direction: column;
@@ -832,8 +956,8 @@
             <span class="back-btn" onclick="backToMain()">← 返回清单</span>
             
             <div class="header">
-                <h1>🔍 AI算力产业链推导过程</h1>
-                <p>预期差等级：大 | 相关标的：润泽科技、奥飞数据、光环新网</p>
+                <h1>🔍 AI算力产业链</h1>
+                <p>相关标的：润泽科技、奥飞数据、光环新网</p>
             </div>
 
             <div class="detail-section">
@@ -863,30 +987,60 @@
                 </div>
             </div>
 
-            <div class="detail-section">
-                <h3>🧮 预期差分析</h3>
+            <div class="consensus-box">
+                <h4>📊 当前市场共识</h4>
                 <ul>
-                    <li><strong>市场共识：</strong>AI算力供需紧张是短期现象，随着产能释放会缓解</li>
-                    <li><strong>实际情况：</strong>头部云厂商同步大幅涨价，且AI应用爆发导致需求持续超预期</li>
-                    <li><strong>矛盾点：</strong>市场未充分定价涨价的持续性和幅度</li>
+                    <li>AI算力供需紧张是短期现象，随着产能释放会缓解</li>
+                    <li>涨价只是试探性动作，客户会流失到未涨价的厂商</li>
+                    <li>IDC行业产能过剩，提价空间有限</li>
                 </ul>
             </div>
 
-            <div class="detail-section">
-                <h3>🎯 受益标的筛选</h3>
+            <div class="change-box">
+                <h4>⚡ 潜在变化/预期差</h4>
                 <ul>
-                    <li><strong>润泽科技：</strong>AI数据中心龙头，直接受益于算力租赁涨价</li>
-                    <li><strong>奥飞数据：</strong>绑定阿里云，IDC业务量价齐升</li>
-                    <li><strong>光环新网：</strong>AWS国内合作伙伴，AI算力布局领先</li>
+                    <li>头部云厂商<strong>同步大幅涨价</strong>，行业性涨价已成共识而非个别行为</li>
+                    <li>AI应用爆发导致需求持续超预期，客户对涨价接受度高于预期</li>
+                    <li>高端算力供给紧张是结构性问题，短期内难以通过新增产能解决</li>
+                    <li>涨价传导路径清晰：云厂商→IDC→上游设备，全产业链受益</li>
                 </ul>
             </div>
 
-            <div class="detail-section">
-                <h3>⚠️ 风险与验证</h3>
-                <ul>
-                    <li><strong>验证节点：</strong>4月18日涨价正式执行后，观察客户接受度和续费情况</li>
-                    <li><strong>潜在风险：</strong>下游AI应用需求不及预期；新产能快速释放压制价格</li>
-                </ul>
+            <div class="gap-assessment">
+                <h4>🎯 预期差评估</h4>
+                <span class="gap-size-display large">预期差：大</span>
+                <div class="gap-reason">
+                    <p><strong>核心理由：</strong></p>
+                    <p>1. 市场认为涨价不可持续，实际是行业性、持续性的供需错配</p>
+                    <p>2. 市场低估了AI应用爆发对算力需求的拉动速度和规模</p>
+                    <p>3. 市场未充分定价涨价对IDC行业利润弹性的影响</p>
+                </div>
+            </div>
+
+            <div class="verification-box">
+                <h4>✅ 验证节点</h4>
+                <table>
+                    <tr>
+                        <th>时间节点</th>
+                        <th>验证指标</th>
+                        <th>信息来源</th>
+                    </tr>
+                    <tr>
+                        <td>4月18日</td>
+                        <td>涨价执行后客户续费率、新增订单情况</td>
+                        <td>云厂商公告、IDC订单</td>
+                    </tr>
+                    <tr>
+                        <td>持续关注</td>
+                        <td>Token调用量增速、AI应用DAU数据</td>
+                        <td>行业数据、第三方统计</td>
+                    </tr>
+                    <tr>
+                        <td>Q2财报季</td>
+                        <td>IDC公司毛利率变化、产能利用率</td>
+                        <td>公司财报</td>
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -895,8 +1049,8 @@
             <span class="back-btn" onclick="backToMain()">← 返回清单</span>
             
             <div class="header">
-                <h1>🔍 存储芯片推导过程</h1>
-                <p>预期差等级：大 | 相关标的：兆易创新、普冉股份、东芯股份</p>
+                <h1>🔍 存储芯片</h1>
+                <p>相关标的：兆易创新、普冉股份、东芯股份</p>
             </div>
 
             <div class="detail-section">
@@ -926,23 +1080,70 @@
                 </div>
             </div>
 
-            <div class="detail-section">
-                <h3>🧮 预期差分析</h3>
+            <div class="consensus-box">
+                <h4>📊 当前市场共识</h4>
                 <ul>
-                    <li><strong>市场共识：</strong>存储周期反转尚需时日，涨价不可持续</li>
-                    <li><strong>实际情况：</strong>原厂控产坚决，AI端侧创新拉动需求，涨价已从DRAM传导至NAND</li>
-                    <li><strong>矛盾点：</strong>市场未充分认知涨价周期的持续性</li>
+                    <li>存储周期反转尚需时日，涨价不可持续</li>
+                    <li>下游消费电子需求疲软，无法支撑涨价</li>
+                    <li>国产存储厂商技术落后，难以享受涨价红利</li>
                 </ul>
+            </div>
+
+            <div class="change-box">
+                <h4>⚡ 潜在变化/预期差</h4>
+                <ul>
+                    <li>原厂<strong>控产坚决</strong>，库存去化速度超预期，涨价从DRAM传导至NAND</li>
+                    <li>AI端侧创新（AI手机、AI PC）拉动存储需求，单机容量翻倍</li>
+                    <li>国内模组厂商通过封测技术突破，在利基市场实现国产替代</li>
+                    <li>涨价周期持续性被市场低估，至少可维持至2026年底</li>
+                </ul>
+            </div>
+
+            <div class="gap-assessment">
+                <h4>🎯 预期差评估</h4>
+                <span class="gap-size-display large">预期差：大</span>
+                <div class="gap-reason">
+                    <p><strong>核心理由：</strong></p>
+                    <p>1. 市场未充分认知涨价周期的持续性，以为是短期反弹</p>
+                    <p>2. AI端侧设备对存储需求的拉动被市场忽视</p>
+                    <p>3. 国产厂商在利基市场的替代进度超预期</p>
+                </div>
+            </div>
+
+            <div class="verification-box">
+                <h4>✅ 验证节点</h4>
+                <table>
+                    <tr>
+                        <th>时间节点</th>
+                        <th>验证指标</th>
+                        <th>信息来源</th>
+                    </tr>
+                    <tr>
+                        <td>每月中旬</td>
+                        <td>DRAM/NAND合约价走势</td>
+                        <td>Dramexchange、产业链调研</td>
+                    </tr>
+                    <tr>
+                        <td>Q2财报季</td>
+                        <td>模组厂商毛利率改善情况</td>
+                        <td>公司财报</td>
+                    </tr>
+                    <tr>
+                        <td>持续关注</td>
+                        <td>AI手机/PC出货量、单机存储容量</td>
+                        <td>Canalys、IDC等机构数据</td>
+                    </tr>
+                </table>
             </div>
         </div>
 
-        <!-- 详情页：固态电池 -->
+        <!-- 详情页：固态电池设备 -->
         <div id="detail-battery" class="detail-page">
             <span class="back-btn" onclick="backToMain()">← 返回清单</span>
             
             <div class="header">
-                <h1>🔍 固态电池设备推导过程</h1>
-                <p>预期差等级：中偏大 | 相关标的：先导智能、海目星、利元亨</p>
+                <h1>🔍 固态电池设备</h1>
+                <p>相关标的：先导智能、海目星、利元亨</p>
             </div>
 
             <div class="detail-section">
@@ -952,24 +1153,80 @@
                         <span class="step-num">1</span>
                         <div class="step-content">
                             <div class="step-title">全固态电池大会</div>
-                            <div class="step-desc">3.20-22召开，宁德时代、比亚迪等头部企业参会</div>
+                            <div class="step-desc">3.20-22召开，宁德时代、比亚迪等头部企业参会，可能发布新技术进展</div>
                         </div>
                     </div>
                     <div class="logic-step">
                         <span class="step-num">2</span>
                         <div class="step-content">
                             <div class="step-title">奔驰量产突破</div>
-                            <div class="step-desc">奔驰宣布固态电池首次应用于量产车，能量密度提升40%</div>
+                            <div class="step-desc">奔驰宣布固态电池首次应用于量产车，能量密度提升40%，验证技术可行性</div>
                         </div>
                     </div>
                     <div class="logic-step">
                         <span class="step-num">3</span>
                         <div class="step-content">
                             <div class="step-title">设备招标启动</div>
-                            <div class="step-desc">头部电池厂启动固态电池产线设备招标，国产设备份额提升</div>
+                            <div class="step-desc">头部电池厂启动固态电池产线设备招标，国产设备份额有望提升</div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="consensus-box">
+                <h4>📊 当前市场共识</h4>
+                <ul>
+                    <li>固态电池商业化尚需3-5年，短期无法量产</li>
+                    <li>设备投资规模有限，对上市公司业绩贡献小</li>
+                    <li>展会催化只是概念炒作，缺乏实质订单支撑</li>
+                </ul>
+            </div>
+
+            <div class="change-box">
+                <h4>⚡ 潜在变化/预期差</h4>
+                <ul>
+                    <li>奔驰量产验证打破"固态电池无法商业化"的固有认知</li>
+                    <li>半固态电池已进入装车阶段，全固态技术进展超预期</li>
+                    <li>设备厂商已具备固态电池整线交付能力，国产替代空间大</li>
+                    <li>展会可能成为订单催化节点，设备招标有望超预期</li>
+                </ul>
+            </div>
+
+            <div class="gap-assessment">
+                <h4>🎯 预期差评估</h4>
+                <span class="gap-size-display medium">预期差：中偏大</span>
+                <div class="gap-reason">
+                    <p><strong>核心理由：</strong></p>
+                    <p>1. 市场低估了固态电池产业化进度，奔驰量产是重要里程碑</p>
+                    <p>2. 设备厂商订单预期差，展会可能成为催化剂</p>
+                    <p>3. 国产设备在固态电池领域的竞争力被市场忽视</p>
+                </div>
+            </div>
+
+            <div class="verification-box">
+                <h4>✅ 验证节点</h4>
+                <table>
+                    <tr>
+                        <th>时间节点</th>
+                        <th>验证指标</th>
+                        <th>信息来源</th>
+                    </tr>
+                    <tr>
+                        <td>3.20-22</td>
+                        <td>全固态电池大会技术发布、订单签约</td>
+                        <td>展会新闻、公司公告</td>
+                    </tr>
+                    <tr>
+                        <td>Q2</td>
+                        <td>头部电池厂设备招标进展</td>
+                        <td>产业调研、公司公告</td>
+                    </tr>
+                    <tr>
+                        <td>持续关注</td>
+                        <td>固态电池装车数据、良率提升进度</td>
+                        <td>产业链调研、车企公告</td>
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -978,8 +1235,8 @@
             <span class="back-btn" onclick="backToMain()">← 返回清单</span>
             
             <div class="header">
-                <h1>🔍 商业航天推导过程</h1>
-                <p>预期差等级：中 | 相关标的：中国卫星、铖昌科技、航天电子</p>
+                <h1>🔍 商业航天</h1>
+                <p>相关标的：中国卫星、铖昌科技、航天电子</p>
             </div>
 
             <div class="detail-section">
@@ -989,7 +1246,7 @@
                         <span class="step-num">1</span>
                         <div class="step-content">
                             <div class="step-title">英伟达入局</div>
-                            <div class="step-desc">英伟达发布VeraRubinSpace-1平台，布局卫星AI计算</div>
+                            <div class="step-desc">英伟达发布VeraRubinSpace-1平台，布局卫星AI计算，验证卫星算力需求</div>
                         </div>
                     </div>
                     <div class="logic-step">
@@ -999,7 +1256,70 @@
                             <div class="step-desc">2026年规划发射卫星数量同比翻倍，低轨星座建设提速</div>
                         </div>
                     </div>
+                    <div class="logic-step">
+                        <span class="step-num">3</span>
+                        <div class="step-content">
+                            <div class="step-title">政策持续加码</div>
+                            <div class="step-desc">卫星互联网纳入新基建，多地出台商业航天扶持政策</div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="consensus-box">
+                <h4>📊 当前市场共识</h4>
+                <ul>
+                    <li>商业航天投资周期长，短期难以看到业绩</li>
+                    <li>卫星发射成本高，商业模式不清晰</li>
+                    <li>国内低轨星座进展缓慢，与美国Starlink差距大</li>
+                </ul>
+            </div>
+
+            <div class="change-box">
+                <h4>⚡ 潜在变化/预期差</h4>
+                <ul>
+                    <li>英伟达入局验证卫星算力需求，打开新的应用场景（AI推理、边缘计算）</li>
+                    <li>2026年发射计划翻倍，产业链订单进入放量期</li>
+                    <li>可回收火箭技术突破，发射成本快速下降</li>
+                    <li>卫星制造产能提升，从"实验室"走向"工业化"</li>
+                </ul>
+            </div>
+
+            <div class="gap-assessment">
+                <h4>🎯 预期差评估</h4>
+                <span class="gap-size-display medium">预期差：中</span>
+                <div class="gap-reason">
+                    <p><strong>核心理由：</strong></p>
+                    <p>1. 市场低估了卫星算力需求的长期空间，英伟达入局是重要信号</p>
+                    <p>2. 2026年发射量翻倍带来的订单预期差尚未充分定价</p>
+                    <p>3. 产业链从"概念"走向"订单兑现"的临界点临近</p>
+                </div>
+            </div>
+
+            <div class="verification-box">
+                <h4>✅ 验证节点</h4>
+                <table>
+                    <tr>
+                        <th>时间节点</th>
+                        <th>验证指标</th>
+                        <th>信息来源</th>
+                    </tr>
+                    <tr>
+                        <td>每月</td>
+                        <td>卫星发射数量、成功率</td>
+                        <td>航天局公告、媒体报道</td>
+                    </tr>
+                    <tr>
+                        <td>Q2-Q3</td>
+                        <td>卫星制造订单、招标信息</td>
+                        <td>公司公告、产业调研</td>
+                    </tr>
+                    <tr>
+                        <td>持续关注</td>
+                        <td>可回收火箭试验进展</td>
+                        <td>航天公司公告</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
