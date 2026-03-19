@@ -77,6 +77,13 @@ TEMPLATES = {
             </div>
 
             <div class="detail-section">
+                <h3>📝 候选股池筛选</h3>
+                <ul>
+{candidate_pool_items}
+                </ul>
+            </div>
+
+            <div class="detail-section">
                 <h3>✅ 验证节点</h3>
                 <ul>
 {validation_items}
@@ -84,7 +91,7 @@ TEMPLATES = {
             </div>
 
             <div class="detail-section">
-                <h3>📈 受益个股</h3>
+                <h3>📈 最终推荐（按预期差强度排序）</h3>
                 <ul>
 {stocks_detail_items}
                 </ul>
@@ -133,7 +140,26 @@ def generate_stocks_detail_items(stocks_detail_list):
     items = []
     for stock in stocks_detail_list:
         stars = stock.get('stars', '')
-        items.append(f'                    <li><strong>{stock["name"]} ({stock["code"]})</strong> <span style="color:#fbbf24;">{stars}</span><br/><span style="color:#94a3b8;font-size:13px;margin-left:20px;">{stock["logic"]}</span></li>')
+        logic = stock.get('logic', '')
+        items.append(f'                    <li style="margin-bottom:16px;"><strong>{stock["name"]} ({stock["code"]})</strong> <span style="color:#fbbf24;">{stars}</span><br/><span style="color:#94a3b8;font-size:13px;margin-left:20px;display:block;margin-top:6px;">{logic}</span></li>')
+    return '\n'.join(items)
+
+def generate_candidate_pool_items(candidate_pool_list):
+    """生成候选股池表格"""
+    items = []
+    for stock in candidate_pool_list:
+        status = stock.get('status', '')
+        reason = stock.get('reason', '')
+        # 根据状态设置颜色
+        if '✅' in status:
+            color = '#22c55e'
+        elif '⚠️' in status:
+            color = '#fbbf24'
+        elif '❌' in status:
+            color = '#ef4444'
+        else:
+            color = '#94a3b8'
+        items.append(f'                    <li style="margin-bottom:16px;"><strong>{stock["name"]} ({stock["code"]})</strong> <span style="color:{color};font-weight:bold;">{status}</span><br/><span style="color:#94a3b8;font-size:13px;margin-left:20px;display:block;margin-top:6px;">{reason}</span></li>')
     return '\n'.join(items)
 
 def get_size_color(size):
@@ -172,6 +198,7 @@ def generate_detail_page(gap):
         stars=gap['stars'],
         conclusion_items=generate_conclusion_items(gap['conclusion']),
         validation_items=generate_validation_items(gap['validation']),
+        candidate_pool_items=generate_candidate_pool_items(gap.get('candidate_pool', [])),
         stocks_detail_items=generate_stocks_detail_items(gap.get('stocks_detail', []))
     )
 
