@@ -44,6 +44,11 @@ TEMPLATES = {
             </div>
 
             <div class="detail-section">
+                <h3>🌎 隔夜美股信号</h3>
+{us_signal_items}
+            </div>
+
+            <div class="detail-section">
                 <h3>📊 当前市场共识</h3>
                 <ul>
 {consensus_items}
@@ -162,6 +167,39 @@ def generate_candidate_pool_items(candidate_pool_list):
         items.append(f'                    <li style="margin-bottom:16px;"><strong>{stock["name"]} ({stock["code"]})</strong> <span style="color:{color};font-weight:bold;">{status}</span><br/><span style="color:#94a3b8;font-size:13px;margin-left:20px;display:block;margin-top:6px;">{reason}</span></li>')
     return '\n'.join(items)
 
+def generate_us_signal_items(us_signal):
+    """生成美股信号展示"""
+    if not us_signal:
+        return '                <p style="color:#64748b;">暂无美股信号关联</p>'
+    
+    indicator = us_signal.get('indicator', '')
+    ticker = us_signal.get('ticker', '')
+    change = us_signal.get('change', '')
+    price = us_signal.get('price', '')
+    trigger = us_signal.get('trigger', '')
+    update_time = us_signal.get('update_time', '')
+    mapping_logic = us_signal.get('mapping_logic', '')
+    
+    # 判断涨跌颜色
+    change_color = '#22c55e' if '+' in change else '#ef4444'
+    
+    html = f'''                <div style="background:rgba(56,189,248,0.1);padding:12px;border-radius:8px;margin-bottom:12px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                        <span style="font-weight:bold;">{indicator} ({ticker})</span>
+                        <span style="color:{change_color};font-weight:bold;">{change}</span>
+                    </div>
+                    <div style="color:#64748b;font-size:13px;margin-bottom:8px;">
+                        价格: {price} | 更新时间: {update_time}
+                    </div>
+                    <div style="color:#e2e8f0;font-size:14px;margin-bottom:8px;">
+                        <strong>触发事件:</strong> {trigger}
+                    </div>
+                    <div style="color:#fbbf24;font-size:13px;">
+                        <strong>→ 映射逻辑:</strong> {mapping_logic}
+                    </div>
+                </div>'''
+    return html
+
 def get_size_color(size):
     """根据预期差大小返回颜色"""
     colors = {
@@ -198,6 +236,7 @@ def generate_detail_page(gap):
         stars=gap['stars'],
         conclusion_items=generate_conclusion_items(gap['conclusion']),
         validation_items=generate_validation_items(gap['validation']),
+        us_signal_items=generate_us_signal_items(gap.get('us_signal')),
         candidate_pool_items=generate_candidate_pool_items(gap.get('candidate_pool', [])),
         stocks_detail_items=generate_stocks_detail_items(gap.get('stocks_detail', []))
     )
