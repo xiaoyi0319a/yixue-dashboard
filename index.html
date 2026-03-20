@@ -404,36 +404,23 @@
             color: #64748b;
         }
         
-        /* 变更记录对比样式 */
-        .changelog-item {
-            border-bottom: 1px solid #2d3748;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .changelog-item:hover { background: rgba(59, 130, 246, 0.05); }
-        .changelog-item:last-child { border-bottom: none; }
-        .changelog-header {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 8px 0;
             font-size: 13px;
         }
-        .changelog-arrow {
             color: #64748b;
             font-size: 12px;
             transition: transform 0.2s;
             margin-right: 4px;
         }
-        .changelog-item.expanded .changelog-arrow {
             transform: rotate(90deg);
         }
-        .changelog-diff {
             display: none;
             padding: 12px 0 12px 32px;
             margin-top: 4px;
         }
-        .changelog-item.expanded .changelog-diff {
             display: block;
         }
         .diff-box {
@@ -2319,9 +2306,6 @@
         }
         
         // 切换变更记录展开/折叠
-        function toggleChangelog(item) {
-            item.classList.toggle('expanded');
-        }
         
         // 切换时间标签
         function switchTime(timeId) {
