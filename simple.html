@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羿学交易 - 智囊团仪表盘</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e1a;
+            color: #f1f5f9;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #2d3748; }
+        .header h1 { font-size: 32px; color: #3b82f6; margin-bottom: 10px; }
+        .header p { color: #94a3b8; }
+        .card { 
+            background: #1a1f2e; 
+            border: 1px solid #2d3748;
+            border-radius: 12px; 
+            padding: 24px; 
+            margin-bottom: 20px;
+        }
+        .card h2 { color: #3b82f6; margin-bottom: 16px; font-size: 20px; }
+        .card h3 { color: #6366f1; margin-bottom: 12px; font-size: 16px; }
+        .market-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #2d3748;
+        }
+        .market-item:last-child { border-bottom: none; }
+        .down { color: #ef4444; }
+        .up { color: #22c55e; }
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #252b3b;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        .highlight { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #2d3748; }
+        th { color: #94a3b8; font-weight: 500; }
+        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #2d3748; color: #64748b; font-size: 14px; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 羿学交易智囊团仪表盘</h1>
+            <p>数据日期：2026-03-19 | 系统版本：v2.1</p>
+        </div>
+
+        <div class="card">
+            <h2>📈 外盘市场（3月18日收盘）</h2>
+            <div class="market-item">
+                <span>标普500</span>
+                <span class="down">6,624.70 (-1.36%)</span>
+            </div>
+            <div class="market-item">
+                <span>道指</span>
+                <span class="down">46,225.15 (-1.63%)</span>
+            </div>
+            <div class="market-item">
+                <span>纳指</span>
+                <span class="down">22,152.42 (-1.46%)</span>
+            </div>
+            <div class="market-item">
+                <span>VIX恐慌指数</span>
+                <span class="up">25.09 (+12.16%)</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🇨🇳 中概股</h2>
+            <p style="color:#94a3b8;margin-bottom:16px;">金龙指数 -2.06%</p>
+            <div class="market-item">
+                <span>微博</span>
+                <span class="down">-10.8%</span>
+            </div>
+            <div class="market-item">
+                <span>腾讯音乐</span>
+                <span class="down">-9.4%</span>
+            </div>
+            <div class="market-item">
+                <span>金山云</span>
+                <span class="up">+12.6%</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🏭 行业要闻</h2>
+            <table>
+                <tr><th>板块</th><th>核心事件</th><th>重要性</th></tr>
+                <tr>
+                    <td><strong>AI算力</strong></td>
+                    <td>阿里云/百度涨价，Token调用量暴涨</td>
+                    <td><span class="tag highlight">⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td><strong>存储芯片</strong></td>
+                    <td>NAND闪存涨价10%，供给受限</td>
+                    <td><span class="tag highlight">⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td><strong>商业航天</strong></td>
+                    <td>英伟达入局轨道AI</td>
+                    <td><span class="tag">⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td><strong>固态电池</strong></td>
+                    <td>奔驰固态电池首次量产应用</td>
+                    <td><span class="tag">⭐⭐</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>🔥 预期差清单</h2>
+            <div class="market-item">
+                <span><strong>1. AI算力产业链</strong><br><small style="color:#64748b;">润泽科技/奥飞数据</small></span>
+                <span class="up">预期差：大</span>
+            </div>
+            <div class="market-item">
+                <span><strong>2. 存储芯片</strong><br><small style="color:#64748b;">兆易创新/普冉股份</small></span>
+                <span class="up">预期差：大</span>
+            </div>
+            <div class="market-item">
+                <span><strong>3. 固态电池设备</strong><br><small style="color:#64748b;">先导智能/海目星</small></span>
+                <span class="up">预期差：中偏大</span>
+            </div>
+            <div class="market-item">
+                <span><strong>4. 商业航天</strong><br><small style="color:#64748b;">中国卫星/铖昌科技</small></span>
+                <span class="up">预期差：中</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>👥 智囊团状态</h2>
+            <h3>📊 选股智囊团 (7人)</h3>
+            <p><span class="tag">本杰明</span> <span class="tag">菲利普</span> <span class="tag">霍华德</span> <span class="tag highlight">马克(首席)</span></p>
+            
+            <h3>⏰ 择时智囊团 (5人)</h3>
+            <p><span class="tag">查尔斯·道</span> <span class="tag highlight">艾略特(首席)</span> <span class="tag highlight">缠论大师</span></p>
+            
+            <h3>🔮 奇门遁甲组</h3>
+            <p><span class="tag">奇门君</span></p>
+        </div>
+
+        <div class="footer">
+            <p>羿学交易 · 智囊团系统 v2.1 | 部署平台：Netlify</p>
+        </div>
+    </div>
+</body>
+</html>
