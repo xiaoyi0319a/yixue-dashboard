@@ -397,6 +397,239 @@
             color: #fca5a5;
         }
         
+        /* 起盘信息 */
+        .qimen-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .info-item {
+            background: rgba(255,255,255,0.06);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .info-item .label {
+            color: #a5b4fc;
+            margin-right: 4px;
+        }
+        .info-item .value {
+            color: #e0e7ff;
+        }
+        .info-item .value-highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        
+        /* 九宫排盘 */
+        .qimen-paipan {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .gong {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-size: 12px;
+            color: #a5b4fc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .gong-active {
+            background: rgba(79,70,229,0.3);
+            border-color: #6366f1;
+        }
+        .gong .star { color: #fbbf24; font-size: 11px; }
+        .gong .star-highlight { color: #fbbf24; font-weight: 600; }
+        .gong .men { color: #34d399; font-size: 11px; }
+        .gong .men-highlight { color: #34d399; font-weight: 600; }
+        .gong .gan { color: #e0e7ff; }
+        .gong .gan-highlight { color: #f87171; font-weight: 600; }
+        .gong .shen { color: #a78bfa; font-size: 11px; }
+        .gong-zhong {
+            background: rgba(139,92,246,0.2);
+        }
+        
+        /* 用神分析 */
+        .yongshen-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .yongshen-item {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 3px solid #6366f1;
+        }
+        .yongshen-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 8px;
+        }
+        .yongshen-detail {
+            font-size: 13px;
+            color: #e0e7ff;
+            line-height: 1.5;
+        }
+        .yongshen-detail .analysis {
+            color: #a5b4fc;
+            display: block;
+            margin-top: 6px;
+        }
+        
+        /* 吉凶判断 */
+        .jixiong-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .jixiong-analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .ji-box, .xiong-box {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .ji-box {
+            border-left: 3px solid #10b981;
+        }
+        .xiong-box {
+            border-left: 3px solid #ef4444;
+        }
+        .ji-box h4 {
+            color: #34d399;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .xiong-box h4 {
+            color: #f87171;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .ji-box ul, .xiong-box ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+        .ji-box li {
+            color: #c7d2fe;
+            font-size: 13px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .xiong-box li {
+            color: #fca5a5;
+            font-size: 13px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        /* 点位预测 */
+        .point-prediction {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .point-yesterday {
+            text-align: center;
+            font-size: 14px;
+            color: #a5b4fc;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .point-yesterday .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-left: 8px;
+        }
+        .point-range {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        .point-support, .point-resistance, .point-current {
+            text-align: center;
+            flex: 1;
+        }
+        .point-support .label, .point-resistance .label, .point-current .label {
+            display: block;
+            font-size: 12px;
+            color: #a5b4fc;
+            margin-bottom: 4px;
+        }
+        .point-support .price-down {
+            font-size: 14px;
+            font-weight: 600;
+            color: #34d399;
+        }
+        .point-resistance .price-up {
+            font-size: 14px;
+            font-weight: 600;
+            color: #f87171;
+        }
+        .point-current .price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+        
+        /* 化解信号 */
+        .resolve-signals {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .signal-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+        .signal-item.positive {
+            border-left: 3px solid #10b981;
+        }
+        .signal-item.negative {
+            border-left: 3px solid #ef4444;
+        }
+        .signal-icon {
+            font-size: 16px;
+        }
+        .signal-content {
+            font-size: 13px;
+            color: #e0e7ff;
+        }
+        .signal-content strong {
+            color: #fbbf24;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .qimen-info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .jixiong-analysis {
+                grid-template-columns: 1fr;
+            }
+            .point-range {
+                flex-wrap: wrap;
+            }
+            .qimen-paipan {
+                max-width: 100%;
+            }
+        }
+        
         /* 总结 */
         .qimen-summary-dark {
             margin-top: 28px;
@@ -476,73 +709,158 @@
                     <span class="update-time">2026-03-23 11:18 | 阳遁3局 | 值符天心·值使开门</span>
                 </div>
 
-                <!-- 吉凶分析 -->
-                <div class="qimen-overview-dark">
-                    <div class="rating-card-dark">
-                        <h3>大势评级</h3>
-                        <div class="rating-stars">★★★☆☆</div>
-                        <p class="rating-text">震荡整理<br>蓄势待发</p>
-                    </div>
-                    <div class="key-points-dark">
-                        <div class="point-dark">
-                            <span class="label">日干丙奇</span>
-                            <span class="value">坎一宫·胎地<br>天蓬+休门+螣蛇</span>
-                        </div>
-                        <div class="point-dark">
-                            <span class="label">时干甲木</span>
-                            <span class="value">坤二宫·冠带<br>天芮+死门+九地</span>
-                        </div>
-                        <div class="point-dark">
-                            <span class="label">吉凶判断</span>
-                            <span class="value">丙奇受克休囚<br>时干临死门九地</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 板块分析 -->
+                <!-- 1. 起盘信息 -->
                 <div class="qimen-section-dark">
-                    <h3>📊 板块分析</h3>
-                    <div class="sector-grid-dark">
-                        <div class="sector-card-dark strong">
-                            <div class="sector-name">金融（银行/证券）</div>
-                            <div class="sector-basis">值符天心+开门同宫乾六，消息主导</div>
-                            <div class="sector-trend">🟢 关注政策面</div>
-                            <div class="sector-action">逢低关注</div>
+                    <h3>📋 起盘信息</h3>
+                    <div class="qimen-info-grid">
+                        <div class="info-item"><span class="label">日期：</span><span class="value">2026年3月23日 11:18</span></div>
+                        <div class="info-item"><span class="label">四柱：</span><span class="value">丙午年 辛卯月 丙申日 甲午时</span></div>
+                        <div class="info-item"><span class="label">节气：</span><span class="value">春分后第3天</span></div>
+                        <div class="info-item"><span class="label">局数：</span><span class="value">阳遁3局（拆补法·寄坤宫）</span></div>
+                        <div class="info-item"><span class="label">旬首：</span><span class="value">甲午辛</span></div>
+                        <div class="info-item"><span class="label">值符：</span><span class="value-highlight">天心星（乾六宫）</span></div>
+                        <div class="info-item"><span class="label">值使：</span><span class="value-highlight">开门（乾六宫）</span></div>
+                        <div class="info-item"><span class="label">马星：</span><span class="value">申</span></div>
+                    </div>
+                </div>
+
+                <!-- 2. 九宫排盘 -->
+                <div class="qimen-section-dark">
+                    <h3>🔲 九宫排盘</h3>
+                    <div class="qimen-paipan">
+                        <div class="gong gong-si">巽四宫<br><span class="star">白虎·天辅</span><br><span class="gan">庚</span><br><span class="men">杜门</span><br><span class="shen">己</span></div>
+                        <div class="gong gong-li">离九宫<br><span class="star">玄武·天英</span><br><span class="gan">丙</span><br><span class="men">景门</span><br><span class="shen">丁</span></div>
+                        <div class="gong gong-kun">坤二宫<br><span class="star">九地·芮禽</span><br><span class="gan">戊</span><br><span class="men">死门</span><br><span class="shen">庚乙</span></div>
+                        <div class="gong gong-zhen">震三宫<br><span class="star">六合·天冲</span><br><span class="gan">己</span><br><span class="men">伤门</span><br><span class="shen">戊</span></div>
+                        <div class="gong gong-zhong">中五宫<br><span class="gan">辛（寄坤）</span></div>
+                        <div class="gong gong-dui">兑七宫<br><span class="star">九天·天柱</span><br><span class="gan">癸</span><br><span class="men">惊门</span><br><span class="shen">壬</span></div>
+                        <div class="gong gong-gen">艮八宫<br><span class="star">太阴·天任</span><br><span class="gan">乙</span><br><span class="men">生门</span><br><span class="shen">癸</span></div>
+                        <div class="gong gong-kan">坎一宫<br><span class="star">螣蛇·天蓬</span><br><span class="gan-highlight">丙（日干）</span><br><span class="men">休门</span><br><span class="shen">丙</span></div>
+                        <div class="gong gong-qian gong-active">乾六宫<br><span class="star-highlight">值符·天心</span><br><span class="gan">壬</span><br><span class="men-highlight">开门（值使）</span><br><span class="shen">辛</span></div>
+                    </div>
+                </div>
+
+                <!-- 3. 用神分析 -->
+                <div class="qimen-section-dark">
+                    <h3>🎯 用神分析</h3>
+                    <div class="yongshen-list">
+                        <div class="yongshen-item">
+                            <div class="yongshen-title">日干丙奇（市场主气）</div>
+                            <div class="yongshen-detail">落坎一宫·胎地 | 天蓬+休门+螣蛇<br><span class="analysis">丙奇落坎宫受克，处胎地主孕育蓄势。天蓬主冒险投机，休门主静观，螣蛇主虚惊反复。多方力量不足，市场观望情绪浓厚。</span></div>
                         </div>
-                        <div class="sector-card-dark strong">
-                            <div class="sector-name">新能源（光伏/锂电）</div>
-                            <div class="sector-basis">六合+天冲+伤门，有冲高机会</div>
-                            <div class="sector-trend">🟢 冲高注意高抛</div>
-                            <div class="sector-action">不宜追高</div>
+                        <div class="yongshen-item">
+                            <div class="yongshen-title">时干甲木（大盘走势）</div>
+                            <div class="yongshen-detail">落坤二宫·冠带 | 天芮+死门+九地<br><span class="analysis">甲遁戊落坤宫得地，处冠带有气。但临死门主停滞，九地主潜藏。大盘难有突破，以稳为主。</span></div>
                         </div>
-                        <div class="sector-card-dark strong">
-                            <div class="sector-name">消费</div>
-                            <div class="sector-basis">太阴+天任+生门，长生之地有利可图</div>
-                            <div class="sector-trend">🟢 关注低吸机会</div>
-                            <div class="sector-action">逢低布局</div>
+                        <div class="yongshen-item">
+                            <div class="yongshen-title">值符天心（机构主力）</div>
+                            <div class="yongshen-detail">同宫乾六宫 | 开门+值符+辛<br><span class="analysis">值符值使同宫乾六，机构与消息同力。天心主理性管理，开门主公开，今日机构操作受消息面影响大。</span></div>
                         </div>
-                        <div class="sector-card-dark neutral">
-                            <div class="sector-name">医药</div>
-                            <div class="sector-basis">九地+天芮+死门，防御属性</div>
-                            <div class="sector-trend">🟡 稳中偏弱</div>
-                            <div class="sector-action">防御配置</div>
-                        </div>
-                        <div class="sector-card-dark neutral">
-                            <div class="sector-name">科技（AI/半导体）</div>
-                            <div class="sector-basis">白虎+天辅+杜门，杜门闭塞</div>
-                            <div class="sector-trend">🟡 难有表现</div>
-                            <div class="sector-action">观望</div>
-                        </div>
-                        <div class="sector-card-dark weak">
-                            <div class="sector-name">军工</div>
-                            <div class="sector-basis">九天+天柱+惊门，惊门主惊恐</div>
-                            <div class="sector-trend">🔴 注意风险</div>
-                            <div class="sector-action">回避</div>
+                        <div class="yongshen-item">
+                            <div class="yongshen-title">生门（利润）</div>
+                            <div class="yongshen-detail">落艮八宫·长生 | 天任+太阴+癸<br><span class="analysis">生门落长生之地，有利可图。太阴主暗中获利，适合潜伏低吸。但乙+癸为日奇入雾，利润有隐情。</span></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 仓位建议 -->
+                <!-- 4. 吉凶判断（结合大盘数据） -->
+                <div class="qimen-section-dark">
+                    <h3>⚖️ 吉凶判断</h3>
+                    <div class="jixiong-container">
+                        <div class="rating-card-dark">
+                            <h3>大势评级</h3>
+                            <div class="rating-stars">★★★☆☆</div>
+                            <p class="rating-text">震荡整理</p>
+                        </div>
+                        <div class="jixiong-analysis">
+                            <div class="ji-box">
+                                <h4>✓ 吉在何处</h4>
+                                <ul>
+                                    <li><strong>值符开门同宫：</strong>机构与消息同力，如有利好政策，市场有反弹动力</li>
+                                    <li><strong>生门长生：</strong>利润宫得地，结构性机会存在，低吸有利可图</li>
+                                    <li><strong>无四害：</strong>全局无门迫、击刑、入墓，格局相对清明</li>
+                                </ul>
+                            </div>
+                            <div class="xiong-box">
+                                <h4>✗ 凶在何处</h4>
+                                <ul>
+                                    <li><strong>丙奇休囚：</strong>日干落坎宫受克，多方力量不足，上攻乏力</li>
+                                    <li><strong>死门临事：</strong>时干临死门九地，市场停滞，难有大的突破</li>
+                                    <li><strong>螣蛇虚惊：</strong>临日干主盘中波动大，假突破假跌破多</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 点位预测 -->
+                <div class="qimen-section-dark">
+                    <h3>📍 点位预测</h3>
+                    <div class="point-prediction">
+                        <div class="point-yesterday">昨日收盘：<span class="price">3,957.00</span></div>
+                        <div class="point-range">
+                            <div class="point-support">
+                                <span class="label">强支撑</span>
+                                <span class="price-down">3,800</span>
+                            </div>
+                            <div class="point-support">
+                                <span class="label">支撑</span>
+                                <span class="price-down">3,920 (-0.9%)</span>
+                            </div>
+                            <div class="point-current">
+                                <span class="label">当前</span>
+                                <span class="price">3,957</span>
+                            </div>
+                            <div class="point-resistance">
+                                <span class="label">压力</span>
+                                <span class="price-up">3,990 (+0.8%)</span>
+                            </div>
+                            <div class="point-resistance">
+                                <span class="label">强压力</span>
+                                <span class="price-up">4,020 (+1.6%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. 化解信号 -->
+                <div class="qimen-section-dark">
+                    <h3>🔔 化解信号</h3>
+                    <div class="resolve-signals">
+                        <div class="signal-item positive">
+                            <span class="signal-icon">🟢</span>
+                            <div class="signal-content">
+                                <strong>若开盘放量突破3990：</strong>值符开门发力，可跟进做多
+                            </div>
+                        </div>
+                        <div class="signal-item positive">
+                            <span class="signal-icon">🟢</span>
+                            <div class="signal-content">
+                                <strong>若北向净流入超50亿：</strong>外资助力，化解丙奇休囚
+                            </div>
+                        </div>
+                        <div class="signal-item positive">
+                            <span class="signal-icon">🟢</span>
+                            <div class="signal-content">
+                                <strong>若金融板块领涨：</strong>开门值使发力，消息兑现
+                            </div>
+                        </div>
+                        <div class="signal-item negative">
+                            <span class="signal-icon">🔴</span>
+                            <div class="signal-content">
+                                <strong>若跌破3920无反弹：</strong>死门发力，减仓避险
+                            </div>
+                        </div>
+                        <div class="signal-item negative">
+                            <span class="signal-icon">🔴</span>
+                            <div class="signal-content">
+                                <strong>若11:00前后急杀：</strong>螣蛇发难，防虚惊成真
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. 仓位建议 -->
                 <div class="qimen-section-dark">
                     <h3>💼 仓位建议</h3>
                     <div class="strategy-cards-dark">
@@ -564,19 +882,19 @@
                             <ul>
                                 <li>螣蛇临日干，防虚惊假信号</li>
                                 <li>死门临时干，市场难有突破</li>
-                                <li>伤门临资金，注意控制回撤</li>
+                                <li>跌破3920果断减仓</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- 总结 -->
+                <!-- 8. 总结 -->
                 <div class="qimen-summary-dark">
                     <h3>📝 总结</h3>
                     <div class="summary-box-dark">
                         <p class="summary-title">阳遁三局，春分上元，天心值符，开门值使。</p>
-                        <p class="summary-content">日干丙奇胎于坎宫，时干戊临死门于坤宫。值符值使同宫乾六，生门长生艮八，市场蓄势待发。</p>
-                        <p class="summary-conclusion">今日大盘震荡整理为主，弱波动预期，关注金融政策消息，新能源冲高注意高抛，整体宜3-5成仓位，低吸为主不追高。</p>
+                        <p class="summary-content">日干丙奇胎于坎宫休囚，时干戊临死门九地，值符值使同宫乾六蓄势。今日大盘震荡整理为主，区间3920-3990，关注化解信号，3-5成仓位应对。</p>
+                        <p class="summary-conclusion">一句话：震荡蓄势，低吸为主，突破3990跟进，跌破3920减仓。</p>
                     </div>
                 </div>
             </section>
