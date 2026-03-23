@@ -683,7 +683,42 @@
             color: #fbbf24;
         }
         
-        /* 化解信号 */
+        /* 化解信号简化版 */
+        .resolve-simple {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .resolve-simple p {
+            font-size: 13px;
+            color: #e0e7ff;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .resolve-simple .positive-text {
+            color: #34d399;
+        }
+        .resolve-simple .negative-text {
+            color: #f87171;
+        }
+        
+        /* 仓位建议简化版 */
+        .position-simple {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .position-simple p {
+            font-size: 13px;
+            color: #e0e7ff;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .position-simple strong {
+            color: #fbbf24;
+        }
+        
+        /* 原化解信号样式（保留供兼容） */
         .resolve-signals {
             display: flex;
             flex-direction: column;
@@ -868,66 +903,19 @@
                 <!-- 4. 化解信号 -->
                 <div class="qimen-section-dark">
                     <h3>🔔 化解信号</h3>
-                    <div class="resolve-signals">
-                        <div class="signal-item positive">
-                            <span class="signal-icon">🟢</span>
-                            <div class="signal-content">
-                                <strong>若放量收复3900：</strong>死门得化解，可轻仓试探
-                            </div>
-                        </div>
-                        <div class="signal-item positive">
-                            <span class="signal-icon">🟢</span>
-                            <div class="signal-content">
-                                <strong>若北向净流入超30亿：</strong>外资助力，化解丙奇休囚
-                            </div>
-                        </div>
-                        <div class="signal-item positive">
-                            <span class="signal-icon">🟢</span>
-                            <div class="signal-content">
-                                <strong>若金融板块护盘：</strong>开门值使发力，消息兑现
-                            </div>
-                        </div>
-                        <div class="signal-item negative">
-                            <span class="signal-icon">🔴</span>
-                            <div class="signal-content">
-                                <strong>若跌破3850无反弹：</strong>死门发力，减仓至3成以下
-                            </div>
-                        </div>
-                        <div class="signal-item negative">
-                            <span class="signal-icon">🔴</span>
-                            <div class="signal-content">
-                                <strong>若缩量阴跌：</strong>九地无解，观望为主
-                            </div>
-                        </div>
+                    <div class="resolve-simple">
+                        <p><strong class="positive-text">🟢 化解：</strong>放量收复3900可轻仓；北向流入30亿+金融护盘可跟进</p>
+                        <p><strong class="negative-text">🔴 恶化：</strong>跌破3850无反弹减仓；缩量阴跌观望</p>
                     </div>
                 </div>
 
-                <!-- 4. 仓位建议 -->
                 <!-- 5. 仓位建议 -->
                 <div class="qimen-section-dark">
                     <h3>💼 仓位建议</h3>
-                    <div class="strategy-cards-dark">
-                        <div class="strategy-card-dark">
-                            <h4>总体建议</h4>
-                            <p class="position-level">3成以下</p>
-                            <p>早盘已破3900，弱势超预期，控制仓位观望</p>
-                        </div>
-                        <div class="strategy-card-dark">
-                            <h4>操作策略</h4>
-                            <ul>
-                                <li>已跌破3900，不急于抄底</li>
-                                <li>关注3850强支撑是否有效</li>
-                                <li>放量收复3900再考虑加仓</li>
-                            </ul>
-                        </div>
-                        <div class="strategy-card-dark warning">
-                            <h4>⚠️ 风险提示</h4>
-                            <ul>
-                                <li>早盘低开1.32%破3900，弱势明显</li>
-                                <li>死门发力，市场难有大的反弹</li>
-                                <li>跌破3850果断减仓至空仓</li>
-                            </ul>
-                        </div>
+                    <div class="position-simple">
+                        <p><strong>仓位：</strong>3成以下，早盘破3900弱势超预期</p>
+                        <p><strong>策略：</strong>不急于抄底，关注3850支撑，收复3900再考虑加仓</p>
+                        <p><strong>风控：</strong>跌破3850果断减仓至空仓</p>
                     </div>
                 </div>
             </section>
