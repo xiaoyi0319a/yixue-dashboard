@@ -527,7 +527,49 @@
             margin-top: 6px;
         }
         
-        /* 吉凶判断 */
+        /* 吉凶判断简化版 */
+        .jixiong-simple {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .ji-line, .xiong-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .ji-line {
+            border-left: 3px solid #10b981;
+        }
+        .xiong-line {
+            border-left: 3px solid #ef4444;
+        }
+        .ji-tag, .xiong-tag {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .ji-tag {
+            background: rgba(16,185,129,0.2);
+            color: #34d399;
+        }
+        .xiong-tag {
+            background: rgba(239,68,68,0.2);
+            color: #f87171;
+        }
+        .ji-text, .xiong-text {
+            font-size: 13px;
+            color: #e0e7ff;
+            line-height: 1.5;
+        }
+        
+        /* 原吉凶判断样式（保留供兼容） */
         .jixiong-container {
             display: flex;
             flex-direction: column;
@@ -811,29 +853,14 @@
                 <!-- 3. 吉凶判断（结合大盘数据） -->
                 <div class="qimen-section-dark">
                     <h3>⚖️ 吉凶判断</h3>
-                    <div class="jixiong-container">
-                        <div class="rating-card-dark">
-                            <h3>大势评级</h3>
-                            <div class="rating-stars">★★★☆☆</div>
-                            <p class="rating-text">震荡整理</p>
+                    <div class="jixiong-simple">
+                        <div class="ji-line">
+                            <span class="ji-tag">✓ 吉</span>
+                            <span class="ji-text">值符开门同宫乾六，机构与消息同力；生门长生艮八，利润宫有利可图</span>
                         </div>
-                        <div class="jixiong-analysis">
-                            <div class="ji-box">
-                                <h4>✓ 吉在何处</h4>
-                                <ul>
-                                    <li><strong>值符开门同宫：</strong>机构与消息同力，如有利好政策，市场有反弹动力。当前低开后关注是否有护盘动作。</li>
-                                    <li><strong>生门长生：</strong>利润宫得地，结构性机会存在。早盘低开已释放部分风险，超跌反弹概率增加。</li>
-                                    <li><strong>无四害：</strong>全局无门迫、击刑、入墓，格局相对清明，急跌后或有修复。</li>
-                                </ul>
-                            </div>
-                            <div class="xiong-box">
-                                <h4>✗ 凶在何处</h4>
-                                <ul>
-                                    <li><strong>丙奇休囚：</strong>日干落坎宫受克，多方力量不足。今日低开1.32%破3900，弱势明显。</li>
-                                    <li><strong>死门临事：</strong>时干临死门九地，市场停滞。昨日跌1.24%，今日延续弱势，短期难有大反弹。</li>
-                                    <li><strong>螣蛇虚惊：</strong>临日干主盘中波动大。早盘已破3900，需防进一步下探至3800强支撑。</li>
-                                </ul>
-                            </div>
+                        <div class="xiong-line">
+                            <span class="xiong-tag">✗ 凶</span>
+                            <span class="xiong-text">丙奇休囚坎宫受克，多方不足；死门临事九地潜藏，大盘停滞难突破</span>
                         </div>
                     </div>
                 </div>
