@@ -718,6 +718,41 @@
             color: #fbbf24;
         }
         
+        /* 奇门断语简化版 */
+        .duanyu-simple {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .duanyu-simple p {
+            font-size: 13px;
+            color: #e0e7ff;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .duanyu-simple strong {
+            color: #fbbf24;
+        }
+        
+        /* 吉凶判断纯文字版 */
+        .jixiong-text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .jixiong-text p {
+            font-size: 13px;
+            color: #e0e7ff;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .jixiong-text .ji-label {
+            color: #34d399;
+        }
+        .jixiong-text .xiong-label {
+            color: #f87171;
+        }
+        
         /* 原化解信号样式（保留供兼容） */
         .resolve-signals {
             display: flex;
@@ -878,25 +913,19 @@
                 <!-- 2. 奇门断语 -->
                 <div class="qimen-section-dark">
                     <h3>📝 奇门断语</h3>
-                    <div class="summary-box-dark">
-                        <p class="summary-title">阳遁三局，春分上元，天心值符，开门值使。</p>
-                        <p class="summary-content">日干丙奇胎于坎宫休囚，时干戊临死门九地，值符值使同宫乾六蓄势。早盘低开1.32%破3900，弱势超预期，凶象显现。</p>
-                        <p class="summary-conclusion">早盘已破3900，弱势确认，控制仓位3成以下，关注3850支撑，放量收复3900再跟进。</p>
+                    <div class="duanyu-simple">
+                        <p><strong>格局：</strong>阳遁三局，春分上元，天心值符，开门值使</p>
+                        <p><strong>态势：</strong>日干丙奇休囚坎宫，时干戊临死门九地，早盘低开1.32%破3900，弱势超预期</p>
+                        <p><strong>结论：</strong>控制仓位3成以下，关注3850支撑，放量收复3900再跟进</p>
                     </div>
                 </div>
 
-                <!-- 3. 吉凶判断（结合大盘数据） -->
+                <!-- 3. 吉凶判断 -->
                 <div class="qimen-section-dark">
                     <h3>⚖️ 吉凶判断</h3>
-                    <div class="jixiong-simple">
-                        <div class="ji-line">
-                            <span class="ji-tag">✓ 吉</span>
-                            <span class="ji-text">值符开门同宫乾六，机构与消息同力；生门长生艮八，利润宫有利可图</span>
-                        </div>
-                        <div class="xiong-line">
-                            <span class="xiong-tag">✗ 凶</span>
-                            <span class="xiong-text">丙奇休囚坎宫受克，多方不足；死门临事九地潜藏，大盘停滞难突破</span>
-                        </div>
+                    <div class="jixiong-text">
+                        <p><strong class="ji-label">✓ 吉：</strong>值符开门同宫乾六，机构与消息同力；生门长生艮八，利润宫有利可图</p>
+                        <p><strong class="xiong-label">✗ 凶：</strong>丙奇休囚坎宫受克，多方不足；死门临事九地潜藏，大盘停滞难突破</p>
                     </div>
                 </div>
 
