@@ -479,7 +479,26 @@
             background: rgba(139,92,246,0.2);
         }
         
-        /* 用神分析 */
+        /* 用神分析简化版 */
+        .yongshen-simple {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .yongshen-simple p {
+            font-size: 14px;
+            color: #e0e7ff;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        .yongshen-simple p:last-child {
+            margin-bottom: 0;
+        }
+        .yongshen-simple strong {
+            color: #fbbf24;
+        }
+        
+        /* 原用神分析样式（保留供兼容） */
         .yongshen-list {
             display: flex;
             flex-direction: column;
@@ -759,26 +778,13 @@
                     </div>
                 </div>
 
-                <!-- 2. 用神分析 -->
+                <!-- 2. 用神分析（简化） -->
                 <div class="qimen-section-dark">
                     <h3>🎯 用神分析</h3>
-                    <div class="yongshen-list">
-                        <div class="yongshen-item">
-                            <div class="yongshen-title">日干丙奇（市场主气）</div>
-                            <div class="yongshen-detail">落坎一宫·胎地 | 天蓬+休门+螣蛇<br><span class="analysis">丙奇落坎宫受克，处胎地主孕育蓄势。天蓬主冒险投机，休门主静观，螣蛇主虚惊反复。多方力量不足，市场观望情绪浓厚。</span></div>
-                        </div>
-                        <div class="yongshen-item">
-                            <div class="yongshen-title">时干甲木（大盘走势）</div>
-                            <div class="yongshen-detail">落坤二宫·冠带 | 天芮+死门+九地<br><span class="analysis">甲遁戊落坤宫得地，处冠带有气。但临死门主停滞，九地主潜藏。大盘难有突破，以稳为主。</span></div>
-                        </div>
-                        <div class="yongshen-item">
-                            <div class="yongshen-title">值符天心（机构主力）</div>
-                            <div class="yongshen-detail">同宫乾六宫 | 开门+值符+辛<br><span class="analysis">值符值使同宫乾六，机构与消息同力。天心主理性管理，开门主公开，今日机构操作受消息面影响大。</span></div>
-                        </div>
-                        <div class="yongshen-item">
-                            <div class="yongshen-title">生门（利润）</div>
-                            <div class="yongshen-detail">落艮八宫·长生 | 天任+太阴+癸<br><span class="analysis">生门落长生之地，有利可图。太阴主暗中获利，适合潜伏低吸。但乙+癸为日奇入雾，利润有隐情。</span></div>
-                        </div>
+                    <div class="yongshen-simple">
+                        <p><strong>日干丙奇</strong>落坎一宫受克休囚，天蓬+休门+螣蛇，多方力量不足，市场观望情绪浓。</p>
+                        <p><strong>时干甲木</strong>落坤二宫临死门九地，大盘停滞难有突破，以稳为主。</p>
+                        <p><strong>值符天心</strong>同宫开门乾六，机构与消息同力，今日操作受消息面影响大。</p>
                     </div>
                 </div>
 
