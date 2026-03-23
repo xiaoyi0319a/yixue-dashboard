@@ -806,6 +806,77 @@
             color: #fbbf24;
         }
         
+        /* 当日预期差暗色主题 */
+        .gap-direction-list-dark {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .gap-direction-card-dark {
+            display: block;
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .gap-direction-card-dark:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateX(4px);
+        }
+        .gap-header-dark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .gap-header-dark .gap-rank {
+            font-size: 20px;
+        }
+        .gap-header-dark .gap-name {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .gap-header-dark .gap-arrow {
+            font-size: 18px;
+            color: #a5b4fc;
+            opacity: 0.6;
+        }
+        .gap-direction-card-dark:hover .gap-arrow {
+            opacity: 1;
+            color: #fbbf24;
+        }
+        .gap-meta-dark {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-left: 32px;
+        }
+        .gap-meta-dark .gap-size {
+            font-size: 13px;
+            font-weight: 500;
+            color: #fbbf24;
+            padding: 2px 8px;
+            background: rgba(251,191,36,0.15);
+            border-radius: 4px;
+        }
+        .gap-meta-dark .gap-size.medium {
+            color: #c084fc;
+            background: rgba(192,132,252,0.15);
+        }
+        .gap-meta-dark .gap-size.small {
+            color: #60a5fa;
+            background: rgba(96,165,250,0.15);
+        }
+        .gap-meta-dark .gap-sectors {
+            font-size: 13px;
+            color: #a5b4fc;
+        }
+        
         /* 响应式调整 */
         @media (max-width: 768px) {
             .qimen-info-grid {
@@ -976,156 +1047,51 @@
                 </div>
             </section>
 
-            <!-- 栏目2: 当日预期差清单 -->
-            <section class="section-block">
-                <div class="section-header">
-                    <h2>🔥 当日预期差清单 (2026-03-23)</h2>
-                    <span class="update-time">更新时间：12:00</span>
+            <!-- 栏目2: 当日预期差 -->
+            <section class="section-block qimen-dark">
+                <div class="section-header qimen-header">
+                    <h2>🔥 当日预期差</h2>
+                    <span class="update-time">2026-03-23 12:00 | 3个方向</span>
                 </div>
 
-                <div class="gap-direction-list">
+                <div class="gap-direction-list-dark">
                     <!-- 方向1 -->
-                    <div class="gap-direction-card rank-1">
-                        <div class="gap-header">
+                    <a href="gap/gap-20260323-1.html" class="gap-direction-card-dark rank-1">
+                        <div class="gap-header-dark">
                             <span class="gap-rank">🥇</span>
                             <span class="gap-name">光伏/锂电板块修复</span>
+                            <span class="gap-arrow">→</span>
+                        </div>
+                        <div class="gap-meta-dark">
                             <span class="gap-size">预期差：中偏大</span>
+                            <span class="gap-sectors">光伏设备 · 能源金属 · 储能</span>
                         </div>
-                        <div class="gap-sectors">
-                            <span class="sector-tag">光伏设备</span>
-                            <span class="sector-tag">能源金属</span>
-                            <span class="sector-tag">储能</span>
-                        </div>
-                        <div class="gap-reason">
-                            <strong>入选理由：</strong>市场假设Q2需求平淡旺季在Q3，实际情况抢装潮提前+海外需求超预期；市场认为产能过剩价格战持续，实际小企业出清龙头开工率回升；政策催化+价格企稳，修复逻辑成立。
-                        </div>
-                        <div class="gap-source">出处：菲利普信息差挖掘 | 验证：下周组件价格数据</div>
-                    </div>
+                    </a>
 
                     <!-- 方向2 -->
-                    <div class="gap-direction-card rank-2">
-                        <div class="gap-header">
+                    <a href="gap/gap-20260323-2.html" class="gap-direction-card-dark rank-2">
+                        <div class="gap-header-dark">
                             <span class="gap-rank">🥈</span>
                             <span class="gap-name">央行政策底确认</span>
+                            <span class="gap-arrow">→</span>
+                        </div>
+                        <div class="gap-meta-dark">
                             <span class="gap-size medium">预期差：中</span>
+                            <span class="gap-sectors">银行 · 高股息蓝筹 · 金融ETF</span>
                         </div>
-                        <div class="gap-sectors">
-                            <span class="sector-tag">银行</span>
-                            <span class="sector-tag">高股息蓝筹</span>
-                            <span class="sector-tag">金融ETF</span>
-                        </div>
-                        <div class="gap-reason">
-                            <strong>入选理由：</strong>市场认为政策以口头表态为主，实际央行研究建立对非银机构流动性支持机制；市场认为居民存款搬家放缓，实际M1-M2剪刀差收窄资金活化上升；3月19日北向逆势净流入135.9亿，显示外资态度转变。
-                        </div>
-                        <div class="gap-source">出处：瑞宏观监测 | 验证：3月21日LPR报价</div>
-                    </div>
+                    </a>
 
                     <!-- 方向3 -->
-                    <div class="gap-direction-card rank-3">
-                        <div class="gap-header">
+                    <a href="gap/gap-20260323-3.html" class="gap-direction-card-dark rank-3">
+                        <div class="gap-header-dark">
                             <span class="gap-rank">🥉</span>
                             <span class="gap-name">油服设备滞后反应</span>
+                            <span class="gap-arrow">→</span>
+                        </div>
+                        <div class="gap-meta-dark">
                             <span class="gap-size small">预期差：小中</span>
+                            <span class="gap-sectors">油服工程 · 油气装备 · 海上钻井</span>
                         </div>
-                        <div class="gap-sectors">
-                            <span class="sector-tag">油服工程</span>
-                            <span class="sector-tag">油气装备</span>
-                            <span class="sector-tag">海上钻井</span>
-                        </div>
-                        <div class="gap-reason">
-                            <strong>入选理由：</strong>中东地缘冲突升级推升油价，但油服设备板块尚未充分反应；历史规律显示油服订单滞后油价上涨3-6个月，当前处于预期差窗口期；中海油等央企资本开支计划上调，订单确定性增强。
-                        </div>
-                        <div class="gap-source">出处：霍华德周期风险 | 验证：油服公司订单公告</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 栏目3: 昨日预期差清单 -->
-            <section class="section-block">
-                <div class="section-header">
-                    <h2>📅 昨日预期差清单 (2026-03-22)</h2>
-                    <span class="update-time">已收盘验证</span>
-                </div>
-
-                <div class="gap-direction-list">
-                    <div class="gap-direction-card rank-1">
-                        <div class="gap-header">
-                            <span class="gap-rank">🥇</span>
-                            <span class="gap-name">光伏/锂电板块修复</span>
-                            <span class="gap-size">验证：✅ 光伏设备+3.5%</span>
-                        </div>
-                        <div class="gap-sectors">
-                            <span class="sector-tag">光伏设备</span>
-                            <span class="sector-tag">能源金属</span>
-                            <span class="sector-tag">电池</span>
-                        </div>
-                        <div class="gap-reason">
-                            <strong>验证结果：</strong>光伏设备板块收涨3.5%，能源金属+2.8%，电池+2.1%，预期差兑现。阳光电源领涨，储能订单超预期成为催化剂。
-                        </div>
-                    </div>
-
-                    <div class="gap-direction-card rank-2">
-                        <div class="gap-header">
-                            <span class="gap-rank">🥈</span>
-                            <span class="gap-name">富时A50新纳入效应</span>
-                            <span class="gap-size medium">验证：✅ 尾盘拉升</span>
-                        </div>
-                        <div class="gap-sectors">
-                            <span class="sector-tag">中国船舶</span>
-                            <span class="sector-tag">天孚通信</span>
-                            <span class="sector-tag">万华化学</span>
-                        </div>
-                        <div class="gap-reason">
-                            <strong>验证结果：</strong>新纳入标的尾盘出现明显买盘，被动资金建仓效应兑现。中国船舶尾盘放量上涨1.8%，天孚通信+2.1%。
-                        </div>
-                    </div>
-
-                    <div class="gap-direction-card rank-3">
-                        <div class="gap-header">
-                            <span class="gap-rank">🥉</span>
-                            <span class="gap-name">黄金避险情绪</span>
-                            <span class="gap-size small">验证：❌ 反向</span>
-                        </div>
-                        <div class="gap-sectors">
-                            <span class="sector-tag">黄金ETF</span>
-                            <span class="sector-tag">贵金属</span>
-                        </div>
-                        <div class="gap-reason">
-                            <strong>验证结果：</strong>COMEX黄金大跌4.99%，与预期相反。美联储鹰派表态+美元指数走强压制金价，地缘风险已被充分定价。
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 栏目4: 预期差清单归档 -->
-            <section class="section-block">
-                <div class="section-header">
-                    <h2>📁 预期差清单归档</h2>
-                </div>
-
-                <div class="archive-list">
-                    <a href="expectation/20260323.html" class="archive-item">
-                        <span class="archive-date">2026年3月23日</span>
-                        <span class="archive-count">3个方向</span>
-                        <span class="archive-status">当前</span>
-                    </a>
-                    <a href="expectation/20260322.html" class="archive-item">
-                        <span class="archive-date">2026年3月22日</span>
-                        <span class="archive-count">3个方向</span>
-                        <span class="archive-status">已验证</span>
-                    </a>
-                    <a href="expectation/20260321.html" class="archive-item">
-                        <span class="archive-date">2026年3月21日</span>
-                        <span class="archive-count">3个方向</span>
-                        <span class="archive-status">已验证</span>
-                    </a>
-                    <a href="expectation/20260320.html" class="archive-item">
-                        <span class="archive-date">2026年3月20日</span>
-                        <span class="archive-count">3个方向</span>
-                        <span class="archive-status">已验证</span>
-                    </a>
-                    <a href="archive.html" class="archive-item more">
-                        <span class="archive-date" style="color: #3b82f6;">查看更多历史记录 →</span>
                     </a>
                 </div>
             </section>
