@@ -4,370 +4,285 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>羿学交易 - 智囊团仪表盘</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        
-        .header .subtitle {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        
-        .header .date {
-            margin-top: 12px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
-        /* Main Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-        
-        @media (max-width: 768px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Section Card */
-        .section-card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border: 1px solid #e5e7eb;
-        }
-        
-        .section-card h2 {
-            font-size: 20px;
-            color: #1e3a8a;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #3b82f6;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .section-card h2 .icon {
-            font-size: 24px;
-        }
-        
-        /* Qimen Section */
-        .qimen-content {
-            background: #fef3c7;
-            border-radius: 8px;
-            padding: 16px;
-            border-left: 4px solid #f59e0b;
-        }
-        
-        .qimen-content .prediction {
-            font-size: 18px;
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 12px;
-        }
-        
-        .qimen-content .details {
-            font-size: 14px;
-            color: #78350f;
-            line-height: 1.8;
-        }
-        
-        .qimen-content .view-link {
-            display: inline-block;
-            margin-top: 12px;
-            color: #3b82f6;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .qimen-content .view-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* Stock List */
-        .stock-list {
-            list-style: none;
-        }
-        
-        .stock-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            margin-bottom: 8px;
-            background: #f9fafb;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            transition: all 0.2s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .stock-item:hover {
-            background: #f3f4f6;
-            border-color: #3b82f6;
-            transform: translateX(4px);
-        }
-        
-        .stock-item .code {
-            font-weight: 600;
-            color: #3b82f6;
-            width: 80px;
-        }
-        
-        .stock-item .name {
-            flex: 1;
-            font-weight: 500;
-        }
-        
-        .stock-item .rating {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .stock-item .rating.strong-buy {
-            background: #dcfce7;
-            color: #166534;
-        }
-        
-        .stock-item .rating.buy {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        
-        .stock-item .target {
-            margin-left: 12px;
-            font-size: 13px;
-            color: #6b7280;
-        }
-        
-        /* Archive List */
-        .archive-list {
-            list-style: none;
-        }
-        
-        .archive-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 12px;
-            margin-bottom: 6px;
-            background: #f9fafb;
-            border-radius: 6px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.2s;
-        }
-        
-        .archive-item:hover {
-            background: #f3f4f6;
-        }
-        
-        .archive-item .date {
-            color: #6b7280;
-            font-size: 14px;
-        }
-        
-        .archive-item .count {
-            background: #3b82f6;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #9ca3af;
-        }
-        
-        .empty-state .icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #9ca3af;
-            font-size: 14px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>羿学交易</h1>
-            <div class="subtitle">智囊团仪表盘 · 预期差挖掘系统</div>
-            <div class="date">2026年3月23日</div>
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <h1>羿学交易 <span class="subtitle">智囊团仪表盘</span></h1>
+            </div>
+            <div class="header-right">
+                <span class="date" id="current-date">2026-03-23</span>
+                <span class="status-dot"></span>
+            </div>
         </header>
-        
-        <!-- Main Grid -->
-        <div class="main-grid">
+
+        <!-- Navigation - 四个栏目 -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="qimen">
+                <span class="tab-icon">☯️</span>
+                奇门君预测
+            </button>
+            <button class="tab-btn" data-tab="today">
+                <span class="tab-icon">🔥</span>
+                当日预期差清单
+            </button>
+            <button class="tab-btn" data-tab="yesterday">
+                <span class="tab-icon">📅</span>
+                昨日预期差清单
+            </button>
+            <button class="tab-btn" data-tab="archive">
+                <span class="tab-icon">📁</span>
+                预期差清单归档
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
             
-            <!-- 奇门君预测 -->
-            <section class="section-card">
-                <h2><span class="icon">☯️</span>奇门君预测</h2>
-                <div class="qimen-content">
-                    <div class="prediction">阳遁3局 · 大势评级★★★☆☆</div>
-                    <div class="details">
-                        <strong>今日预判：</strong>震荡整理，弱波动预期<br>
-                        <strong>板块：</strong>新能源延续强势，科技继续承压<br>
-                        <strong>操作建议：</strong>控制仓位，防御为主
+            <!-- Tab 1: 奇门君预测 -->
+            <section id="qimen" class="tab-content active">
+                <div class="section-header">
+                    <h2>☯️ 奇门君预测</h2>
+                    <span class="update-time">2026-03-23 | 阳遁3局</span>
+                </div>
+
+                <div class="qimen-dashboard">
+                    <!-- Overall Rating -->
+                    <div class="qimen-overview">
+                        <div class="rating-card">
+                            <h3>大势评级</h3>
+                            <div class="rating-stars">★★★☆☆</div>
+                            <p class="rating-text">震荡整理，弱波动预期</p>
+                        </div>
+                        <div class="key-points">
+                            <div class="point">
+                                <span class="label">趋势</span>
+                                <span class="value neutral">震荡整理</span>
+                            </div>
+                            <div class="point">
+                                <span class="label">量能</span>
+                                <span class="value neutral">缩量观望</span>
+                            </div>
+                            <div class="point">
+                                <span class="label">情绪</span>
+                                <span class="value neutral">弱波动</span>
+                            </div>
+                        </div>
                     </div>
-                    <a href="qimen/20260323.html" class="view-link">查看完整预测 →</a>
+
+                    <!-- Sector Predictions -->
+                    <div class="qimen-sectors">
+                        <h3>板块预测</h3>
+                        <table class="sector-prediction-table">
+                            <thead>
+                                <tr>
+                                    <th>板块</th>
+                                    <th>奇门依据</th>
+                                    <th>预判</th>
+                                    <th>操作建议</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="strong">
+                                    <td>新能源（光伏/锂电）</td>
+                                    <td>震宫旺相，值符临宫</td>
+                                    <td>🟢 延续强势</td>
+                                    <td>不宜追高</td>
+                                </tr>
+                                <tr class="strong">
+                                    <td>军工</td>
+                                    <td>值符+天冲，冲动之象</td>
+                                    <td>🟢 地缘催化</td>
+                                    <td>逢低关注</td>
+                                </tr>
+                                <tr class="weak">
+                                    <td>科技（AI/半导体）</td>
+                                    <td>兑宫白虎干格，惊门临宫</td>
+                                    <td>🔴 继续承压</td>
+                                    <td>回避为主</td>
+                                </tr>
+                                <tr class="weak">
+                                    <td>金融</td>
+                                    <td>乾宫刑格，开门受制</td>
+                                    <td>🔴 护盘但阻力大</td>
+                                    <td>观望</td>
+                                </tr>
+                                <tr class="neutral">
+                                    <td>医药</td>
+                                    <td>天芮临坤，病星得地</td>
+                                    <td>🟡 防御属性</td>
+                                    <td>抗跌配置</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Strategy -->
+                    <div class="qimen-strategy">
+                        <h3>操作策略</h3>
+                        <div class="strategy-cards">
+                            <div class="strategy-card">
+                                <h4>进攻型</h4>
+                                <p>仓位：4-5成</p>
+                                <p>仅参与新能源等强势板块</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>平衡型</h4>
+                                <p>仓位：3-4成</p>
+                                <p>防御为主，等待明确信号</p>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>防御型</h4>
+                                <p>仓位：2-3成</p>
+                                <p>现金为王，观望为主</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
-            
-            <!-- 当日预期差清单 -->
-            <section class="section-card">
-                <h2><span class="icon">🔥</span>当日预期差清单 (2026-03-23)</h2>
-                <ul class="stock-list">
-                    <a href="reports/20260323-300274-完整报告.html" class="stock-item">
-                        <span class="code">300274</span>
-                        <span class="name">阳光电源</span>
-                        <span class="rating strong-buy">强烈推荐</span>
-                        <span class="target">200-220元</span>
-                    </a>
-                    <a href="reports/20260323-601808-完整报告.html" class="stock-item">
-                        <span class="code">601808</span>
-                        <span class="name">中海油服</span>
-                        <span class="rating buy">买入</span>
-                        <span class="target">20-25元</span>
-                    </a>
-                    <a href="reports/20260323-600036-完整报告.html" class="stock-item">
-                        <span class="code">600036</span>
-                        <span class="name">招商银行</span>
-                        <span class="rating strong-buy">强烈推荐</span>
-                        <span class="target">50-55元</span>
-                    </a>
-                    <a href="reports/20260323-300014-完整报告.html" class="stock-item">
-                        <span class="code">300014</span>
-                        <span class="name">亿纬锂能</span>
-                        <span class="rating buy">买入</span>
-                        <span class="target">75元</span>
-                    </a>
-                    <a href="reports/20260323-000333-完整报告.html" class="stock-item">
-                        <span class="code">000333</span>
-                        <span class="name">美的集团</span>
-                        <span class="rating buy">买入</span>
-                        <span class="target">93元</span>
-                    </a>
-                </ul>
+
+            <!-- Tab 2: 当日预期差清单 -->
+            <section id="today" class="tab-content">
+                <div class="section-header">
+                    <h2>🔥 当日预期差清单 (2026-03-23)</h2>
+                    <span class="update-time">更新时间：12:00</span>
+                </div>
+
+                <!-- Featured Reports -->
+                <div class="featured-reports">
+                    <div class="featured-grid">
+                        <a href="reports/20260323-300274-完整报告.html" class="featured-card strong-buy">
+                            <div class="stock-code">300274</div>
+                            <div class="stock-name">阳光电源</div>
+                            <div class="stock-rating">强烈推荐</div>
+                            <div class="stock-target">目标价: 200-220元 (+15%-27%)</div>
+                            <div class="stock-logic">储能爆发+估值低位+欧洲订单</div>
+                        </a>
+                        <a href="reports/20260323-601808-完整报告.html" class="featured-card buy">
+                            <div class="stock-code">601808</div>
+                            <div class="stock-name">中海油服</div>
+                            <div class="stock-rating">买入</div>
+                            <div class="stock-target">目标价: 20-25元 (+19%-49%)</div>
+                            <div class="stock-logic">地缘冲突+油服订单滞后上涨</div>
+                        </a>
+                        <a href="reports/20260323-600036-完整报告.html" class="featured-card strong-buy">
+                            <div class="stock-code">600036</div>
+                            <div class="stock-name">招商银行</div>
+                            <div class="stock-rating">强烈推荐</div>
+                            <div class="stock-target">目标价: 50-55元 (+26%-38%)</div>
+                            <div class="stock-logic">汇率政策+北向重仓+PB 0.95x</div>
+                        </a>
+                        <a href="reports/20260323-300014-完整报告.html" class="featured-card buy">
+                            <div class="stock-code">300014</div>
+                            <div class="stock-name">亿纬锂能</div>
+                            <div class="stock-rating">买入</div>
+                            <div class="stock-target">目标价: 75元 (+6%)</div>
+                            <div class="stock-logic">欧洲光储预期差+储能第二</div>
+                        </a>
+                        <a href="reports/20260323-000333-完整报告.html" class="featured-card buy">
+                            <div class="stock-code">000333</div>
+                            <div class="stock-name">美的集团</div>
+                            <div class="stock-rating">买入</div>
+                            <div class="stock-target">目标价: 93元 (+24%)</div>
+                            <div class="stock-logic">汇率稳定+外资回流+成本下降</div>
+                        </a>
+                    </div>
+                </div>
             </section>
-            
-            <!-- 昨日预期差清单 -->
-            <section class="section-card">
-                <h2><span class="icon">📅</span>昨日预期差清单 (2026-03-22)</h2>
-                <ul class="stock-list">
-                    <a href="expectation/20260322.html" class="stock-item">
-                        <span class="code">300274</span>
-                        <span class="name">阳光电源</span>
-                        <span class="rating strong-buy">强烈推荐</span>
-                        <span class="target">+15%-27%</span>
-                    </a>
-                    <a href="expectation/20260322.html" class="stock-item">
-                        <span class="code">601808</span>
-                        <span class="name">中海油服</span>
-                        <span class="rating buy">买入</span>
-                        <span class="target">+19%-49%</span>
-                    </a>
-                    <a href="expectation/20260322.html" class="stock-item">
-                        <span class="code">600036</span>
-                        <span class="name">招商银行</span>
-                        <span class="rating strong-buy">强烈推荐</span>
-                        <span class="target">+26%-38%</span>
-                    </a>
-                    <a href="expectation/20260322.html" class="stock-item">
-                        <span class="code">300014</span>
-                        <span class="name">亿纬锂能</span>
-                        <span class="rating buy">买入</span>
-                        <span class="target">+6%</span>
-                    </a>
-                    <a href="expectation/20260322.html" class="stock-item">
-                        <span class="code">000333</span>
-                        <span class="name">美的集团</span>
-                        <span class="rating buy">买入</span>
-                        <span class="target">+24%</span>
-                    </a>
-                </ul>
+
+            <!-- Tab 3: 昨日预期差清单 -->
+            <section id="yesterday" class="tab-content">
+                <div class="section-header">
+                    <h2>📅 昨日预期差清单 (2026-03-22)</h2>
+                    <span class="update-time">已归档</span>
+                </div>
+
+                <div class="featured-reports">
+                    <div class="featured-grid">
+                        <a href="expectation/20260322.html" class="featured-card strong-buy">
+                            <div class="stock-code">300274</div>
+                            <div class="stock-name">阳光电源</div>
+                            <div class="stock-rating">强烈推荐</div>
+                            <div class="stock-target">目标价: 200-220元 (+15%-27%)</div>
+                            <div class="stock-logic">储能爆发+估值低位+欧洲订单</div>
+                        </a>
+                        <a href="expectation/20260322.html" class="featured-card buy">
+                            <div class="stock-code">601808</div>
+                            <div class="stock-name">中海油服</div>
+                            <div class="stock-rating">买入</div>
+                            <div class="stock-target">目标价: 20-25元 (+19%-49%)</div>
+                            <div class="stock-logic">地缘冲突+油服订单滞后上涨</div>
+                        </a>
+                        <a href="expectation/20260322.html" class="featured-card strong-buy">
+                            <div class="stock-code">600036</div>
+                            <div class="stock-name">招商银行</div>
+                            <div class="stock-rating">强烈推荐</div>
+                            <div class="stock-target">目标价: 50-55元 (+26%-38%)</div>
+                            <div class="stock-logic">汇率政策+北向重仓+PB 0.95x</div>
+                        </a>
+                        <a href="expectation/20260322.html" class="featured-card buy">
+                            <div class="stock-code">300014</div>
+                            <div class="stock-name">亿纬锂能</div>
+                            <div class="stock-rating">买入</div>
+                            <div class="stock-target">目标价: 75元 (+6%)</div>
+                            <div class="stock-logic">欧洲光储预期差+储能第二</div>
+                        </a>
+                        <a href="expectation/20260322.html" class="featured-card buy">
+                            <div class="stock-code">000333</div>
+                            <div class="stock-name">美的集团</div>
+                            <div class="stock-rating">买入</div>
+                            <div class="stock-target">目标价: 93元 (+24%)</div>
+                            <div class="stock-logic">汇率稳定+外资回流+成本下降</div>
+                        </a>
+                    </div>
+                </div>
             </section>
-            
-            <!-- 预期差清单归档 -->
-            <section class="section-card">
-                <h2><span class="icon">📁</span>预期差清单归档</h2>
-                <ul class="archive-list">
+
+            <!-- Tab 4: 预期差清单归档 -->
+            <section id="archive" class="tab-content">
+                <div class="section-header">
+                    <h2>📁 预期差清单归档</h2>
+                </div>
+
+                <div class="archive-list">
                     <a href="expectation/20260323.html" class="archive-item">
-                        <span>2026年3月23日</span>
-                        <span class="count">5只</span>
+                        <div class="archive-date">2026年3月23日</div>
+                        <div class="archive-count">5只</div>
+                        <div class="archive-status">当前</div>
                     </a>
                     <a href="expectation/20260322.html" class="archive-item">
-                        <span>2026年3月22日</span>
-                        <span class="count">5只</span>
+                        <div class="archive-date">2026年3月22日</div>
+                        <div class="archive-count">5只</div>
+                        <div class="archive-status">已归档</div>
                     </a>
                     <a href="expectation/20260321.html" class="archive-item">
-                        <span>2026年3月21日</span>
-                        <span class="count">5只</span>
+                        <div class="archive-date">2026年3月21日</div>
+                        <div class="archive-count">5只</div>
+                        <div class="archive-status">已归档</div>
                     </a>
                     <a href="expectation/20260320.html" class="archive-item">
-                        <span>2026年3月20日</span>
-                        <span class="count">5只</span>
+                        <div class="archive-date">2026年3月20日</div>
+                        <div class="archive-count">5只</div>
+                        <div class="archive-status">已归档</div>
                     </a>
-                    <a href="archive.html" class="archive-item">
-                        <span style="color: #3b82f6;">查看更多历史记录 →</span>
+                    <a href="archive.html" class="archive-item more">
+                        <div class="archive-date" style="color: #3b82f6;">查看更多历史记录 →</div>
                     </a>
-                </ul>
+                </div>
             </section>
-            
-        </div>
-        
+        </main>
+
         <!-- Footer -->
         <footer class="footer">
-            <p>羿学交易 · 智囊团生产系统</p>
-            <p style="margin-top: 8px; font-size: 12px;">数据来源：智囊团12人分析团队 | 更新时间：2026-03-23 12:00</p>
+            <p>羿学交易 · 智囊团系统 v2.0 | 更新时间: <span id="update-time">2026-03-23 12:00</span></p>
         </footer>
     </div>
+
+    <script src="js/app.js"></script>
 </body>
 </html>
