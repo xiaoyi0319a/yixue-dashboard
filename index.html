@@ -397,7 +397,33 @@
             color: #fca5a5;
         }
         
-        /* 起盘信息 */
+        /* 起盘信息简化版 */
+        .qimen-info-simple {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+        }
+        .qimen-info-simple .info-line {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .qimen-info-simple .info-tag {
+            font-size: 13px;
+            color: #a5b4fc;
+            background: rgba(255,255,255,0.08);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        .qimen-info-simple .info-tag.highlight {
+            color: #fbbf24;
+            background: rgba(251,191,36,0.15);
+            font-weight: 600;
+        }
+        
+        /* 原起盘信息（保留供兼容） */
         .qimen-info-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -722,38 +748,18 @@
                     <span class="update-time">2026-03-23 11:18 | 阳遁3局 | 值符天心·值使开门</span>
                 </div>
 
-                <!-- 1. 起盘信息 -->
-                <div class="qimen-section-dark">
-                    <h3>📋 起盘信息</h3>
-                    <div class="qimen-info-grid">
-                        <div class="info-item"><span class="label">日期：</span><span class="value">2026年3月23日 11:18</span></div>
-                        <div class="info-item"><span class="label">四柱：</span><span class="value">丙午年 辛卯月 丙申日 甲午时</span></div>
-                        <div class="info-item"><span class="label">节气：</span><span class="value">春分后第3天</span></div>
-                        <div class="info-item"><span class="label">局数：</span><span class="value">阳遁3局（拆补法·寄坤宫）</span></div>
-                        <div class="info-item"><span class="label">旬首：</span><span class="value">甲午辛</span></div>
-                        <div class="info-item"><span class="label">值符：</span><span class="value-highlight">天心星（乾六宫）</span></div>
-                        <div class="info-item"><span class="label">值使：</span><span class="value-highlight">开门（乾六宫）</span></div>
-                        <div class="info-item"><span class="label">马星：</span><span class="value">申</span></div>
+                <!-- 1. 起盘信息（简化） -->
+                <div class="qimen-section-dark qimen-info-simple">
+                    <div class="info-line">
+                        <span class="info-tag">2026年3月23日 甲午时</span>
+                        <span class="info-tag highlight">阳遁3局</span>
+                        <span class="info-tag">值符天心·乾六宫</span>
+                        <span class="info-tag">值使开门·乾六宫</span>
+                        <span class="info-tag">马星在申</span>
                     </div>
                 </div>
 
-                <!-- 2. 九宫排盘 -->
-                <div class="qimen-section-dark">
-                    <h3>🔲 九宫排盘</h3>
-                    <div class="qimen-paipan">
-                        <div class="gong gong-si">巽四宫<br><span class="star">白虎·天辅</span><br><span class="gan">庚</span><br><span class="men">杜门</span><br><span class="shen">己</span></div>
-                        <div class="gong gong-li">离九宫<br><span class="star">玄武·天英</span><br><span class="gan">丙</span><br><span class="men">景门</span><br><span class="shen">丁</span></div>
-                        <div class="gong gong-kun">坤二宫<br><span class="star">九地·芮禽</span><br><span class="gan">戊</span><br><span class="men">死门</span><br><span class="shen">庚乙</span></div>
-                        <div class="gong gong-zhen">震三宫<br><span class="star">六合·天冲</span><br><span class="gan">己</span><br><span class="men">伤门</span><br><span class="shen">戊</span></div>
-                        <div class="gong gong-zhong">中五宫<br><span class="gan">辛（寄坤）</span></div>
-                        <div class="gong gong-dui">兑七宫<br><span class="star">九天·天柱</span><br><span class="gan">癸</span><br><span class="men">惊门</span><br><span class="shen">壬</span></div>
-                        <div class="gong gong-gen">艮八宫<br><span class="star">太阴·天任</span><br><span class="gan">乙</span><br><span class="men">生门</span><br><span class="shen">癸</span></div>
-                        <div class="gong gong-kan">坎一宫<br><span class="star">螣蛇·天蓬</span><br><span class="gan-highlight">丙（日干）</span><br><span class="men">休门</span><br><span class="shen">丙</span></div>
-                        <div class="gong gong-qian gong-active">乾六宫<br><span class="star-highlight">值符·天心</span><br><span class="gan">壬</span><br><span class="men-highlight">开门（值使）</span><br><span class="shen">辛</span></div>
-                    </div>
-                </div>
-
-                <!-- 3. 用神分析 -->
+                <!-- 2. 用神分析 -->
                 <div class="qimen-section-dark">
                     <h3>🎯 用神分析</h3>
                     <div class="yongshen-list">
