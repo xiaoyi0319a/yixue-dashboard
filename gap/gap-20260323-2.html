@@ -132,6 +132,50 @@
             margin-top: 4px;
         }
         
+        /* 重点个股样式 */
+        .stock-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .stock-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .stock-item .stock-rank {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(192,132,252,0.2);
+            color: #c084fc;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+        .stock-item .stock-code {
+            font-size: 13px;
+            color: #a5b4fc;
+            font-family: monospace;
+        }
+        .stock-item .stock-name {
+            flex: 1;
+            font-size: 14px;
+            color: #fff;
+            font-weight: 500;
+        }
+        .stock-item .stock-price {
+            font-size: 14px;
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        
         .footer {
             text-align: center;
             padding: 40px 0;
@@ -165,6 +209,24 @@
                 <span class="sector-tag">银行</span>
                 <span class="sector-tag">高股息蓝筹</span>
                 <span class="sector-tag">金融ETF</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>📈 重点个股</h3>
+            <div class="stock-list">
+                <div class="stock-item">
+                    <span class="stock-rank">3</span>
+                    <span class="stock-code">600036</span>
+                    <span class="stock-name">招商银行</span>
+                    <span class="stock-price">39.75元</span>
+                </div>
+                <div class="stock-item">
+                    <span class="stock-rank">5</span>
+                    <span class="stock-code">000333</span>
+                    <span class="stock-name">美的集团</span>
+                    <span class="stock-price">75.12元</span>
+                </div>
             </div>
         </div>
         
