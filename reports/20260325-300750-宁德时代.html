@@ -54,6 +54,11 @@
             padding-left: 12px;
             border-left: 3px solid #6366f1;
         }
+        .section h3 {
+            font-size: 15px;
+            color: #a5b4fc;
+            margin: 16px 0 12px 0;
+        }
         .section p, .section li {
             font-size: 14px;
             line-height: 1.8;
@@ -72,6 +77,11 @@
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 16px;
         }
         .metric-box {
@@ -103,6 +113,28 @@
         .back-link:hover {
             color: #fbbf24;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        th {
+            background: rgba(255,255,255,0.08);
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        td {
+            color: #c7d2fe;
+        }
+        .risk-high { color: #f87171; }
+        .risk-medium { color: #fbbf24; }
+        .risk-low { color: #34d399; }
     </style>
 </head>
 <body>
@@ -115,30 +147,474 @@
 
         <div class="section">
             <h2>核心预期差</h2>
-            <p>2025年Q4净利<span class="highlight">+57.1%</span>超预期，碳酸锂价格企稳回升叠加储能业务高增，2026年维持高增长。市场低估其全球市占率提升（37%）和毛利率修复能力，储能业务增速超50%成为第二增长曲线。</p>
+            <p>2024年Q4净利<span class="highlight">+57.1%</span>超预期，碳酸锂价格企稳回升叠加储能业务高增，2025年维持高增长。市场低估其全球市占率提升（37.9%）和毛利率修复能力，储能业务增速超50%成为第二增长曲线。全年营收3620亿元，虽然同比-9.70%，但归母净利润507亿元，同比+15.01%，实现"增利不增收"。</p>
             <p><strong>落地确定性评分：</strong>85/100（高确定性）</p>
         </div>
 
         <div class="section">
-            <h2>关键财务数据</h2>
+            <h2>公司业务详解</h2>
+            <h3>主营业务构成</h3>
+            <p>宁德时代是全球领先的动力电池系统提供商，专注于新能源汽车动力电池系统、储能系统的研发、生产和销售。公司业务涵盖四大板块：</p>
+            <ul>
+                <li><strong>动力电池系统（2024年收入占比69.90%）：</strong>为新能源汽车提供动力电池，包括三元锂电池和磷酸铁锂电池。主要产品包括麒麟电池、神行电池、骁遥增混电池等。2024年销量381GWh，同比增长18.85%。</li>
+                <li><strong>储能电池系统（2024年收入占比15.83%）：</strong>为发电侧、电网侧及用户侧提供储能解决方案。2024年销量93GWh，同比增长34.32%，毛利率26.84%首次超过动力电池。</li>
+                <li><strong>电池材料及回收（2024年收入占比7.93%）：</strong>包括正极材料、负极材料及电池回收业务。具备27万吨废旧电池年处理能力，镍钴锰金属回收率99.6%，锂金属回收率93.8%。</li>
+                <li><strong>电池矿产资源（2024年收入占比1.52%）：</strong>包括锂矿、镍矿、钴矿等原材料布局，保障供应链安全。</li>
+            </ul>
+            
+            <h3>产品矩阵与收入占比</h3>
+            <table>
+                <tr>
+                    <th>业务板块</th>
+                    <th>2024年收入（亿元）</th>
+                    <th>收入占比</th>
+                    <th>同比增速</th>
+                    <th>毛利率</th>
+                </tr>
+                <tr>
+                    <td>动力电池系统</td>
+                    <td>2,530.41</td>
+                    <td>69.90%</td>
+                    <td>-11.29%</td>
+                    <td>23.94%</td>
+                </tr>
+                <tr>
+                    <td>储能电池系统</td>
+                    <td>572.90</td>
+                    <td>15.83%</td>
+                    <td>-4.36%</td>
+                    <td>26.84%</td>
+                </tr>
+                <tr>
+                    <td>电池材料及回收</td>
+                    <td>287.00</td>
+                    <td>7.93%</td>
+                    <td>-14.59%</td>
+                    <td>10.51%</td>
+                </tr>
+                <tr>
+                    <td>电池矿产资源</td>
+                    <td>54.93</td>
+                    <td>1.52%</td>
+                    <td>-28.98%</td>
+                    <td>8.53%</td>
+                </tr>
+                <tr>
+                    <td>其他业务</td>
+                    <td>174.88</td>
+                    <td>4.83%</td>
+                    <td>+21.21%</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <h3>核心技术产品</h3>
+            <ul>
+                <li><strong>麒麟电池：</strong>新一代高功率电池，放电功率超1,300kW，可助力新能源车实现零百加速2秒以内</li>
+                <li><strong>神行Plus电池：</strong>全球首个兼备1,000km续航以及4C超充特性的磷酸铁锂电池，系统能量密度超200Wh/kg</li>
+                <li><strong>骁遥增混电池：</strong>全球首款纯电续航达到400公里以上，同时兼具4C超充能力的增混电池</li>
+                <li><strong>天恒储能系统：</strong>全球首款5年零衰减、单体6.25MWh的储能系统，单位面积能量密度提升30%</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>财务深度拆解</h2>
+            <h3>年度财务数据</h3>
+            <table>
+                <tr>
+                    <th>指标</th>
+                    <th>2024年</th>
+                    <th>2023年</th>
+                    <th>同比变化</th>
+                </tr>
+                <tr>
+                    <td>营业收入</td>
+                    <td>3,620.13亿元</td>
+                    <td>4,009.17亿元</td>
+                    <td>-9.70%</td>
+                </tr>
+                <tr>
+                    <td>归母净利润</td>
+                    <td>507.45亿元</td>
+                    <td>441.21亿元</td>
+                    <td class="highlight">+15.01%</td>
+                </tr>
+                <tr>
+                    <td>扣非净利润</td>
+                    <td>449.93亿元</td>
+                    <td>400.68亿元</td>
+                    <td class="highlight">+12.23%</td>
+                </tr>
+                <tr>
+                    <td>综合毛利率</td>
+                    <td>24.69%</td>
+                    <td>19.18%</td>
+                    <td>+5.51pct</td>
+                </tr>
+                <tr>
+                    <td>净利率</td>
+                    <td>14.01%</td>
+                    <td>11.00%</td>
+                    <td>+3.01pct</td>
+                </tr>
+                <tr>
+                    <td>研发费用率</td>
+                    <td>5.14%</td>
+                    <td>4.58%</td>
+                    <td>+0.56pct</td>
+                </tr>
+            </table>
+
+            <h3>分季度财务数据（2024年）</h3>
+            <table>
+                <tr>
+                    <th>季度</th>
+                    <th>营业收入（亿元）</th>
+                    <th>环比变化</th>
+                    <th>归母净利润（亿元）</th>
+                    <th>环比变化</th>
+                </tr>
+                <tr>
+                    <td>Q1</td>
+                    <td>797.71</td>
+                    <td>-</td>
+                    <td>105.10</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Q2</td>
+                    <td>869.96</td>
+                    <td>+9.1%</td>
+                    <td>123.55</td>
+                    <td>+17.6%</td>
+                </tr>
+                <tr>
+                    <td>Q3</td>
+                    <td>922.78</td>
+                    <td>+6.1%</td>
+                    <td>131.36</td>
+                    <td>+6.3%</td>
+                </tr>
+                <tr>
+                    <td>Q4</td>
+                    <td>约1,030</td>
+                    <td>+11.6%</td>
+                    <td>约147</td>
+                    <td>+11.9%</td>
+                </tr>
+            </table>
+
+            <h3>分业务毛利率分析</h3>
+            <div class="grid-3">
+                <div class="metric-box">
+                    <div class="label">动力电池毛利率</div>
+                    <div class="value" style="color: #34d399;">23.94%</div>
+                </div>
+                <div class="metric-box">
+                    <div class="label">储能电池毛利率</div>
+                    <div class="value" style="color: #34d399;">26.84%</div>
+                </div>
+                <div class="metric-box">
+                    <div class="label">海外业务毛利率</div>
+                    <div class="value" style="color: #34d399;">29.45%</div>
+                </div>
+            </div>
+            
+            <p>储能业务毛利率首次超过动力电池，成为公司利润的重要来源。海外业务毛利率比境内高出7.2个百分点，凸显海外储能项目的高盈利水平。</p>
+
+            <h3>关键财务指标</h3>
             <div class="grid-2">
                 <div class="metric-box">
-                    <div class="label">Q4净利润</div>
-                    <div class="value">231.7亿</div>
+                    <div class="label">锂离子电池销量</div>
+                    <div class="value">475 GWh</div>
                 </div>
                 <div class="metric-box">
-                    <div class="label">Q4同比增长</div>
-                    <div class="value" style="color: #34d399;">+57.1%</div>
+                    <div class="label">销量同比增长</div>
+                    <div class="value" style="color: #34d399;">+21.79%</div>
                 </div>
                 <div class="metric-box">
-                    <div class="label">全球市占率</div>
-                    <div class="value">37%</div>
+                    <div class="label">动力电池销量</div>
+                    <div class="value">381 GWh</div>
+                </div>
+                <div class="metric-box">
+                    <div class="label">储能电池销量</div>
+                    <div class="value">93 GWh</div>
                 </div>
                 <div class="metric-box">
                     <div class="label">产能利用率</div>
-                    <div class="value">96.9%</div>
+                    <div class="value">76.33%</div>
+                </div>
+                <div class="metric-box">
+                    <div class="label">ROE</div>
+                    <div class="value">约25%</div>
                 </div>
             </div>
+        </div>
+
+        <div class="section">
+            <h2>竞争格局</h2>
+            <h3>全球动力电池市场份额（2024年）</h3>
+            <table>
+                <tr>
+                    <th>排名</th>
+                    <th>厂商</th>
+                    <th>市场份额</th>
+                    <th>主要客户</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span class="highlight">宁德时代（中国）</span></td>
+                    <td><span class="highlight">37.9%</span></td>
+                    <td>特斯拉、宝马、奔驰、大众、蔚来、理想</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>比亚迪（中国）</td>
+                    <td>约16%</td>
+                    <td>自供为主+外部客户</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>LG新能源（韩国）</td>
+                    <td>约12%</td>
+                    <td>通用、现代、沃尔沃</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>松下（日本）</td>
+                    <td>约7%</td>
+                    <td>特斯拉、丰田</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>SK On（韩国）</td>
+                    <td>约5%</td>
+                    <td>福特、大众</td>
+                </tr>
+            </table>
+
+            <h3>全球储能电池市场份额（2024年）</h3>
+            <table>
+                <tr>
+                    <th>排名</th>
+                    <th>厂商</th>
+                    <th>市场份额</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span class="highlight">宁德时代（中国）</span></td>
+                    <td><span class="highlight">36.5%</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>亿纬锂能（中国）</td>
+                    <td>约12%</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>比亚迪（中国）</td>
+                    <td>约11%</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>海辰储能（中国）</td>
+                    <td>约8%</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>瑞浦兰钧（中国）</td>
+                    <td>约6%</td>
+                </tr>
+            </table>
+
+            <h3>行业地位与竞争优势</h3>
+            <ul>
+                <li><strong>全球龙头地位：</strong>动力电池和储能电池全球市占率均第一，领先第二名超20个百分点</li>
+                <li><strong>技术领先：</strong>凝聚态电池、麒麟电池、神行电池等技术领先行业1-2代</li>
+                <li><strong>客户覆盖：</strong>已与全球前十大车企中的9家建立合作关系</li>
+                <li><strong>产能布局：</strong>全球布局生产基地，匈牙利、德国基地推进中</li>
+                <li><strong>成本控制：</strong>一体化布局+规模效应，单位成本行业最低</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>详细验证节点</h2>
+            <table>
+                <tr>
+                    <th>时间节点</th>
+                    <th>跟踪指标</th>
+                    <th>验证标准</th>
+                    <th>重要性</th>
+                </tr>
+                <tr>
+                    <td>2026年4月</td>
+                    <td>2025年Q1财报</td>
+                    <td>营收同比转正，净利润增长15%+</td>
+                    <td class="risk-high">高</td>
+                </tr>
+                <tr>
+                    <td>2026年4月</td>
+                    <td>动力电池装机量</td>
+                    <td>国内市占率维持45%+</td>
+                    <td class="risk-high">高</td>
+                </tr>
+                <tr>
+                    <td>2026年5月</td>
+                    <td>匈牙利基地进展</td>
+                    <td>按计划推进设备安装</td>
+                    <td class="risk-medium">中</td>
+                </tr>
+                <tr>
+                    <td>2026年6月</td>
+                    <td>储能订单</td>
+                    <td>新签订单超100GWh</td>
+                    <td class="risk-medium">中</td>
+                </tr>
+                <tr>
+                    <td>2026年7月</td>
+                    <td>2025年半年报</td>
+                    <td>H1净利润同比+20%以上</td>
+                    <td class="risk-high">高</td>
+                </tr>
+                <tr>
+                    <td>2026年10月</td>
+                    <td>固态电池进展</td>
+                    <td>送样测试通过</td>
+                    <td class="risk-medium">中</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>风险因素细化</h2>
+            <table>
+                <tr>
+                    <th>风险类型</th>
+                    <th>具体描述</th>
+                    <th>发生概率</th>
+                    <th>影响程度</th>
+                </tr>
+                <tr>
+                    <td>产能过剩风险</td>
+                    <td>行业竞争加剧，价格战导致利润率下滑</td>
+                    <td class="risk-medium">中（35-45%）</td>
+                    <td class="risk-high">高</td>
+                </tr>
+                <tr>
+                    <td>技术迭代风险</td>
+                    <td>固态电池等新技术冲击现有液态锂电池地位</td>
+                    <td class="risk-medium">中（25-35%）</td>
+                    <td class="risk-medium">中高</td>
+                </tr>
+                <tr>
+                    <td>地缘政治风险</td>
+                    <td>欧美贸易壁垒限制中国锂电产品出口</td>
+                    <td class="risk-medium">中（30-40%）</td>
+                    <td class="risk-medium">中高</td>
+                </tr>
+                <tr>
+                    <td>原材料价格波动</td>
+                    <td>碳酸锂、镍钴等原材料价格大幅波动</td>
+                    <td class="risk-medium">中（30-40%）</td>
+                    <td class="risk-medium">中</td>
+                </tr>
+                <tr>
+                    <td>海外扩张不及预期</td>
+                    <td>匈牙利、德国基地投产进度延迟</td>
+                    <td class="risk-medium">中（25-35%）</td>
+                    <td class="risk-medium">中</td>
+                </tr>
+                <tr>
+                    <td>客户集中风险</td>
+                    <td>大客户流失或订单下滑</td>
+                    <td class="risk-low">低（15-25%）</td>
+                    <td class="risk-medium">中</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>估值分析</h2>
+            <h3>相对估值法</h3>
+            <table>
+                <tr>
+                    <th>估值指标</th>
+                    <th>当前值</th>
+                    <th>行业均值</th>
+                    <th>历史分位</th>
+                </tr>
+                <tr>
+                    <td>PE-TTM</td>
+                    <td>约20倍</td>
+                    <td>约25倍</td>
+                    <td>30%</td>
+                </tr>
+                <tr>
+                    <td>PB</td>
+                    <td>约5.5倍</td>
+                    <td>约4.5倍</td>
+                    <td>45%</td>
+                </tr>
+                <tr>
+                    <td>PS</td>
+                    <td>约2.8倍</td>
+                    <td>约3.0倍</td>
+                    <td>35%</td>
+                </tr>
+            </table>
+
+            <h3>同业对比</h3>
+            <table>
+                <tr>
+                    <th>公司</th>
+                    <th>PE-TTM</th>
+                    <th>PB</th>
+                    <th>2024年毛利率</th>
+                    <th>ROE</th>
+                </tr>
+                <tr>
+                    <td>宁德时代</td>
+                    <td>20x</td>
+                    <td>5.5x</td>
+                    <td>24.69%</td>
+                    <td>约25%</td>
+                </tr>
+                <tr>
+                    <td>比亚迪</td>
+                    <td>约22x</td>
+                    <td>约5.0x</td>
+                    <td>约21%</td>
+                    <td>约22%</td>
+                </tr>
+                <tr>
+                    <td>亿纬锂能</td>
+                    <td>约30x</td>
+                    <td>约4.0x</td>
+                    <td>17.41%</td>
+                    <td>约15%</td>
+                </tr>
+                <tr>
+                    <td>LG新能源</td>
+                    <td>约35x</td>
+                    <td>约3.5x</td>
+                    <td>约18%</td>
+                    <td>约10%</td>
+                </tr>
+            </table>
+
+            <h3>目标价测算逻辑</h3>
+            <p><strong>核心假设：</strong></p>
+            <ul>
+                <li>2025年营收增长10-15%，净利润增长20-25%，受益于储能高增和毛利率修复</li>
+                <li>2025年储能业务占比提升至20%+，毛利率维持25%+</li>
+                <li>给予2025年PE 22-28倍（考虑全球龙头地位和估值修复空间）</li>
+            </ul>
+            <p><strong>目标价测算：</strong></p>
+            <ul>
+                <li>保守情景（PE 20x）：目标价约400元（+0.8%）</li>
+                <li>中性情景（PE 25x）：<span class="highlight">目标价约450元（+13.4%）</span></li>
+                <li>乐观情景（PE 30x）：目标价约520元（+31.0%）</li>
+            </ul>
         </div>
 
         <div class="section">
@@ -148,6 +624,7 @@
                 <li><strong>全球布局：</strong>匈牙利基地2025年投产，德国基地2026年底投产</li>
                 <li><strong>客户覆盖：</strong>特斯拉、宝马、大众、蔚来等全球头部车企</li>
                 <li><strong>储能高增：</strong>储能业务增速超50%，成为第二增长曲线</li>
+                <li><strong>成本优势：</strong>一体化布局+规模效应，单位成本行业最低</li>
             </ul>
         </div>
 

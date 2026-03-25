@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>深度报告 - 江波龙 301308.SZ</title>
-    <link rel="stylesheet" href="../css/style.css">
     <style>
         body {
             background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
             color: #e0e7ff;
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
         }
         .container {
             max-width: 900px;
@@ -54,6 +56,11 @@
             padding-left: 12px;
             border-left: 3px solid #6366f1;
         }
+        .section h3 {
+            font-size: 15px;
+            color: #a5b4fc;
+            margin: 20px 0 12px 0;
+        }
         .section p, .section li {
             font-size: 14px;
             line-height: 1.8;
@@ -68,6 +75,65 @@
         .highlight {
             color: #fbbf24;
             font-weight: 600;
+        }
+        .analysis-box {
+            background: rgba(99,102,241,0.15);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            border-left: 3px solid #6366f1;
+        }
+        .analysis-box .step {
+            color: #fbbf24;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .conclusion-box {
+            background: rgba(16,185,129,0.15);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            border-left: 3px solid #34d399;
+        }
+        .conclusion-box .label {
+            color: #34d399;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+        .data-table th {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            text-align: left;
+            color: #fbbf24;
+        }
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .data-table tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        .metric-highlight {
+            color: #34d399;
+            font-weight: 600;
+        }
+        .risk-highlight {
+            color: #f85149;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #a5b4fc;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: #fbbf24;
         }
         .grid-2 {
             display: grid;
@@ -90,82 +156,266 @@
             font-weight: 700;
             color: #fff;
         }
-        .conclusion {
-            background: rgba(79,70,229,0.2);
-            border-left: 4px solid #6366f1;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: #a5b4fc;
-            text-decoration: none;
-        }
-        .back-link:hover {
-            color: #fbbf24;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📊 江波龙 301308.SZ</h1>
-            <div class="meta">深度投研报告 | 2026-03-25 09:20</div>
+            <div class="meta">深度投研报告 | 2026-03-25</div>
             <div class="rating-badge">🌟 S级确认 | 强度8.4</div>
         </div>
 
         <div class="section">
-            <h2>核心预期差</h2>
-            <p>存储模组龙头，<span class="highlight">2025年净利润预增150.66%-210.82%</span>，Q4扣非净利润约6.5-8.7亿元。AI服务器需求爆发带动企业级存储放量，UFS4.1主控芯片首次流片成功，市场低估其高端产品布局和海外扩张潜力。</p>
-            <p><strong>落地确定性评分：</strong>86/100（高确定性）</p>
-        </div>
+            <h2>🔍 投资逻辑推演</h2>
+            
+            <div class="analysis-box">
+                <div class="step">Step 1: 发现异常信号</div>
+                <p>存储模组行业出现分化迹象：<span class="highlight">江波龙2025年净利润预增150.66%-210.82%</span>，而市场普遍认为存储模组企业同质化严重、竞争激烈。这与行业普遍认知形成鲜明对比。</p>
+            </div>
 
-        <div class="section">
-            <h2>关键财务数据</h2>
-            <div class="grid-2">
-                <div class="metric-box">
-                    <div class="label">2025年营收</div>
-                    <div class="value">225-230亿</div>
-                </div>
-                <div class="metric-box">
-                    <div class="label">净利润预增</div>
-                    <div class="value" style="color: #34d399;">+150%~211%</div>
-                </div>
-                <div class="metric-box">
-                    <div class="label">净利润</div>
-                    <div class="value">12.5-15.5亿</div>
-                </div>
-                <div class="metric-box">
-                    <div class="label">扣非净利润</div>
-                    <div class="value">11.3-13.5亿</div>
-                </div>
+            <div class="analysis-box">
+                <div class="step">Step 2: 深挖驱动因素</div>
+                <p><strong>企业级存储爆发：</strong>AI服务器需求激增，企业级存储收入同比<span class="highlight">+138.66%</span>，单机价值量远超消费级产品。</p>
+                <p><strong>主控芯片突破：</strong>UFS4.1主控芯片首次流片成功，成为全球少数具备该能力的企业，打破海外垄断。</p>
+                <p><strong>海外扩张加速：</strong>巴西子公司Zilia收入同比+40%，Lexar全球销售收入同比+31.61%，海外产能布局领先同行。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">Step 3: 评估受益标的</div>
+                <p>江波龙是国内存储模组龙头，具备<span class="highlight">主控芯片+固件算法+封装测试</span>全栈能力，这是纯模组厂商不具备的核心竞争力。</p>
+                <p>更重要的是，公司Q4扣非净利润约6.5-8.7亿元，单季度盈利能力大幅提升，说明涨价已经传导至利润端。</p>
+            </div>
+
+            <div class="conclusion-box">
+                <div class="label">💡 核心结论</div>
+                <p>市场共识"模组企业同质化"vs实际"全栈能力构建差异化壁垒"。<span class="highlight">预期差评分：86/100</span></p>
+                <p>江波龙是存储涨价+主控芯片国产替代+海外扩张三重主线的最纯正标的。</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>核心优势</h2>
-            <ul>
-                <li><strong>企业级存储放量：</strong>企业级存储收入同比+138.66%，AI服务器需求高增</li>
-                <li><strong>主控芯片突破：</strong>UFS4.1主控芯片首次流片成功，全球少数具备该能力企业</li>
-                <li><strong>海外布局领先：</strong>Zilia收入同比+40%，Lexar全球销售收入同比+31.61%</li>
-                <li><strong>全栈能力：</strong>主控芯片、固件算法、封装测试全栈能力构建差异化竞争</li>
-            </ul>
+            <h2>📈 财务分析：验证业绩拐点</h2>
+            
+            <h3>年度数据拆解</h3>
+            <table class="data-table">
+                <tr>
+                    <th>指标</th>
+                    <th>2023年</th>
+                    <th>2024年</th>
+                    <th>2025年</th>
+                    <th>同比变化</th>
+                </tr>
+                <tr>
+                    <td>营收（亿元）</td>
+                    <td>101.25</td>
+                    <td>174.64</td>
+                    <td>225-230</td>
+                    <td class="metric-highlight">+29%~+32%</td>
+                </tr>
+                <tr>
+                    <td>净利润（亿元）</td>
+                    <td>-8.28</td>
+                    <td>4.98</td>
+                    <td>12.5-15.5</td>
+                    <td class="metric-highlight">+151%~+211%</td>
+                </tr>
+                <tr>
+                    <td>扣非净利润（亿元）</td>
+                    <td>-8.82</td>
+                    <td>3.15</td>
+                    <td>11.3-13.5</td>
+                    <td class="metric-highlight">扭亏为盈</td>
+                </tr>
+                <tr>
+                    <td>企业级存储收入</td>
+                    <td>低基数</td>
+                    <td>快速增长</td>
+                    <td>同比+138.66%</td>
+                    <td class="metric-highlight">爆发式增长</td>
+                </tr>
+            </table>
+
+            <div class="analysis-box">
+                <div class="step">分析：业绩进入高速增长通道</div>
+                <p>从2023年亏损8.28亿元到2025年净利润12.5-15.5亿元，两年实现<span class="highlight">超20亿元利润 swing</span>，说明公司已走出行业低谷。</p>
+                <p>扣非净利润大幅增长验证主业盈利能力真实改善，非经常性损益影响较小。</p>
+            </div>
         </div>
 
         <div class="section">
-            <h2>风险提示</h2>
-            <ul>
-                <li>存储价格波动风险</li>
-                <li>行业供需格局变化风险</li>
-                <li>海外业务拓展不及预期</li>
-                <li>主控芯片量产进度不确定性</li>
-            </ul>
+            <h2>🎯 竞争格局：为什么选江波龙？</h2>
+            
+            <h3>国内存储模组市场格局</h3>
+            <table class="data-table">
+                <tr>
+                    <th>排名</th>
+                    <th>厂商</th>
+                    <th>核心优势</th>
+                    <th>主控芯片</th>
+                    <th>企业级存储</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><strong>江波龙</strong></td>
+                    <td>全栈能力+海外布局</td>
+                    <td class="metric-highlight">自研UFS4.1</td>
+                    <td class="metric-highlight">已放量</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>朗科科技</td>
+                    <td>品牌+渠道</td>
+                    <td>外购为主</td>
+                    <td>布局中</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>嘉合劲威</td>
+                    <td>消费级市场</td>
+                    <td>外购为主</td>
+                    <td>较少</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>金泰克</td>
+                    <td>性价比</td>
+                    <td>外购</td>
+                    <td>较少</td>
+                </tr>
+            </table>
+
+            <div class="analysis-box">
+                <div class="step">竞争优势解读</div>
+                <p><strong>1. 全栈能力稀缺：</strong>主控芯片是存储模组的核心，自研UFS4.1主控芯片使公司成为<span class="highlight">全球少数具备该能力的企业</span>，毛利率有望显著提升。</p>
+                <p><strong>2. 海外产能先发：</strong>巴西Zilia产能爬坡，可规避关税壁垒，这是同行短期内难以复制的优势。</p>
+                <p><strong>3. 企业级认证壁垒：</strong>企业级存储客户认证周期长（6-12个月），已进入供应链的企业具有先发优势。</p>
+            </div>
         </div>
 
-        <div class="section conclusion">
-            <h2>投资建议</h2>
-            <p><strong>短期：</strong>存储涨价周期核心受益标的，Q4业绩爆发</p>
-            <p><strong>长期：</strong>企业级+主控芯片双轮驱动，国产替代龙头</p>
-            <p><strong>策略：</strong>积极布局，目标价<span class="highlight">380元</span>（当前323.50元，<span class="highlight">+17.5%空间</span>）</p>
+        <div class="section">
+            <h2>⚠️ 风险识别与应对</h2>
+            
+            <div class="analysis-box">
+                <div class="step">风险1：存储价格波动风险</div>
+                <p><span class="risk-highlight">概率：中等 | 影响：高</span></p>
+                <p>若NAND Flash价格大幅回落，模组企业利润空间将被压缩。</p>
+                <p><strong>应对：</strong>关注3月底存储合约价谈判结果，若涨价幅度&gt;50%则全年利润有保障。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">风险2：主控芯片量产进度不确定性</div>
+                <p><span class="risk-highlight">概率：中等 | 影响：中</span></p>
+                <p>UFS4.1主控芯片首次流片成功，但量产时间和良率存在不确定性。</p>
+                <p><strong>应对：</strong>跟踪Q2量产进展，若良率&gt;80%则可实现成本优势。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">风险3：海外业务拓展不及预期</div>
+                <p><span class="risk-highlight">概率：低 | 影响：中</span></p>
+                <p>地缘政治风险可能影响海外产能利用率和客户订单。</p>
+                <p><strong>应对：</strong>关注Q1海外收入占比变化，若持续提升则风险可控。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">风险4：行业竞争加剧</div>
+                <p><span class="risk-highlight">概率：高 | 影响：中</span></p>
+                <p>存储模组行业进入门槛相对较低，新进入者可能导致价格战。</p>
+                <p><strong>应对：</strong>关注毛利率变化，若能维持在15%以上则竞争优势稳固。</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 估值与目标价</h2>
+            
+            <h3>同业估值对比</h3>
+            <table class="data-table">
+                <tr>
+                    <th>标的</th>
+                    <th>PE-TTM</th>
+                    <th>PB</th>
+                    <th>PS</th>
+                    <th>市值（亿）</th>
+                </tr>
+                <tr>
+                    <td>江波龙</td>
+                    <td class="metric-highlight">65x</td>
+                    <td>8.1x</td>
+                    <td>2.8x</td>
+                    <td>1350</td>
+                </tr>
+                <tr>
+                    <td>兆易创新</td>
+                    <td>45x</td>
+                    <td>6.2x</td>
+                    <td>8.5x</td>
+                    <td>1945</td>
+                </tr>
+                <tr>
+                    <td>普冉股份</td>
+                    <td>85x</td>
+                    <td>12.5x</td>
+                    <td>6.2x</td>
+                    <td>389</td>
+                </tr>
+                <tr>
+                    <td>行业平均</td>
+                    <td>65x</td>
+                    <td>8.9x</td>
+                    <td>5.8x</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <div class="analysis-box">
+                <div class="step">目标价测算逻辑</div>
+                <p><strong>情景1（乐观）：</strong>企业级存储持续高增+UFS4.1量产成功 → 2026年净利润20亿 → 给予50x PE → <span class="highlight">目标价450元</span></p>
+                <p><strong>情景2（中性）：</strong>企业级存储稳健增长+主控芯片逐步放量 → 2026年净利润17亿 → 给予45x PE → 目标价380元</p>
+                <p><strong>情景3（悲观）：</strong>存储价格回落+主控芯片量产延期 → 2026年净利润14亿 → 给予40x PE → 目标价320元</p>
+            </div>
+
+            <div class="conclusion-box">
+                <div class="label">🎯 投资建议</div>
+                <p><strong>当前价323.50元，目标价380元，上涨空间+17.5%</strong></p>
+                <p><strong>策略：</strong>Q1财报披露前积极布局，若企业级存储收入占比提升则加仓。</p>
+                <p><strong>仓位：</strong>建议配置3%-5%仓位，作为存储板块进攻性持仓。</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📅 跟踪日历</h2>
+            <table class="data-table">
+                <tr>
+                    <th>日期</th>
+                    <th>事件</th>
+                    <th>验证指标</th>
+                    <th>判断标准</th>
+                </tr>
+                <tr>
+                    <td>3月底</td>
+                    <td>存储合约价谈判</td>
+                    <td>涨价幅度</td>
+                    <td>&gt;50%→利好；&lt;30%→利空</td>
+                </tr>
+                <tr>
+                    <td>4月中旬</td>
+                    <td>Q1财报披露</td>
+                    <td>企业级收入占比</td>
+                    <td>&gt;20%→超预期；&lt;15%→不及预期</td>
+                </tr>
+                <tr>
+                    <td>4月底</td>
+                    <td>UFS4.1量产进展</td>
+                    <td>良率数据</td>
+                    <td>&gt;80%→可成本优势</td>
+                </tr>
+                <tr>
+                    <td>5月</td>
+                    <td>海外订单数据</td>
+                    <td>Zilia收入增速</td>
+                    <td>&gt;30%→海外扩张顺利</td>
+                </tr>
+            </table>
         </div>
 
         <a href="../index.html" class="back-link">← 返回仪表盘</a>

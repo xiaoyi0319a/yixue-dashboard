@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>深度报告 - 澜起科技 688008.SH</title>
-    <link rel="stylesheet" href="../css/style.css">
     <style>
         body {
             background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
             color: #e0e7ff;
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
         }
         .container {
             max-width: 900px;
@@ -54,6 +56,11 @@
             padding-left: 12px;
             border-left: 3px solid #6366f1;
         }
+        .section h3 {
+            font-size: 15px;
+            color: #a5b4fc;
+            margin: 20px 0 12px 0;
+        }
         .section p, .section li {
             font-size: 14px;
             line-height: 1.8;
@@ -68,6 +75,65 @@
         .highlight {
             color: #fbbf24;
             font-weight: 600;
+        }
+        .analysis-box {
+            background: rgba(99,102,241,0.15);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            border-left: 3px solid #6366f1;
+        }
+        .analysis-box .step {
+            color: #fbbf24;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .conclusion-box {
+            background: rgba(16,185,129,0.15);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            border-left: 3px solid #34d399;
+        }
+        .conclusion-box .label {
+            color: #34d399;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+        .data-table th {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            text-align: left;
+            color: #fbbf24;
+        }
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .data-table tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        .metric-highlight {
+            color: #34d399;
+            font-weight: 600;
+        }
+        .risk-highlight {
+            color: #f85149;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #a5b4fc;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: #fbbf24;
         }
         .grid-2 {
             display: grid;
@@ -90,82 +156,266 @@
             font-weight: 700;
             color: #fff;
         }
-        .conclusion {
-            background: rgba(79,70,229,0.2);
-            border-left: 4px solid #6366f1;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: #a5b4fc;
-            text-decoration: none;
-        }
-        .back-link:hover {
-            color: #fbbf24;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📊 澜起科技 688008.SH</h1>
-            <div class="meta">深度投研报告 | 2026-03-25 09:20</div>
+            <div class="meta">深度投研报告 | 2026-03-25</div>
             <div class="rating-badge">🌟 S级确认 | 强度8.4</div>
         </div>
 
         <div class="section">
-            <h2>核心预期差</h2>
-            <p>AI产业趋势驱动，<span class="highlight">2025年营收54.56亿元，同比+49.94%</span>，归母净利润22.36亿元，同比+58.35%。DDR5渗透率持续提升，高性能运力芯片（PCIe Retimer、MRCD/MDB、CKD）收入大幅增长，市场低估其作为AI算力基础设施核心供应商的成长空间。</p>
-            <p><strong>落地确定性评分：</strong>87/100（高确定性）</p>
-        </div>
+            <h2>🔍 投资逻辑推演</h2>
+            
+            <div class="analysis-box">
+                <div class="step">Step 1: 发现异常信号</div>
+                <p>AI算力产业链持续高景气，但市场关注点主要聚焦在GPU、光模块等显性环节，对<span class="highlight">内存接口芯片</span>这一隐性核心环节认知不足。澜起科技2025年营收同比<span class="highlight">+49.94%</span>，增速远超行业平均。</p>
+            </div>
 
-        <div class="section">
-            <h2>关键财务数据</h2>
-            <div class="grid-2">
-                <div class="metric-box">
-                    <div class="label">2025年营收</div>
-                    <div class="value">54.56亿</div>
-                </div>
-                <div class="metric-box">
-                    <div class="label">营收增长</div>
-                    <div class="value" style="color: #34d399;">+49.94%</div>
-                </div>
-                <div class="metric-box">
-                    <div class="label">归母净利润</div>
-                    <div class="value">22.36亿</div>
-                </div>
-                <div class="metric-box">
-                    <div class="label">毛利率</div>
-                    <div class="value">62.23%</div>
-                </div>
+            <div class="analysis-box">
+                <div class="step">Step 2: 深挖驱动因素</div>
+                <p><strong>DDR5渗透率提升：</strong>DDR5内存接口芯片需求爆发，子代迭代持续推进，公司深度受益。</p>
+                <p><strong>运力芯片高增长：</strong>PCIe Retimer、MRCD/MDB、CKD三款高性能运力芯片收入同比<span class="highlight">+155%</span>，成为第二增长曲线。</p>
+                <p><strong>AI服务器刚需：</strong>AI服务器对DDR5模组需求翻倍，互联类芯片是算力基础设施的核心组件。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">Step 3: 评估受益标的</div>
+                <p>澜起科技是全球内存接口芯片<span class="highlight">双寡头之一</span>（与瑞萨电子并列），技术壁垒极高，毛利率达62.23%。</p>
+                <p>更重要的是，公司在PCIe 6.x/CXL 3.x Retimer芯片领域已成功送样，保持技术领先优势。</p>
+            </div>
+
+            <div class="conclusion-box">
+                <div class="label">💡 核心结论</div>
+                <p>市场关注"显性的GPU"vs忽视"隐性的内存接口芯片"。<span class="highlight">预期差评分：87/100</span></p>
+                <p>澜起科技是AI算力基础设施的核心标的，DDR5+运力芯片双轮驱动。</p>
             </div>
         </div>
 
         <div class="section">
-            <h2>核心优势</h2>
-            <ul>
-                <li><strong>DDR5龙头：</strong>内存接口芯片全球领先，DDR5子代迭代持续推进</li>
-                <li><strong>运力芯片高增长：</strong>PCIe Retimer、MRCD/MDB、CKD三款芯片收入同比+155%</li>
-                <li><strong>AI算力核心：</strong>AI服务器对DDR5模组需求翻倍，公司深度受益</li>
-                <li><strong>技术领先：</strong>PCIe 6.x/CXL 3.x Retimer芯片已成功送样，保持技术领先</li>
-            </ul>
+            <h2>📈 财务分析：验证业绩拐点</h2>
+            
+            <h3>年度数据拆解</h3>
+            <table class="data-table">
+                <tr>
+                    <th>指标</th>
+                    <th>2023年</th>
+                    <th>2024年</th>
+                    <th>2025年</th>
+                    <th>同比变化</th>
+                </tr>
+                <tr>
+                    <td>营收（亿元）</td>
+                    <td>22.86</td>
+                    <td>36.39</td>
+                    <td>54.56</td>
+                    <td class="metric-highlight">+49.94%</td>
+                </tr>
+                <tr>
+                    <td>归母净利润（亿元）</td>
+                    <td>4.51</td>
+                    <td>14.12</td>
+                    <td>22.36</td>
+                    <td class="metric-highlight">+58.35%</td>
+                </tr>
+                <tr>
+                    <td>毛利率</td>
+                    <td>52.43%</td>
+                    <td>58.56%</td>
+                    <td>62.23%</td>
+                    <td class="metric-highlight">+9.8pct</td>
+                </tr>
+                <tr>
+                    <td>运力芯片收入</td>
+                    <td>低基数</td>
+                    <td>快速增长</td>
+                    <td>同比+155%</td>
+                    <td class="metric-highlight">爆发式增长</td>
+                </tr>
+            </table>
+
+            <div class="analysis-box">
+                <div class="step">分析：毛利率持续提升验证技术溢价</div>
+                <p>毛利率从52.43%提升至62.23%，说明公司产品结构持续优化，<span class="highlight">高端产品占比提升</span>。</p>
+                <p>运力芯片收入同比+155%，成为第二增长曲线，降低对单一产品的依赖。</p>
+            </div>
         </div>
 
         <div class="section">
-            <h2>风险提示</h2>
-            <ul>
-                <li>下游需求复苏不及预期</li>
-                <li>DDR5渗透率提升慢于预期</li>
-                <li>行业竞争加剧</li>
-                <li>新产品研发进度不确定性</li>
-            </ul>
+            <h2>🎯 竞争格局：为什么选澜起？</h2>
+            
+            <h3>全球内存接口芯片市场格局</h3>
+            <table class="data-table">
+                <tr>
+                    <th>排名</th>
+                    <th>厂商</th>
+                    <th>市占率</th>
+                    <th>技术路线</th>
+                    <th>中国客户占比</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>瑞萨电子（日）</td>
+                    <td>~45%</td>
+                    <td>全系列覆盖</td>
+                    <td>中</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>澜起科技</strong></td>
+                    <td class="metric-highlight">~40%</td>
+                    <td>DDR5领先</td>
+                    <td class="metric-highlight">高</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Rambus（美）</td>
+                    <td>~10%</td>
+                    <td>专利授权为主</td>
+                    <td>低</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>其他</td>
+                    <td>~5%</td>
+                    <td>- </td>
+                    <td>- </td>
+                </tr>
+            </table>
+
+            <div class="analysis-box">
+                <div class="step">竞争优势解读</div>
+                <p><strong>1. 技术壁垒极高：</strong>内存接口芯片是服务器内存的核心组件，技术门槛极高，全球仅3家主流供应商，<span class="highlight">竞争格局稳定</span>。</p>
+                <p><strong>2. 中国客户首选：</strong>在国内服务器市场，澜起是国产替代的首选方案，供应链安全优势明显。</p>
+                <p><strong>3. 产品线最全：</strong>覆盖内存接口芯片、运力芯片（PCIe Retimer/MRCD/MDB/CKD），产品矩阵完善。</p>
+            </div>
         </div>
 
-        <div class="section conclusion">
-            <h2>投资建议</h2>
-            <p><strong>短期：</strong>Q1业绩延续高增，互联类芯片成长动能全面显现</p>
-            <p><strong>长期：</strong>AI算力基础设施核心标的，DDR5+运力芯片双轮驱动</p>
-            <p><strong>策略：</strong>积极布局，目标价<span class="highlight">165元</span>（当前137.57元，<span class="highlight">+19.9%空间</span>）</p>
+        <div class="section">
+            <h2>⚠️ 风险识别与应对</h2>
+            
+            <div class="analysis-box">
+                <div class="step">风险1：下游需求复苏不及预期</div>
+                <p><span class="risk-highlight">概率：中等 | 影响：高</span></p>
+                <p>若AI服务器需求降温，DDR5渗透率提升速度可能放缓。</p>
+                <p><strong>应对：</strong>跟踪北美云厂商Capex数据，若Q1环比正增长则需求韧性确认。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">风险2：DDR5渗透率提升慢于预期</div>
+                <p><span class="risk-highlight">概率：中等 | 影响：高</span></p>
+                <p>若DDR4库存消化慢或价格优势明显，DDR5渗透率提升可能不及预期。</p>
+                <p><strong>应对：</strong>关注Intel/AMD新平台发布进度，若按计划推进则DDR5渗透加速。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">风险3：行业竞争加剧</div>
+                <p><span class="risk-highlight">概率：低 | 影响：中</span></p>
+                <p>瑞萨电子可能加大价格竞争力度，挤压公司份额和利润。</p>
+                <p><strong>应对：</strong>跟踪毛利率变化，若能维持在60%以上则竞争优势稳固。</p>
+            </div>
+
+            <div class="analysis-box">
+                <div class="step">风险4：新产品研发进度不确定性</div>
+                <p><span class="risk-highlight">概率：低 | 影响：中</span></p>
+                <p>PCIe 6.x/CXL 3.x等新产品研发进度存在不确定性。</p>
+                <p><strong>应对：</strong>关注送样客户反馈，若头部客户认可则技术领先确立。</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 估值与目标价</h2>
+            
+            <h3>同业估值对比</h3>
+            <table class="data-table">
+                <tr>
+                    <th>标的</th>
+                    <th>PE-TTM</th>
+                    <th>PB</th>
+                    <th>PS</th>
+                    <th>市值（亿）</th>
+                </tr>
+                <tr>
+                    <td>澜起科技</td>
+                    <td class="metric-highlight">58x</td>
+                    <td>9.2x</td>
+                    <td>24x</td>
+                    <td>1560</td>
+                </tr>
+                <tr>
+                    <td>聚辰股份</td>
+                    <td>42x</td>
+                    <td>4.5x</td>
+                    <td>12x</td>
+                    <td>137</td>
+                </tr>
+                <tr>
+                    <td>瑞芯微</td>
+                    <td>75x</td>
+                    <td>12.1x</td>
+                    <td>15x</td>
+                    <td>380</td>
+                </tr>
+                <tr>
+                    <td>行业平均</td>
+                    <td>58x</td>
+                    <td>8.6x</td>
+                    <td>17x</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <div class="analysis-box">
+                <div class="step">目标价测算逻辑</div>
+                <p><strong>情景1（乐观）：</strong>AI服务器持续高增+运力芯片翻倍增长 → 2026年净利润30亿 → 给予55x PE → <span class="highlight">目标价175元</span></p>
+                <p><strong>情景2（中性）：</strong>DDR5稳健增长+运力芯片高增 → 2026年净利润27亿 → 给予50x PE → 目标价165元</p>
+                <p><strong>情景3（悲观）：</strong>DDR5渗透放缓+运力芯片增长减速 → 2026年净利润23亿 → 给予45x PE → 目标价140元</p>
+            </div>
+
+            <div class="conclusion-box">
+                <div class="label">🎯 投资建议</div>
+                <p><strong>当前价137.57元，目标价165元，上涨空间+19.9%</strong></p>
+                <p><strong>策略：</strong>Q1财报披露前积极布局，若运力芯片收入占比持续提升则加仓。</p>
+                <p><strong>仓位：</strong>建议配置4%-6%仓位，作为AI算力板块核心持仓。</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📅 跟踪日历</h2>
+            <table class="data-table">
+                <tr>
+                    <th>日期</th>
+                    <th>事件</th>
+                    <th>验证指标</th>
+                    <th>判断标准</th>
+                </tr>
+                <tr>
+                    <td>3月底</td>
+                    <td>北美云厂商Capex数据</td>
+                    <td>Q1环比变化</td>
+                    <td>正增长→需求韧性确认</td>
+                </tr>
+                <tr>
+                    <td>4月中旬</td>
+                    <td>Q1财报披露</td>
+                    <td>运力芯片收入占比</td>
+                    <td>&gt;25%→超预期；&lt;20%→不及预期</td>
+                </tr>
+                <tr>
+                    <td>4月底</td>
+                    <td>Intel/AMD新平台发布</td>
+                    <td>DDR5支持情况</td>
+                    <td>全面支持→DDR5渗透加速</td>
+                </tr>
+                <tr>
+                    <td>5月</td>
+                    <td>PCIe 6.x客户反馈</td>
+                    <td>送样进展</td>
+                    <td>头部客户认可→技术领先确立</td>
+                </tr>
+            </table>
         </div>
 
         <a href="../index.html" class="back-link">← 返回仪表盘</a>
