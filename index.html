@@ -20,6 +20,7 @@
             --accent-yellow: #d29922;
             --accent-red: #f85149;
             --accent-purple: #a371f7;
+            --accent-cyan: #39c5cf;
         }
         
         body {
@@ -73,91 +74,117 @@
             font-size: 24px;
         }
         
-        /* 高热度方向卡片 */
-        .direction-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
+        /* 奇门预测区域 */
+        .qimen-box {
+            background: linear-gradient(135deg, #1a2332 0%, #0d1117 100%);
+            border: 1px solid var(--accent-purple);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
         }
         
-        .direction-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        
-        .direction-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
-        
-        .direction-card.rank-1 {
-            border-left: 4px solid var(--accent-yellow);
-        }
-        
-        .direction-card.rank-2 {
-            border-left: 4px solid #a3a3a3;
-        }
-        
-        .direction-card.rank-3 {
-            border-left: 4px solid #cd7f32;
-        }
-        
-        .direction-header {
+        .qimen-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
         }
         
-        .direction-rank {
-            font-size: 20px;
-        }
-        
-        .direction-name {
-            font-size: 17px;
+        .qimen-title {
+            font-size: 18px;
             font-weight: 600;
-            flex: 1;
+            color: var(--accent-purple);
         }
         
-        .direction-score {
+        .qimen-content {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 2;
+            color: var(--text-secondary);
+        }
+        
+        .qimen-content .label {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        
+        .qimen-content .highlight {
+            color: var(--accent-yellow);
+        }
+        
+        .qimen-content .good {
+            color: var(--accent-green);
+        }
+        
+        .qimen-content .bad {
+            color: var(--accent-red);
+        }
+        
+        /* 预期差清单表格 */
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .stock-table th {
+            background: var(--bg-secondary);
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stock-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        
+        .stock-table tr:hover {
+            background: rgba(88, 166, 255, 0.05);
+        }
+        
+        .rating-s {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        .rating-a {
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+        
+        .score {
             background: rgba(88, 166, 255, 0.15);
             color: var(--accent-blue);
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
         }
         
-        .direction-logic {
+        .stock-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .stock-code {
             color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 12px;
-        }
-        
-        .direction-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .tag {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 6px;
             font-size: 12px;
-            color: var(--text-secondary);
+            margin-left: 8px;
         }
         
-        /* 深度报告卡片 */
+        /* 研报卡片 */
         .report-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 16px;
         }
         
@@ -166,24 +193,13 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 20px;
-            transition: all 0.2s;
             cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            transition: all 0.2s;
         }
         
         .report-card:hover {
-            border-color: var(--accent-purple);
+            border-color: var(--accent-blue);
             transform: translateY(-2px);
-        }
-        
-        .report-card.warning {
-            border-left: 4px solid var(--accent-yellow);
-        }
-        
-        .report-card.success {
-            border-left: 4px solid var(--accent-green);
         }
         
         .report-header {
@@ -193,8 +209,21 @@
             margin-bottom: 12px;
         }
         
-        .report-status {
-            font-size: 20px;
+        .report-rating {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .report-rating.s {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--accent-green);
+        }
+        
+        .report-rating.a {
+            background: rgba(210, 153, 34, 0.15);
+            color: var(--accent-yellow);
         }
         
         .report-name {
@@ -203,51 +232,71 @@
             flex: 1;
         }
         
-        .report-rating {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
+        .report-price {
+            font-size: 14px;
+            color: var(--text-secondary);
         }
         
-        .report-rating.warning {
-            background: rgba(210, 153, 34, 0.15);
-            color: var(--accent-yellow);
+        .report-price strong {
+            color: var(--text-primary);
+            font-size: 18px;
         }
         
-        .report-rating.success {
-            background: rgba(63, 185, 80, 0.15);
-            color: var(--accent-green);
-        }
-        
-        .report-info {
+        .report-logic {
             color: var(--text-secondary);
             font-size: 14px;
             line-height: 1.7;
+            margin-bottom: 12px;
         }
         
-        .report-info strong {
-            color: var(--text-primary);
-        }
-        
-        .report-target {
-            margin-top: 12px;
+        .report-verify {
             padding-top: 12px;
             border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .target-label {
             font-size: 13px;
             color: var(--text-secondary);
         }
         
-        .target-value {
-            font-size: 16px;
+        .report-verify strong {
+            color: var(--accent-cyan);
+        }
+        
+        /* 新闻区域 */
+        .news-list {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .news-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        
+        .news-title {
+            font-size: 15px;
             font-weight: 600;
-            color: var(--accent-green);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .news-tag {
+            background: rgba(243, 149, 72, 0.15);
+            color: #f39548;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+        
+        .news-content {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
         }
         
         .footer {
@@ -257,157 +306,333 @@
             color: var(--text-secondary);
             font-size: 13px;
         }
+        
+        @media (max-width: 768px) {
+            .stock-table {
+                font-size: 12px;
+            }
+            .stock-table th,
+            .stock-table td {
+                padding: 10px 8px;
+            }
+            .report-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>☯️ 羿学交易 · 智囊团仪表盘</h1>
-        <div class="date">2026年3月24日 更新</div>
+        <div class="date">2026年3月25日 09:30 更新</div>
     </div>
     
     <div class="container">
-        <!-- 高热度方向 -->
+        <!-- 奇门君今日预测 -->
+        <div class="qimen-box">
+            <div class="qimen-header">
+                <span style="font-size: 24px;">🔮</span>
+                <span class="qimen-title">奇门君 · 今日大盘运势 | 2026-03-25</span>
+            </div>
+            <div class="qimen-content">
+                <div><span class="label">[起盘]</span> 乙丑日·巳时·阳遁三局 | 值符天辅落巽宫 | 值使杜门 | 旬首甲戌己</div>
+                <div><span class="label">[判断]</span> 杜门当值，主闭塞阻滞，早盘量能受限；<span class="bad">辛加乙为"白虎猖狂"</span>，金融板块承压。然<span class="good">生门临戊</span>，财库有根，午后企稳回升，收小阳线，涨幅0.3%以内。</div>
+                <div><span class="label">[时辰]</span> <span class="bad">凶：巳时（9-11点）</span> 冲高回落，忌追高 | <span class="good">吉：未时（13-15点）</span> 财星发动，可低吸 | <span class="highlight">平：申时尾盘</span>，观望为宜</div>
+                <div><span class="label">[策略]</span> <span class="highlight">东南巽宫为财位</span>；操作策略"早盘观望、午后择机"，重点关注<span class="good">新能源、军工</span>板块。总仓位不超六成。</div>
+            </div>
+        </div>
+        
+        <!-- Top 12 预期差清单 -->
         <div class="section">
             <div class="section-title">
-                <span class="icon">🔥</span>
-                高热度方向（5维度评分≥7.5）
+                <span class="icon">📊</span>
+                Top 12 预期差清单 | 2026-03-25
+                <span style="margin-left: auto; font-size: 13px; color: var(--text-secondary);">通过方向：存储芯片(18分)、碳酸锂(17分) | 初筛：12只</span>
             </div>
-            <div class="direction-grid">
-                <div class="direction-card rank-1">
-                    <div class="direction-header">
-                        <span class="direction-rank">🥇</span>
-                        <span class="direction-name">CXO/医药服务</span>
-                        <span class="direction-score">评分 19.0</span>
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>标的</th>
+                        <th>评级</th>
+                        <th>强度</th>
+                        <th>核心逻辑</th>
+                        <th>验证节点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🥇1</td>
+                        <td><span class="stock-name">兆易创新</span><span class="stock-code">603986</span></td>
+                        <td class="rating-s">S级</td>
+                        <td><span class="score">9.2</span></td>
+                        <td>NOR Flash全球第二+DRAM国产替代加速</td>
+                        <td>3月底三星罢工、4月Q1财报</td>
+                    </tr>
+                    <tr>
+                        <td>🥈2</td>
+                        <td><span class="stock-name">宁德时代</span><span class="stock-code">300750</span></td>
+                        <td class="rating-s">S级</td>
+                        <td><span class="score">8.8</span></td>
+                        <td>碳酸锂成本下降+储能需求爆发62%</td>
+                        <td>3月底库存数据、4月年报</td>
+                    </tr>
+                    <tr>
+                        <td>🥉3</td>
+                        <td><span class="stock-name">江波龙</span><span class="stock-code">301308</span></td>
+                        <td class="rating-s">S级</td>
+                        <td><span class="score">8.4</span></td>
+                        <td>存储模组龙头+企业级SSD放量</td>
+                        <td>4月年报、Q1经营数据</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><span class="stock-name">澜起科技</span><span class="stock-code">688008</span></td>
+                        <td class="rating-s">S级</td>
+                        <td><span class="score">8.4</span></td>
+                        <td>DDR5内存接口芯片龙头+HBM布局</td>
+                        <td>3月底出货数据、4月Q1财报</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><span class="stock-name">普冉股份</span><span class="stock-code">688766</span></td>
+                        <td class="rating-s">S级</td>
+                        <td><span class="score">8.2</span></td>
+                        <td>NOR Flash全球主要供应商+MCU第二曲线</td>
+                        <td>4月年报、客户订单数据</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><span class="stock-name">聚辰股份</span><span class="stock-code">688123</span></td>
+                        <td class="rating-s">S级</td>
+                        <td><span class="score">8.0</span></td>
+                        <td>EEPROM全球龙头+车载存储新增长点</td>
+                        <td>3月底车载订单、4月Q1财报</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><span class="stock-name">新宙邦</span><span class="stock-code">300037</span></td>
+                        <td class="rating-a">A级</td>
+                        <td><span class="score">8.0</span></td>
+                        <td>电解液一体化+半导体化学品第二曲线</td>
+                        <td>3月底排产数据、4月年报</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><span class="stock-name">天赐材料</span><span class="stock-code">002709</span></td>
+                        <td class="rating-a">A级</td>
+                        <td><span class="score">8.0</span></td>
+                        <td>电解液龙头+一体化成本优势</td>
+                        <td>3月底库存数据、4月排产</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><span class="stock-name">上海新阳</span><span class="stock-code">300236</span></td>
+                        <td class="rating-a">A级</td>
+                        <td><span class="score">8.0</span></td>
+                        <td>半导体材料平台+存储芯片蚀刻技术领先</td>
+                        <td>3月底扩产数据、4月Q1财报</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><span class="stock-name">紫光国微</span><span class="stock-code">002049</span></td>
+                        <td class="rating-a">A级</td>
+                        <td><span class="score">8.0</span></td>
+                        <td>特种集成电路龙头+智能安全芯片</td>
+                        <td>3月底特种订单、4月Q1财报</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><span class="stock-name">亿纬锂能</span><span class="stock-code">300014</span></td>
+                        <td class="rating-a">A级</td>
+                        <td><span class="score">7.6</span></td>
+                        <td>全场景锂电池平台+储能电芯全球第二</td>
+                        <td>3月底排产数据、4月Q1财报</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><span class="stock-name">联芸科技</span><span class="stock-code">688449</span></td>
+                        <td class="rating-a">A级</td>
+                        <td><span class="score">7.6</span></td>
+                        <td>数据存储主控芯片龙头+车规级突破</td>
+                        <td>3月底车载订单、4月Q1财报</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 深度研报 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📋</span>
+                深度研报精选
+            </div>
+            <div class="report-grid">
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating s">S级</span>
+                        <span class="report-name">兆易创新 (603986)</span>
+                        <span class="report-price">现价 <strong>273.71</strong>元</span>
                     </div>
-                    <div class="direction-logic">
-                        药明康德2025净利+102.65%，2026指引+18~22%，580亿订单提供确定性，市场过度担忧生物安全法案
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>NOR Flash全球市占率第二+DRAM国产替代加速<br>
+                        <strong>关键假设：</strong>2026Q2存储合约价涨幅确认90%-95%；国产云厂商AI服务器需求持续放量
                     </div>
-                    <div class="direction-tags">
-                        <span class="tag">药明康德</span>
-                        <span class="tag">CXO</span>
-                        <span class="tag">创新药服务</span>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>3月底三星罢工是否落地 | 4月Q1财报（预计4/15-4/20）
                     </div>
                 </div>
                 
-                <div class="direction-card rank-2">
-                    <div class="direction-header">
-                        <span class="direction-rank">🥈</span>
-                        <span class="direction-name">锂电/储能</span>
-                        <span class="direction-score">评分 18.0</span>
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating s">S级</span>
+                        <span class="report-name">宁德时代 (300750)</span>
+                        <span class="report-price">现价 <strong>396.99</strong>元</span>
                     </div>
-                    <div class="direction-logic">
-                        碳酸锂价格反弹+19%，排产回暖，海外订单爆发（中东地缘冲突）
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>碳酸锂成本下降+储能需求爆发62%<br>
+                        <strong>财务亮点：</strong>2025年净利润722亿元(+42.28%)，毛利率26.27%，ROE 24.91%
                     </div>
-                    <div class="direction-tags">
-                        <span class="tag">宁德时代</span>
-                        <span class="tag">阳光电源</span>
-                        <span class="tag">储能电池</span>
-                    </div>
-                </div>
-                
-                <div class="direction-card rank-3">
-                    <div class="direction-header">
-                        <span class="direction-rank">🥉</span>
-                        <span class="direction-name">算电协同/数据中心</span>
-                        <span class="direction-score">评分 17.0</span>
-                    </div>
-                    <div class="direction-logic">
-                        2026年政府工作报告首次将"算力协同"写入国家战略，液冷/固态变压器/储能受益
-                    </div>
-                    <div class="direction-tags">
-                        <span class="tag">液冷</span>
-                        <span class="tag">固态变压器</span>
-                        <span class="tag">储能配套</span>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>3月底碳酸锂库存是否&lt;10万吨 | 4月Q1排产数据
                     </div>
                 </div>
                 
-                <div class="direction-card">
-                    <div class="direction-header">
-                        <span class="direction-rank">4️⃣</span>
-                        <span class="direction-name">高端珠宝</span>
-                        <span class="direction-score">评分 17.0</span>
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating s">S级</span>
+                        <span class="report-name">江波龙 (301308)</span>
+                        <span class="report-price">现价 <strong>323.50</strong>元</span>
                     </div>
-                    <div class="direction-logic">
-                        老铺黄金2025利润+228%，2026 Q1预增150%+，直营业绩爆发超预期，毛利率37.6%远超同业
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>存储模组龙头+FORESEE品牌B2B收入全球第五<br>
+                        <strong>业绩亮点：</strong>2025Q3营收65.39亿元(+54.60%)，毛利率提升至18.92%
                     </div>
-                    <div class="direction-tags">
-                        <span class="tag">老铺黄金</span>
-                        <span class="tag">奢侈消费</span>
-                        <span class="tag">品牌溢价</span>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>4月2025年报披露 | 4月底Q1经营数据
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating s">S级</span>
+                        <span class="report-name">澜起科技 (688008)</span>
+                        <span class="report-price">现价 <strong>137.57</strong>元</span>
+                    </div>
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>DDR5内存接口芯片全球龙头+HBM布局<br>
+                        <strong>财务健康：</strong>ROE 13.80%，资产负债率仅10.87%
+                    </div>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>3月底DDR5芯片出货数据 | 4月Q1财报
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating s">S级</span>
+                        <span class="report-name">普冉股份 (688766)</span>
+                        <span class="report-price">现价 <strong>263.08</strong>元</span>
+                    </div>
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>NOR Flash全球主要供应商+存储+MCU平台化<br>
+                        <strong>客户优势：</strong>产品广泛应用于三星、OPPO、vivo、小米
+                    </div>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>4月2025年报披露 | 4月中旬客户订单数据
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating s">S级</span>
+                        <span class="report-name">聚辰股份 (688123)</span>
+                        <span class="report-price">现价 <strong>111.98</strong>元</span>
+                    </div>
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>EEPROM全球龙头+车载存储新增长点<br>
+                        <strong>财务健康：</strong>ROE 15.06%，资产负债率仅6.39%
+                    </div>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>3月底车载客户订单数据 | 4月Q1财报
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating a">A级</span>
+                        <span class="report-name">天赐材料 (002709)</span>
+                        <span class="report-price">现价 <strong>43.46</strong>元</span>
+                    </div>
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>电解液龙头+一体化成本优势<br>
+                        <strong>业绩反转：</strong>2025Q4营收166.50亿元，净利13.44亿元，毛利率Q2起回升至23%+
+                    </div>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>3月底碳酸锂库存数据 | 4月Q1排产数据
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-header">
+                        <span class="report-rating a">A级</span>
+                        <span class="report-name">新宙邦 (300037)</span>
+                        <span class="report-price">现价 <strong>54.40</strong>元</span>
+                    </div>
+                    <div class="report-logic">
+                        <strong>核心逻辑：</strong>电解液一体化布局+半导体化学品第二曲线<br>
+                        <strong>2025业绩：</strong>净利润10.98亿元(+16.56%)，资产负债率下降3.12个百分点
+                    </div>
+                    <div class="report-verify">
+                        <strong>验证节点：</strong>3月底电解液排产数据 | 4月2025年报
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- 深度报告 -->
+        <!-- 今日关键新闻 -->
         <div class="section">
             <div class="section-title">
-                <span class="icon">📋</span>
-                深度报告
+                <span class="icon">📰</span>
+                今日关键新闻
             </div>
-            <div class="report-grid">
-                <a href="reports/20260324-02517-老铺黄金.html" class="report-card warning">
-                    <div class="report-header">
-                        <span class="report-status">⚠️</span>
-                        <span class="report-name">02517.HK 老铺黄金</span>
-                        <span class="report-rating warning">A级观察</span>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-title">
+                        <span class="news-tag">存储芯片</span>
+                        美光科技营收同比增近两倍，本季指引大超预期
                     </div>
-                    <div class="report-info">
-                        <strong>核心亮点：</strong>净利+230%，毛利率37.6%<br>
-                        <strong>风险提示：</strong>经营现金流-55亿需监控
+                    <div class="news-content">
+                        AI需求爆发导致存储芯片长期供应短缺，HBM产能倾斜，传统内存芯片供应更加紧张，长期合同模式确立产业链稳定预期。
+                        <strong>关联标的：</strong>兆易创新、江波龙、澜起科技、普冉股份
                     </div>
-                </a>
-                
-                <a href="reports/20260324-300274-阳光电源.html" class="report-card success">
-                    <div class="report-header">
-                        <span class="report-status">✅</span>
-                        <span class="report-name">300274.SZ 阳光电源</span>
-                        <span class="report-rating success">A级确认</span>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">
+                        <span class="news-tag">碳酸锂</span>
+                        碳酸锂价格企稳回升，库存维持低位
                     </div>
-                    <div class="report-info">
-                        <strong>核心亮点：</strong>储能爆发，海外订单翻倍，逆变器全球市占率第一
+                    <div class="news-content">
+                        碳酸锂价格自5月低点8万元/吨回升至10.5万元/吨，Q3毛利率有望从17.2%回升至18.5%+。储能需求持续爆发，2024-2026年规划新增超150GWh产能。
+                        <strong>关联标的：</strong>宁德时代、天赐材料、新宙邦、亿纬锂能
                     </div>
-                    <div class="report-target">
-                        <span class="target-label">目标价</span>
-                        <span class="target-value">200元 (+21.5%)</span>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">
+                        <span class="news-tag">三星罢工</span>
+                        三星内存芯片工厂罢工风险升温
                     </div>
-                </a>
-                
-                <a href="reports/20260324-300750-宁德时代.html" class="report-card success">
-                    <div class="report-header">
-                        <span class="report-status">✅</span>
-                        <span class="report-name">300750.SZ 宁德时代</span>
-                        <span class="report-rating success">A级确认</span>
+                    <div class="news-content">
+                        三星拟将内存芯片合同期限延长至3-5年，罢工若落地将加剧存储芯片供给紧张。3月底为关键验证节点。
+                        <strong>关联标的：</strong>兆易创新、江波龙、澜起科技（国产替代受益）
                     </div>
-                    <div class="report-info">
-                        <strong>核心亮点：</strong>Q4净利+57%，全球市占37%，匈牙利/德国基地投产
-                    </div>
-                    <div class="report-target">
-                        <span class="target-label">目标价</span>
-                        <span class="target-value">450元 (+13.4%)</span>
-                    </div>
-                </a>
-                
-                <a href="reports/20260324-605117-德业股份.html" class="report-card success">
-                    <div class="report-header">
-                        <span class="report-status">✅</span>
-                        <span class="report-name">605117.SH 德业股份</span>
-                        <span class="report-rating success">A级确认</span>
-                    </div>
-                    <div class="report-info">
-                        <strong>核心亮点：</strong>逆变器出口+50%，户储需求爆发，海外渠道优势显著
-                    </div>
-                    <div class="report-target">
-                        <span class="target-label">目标价</span>
-                        <span class="target-value">160元 (+18.4%)</span>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
     
     <div class="footer">
-        羿学交易 · 智囊团系统 | 数据来源：Wind 金融终端
+        羿学交易 · 智囊团系统 | 数据来源：Wind 金融终端 | 生成时间：2026-03-25 09:30
     </div>
 </body>
 </html>
