@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字节/华为算力绑定 | 羿学交易智囊团</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-yellow: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #a371f7;
+            --accent-cyan: #39c5cf;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .header .score {
+            color: var(--accent-blue);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .back-link {
+            position: absolute;
+            left: 24px;
+            top: 32px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .back-link:hover {
+            color: var(--accent-blue);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--accent-cyan);
+        }
+        
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .section-content strong {
+            color: var(--text-primary);
+        }
+        
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        
+        .stock-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stock-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        
+        .stock-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .rating-s {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        .rating-a {
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+        
+        .score-badge {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .stock-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .stock-code {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .stock-table {
+                font-size: 12px;
+            }
+            .stock-table th,
+            .stock-table td {
+                padding: 10px 8px;
+            }
+            .back-link {
+                position: relative;
+                left: 0;
+                top: 0;
+                display: block;
+                margin-bottom: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="../index.html" class="back-link">← 返回仪表盘</a>
+        <h1>🥉 字节/华为算力绑定</h1>
+        <div class="score">方向评分：16分</div>
+    </div>
+    
+    <div class="container">
+        <!-- 核心逻辑 -->
+        <div class="section">
+            <div class="section-title">📌 核心逻辑</div>
+            <div class="section-content">
+                润泽科技布局 7 个 AIDC 集群（61 栋/32 万架机柜）+ 已交付 8.2 万架 → 深度绑定字节/华为/阿里/腾讯 → 算力租赁涨价最大受益者
+            </div>
+        </div>
+        
+        <!-- 验证节点 -->
+        <div class="section">
+            <div class="section-title">✅ 验证节点</div>
+            <div class="section-content">
+                Q2 机柜上架率数据披露
+            </div>
+        </div>
+        
+        <!-- 风险因素 -->
+        <div class="section">
+            <div class="section-title">⚠️ 风险因素</div>
+            <div class="section-content">
+                若互联网巨头资本开支收缩，订单不及预期
+            </div>
+        </div>
+        
+        <!-- 方向标的 -->
+        <div class="section">
+            <div class="section-title">📊 该方向标的</div>
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>名称</th>
+                        <th>代码</th>
+                        <th>强度</th>
+                        <th>评级</th>
+                        <th>核心逻辑</th>
+                        <th>关键数据</th>
+                        <th>风险</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><span class="stock-name">新易盛</span></td>
+                        <td><span class="stock-code">300502.SZ</span></td>
+                        <td><span class="score-badge">9.2</span></td>
+                        <td class="rating-s">S</td>
+                        <td>字节/华为光模块，营收增速 221.70%</td>
+                        <td>ROE 17.92%, 资产负债率 31.99%, 现金流 0.73</td>
+                        <td>高增长可持续性</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><span class="stock-name">寒武纪</span></td>
+                        <td><span class="stock-code">688256.SH</span></td>
+                        <td><span class="score-badge">9.0</span></td>
+                        <td class="rating-s">S</td>
+                        <td>算力芯片，营收增速 2386%</td>
+                        <td>ROE 6.27%, 资产负债率 10.12%, 现金流 -0.02</td>
+                        <td>现金流为负，高研发</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><span class="stock-name">天孚通信</span></td>
+                        <td><span class="stock-code">300394.SZ</span></td>
+                        <td><span class="score-badge">8.8</span></td>
+                        <td class="rating-s">S</td>
+                        <td>光器件龙头，营收增速 63.63%</td>
+                        <td>ROE 11.84%, 资产负债率 16.45%, 现金流 0.92</td>
+                        <td>毛利率波动风险</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><span class="stock-name">中际旭创</span></td>
+                        <td><span class="stock-code">300308.SZ</span></td>
+                        <td><span class="score-badge">8.4</span></td>
+                        <td class="rating-s">S</td>
+                        <td>光模块全球龙头，营收增速 44.43%</td>
+                        <td>ROE 12.75%, 资产负债率 29.47%, 现金流 0.72</td>
+                        <td>非经常性损益影响</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><span class="stock-name">海光信息</span></td>
+                        <td><span class="stock-code">688041.SH</span></td>
+                        <td><span class="score-badge">7.8</span></td>
+                        <td class="rating-a">A</td>
+                        <td>国产 CPU/DCU，营收增速 54.65%</td>
+                        <td>ROE 3.53%, 资产负债率 24.12%, 现金流 0.79</td>
+                        <td>ROE 略低</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><span class="stock-name">润泽科技</span></td>
+                        <td><span class="stock-code">300442.SZ</span></td>
+                        <td><span class="score-badge">8.6</span></td>
+                        <td class="rating-s">S</td>
+                        <td>AIDC 龙头，字节/华为深度绑定</td>
+                        <td>ROE 38.72%, 资产负债率 62.53%, 现金流 0.59</td>
+                        <td>REITs 依赖</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><span class="stock-name">数据港</span></td>
+                        <td><span class="stock-code">603881.SH</span></td>
+                        <td><span class="score-badge">7.6</span></td>
+                        <td class="rating-a">A</td>
+                        <td>字节/阿里合作，经营现金流/净利润=6.58</td>
+                        <td>ROE 3.67%, 资产负债率 58.78%, 现金流 6.58</td>
+                        <td>ROE 略低</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><span class="stock-name">奥飞数据</span></td>
+                        <td><span class="stock-code">300738.SZ</span></td>
+                        <td><span class="score-badge">7.4</span></td>
+                        <td class="rating-a">A</td>
+                        <td>字节第三方 IDC，现金流 3.71</td>
+                        <td>ROE 4.21%, 资产负债率 75.83%, 现金流 3.71</td>
+                        <td>ROE 略低，高杠杆</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><span class="stock-name">润建股份</span></td>
+                        <td><span class="stock-code">002929.SZ</span></td>
+                        <td><span class="score-badge">7.2</span></td>
+                        <td class="rating-a">A</td>
+                        <td>华为算力合作，营收增速 10-17%</td>
+                        <td>营收增速 10-17%, 资产负债率 70.60%</td>
+                        <td>现金流为负，高杠杆</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="footer">
+        羿学交易 · 智囊团系统 | 数据来源：Wind 金融终端 | 生成时间：2026-03-26
+    </div>
+</body>
+</html>

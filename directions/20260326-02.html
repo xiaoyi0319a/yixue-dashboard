@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英伟达Vera Rubin 100%液冷→智算中心刚需 | 羿学交易智囊团</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-yellow: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #a371f7;
+            --accent-cyan: #39c5cf;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .header .score {
+            color: var(--accent-green);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .back-link {
+            position: absolute;
+            left: 24px;
+            top: 32px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .back-link:hover {
+            color: var(--accent-blue);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--accent-cyan);
+        }
+        
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .section-content strong {
+            color: var(--text-primary);
+        }
+        
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        
+        .stock-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stock-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        
+        .stock-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .rating-s {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        .rating-a {
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+        
+        .score-badge {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .stock-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .stock-code {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .stock-table {
+                font-size: 12px;
+            }
+            .stock-table th,
+            .stock-table td {
+                padding: 10px 8px;
+            }
+            .back-link {
+                position: relative;
+                left: 0;
+                top: 0;
+                display: block;
+                margin-bottom: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="../index.html" class="back-link">← 返回仪表盘</a>
+        <h1>🥈 英伟达Vera Rubin 100%液冷→智算中心刚需</h1>
+        <div class="score">方向评分：17分</div>
+    </div>
+    
+    <div class="container">
+        <!-- 核心逻辑 -->
+        <div class="section">
+            <div class="section-title">📌 核心逻辑</div>
+            <div class="section-content">
+                英伟达 GTC 2026 大会确认 Vera Rubin 采用 100% 液冷（45℃热水冷却）→ 单机柜功耗 120-150kW→ 风冷物理极限→ 液冷从选配转为强制标配 → 政策 PUE 红线倒逼
+            </div>
+        </div>
+        
+        <!-- 验证节点 -->
+        <div class="section">
+            <div class="section-title">✅ 验证节点</div>
+            <div class="section-content">
+                2026 下半年新建智算中心液冷渗透率确认（目标>50%）
+            </div>
+        </div>
+        
+        <!-- 风险因素 -->
+        <div class="section">
+            <div class="section-title">⚠️ 风险因素</div>
+            <div class="section-content">
+                若液冷技术路线切换慢于预期，市场反应滞后
+            </div>
+        </div>
+        
+        <!-- 方向标的 -->
+        <div class="section">
+            <div class="section-title">📊 该方向标的</div>
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>名称</th>
+                        <th>代码</th>
+                        <th>强度</th>
+                        <th>评级</th>
+                        <th>核心逻辑</th>
+                        <th>关键数据</th>
+                        <th>风险</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><span class="stock-name">英维克</span></td>
+                        <td><span class="stock-code">002837.SZ</span></td>
+                        <td><span class="score-badge">8.8</span></td>
+                        <td class="rating-s">S</td>
+                        <td>英伟达供应链，液冷龙头，营收增速 40.19%</td>
+                        <td>ROE 12.81%, 资产负债率 53.90%, 现金流 -0.77</td>
+                        <td>现金流为负，高增长容忍</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><span class="stock-name">高澜股份</span></td>
+                        <td><span class="stock-code">300499.SZ</span></td>
+                        <td><span class="score-badge">8.4</span></td>
+                        <td class="rating-s">S</td>
+                        <td>液冷技术，营收增速 62.52%，现金流 3.73</td>
+                        <td>ROE 2.50%, 资产负债率 34.34%, 现金流 3.73</td>
+                        <td>ROE 略低，营运效率偏低</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><span class="stock-name">申菱环境</span></td>
+                        <td><span class="stock-code">301018.SZ</span></td>
+                        <td><span class="score-badge">8.0</span></td>
+                        <td class="rating-s">S</td>
+                        <td>数据中心温控，净利润预计增长 77-112%</td>
+                        <td>ROE 5.79%, 资产负债率 54.52%, 现金流 -0.03</td>
+                        <td>现金流负，高增长容忍</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><span class="stock-name">曙光数创</span></td>
+                        <td><span class="stock-code">872808.BJ</span></td>
+                        <td><span class="score-badge">7.8</span></td>
+                        <td class="rating-a">A</td>
+                        <td>中科曙光子公司，浸没液冷增长 370%</td>
+                        <td>营收增速 74.29%, 资产负债率 56.97%</td>
+                        <td>ROE 亏损，高研发压力</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="footer">
+        羿学交易 · 智囊团系统 | 数据来源：Wind 金融终端 | 生成时间：2026-03-26
+    </div>
+</body>
+</html>
