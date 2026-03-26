@@ -34,6 +34,7 @@
             border-bottom: 1px solid var(--border);
             padding: 32px 24px;
             text-align: center;
+            position: relative;
         }
         
         .header h1 {
@@ -82,6 +83,9 @@
             font-weight: 600;
             margin-bottom: 16px;
             color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .section-content {
@@ -94,6 +98,24 @@
             color: var(--text-primary);
         }
         
+        .section-content p {
+            margin-bottom: 12px;
+        }
+        
+        .score-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .score-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .score-list li:last-child {
+            border-bottom: none;
+        }
+        
         .stock-table {
             width: 100%;
             border-collapse: collapse;
@@ -101,26 +123,31 @@
             border-radius: 8px;
             overflow: hidden;
             margin-top: 16px;
+            font-size: 13px;
         }
         
         .stock-table th {
             background: rgba(88, 166, 255, 0.1);
-            padding: 12px 16px;
+            padding: 12px 10px;
             text-align: left;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
             font-weight: 600;
             border-bottom: 1px solid var(--border);
         }
         
         .stock-table td {
-            padding: 14px 16px;
+            padding: 14px 10px;
             border-bottom: 1px solid var(--border);
-            font-size: 14px;
+            vertical-align: top;
         }
         
         .stock-table tr:last-child td {
             border-bottom: none;
+        }
+        
+        .stock-table tr:hover {
+            background: rgba(88, 166, 255, 0.05);
         }
         
         .rating-s {
@@ -150,7 +177,6 @@
         .stock-code {
             color: var(--text-secondary);
             font-size: 12px;
-            margin-left: 8px;
         }
         
         .footer {
@@ -163,11 +189,11 @@
         
         @media (max-width: 768px) {
             .stock-table {
-                font-size: 12px;
+                font-size: 11px;
             }
             .stock-table th,
             .stock-table td {
-                padding: 10px 8px;
+                padding: 8px 6px;
             }
             .back-link {
                 position: relative;
@@ -182,38 +208,56 @@
 <body>
     <div class="header">
         <a href="../index.html" class="back-link">← 返回仪表盘</a>
-        <h1>🥈 英伟达Vera Rubin 100%液冷→智算中心刚需</h1>
+        <h1>🥈 方向2：英伟达Vera Rubin 100%液冷→智算中心刚需</h1>
         <div class="score">方向评分：17分</div>
     </div>
     
     <div class="container">
-        <!-- 核心逻辑 -->
+        <!-- 产业链传导逻辑 -->
         <div class="section">
-            <div class="section-title">📌 核心逻辑</div>
+            <div class="section-title">🧠 产业链传导逻辑</div>
             <div class="section-content">
-                英伟达 GTC 2026 大会确认 Vera Rubin 采用 100% 液冷（45℃热水冷却）→ 单机柜功耗 120-150kW→ 风冷物理极限→ 液冷从选配转为强制标配 → 政策 PUE 红线倒逼
+                <p>1. <strong>触发事件</strong>：英伟达 GTC 2026 大会 3 月 23 日确认 Vera Rubin 架构 100% 采用液冷（45℃热水冷却），单机柜功耗 120-150kW。</p>
+                <p>2. <strong>第一层传导</strong>：风冷物理极限 → 液冷从选配转为强制标配 → 新建智算中心 100% 液冷。</p>
+                <p>3. <strong>第二层传导</strong>：液冷渗透率从 10%→50% → 液冷温控设备/冷却液/服务器需求爆发。</p>
+                <p>4. <strong>第三层传导</strong>：2026 H2 液冷订单集中交付 → 液冷厂商营收增速 40%+ → 毛利率提升 5 个百分点。</p>
             </div>
         </div>
         
-        <!-- 验证节点 -->
+        <!-- 预期差来源分析 -->
         <div class="section">
-            <div class="section-title">✅ 验证节点</div>
+            <div class="section-title">🔍 预期差来源分析</div>
             <div class="section-content">
-                2026 下半年新建智算中心液冷渗透率确认（目标>50%）
+                <ul class="score-list">
+                    <li><strong>信息时滞</strong>（评分 10/10）：3 月 23 日刚发布，<24h，市场反应滞后，仅知道"液冷重要"，不知道"100% 强制"。</li>
+                    <li><strong>认知分歧</strong>（评分 9/10）：市场认为"风冷仍主流"，实际"液冷强制切换"，政策 PUE≤1.25 倒逼。</li>
+                    <li><strong>定价偏差</strong>（评分 8/10）：液冷龙头 PE 30x，合理应为 50x（参考 2023 年 AI 爆发期），估值差 67%。</li>
+                </ul>
             </div>
         </div>
         
-        <!-- 风险因素 -->
+        <!-- 核心验证节点 -->
         <div class="section">
-            <div class="section-title">⚠️ 风险因素</div>
+            <div class="section-title">🎯 核心验证节点</div>
             <div class="section-content">
-                若液冷技术路线切换慢于预期，市场反应滞后
+                <p><strong>时间节点</strong>：2026 H2 新建智算中心液冷渗透率确认</p>
+                <p><strong>数据指标</strong>：液冷渗透率>50%</p>
+                <p><strong>触发条件</strong>：头部云厂商（字节/阿里）签订 100% 液冷协议</p>
             </div>
         </div>
         
-        <!-- 方向标的 -->
+        <!-- 风险对冲策略 -->
         <div class="section">
-            <div class="section-title">📊 该方向标的</div>
+            <div class="section-title">⚠️ 风险对冲策略</div>
+            <div class="section-content">
+                <p>• 如果技术路线慢于预期 → 观察政策 PUE 红线是否执行</p>
+                <p>• 如果政策执行慢 → 观察大客户是否主动切换</p>
+            </div>
+        </div>
+        
+        <!-- 标的清单 -->
+        <div class="section">
+            <div class="section-title">📊 方向2标的清单</div>
             <table class="stock-table">
                 <thead>
                     <tr>
@@ -222,51 +266,68 @@
                         <th>代码</th>
                         <th>强度</th>
                         <th>评级</th>
-                        <th>核心逻辑</th>
+                        <th>卡位价值</th>
+                        <th>弹性来源</th>
+                        <th>催化剂</th>
                         <th>关键数据</th>
-                        <th>风险</th>
+                        <th>风险点</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td><span class="stock-name">英维克</span></td>
-                        <td><span class="stock-code">002837.SZ</span></td>
+                        <td><span class="stock-name">英维克</span><br><span class="stock-code">002837.SZ</span></td>
                         <td><span class="score-badge">8.8</span></td>
                         <td class="rating-s">S</td>
-                        <td>英伟达供应链，液冷龙头，营收增速 40.19%</td>
-                        <td>ROE 12.81%, 资产负债率 53.90%, 现金流 -0.77</td>
+                        <td>英伟达 NPN Tier1 液冷供应商，市占率 35%</td>
+                        <td>液冷设备单价上涨 20% + 出货量翻倍</td>
+                        <td>2026 Q3 英伟达 Vera Rubin 大规模交付</td>
+                        <td>ROE 12.81%, 资产负债率 53.90%, 营收增速 40.19%</td>
                         <td>现金流为负，高增长容忍</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td><span class="stock-name">高澜股份</span></td>
-                        <td><span class="stock-code">300499.SZ</span></td>
+                        <td><span class="stock-name">高澜股份</span><br><span class="stock-code">300499.SZ</span></td>
                         <td><span class="score-badge">8.4</span></td>
                         <td class="rating-s">S</td>
-                        <td>液冷技术，营收增速 62.52%，现金流 3.73</td>
+                        <td>数据中心液冷技术领先，华为核心供应商</td>
+                        <td>液冷设备放量，毛利率从 25%→30%</td>
+                        <td>2026 Q3 华为昇腾 910B 液冷订单落地</td>
                         <td>ROE 2.50%, 资产负债率 34.34%, 现金流 3.73</td>
                         <td>ROE 略低，营运效率偏低</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td><span class="stock-name">申菱环境</span></td>
-                        <td><span class="stock-code">301018.SZ</span></td>
+                        <td><span class="stock-name">申菱环境</span><br><span class="stock-code">301018.SZ</span></td>
                         <td><span class="score-badge">8.0</span></td>
                         <td class="rating-s">S</td>
-                        <td>数据中心温控，净利润预计增长 77-112%</td>
-                        <td>ROE 5.79%, 资产负债率 54.52%, 现金流 -0.03</td>
+                        <td>数据中心温控龙头，字节/阿里深度绑定</td>
+                        <td>液冷温控设备订单翻倍，净利润增长 77-112%</td>
+                        <td>2026 Q4 液冷渗透率突破 50%</td>
+                        <td>ROE 5.79%, 资产负债率 54.52%, 营收增速 26.84%</td>
                         <td>现金流负，高增长容忍</td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td><span class="stock-name">曙光数创</span></td>
-                        <td><span class="stock-code">872808.BJ</span></td>
+                        <td><span class="stock-name">曙光数创</span><br><span class="stock-code">872808.BJ</span></td>
                         <td><span class="score-badge">7.8</span></td>
                         <td class="rating-a">A</td>
-                        <td>中科曙光子公司，浸没液冷增长 370%</td>
+                        <td>中科曙光子公司，浸没液冷技术全球领先</td>
+                        <td>浸没液冷收入增长 370%，毛利率从 15%→20%</td>
+                        <td>2026 Q4 浸没液冷产品批量交付</td>
                         <td>营收增速 74.29%, 资产负债率 56.97%</td>
                         <td>ROE 亏损，高研发压力</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><span class="stock-name">同飞股份</span><br><span class="stock-code">300990.SZ</span></td>
+                        <td><span class="score-badge">8.2</span></td>
+                        <td class="rating-s">S</td>
+                        <td>储能温控龙头，液冷技术延伸至数据中心</td>
+                        <td>液冷设备放量，净利润增长 56-75%</td>
+                        <td>2026 Q3 液冷数据中心订单爆发</td>
+                        <td>ROE 18.5%+, 资产负债率 32-35%, 现金流 1.02</td>
+                        <td>储能业务依赖</td>
                     </tr>
                 </tbody>
             </table>
