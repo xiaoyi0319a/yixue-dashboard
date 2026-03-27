@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <title>羿学交易 · 智囊团仪表盘</title>
+    <title>羿学交易 · 智囊团仪表盘 | 2026-03-27</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -98,93 +98,119 @@
             color: var(--accent-purple);
         }
         
-        .qimen-content {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-            line-height: 2;
+        .qimen-time {
             color: var(--text-secondary);
+            font-size: 12px;
+            margin-left: auto;
         }
         
-        .qimen-content .label {
+        .qimen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        .qimen-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .qimen-card h4 {
             color: var(--accent-cyan);
-            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
         }
         
-        .qimen-content .highlight {
+        .qimen-card .content {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .qimen-card .highlight {
+            color: var(--accent-green);
+            font-weight: 500;
+        }
+        
+        .qimen-card .warning {
             color: var(--accent-yellow);
         }
         
-        .qimen-content .good {
-            color: var(--accent-green);
-        }
-        
-        .qimen-content .bad {
+        .qimen-card .danger {
             color: var(--accent-red);
         }
         
-        /* 预期差清单表格 */
-        .stock-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* 方向卡片 */
+        .direction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .direction-card {
             background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
         }
         
-        .stock-table th {
+        .direction-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        
+        .direction-card .score {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .direction-card .score.s { color: var(--accent-green); }
+        .direction-card .score.a { color: var(--accent-yellow); }
+        
+        .direction-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-right: 60px;
+        }
+        
+        .direction-card .logic {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        
+        .direction-card .stocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .direction-card .stock-tag {
             background: var(--bg-secondary);
-            padding: 14px 16px;
-            text-align: left;
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .stock-table td {
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-        }
-        
-        .stock-table tr:hover {
-            background: rgba(88, 166, 255, 0.05);
-        }
-        
-        .rating-s {
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-        
-        .rating-a {
-            color: var(--accent-yellow);
-            font-weight: 600;
-        }
-        
-        .score {
-            background: rgba(88, 166, 255, 0.15);
-            color: var(--accent-blue);
             padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        .stock-name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .stock-code {
-            color: var(--text-secondary);
+            border-radius: 4px;
             font-size: 12px;
-            margin-left: 8px;
+            color: var(--text-secondary);
+        }
+        
+        .direction-card .stock-tag strong {
+            color: var(--text-primary);
         }
         
         /* 研报卡片 */
         .report-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }
         
@@ -195,6 +221,9 @@
             padding: 20px;
             cursor: pointer;
             transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
         .report-card:hover {
@@ -202,472 +231,377 @@
             transform: translateY(-2px);
         }
         
-        .report-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .report-card .rating {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
             margin-bottom: 12px;
         }
         
-        .report-rating {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .report-rating.s {
+        .report-card .rating.s {
             background: rgba(63, 185, 80, 0.15);
             color: var(--accent-green);
         }
         
-        .report-rating.a {
+        .report-card .rating.a {
             background: rgba(210, 153, 34, 0.15);
             color: var(--accent-yellow);
         }
         
-        .report-name {
-            font-size: 16px;
-            font-weight: 600;
-            flex: 1;
+        .report-card h4 {
+            font-size: 15px;
+            margin-bottom: 8px;
         }
         
-        .report-price {
-            font-size: 14px;
+        .report-card .code {
             color: var(--text-secondary);
-        }
-        
-        .report-price strong {
-            color: var(--text-primary);
-            font-size: 18px;
-        }
-        
-        .report-logic {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.7;
+            font-size: 13px;
             margin-bottom: 12px;
         }
         
-        .report-verify {
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-            font-size: 13px;
-            color: var(--text-secondary);
+        .report-card .score {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
         }
         
-        .report-verify strong {
-            color: var(--accent-cyan);
+        .report-card .logic {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
         
         /* 新闻区域 */
         .news-list {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
         
         .news-item {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
         }
         
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        
-        .news-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .news-tag {
-            background: rgba(243, 149, 72, 0.15);
-            color: #f39548;
+        .news-item .tag {
+            display: inline-block;
+            background: var(--bg-secondary);
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 11px;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
         }
         
-        .news-content {
-            color: var(--text-secondary);
+        .news-item h4 {
             font-size: 14px;
-            line-height: 1.7;
+            margin-bottom: 8px;
         }
         
+        .news-item p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .news-item .stocks {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--accent-blue);
+        }
+        
+        /* 页脚 */
         .footer {
             text-align: center;
-            padding: 24px;
-            border-top: 1px solid var(--border);
+            padding: 32px;
             color: var(--text-secondary);
             font-size: 13px;
-        }
-        
-        @media (max-width: 768px) {
-            .stock-table {
-                font-size: 12px;
-            }
-            .stock-table th,
-            .stock-table td {
-                padding: 10px 8px;
-            }
-            .report-grid {
-                grid-template-columns: 1fr;
-            }
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>☯️ 羿学交易 · 智囊团仪表盘</h1>
-        <div class="date">2026年3月26日 09:30 更新</div>
+        <h1>🔮 羿学交易 · 智囊团仪表盘</h1>
+        <div class="date">2026年3月27日 星期五</div>
     </div>
     
     <div class="container">
-        <!-- 奇门君今日预测 -->
-        <div class="qimen-box">
-            <div class="qimen-header">
-                <span style="font-size: 24px;">🔮</span>
-                <span class="qimen-title">奇门君 · 今日大盘运势 | 2026-03-26</span>
+        <!-- 第一层：奇门预测 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🔮</span>
+                奇门君 · 今日预测
             </div>
-            <div class="qimen-content">
-                <div><span class="label">[起盘]</span> 春分中元 · 阳遁9局 | 庚子日·己巳时 | 旬首甲子戊</div>
-                <div><span class="label">[判断]</span> 日干艮宫值符护佑但杜门闭塞，时干离宫天芮螣蛇，走势病态缠绵；<span class="bad">开门落震三宫逢门迫+天蓬+白虎，最大凶象</span>。生门乾宫朱雀入狱，求财受阻。整体弱势震荡，力度偏弱。</div>
-                <div><span class="label">[时辰]</span> <span class="highlight">弱反弹：10:00-10:30</span> 可能短暂回升 | <span class="bad">承压：10:30后</span> 回落概率大 | <span class="bad">策略：宜守不宜攻</span>，防御为主，见反弹减仓</div>
-                <div><span class="label">[结论]</span> <span class="bad">小跌或平盘收阴</span>；总仓位建议降至四成以下，观望为宜。</div>
+            
+            <div class="qimen-box">
+                <div class="qimen-header">
+                    <span class="qimen-title">📅 下午盘预测 (13:00-15:00)</span>
+                    <span class="qimen-time">起盘：2026-03-27 12:31 | 阳遁3局 | 甲午辛旬</span>
+                </div>
+                
+                <div class="qimen-grid">
+                    <div class="qimen-card">
+                        <h4>🎯 大势判断</h4>
+                        <div class="content">
+                            日干辛落兑七宫绝地，卯月金囚，日主力弱。<span class="highlight">值符天冲临震宫旺地</span>，下午有冲高动能但难持续。<span class="warning">辛+乙白虎猖狂格局</span>，主震荡不安，多空争夺激烈。
+                        </div>
+                    </div>
+                    
+                    <div class="qimen-card">
+                        <h4>📈 走势预判</h4>
+                        <div class="content">
+                            <span class="highlight">13:00-13:30</span>：高开或平开冲高<br>
+                            <span class="warning">13:30-14:30</span>：冲高回落，震荡整理<br>
+                            <span class="highlight">14:30-15:00</span>：尾盘小幅回升或维持震荡<br>
+                            <strong>收盘：沪指小阴或小阳，±0.3%以内</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="qimen-card">
+                        <h4>🔥 板块方向</h4>
+                        <div class="content">
+                            <span class="highlight">强势</span>：ASIC/芯片设计（震宫天冲主技术突破）<br>
+                            <span class="warning">分化</span>：存储/HBM（辛金绝地，资金分流）<br>
+                            <span class="danger">弱势</span>：新能源/锂电（辛金克木受制）
+                        </div>
+                    </div>
+                    
+                    <div class="qimen-card">
+                        <h4>⏰ 关键时间点</h4>
+                        <div class="content">
+                            <span class="warning">13:15-13:30</span>：观察冲高力度，无量则减仓<br>
+                            <span class="highlight">14:00-14:15</span>：日内低点区域，观察承接<br>
+                            <span class="highlight">14:45-15:00</span>：尾盘博弈，值符发力有限
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- 3大方向 -->
+        <!-- 第二层：三大方向 -->
         <div class="section">
             <div class="section-title">
                 <span class="icon">🎯</span>
-                3大方向（点击卡片查看详情）
+                今日三大方向
             </div>
-            <div class="report-grid">
-                <div class="report-card" onclick="window.open('directions/20260326-01.html', '_blank')" style="border-left: 4px solid var(--accent-yellow); cursor: pointer;">
-                    <div class="report-header">
-                        <span style="font-size: 20px;">🥇</span>
-                        <span class="report-name">Token调用量激增→算力租赁涨价</span>
-                        <span class="score">18分</span>
+            
+            <div class="direction-grid">
+                <div class="direction-card" onclick="location.href='directions/20260327-01.html'">
+                    <div class="score s">8.4</div>
+                    <h3>🧠 ASIC设计服务</h3>
+                    <div class="logic">
+                        DeepSeek EP+DP架构横空出世，2026年为ASIC行业放量元年。芯原股份2025年新签订单59.60亿元（+103%），AI算力订单占比超73%。市场仍按传统IP授权业务估值，未充分反映ASIC定制业务爆发。
                     </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>国家数据局透露日均Token调用量超140万亿（3月新增40%）→算力租赁市场进入涨价周期→IDC/AIDC厂商盈利弹性释放。<br>
-                        <strong>验证节点：</strong>Q2算力租赁价格实际涨幅确认<br>
-                        <strong>关联标的：</strong>润泽科技、科华数据、数据港、奥飞数据
-                    </div>
-                </div>
-                
-                <div class="report-card" onclick="window.open('directions/20260326-02.html', '_blank')" style="border-left: 4px solid var(--accent-green); cursor: pointer;">
-                    <div class="report-header">
-                        <span style="font-size: 20px;">🥈</span>
-                        <span class="report-name">英伟达Vera Rubin 100%液冷</span>
-                        <span class="score">17分</span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>英伟达GTC 2026确认Vera Rubin采用100%液冷→单机柜功耗120-150kW→风冷物理极限→液冷从选配转强制标配→PUE政策红线倒逼。<br>
-                        <strong>验证节点：</strong>2026下半年新建智算中心液冷渗透率>50%<br>
-                        <strong>关联标的：</strong>英维克、高澜股份、申菱环境、曙光数创
+                    <div class="stocks">
+                        <span class="stock-tag"><strong>芯原股份</strong> 688521</span>
+                        <span class="stock-tag"><strong>翱捷科技</strong> 688220</span>
+                        <span class="stock-tag"><strong>灿芯股份</strong> 688691</span>
+                        <span class="stock-tag">+2只</span>
                     </div>
                 </div>
                 
-                <div class="report-card" onclick="window.open('directions/20260326-03.html', '_blank')" style="border-left: 4px solid var(--accent-blue); cursor: pointer;">
-                    <div class="report-header">
-                        <span style="font-size: 20px;">🥉</span>
-                        <span class="report-name">字节/华为算力绑定</span>
-                        <span class="score">16分</span>
+                <div class="direction-card" onclick="location.href='directions/20260327-02.html'">
+                    <div class="score a">7.4</div>
+                    <h3>💾 HBM/存储芯片</h3>
+                    <div class="logic">
+                        SEMI中国总裁表态2026年HBM市场规模增长58%至546亿美元，产能缺口50-60%。存储超级牛市来临，DDR4价格涨幅达1800%。市场关注模组厂，但HBM封测（深科技）和代理（香农芯创）环节预期差更大。
                     </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>润泽科技布局7个AIDC集群（61栋/32万架机柜）+已交付8.2万架→深度绑定字节/华为/阿里/腾讯→算力租赁涨价最大受益者。<br>
-                        <strong>验证节点：</strong>Q2机柜上架率数据披露<br>
-                        <strong>关联标的：</strong>新易盛、寒武纪、天孚通信、中际旭创
+                    <div class="stocks">
+                        <span class="stock-tag"><strong>深科技</strong> 000021</span>
+                        <span class="stock-tag"><strong>香农芯创</strong> 300475</span>
+                        <span class="stock-tag"><strong>德明利</strong> 001309</span>
+                        <span class="stock-tag">+2只</span>
+                    </div>
+                </div>
+                
+                <div class="direction-card" onclick="location.href='directions/20260327-03.html'">
+                    <div class="score s">8.4</div>
+                    <h3>🔬 磷化铟/光芯片上游</h3>
+                    <div class="logic">
+                        OFC 2025大会引发全球关注，Lumentum/Coherent宣布磷化铟产能"超级加倍"。美股AXT大涨15%，A股滞后反应。市场关注光模块，但上游磷化铟材料才是硬瓶颈。云南锗业是国内唯一量产磷化铟衬底的A股公司。
+                    </div>
+                    <div class="stocks">
+                        <span class="stock-tag"><strong>云南锗业</strong> 002428</span>
+                        <span class="stock-tag"><strong>有研新材</strong> 600206</span>
+                        <span class="stock-tag"><strong>长光华芯</strong> 688048</span>
+                        <span class="stock-tag">+2只</span>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- 深度研报 -->
+        <!-- 第三层：深度研报 -->
         <div class="section">
             <div class="section-title">
-                <span class="icon">📋</span>
-                深度研报精选
-                <span style="margin-left: auto; font-size: 13px; color: var(--text-secondary);">已完成15只标的</span>
+                <span class="icon">📊</span>
+                深度研报
             </div>
+            
             <div class="report-grid">
-                <div class="report-card" onclick="window.open('reports/20260326-300502-新易盛.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">新易盛 (300502)</span>
-                        <span class="report-price">强度 <strong>9.2</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>字节/华为光模块核心供应商，营收增速221.70%，ROE 55.37%<br>
-                        <strong>关键数据：</strong>资产负债率31.99%，现金流73.29%，毛利率47.25%
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>Q2光模块出货量 | 字节/华为订单确认
-                    </div>
-                </div>
+                <a href="reports/20260327-688521-芯原股份.html" class="report-card">
+                    <span class="rating s">S级</span>
+                    <h4>芯原股份</h4>
+                    <div class="code">688521.SH</div>
+                    <div class="score">8.4分</div>
+                    <div class="logic">国内IP授权龙头，2025年新签订单59.6亿（+103%），AI算力订单占比超73%，2026年预计扭亏。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-688256-寒武纪.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">寒武纪 (688256)</span>
-                        <span class="report-price">强度 <strong>9.0</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>算力芯片龙头，营收增速2386%，国产AI芯片核心标的<br>
-                        <strong>关键数据：</strong>ROE 6.27%，资产负债率10.12%，高研发期现金流为负
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>Q2芯片交付节奏 | 互联网大厂订单
-                    </div>
-                </div>
+                <a href="reports/20260327-688220-翱捷科技.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>翱捷科技</h4>
+                    <div class="code">688220.SH</div>
+                    <div class="score">7.8分</div>
+                    <div class="logic">Cat.1bis市占率50%，ASIC在手订单充足，2025年亏损收窄42%，预计2026-2027年扭亏。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-300442-润泽科技.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">润泽科技 (300442)</span>
-                        <span class="report-price">强度 <strong>8.6</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>AIDC龙头，字节/华为深度绑定，REITs模式激活资产价值<br>
-                        <strong>关键数据：</strong>ROE 38.72%，7个AIDC集群，首发REITs募集45亿
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>REITs扩募方案 | 佛山数据中心盈利转正
-                    </div>
-                </div>
+                <a href="reports/20260327-688691-灿芯股份.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>灿芯股份</h4>
+                    <div class="code">688691.SH</div>
+                    <div class="score">7.2分</div>
+                    <div class="logic">中芯国际N+1/N+2制程核心配套商，阿里/字节AI芯片代工链核心，在手订单9亿元。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-002837-英维克.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">英维克 (002837)</span>
-                        <span class="report-price">强度 <strong>8.8</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>英伟达供应链，液冷龙头，Vera Rubin 100%液冷直接受益<br>
-                        <strong>关键数据：</strong>营收增速40.19%，ROE 12.81%，单机柜功耗120-150kW催生刚需
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>2026下半年液冷渗透率>50% | 英伟达订单确认
-                    </div>
-                </div>
+                <a href="reports/20260327-688262-国芯科技.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>国芯科技</h4>
+                    <div class="code">688262.SH</div>
+                    <div class="score">7.0分</div>
+                    <div class="logic">国产嵌入式CPU龙头，RISC-V技术领先，比亚迪/奇瑞/吉利供应商，车规级芯片放量。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-300308-中际旭创.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">中际旭创 (300308)</span>
-                        <span class="report-price">强度 <strong>8.4</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>光模块全球龙头，营收增速60.25%，净利润108%<br>
-                        <strong>关键数据：</strong>ROE 12.75%，资产负债率29.47%，英伟达/AWS核心供应商
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>1.6T营收占比 | 美国工厂落地进展
-                    </div>
-                </div>
+                <a href="reports/20260327-300613-富瀚微.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>富瀚微</h4>
+                    <div class="code">300613.SZ</div>
+                    <div class="score">6.5分</div>
+                    <div class="logic">视频编解码SoC芯片龙头，智慧物联+智慧车行双轮驱动，车载芯片（DVR/ISP）放量。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-300394-天孚通信.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">天孚通信 (300394)</span>
-                        <span class="report-price">强度 <strong>9.5</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>英伟达CPO核心供应商，1.6T光引擎锁定订单75亿<br>
-                        <strong>关键数据：</strong>毛利率51.87%，ROE 33.09%，现金流91.71%极佳
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>1.6T出货量 | SuperX订单贡献
-                    </div>
-                </div>
+                <a href="reports/20260327-000021-深科技.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>深科技</h4>
+                    <div class="code">000021.SZ</div>
+                    <div class="score">7.8分</div>
+                    <div class="logic">国内唯一HBM封测能力，良率98%，2025年Q1净利润同比+46.91%，长鑫/长存核心伙伴。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-301018-申菱环境.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">申菱环境 (301018)</span>
-                        <span class="report-price">强度 <strong>8.0</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>华为液冷核心供应商，液冷产品营收翻3倍<br>
-                        <strong>关键数据：</strong>营收增速28.95%，净利润增速35.95%，PE仅16.6倍
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>液冷基地满产数据 | 海外订单占比
-                    </div>
-                </div>
+                <a href="reports/20260327-300475-香农芯创.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>香农芯创</h4>
+                    <div class="code">300475.SZ</div>
+                    <div class="score">7.4分</div>
+                    <div class="logic">SK海力士HBM国内独家代理，2025年Q1营收同比+243%，存货增值确定性强。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-872808-曙光数创.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating a">A级</span>
-                        <span class="report-name">曙光数创 (872808)</span>
-                        <span class="report-price">强度 <strong>7.8</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>浸没式液冷绝对龙头，中科院背景，市占率61.3%<br>
-                        <strong>关键数据：</strong>营收增速74.29%，浸没液冷收入+370.58%，PUE<1.08
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>北交所上市进展 | 存货去化情况
-                    </div>
-                </div>
+                <a href="reports/20260327-001309-德明利.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>德明利</h4>
+                    <div class="code">001309.SZ</div>
+                    <div class="score">7.2分</div>
+                    <div class="logic">存储模组小盘弹性标的，企业级SSD突破（2024年同比+666%），涨价周期毛利率修复。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-688041-海光信息.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">海光信息 (688041)</span>
-                        <span class="report-price">强度 <strong>9.1</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>国产CPU+DCU双龙头，营收增速56.91%，毛利率60.04%<br>
-                        <strong>关键数据：</strong>ROE 11.5%，现金流>120%，信创核心供应商
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>海光8000系列量产 | 央企订单占比
-                    </div>
-                </div>
+                <a href="reports/20260327-688008-澜起科技.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>澜起科技</h4>
+                    <div class="code">688008.SH</div>
+                    <div class="score">7.0分</div>
+                    <div class="logic">DDR5接口芯片（RCD/DB）寡头，全球市占率领先，AI服务器刚需，2025年Q1净利润+135%。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-002335-科华数据.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">科华数据 (002335)</span>
-                        <span class="report-price">强度 <strong>8.2</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>数据中心+储能双引擎，华为/宁德时代供应链<br>
-                        <strong>关键数据：</strong>ROE 15.2%，现金流112%，储能PCS出货量国内第一
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>马来西亚基地产能 | 智算收入占比
-                    </div>
-                </div>
+                <a href="reports/20260327-301308-江波龙.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>江波龙</h4>
+                    <div class="code">301308.SZ</div>
+                    <div class="score">6.5分</div>
+                    <div class="logic">企业级存储龙头，2024年企业存储业务同比+666%，Lexar品牌全球知名，已部分定价。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-300738-奥飞数据.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating a">A级</span>
-                        <span class="report-name">奥飞数据 (300738)</span>
-                        <span class="report-price">强度 <strong>7.5</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>多元化客户结构，定增储备中，现金流371%顶级<br>
-                        <strong>关键数据：</strong>2025Q3净利润+37.29%，ROE 4.21%，光伏并网283MW
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>定增落地 | 怀来数据中心投产
-                    </div>
-                </div>
+                <a href="reports/20260327-002428-云南锗业.html" class="report-card">
+                    <span class="rating s">S级</span>
+                    <h4>云南锗业</h4>
+                    <div class="code">002428.SZ</div>
+                    <div class="score">8.4分</div>
+                    <div class="logic">国内唯一量产磷化铟衬底A股公司，市占80%，2025年Q1净利润同比+188.73%扭亏为盈。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-603881-数据港.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating a">A级</span>
-                        <span class="report-name">数据港 (603881)</span>
-                        <span class="report-price">强度 <strong>7.6</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>阿里巴巴深度绑定，绿色算力龙头，全国35座数据中心<br>
-                        <strong>关键数据：</strong>PUE最低1.09，绿电占比>80%，ROE 3.67%
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>REITs发行计划 | 阿里订单续约
-                    </div>
-                </div>
+                <a href="reports/20260327-600206-有研新材.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>有研新材</h4>
+                    <div class="code">600206.SH</div>
+                    <div class="score">7.8分</div>
+                    <div class="logic">央企背景，6英寸磷化铟衬底良率60%，与中际旭创合作推进国产替代，成本优势显著。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-300017-网宿科技.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating a">A级</span>
-                        <span class="report-name">网宿科技 (300017)</span>
-                        <span class="report-price">强度 <strong>7.8</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>CDN龙头转型边缘计算+安全双引擎，海外云厂商涨价受益<br>
-                        <strong>关键数据：</strong>安全业务毛利率78.90%，全球2800+节点，现金流>150%
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>安全业务占比 | 迪拜子公司满产
-                    </div>
-                </div>
+                <a href="reports/20260327-688048-长光华芯.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>长光华芯</h4>
+                    <div class="code">688048.SH</div>
+                    <div class="score">7.6分</div>
+                    <div class="logic">100G EML年产能500万颗，与中际旭创签3年6亿元订单，2025年H1扭亏。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-300499-高澜股份.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating a">A级</span>
-                        <span class="report-name">高澜股份 (300499)</span>
-                        <span class="report-price">强度 <strong>8.4</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>液冷技术，扭亏为盈，现金流3.73倍<br>
-                        <strong>关键数据：</strong>营收增速61.75%，净利润3010万元，ROE 3.92%
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>液冷订单确认 | 4月Q1财报
-                    </div>
-                </div>
+                <a href="reports/20260327-002281-光迅科技.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>光迅科技</h4>
+                    <div class="code">002281.SZ</div>
+                    <div class="score">7.2分</div>
+                    <div class="logic">唯一覆盖"光芯片-器件-模块"全产业链，IDM产线2025年投产，全球光器件TOP5。</div>
+                </a>
                 
-                <div class="report-card" onclick="window.open('reports/20260326-300990-同飞股份.html', '_blank')" style="cursor: pointer;">
-                    <div class="report-header">
-                        <span class="report-rating s">S级</span>
-                        <span class="report-name">同飞股份 (300990)</span>
-                        <span class="report-price">强度 <strong>8.2</strong></span>
-                    </div>
-                    <div class="report-logic">
-                        <strong>核心逻辑：</strong>储能温控龙头，液冷技术延伸至数据中心，净利润增长56-75%<br>
-                        <strong>关键数据：</strong>ROE 18.5%+，资产负债率32-35%，现金流1.02
-                    </div>
-                    <div class="report-verify">
-                        <strong>验证节点：</strong>2026 Q3液冷数据中心订单 | 储能温控业务增长
-                    </div>
-                </div>
+                <a href="reports/20260327-688498-源杰科技.html" class="report-card">
+                    <span class="rating a">A级</span>
+                    <h4>源杰科技</h4>
+                    <div class="code">688498.SH</div>
+                    <div class="score">6.8分</div>
+                    <div class="logic">磷化铟激光器芯片IDM龙头，50G EML通过英伟达认证（国内首家），毛利率60%+。</div>
+                </a>
             </div>
         </div>
         
-        <!-- 今日关键新闻 -->
+        <!-- 第四层：今日关键新闻 -->
         <div class="section">
             <div class="section-title">
                 <span class="icon">📰</span>
                 今日关键新闻
             </div>
+            
             <div class="news-list">
                 <div class="news-item">
-                    <div class="news-title">
-                        <span class="news-tag">算力租赁</span>
-                        日均Token调用量超140万亿，算力租赁进入涨价周期
-                    </div>
-                    <div class="news-content">
-                        国家数据局局长刘烈宏透露，日均Token调用量超140万亿（3月新增40%），算力租赁市场进入涨价周期，IDC/AIDC厂商盈利弹性释放。
-                        <strong>关联标的：</strong>润泽科技、科华数据、数据港、奥飞数据
-                    </div>
+                    <span class="tag">ASIC</span>
+                    <h4>申万宏源首发：2026年为ASIC行业放量元年</h4>
+                    <p>申万宏源3月27日研报指出，DeepSeek EP+DP架构大幅降低推理成本30-50%，推动云厂商自研AI芯片需求激增。东吴证券首推芯原股份，目标价看至...</p>
+                    <div class="stocks">关联标的：芯原股份、灿芯股份、翱捷科技</div>
                 </div>
+                
                 <div class="news-item">
-                    <div class="news-title">
-                        <span class="news-tag">液冷技术</span>
-                        英伟达GTC确认Vera Rubin 100%液冷，单机柜功耗120-150kW
-                    </div>
-                    <div class="news-content">
-                        英伟达GTC 2026大会确认Vera Rubin采用100%液冷（45℃热水冷却），单机柜功耗120-150kW突破风冷物理极限，液冷从选配转为强制标配。
-                        <strong>关联标的：</strong>英维克、高澜股份、申菱环境、曙光数创
-                    </div>
+                    <span class="tag">HBM</span>
+                    <h4>SEMI中国：2026年HBM市场规模增长58%，产能缺口50-60%</h4>
+                    <p>SEMI中国总裁3月26日表态，2026年HBM市场规模将达546亿美元。SK海力士称"2026年所有客户需求都无法完全满足"，存储超级牛市来临。</p>
+                    <div class="stocks">关联标的：深科技、香农芯创、德明利</div>
                 </div>
+                
                 <div class="news-item">
-                    <div class="news-title">
-                        <span class="news-tag">字节华为</span>
-                        润泽科技AIDC龙头订单确认，深度绑定字节/华为
-                    </div>
-                    <div class="news-content">
-                        润泽科技布局7个AIDC集群（61栋/32万架机柜），已交付8.2万架，深度绑定字节/华为/阿里/腾讯，算力租赁涨价最大受益者。
-                        <strong>关联标的：</strong>润泽科技、新易盛、寒武纪、天孚通信
-                    </div>
+                    <span class="tag">光芯片</span>
+                    <h4>OFC 2025：Lumentum/Coherent宣布磷化铟产能"超级加倍"</h4>
+                    <p>OFC 2025大会在美国召开，Lumentum宣布EML产能2025年底增长超50%，Coherent宣布2025-2026年磷化铟产能超级加倍。美股AXT大涨15%。</p>
+                    <div class="stocks">关联标的：云南锗业、有研新材、长光华芯</div>
                 </div>
             </div>
         </div>
     </div>
     
     <div class="footer">
-        羿学交易 · 智囊团系统 | 数据来源：Wind 金融终端 | 生成时间：2026-03-26 09:30
+        <p>🔮 羿学交易智囊团 | 数据截止日期：2026-03-27</p>
+        <p style="margin-top: 8px; font-size: 12px;">奇门预测 + AI情报 + 智囊团验证</p>
     </div>
 </body>
 </html>

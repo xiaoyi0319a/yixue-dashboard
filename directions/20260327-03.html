@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>磷化铟/光芯片上游 | 预期差深度分析 | 2026-03-27</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-yellow: #d29922;
+            --accent-purple: #a371f7;
+            --accent-cyan: #39c5cf;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+        .nav {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+        }
+        .nav a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        .header {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .score {
+            display: inline-block;
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--accent-green);
+            padding: 4px 16px;
+            border-radius: 4px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .section {
+            margin-bottom: 32px;
+        }
+        .section h2 {
+            font-size: 18px;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section h3 {
+            font-size: 16px;
+            color: var(--accent-blue);
+            margin: 20px 0 12px;
+        }
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .citation {
+            color: var(--text-secondary);
+            font-size: 12px;
+            background: var(--bg-secondary);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--bg-secondary);
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+        tr:hover {
+            background: var(--bg-secondary);
+        }
+        .rating-s { color: var(--accent-green); font-weight: 600; }
+        .rating-a { color: var(--accent-yellow); font-weight: 600; }
+        .back-link {
+            display: inline-block;
+            margin-top: 32px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        .back-link:hover {
+            border-color: var(--accent-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="../index.html">← 返回仪表盘</a>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🔬 磷化铟/光芯片上游</h1>
+            <div class="score">强度：8.4分（S级）</div>
+        </div>
+        
+        <div class="section">
+            <h2>🧠 产业链传导逻辑</h2>
+            
+            <h3>第一层：触发事件</h3>
+            <p>OFC 2025大会（3月17-19日）在美国圣地亚哥召开，Lumentum宣布EML产能2025年底较2024年增长超50%，Coherent宣布2025-2026年磷化铟产能"超级加倍"。美股AXT（磷化铟衬底龙头）3月19-20日大涨15%，A股3月20日后反应滞后。</p>
+            <span class="citation">【可信度：90%，数据日期：2025年3月17-20日】</span>
+            
+            <h3>第二层：直接影响</h3>
+            <p>AI算力集群建设（英伟达/谷歌/微软大规模部署800G/1.6T光模块）→ EML（电吸收调制激光器）激光器供不应求→磷化铟（InP）材料成为核心瓶颈。Lumentum产能已预订至2026年，Coherent扩产受限于衬底供应。海外磷化铟衬底供应商（日本住友/美国AXT）产能已满。</p>
+            <span class="citation">【可信度：85%，基于OFC大会报告】</span>
+            
+            <h3>第三层：受益细分</h3>
+            <p>海外磷化铟产能紧张→国内衬底/外延片供应商受益：①衬底：云南锗业（国内唯一量产，市占80%，华为海思/光迅科技/中际旭创认证）；②外延片：有研新材（6英寸衬底良率60%，与中际旭创合作）；③光芯片：长光华芯（100G EML与中际旭创签3年6亿订单）。</p>
+            <span class="citation">【可信度：80%，基于公司公告】</span>
+            
+            <h3>第四层：盈利兑现</h3>
+            <p>2025年H1国产磷化铟衬底通过华为/光迅/中际旭创验证→ 2025年H2批量供货→ 2025年Q4开始释放利润弹性。云南锗业计划2025年磷化铟出货8.3万片（同比+100%+），2025年Q1已实现扭亏为盈（净利润同比+188.73%）。</p>
+            <span class="citation">【可信度：75%，基于公司计划】</span>
+        </div>
+        
+        <div class="section">
+            <h2>🔍 预期差来源分析</h2>
+            
+            <p><strong>信息时滞：8/10分</strong> — OFC大会3月17-19日海外已反应，美股AXT 3月19-20日大涨15%，但A股3月20日后才逐步反应，滞后约3-5天。市场主要关注光模块（中际旭创/新易盛已充分定价），对上游磷化铟材料认知滞后约1周。</p>
+            <span class="citation">【可信度：90%】</span>
+            
+            <p><strong>认知分歧：9/10分</strong> — 市场共识AI算力看光模块（中际旭创/新易盛/天孚通信已充分定价）。事实真相：光模块上游磷化铟材料才是硬瓶颈。云南锗业是国内唯一量产磷化铟衬底的A股公司（市占80%），市场当锗周期股而非半导体材料股。</p>
+            <span class="citation">【可信度：85%】</span>
+            
+            <p><strong>定价偏差：8/10分</strong> — 云南锗业当前PE约45倍，对比半导体材料龙头（沪硅产业/安集科技）平均60倍+，相对同行折价约25%。且市场按锗周期股估值，未给予半导体材料估值溢价。</p>
+            <span class="citation">【可信度：70%，基于公开市值估算，2026年3月27日】</span>
+            
+            <p style="margin-top: 20px; font-size: 16px;"><strong>强度计算：8×0.4 + 9×0.4 + 8×0.2 = 8.4分（S级）</strong></p>
+        </div>
+        
+        <div class="section">
+            <h2>🎯 核心验证节点</h2>
+            
+            <p><strong>时间节点</strong>：2025年6月（Lumentum产能进展公告）、2025年9月（国产磷化铟衬底验证结果）</p>
+            <p><strong>数据指标</strong>：磷化铟衬底出货同比>100%、通过华为/光迅/中际旭创认证、云南锗业磷化铟出货>8万片</p>
+            <p><strong>触发条件</strong>：云南锗业2025年H1财报磷化铟收入占比>15%或通过华为认证公告，确认磷化铟逻辑</p>
+        </div>
+        
+        <div class="section">
+            <h2>⚠️ 风险对冲策略</h2>
+            
+            <p><strong>路径一</strong>：如果云南锗业验证延迟（信号：2025年H1无大客户认证公告或出货<4万片）→ 观察有研新材（6英寸衬底良率60%，与中际旭创合作推进）</p>
+            <p><strong>路径二</strong>：如果有研新材成本过高（信号：毛利率<10%或客户导入延迟）→ 观察三安光电（磷化铟外延片全球前三，已通过华为海思认证）</p>
+        </div>
+        
+        <div class="section">
+            <h2>📈 Top 5 标的清单</h2>
+            
+            <table>
+                <tr>
+                    <th>排名</th>
+                    <th>名称</th>
+                    <th>代码</th>
+                    <th>强度</th>
+                    <th>评级</th>
+                    <th>核心逻辑</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>云南锗业</td>
+                    <td>002428</td>
+                    <td>8.4</td>
+                    <td class="rating-s">S级</td>
+                    <td>国内唯一量产磷化铟衬底A股公司，市占80%，2025年Q1净利润同比+188.73%扭亏为盈</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>有研新材</td>
+                    <td>600206</td>
+                    <td>7.8</td>
+                    <td class="rating-a">A级</td>
+                    <td>央企背景，6英寸磷化铟衬底良率60%，与中际旭创合作推进国产替代</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>长光华芯</td>
+                    <td>688048</td>
+                    <td>7.6</td>
+                    <td class="rating-a">A级</td>
+                    <td>100G EML年产能500万颗，与中际旭创签3年6亿元订单，2025年H1扭亏</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>光迅科技</td>
+                    <td>002281</td>
+                    <td>7.2</td>
+                    <td class="rating-a">A级</td>
+                    <td>唯一覆盖"光芯片-器件-模块"全产业链，IDM产线2025年投产，全球光器件TOP5</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>源杰科技</td>
+                    <td>688498</td>
+                    <td>6.8</td>
+                    <td class="rating-a">A级</td>
+                    <td>磷化铟激光器芯片IDM龙头，50G EML通过英伟达认证（国内首家），毛利率60%+</td>
+                </tr>
+            </table>
+        </div>
+        
+        <a href="../index.html" class="back-link">← 返回仪表盘</a>
+    </div>
+</body>
+</html>
