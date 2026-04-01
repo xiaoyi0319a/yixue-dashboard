@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羿学交易 - 每日投资情报</title>
+    <title>羿学交易 - 每日投资情报 | 2026-04-01</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0e1a; color: #e8eaed; line-height: 1.6; }
@@ -11,41 +11,54 @@
         header { text-align: center; padding: 40px 0; border-bottom: 1px solid #1e3a5f; margin-bottom: 30px; }
         header h1 { font-size: 2.5em; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
         header p { color: #8892b0; font-size: 1.1em; }
+        .date-tag { display: inline-block; background: #7b2cbf; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; margin-top: 10px; }
+        
         .section { background: #111827; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #1e3a5f; }
         .section-title { font-size: 1.4em; color: #00d4ff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
         .section-title::before { content: '◆'; color: #7b2cbf; }
         
         /* 奇门预测样式 */
-        .qimen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; font-size: 0.85em; }
-        .qimen-cell { background: #1a2332; padding: 15px; border-radius: 8px; border: 1px solid #2d3a4f; }
-        .qimen-cell .gong { color: #8892b0; font-size: 0.8em; }
-        .qimen-cell .star { color: #ffd700; font-weight: bold; }
-        .qimen-cell .door { color: #00d4ff; }
-        .qimen-cell .god { color: #ff6b6b; }
-        .qimen-summary { margin-top: 20px; padding: 15px; background: #1a2332; border-radius: 8px; border-left: 4px solid #00d4ff; }
-        .qimen-verdict { font-size: 1.2em; color: #00ff88; font-weight: bold; margin: 10px 0; }
+        .qimen-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: #1a2332; border-radius: 8px; }
+        .qimen-info { display: flex; gap: 30px; font-size: 0.9em; }
+        .qimen-info span { color: #8892b0; }
+        .qimen-info strong { color: #00d4ff; }
+        .qimen-verdict { background: linear-gradient(90deg, #ff6b6b, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3em; font-weight: bold; }
+        
+        .qimen-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .qimen-box { background: #1a2332; padding: 20px; border-radius: 8px; border: 1px solid #2d3a4f; }
+        .qimen-box h4 { color: #ffd700; margin-bottom: 15px; font-size: 1em; }
+        .qimen-box table { width: 100%; font-size: 0.85em; }
+        .qimen-box td { padding: 8px 0; border-bottom: 1px solid #2d3a4f; }
+        .qimen-box td:first-child { color: #8892b0; }
+        .qimen-box .highlight { color: #00ff88; }
+        .qimen-box .warning { color: #ff6b6b; }
+        
+        .hours-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 15px; }
+        .hour-cell { text-align: center; padding: 10px; background: #0f1419; border-radius: 6px; font-size: 0.8em; }
+        .hour-cell .time { color: #8892b0; font-size: 0.75em; }
+        .hour-cell .status { margin-top: 5px; }
+        .hour-cell.good { border: 1px solid #00ff88; }
+        .hour-cell.bad { border: 1px solid #ff6b6b; }
+        .hour-cell.warn { border: 1px solid #ffd700; }
         
         /* 方向卡片样式 */
-        .direction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
-        .direction-card { background: #1a2332; border-radius: 10px; padding: 20px; border: 1px solid #2d3a4f; transition: transform 0.2s; }
-        .direction-card:hover { transform: translateY(-3px); border-color: #00d4ff; }
+        .direction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 20px; }
+        .direction-card { background: #1a2332; border-radius: 10px; padding: 20px; border: 1px solid #2d3a4f; }
         .direction-card h3 { color: #00d4ff; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .direction-card .score { background: #7b2cbf; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; }
-        .direction-card .logic { font-size: 0.9em; color: #8892b0; margin: 10px 0; padding: 10px; background: #0f1419; border-radius: 6px; }
-        .stock-list { margin-top: 15px; }
-        .stock-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #0f1419; margin: 5px 0; border-radius: 6px; font-size: 0.9em; }
-        .stock-item .s { color: #ffd700; font-weight: bold; }
-        .stock-item .a { color: #00ff88; }
-        .stock-item .b { color: #8892b0; }
+        .direction-card .tag { padding: 4px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
+        .tag-fire { background: #ff6b6b; color: #fff; }
+        .tag-eye { background: #ffd700; color: #000; }
+        .direction-card .logic { font-size: 0.9em; color: #8892b0; margin: 15px 0; padding: 12px; background: #0f1419; border-radius: 6px; border-left: 3px solid #00d4ff; }
+        .direction-card .score { font-size: 0.85em; color: #7b2cbf; margin-bottom: 10px; }
         
-        /* 研报卡片样式 */
-        .research-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-        .research-card { background: #1a2332; border-radius: 10px; padding: 20px; border: 1px solid #2d3a4f; cursor: pointer; transition: all 0.2s; }
-        .research-card:hover { border-color: #7b2cbf; box-shadow: 0 4px 20px rgba(123, 44, 191, 0.2); }
-        .research-card h4 { color: #e8eaed; margin-bottom: 8px; font-size: 1em; }
-        .research-card .meta { font-size: 0.8em; color: #8892b0; display: flex; gap: 15px; margin-bottom: 10px; }
-        .research-card .summary { font-size: 0.85em; color: #a8b2d1; line-height: 1.5; }
-        .research-card .tag { display: inline-block; padding: 3px 10px; background: #7b2cbf; border-radius: 4px; font-size: 0.75em; margin-top: 10px; }
+        .stock-table { width: 100%; font-size: 0.85em; border-collapse: collapse; margin-top: 15px; }
+        .stock-table th { text-align: left; padding: 10px; background: #0f1419; color: #8892b0; font-weight: normal; }
+        .stock-table td { padding: 10px; border-bottom: 1px solid #2d3a4f; }
+        .stock-table tr:hover { background: #252d3d; }
+        .stock-table .s { color: #ffd700; font-weight: bold; }
+        .stock-table .a { color: #00ff88; }
+        .stock-name { font-weight: 500; }
+        .stock-code { color: #8892b0; font-size: 0.85em; }
         
         /* 新闻样式 */
         .news-list { display: flex; flex-direction: column; gap: 12px; }
@@ -57,6 +70,12 @@
         
         footer { text-align: center; padding: 30px; color: #8892b0; font-size: 0.9em; border-top: 1px solid #1e3a5f; margin-top: 30px; }
         .update-time { color: #00d4ff; }
+        
+        @media (max-width: 768px) {
+            .direction-grid { grid-template-columns: 1fr; }
+            .qimen-detail { grid-template-columns: 1fr; }
+            .hours-grid { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -64,256 +83,360 @@
         <header>
             <h1>羿学交易</h1>
             <p>每日投资情报 · 奇门预测 · 预期差挖掘</p>
+            <div class="date-tag">2026年4月1日 星期三</div>
         </header>
 
         <!-- 第一层：奇门预测 -->
         <div class="section">
             <h2 class="section-title">奇门遁甲大盘预测（奇门君）</h2>
-            <div class="qimen-grid">
-                <div class="qimen-cell">
-                    <div class="gong">巽四宫·东南</div>
-                    <div class="star">天辅★值符</div>
-                    <div class="door">杜门</div>
-                    <div class="god">乙+壬 蛇夭矫</div>
+            
+            <div class="qimen-header">
+                <div class="qimen-info">
+                    <div><span>局数：</span><strong>阳遁四局</strong></div>
+                    <div><span>值符：</span><strong>天冲星</strong></div>
+                    <div><span>值使：</span><strong>伤门</strong></div>
+                    <div><span>日干：</span><strong>乙（阴木）</strong></div>
+                    <div><span>时干：</span><strong>庚（阳金）</strong></div>
                 </div>
-                <div class="qimen-cell">
-                    <div class="gong">离九宫·南</div>
-                    <div class="star">天英</div>
-                    <div class="door">景门</div>
-                    <div class="god">戊+辛 困龙被伤</div>
-                </div>
-                <div class="qimen-cell">
-                    <div class="gong">坤二宫·西南</div>
-                    <div class="star">天芮</div>
-                    <div class="door">死门</div>
-                    <div class="god">己+癸 天乙伏宫</div>
-                </div>
-                <div class="qimen-cell" style="background: #2d1f3d; border-color: #ff6b6b;">
-                    <div class="gong">震三宫·东</div>
-                    <div class="star">天冲</div>
-                    <div class="door">伤门</div>
-                    <div class="god" style="color: #ff6b6b;">丁+庚 星奇受阻</div>
-                    <div style="color: #ffd700; font-size: 0.8em;">日干丁·空亡</div>
-                </div>
-                <div class="qimen-cell" style="background: #2d1f3d; border-color: #7b2cbf;">
-                    <div class="gong">中五宫</div>
-                    <div style="color: #ffd700;">寄坤二宫</div>
-                </div>
-                <div class="qimen-cell">
-                    <div class="gong">兑七宫·西</div>
-                    <div class="star">天柱</div>
-                    <div class="door">惊门</div>
-                    <div class="god">壬+丙 水蛇入火</div>
-                </div>
-                <div class="qimen-cell">
-                    <div class="gong">艮八宫·东北</div>
-                    <div class="star">天任</div>
-                    <div class="door">生门</div>
-                    <div class="god">丙+己 火悖地户</div>
-                </div>
-                <div class="qimen-cell">
-                    <div class="gong">坎一宫·北</div>
-                    <div class="star">天蓬</div>
-                    <div class="door">休门</div>
-                    <div class="god">辛+丁 狱神得奇</div>
-                </div>
-                <div class="qimen-cell">
-                    <div class="gong">乾六宫·西北</div>
-                    <div class="star">天心</div>
-                    <div class="door">开门</div>
-                    <div class="god">癸+戊 天乙合会</div>
-                </div>
+                <div class="qimen-verdict">震荡偏空 · 冲高回落</div>
             </div>
-            <div class="qimen-summary">
-                <p><strong>起局信息：</strong>甲辰年 己卯月 丁丑日 乙巳时 | 阳遁四局 | 旬首：甲辰壬 | <span style="color: #ff6b6b;">空亡：寅卯</span></p>
-                <p class="qimen-verdict">📉 走势判断：小阴或十字星，收盘3920-3935区间（参考昨日收盘3923）</p>
-                <p><strong>核心格局：</strong>值符逢蛇夭矫（虚惊缠绕）+ 日干星奇受阻（追高被套）+ <span style="color: #ff6b6b;">震巽空亡（真空之日）</span></p>
-                <p><strong>分时推演：</strong>早盘09:30-10:00冲高诱多（压力3945-3950） → 10:00后回落 → 午盘13:30前后见低点（支撑3920-3925） → 尾盘平稳</p>
-                <p><strong>操作建议：</strong>⚠️ 早盘不追高，若高开超0.3%（3940+）宜减仓；午盘恐慌低点（3920-3925）可轻仓试探</p>
-                <p><strong>仓位建议：</strong>激进≤5成 / 稳健≤3成 / 保守≤1成</p>
-                <p style="color: #ff6b6b;"><strong>重大风险：</strong>今日为"真空"之日，任何突破都可能是假突破！</p>
+            
+            <div class="qimen-detail">
+                <div class="qimen-box">
+                    <h4>🔮 走势推演</h4>
+                    <table>
+                        <tr><td>开盘</td><td class="highlight">小幅高开 (+0.1%~+0.3%)</td></tr>
+                        <tr><td>09:30-10:00</td><td>小幅高开，买方尝试上攻</td></tr>
+                        <tr><td>10:00-11:00</td><td class="warning">空方反击，指数回落</td></tr>
+                        <tr><td>下午</td><td>多空拉锯，震荡收窄</td></tr>
+                        <tr><td>收盘</td><td class="warning">小幅收跌 (-0.2%~-0.5%)</td></tr>
+                        <tr><td>幅度预估</td><td>±0.5% 以内震荡</td></tr>
+                    </table>
+                </div>
+                <div class="qimen-box">
+                    <h4>⏰ 时辰吉凶与操作</h4>
+                    <div class="hours-grid">
+                        <div class="hour-cell warn">
+                            <div class="time">辰时</div>
+                            <div>07-09</div>
+                            <div class="status">⚠️ 观望</div>
+                        </div>
+                        <div class="hour-cell bad">
+                            <div class="time">巳时</div>
+                            <div>09-11</div>
+                            <div class="status">🔴 高抛</div>
+                        </div>
+                        <div class="hour-cell warn">
+                            <div class="time">午时</div>
+                            <div>11-13</div>
+                            <div class="status">⚠️ 观望</div>
+                        </div>
+                        <div class="hour-cell good">
+                            <div class="time">未时</div>
+                            <div>13-15</div>
+                            <div class="status">🟢 低吸</div>
+                        </div>
+                        <div class="hour-cell">
+                            <div class="time">申时</div>
+                            <div>15-17</div>
+                            <div class="status">收盘</div>
+                        </div>
+                        <div class="hour-cell">
+                            <div class="time">酉时</div>
+                            <div>17-19</div>
+                            <div class="status">休市</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.85em; color: #8892b0;">
+                        <strong style="color: #00d4ff;">策略：</strong>早盘冲高减仓，午后急跌可轻仓低吸，半仓以内
+                    </p>
+                </div>
             </div>
         </div>
 
-        <!-- 第二层：三大方向 -->
+        <!-- 第二层：预期差方向 -->
         <div class="section">
-            <h2 class="section-title">今日三大方向</h2>
+            <h2 class="section-title">预期差方向（基于v6.1大白话版）</h2>
+            
             <div class="direction-grid">
-                <!-- 方向一 -->
-                <div class="direction-card" onclick="window.location.href='directions/20260331-01.html'" style="cursor: pointer;">
-                    <h3>伊朗局势-能源/航运 <span class="score">18分</span></h3>
+                <!-- 方向1：储能电池 -->
+                <div class="direction-card">
+                    <h3>
+                        储能电池供给侧改革
+                        <span class="tag tag-fire">🔥 值得重点看</span>
+                    </h3>
+                    <div class="score">强度 8.4分 | S级</div>
                     <div class="logic">
-                        <strong>传导逻辑：</strong>霍尔木兹海峡收费法案 → 油轮绕行好望角（运距+40%） → VLCC日租金17万美元（历史新高） → 油运企业Q2利润暴增
+                        <strong>逻辑链：</strong>工信部发话要编"十五五"电池规划 → 核心就一句话：别再瞎建烂电池厂了 → 小厂关门/被并购 → 大厂竞争少了 → 价格战缓和 → 利润率修复<br><br>
+                        <strong>预期差：</strong>市场还在担心"产能过剩、价格战"，没看到政策拐点已至。宁德时代、比亚迪的估值反映的还是"产能过剩"预期，但如果供给侧改革真执行，估值应该向海外同行靠拢。
                     </div>
-                    <div class="stock-list">
-                        <div class="stock-item">
-                            <span>600938 中国海油</span>
-                            <span class="s">S级 7.6分</span>
-                        </div>
-                        <div class="stock-item">
-                            <span>600026 中远海能</span>
-                            <span class="a">A级 7.0分</span>
-                        </div>
-                        <div class="stock-item">
-                            <span>002353 杰瑞股份</span>
-                            <span class="a">A级 7.0分</span>
-                        </div>
-                        <div class="stock-item">
-                            <span>601872 招商轮船</span>
-                            <span class="b">B级 6.4分</span>
-                        </div>
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.8em; color: #ff6b6b;">验证节点：4月6日美伊谈判 | 4月15日BDTI指数</p>
+                    <table class="stock-table">
+                        <tr><th>排名</th><th>名称</th><th>强度</th><th>卡位价值</th></tr>
+                        <tr>
+                            <td class="s">1</td>
+                            <td><span class="stock-name">宁德时代</span> <span class="stock-code">300750</span></td>
+                            <td class="s">8.5</td>
+                            <td>全球市占率37%，技术领先一代</td>
+                        </tr>
+                        <tr>
+                            <td class="s">2</td>
+                            <td><span class="stock-name">比亚迪</span> <span class="stock-code">002594</span></td>
+                            <td class="s">8.2</td>
+                            <td>电池外供加速，垂直整合</td>
+                        </tr>
+                        <tr>
+                            <td class="a">3</td>
+                            <td><span class="stock-name">亿纬锂能</span> <span class="stock-code">300014</span></td>
+                            <td class="a">7.8</td>
+                            <td>储能前三，大圆柱技术领先</td>
+                        </tr>
+                        <tr>
+                            <td class="a">4</td>
+                            <td><span class="stock-name">派能科技</span> <span class="stock-code">688063</span></td>
+                            <td class="a">7.5</td>
+                            <td>户储龙头，海外占比80%</td>
+                        </tr>
+                        <tr>
+                            <td class="a">5</td>
+                            <td><span class="stock-name">国轩高科</span> <span class="stock-code">002074</span></td>
+                            <td class="a">7.2</td>
+                            <td>大众持股26%，美国工厂投产</td>
+                        </tr>
+                    </table>
                 </div>
 
-                <!-- 方向二 -->
-                <div class="direction-card" onclick="window.location.href='directions/20260331-02.html'" style="cursor: pointer;">
-                    <h3>商业航天-可回收火箭 <span class="score">16分</span></h3>
+                <!-- 方向2：美伊能源 -->
+                <div class="direction-card">
+                    <h3>
+                        美伊战争与能源安全
+                        <span class="tag tag-fire">🔥 值得重点看</span>
+                    </h3>
+                    <div class="score">强度 7.8分 | A级</div>
                     <div class="logic">
-                        <strong>传导逻辑：</strong>力箭二号首飞成功 → 发射成本降至SpaceX一半 → 星座组网需求爆发 → 火箭结构件订单放量
+                        <strong>逻辑链：</strong>特朗普嘴上说停战但手没停 → 霍尔木兹海峡通航受阻 → 油轮绕行好望角（运距+40%） → VLCC运力紧张 → 运价暴涨<br><br>
+                        <strong>预期差：</strong>市场纠结"打不打"的短期博弈，没看到"能源安全"的长期逻辑。不管打不打，中国能源自主战略都会加速。
                     </div>
-                    <div class="stock-list">
-                        <div class="stock-item">
-                            <span>600862 中航高科</span>
-                            <span class="b">B级 6.8分</span>
-                        </div>
-                        <div class="stock-item">
-                            <span>601698 中国卫通</span>
-                            <span class="b">B级 6.2分</span>
-                        </div>
-                        <div class="stock-item">
-                            <span>600879 航天电子</span>
-                            <span class="b">B级 5.8分</span>
-                        </div>
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.8em; color: #8892b0;">验证节点：4月3日太空算力大会 | 天龙三号首飞</p>
+                    <table class="stock-table">
+                        <tr><th>排名</th><th>名称</th><th>强度</th><th>卡位价值</th></tr>
+                        <tr>
+                            <td class="s">1</td>
+                            <td><span class="stock-name">中远海能</span> <span class="stock-code">600026</span></td>
+                            <td class="s">8.0</td>
+                            <td>全球最大VLCC运营商</td>
+                        </tr>
+                        <tr>
+                            <td class="a">2</td>
+                            <td><span class="stock-name">中国海油</span> <span class="stock-code">600938</span></td>
+                            <td class="a">7.8</td>
+                            <td>桶油成本27.9美元全球最低</td>
+                        </tr>
+                        <tr>
+                            <td class="a">3</td>
+                            <td><span class="stock-name">招商轮船</span> <span class="stock-code">601872</span></td>
+                            <td class="a">7.6</td>
+                            <td>央企油运老二，LNG船占比高</td>
+                        </tr>
+                        <tr>
+                            <td class="a">4</td>
+                            <td><span class="stock-name">杰瑞股份</span> <span class="stock-code">002353</span></td>
+                            <td class="a">7.4</td>
+                            <td>油服设备龙头，压裂设备60%</td>
+                        </tr>
+                        <tr>
+                            <td class="a">5</td>
+                            <td><span class="stock-name">山东黄金</span> <span class="stock-code">600547</span></td>
+                            <td class="a">7.0</td>
+                            <td>国内黄金产量最大</td>
+                        </tr>
+                    </table>
                 </div>
 
-                <!-- 方向三 -->
-                <div class="direction-card" onclick="window.location.href='directions/20260331-03.html'" style="cursor: pointer;">
-                    <h3>创新药-出海BD/核药 <span class="score">15分</span></h3>
+                <!-- 方向3：商业航天 -->
+                <div class="direction-card">
+                    <h3>
+                        商业航天IPO加速
+                        <span class="tag tag-eye">👀 可以关注</span>
+                    </h3>
+                    <div class="score">强度 6.8分 | A级</div>
                     <div class="logic">
-                        <strong>传导逻辑：</strong>Q1 BD交易超600亿美元 → 现金流大幅改善 → 阿尔法同位素量产突破 → 估值体系重构（PS→PE）
+                        <strong>逻辑链：</strong>中科宇航科创板IPO（融41.8亿） → 银河航天启动上市辅导 → 火箭公司上市 → 资本涌入 → 产能扩张 → 发射成本下降<br><br>
+                        <strong>预期差：</strong>市场以为是"概念股炒作"，实际是产业成熟的标志。产业链上游（材料、设备）还没被充分定价。
                     </div>
-                    <div class="stock-list">
-                        <div class="stock-item">
-                            <span>688235 百济神州</span>
-                            <span class="s">S级 7.6分</span>
-                        </div>
-                        <div class="stock-item">
-                            <span>688331 荣昌生物</span>
-                            <span class="a">A级 7.2分</span>
-                        </div>
-                        <div class="stock-item">
-                            <span>002675 东诚药业</span>
-                            <span class="b">B级 6.4分</span>
-                        </div>
+                    <table class="stock-table">
+                        <tr><th>排名</th><th>名称</th><th>强度</th><th>卡位价值</th></tr>
+                        <tr>
+                            <td class="a">1</td>
+                            <td><span class="stock-name">航天动力</span> <span class="stock-code">600343</span></td>
+                            <td class="a">7.2</td>
+                            <td>液体火箭发动机龙头</td>
+                        </tr>
+                        <tr>
+                            <td class="a">2</td>
+                            <td><span class="stock-name">斯瑞新材</span> <span class="stock-code">688102</span></td>
+                            <td class="a">7.0</td>
+                            <td>火箭喷管高温合金独家</td>
+                        </tr>
+                        <tr>
+                            <td class="a">3</td>
+                            <td><span class="stock-name">中国卫星</span> <span class="stock-code">600118</span></td>
+                            <td class="a">6.8</td>
+                            <td>卫星制造龙头，星网核心</td>
+                        </tr>
+                        <tr>
+                            <td class="a">4</td>
+                            <td><span class="stock-name">超捷股份</span> <span class="stock-code">301005</span></td>
+                            <td class="a">6.5</td>
+                            <td>火箭结构件，市值小弹性大</td>
+                        </tr>
+                        <tr>
+                            <td class="a">5</td>
+                            <td><span class="stock-name">中国卫通</span> <span class="stock-code">601698</span></td>
+                            <td class="a">6.2</td>
+                            <td>卫星运营龙头，轨道资源垄断</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 方向4：AI算力 -->
+                <div class="direction-card">
+                    <h3>
+                        AI算力基建烧钱不停
+                        <span class="tag tag-eye">👀 可以关注</span>
+                    </h3>
+                    <div class="score">强度 6.4分 | B级→A级边缘</div>
+                    <div class="logic">
+                        <strong>逻辑链：</strong>OpenAI融资1220亿美元（历史最大） → CoreWeave融资85亿美元 → 全球资本疯狂砸钱建AI数据中心 → 光模块/液冷/电源需求爆发<br><br>
+                        <strong>预期差：</strong>光模块龙头估值已高，但液冷、电源等细分领域仍有空间。
                     </div>
-                    <p style="margin-top: 10px; font-size: 0.8em; color: #ff6b6b;">⚠️ 东诚药业3月30日涨停，短期过热</p>
-                    <p style="font-size: 0.8em; color: #8892b0;">验证节点：4月17日AACR年会 | 核药审批进展</p>
+                    <table class="stock-table">
+                        <tr><th>排名</th><th>名称</th><th>强度</th><th>卡位价值</th></tr>
+                        <tr>
+                            <td class="a">1</td>
+                            <td><span class="stock-name">中际旭创</span> <span class="stock-code">300308</span></td>
+                            <td class="a">7.0</td>
+                            <td>全球光模块龙头，800G第一</td>
+                        </tr>
+                        <tr>
+                            <td class="a">2</td>
+                            <td><span class="stock-name">英维克</span> <span class="stock-code">002837</span></td>
+                            <td class="a">6.8</td>
+                            <td>液冷设备龙头</td>
+                        </tr>
+                        <tr>
+                            <td class="a">3</td>
+                            <td><span class="stock-name">新易盛</span> <span class="stock-code">300502</span></td>
+                            <td class="a">6.5</td>
+                            <td>光模块第二梯队，LPO技术</td>
+                        </tr>
+                        <tr>
+                            <td class="a">4</td>
+                            <td><span class="stock-name">麦格米特</span> <span class="stock-code">002851</span></td>
+                            <td class="a">6.2</td>
+                            <td>数据中心电源供应商</td>
+                        </tr>
+                        <tr>
+                            <td class="a">5</td>
+                            <td><span class="stock-name">高澜股份</span> <span class="stock-code">300499</span></td>
+                            <td class="a">5.8</td>
+                            <td>液冷解决方案提供商</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- 方向5：存储芯片 -->
+                <div class="direction-card">
+                    <h3>
+                        存储芯片供给侧收缩
+                        <span class="tag tag-eye">👀 可以关注</span>
+                    </h3>
+                    <div class="score">强度 7.0分 | A级</div>
+                    <div class="logic">
+                        <strong>逻辑链：</strong>铠侠宣布停产2D NAND（2028年最后出货） → 供给收缩 → 库存去化加速 → 价格见底回升 → 产业链利润修复<br><br>
+                        <strong>预期差：</strong>市场担忧需求疲软，没看到供给侧收缩可能先于需求复苏发生。
+                    </div>
+                    <table class="stock-table">
+                        <tr><th>排名</th><th>名称</th><th>强度</th><th>卡位价值</th></tr>
+                        <tr>
+                            <td class="a">1</td>
+                            <td><span class="stock-name">兆易创新</span> <span class="stock-code">603986</span></td>
+                            <td class="a">7.2</td>
+                            <td>国内存储设计龙头，NOR前三</td>
+                        </tr>
+                        <tr>
+                            <td class="a">2</td>
+                            <td><span class="stock-name">江波龙</span> <span class="stock-code">301308</span></td>
+                            <td class="a">6.8</td>
+                            <td>存储模组龙头</td>
+                        </tr>
+                        <tr>
+                            <td class="a">3</td>
+                            <td><span class="stock-name">佰维存储</span> <span class="stock-code">688525</span></td>
+                            <td class="a">6.5</td>
+                            <td>存储模组+封测一体化</td>
+                        </tr>
+                        <tr>
+                            <td class="a">4</td>
+                            <td><span class="stock-name">深科技</span> <span class="stock-code">000021</span></td>
+                            <td class="a">6.2</td>
+                            <td>存储封测龙头，长鑫核心</td>
+                        </tr>
+                        <tr>
+                            <td class="a">5</td>
+                            <td><span class="stock-name">朗科科技</span> <span class="stock-code">300042</span></td>
+                            <td class="a">5.8</td>
+                            <td>韶关数据中心项目</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
 
-        <!-- 第三层：深度研报卡片 -->
-        <div class="section">
-            <h2 class="section-title">深度研报</h2>
-            <div class="research-grid">
-                <div class="research-card" onclick="alert('研报加载中...')">
-                    <h4>600938 中国海油深度研报</h4>
-                    <div class="meta">
-                        <span>📅 2026-03-31</span>
-                        <span>⭐ S级 7.6分</span>
-                    </div>
-                    <div class="summary">
-                        海上开采龙头，桶油成本27.9美元全球最低。油价突破105美元直接增厚利润，油价每涨10美元/桶，净利润增厚约120亿元...
-                    </div>
-                    <span class="tag">P0优先级</span>
-                </div>
-
-                <div class="research-card" onclick="alert('研报加载中...')">
-                    <h4>688235 百济神州深度研报</h4>
-                    <div class="meta">
-                        <span>📅 2026-03-31</span>
-                        <span>⭐ S级 7.6分</span>
-                    </div>
-                    <div class="summary">
-                        首个实现年度盈利的中国创新药企，2025年净利润14.22亿元。百悦泽全球销售额280.67亿元，同比+48.8%。估值体系从PS向PE切换...
-                    </div>
-                    <span class="tag">P0优先级</span>
-                </div>
-
-                <div class="research-card" onclick="alert('研报加载中...')">
-                    <h4>600026 中远海能深度研报</h4>
-                    <div class="meta">
-                        <span>📅 2026-03-31</span>
-                        <span>⭐ A级 7.0分</span>
-                    </div>
-                    <div class="summary">
-                        全球最大VLCC运营商，VLCC日租金17万美元历史新高。国际运输收入占比75%，直接受益运价暴涨...
-                    </div>
-                    <span class="tag">P1优先级</span>
-                </div>
-
-                <div class="research-card" onclick="alert('研报加载中...')">
-                    <h4>002353 杰瑞股份深度研报</h4>
-                    <div class="meta">
-                        <span>📅 2026-03-31</span>
-                        <span>⭐ A级 7.0分</span>
-                    </div>
-                    <div class="summary">
-                        油服设备龙头，2025年前三季度营收104.2亿元，同比+29.49%。受益油价上涨带动的上游资本开支...
-                    </div>
-                    <span class="tag">P1优先级</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 第四层：今日关键新闻 -->
+        <!-- 第三层：今日关键新闻 -->
         <div class="section">
             <h2 class="section-title">今日关键新闻</h2>
             <div class="news-list">
                 <div class="news-item">
-                    <div class="news-time">03-30</div>
+                    <div class="news-time">2026-04-01</div>
                     <div class="news-content">
-                        <div class="news-title">伊朗议会通过霍尔木兹海峡收费法案，油轮运价飙升至17万美元/天历史新高</div>
-                        <div class="news-source">来源：克拉克森/上海航运交易所</div>
+                        <div class="news-title">工信部：编制"十五五"新型电池发展规划，遏制低水平产能重复建设</div>
+                        <div class="news-source">工信部公告</div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-time">03-30</div>
+                    <div class="news-time">2026-04-01</div>
                     <div class="news-content">
-                        <div class="news-title">力箭二号运载火箭首飞成功，可回收火箭技术取得重大突破</div>
-                        <div class="news-source">来源：财联社/开源证券</div>
+                        <div class="news-title">OpenAI完成1220亿美元融资，创历史纪录</div>
+                        <div class="news-source">公开报道</div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-time">03-30</div>
+                    <div class="news-time">2026-04-01</div>
                     <div class="news-content">
-                        <div class="news-title">2026年Q1创新药出海BD交易超600亿美元，已超2024全年水平</div>
-                        <div class="news-source">来源：医药魔方/新浪财经</div>
+                        <div class="news-title">中科宇航科创板IPO受理，拟募资41.8亿元</div>
+                        <div class="news-source">上交所公告</div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-time">03-28</div>
+                    <div class="news-time">2026-04-01</div>
                     <div class="news-content">
-                        <div class="news-title">阿尔法同位素居里级量产突破，打破核药原料100%进口依赖</div>
-                        <div class="news-source">来源：东诚药业公告</div>
+                        <div class="news-title">铠侠宣布停产2D NAND，最后一批2028年出货</div>
+                        <div class="news-source">铠侠官方通知</div>
                     </div>
                 </div>
                 <div class="news-item">
-                    <div class="news-time">03-26</div>
+                    <div class="news-time">2026-04-01</div>
                     <div class="news-content">
-                        <div class="news-title">中国海油发布2025年报：净利润1220.8亿元，桶油成本27.9美元全球最低</div>
-                        <div class="news-source">来源：公司年报</div>
+                        <div class="news-title">美伊局势混乱，特朗普表态愿和谈但军事行动未停</div>
+                        <div class="news-source">Wind</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>羿学交易 · 基于公开信息整理，不构成投资建议</p>
-            <p class="update-time">更新时间：2026-03-31 09:00</p>
+            <p>数据截止日期：2026-04-01 | 数据来源：公开渠道搜索（东方财富、新浪财经、公司公告、券商研报）</p>
+            <p class="update-time">更新时间：2026-04-01 08:43 | 规范版本：v6.1大白话版</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">声明：本页面仅供学习研究，不构成投资建议。数据可能存在时滞，建议用Wind/Choice验证。</p>
         </footer>
     </div>
 </body>
