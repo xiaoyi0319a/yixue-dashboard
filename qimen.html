@@ -907,18 +907,10 @@
             const tianPan = {};
             const hourGan = hourGanZhi[0];
             
-            console.log('=== paiTianPan 开始 ===');
-            console.log('hourGan:', hourGan);
-            console.log('完整diPan:', JSON.stringify(diPan));
-            console.log('宫8的值:', diPan[8], '类型:', typeof diPan[8]);
-            console.log('宫8 key:', Object.keys(diPan)[7]);
-            console.log('所有key:', Object.keys(diPan));
-            
             // 找时干在地盘的宫位（值符星要飞到这里）
             let hourGanGong = null;
             for (let gongStr in diPan) {
                 const gongNum = parseInt(gongStr);
-                console.log('检查宫:', gongStr, '→', gongNum, '值:', diPan[gongStr], '匹配?', diPan[gongStr] === hourGan);
                 if (diPan[gongStr] === hourGan) {
                     hourGanGong = gongNum;
                     break;
@@ -929,17 +921,11 @@
             const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(hourGanGong);
             
-            // 值符星到时干宫，带旬首的六仪（关键修正！）
-            const liuYi = zhiFuInfo.xunShou.slice(2); // 从"甲辰壬"取"壬"
-            console.log('值符设置:', {
-                hourGanGong,
-                liuYi,
-                xunShou: zhiFuInfo.xunShou,
-                zhiFuXing: zhiFuInfo.zhiFuXing
-            });
+            // 值符星到时干宫，带旬首的六仪
+            const liuYi = zhiFuInfo.xunShou.slice(2);
             tianPan[hourGanGong] = {
                 star: zhiFuInfo.zhiFuXing,
-                gan: liuYi  // 带六仪，不是时干！
+                gan: liuYi
             };
             
             // 其他星按顺序排，带原始宫的地盘干
@@ -948,17 +934,11 @@
                 const gong = CLOCKWISE_ORDER[currentGongIndex];
                 
                 // 跳过已经设置的值符宫
-                if (gong === hourGanGong) {
-                    console.log('跳过值符宫:', gong);
-                    continue;
-                }
+                if (gong === hourGanGong) continue;
                 
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
-                
-                // 找这个星的原始宫
                 const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
-                // 带原始宫的地盘干
                 tianPan[gong] = {
                     star,
                     gan: diPan[origGong]
@@ -969,12 +949,6 @@
                 star: '天禽',
                 gan: diPan[5] || '乙'
             };
-            
-            console.log('天盘最终结果:', {
-                gong8: tianPan[8],
-                gong1: tianPan[1],
-                hourGanGong
-            });
             
             return {tianPan, hourGanGong};
         }
