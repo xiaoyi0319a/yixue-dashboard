@@ -778,16 +778,18 @@
         
         // 计算时辰干支
         function getHourGanZhi(dayGan, hourZhi) {
+            // hourZhi 是 1-based (子=1..亥=12)，需要转成 0-based
+            const hourZhi0 = hourZhi - 1;
             // 日上起时口诀：
             // 甲己还加甲(甲子), 乙庚丙作初(丙子), 
             // 丙辛从戊起(戊子), 丁壬庚子居(庚子),
             // 戊癸何方发, 壬子是真途(壬子)
             const startGan = [0, 2, 4, 6, 8, 0, 2, 4, 6, 8][dayGan];
-            const gan = (startGan + hourZhi) % 10;
+            const gan = (startGan + hourZhi0) % 10;
             return {
                 gan,
-                zhi: hourZhi,
-                ganZhi: TIANGAN[gan] + DIZHI[hourZhi]
+                zhi: hourZhi0,
+                ganZhi: TIANGAN[gan] + DIZHI[hourZhi0]
             };
         }
         
@@ -1256,4 +1258,3 @@
     </script>
 </body>
 </html>
-// Updated Fri Apr  3 11:09:46 PM CST 2026
