@@ -712,7 +712,11 @@
         
         // 计算时辰干支
         function getHourGanZhi(dayGan, hourZhi) {
-            const startGan = [0, 0, 2, 2, 4, 4, 6, 6, 8, 8][dayGan];
+            // 日上起时口诀：
+            // 甲己还加甲(甲子), 乙庚丙作初(丙子), 
+            // 丙辛从戊起(戊子), 丁壬庚子居(庚子),
+            // 戊癸何方发, 壬子是真途(壬子)
+            const startGan = [0, 2, 4, 6, 8, 0, 2, 4, 6, 8][dayGan];
             const gan = (startGan + hourZhi) % 10;
             return {
                 gan,
