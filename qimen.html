@@ -406,6 +406,27 @@
             margin-top: 2px;
         }
         
+        /* 中宫特殊显示 */
+        .gong .zhong-row1 {
+            font-size: 1.1rem;
+            color: #aa96da;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gong .zhong-row2 {
+            font-size: 1.1rem;
+            color: #95e1d3;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .legend {
             display: flex;
             gap: 12px;
@@ -1192,23 +1213,15 @@
                 // 第一行：八神
                 // 第二行：隐干 | 九星 | 天盘干
                 // 第三行：八门 | 地盘干
-                // 中宫特殊：显示隐干 + 借用坤二宫地盘干（天禽寄坤）
+                // 中宫特殊：只显示隐干 + 借用坤二宫地盘干（天禽寄坤）
                 
                 let content;
                 if (gongNum === 5) {
-                    // 中宫：隐干 + 坤二宫地盘干
+                    // 中宫：只显示隐干（上） + 坤二宫地盘干（下）
                     const kunDiPan = diPan[2]; // 坤二宫地盘干
                     content = `
-                        <div class="row1">${shen}</div>
-                        <div class="row2">
-                            <span class="yg-left">${yg}</span>
-                            <span class="star-center">-</span>
-                            <span class="tp-right">-</span>
-                        </div>
-                        <div class="row3">
-                            <span class="men-left">-</span>
-                            <span class="dp-right">${kunDiPan}</span>
-                        </div>
+                        <div class="zhong-row1">${yg}</div>
+                        <div class="zhong-row2">${kunDiPan}</div>
                     `;
                 } else {
                     content = `
