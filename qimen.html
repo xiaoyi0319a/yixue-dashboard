@@ -1020,11 +1020,11 @@
             // 从旬首宫开始走
             let currentGong = zhiFuInfo.xunShouGong;
             
-            // 每2步走一宫
-            for (let i = 0; i < steps; i += 2) {
+            // 每1步走一宫（不是2步！）
+            for (let i = 0; i < steps; i++) {
                 const idx = CLOCKWISE_ORDER.indexOf(currentGong);
                 currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
-                console.log(`走${Math.floor(i/2)+1}宫到:`, currentGong);
+                console.log(`第${i+1}步到:`, currentGong);
             }
             
             console.log('最终值使门落宫:', currentGong);
