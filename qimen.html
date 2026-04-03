@@ -808,21 +808,28 @@
             return diPan;
         }
         
-        // 找值符值使
+        // 旬首到六仪的映射
+        const XUNSHOU_LIUYI = {
+            '甲子': '戊', '甲戌': '己', '甲申': '庚', 
+            '甲午': '辛', '甲辰': '壬', '甲寅': '癸'
+        };
+        
+        // 找值符值使（修正版）
         function findZhiFuZhiShi(hourGanZhi, diPan) {
             const xunShou = XUNSHOU_MAP[hourGanZhi];
-            const xunShouGanIndex = TIANGAN.indexOf(xunShou[0]);
+            const liuYi = XUNSHOU_LIUYI[xunShou]; // 六仪：戊己庚辛壬癸
             
+            // 找六仪在地盘的宫位
             let xunShouGong = null;
             for (let gong in diPan) {
-                if (diPan[gong] === TIANGAN[xunShouGanIndex]) {
+                if (diPan[gong] === liuYi) {
                     xunShouGong = parseInt(gong);
                     break;
                 }
             }
             
             return {
-                xunShou,
+                xunShou: xunShou + liuYi, // 如：甲辰壬
                 xunShouGong,
                 zhiFuXing: JIU_XING[xunShouGong],
                 zhiShiMen: BA_MEN[xunShouGong]
@@ -834,6 +841,7 @@
             const tianPan = {};
             const hourGan = hourGanZhi[0];
             
+            // 找时干在地盘的宫位
             let hourGanGong = null;
             for (let gong in diPan) {
                 if (diPan[gong] === hourGan) {
@@ -846,9 +854,11 @@
             const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(hourGanGong);
             
+            // 值符星到时干宫，带旬首的六仪
+            const liuYi = zhiFuInfo.xunShou.slice(2); // 从"甲辰壬"取"壬"
             tianPan[hourGanGong] = {
                 star: zhiFuInfo.zhiFuXing,
-                gan: zhiFuInfo.xunShou[0]
+                gan: liuYi
             };
             
             for (let i = 1; i < 8; i++) {
@@ -893,8 +903,8 @@
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
             const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
             
-            // 计算值使门落宫
-            const xunShouZhi = XUNSHOU_DIZHI[zhiFuInfo.xunShou];
+            // 计算值使门落宫：从旬首宫开始，数时辰地支
+            const xunShouZhi = XUNSHOU_DIZHI[zhiFuInfo.xunShou.slice(0, 2)]; // 取"甲辰壬"中的"甲辰"
             let steps;
             if (isYang) {
                 steps = (hourZhi - xunShouZhi + 12) % 12;
