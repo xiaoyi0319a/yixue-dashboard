@@ -406,6 +406,27 @@
             margin-top: 2px;
         }
         
+        /* 中宫特殊显示 */
+        .gong .zhong-row1 {
+            font-size: 1.1rem;
+            color: #aa96da;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gong .zhong-row2 {
+            font-size: 1.1rem;
+            color: #95e1d3;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .legend {
             display: flex;
             gap: 12px;
@@ -475,18 +496,18 @@
                 <div class="input-group">
                     <label>时辰</label>
                     <select id="hour">
-                        <option value="0">子时 (23-1)</option>
-                        <option value="1">丑时 (1-3)</option>
-                        <option value="2">寅时 (3-5)</option>
-                        <option value="3">卯时 (5-7)</option>
-                        <option value="4">辰时 (7-9)</option>
-                        <option value="5">巳时 (9-11)</option>
-                        <option value="6" selected>午时 (11-13)</option>
-                        <option value="7">未时 (13-15)</option>
-                        <option value="8">申时 (15-17)</option>
-                        <option value="9">酉时 (17-19)</option>
-                        <option value="10">戌时 (19-21)</option>
-                        <option value="11">亥时 (21-23)</option>
+                        <option value="1">子时 (23-1)</option>
+                        <option value="2">丑时 (1-3)</option>
+                        <option value="3">寅时 (3-5)</option>
+                        <option value="4">卯时 (5-7)</option>
+                        <option value="5">辰时 (7-9)</option>
+                        <option value="6">巳时 (9-11)</option>
+                        <option value="7" selected>午时 (11-13)</option>
+                        <option value="8">未时 (13-15)</option>
+                        <option value="9">申时 (15-17)</option>
+                        <option value="10">酉时 (17-19)</option>
+                        <option value="11">戌时 (19-21)</option>
+                        <option value="12">亥时 (21-23)</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -593,23 +614,23 @@
         }
         
         // 旬首地支
-        const XUNSHOU_DIZHI = {'甲子': 0, '甲戌': 10, '甲申': 6, '甲午': 4, '甲辰': 4, '甲寅': 2};
+        const XUNSHOU_DIZHI = {'甲子': 1, '甲戌': 11, '甲申': 7, '甲午': 5, '甲辰': 5, '甲寅': 3};
         
         // 马星（时支定）
         // 申子辰马在寅(2), 寅午戌马在申(8), 巳酉丑马在亥(11), 亥卯未马在巳(5)
         const MAXING = {
-            0: 2,   // 子→寅
-            1: 11,  // 丑→亥
-            2: 8,   // 寅→申
-            3: 5,   // 卯→巳
-            4: 2,   // 辰→寅
-            5: 11,  // 巳→亥
-            6: 8,   // 午→申
-            7: 5,   // 未→巳
-            8: 2,   // 申→寅
-            9: 11,  // 酉→亥
-            10: 8,  // 戌→申
-            11: 5   // 亥→巳
+            1: 3,   // 子→寅
+            2: 12,  // 丑→亥
+            3: 9,   // 寅→申
+            4: 6,   // 卯→巳
+            5: 3,   // 辰→寅
+            6: 12,  // 巳→亥
+            7: 9,   // 午→申
+            8: 6,   // 未→巳
+            9: 3,   // 申→寅
+            10: 12, // 酉→亥
+            11: 9,  // 戌→申
+            12: 6   // 亥→巳
         };
         
         // 击刑
@@ -752,7 +773,8 @@
         function useNow() {
             const now = new Date();
             document.getElementById('date').value = now.toISOString().split('T')[0];
-            document.getElementById('hour').value = Math.floor((now.getHours() + 1) / 2) % 12;
+            // 时辰改为1-based (1-12)
+            document.getElementById('hour').value = (Math.floor((now.getHours() + 1) / 2) % 12) + 1;
             document.getElementById('minute').value = now.getMinutes();
         }
         
@@ -983,22 +1005,13 @@
                 steps = (xunShouZhi - hourZhi + 12) % 12;
             }
             
-            console.log('paiBaMen调试:', {
-                xunShou: zhiFuInfo.xunShou,
-                xunShouZhi,
-                hourZhi,
-                steps,
-                xunShouGong: zhiFuInfo.xunShouGong
-            });
-            
             // 从旬首宫开始走
-            let currentGong = zhiFuInfo.xunShouGong;
+            let currentGong = parseInt(zhiFuInfo.xunShouGong); // 确保是数字
             
             // 每1步走一宫（不是2步！）
             for (let i = 0; i < steps; i++) {
                 const idx = CLOCKWISE_ORDER.indexOf(currentGong);
                 currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
-                console.log(`第${i+1}步到:`, currentGong);
             }
             
             console.log('最终值使门落宫:', currentGong);
@@ -1025,7 +1038,15 @@
             const hourGanIndex = ganOrder.indexOf(hourGan);
             
             const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-            const startIndex = gongOrder.indexOf(zhiShiGong);
+            const startIndex = gongOrder.indexOf(parseInt(zhiShiGong)); // 确保是数字
+            
+            console.log('paiYinGan调试:', {
+                zhiShiGong,
+                zhiShiGongType: typeof zhiShiGong,
+                startIndex,
+                hourGan,
+                hourGanIndex
+            });
             
             for (let i = 0; i < 9; i++) {
                 const ganIdx = (hourGanIndex + i) % 9;
@@ -1115,7 +1136,7 @@
             const {baMen, zhiShiGong} = paiBaMen(zhiFuInfo, hour, juInfo.isYang);
             
             // 排隐干
-            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
+            const yinGan = paiYinGan(parseInt(zhiShiGong), diPan, hourGZ.ganZhi, juInfo.isYang);
             
             // 马星
             const maXingZhi = MAXING[hour];
@@ -1188,29 +1209,27 @@
                 if (sihai.includes('击刑') || sihai.includes('入墓')) gong.classList.add('jixing');
                 if (star === zhiFuInfo.zhiFuXing) gong.classList.add('zhifu');
                 
-                // 新布局：
+                // 布局：
                 // 第一行：八神
                 // 第二行：隐干 | 九星 | 天盘干
                 // 第三行：八门 | 地盘干
                 
-                // 调试：打印关键宫位的值
-                if (gongNum === 8 || gongNum === 1) {
-                    console.log('宫位' + gongNum + '调试:', {
-                        star, tpGan, dpGan, shen, men, yg,
-                        tianPanObj: tianPan[gongNum]
-                    });
-                }
+                // 注意：以下是显示用的变量，不要修改原始数据
+                let displayStar = star;
+                let displayTpGan = tpGan;
+                let displayDpGan = dpGan;
+                let displayMen = men;
                 
                 gong.innerHTML = `
                     <div class="row1">${shen}</div>
                     <div class="row2">
                         <span class="yg-left">${yg}</span>
-                        <span class="star-center">${star}</span>
-                        <span class="tp-right">${tpGan}${sihai.includes('击刑') ? '刑' : ''}${sihai.includes('入墓') ? '墓' : ''}</span>
+                        <span class="star-center">${displayStar}</span>
+                        <span class="tp-right">${displayTpGan}${sihai.includes('击刑') ? '刑' : ''}${sihai.includes('入墓') ? '墓' : ''}</span>
                     </div>
                     <div class="row3">
-                        <span class="men-left ${sihai.includes('门迫') ? 'menpo' : ''}">${men}${sihai.includes('门迫') ? '迫' : ''}</span>
-                        <span class="dp-right">${dpGan}</span>
+                        <span class="men-left ${sihai.includes('门迫') ? 'menpo' : ''}">${displayMen}${sihai.includes('门迫') ? '迫' : ''}</span>
+                        <span class="dp-right">${displayDpGan}</span>
                     </div>
                     ${geju ? `<div class="geju-new">${geju}</div>` : ''}
                 `;
