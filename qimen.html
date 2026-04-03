@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>奇门遁甲排盘工具 - V2.4</title>
+    <title>奇门遁甲排盘工具 - V2.0</title>
     <style>
         * {
             margin: 0;
@@ -134,7 +134,7 @@
         
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
         }
         
@@ -143,16 +143,17 @@
             padding: 15px;
             border-radius: 10px;
             border-left: 3px solid #ffd700;
+            text-align: center;
         }
         
         .info-card h3 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #aaa;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .info-card p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #ffd700;
             font-weight: bold;
         }
@@ -171,23 +172,24 @@
         .pan-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 600px;
+            gap: 8px;
+            max-width: 700px;
             margin: 0 auto;
         }
         
         .gong {
             aspect-ratio: 1;
             background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.2));
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 12px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            font-size: 0.85rem;
         }
         
         .gong:hover {
@@ -198,22 +200,30 @@
         .gong.zhong {
             grid-column: 2;
             grid-row: 2;
+            background: linear-gradient(145deg, rgba(255,215,0,0.15), rgba(0,0,0,0.3));
+            border-color: rgba(255, 215, 0, 0.4);
         }
         
-        .gong .position {
+        .gong.zhifu {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .gong .gong-name {
             font-size: 0.7rem;
             color: #888;
             text-align: center;
         }
         
         .gong .star {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #4ecdc4;
             text-align: center;
+            font-weight: bold;
         }
         
         .gong .god {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #ff6b6b;
             text-align: center;
         }
@@ -225,10 +235,10 @@
             font-weight: bold;
         }
         
-        .gong .tiangan {
+        .gong .tiangan-row {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .gong .dp {
@@ -247,41 +257,72 @@
         
         .legend {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             margin-top: 20px;
             flex-wrap: wrap;
+            font-size: 0.8rem;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 0.85rem;
         }
         
         .legend-color {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border-radius: 4px;
         }
         
-        .hidden {
-            display: none !important;
+        .sizhu-section {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .sizhu-section h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .sizhu-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .sizhu-item {
+            text-align: center;
+        }
+        
+        .sizhu-item .label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .sizhu-item .value {
+            font-size: 1.3rem;
+            color: #ffd700;
+            font-weight: bold;
         }
         
         @media (max-width: 768px) {
             .pan-container {
-                grid-template-columns: repeat(3, 1fr);
                 gap: 5px;
             }
             
             .gong {
                 padding: 5px;
+                font-size: 0.75rem;
             }
             
             .gong .door {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             
             h1 {
@@ -293,7 +334,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V2.4 | 拆补法 · 寄坤宫</p>
+        <p class="subtitle">V2.0 | 拆补法 · 寄坤宫 · 完整排盘</p>
         
         <div class="input-section">
             <div class="input-row">
@@ -331,11 +372,14 @@
         </div>
         
         <div class="info-section" id="infoSection">
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>四柱</h3>
-                    <p id="sizhu">-</p>
+            <div class="sizhu-section">
+                <h3>四柱八字</h3>
+                <div class="sizhu-row" id="sizhuRow">
+                    <!-- 动态生成 -->
                 </div>
+            </div>
+            
+            <div class="info-grid">
                 <div class="info-card">
                     <h3>节气</h3>
                     <p id="jieqi">-</p>
@@ -363,6 +407,7 @@
             <div class="pan-container" id="panContainer">
                 <!-- 九宫格将由JavaScript生成 -->
             </div>
+            
             <div class="legend">
                 <div class="legend-item">
                     <div class="legend-color" style="background: #4ecdc4;"></div>
@@ -393,7 +438,7 @@
     </div>
 
     <script>
-        // 天干地支数据
+        // 基础数据
         const TIANGAN = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
         const DIZHI = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
         
@@ -404,24 +449,40 @@
         }
         
         // 六甲旬首
-        const XUNSHOU = {
-            '甲子': '甲子', '乙丑': '甲子', '丙寅': '甲子', '丁卯': '甲子', '戊辰': '甲子',
-            '己巳': '甲子', '庚午': '甲子', '辛未': '甲子', '壬申': '甲子', '癸酉': '甲子',
-            '甲戌': '甲戌', '乙亥': '甲戌', '丙子': '甲戌', '丁丑': '甲戌', '戊寅': '甲戌',
-            '己卯': '甲戌', '庚辰': '甲戌', '辛巳': '甲戌', '壬午': '甲戌', '癸未': '甲戌',
-            '甲申': '甲申', '乙酉': '甲申', '丙戌': '甲申', '丁亥': '甲申', '戊子': '甲申',
-            '己丑': '甲申', '庚寅': '甲申', '辛卯': '甲申', '壬辰': '甲申', '癸巳': '甲申',
-            '甲午': '甲午', '乙未': '甲午', '丙申': '甲午', '丁酉': '甲午', '戊戌': '甲午',
-            '己亥': '甲午', '庚子': '甲午', '辛丑': '甲午', '壬寅': '甲午', '癸卯': '甲午',
-            '甲辰': '甲辰', '乙巳': '甲辰', '丙午': '甲辰', '丁未': '甲辰', '戊申': '甲辰',
-            '己酉': '甲辰', '庚戌': '甲辰', '辛亥': '甲辰', '壬子': '甲辰', '癸丑': '甲辰',
-            '甲寅': '甲寅', '乙卯': '甲寅', '丙辰': '甲寅', '丁巳': '甲寅', '戊午': '甲寅',
-            '己未': '甲寅', '庚申': '甲寅', '辛酉': '甲寅', '壬戌': '甲寅', '癸亥': '甲寅'
-        };
+        const XUNSHOU_MAP = {};
+        const XUNSHOU_LIST = ['甲子', '甲戌', '甲申', '甲午', 'A辰', '甲寅'];
+        for (let i = 0; i < 60; i++) {
+            const xunIndex = Math.floor(i / 10);
+            XUNSHOU_MAP[JIAZI[i]] = XUNSHOU_LIST[xunIndex];
+        }
         
-        // 节气数据（2026年）
-        const JIEQI_2026 = [
-            {name: '冬至', date: '2025-12-22', type: 'yang'},
+        // 节气数据（2024-2027）
+        const JIEQI_DATA = [
+            {name: '冬至', date: '2024-12-21', type: 'yang'},
+            {name: '小寒', date: '2025-01-05', type: 'yang'},
+            {name: '大寒', date: '2025-01-20', type: 'yang'},
+            {name: '立春', date: '2025-02-03', type: 'yang'},
+            {name: '雨水', date: '2025-02-18', type: 'yang'},
+            {name: '惊蛰', date: '2025-03-05', type: 'yang'},
+            {name: '春分', date: '2025-03-20', type: 'yang'},
+            {name: '清明', date: '2025-04-04', type: 'yang'},
+            {name: '谷雨', date: '2025-04-20', type: 'yang'},
+            {name: '立夏', date: '2025-05-05', type: 'yang'},
+            {name: '小满', date: '2025-05-21', type: 'yang'},
+            {name: '芒种', date: '2025-06-05', type: 'yang'},
+            {name: '夏至', date: '2025-06-21', type: 'yin'},
+            {name: '小暑', date: '2025-07-07', type: 'yin'},
+            {name: '大暑', date: '2025-07-22', type: 'yin'},
+            {name: '立秋', date: '2025-08-07', type: 'yin'},
+            {name: '处暑', date: '2025-08-23', type: 'yin'},
+            {name: '白露', date: '2025-09-07', type: 'yin'},
+            {name: '秋分', date: '2025-09-23', type: 'yin'},
+            {name: '寒露', date: '2025-10-08', type: 'yin'},
+            {name: '霜降', date: '2025-10-23', type: 'yin'},
+            {name: '立冬', date: '2025-11-07', type: 'yin'},
+            {name: '小雪', date: '2025-11-22', type: 'yin'},
+            {name: '大雪', date: '2025-12-07', type: 'yin'},
+            {name: '冬至', date: '2025-12-21', type: 'yang'},
             {name: '小寒', date: '2026-01-05', type: 'yang'},
             {name: '大寒', date: '2026-01-20', type: 'yang'},
             {name: '立春', date: '2026-02-04', type: 'yang'},
@@ -459,23 +520,33 @@
             '立冬': [6, 9, 3], '小雪': [5, 8, 2], '大雪': [4, 7, 1]
         };
         
-        // 九星原始宫
+        // 九星
         const JIU_XING = {
-            '天蓬': 1, '天任': 8, '天冲': 3, '天辅': 4,
-            '天英': 9, '天芮': 2, '天柱': 7, '天心': 6, '天禽': 5
+            1: '天蓬', 8: '天任', 3: '天冲', 4: '天辅',
+            9: '天英', 2: '天芮', 7: '天柱', 6: '天心', 5: '天禽'
         };
         
-        // 八门原始宫
+        // 八门
         const BA_MEN = {
-            '休门': 1, '生门': 8, '伤门': 3, '杜门': 4,
-            '景门': 9, '死门': 2, '惊门': 7, '开门': 6
+            1: '休门', 8: '生门', 3: '伤门', 4: '杜门',
+            9: '景门', 2: '死门', 7: '惊门', 6: '开门'
         };
         
-        // 宫位数字对应
-        const GONG_NUM = {
-            '坎一': 1, '坤二': 2, '震三': 3, '巽四': 5,
-            '中五': 5, '乾六': 6, '兑七': 7, '艮八': 8, '离九': 9
+        // 八神（阳遁顺序）
+        const BA_SHEN_YANG = ['值符', '螣蛇', '太阴', '六合', '白虎', '玄武', '九地', '九天'];
+        const BA_SHEN_YIN = ['值符', '九天', '九地', '玄武', '白虎', '六合', '太阴', '螣蛇'];
+        
+        // 宫位名称
+        const GONG_NAMES = {
+            1: '坎一', 2: '坤二', 3: '震三', 4: '巽四',
+            5: '中五', 6: '乾六', 7: '兑七', 8: '艮八', 9: '离九'
         };
+        
+        // 物理顺时针顺序（从坎一开始）
+        const CLOCKWISE_ORDER = [1, 8, 3, 4, 9, 2, 7, 6];
+        
+        // 数字顺序（隐干用）
+        const NUMBER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         
         // 获取当前时间
         function useNow() {
@@ -485,27 +556,49 @@
             document.getElementById('minute').value = now.getMinutes();
         }
         
+        // 计算年干支
+        function getYearGanZhi(year) {
+            const gan = (year - 4) % 10;
+            const zhi = (year - 4) % 12;
+            return {
+                gan: gan,
+                zhi: zhi,
+                ganZhi: TIANGAN[gan] + DIZHI[zhi]
+            };
+        }
+        
         // 计算日干支（简化算法）
         function getDayGanZhi(date) {
-            const baseDate = new Date('2025-09-01');
-            const baseGanZhi = 9; // 癸酉是第9个（从0开始是8）
-            
-            const diffDays = Math.floor((date - baseDate) / (1000 * 60 * 60 * 24));
-            const ganZhiIndex = ((baseGanZhi + diffDays) % 60 + 60) % 60;
-            
+            // 以1900年1月31日为基准（甲辰日）
+            const baseDate = new Date(1900, 0, 31);
+            const diffTime = date.getTime() - baseDate.getTime();
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const index = (40 + diffDays) % 60; // 甲辰是第40个
             return {
-                gan: ganZhiIndex % 10,
-                zhi: ganZhiIndex % 12,
-                ganZhi: JIAZI[ganZhiIndex]
+                gan: index % 10,
+                zhi: index % 12,
+                ganZhi: JIAZI[index]
             };
         }
         
         // 计算时辰干支
         function getHourGanZhi(dayGan, hourZhi) {
             // 日上起时法
-            const startGan = [0, 0, 2, 2, 4, 4, 6, 6, 8, 8][dayGan]; // 甲己日起甲子...
+            const startGan = [0, 0, 2, 2, 4, 4, 6, 6, 8, 8][dayGan];
             const gan = (startGan + hourZhi) % 10;
-            const zhi = hourZhi;
+            return {
+                gan: gan,
+                zhi: hourZhi,
+                ganZhi: TIANGAN[gan] + DIZHI[hourZhi]
+            };
+        }
+        
+        // 计算月干支
+        function getMonthGanZhi(yearGan, month) {
+            // 年上起月法
+            const startGan = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0][yearGan]; // 甲己年起丙寅
+            const gan = (startGan + month - 1) % 10;
+            const zhi = (month + 1) % 12; // 寅月为2
             return {
                 gan: gan,
                 zhi: zhi,
@@ -515,31 +608,30 @@
         
         // 获取节气
         function getJieQi(date) {
-            const targetDate = new Date(date);
-            targetDate.setHours(0, 0, 0, 0);
+            const target = new Date(date);
+            target.setHours(0, 0, 0, 0);
             
-            for (let i = JIEQI_2026.length - 1; i >= 0; i--) {
-                const jqDate = new Date(JIEQI_2026[i].date);
-                jqDate.setHours(0, 0, 0, 0);
-                if (targetDate >= jqDate) {
-                    return JIEQI_2026[i];
+            for (let i = JIEQI_DATA.length - 1; i >= 0; i--) {
+                const jqDate = new Date(JIEQI_DATA[i].date);
+                if (target >= jqDate) {
+                    return JIEQI_DATA[i];
                 }
             }
-            return JIEQI_2026[0];
+            return JIEQI_DATA[0];
         }
         
         // 定局数
         function determineJuShu(jieQi, dayGanZhi) {
-            const xunShou = XUNSHOU[dayGanZhi];
+            const xunShou = XUNSHOU_MAP[dayGanZhi];
             const fuTouZhi = DIZHI.indexOf(xunShou[1]);
             
             let yuan;
-            if ([0, 6, 3, 9].includes(fuTouZhi)) { // 子午卯酉
-                yuan = 0; // 上元
-            } else if ([2, 8, 5, 11].includes(fuTouZhi)) { // 寅申巳亥
-                yuan = 1; // 中元
-            } else { // 辰戌丑未
-                yuan = 2; // 下元
+            if ([0, 6, 3, 9].includes(fuTouZhi)) {
+                yuan = 0;
+            } else if ([2, 8, 5, 11].includes(fuTouZhi)) {
+                yuan = 1;
+            } else {
+                yuan = 2;
             }
             
             const juShu = SAN_YUAN[jieQi.name][yuan];
@@ -556,17 +648,9 @@
         // 排地盘干
         function paiDiPan(juShu, isYang) {
             const diPan = {};
-            const tianGanOrder = [4, 5, 6, 7, 8, 9, 0, 1, 2, 3]; // 戊己庚辛壬癸丁丙乙的索引
+            const tianGanOrder = [4, 5, 6, 7, 8, 9, 0, 1, 2, 3]; // 戊己庚辛壬癸丁丙乙
             
-            // 宫位顺序：阳遁顺排1-9，阴遁逆排
-            let gongOrder;
-            if (isYang) {
-                gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-            } else {
-                gongOrder = [9, 8, 7, 6, 5, 4, 3, 2, 1];
-            }
-            
-            // 从局数对应的宫开始
+            let gongOrder = isYang ? [1, 2, 3, 4, 5, 6, 7, 8, 9] : [9, 8, 7, 6, 5, 4, 3, 2, 1];
             const startIndex = gongOrder.indexOf(juShu);
             
             for (let i = 0; i < 9; i++) {
@@ -580,11 +664,9 @@
         
         // 找值符值使
         function findZhiFuZhiShi(hourGanZhi, diPan) {
-            const xunShou = XUNSHOU[hourGanZhi];
-            const xunShouGan = xunShou[0] + xunShou[1]; // 如甲子取甲，甲戌取甲
+            const xunShou = XUNSHOU_MAP[hourGanZhi];
             const xunShouGanIndex = TIANGAN.indexOf(xunShou[0]);
             
-            // 找旬首干在地盘的位置
             let xunShouGong = null;
             for (let gong in diPan) {
                 if (diPan[gong] === TIANGAN[xunShouGanIndex]) {
@@ -593,23 +675,8 @@
                 }
             }
             
-            // 值符星和值使门
-            let zhiFuXing = null;
-            let zhiShiMen = null;
-            
-            for (let xing in JIU_XING) {
-                if (JIU_XING[xing] === xunShouGong) {
-                    zhiFuXing = xing;
-                    break;
-                }
-            }
-            
-            for (let men in BA_MEN) {
-                if (BA_MEN[men] === xunShouGong) {
-                    zhiShiMen = men;
-                    break;
-                }
-            }
+            const zhiFuXing = JIU_XING[xunShouGong];
+            const zhiShiMen = BA_MEN[xunShouGong];
             
             return {
                 xunShou: xunShou,
@@ -619,14 +686,164 @@
             };
         }
         
+        // 排天盘干
+        function paiTianPan(hourGanZhi, diPan, zhiFuInfo, isYang) {
+            const tianPan = {};
+            const hourGan = hourGanZhi[0];
+            
+            // 找时干在地盘的宫位
+            let hourGanGong = null;
+            for (let gong in diPan) {
+                if (diPan[gong] === hourGan) {
+                    hourGanGong = parseInt(gong);
+                    break;
+                }
+            }
+            
+            // 值符到时干宫
+            tianPan[hourGanGong] = {
+                star: zhiFuInfo.zhiFuXing,
+                gan: zhiFuInfo.xunShou[0] // 旬首干
+            };
+            
+            // 其他星按顺序排
+            const starOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
+            const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
+            
+            // 物理顺时针方向
+            let currentGongIndex = CLOCKWISE_ORDER.indexOf(hourGanGong);
+            
+            for (let i = 1; i < 8; i++) {
+                currentGongIndex = (currentGongIndex + 1) % 8;
+                const gong = CLOCKWISE_ORDER[currentGongIndex];
+                if (gong === 5) continue; // 跳过中五
+                
+                const starIndex = (zhiFuIndex + i) % 8;
+                const star = starOrder[starIndex];
+                const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
+                
+                tianPan[gong] = {
+                    star: star,
+                    gan: diPan[origGong]
+                };
+            }
+            
+            // 中五宫
+            tianPan[5] = {
+                star: '天禽',
+                gan: diPan[5] || '戊'
+            };
+            
+            return tianPan;
+        }
+        
+        // 排八神
+        function paiBaShen(zhiFuGong, isYang) {
+            const baShen = {};
+            const shenOrder = isYang ? BA_SHEN_YANG : BA_SHEN_YIN;
+            
+            const zhiFuIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
+            
+            for (let i = 0; i < 8; i++) {
+                const gongIndex = (zhiFuIndex + i) % 8;
+                const gong = CLOCKWISE_ORDER[gongIndex];
+                baShen[gong] = shenOrder[i];
+            }
+            
+            return baShen;
+        }
+        
+        // 排八门
+        function paiBaMen(zhiShiMen, xunShouGong, hourZhi, isYang) {
+            const baMen = {};
+            const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
+            const zhiShiIndex = menOrder.indexOf(zhiShiMen);
+            
+            // 计算值使门落宫
+            const xunShouZhi = DIZHI.indexOf(XUNSHOU_MAP[TIANGAN[0] + DIZHI[hourZhi]][1]);
+            const hourZhiIndex = hourZhi;
+            
+            let steps;
+            if (isYang) {
+                steps = (hourZhiIndex - xunShouZhi + 12) % 12;
+            } else {
+                steps = (xunShouZhi - hourZhiIndex + 12) % 12;
+            }
+            
+            // 简化：值使门从旬首宫开始走
+            let currentGong = xunShouGong;
+            for (let i = 0; i < steps; i++) {
+                const idx = CLOCKWISE_ORDER.indexOf(currentGong);
+                currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
+            }
+            
+            // 从值使门落宫开始排八门
+            const startIndex = CLOCKWISE_ORDER.indexOf(currentGong);
+            
+            for (let i = 0; i < 8; i++) {
+                const gongIndex = (startIndex + i) % 8;
+                const gong = CLOCKWISE_ORDER[gongIndex];
+                const menIndex = (zhiShiIndex + i) % 8;
+                baMen[gong] = menOrder[menIndex];
+            }
+            
+            return baMen;
+        }
+        
+        // 排隐干
+        function paiYinGan(zhiShiMenGong, diPan, hourGanZhi, isYang) {
+            const yinGan = {};
+            const ganOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
+            const hourGan = hourGanZhi[0];
+            
+            // 找时干序号
+            const hourGanIndex = ganOrder.indexOf(hourGan);
+            
+            // 从值使门落宫开始
+            const startGong = zhiShiMenGong;
+            const startIndex = NUMBER_ORDER.indexOf(startGong);
+            
+            for (let i = 0; i < 9; i++) {
+                const ganIdx = (hourGanIndex + i) % 9;
+                const gongIdx = (startIndex + i) % 9;
+                const gong = NUMBER_ORDER[gongIdx];
+                yinGan[gong] = ganOrder[ganIdx];
+            }
+            
+            return yinGan;
+        }
+        
         // 主排盘函数
         function qiPan() {
             const date = new Date(document.getElementById('date').value);
             const hour = parseInt(document.getElementById('hour').value);
             
             // 计算四柱
+            const yearGZ = getYearGanZhi(date.getFullYear());
+            const monthGZ = getMonthGanZhi(yearGZ.gan, date.getMonth() + 1);
             const dayGZ = getDayGanZhi(date);
             const hourGZ = getHourGanZhi(dayGZ.gan, hour);
+            
+            // 显示四柱
+            const sizhuRow = document.getElementById('sizhuRow');
+            sizhuRow.innerHTML = `
+                <div class="sizhu-item">
+                    <div class="label">年柱</div>
+                    <div class="value">${yearGZ.ganZhi}</div>
+                </div>
+                <div class="sizhu-item">
+                    <div class="label">月柱</div>
+                    <div class="value">${monthGZ.ganZhi}</div>
+                </div>
+                <div class="sizhu-item">
+                    <div class="label">日柱</div>
+                    <div class="value">${dayGZ.ganZhi}</div>
+                </div>
+                <div class="sizhu-item">
+                    <div class="label">时柱</div>
+                    <div class="value">${hourGZ.ganZhi}</div>
+                </div>
+            `;
             
             // 获取节气
             const jieQi = getJieQi(date);
@@ -640,57 +857,78 @@
             // 找值符值使
             const zhiFuInfo = findZhiFuZhiShi(hourGZ.ganZhi, diPan);
             
+            // 排天盘
+            const tianPan = paiTianPan(hourGZ.ganZhi, diPan, zhiFuInfo, juInfo.isYang);
+            
+            // 排八神
+            const hourGanGong = Object.keys(diPan).find(k => diPan[k] === hourGZ.ganZhi[0]);
+            const baShen = paiBaShen(parseInt(hourGanGong), juInfo.isYang);
+            
+            // 排八门（简化版）
+            const baMen = {};
+            const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
+            
+            // 值使门落宫简化处理
+            let zhiShiGong = zhiFuInfo.xunShouGong;
+            const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
+            
+            for (let i = 0; i < 8; i++) {
+                const gong = CLOCKWISE_ORDER[i];
+                const menIdx = (zhiShiIndex + i) % 8;
+                baMen[gong] = menOrder[menIdx];
+            }
+            
+            // 排隐干
+            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
+            
             // 显示信息
-            document.getElementById('sizhu').textContent = 
-                `${dayGZ.ganZhi}日 ${hourGZ.ganZhi}时`;
             document.getElementById('jieqi').textContent = jieQi.name;
-            document.getElementById('jushu').textContent = 
-                `${juInfo.type}${juInfo.ju}局 (${juInfo.yuan})`;
+            document.getElementById('jushu').textContent = `${juInfo.type}${juInfo.ju}局 (${juInfo.yuan})`;
             document.getElementById('xunshou').textContent = zhiFuInfo.xunShou;
             document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing;
             document.getElementById('zhishi').textContent = zhiFuInfo.zhiShiMen;
             
             document.getElementById('infoSection').classList.add('active');
             
-            // 生成九宫格
-            renderPan(diPan, zhiFuInfo, juInfo.isYang, hourGZ);
+            // 渲染九宫格
+            renderPan(diPan, tianPan, baShen, baMen, yinGan, zhiFuInfo);
             
             document.getElementById('panSection').classList.add('active');
         }
         
         // 渲染盘面
-        function renderPan(diPan, zhiFuInfo, isYang, hourGZ) {
+        function renderPan(diPan, tianPan, baShen, baMen, yinGan, zhiFuInfo) {
             const container = document.getElementById('panContainer');
             container.innerHTML = '';
             
-            // 九宫位置映射（按页面显示顺序）
-            const gongPositions = [
-                4, 9, 2,
-                3, 5, 7,
-                8, 1, 6
-            ];
+            // 九宫位置映射
+            const gongPositions = [4, 9, 2, 3, 5, 7, 8, 1, 6];
             
-            const gongNames = {
-                1: '坎一', 2: '坤二', 3: '震三', 4: '巽四',
-                5: '中五', 6: '乾六', 7: '兑七', 8: '艮八', 9: '离九'
-            };
-            
-            gongPositions.forEach((gongNum, index) => {
+            gongPositions.forEach(gongNum => {
                 const gong = document.createElement('div');
                 gong.className = 'gong' + (gongNum === 5 ? ' zhong' : '');
                 
-                const dp = diPan[gongNum] || '-';
+                if (tianPan[gongNum] && tianPan[gongNum].star === zhiFuInfo.zhiFuXing) {
+                    gong.classList.add('zhifu');
+                }
+                
+                const star = tianPan[gongNum] ? tianPan[gongNum].star : '-';
+                const tpGan = tianPan[gongNum] ? tianPan[gongNum].gan : '-';
+                const dpGan = diPan[gongNum] || '-';
+                const shen = baShen[gongNum] || '-';
+                const men = baMen[gongNum] || '-';
+                const yg = yinGan[gongNum] || '-';
                 
                 gong.innerHTML = `
-                    <div class="position">${gongNames[gongNum]}</div>
-                    <div class="star">-</div>
-                    <div class="god">-</div>
-                    <div class="door">-</div>
-                    <div class="tiangan">
-                        <span class="dp">地:${dp}</span>
-                        <span class="tp">天:-</span>
+                    <div class="gong-name">${GONG_NAMES[gongNum]}</div>
+                    <div class="star">${star}</div>
+                    <div class="god">${shen}</div>
+                    <div class="door">${men}</div>
+                    <div class="tiangan-row">
+                        <span class="dp">地:${dpGan}</span>
+                        <span class="tp">天:${tpGan}</span>
                     </div>
-                    <div class="yg">隐:-</div>
+                    <div class="yg">隐:${yg}</div>
                 `;
                 
                 container.appendChild(gong);
