@@ -916,10 +916,11 @@
             
             // 找时干在地盘的宫位（值符星要飞到这里）
             let hourGanGong = null;
-            for (let gong in diPan) {
-                console.log('检查宫:', gong, '值:', diPan[gong], '匹配?', diPan[gong] === hourGan);
-                if (diPan[gong] === hourGan) {
-                    hourGanGong = parseInt(gong);
+            for (let gongStr in diPan) {
+                const gongNum = parseInt(gongStr);
+                console.log('检查宫:', gongStr, '→', gongNum, '值:', diPan[gongStr], '匹配?', diPan[gongStr] === hourGan);
+                if (diPan[gongStr] === hourGan) {
+                    hourGanGong = gongNum;
                     break;
                 }
             }
