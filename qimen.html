@@ -721,11 +721,28 @@
             };
         }
         
-        // 计算月干支
-        function getMonthGanZhi(yearGan, month) {
-            const startGan = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0][yearGan];
-            const gan = (startGan + month - 1) % 10;
-            const zhi = (month + 1) % 12;
+        // 计算月干支（按节气）
+        function getMonthGanZhi(yearGan, jieQiName) {
+            // 年上起月口诀：
+            // 甲己之年丙作首(丙寅), 乙庚之岁戊为头(戊寅), 
+            // 丙辛之岁寻庚上(庚寅), 丁壬壬位顺行流(壬寅),
+            // 若问戊癸何方发, 甲寅之上好追求(甲寅)
+            const startGan = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0][yearGan]; // 正月的干
+            
+            // 根据节气确定月份（正月从立春/惊蛰开始）
+            const jieqiToMonth = {
+                '立春': 0, '雨水': 0, '惊蛰': 1, '春分': 1,
+                '清明': 2, '谷雨': 2, '立夏': 3, '小满': 3,
+                '芒种': 4, '夏至': 4, '小暑': 5, '大暑': 5,
+                '立秋': 6, '处暑': 6, '白露': 7, '秋分': 7,
+                '寒露': 8, '霜降': 8, '立冬': 9, '小雪': 9,
+                '大雪': 10, '冬至': 10, '小寒': 11, '大寒': 11
+            };
+            
+            const monthOffset = jieqiToMonth[jieQiName] || 0;
+            const gan = (startGan + monthOffset) % 10;
+            const zhi = (2 + monthOffset) % 12; // 正月建寅(2)
+            
             return {
                 gan,
                 zhi,
@@ -967,9 +984,12 @@
             const date = new Date(document.getElementById('date').value);
             const hour = parseInt(document.getElementById('hour').value);
             
+            // 先获取节气（用于月柱计算）
+            const jieQi = getJieQi(date);
+            
             // 四柱
             const yearGZ = getYearGanZhi(date.getFullYear());
-            const monthGZ = getMonthGanZhi(yearGZ.gan, date.getMonth() + 1);
+            const monthGZ = getMonthGanZhi(yearGZ.gan, jieQi.name);
             const dayGZ = getDayGanZhi(date);
             const hourGZ = getHourGanZhi(dayGZ.gan, hour);
             
@@ -981,9 +1001,6 @@
                 <div class="sizhu-item"><div class="label">日柱</div><div class="value">${dayGZ.ganZhi}</div></div>
                 <div class="sizhu-item"><div class="label">时柱</div><div class="value">${hourGZ.ganZhi}</div></div>
             `;
-            
-            // 节气
-            const jieQi = getJieQi(date);
             
             // 定局
             const juInfo = determineJuShu(jieQi, dayGZ.ganZhi);
