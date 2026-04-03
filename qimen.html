@@ -1004,29 +1004,16 @@
                 steps = (xunShouZhi - hourZhi + 12) % 12;
             }
             
-            console.log('paiBaMen调试:', {
-                xunShou: zhiFuInfo.xunShou,
-                xunShouZhi,
-                hourZhi,
-                steps,
-                xunShouGong: zhiFuInfo.xunShouGong,
-                xunShouGongType: typeof zhiFuInfo.xunShouGong
-            });
-            
             // 从旬首宫开始走
-            let currentGong = zhiFuInfo.xunShouGong;
+            let currentGong = parseInt(zhiFuInfo.xunShouGong); // 确保是数字
             
             // 每1步走一宫（不是2步！）
             for (let i = 0; i < steps; i++) {
                 const idx = CLOCKWISE_ORDER.indexOf(currentGong);
                 currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
-                console.log(`第${i+1}步到:`, currentGong);
             }
             
-            console.log('最终值使门落宫:', currentGong, '类型:', typeof currentGong);
-            
-            // 确保是数字
-            currentGong = parseInt(currentGong);
+            console.log('最终值使门落宫:', currentGong);
             
             const startIndex = CLOCKWISE_ORDER.indexOf(currentGong);
             
@@ -1050,7 +1037,15 @@
             const hourGanIndex = ganOrder.indexOf(hourGan);
             
             const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-            const startIndex = gongOrder.indexOf(zhiShiGong);
+            const startIndex = gongOrder.indexOf(parseInt(zhiShiGong)); // 确保是数字
+            
+            console.log('paiYinGan调试:', {
+                zhiShiGong,
+                zhiShiGongType: typeof zhiShiGong,
+                startIndex,
+                hourGan,
+                hourGanIndex
+            });
             
             for (let i = 0; i < 9; i++) {
                 const ganIdx = (hourGanIndex + i) % 9;
@@ -1140,7 +1135,7 @@
             const {baMen, zhiShiGong} = paiBaMen(zhiFuInfo, hour, juInfo.isYang);
             
             // 排隐干
-            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
+            const yinGan = paiYinGan(parseInt(zhiShiGong), diPan, hourGZ.ganZhi, juInfo.isYang);
             
             // 马星
             const maXingZhi = MAXING[hour];
