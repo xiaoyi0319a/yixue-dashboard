@@ -1119,7 +1119,9 @@
             const zhiFuInfo = findZhiFuZhiShi(hourGZ.ganZhi, diPan);
             
             // 排天盘
+            console.log('排天盘前diPan:', JSON.stringify(diPan));
             const {tianPan, hourGanGong} = paiTianPan(hourGZ.ganZhi, diPan, zhiFuInfo, juInfo.isYang);
+            console.log('排天盘后diPan:', JSON.stringify(diPan));
             
             // 排八神
             const baShen = paiBaShen(hourGanGong, juInfo.isYang);
