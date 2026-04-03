@@ -902,12 +902,12 @@
             };
         }
         
-        // 排天盘干和九星
+        // 排天盘干和九星（修正版）
         function paiTianPan(hourGanZhi, diPan, zhiFuInfo, isYang) {
             const tianPan = {};
             const hourGan = hourGanZhi[0];
             
-            // 找时干在地盘的宫位
+            // 找时干在地盘的宫位（值符星要飞到这里）
             let hourGanGong = null;
             for (let gong in diPan) {
                 if (diPan[gong] === hourGan) {
@@ -920,20 +920,22 @@
             const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(hourGanGong);
             
-            // 值符星到时干宫，带旬首的六仪
+            // 值符星到时干宫，带旬首的六仪（关键修正！）
             const liuYi = zhiFuInfo.xunShou.slice(2); // 从"甲辰壬"取"壬"
             tianPan[hourGanGong] = {
                 star: zhiFuInfo.zhiFuXing,
-                gan: liuYi
+                gan: liuYi  // 带六仪，不是时干！
             };
             
+            // 其他星按顺序排，带原始宫的地盘干
             for (let i = 1; i < 8; i++) {
                 currentGongIndex = (currentGongIndex + 1) % 8;
                 const gong = CLOCKWISE_ORDER[currentGongIndex];
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
+                // 找这个星的原始宫
                 const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
-                
+                // 带原始宫的地盘干
                 tianPan[gong] = {
                     star,
                     gan: diPan[origGong]
@@ -942,7 +944,7 @@
             
             tianPan[5] = {
                 star: '天禽',
-                gan: diPan[5] || '戊'
+                gan: diPan[5] || '乙'
             };
             
             return {tianPan, hourGanGong};
