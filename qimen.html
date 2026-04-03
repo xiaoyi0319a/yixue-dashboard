@@ -1213,34 +1213,12 @@
                 // 第一行：八神
                 // 第二行：隐干 | 九星 | 天盘干
                 // 第三行：八门 | 地盘干
-                // 
-                // 寄宫显示规则（方案A）：
-                // 中宫：天盘乙寄到兑七天芮，地盘乙寄到坤二
-                // 中宫显示：八神/隐干/星(-)/天盘(-)/门(-)/地盘(乙)
-                // 坤二宫：地盘显示"乙/癸"
-                // 兑七宫：星名"天芮禽"，天盘"乙/癸"
                 
+                // 注意：以下是显示用的变量，不要修改原始数据
                 let displayStar = star;
                 let displayTpGan = tpGan;
                 let displayDpGan = dpGan;
                 let displayMen = men;
-                
-                // 中宫特殊处理
-                if (gongNum === 5) {
-                    displayStar = '-';
-                    displayTpGan = '-';
-                    displayMen = '-';
-                    // 地盘保留乙
-                }
-                // 坤二宫特殊处理：地盘显示"乙/癸"
-                else if (gongNum === 2) {
-                    displayDpGan = '乙/癸';
-                }
-                // 兑七宫特殊处理：星名"天芮禽"，天盘"乙/癸"
-                else if (gongNum === 7) {
-                    displayStar = '天芮禽';
-                    displayTpGan = '乙/癸';
-                }
                 
                 gong.innerHTML = `
                     <div class="row1">${shen}</div>
