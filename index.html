@@ -3,246 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羿学交易 - 每日投资情报 | 2026-04-01</title>
+    <title>羿学交易智囊团 | 2026-04-03</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0e1a; color: #e8eaed; line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; padding: 40px 0; border-bottom: 1px solid #1e3a5f; margin-bottom: 30px; }
-        header h1 { font-size: 2.5em; background: linear-gradient(90deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        header p { color: #8892b0; font-size: 1.1em; }
-        .date-tag { display: inline-block; background: #7b2cbf; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; margin-top: 10px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .date {
+            color: #8b9dc3;
+            font-size: 1.1em;
+        }
         
-        .section { background: #111827; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #1e3a5f; }
-        .section-title { font-size: 1.4em; color: #00d4ff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .section-title::before { content: '◆'; color: #7b2cbf; }
+        /* 奇门预测区 */
+        .qimen-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #a371f7;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(163, 113, 247, 0.2);
+        }
+        .qimen-section h2 {
+            color: #a371f7;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .qimen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .qimen-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .qimen-item .label {
+            color: #8b9dc3;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .qimen-item .value {
+            color: #00d4ff;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .qimen-trend {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .qimen-trend .trend-title {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .qimen-strategy {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .qimen-strategy .strategy-title {
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .qimen-esoteric {
+            color: #a371f7;
+            font-style: italic;
+            padding: 10px;
+            border-top: 1px dashed #a371f7;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
         
-        /* 奇门预测样式 */
-        .qimen-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: #1a2332; border-radius: 8px; }
-        .qimen-info { display: flex; gap: 30px; font-size: 0.9em; }
-        .qimen-info span { color: #8892b0; }
-        .qimen-info strong { color: #00d4ff; }
-        .qimen-verdict { background: linear-gradient(90deg, #ff6b6b, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3em; font-weight: bold; }
+        /* 方向卡片 */
+        .directions-section h2 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .direction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .direction-card {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .direction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+        }
+        .direction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        .direction-card.hot::before { background: linear-gradient(90deg, #ff6b6b, #ffd700); }
+        .direction-card.watch::before { background: linear-gradient(90deg, #00d4ff, #58a6ff); }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-watch { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
+        .direction-card h3 {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .direction-card p {
+            color: #b0c4de;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .click-hint {
+            color: #58a6ff;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
         
-        .qimen-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .qimen-box { background: #1a2332; padding: 20px; border-radius: 8px; border: 1px solid #2d3a4f; }
-        .qimen-box h4 { color: #ffd700; margin-bottom: 15px; font-size: 1em; }
-        .qimen-box table { width: 100%; font-size: 0.85em; }
-        .qimen-box td { padding: 8px 0; border-bottom: 1px solid #2d3a4f; }
-        .qimen-box td:first-child { color: #8892b0; }
-        .qimen-box .highlight { color: #00ff88; }
-        .qimen-box .warning { color: #ff6b6b; }
+        /* 验证节点表格 */
+        .verification-section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .verification-section h2 {
+            color: #00d4ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        .verification-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .verification-table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .verification-table td {
+            padding: 12px;
+            border-bottom: 1px solid #2d3a4f;
+            color: #b0c4de;
+        }
+        .verification-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
         
-        .hours-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 15px; }
-        .hour-cell { text-align: center; padding: 10px; background: #0f1419; border-radius: 6px; font-size: 0.8em; }
-        .hour-cell .time { color: #8892b0; font-size: 0.75em; }
-        .hour-cell .status { margin-top: 5px; }
-        .hour-cell.good { border: 1px solid #00ff88; }
-        .hour-cell.bad { border: 1px solid #ff6b6b; }
-        .hour-cell.warn { border: 1px solid #ffd700; }
-        
-        /* 方向卡片样式 */
-        .direction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 20px; }
-        .direction-card { background: #1a2332; border-radius: 10px; padding: 20px; border: 1px solid #2d3a4f; }
-        .direction-card h3 { color: #00d4ff; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .direction-card .tag { padding: 4px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
-        .tag-fire { background: #ff6b6b; color: #fff; }
-        .tag-eye { background: #ffd700; color: #000; }
-        .direction-card .logic { font-size: 0.9em; color: #8892b0; margin: 15px 0; padding: 12px; background: #0f1419; border-radius: 6px; border-left: 3px solid #00d4ff; }
-        .direction-card .score { font-size: 0.85em; color: #7b2cbf; margin-bottom: 10px; }
-        
-        .stock-table { width: 100%; font-size: 0.85em; border-collapse: collapse; margin-top: 15px; }
-        .stock-table th { text-align: left; padding: 10px; background: #0f1419; color: #8892b0; font-weight: normal; }
-        .stock-table td { padding: 10px; border-bottom: 1px solid #2d3a4f; }
-        .stock-table tr:hover { background: #252d3d; }
-        .stock-table .s { color: #ffd700; font-weight: bold; }
-        .stock-table .a { color: #00ff88; }
-        .stock-name { font-weight: 500; }
-        .stock-code { color: #8892b0; font-size: 0.85em; }
-        
-        /* 新闻样式 */
-        .news-list { display: flex; flex-direction: column; gap: 12px; }
-        .news-item { display: flex; gap: 15px; padding: 15px; background: #1a2332; border-radius: 8px; border-left: 3px solid #00d4ff; }
-        .news-time { color: #8892b0; font-size: 0.8em; min-width: 80px; }
-        .news-content { flex: 1; }
-        .news-title { color: #e8eaed; font-weight: 500; margin-bottom: 5px; }
-        .news-source { font-size: 0.8em; color: #7b2cbf; }
-        
-        footer { text-align: center; padding: 30px; color: #8892b0; font-size: 0.9em; border-top: 1px solid #1e3a5f; margin-top: 30px; }
-        .update-time { color: #00d4ff; }
-        
-        @media (max-width: 768px) {
-            .direction-grid { grid-template-columns: 1fr; }
-            .qimen-detail { grid-template-columns: 1fr; }
-            .hours-grid { grid-template-columns: repeat(3, 1fr); }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>羿学交易</h1>
-            <p>每日投资情报 · 奇门预测 · 预期差挖掘</p>
-            <div class="date-tag">2026年4月1日 星期三</div>
-        </header>
-
-        <!-- 第一层：奇门预测 -->
-        <div class="section">
-            <h2 class="section-title">奇门遁甲大盘预测（奇门君）</h2>
-            
-            <div class="qimen-header">
-                <div class="qimen-info">
-                    <div><span>局数：</span><strong>阳遁四局</strong></div>
-                    <div><span>值符：</span><strong>天冲星</strong></div>
-                    <div><span>值使：</span><strong>伤门</strong></div>
-                    <div><span>日干：</span><strong>乙（阴木）</strong></div>
-                    <div><span>时干：</span><strong>庚（阳金）</strong></div>
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🎯 羿学交易智囊团</h1>
+            <div class="date">2026年4月3日 星期五 | 甲辰年 辛卯月 丁未日</div>
+        </div>
+        
+        <!-- 奇门预测 -->
+        <div class="qimen-section">
+            <h2>🔮 奇门君今日预测</h2>
+            <div class="qimen-grid">
+                <div class="qimen-item">
+                    <div class="label">局数</div>
+                    <div class="value">阳遁6局</div>
                 </div>
-                <div class="qimen-verdict">震荡偏空 · 冲高回落</div>
+                <div class="qimen-item">
+                    <div class="label">值符</div>
+                    <div class="value">天蓬星（坎一宫）</div>
+                </div>
+                <div class="qimen-item">
+                    <div class="label">值使</div>
+                    <div class="value">休门（坎一宫）</div>
+                </div>
+                <div class="qimen-item">
+                    <div class="label">日干</div>
+                    <div class="value">丁（震三宫·休囚）</div>
+                </div>
             </div>
-            
-            <div class="qimen-detail">
-                <div class="qimen-box">
-                    <h4>🔮 走势推演</h4>
-                    <table>
-                        <tr><td>开盘</td><td class="highlight">小幅高开 (+0.1%~+0.3%)</td></tr>
-                        <tr><td>09:30-10:00</td><td>小幅高开，买方尝试上攻</td></tr>
-                        <tr><td>10:00-11:00</td><td class="warning">空方反击，指数回落</td></tr>
-                        <tr><td>下午</td><td>多空拉锯，震荡收窄</td></tr>
-                        <tr><td>收盘</td><td class="warning">小幅收跌 (-0.2%~-0.5%)</td></tr>
-                        <tr><td>幅度预估</td><td>±0.5% 以内震荡</td></tr>
-                    </table>
-                </div>
-                <div class="qimen-box">
-                    <h4>⏰ 时辰吉凶与操作</h4>
-                    <div class="hours-grid">
-                        <div class="hour-cell warn">
-                            <div class="time">辰时</div>
-                            <div>07-09</div>
-                            <div class="status">⚠️ 观望</div>
-                        </div>
-                        <div class="hour-cell bad">
-                            <div class="time">巳时</div>
-                            <div>09-11</div>
-                            <div class="status">🔴 高抛</div>
-                        </div>
-                        <div class="hour-cell warn">
-                            <div class="time">午时</div>
-                            <div>11-13</div>
-                            <div class="status">⚠️ 观望</div>
-                        </div>
-                        <div class="hour-cell good">
-                            <div class="time">未时</div>
-                            <div>13-15</div>
-                            <div class="status">🟢 低吸</div>
-                        </div>
-                        <div class="hour-cell">
-                            <div class="time">申时</div>
-                            <div>15-17</div>
-                            <div class="status">收盘</div>
-                        </div>
-                        <div class="hour-cell">
-                            <div class="time">酉时</div>
-                            <div>17-19</div>
-                            <div class="status">休市</div>
-                        </div>
-                    </div>
-                    <p style="margin-top: 15px; font-size: 0.85em; color: #8892b0;">
-                        <strong style="color: #00d4ff;">策略：</strong>早盘冲高减仓，午后急跌可轻仓低吸，半仓以内
-                    </p>
-                    <p style="margin-top: 10px; font-size: 0.8em; color: #7b2cbf; font-style: italic; border-top: 1px solid #2d3a4f; padding-top: 10px;">
-                        乙巳日庚辰时，阳遁四局。天冲值符临震宫，伤门值使同宫，主变动伤损。日干乙奇虽落艮宫帝旺，然时干庚金当令，金克木而成战格。玄武暗动，暗中波涛汹涌；太白同宫，多空激烈交锋。看似生门吉庆，实则庚金当令，乙木受困。
-                    </p>
-                </div>
+            <div class="qimen-trend">
+                <div class="trend-title">📊 走势判断：小吉带凶，谨慎参与</div>
+                <div>大盘（值符）旺相临休门，大势稳健但主休息；股价（日干丁）休囚无力，临太阴暗动；白虎在离宫，防突发下跌风险。</div>
+            </div>
+            <div class="qimen-strategy">
+                <div class="strategy-title">💡 操作策略</div>
+                <div>早盘观望，小仓位试探，不宜重仓。等待白虎之凶过去后再择机操作，仓位控制在3成以内。</div>
+            </div>
+            <div class="qimen-esoteric">
+                📜 玄学解析：时干甲辰（隐干壬）临值符天蓬，壬水生丁火时机生助股价；然艮八宫庚临螣蛇，卖盘缠绕虚诈；离九宫白虎当令，突发利空需警惕。值使休门主静待，莫要急躁追高。
             </div>
         </div>
-
-        <!-- 第二层：预期差方向 -->
-        <div class="section">
-            <h2 class="section-title">预期差方向（基于v6.1大白话版）</h2>
-            
+        
+        <!-- 预期差方向 -->
+        <div class="directions-section">
+            <h2>📈 今日预期差方向</h2>
             <div class="direction-grid">
-                <!-- 方向1：储能电池 -->
-                <div class="direction-card" onclick="location.href='direction-1-energy-storage.html'" style="cursor: pointer;">
-                    <h3>
-                        储能电池供给侧改革
-                        <span class="tag tag-fire">🔥 值得重点看</span>
-                    </h3>
-                    <div class="logic">
-                        工信部发话要编"十五五"电池规划，核心就一句话：别再瞎建烂电池厂了。以前谁有钱谁都能进来卷，以后只有头部玩家能玩。
-                        <br><br>
-                        <strong style="color:#00ff88">最新验证：</strong>宁德时代2025年毛利率已回升至26.27%，2026年Q1市占率突破50%创5年新高，价格战对龙头影响已有限。
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #00d4ff;">点击查看详细分析 →</p>
+                <div class="direction-card hot" onclick="location.href='direction-1-oil.html'">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>中东局势/霍尔木兹海峡</h3>
+                    <p>特朗普放话要打伊朗，油价一天飙涨12%，霍尔木兹海峡这石油咽喉要地可能要关门，油气股、航运股直接受益。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-
-                <!-- 方向2：美伊能源 -->
-                <div class="direction-card" onclick="location.href='direction-2-iran-energy.html'" style="cursor: pointer;">
-                    <h3>
-                        美伊战争与能源安全
-                        <span class="tag tag-fire">🔥 值得重点看</span>
-                    </h3>
-                    <div class="logic">
-                        特朗普嘴上说想停战，但美军还在炸伊朗钢厂，伊朗也说可以谈但列了一堆条件。这局面就是一个字：乱。嘴上喊和平，手上没停火，市场根本搞不清楚这仗到底还打不打。不管打不打，中国能源自主战略都会加速推进。
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #00d4ff;">点击查看详细分析 →</p>
+                <div class="direction-card hot" onclick="location.href='direction-2-computing.html'">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>算力银行/算力超市</h3>
+                    <p>工信部首次提出"算力银行"新概念，以后中小企业也能便宜租到算力，IDC和算力调度公司最受益。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-
-                <!-- 方向3：商业航天 -->
-                <div class="direction-card" onclick="location.href='direction-3-space.html'" style="cursor: pointer;">
-                    <h3>
-                        商业航天IPO加速
-                        <span class="tag tag-eye">👀 可以关注</span>
-                    </h3>
-                    <div class="logic">
-                        中科宇航要科创板IPO了，想融41.8亿；银河航天也启动上市辅导了。以前造火箭是国家队的事，现在民营企业也能搞，而且国家开绿灯——别的行业IPO排队被卡，火箭公司反而放行。这是产业从"讲故事"进入"真赚钱"阶段的标志。
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #00d4ff;">点击查看详细分析 →</p>
+                <div class="direction-card watch" onclick="location.href='direction-3-robot.html'">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>人形机器人/具身智能</h3>
+                    <p>机器人公司开天价年薪抢人，具身智能技术竞赛白热化，但市场已经炒过一波，预期差有限。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-
-                <!-- 方向4：AI算力 -->
-                <div class="direction-card" onclick="location.href='direction-4-ai.html'" style="cursor: pointer;">
-                    <h3>
-                        AI算力基建烧钱不停
-                        <span class="tag tag-eye">👀 可以关注</span>
-                    </h3>
-                    <div class="logic">
-                        OpenAI融资1220亿美元创历史纪录，微软、亚马逊、谷歌还在疯狂砸钱建AI数据中心。全球资本都在抢AI赛道，算力基础设施需求爆发。这不是"概念"，是实实在在的订单。
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #00d4ff;">点击查看详细分析 →</p>
-                </div>
-
-                <!-- 方向5：存储芯片 -->
-                <div class="direction-card" onclick="location.href='direction-5-storage.html'" style="cursor: pointer;">
-                    <h3>
-                        存储芯片供给侧收缩
-                        <span class="tag tag-eye">👀 可以关注</span>
-                    </h3>
-                    <div class="logic">
-                        铠侠宣布停产2D NAND，最后一批2028年出货。这是全球第二大NAND厂商，它退出2D NAND意味着供给侧开始收缩。市场还在担心需求疲软，没看到供给侧收缩可能比需求复苏更早发生。
-                    </div>
-                    <p style="margin-top: 10px; font-size: 0.85em; color: #00d4ff;">点击查看详细分析 →</p>
+                <div class="direction-card watch" onclick="location.href='direction-4-ai-medical.html'">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>AI+药品监管</h3>
+                    <p>药监局要用AI来管药品审批，医疗IT公司有活干，但政策落地周期长，短期业绩难兑现。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
             </div>
         </div>
-
-        <!-- 第三层：关键验证节点 -->
-        <div class="section">
-            <h2 class="section-title">关键验证节点</h2>
-            <table class="stock-table">
-                <tr><th>时间</th><th>事件</th><th>验证逻辑</th></tr>
-                <tr><td>4月6日</td><td>美伊谈判deadline</td><td>能源安全主题持续/证伪</td></tr>
-                <tr><td>4月15日</td><td>宁德时代Q1财报</td><td>毛利率止跌回升验证供给侧改革逻辑</td></tr>
-                <tr><td>4月15日</td><td>BDTI运价指数</td><td>运价中枢上移验证油运逻辑</td></tr>
-                <tr><td>5月</td><td>天龙三号/朱雀三号首飞</td><td>商业航天技术成熟度验证</td></tr>
+        
+        <!-- 关键验证节点 -->
+        <div class="verification-section">
+            <h2>⏰ 关键验证节点</h2>
+            <table class="verification-table">
+                <tr>
+                    <th>时间</th>
+                    <th>事件</th>
+                    <th>验证逻辑</th>
+                </tr>
+                <tr>
+                    <td>4月6日</td>
+                    <td>美伊和谈关键节点</td>
+                    <td>若和谈破裂+运价上涨>20%，能源安全主题延续</td>
+                </tr>
+                <tr>
+                    <td>4月15日前后</td>
+                    <td>Q1财报密集披露</td>
+                    <td>关注算力租赁订单、VLCC运价、人形机器人出货量</td>
+                </tr>
+                <tr>
+                    <td>4月底</td>
+                    <td>工信部算力政策细则</td>
+                    <td>若政策超预期，算力银行概念持续发酵</td>
+                </tr>
+                <tr>
+                    <td>5月</td>
+                    <td>药监局AI项目招标</td>
+                    <td>若招标启动，AI+药品监管逻辑验证</td>
+                </tr>
             </table>
         </div>
-
-        <footer>
-            <p>数据截止日期：2026-04-01 | 数据来源：公开渠道搜索（东方财富、新浪财经、公司公告、券商研报）</p>
-            <p class="update-time">更新时间：2026-04-01 08:43 | 规范版本：v6.1大白话版</p>
-            <p style="margin-top: 10px; font-size: 0.85em;">声明：本页面仅供学习研究，不构成投资建议。数据可能存在时滞，建议用Wind/Choice验证。</p>
-        </footer>
+        
+        <!-- 底部 -->
+        <div class="footer">
+            <p>📊 数据更新于：2026年4月3日 09:00</p>
+            <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
+            <p>🔧 版本：v2.2 | 数据来源：Wind/东方财富/新浪财经</p>
+        </div>
     </div>
 </body>
 </html>

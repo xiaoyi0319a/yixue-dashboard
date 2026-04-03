@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算力银行/算力超市 | 方向详细分析</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        .back-link:hover { text-decoration: underline; }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid #2d3a4f;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            color: #00d4ff;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .header .meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: #8b9dc3;
+            font-size: 0.9em;
+        }
+        .header .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+        
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section p {
+            color: #b0c4de;
+            margin-bottom: 10px;
+        }
+        .section ul {
+            margin-left: 20px;
+            color: #b0c4de;
+        }
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .stock-card {
+            background: #0f1419;
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        .stock-card h4 {
+            color: #fff;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .stock-card .code {
+            color: #8b9dc3;
+            font-size: 0.9em;
+        }
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .stock-item {
+            background: rgba(255,255,255,0.03);
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .stock-item .label {
+            color: #8b9dc3;
+            font-size: 0.85em;
+        }
+        .stock-item .value {
+            color: #e0e6ed;
+            font-weight: 500;
+        }
+        
+        .data-source {
+            color: #8b9dc3;
+            font-size: 0.85em;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .risk-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .risk-box h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        
+        <div class="header">
+            <h1>💻 算力银行/算力超市</h1>
+            <div class="meta">
+                <span class="tag">🔥 重点看</span>
+                <span>强度：5.2分（S级）</span>
+                <span>核心驱动：政策拐点+AI算力需求爆发</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📢 发生了啥</h2>
+            <p>工信部开展普惠算力赋能中小企业发展专项行动，首提"算力银行""算力超市"概念，探索中小企业存入闲置算力资源。腾讯云企业版"龙虾"ClawPro同日发布。这是国家层面首次提出算力银行模式，标志着算力基础设施从"自建自用"向"共享调度"转型。</p>
+        </div>
+        
+        <div class="section">
+            <h2>🔍 预期差在哪</h2>
+            <h3>信息时滞（6分）</h3>
+            <p>"算力银行""算力超市"新概念24小时内首次提出，市场尚未充分认知。与单纯的算力租赁不同，算力银行涉及算力调度、交易、结算等复杂体系，价值量更高。</p>
+            <p class="data-source">【可信度：90%，工信部文件4/3】</p>
+            
+            <h3>认知分歧（5分）</h3>
+            <p>市场关注算力租赁（润泽科技等IDC企业），但忽视了算力调度平台、液冷设备、算力交易系统的增量价值。算力银行模式下，具备调度能力的平台型企业将受益更大。</p>
+            <p class="data-source">【可信度：85%，公开研报】</p>
+            
+            <h3>定价偏差（4分）</h3>
+            <p>部分IDC股已有涨幅，但算力银行新概念未定价。液冷设备、服务器等上游环节估值相对合理，有补涨空间。</p>
+            <p class="data-source">【可信度：80%，4/3市值】</p>
+            
+            <p><strong>强度 = 6×0.4 + 5×0.4 + 4×0.2 = 5.2分（S级）</strong></p>
+        </div>
+        
+        <div class="section">
+            <h2>📈 核心验证节点</h2>
+            <ul>
+                <li><strong>4月15日前后</strong>：Q1财报披露。关注IDC企业新签订单、算力租赁价格。</li>
+                <li><strong>4月底</strong>：工信部算力政策细则出台。若超预期，概念持续发酵。</li>
+                <li><strong>触发条件</strong>：Q1订单同比+50%+算力租赁价格上涨，逻辑验证。</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>📊 重点标的分析</h2>
+            
+            <div class="stock-card">
+                <h4>润泽科技 <span class="code">300442.SZ</span></h4>
+                <div class="stock-grid">
+                    <div class="stock-item">
+                        <div class="label">卡位价值</div>
+                        <div class="value">园区级IDC龙头，运营商核心供应商</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">弹性来源</div>
+                        <div class="value">机柜上架率提升，AI算力需求爆发</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">催化剂</div>
+                        <div class="value">4/15 Q1财报、新签订单</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">关键数据</div>
+                        <div class="value">2025前三季度营收39.77亿，归母净利润47.04亿</div>
+                    </div>
+                </div>
+                <p class="data-source">【数据日期：2025三季报，2025-10-31；2025业绩预告，2026-01-30】归母净利润同比增长210.74%（含REITs收益），扣非净利润13.53亿。毛利率48.11%，ROE 38.72%。</p>
+                <div class="risk-box">
+                    <h4>⚠️ 风险点</h4>
+                    <p>机柜交付不及预期；高负债重资产模式风险；REITs收益不可持续。</p>
+                </div>
+            </div>
+            
+            <div class="stock-card">
+                <h4>英维克 <span class="code">002837.SZ</span></h4>
+                <div class="stock-grid">
+                    <div class="stock-item">
+                        <div class="label">卡位价值</div>
+                        <div class="value">液冷温控龙头，AI算力必需</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">弹性来源</div>
+                        <div class="value">液冷渗透率提升，毛利率改善</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">催化剂</div>
+                        <div class="value">4/15 Q1财报、液冷订单</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">关键数据</div>
+                        <div class="value">2025前三季度营收40.26亿，归母净利润3.99亿</div>
+                    </div>
+                </div>
+                <p class="data-source">【数据日期：2025三季报，2025-10-31】营收同比增长40.19%，归母净利润同比增长13.13%。2025年上半年液冷相关营收超2亿元。获英伟达GB300液冷机柜订单1200台（中国区50%份额），谷歌供应份额约25%。</p>
+                <div class="risk-box">
+                    <h4>⚠️ 风险点</h4>
+                    <p>技术路线变更风险；行业竞争加剧（高澜股份、曙光数创等）；估值偏高。</p>
+                </div>
+            </div>
+            
+            <div class="stock-card">
+                <h4>奥飞数据 <span class="code">300738.SZ</span></h4>
+                <div class="stock-grid">
+                    <div class="stock-item">
+                        <div class="label">卡位价值</div>
+                        <div class="value">华南IDC龙头，绑定大厂</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">弹性来源</div>
+                        <div class="value">新建数据中心投产，上架率爬坡</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">催化剂</div>
+                        <div class="value">4/15 Q1财报、投产进度</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">关键数据</div>
+                        <div class="value">ROE 12%，负债率58%，2024年报</div>
+                    </div>
+                </div>
+                <p class="data-source">【数据日期：2024年报，2025-03-28】</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🛡️ 风险对冲策略</h2>
+            <ul>
+                <li>若Q1订单不及预期（信号：增速<30%）→ 观察AI服务器方向</li>
+                <li>若AI服务器也证伪（信号：浪潮/曙光订单下滑）→ 观望</li>
+                <li>若政策细则不及预期（信号：4月底无实质性政策）→ 减仓</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📊 数据更新于：2026年4月3日 09:00 | 来源：Wind/东方财富/新浪财经</p>
+            <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+</html>

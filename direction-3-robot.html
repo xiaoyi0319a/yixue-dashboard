@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人形机器人/具身智能 | 方向详细分析</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        .back-link:hover { text-decoration: underline; }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid #2d3a4f;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            color: #00d4ff;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .header .meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: #8b9dc3;
+            font-size: 0.9em;
+        }
+        .header .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+        }
+        
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section p {
+            color: #b0c4de;
+            margin-bottom: 10px;
+        }
+        .section ul {
+            margin-left: 20px;
+            color: #b0c4de;
+        }
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .stock-card {
+            background: #0f1419;
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        .stock-card h4 {
+            color: #fff;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .stock-card .code {
+            color: #8b9dc3;
+            font-size: 0.9em;
+        }
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .stock-item {
+            background: rgba(255,255,255,0.03);
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .stock-item .label {
+            color: #8b9dc3;
+            font-size: 0.85em;
+        }
+        .stock-item .value {
+            color: #e0e6ed;
+            font-weight: 500;
+        }
+        
+        .data-source {
+            color: #8b9dc3;
+            font-size: 0.85em;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .risk-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .risk-box h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        
+        <div class="header">
+            <h1>🤖 人形机器人/具身智能</h1>
+            <div class="meta">
+                <span class="tag">👀 可关注</span>
+                <span>强度：4.4分（B级）</span>
+                <span>核心驱动：技术竞争升级+量产临近</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📢 发生了啥</h2>
+            <p>优必选高薪招聘具身智能首席科学家，年薪1500万-1.24亿元；2025年年报显示全尺寸具身智能人形机器人收入同比增长2203.7%（22倍），销量达1079台，成为全球唯一实现全尺寸人形机器人全年交付超千台的企业。人形机器人产业正从"技术验证"进入"规模量产"阶段。</p>
+        </div>
+        
+        <div class="section">
+            <h2>🔍 预期差在哪</h2>
+            <h3>信息时滞（6分）</h3>
+            <p>优必选2025年年报（3月31日发布）显示人形机器人业务爆发，但市场对人形机器人产业链的认知仍停留在"概念阶段"，未充分认知量产落地的进展。</p>
+            <p class="data-source">【可信度：90%，优必选年报2026-03-31】</p>
+            
+            <h3>认知分歧（3分）</h3>
+            <p>市场已充分关注人形机器人概念，特斯拉Optimus、FigureAI等竞品消息频出，预期差有限。但国产供应链（减速器、电机、传感器）的崛起被低估。</p>
+            <p class="data-source">【可信度：80%，公开研报】</p>
+            
+            <h3>定价偏差（3分）</h3>
+            <p>人形机器人概念股（优必选、特斯拉等）已有较大涨幅，但上游零部件企业（绿的谐波、双环传动等）估值相对合理。</p>
+            <p class="data-source">【可信度：75%，4/3市值】</p>
+            
+            <p><strong>强度 = 6×0.4 + 3×0.4 + 3×0.2 = 4.2分（B级）</strong></p>
+        </div>
+        
+        <div class="section">
+            <h2>📈 核心验证节点</h2>
+            <ul>
+                <li><strong>4月15日前后</strong>：特斯拉Optimus更新。若量产进度提前，产业链受益。</li>
+                <li><strong>4月25日</strong>：优必选Q1财报。关注新签订单、出货数据。</li>
+                <li><strong>触发条件</strong>：优必选Q1订单超预期+特斯拉量产进度提前，逻辑验证。</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>📊 重点标的分析</h2>
+            
+            <div class="stock-card">
+                <h4>绿的谐波 <span class="code">688017.SH</span></h4>
+                <div class="stock-grid">
+                    <div class="stock-item">
+                        <div class="label">卡位价值</div>
+                        <div class="value">谐波减速器龙头，人形机器人核心部件</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">弹性来源</div>
+                        <div class="value">产能扩张，客户导入（特斯拉、优必选）</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">催化剂</div>
+                        <div class="value">4/25 Q1财报、新签订单</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">关键数据</div>
+                        <div class="value">2025年营收5.69亿，归母净利润1.25亿</div>
+                    </div>
+                </div>
+                <p class="data-source">【数据日期：2025年业绩快报，2026-02-26】营收同比增长46.86%，归母净利润同比增长122.4%。工业机器人行业份额提升+具身智能机器人业务规模大幅增长。</p>
+                <div class="risk-box">
+                    <h4>⚠️ 风险点</h4>
+                    <p>价格战风险（哈默纳科降价竞争）；人形机器人量产不及预期；技术路线变更（如行星减速器替代）。</p>
+                </div>
+            </div>
+            
+            <div class="stock-card">
+                <h4>优必选（港股） <span class="code">9880.HK</span></h4>
+                <div class="stock-grid">
+                    <div class="stock-item">
+                        <div class="label">卡位价值</div>
+                        <div class="value">人形机器人第一股，具身智能布局领先</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">弹性来源</div>
+                        <div class="value">订单增长（全年11亿），产品落地</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">催化剂</div>
+                        <div class="value">4/25 Q1财报、新签订单</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">关键数据</div>
+                        <div class="value">2025年营收20.01亿，全尺寸人形机器人收入8.2亿</div>
+                    </div>
+                </div>
+                <p class="data-source">【数据日期：2025年报，2026-03-31】总营收同比增长53.3%，全尺寸具身智能人形机器人收入同比增长2203.7%，销量1079台。净亏损7.9亿元，同比收窄31.9%。</p>
+                <div class="risk-box">
+                    <h4>⚠️ 风险点</h4>
+                    <p>持续亏损风险；特斯拉Optimus等竞品冲击；估值偏高。</p>
+                </div>
+            </div>
+            
+            <div class="stock-card">
+                <h4>汇川技术 <span class="code">300124.SZ</span></h4>
+                <div class="stock-grid">
+                    <div class="stock-item">
+                        <div class="label">卡位价值</div>
+                        <div class="value">伺服系统龙头，工业自动化+机器人双轮驱动</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">弹性来源</div>
+                        <div class="value">伺服系统放量，毛利率稳定</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">催化剂</div>
+                        <div class="value">4/25 Q1财报</div>
+                    </div>
+                    <div class="stock-item">
+                        <div class="label">关键数据</div>
+                        <div class="value">ROE 18%，负债率42%，2024年报</div>
+                    </div>
+                </div>
+                <p class="data-source">【数据日期：2024年报，2025-03-28】</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🛡️ 风险对冲策略</h2>
+            <ul>
+                <li>若优必选Q1订单不及预期（信号：增速<30%）→ 观察工业机器人方向</li>
+                <li>若特斯拉推迟量产（信号：量产时间延后）→ 观望</li>
+                <li>若减速器价格战爆发（信号：绿的谐波毛利率下滑>5pct）→ 减仓</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📊 数据更新于：2026年4月3日 09:00 | 来源：Wind/东方财富/新浪财经</p>
+            <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+</html>
