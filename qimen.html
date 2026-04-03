@@ -1180,6 +1180,16 @@
                 // 第一行：八神
                 // 第二行：隐干 | 九星 | 天盘干
                 // 第三行：八门 | 地盘干
+                
+                // 调试：打印关键宫位的值
+                if (gongNum === 8) {
+                    console.log('艮八宫调试:', {
+                        star, tpGan, dpGan, shen, men, yg,
+                        tianPanObj: tianPan[8],
+                        diPanObj: diPan[8]
+                    });
+                }
+                
                 gong.innerHTML = `
                     <div class="row1">${shen}</div>
                     <div class="row2">
