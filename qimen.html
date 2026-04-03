@@ -301,55 +301,107 @@
         }
         
         .gong .star {
-            font-size: 0.85rem;
-            color: #4ecdc4;
-            text-align: center;
-            font-weight: bold;
+            display: none;
         }
         
         .gong .god {
-            font-size: 0.75rem;
-            color: #ff6b6b;
-            text-align: center;
+            display: none;
         }
         
         .gong .door {
-            font-size: 0.95rem;
-            color: #ffd700;
-            text-align: center;
-            font-weight: bold;
+            display: none;
         }
         
         .gong .door.menpo {
-            color: #ff4444;
+            display: none;
         }
         
         .gong .tiangan-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
+            display: none;
         }
         
         .gong .dp {
-            color: #95e1d3;
+            display: none;
         }
         
         .gong .tp {
-            color: #f38181;
+            display: none;
         }
         
         .gong .yg {
-            font-size: 0.7rem;
-            color: #aa96da;
-            text-align: center;
+            display: none;
         }
         
         .gong .geju {
-            font-size: 0.65rem;
+            display: none;
+        }
+        
+        /* 新布局样式 */
+        .gong .row1 {
+            font-size: 0.9rem;
+            color: #ff6b6b;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .gong .row2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+        
+        .gong .row2 .yg-left {
+            color: #aa96da;
+            flex: 1;
+            text-align: left;
+        }
+        
+        .gong .row2 .star-center {
+            color: #4ecdc4;
+            font-weight: bold;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .gong .row2 .tp-right {
+            color: #f38181;
+            flex: 1;
+            text-align: right;
+        }
+        
+        .gong .row3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .gong .row3 .men-left {
+            color: #ffd700;
+            font-weight: bold;
+            flex: 1;
+            text-align: left;
+        }
+        
+        .gong .row3 .men-left.menpo {
+            color: #ff4444;
+        }
+        
+        .gong .row3 .dp-right {
+            color: #95e1d3;
+            flex: 1;
+            text-align: right;
+        }
+        
+        .gong .geju-new {
+            font-size: 0.6rem;
             color: #4ecdc4;
             text-align: center;
             background: rgba(78, 205, 196, 0.15);
-            padding: 1px 4px;
+            padding: 1px 3px;
             border-radius: 3px;
             margin-top: 2px;
         }
@@ -1107,12 +1159,12 @@
                 gong.className = 'gong' + (gongNum === 5 ? ' zhong' : '');
                 
                 const tp = tianPan[gongNum] || {};
-                const star = tp.star || '-';
-                const tpGan = tp.gan || '-';
-                const dpGan = diPan[gongNum] || '-';
-                const shen = baShen[gongNum] || '-';
-                const men = baMen[gongNum] || '-';
-                const yg = yinGan[gongNum] || '-';
+                const star = tp.star || '';
+                const tpGan = tp.gan || '';
+                const dpGan = diPan[gongNum] || '';
+                const shen = baShen[gongNum] || '';
+                const men = baMen[gongNum] || '';
+                const yg = yinGan[gongNum] || '';
                 
                 // 检测四害
                 const sihai = checkSiHai(gongNum, dpGan, tpGan, men, star, yg);
@@ -1122,17 +1174,22 @@
                 if (sihai.includes('击刑') || sihai.includes('入墓')) gong.classList.add('jixing');
                 if (star === zhiFuInfo.zhiFuXing) gong.classList.add('zhifu');
                 
+                // 新布局：
+                // 第一行：八神
+                // 第二行：隐干 | 九星 | 天盘干
+                // 第三行：八门 | 地盘干
                 gong.innerHTML = `
-                    <div class="gong-name">${GONG_NAMES[gongNum]}</div>
-                    <div class="star">${star}</div>
-                    <div class="god">${shen}</div>
-                    <div class="door ${sihai.includes('门迫') ? 'menpo' : ''}">${men}${sihai.includes('门迫') ? '(迫)' : ''}</div>
-                    <div class="tiangan-row">
-                        <span class="dp">地:${dpGan}</span>
-                        <span class="tp">天:${tpGan}${sihai.includes('击刑') ? '(刑)' : ''}${sihai.includes('入墓') ? '(墓)' : ''}${sihai.includes('伏吟') ? '(吟)' : ''}</span>
+                    <div class="row1">${shen}</div>
+                    <div class="row2">
+                        <span class="yg-left">${yg}</span>
+                        <span class="star-center">${star}</span>
+                        <span class="tp-right">${tpGan}${sihai.includes('击刑') ? '刑' : ''}${sihai.includes('入墓') ? '墓' : ''}</span>
                     </div>
-                    <div class="yg">隐:${yg}</div>
-                    ${geju ? `<div class="geju">${geju}</div>` : ''}
+                    <div class="row3">
+                        <span class="men-left ${sihai.includes('门迫') ? 'menpo' : ''}">${men}${sihai.includes('门迫') ? '迫' : ''}</span>
+                        <span class="dp-right">${dpGan}</span>
+                    </div>
+                    ${geju ? `<div class="geju-new">${geju}</div>` : ''}
                 `;
                 
                 container.appendChild(gong);
