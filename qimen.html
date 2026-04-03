@@ -1009,28 +1009,35 @@
                 steps = (xunShouZhi - hourZhi + 12) % 12;
             }
             
+            console.log('paiBaMen调试:', {
+                xunShou: zhiFuInfo.xunShou,
+                xunShouZhi,
+                hourZhi,
+                steps,
+                xunShouGong: zhiFuInfo.xunShouGong
+            });
+            
             // 从旬首宫开始走
             let currentGong = zhiFuInfo.xunShouGong;
-            const stepCount = Math.floor(steps / 2); // 每两步走一宫
             
-            for (let i = 0; i < stepCount; i++) {
+            // 每2步走一宫
+            for (let i = 0; i < steps; i += 2) {
                 const idx = CLOCKWISE_ORDER.indexOf(currentGong);
                 currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
+                console.log(`走${Math.floor(i/2)+1}宫到:`, currentGong);
             }
             
-            // 如果余1步，走半宫（简化处理，直接走下一宫）
-            if (steps % 2 === 1) {
-                const idx = CLOCKWISE_ORDER.indexOf(currentGong);
-                currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
-            }
+            console.log('最终值使门落宫:', currentGong);
             
             const startIndex = CLOCKWISE_ORDER.indexOf(currentGong);
             
+            console.log('八门排布:');
             for (let i = 0; i < 8; i++) {
                 const gongIndex = (startIndex + i) % 8;
                 const gong = CLOCKWISE_ORDER[gongIndex];
                 const menIdx = (zhiShiIndex + i) % 8;
                 baMen[gong] = menOrder[menIdx];
+                console.log(`  宫${gong}: ${menOrder[menIdx]}`);
             }
             
             return {baMen, zhiShiGong: currentGong};
