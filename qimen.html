@@ -907,7 +907,12 @@
             const tianPan = {};
             const hourGan = hourGanZhi[0];
             
-            console.log('paiTianPan调试:', {hourGan, diPan});
+            console.log('=== paiTianPan 开始 ===');
+            console.log('hourGan:', hourGan);
+            console.log('完整diPan:', JSON.stringify(diPan));
+            console.log('宫8的值:', diPan[8], '类型:', typeof diPan[8]);
+            console.log('宫8 key:', Object.keys(diPan)[7]);
+            console.log('所有key:', Object.keys(diPan));
             
             // 找时干在地盘的宫位（值符星要飞到这里）
             let hourGanGong = null;
@@ -949,8 +954,6 @@
                 
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
-                
-                console.log('循环i=' + i + ': gong=' + gong + ', starIndex=' + starIndex + ', star=' + star);
                 
                 // 找这个星的原始宫
                 const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
