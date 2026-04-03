@@ -922,6 +922,12 @@
             
             // 值符星到时干宫，带旬首的六仪（关键修正！）
             const liuYi = zhiFuInfo.xunShou.slice(2); // 从"甲辰壬"取"壬"
+            console.log('值符设置:', {
+                hourGanGong,
+                liuYi,
+                xunShou: zhiFuInfo.xunShou,
+                zhiFuXing: zhiFuInfo.zhiFuXing
+            });
             tianPan[hourGanGong] = {
                 star: zhiFuInfo.zhiFuXing,
                 gan: liuYi  // 带六仪，不是时干！
@@ -933,7 +939,10 @@
                 const gong = CLOCKWISE_ORDER[currentGongIndex];
                 
                 // 跳过已经设置的值符宫
-                if (gong === hourGanGong) continue;
+                if (gong === hourGanGong) {
+                    console.log('跳过值符宫:', gong);
+                    continue;
+                }
                 
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
@@ -950,6 +959,12 @@
                 star: '天禽',
                 gan: diPan[5] || '乙'
             };
+            
+            console.log('天盘最终结果:', {
+                gong8: tianPan[8],
+                gong1: tianPan[1],
+                hourGanGong
+            });
             
             return {tianPan, hourGanGong};
         }
