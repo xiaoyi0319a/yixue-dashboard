@@ -980,9 +980,11 @@
             const xunShouZhi = XUNSHOU_DIZHI[zhiFuInfo.xunShou.slice(0, 2)]; // 取"甲辰壬"中的"甲辰"
             let steps;
             if (isYang) {
-                steps = (hourZhi - xunShouZhi + 11) % 12 + 1; // 修正步数计算
+                steps = (hourZhi - xunShouZhi + 11) % 12; // 修正：减1步
+                if (steps === 0) steps = 12;
             } else {
-                steps = (xunShouZhi - hourZhi + 11) % 12 + 1;
+                steps = (xunShouZhi - hourZhi + 11) % 12;
+                if (steps === 0) steps = 12;
             }
             
             console.log('paiBaMen调试:', {
