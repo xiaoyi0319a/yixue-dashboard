@@ -406,6 +406,27 @@
             margin-top: 2px;
         }
         
+        /* 简化两排布局（参考图片） */
+        .gong .simple-row1 {
+            font-size: 1.2rem;
+            color: #aa96da;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gong .simple-row2 {
+            font-size: 1.2rem;
+            color: #95e1d3;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .legend {
             display: flex;
             gap: 12px;
@@ -1188,32 +1209,26 @@
                 if (sihai.includes('击刑') || sihai.includes('入墓')) gong.classList.add('jixing');
                 if (star === zhiFuInfo.zhiFuXing) gong.classList.add('zhifu');
                 
-                // 新布局：
-                // 第一行：八神
-                // 第二行：隐干 | 九星 | 天盘干
-                // 第三行：八门 | 地盘干
+                // 简化的两排布局（参考图片格式）：
+                // 第一行：隐干
+                // 第二行：地盘干
+                // 中宫不显示天禽星
                 
-                // 调试：打印关键宫位的值
-                if (gongNum === 8 || gongNum === 1) {
-                    console.log('宫位' + gongNum + '调试:', {
-                        star, tpGan, dpGan, shen, men, yg,
-                        tianPanObj: tianPan[gongNum]
-                    });
+                let displayContent;
+                if (gongNum === 5) {
+                    // 中宫只显示隐干和地盘干，不显示天禽
+                    displayContent = `
+                        <div class="simple-row1">${yg}</div>
+                        <div class="simple-row2">${dpGan}</div>
+                    `;
+                } else {
+                    displayContent = `
+                        <div class="simple-row1">${yg}</div>
+                        <div class="simple-row2">${dpGan}</div>
+                    `;
                 }
                 
-                gong.innerHTML = `
-                    <div class="row1">${shen}</div>
-                    <div class="row2">
-                        <span class="yg-left">${yg}</span>
-                        <span class="star-center">${star}</span>
-                        <span class="tp-right">${tpGan}${sihai.includes('击刑') ? '刑' : ''}${sihai.includes('入墓') ? '墓' : ''}</span>
-                    </div>
-                    <div class="row3">
-                        <span class="men-left ${sihai.includes('门迫') ? 'menpo' : ''}">${men}${sihai.includes('门迫') ? '迫' : ''}</span>
-                        <span class="dp-right">${dpGan}</span>
-                    </div>
-                    ${geju ? `<div class="geju-new">${geju}</div>` : ''}
-                `;
+                gong.innerHTML = displayContent;
                 
                 container.appendChild(gong);
             });
