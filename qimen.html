@@ -1188,23 +1188,45 @@
                 if (sihai.includes('击刑') || sihai.includes('入墓')) gong.classList.add('jixing');
                 if (star === zhiFuInfo.zhiFuXing) gong.classList.add('zhifu');
                 
-                // 三排布局：
+                // 布局：
                 // 第一行：八神
                 // 第二行：隐干 | 九星 | 天盘干
                 // 第三行：八门 | 地盘干
-                gong.innerHTML = `
-                    <div class="row1">${shen}</div>
-                    <div class="row2">
-                        <span class="yg-left">${yg}</span>
-                        <span class="star-center">${star}</span>
-                        <span class="tp-right">${tpGan}${sihai.includes('击刑') ? '刑' : ''}${sihai.includes('入墓') ? '墓' : ''}</span>
-                    </div>
-                    <div class="row3">
-                        <span class="men-left ${sihai.includes('门迫') ? 'menpo' : ''}">${men}${sihai.includes('门迫') ? '迫' : ''}</span>
-                        <span class="dp-right">${dpGan}</span>
-                    </div>
-                    ${geju ? `<div class="geju-new">${geju}</div>` : ''}
-                `;
+                // 中宫特殊：显示隐干 + 借用坤二宫地盘干（天禽寄坤）
+                
+                let content;
+                if (gongNum === 5) {
+                    // 中宫：隐干 + 坤二宫地盘干
+                    const kunDiPan = diPan[2]; // 坤二宫地盘干
+                    content = `
+                        <div class="row1">${shen}</div>
+                        <div class="row2">
+                            <span class="yg-left">${yg}</span>
+                            <span class="star-center">-</span>
+                            <span class="tp-right">-</span>
+                        </div>
+                        <div class="row3">
+                            <span class="men-left">-</span>
+                            <span class="dp-right">${kunDiPan}</span>
+                        </div>
+                    `;
+                } else {
+                    content = `
+                        <div class="row1">${shen}</div>
+                        <div class="row2">
+                            <span class="yg-left">${yg}</span>
+                            <span class="star-center">${star}</span>
+                            <span class="tp-right">${tpGan}${sihai.includes('击刑') ? '刑' : ''}${sihai.includes('入墓') ? '墓' : ''}</span>
+                        </div>
+                        <div class="row3">
+                            <span class="men-left ${sihai.includes('门迫') ? 'menpo' : ''}">${men}${sihai.includes('门迫') ? '迫' : ''}</span>
+                            <span class="dp-right">${dpGan}</span>
+                        </div>
+                        ${geju ? `<div class="geju-new">${geju}</div>` : ''}
+                    `;
+                }
+                
+                gong.innerHTML = content;
                 
                 container.appendChild(gong);
             });
