@@ -946,6 +946,9 @@
                 
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
+                
+                console.log('循环i=' + i + ': gong=' + gong + ', starIndex=' + starIndex + ', star=' + star);
+                
                 // 找这个星的原始宫
                 const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
                 // 带原始宫的地盘干
@@ -1201,11 +1204,10 @@
                 // 第三行：八门 | 地盘干
                 
                 // 调试：打印关键宫位的值
-                if (gongNum === 8) {
-                    console.log('艮八宫调试:', {
+                if (gongNum === 8 || gongNum === 1) {
+                    console.log('宫位' + gongNum + '调试:', {
                         star, tpGan, dpGan, shen, men, yg,
-                        tianPanObj: tianPan[8],
-                        diPanObj: diPan[8]
+                        tianPanObj: tianPan[gongNum]
                     });
                 }
                 
