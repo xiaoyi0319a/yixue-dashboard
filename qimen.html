@@ -475,18 +475,18 @@
                 <div class="input-group">
                     <label>时辰</label>
                     <select id="hour">
-                        <option value="0">子时 (23-1)</option>
-                        <option value="1">丑时 (1-3)</option>
-                        <option value="2">寅时 (3-5)</option>
-                        <option value="3">卯时 (5-7)</option>
-                        <option value="4">辰时 (7-9)</option>
-                        <option value="5">巳时 (9-11)</option>
-                        <option value="6" selected>午时 (11-13)</option>
-                        <option value="7">未时 (13-15)</option>
-                        <option value="8">申时 (15-17)</option>
-                        <option value="9">酉时 (17-19)</option>
-                        <option value="10">戌时 (19-21)</option>
-                        <option value="11">亥时 (21-23)</option>
+                        <option value="1">子时 (23-1)</option>
+                        <option value="2">丑时 (1-3)</option>
+                        <option value="3">寅时 (3-5)</option>
+                        <option value="4">卯时 (5-7)</option>
+                        <option value="5">辰时 (7-9)</option>
+                        <option value="6">巳时 (9-11)</option>
+                        <option value="7" selected>午时 (11-13)</option>
+                        <option value="8">未时 (13-15)</option>
+                        <option value="9">申时 (15-17)</option>
+                        <option value="10">酉时 (17-19)</option>
+                        <option value="11">戌时 (19-21)</option>
+                        <option value="12">亥时 (21-23)</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -593,23 +593,23 @@
         }
         
         // 旬首地支
-        const XUNSHOU_DIZHI = {'甲子': 0, '甲戌': 10, '甲申': 6, '甲午': 4, '甲辰': 4, '甲寅': 2};
+        const XUNSHOU_DIZHI = {'甲子': 1, '甲戌': 11, '甲申': 7, '甲午': 5, '甲辰': 5, '甲寅': 3};
         
         // 马星（时支定）
         // 申子辰马在寅(2), 寅午戌马在申(8), 巳酉丑马在亥(11), 亥卯未马在巳(5)
         const MAXING = {
-            0: 2,   // 子→寅
-            1: 11,  // 丑→亥
-            2: 8,   // 寅→申
-            3: 5,   // 卯→巳
-            4: 2,   // 辰→寅
-            5: 11,  // 巳→亥
-            6: 8,   // 午→申
-            7: 5,   // 未→巳
-            8: 2,   // 申→寅
-            9: 11,  // 酉→亥
-            10: 8,  // 戌→申
-            11: 5   // 亥→巳
+            1: 3,   // 子→寅
+            2: 12,  // 丑→亥
+            3: 9,   // 寅→申
+            4: 6,   // 卯→巳
+            5: 3,   // 辰→寅
+            6: 12,  // 巳→亥
+            7: 9,   // 午→申
+            8: 6,   // 未→巳
+            9: 3,   // 申→寅
+            10: 12, // 酉→亥
+            11: 9,  // 戌→申
+            12: 6   // 亥→巳
         };
         
         // 击刑
@@ -752,7 +752,7 @@
         function useNow() {
             const now = new Date();
             document.getElementById('date').value = now.toISOString().split('T')[0];
-            document.getElementById('hour').value = Math.floor((now.getHours() + 1) / 2) % 12;
+            document.getElementById('hour').value = (Math.floor((now.getHours() + 1) / 2) % 12) + 1;
             document.getElementById('minute').value = now.getMinutes();
         }
         
