@@ -1044,15 +1044,41 @@
             const yinGan = {};
             const hourGan = hourGanZhi[0]; // 起局时辰的天干
             
+            // 隐干顺序：戊(1)→己(2)→庚(3)→辛(4)→壬(5)→癸(6)→丁(7)→丙(8)→乙(9)
+            const yinGanOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
+            
+            // 数字顺序：1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
+            const numOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            
             // 值使门落宫的地盘干
             const zhiShiDiPanGan = diPan[zhiShiGong];
             
-            // 如果值使门落宫的地盘干与起局时辰天干相同，隐干写在中宫
-            // 如果不同，隐干写在值使门落宫
+            // 确定时干起点
+            let startIdx; // 在numOrder中的索引
             if (zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan)) {
-                yinGan[5] = hourGan; // 写在中宫
+                // 情况一：值使宫地盘干 = 时干 → 时干在中五（序号5）
+                startIdx = 4; // 中五是numOrder的第5个元素，索引4
             } else {
-                yinGan[zhiShiGong] = hourGan; // 写在值使门落宫
+                // 情况二：值使宫地盘干 ≠ 时干 → 时干在值使门落宫
+                startIdx = numOrder.indexOf(parseInt(zhiShiGong));
+            }
+            
+            // 从时干开始，按顺序填入各宫
+            for (let i = 0; i < 9; i++) {
+                // 确定当前宫序号
+                let gongIdx;
+                if (isYang) {
+                    // 阳遁：数字顺序1→9
+                    gongIdx = (startIdx + i) % 9;
+                } else {
+                    // 阴遁：数字顺序9→1（即反向）
+                    gongIdx = (startIdx - i + 9) % 9;
+                }
+                const gongNum = numOrder[gongIdx];
+                
+                // 确定隐干（从时干开始，按戊己庚辛壬癸丁丙乙顺序）
+                const ganIdx = (yinGanOrder.indexOf(hourGan) + i) % 9;
+                yinGan[gongNum] = yinGanOrder[ganIdx];
             }
             
             return yinGan;
