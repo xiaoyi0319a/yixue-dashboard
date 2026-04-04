@@ -876,9 +876,9 @@
                 diPan[gong] = TIANGAN[ganIndex];
             }
             
-            // 中五宫寄坤二宫
+            // 中五宫寄坤二宫（保留原来的癸，叠加乙）
             if (diPan[5]) {
-                diPan[2] = diPan[5];
+                diPan[2] = diPan[5] + (diPan[2] || ''); // 乙 + 癸 = "乙癸"
                 delete diPan[5];
             }
             
@@ -922,7 +922,8 @@
             let hourGanGong = null;
             for (let gongStr in diPan) {
                 const gongNum = parseInt(gongStr);
-                if (diPan[gongStr] === hourGan) {
+                // 坤二宫可能是"乙癸"，要检查是否包含时干
+                if (diPan[gongStr] && diPan[gongStr].includes(hourGan)) {
                     hourGanGong = gongNum;
                     break;
                 }
@@ -934,8 +935,9 @@
             
             // 值符星到时干宫，带旬首的六仪
             const liuYi = zhiFuInfo.xunShou.slice(2);
+            const zhiFuDisplay = zhiFuInfo.zhiFuXing === '天芮' ? '芮禽' : zhiFuInfo.zhiFuXing;
             tianPan[hourGanGong] = {
-                star: zhiFuInfo.zhiFuXing,
+                star: zhiFuDisplay,
                 gan: liuYi
             };
             
@@ -950,16 +952,13 @@
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
                 const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
+                // 天禽寄天芮
+                const starDisplay = star === '天芮' ? '芮禽' : star;
                 tianPan[gong] = {
-                    star,
+                    star: starDisplay,
                     gan: diPan[origGong]
                 };
             }
-            
-            tianPan[5] = {
-                star: '天禽',
-                gan: diPan[5] || '乙'
-            };
             
             return {tianPan, hourGanGong};
         }
