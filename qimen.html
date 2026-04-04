@@ -921,7 +921,7 @@
                 }
             }
             
-            const starOrder = ['天蓬', '天芮', '天冲', '天辅', '天心', '天柱', '天任', '天英'];
+            const starOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
             const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(hourGanGong);
             
@@ -964,7 +964,7 @@
             const zhiFuIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             for (let i = 0; i < 8; i++) {
-                const gongIndex = (zhiFuIndex + i) % 8;
+                const gongIndex = isYang ? (zhiFuIndex + i) % 8 : (zhiFuIndex - i + 8) % 8;
                 const gong = CLOCKWISE_ORDER[gongIndex];
                 baShen[gong] = shenOrder[i];
             }
