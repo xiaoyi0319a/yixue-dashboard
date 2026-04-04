@@ -1055,8 +1055,6 @@
                 yinGan[zhiShiGong] = hourGan; // 写在值使门落宫
             }
             
-            console.log('paiYinGan调试:', {zhiShiGong, zhiShiGongType: typeof zhiShiGong, hourGan, yinGan});
-            
             return yinGan;
         }
         
@@ -1139,7 +1137,6 @@
             
             // 排隐干
             const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
-            console.log('隐干:', yinGan, 'zhiShiGong:', zhiShiGong, 'hourGan:', hourGZ.ganZhi[0]);
             
             // 马星
             const maXingZhi = MAXING[hour]; // 1-12序号
@@ -1217,19 +1214,6 @@
                 // 第一行：八神
                 // 第二行：隐干 | 九星 | 天盘干
                 // 第三行：八门 | 地盘干
-                
-                // 调试：打印关键宫位的值
-                if (gongNum === 8 || gongNum === 1 || gongNum === 3) {
-                    console.log('宫位' + gongNum + '调试:', {
-                        star, tpGan, dpGan, shen, men, 
-                        yg: yg || '(empty)',
-                        yinGanKeys: Object.keys(yinGan),
-                        yinGanRaw: yinGan,
-                        gongNumType: typeof gongNum,
-                        key3Value: yinGan[3],
-                        keyStr3Value: yinGan['3']
-                    });
-                }
                 
                 gong.innerHTML = `
                     <div class="row1">${shen}</div>
