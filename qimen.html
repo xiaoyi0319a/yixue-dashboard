@@ -875,6 +875,13 @@
                 const ganIndex = tianGanOrder[i];
                 diPan[gong] = TIANGAN[ganIndex];
             }
+            
+            // 中五宫寄坤二宫
+            if (diPan[5]) {
+                diPan[2] = diPan[5];
+                delete diPan[5];
+            }
+            
             return diPan;
         }
         
