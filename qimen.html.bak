@@ -475,18 +475,18 @@
                 <div class="input-group">
                     <label>时辰</label>
                     <select id="hour">
-                        <option value="1">子时 (23-1)</option>
-                        <option value="2">丑时 (1-3)</option>
-                        <option value="3">寅时 (3-5)</option>
-                        <option value="4">卯时 (5-7)</option>
-                        <option value="5">辰时 (7-9)</option>
-                        <option value="6">巳时 (9-11)</option>
-                        <option value="7" selected>午时 (11-13)</option>
-                        <option value="8">未时 (13-15)</option>
-                        <option value="9">申时 (15-17)</option>
-                        <option value="10">酉时 (17-19)</option>
-                        <option value="11">戌时 (19-21)</option>
-                        <option value="12">亥时 (21-23)</option>
+                        <option value="0">子时 (23-1)</option>
+                        <option value="1">丑时 (1-3)</option>
+                        <option value="2">寅时 (3-5)</option>
+                        <option value="3">卯时 (5-7)</option>
+                        <option value="4">辰时 (7-9)</option>
+                        <option value="5">巳时 (9-11)</option>
+                        <option value="6" selected>午时 (11-13)</option>
+                        <option value="7">未时 (13-15)</option>
+                        <option value="8">申时 (15-17)</option>
+                        <option value="9">酉时 (17-19)</option>
+                        <option value="10">戌时 (19-21)</option>
+                        <option value="11">亥时 (21-23)</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -592,26 +592,24 @@
             XUNSHOU_MAP[JIAZI[i]] = XUNSHOU_LIST[xunIndex];
         }
         
-        // 旬首地支 - 修正为旬首六仪所在的宫位号
-        // 甲辰壬在坎一宫，所以'甲辰': 1
-        // 需要根据定局动态计算，这里先修正甲辰的值
-        const XUNSHOU_DIZHI = {'甲子': 1, '甲戌': 6, '甲申': 7, '甲午': 9, '甲辰': 1, '甲寅': 8};
+        // 旬首地支
+        const XUNSHOU_DIZHI = {'甲子': 0, '甲戌': 10, '甲申': 6, '甲午': 4, '甲辰': 4, '甲寅': 2};
         
-        // 马星（时支定）- hour是1-12，对应子丑寅...
-        // 申子辰马在寅, 寅午戌马在申, 巳酉丑马在亥, 亥卯未马在巳
+        // 马星（时支定）
+        // 申子辰马在寅(2), 寅午戌马在申(8), 巳酉丑马在亥(11), 亥卯未马在巳(5)
         const MAXING = {
-            1: 3,   // 子→寅
-            2: 12,  // 丑→亥
-            3: 9,   // 寅→申
-            4: 6,   // 卯→巳
-            5: 3,   // 辰→寅
-            6: 12,  // 巳→亥
-            7: 9,   // 午→申
-            8: 6,   // 未→巳
-            9: 3,   // 申→寅
-            10: 12, // 酉→亥
-            11: 9,  // 戌→申
-            12: 6   // 亥→巳
+            0: 2,   // 子→寅
+            1: 11,  // 丑→亥
+            2: 8,   // 寅→申
+            3: 5,   // 卯→巳
+            4: 2,   // 辰→寅
+            5: 11,  // 巳→亥
+            6: 8,   // 午→申
+            7: 5,   // 未→巳
+            8: 2,   // 申→寅
+            9: 11,  // 酉→亥
+            10: 8,  // 戌→申
+            11: 5   // 亥→巳
         };
         
         // 击刑
@@ -732,7 +730,7 @@
         };
         
         // 九星
-        const JIU_XING = {1: '天蓬', 2: '天芮', 3: '天冲', 4: '天辅', 5: '天禽', 6: '天心', 7: '天柱', 8: '天任', 9: '天英'};
+        const JIU_XING = {1: '天蓬', 8: '天任', 3: '天冲', 4: '天辅', 9: '天英', 2: '天芮', 7: '天柱', 6: '天心', 5: '天禽'};
         
         // 八门
         const BA_MEN = {1: '休门', 8: '生门', 3: '伤门', 4: '杜门', 9: '景门', 2: '死门', 7: '惊门', 6: '开门'};
@@ -754,7 +752,7 @@
         function useNow() {
             const now = new Date();
             document.getElementById('date').value = now.toISOString().split('T')[0];
-            document.getElementById('hour').value = (Math.floor((now.getHours() + 1) / 2) % 12) + 1;
+            document.getElementById('hour').value = Math.floor((now.getHours() + 1) / 2) % 12;
             document.getElementById('minute').value = now.getMinutes();
         }
         
@@ -780,18 +778,16 @@
         
         // 计算时辰干支
         function getHourGanZhi(dayGan, hourZhi) {
-            // hourZhi 是 1-based (子=1..亥=12)，需要转成 0-based
-            const hourZhi0 = hourZhi - 1;
             // 日上起时口诀：
             // 甲己还加甲(甲子), 乙庚丙作初(丙子), 
             // 丙辛从戊起(戊子), 丁壬庚子居(庚子),
             // 戊癸何方发, 壬子是真途(壬子)
             const startGan = [0, 2, 4, 6, 8, 0, 2, 4, 6, 8][dayGan];
-            const gan = (startGan + hourZhi0) % 10;
+            const gan = (startGan + hourZhi) % 10;
             return {
                 gan,
-                zhi: hourZhi0,
-                ganZhi: TIANGAN[gan] + DIZHI[hourZhi0]
+                zhi: hourZhi,
+                ganZhi: TIANGAN[gan] + DIZHI[hourZhi]
             };
         }
         
@@ -875,13 +871,6 @@
                 const ganIndex = tianGanOrder[i];
                 diPan[gong] = TIANGAN[ganIndex];
             }
-            
-            // 中五宫寄坤二宫（保留原来的癸，叠加乙），但中五宫仍保留用于显示
-            if (diPan[5]) {
-                diPan[2] = diPan[5] + (diPan[2] || ''); // 乙 + 癸 = "乙癸"
-                // 中五宫保留原值用于显示
-            }
-            
             return diPan;
         }
         
@@ -899,8 +888,7 @@
             // 找六仪在地盘的宫位
             let xunShouGong = null;
             for (let gong in diPan) {
-                // 处理组合地盘干（如"乙癸"），检查是否包含六仪
-                if (diPan[gong] && diPan[gong].includes(liuYi)) {
+                if (diPan[gong] === liuYi) {
                     xunShouGong = parseInt(gong);
                     break;
                 }
@@ -923,8 +911,7 @@
             let hourGanGong = null;
             for (let gongStr in diPan) {
                 const gongNum = parseInt(gongStr);
-                // 坤二宫可能是"乙癸"，要检查是否包含时干
-                if (diPan[gongStr] && diPan[gongStr].includes(hourGan)) {
+                if (diPan[gongStr] === hourGan) {
                     hourGanGong = gongNum;
                     break;
                 }
@@ -936,9 +923,8 @@
             
             // 值符星到时干宫，带旬首的六仪
             const liuYi = zhiFuInfo.xunShou.slice(2);
-            const zhiFuDisplay = zhiFuInfo.zhiFuXing === '天芮' ? '芮禽' : zhiFuInfo.zhiFuXing;
             tianPan[hourGanGong] = {
-                star: zhiFuDisplay,
+                star: zhiFuInfo.zhiFuXing,
                 gan: liuYi
             };
             
@@ -953,13 +939,16 @@
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
                 const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
-                // 天禽寄天芮
-                const starDisplay = star === '天芮' ? '芮禽' : star;
                 tianPan[gong] = {
-                    star: starDisplay,
+                    star,
                     gan: diPan[origGong]
                 };
             }
+            
+            tianPan[5] = {
+                star: '天禽',
+                gan: diPan[5] || '乙'
+            };
             
             return {tianPan, hourGanGong};
         }
@@ -971,7 +960,7 @@
             const zhiFuIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             for (let i = 0; i < 8; i++) {
-                const gongIndex = isYang ? (zhiFuIndex + i) % 8 : (zhiFuIndex - i + 8) % 8;
+                const gongIndex = (zhiFuIndex + i) % 8;
                 const gong = CLOCKWISE_ORDER[gongIndex];
                 baShen[gong] = shenOrder[i];
             }
@@ -979,53 +968,42 @@
             return baShen;
         }
         
-        // 排八门（按老师规则：旬首地支序号=旬首宫，地支顺序阳顺阴逆）
+        // 排八门
         function paiBaMen(zhiFuInfo, hourZhi, isYang) {
             const baMen = {};
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
             const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
             
-            // 地支顺序：寅→卯→辰→巳→午→未→申→酉→戌→亥→子→丑（用于排宫位）
-            const diZhiOrder = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'];
-            // 标准地支顺序（用于hourZhi转地支名）
-            const standardDiZhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
-            
-            const diZhiIdx = diZhiOrder.indexOf(zhiFuInfo.xunShou.slice(0, 2)[1]); // 取"甲辰壬"中的"辰"
-            const hourZhiName = standardDiZhi[hourZhi - 1]; // hourZhi 1-12 转地支名（1=子, 7=午）
-            
-            // 旬首地支序号 = 旬首宫宫位号
-            const xunShouNum = zhiFuInfo.xunShouGong;
-            
-            // 给每个地支分配宫位（阳顺阴逆）
-            const diZhiToGong = {};
-            console.log('排八门循环调试:', {diZhiIdx, xunShouNum, isYang});
-            for (let i = 0; i < 12; i++) {
-                let gong;
-                if (isYang) {
-                    gong = ((xunShouNum - 1 + i) % 9) + 1;
-                } else {
-                    gong = ((xunShouNum - 1 - i + 9) % 9) + 1;
-                }
-                const dz = diZhiOrder[(diZhiIdx + i) % 12];
-                diZhiToGong[dz] = gong;
-                console.log(`  i=${i}, dz=${dz}, gong=${gong}`);
+            // 计算值使门落宫：从旬首宫开始，数时辰地支
+            const xunShouZhi = XUNSHOU_DIZHI[zhiFuInfo.xunShou.slice(0, 2)]; // 取"甲辰壬"中的"甲辰"
+            let steps;
+            if (isYang) {
+                steps = (hourZhi - xunShouZhi + 12) % 12;
+            } else {
+                steps = (xunShouZhi - hourZhi + 12) % 12;
             }
-            
-            // 时辰地支对应的宫位就是值使门落宫
-            const zhiShiGong = diZhiToGong[hourZhiName];
             
             console.log('paiBaMen调试:', {
                 xunShou: zhiFuInfo.xunShou,
-                xunShouGong: zhiFuInfo.xunShouGong,
-                hourZhi: hourZhiName,
-                zhiShiGong,
-                diZhiToGong,
-                diZhiIdx,
-                xunShouNum
+                xunShouZhi,
+                hourZhi,
+                steps,
+                xunShouGong: zhiFuInfo.xunShouGong
             });
             
-            // 从值使门落宫开始，顺时针排八门
-            const startIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
+            // 从旬首宫开始走
+            let currentGong = zhiFuInfo.xunShouGong;
+            
+            // 每1步走一宫（不是2步！）
+            for (let i = 0; i < steps; i++) {
+                const idx = CLOCKWISE_ORDER.indexOf(currentGong);
+                currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
+                console.log(`第${i+1}步到:`, currentGong);
+            }
+            
+            console.log('最终值使门落宫:', currentGong);
+            
+            const startIndex = CLOCKWISE_ORDER.indexOf(currentGong);
             
             console.log('八门排布:');
             for (let i = 0; i < 8; i++) {
@@ -1036,23 +1014,36 @@
                 console.log(`  宫${gong}: ${menOrder[menIdx]}`);
             }
             
-            return {baMen, zhiShiGong};
+            return {baMen, zhiShiGong: currentGong};
         }
         
         // 排隐干
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang) {
             const yinGan = {};
-            const hourGan = hourGanZhi[0]; // 起局时辰的天干
+            const ganOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
+            const hourGan = hourGanZhi[0];
+            const hourGanIndex = ganOrder.indexOf(hourGan);
             
-            // 值使门落宫的地盘干
-            const zhiShiDiPanGan = diPan[zhiShiGong];
+            const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             
-            // 如果值使门落宫的地盘干与起局时辰天干相同，隐干写在中宫
-            // 如果不同，隐干写在值使门落宫
-            if (zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan)) {
-                yinGan[5] = hourGan; // 写在中宫
-            } else {
-                yinGan[zhiShiGong] = hourGan; // 写在值使门落宫
+            // 调试：检查类型
+            console.log('paiYinGan调试:', {
+                zhiShiGong,
+                zhiShiGongType: typeof zhiShiGong,
+                hourGan,
+                hourGanIndex
+            });
+            
+            const startIndex = gongOrder.indexOf(parseInt(zhiShiGong)); // 确保是数字
+            
+            console.log('startIndex:', startIndex);
+            
+            for (let i = 0; i < 9; i++) {
+                const ganIdx = (hourGanIndex + i) % 9;
+                const gongIdx = (startIndex + i) % 9;
+                const gong = gongOrder[gongIdx];
+                yinGan[gong] = ganOrder[ganIdx];
+                console.log(`  i=${i}: 宫${gong} = ${ganOrder[ganIdx]}`);
             }
             
             return yinGan;
@@ -1137,11 +1128,10 @@
             
             // 排隐干
             const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
-            console.log('隐干:', yinGan, 'zhiShiGong:', zhiShiGong, 'hourGan:', hourGZ.ganZhi[0]);
             
             // 马星
-            const maXingZhi = MAXING[hour]; // 1-12序号
-            const maXingGong = Object.keys(diPan).find(k => DIZHI.indexOf(diPan[k]) + 1 === maXingZhi);
+            const maXingZhi = MAXING[hour];
+            const maXingGong = Object.keys(diPan).find(k => DIZHI.indexOf(diPan[k]) === maXingZhi);
             
             // 保存数据
             currentPanData = {
@@ -1154,7 +1144,7 @@
                 baShen,
                 baMen,
                 yinGan,
-                maXing: DIZHI[maXingZhi - 1],
+                maXing: DIZHI[maXingZhi],
                 isYang: juInfo.isYang
             };
             
@@ -1164,7 +1154,7 @@
             document.getElementById('xunshou').textContent = zhiFuInfo.xunShou;
             document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing;
             document.getElementById('zhishi').textContent = zhiFuInfo.zhiShiMen;
-            document.getElementById('maxing').textContent = DIZHI[maXingZhi - 1];
+            document.getElementById('maxing').textContent = DIZHI[maXingZhi];
             
             // 显示四害
             const sihaiGrid = document.getElementById('sihaiGrid');
@@ -1200,8 +1190,7 @@
                 const dpGan = diPan[gongNum] || '';
                 const shen = baShen[gongNum] || '';
                 const men = baMen[gongNum] || '';
-                // 修复：同时尝试数字和字符串类型的键
-                const yg = yinGan[gongNum] || yinGan[String(gongNum)] || '';
+                const yg = yinGan[gongNum] || '';
                 
                 // 检测四害
                 const sihai = checkSiHai(gongNum, dpGan, tpGan, men, star, yg);
@@ -1217,11 +1206,10 @@
                 // 第三行：八门 | 地盘干
                 
                 // 调试：打印关键宫位的值
-                if (gongNum === 8 || gongNum === 1 || gongNum === 3) {
+                if (gongNum === 8 || gongNum === 1) {
                     console.log('宫位' + gongNum + '调试:', {
-                        star, tpGan, dpGan, shen, men, 
-                        yg: yg || '(empty)',
-                        yinGanObj: yinGan
+                        star, tpGan, dpGan, shen, men, yg,
+                        tianPanObj: tianPan[gongNum]
                     });
                 }
                 
