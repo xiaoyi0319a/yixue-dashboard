@@ -970,7 +970,7 @@
             return baShen;
         }
         
-        // 排八门
+        // 排八门（修正版）
         function paiBaMen(zhiFuInfo, hourZhi, isYang) {
             const baMen = {};
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
@@ -978,13 +978,17 @@
             
             // 计算值使门落宫：从旬首宫开始，数时辰地支
             const xunShouZhi = XUNSHOU_DIZHI[zhiFuInfo.xunShou.slice(0, 2)]; // 取"甲辰壬"中的"甲辰"
+            
+            // 修正步数计算：从旬首地支数到时辰地支
             let steps;
             if (isYang) {
-                steps = (hourZhi - xunShouZhi + 11) % 12; // 修正：减1步
-                if (steps === 0) steps = 12;
+                // 阳遁顺行：从旬首地支数到时辰地支
+                steps = (hourZhi - xunShouZhi + 12) % 12;
+                if (steps === 0) steps = 0; // 同地支不动
             } else {
-                steps = (xunShouZhi - hourZhi + 11) % 12;
-                if (steps === 0) steps = 12;
+                // 阴遁逆行
+                steps = (xunShouZhi - hourZhi + 12) % 12;
+                if (steps === 0) steps = 0;
             }
             
             console.log('paiBaMen调试:', {
@@ -998,7 +1002,7 @@
             // 从旬首宫开始走
             let currentGong = zhiFuInfo.xunShouGong;
             
-            // 每1步走一宫（不是2步！）
+            // 每步走一宫
             for (let i = 0; i < steps; i++) {
                 const idx = CLOCKWISE_ORDER.indexOf(currentGong);
                 currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
