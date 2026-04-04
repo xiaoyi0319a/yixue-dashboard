@@ -1042,18 +1042,17 @@
         // 排隐干
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang) {
             const yinGan = {};
-            const ganOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
-            const hourGan = hourGanZhi[0];
-            const hourGanIndex = ganOrder.indexOf(hourGan);
+            const hourGan = hourGanZhi[0]; // 起局时辰的天干
             
-            const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-            const startIndex = gongOrder.indexOf(zhiShiGong);
+            // 值使门落宫的地盘干
+            const zhiShiDiPanGan = diPan[zhiShiGong];
             
-            for (let i = 0; i < 9; i++) {
-                const ganIdx = (hourGanIndex + i) % 9;
-                const gongIdx = (startIndex + i) % 9;
-                const gong = gongOrder[gongIdx];
-                yinGan[gong] = ganOrder[ganIdx];
+            // 如果值使门落宫的地盘干与起局时辰天干相同，隐干写在中宫
+            // 如果不同，隐干写在值使门落宫
+            if (zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan)) {
+                yinGan[5] = hourGan; // 写在中宫
+            } else {
+                yinGan[zhiShiGong] = hourGan; // 写在值使门落宫
             }
             
             return yinGan;
