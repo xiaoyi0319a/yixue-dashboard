@@ -597,8 +597,8 @@
         // 需要根据定局动态计算，这里先修正甲辰的值
         const XUNSHOU_DIZHI = {'甲子': 1, '甲戌': 6, '甲申': 7, '甲午': 9, '甲辰': 1, '甲寅': 8};
         
-        // 马星（时支定）
-        // 申子辰马在寅(2), 寅午戌马在申(8), 巳酉丑马在亥(11), 亥卯未马在巳(5)
+        // 马星（时支定）- hour是1-12，对应子丑寅...
+        // 申子辰马在寅, 寅午戌马在申, 巳酉丑马在亥, 亥卯未马在巳
         const MAXING = {
             1: 3,   // 子→寅
             2: 12,  // 丑→亥
@@ -1139,8 +1139,8 @@
             const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
             
             // 马星
-            const maXingZhi = MAXING[hour];
-            const maXingGong = Object.keys(diPan).find(k => DIZHI.indexOf(diPan[k]) === maXingZhi);
+            const maXingZhi = MAXING[hour]; // 1-12序号
+            const maXingGong = Object.keys(diPan).find(k => DIZHI.indexOf(diPan[k]) + 1 === maXingZhi);
             
             // 保存数据
             currentPanData = {
@@ -1153,7 +1153,7 @@
                 baShen,
                 baMen,
                 yinGan,
-                maXing: DIZHI[maXingZhi],
+                maXing: DIZHI[maXingZhi - 1],
                 isYang: juInfo.isYang
             };
             
@@ -1163,7 +1163,7 @@
             document.getElementById('xunshou').textContent = zhiFuInfo.xunShou;
             document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing;
             document.getElementById('zhishi').textContent = zhiFuInfo.zhiShiMen;
-            document.getElementById('maxing').textContent = DIZHI[maXingZhi];
+            document.getElementById('maxing').textContent = DIZHI[maXingZhi - 1];
             
             // 显示四害
             const sihaiGrid = document.getElementById('sihaiGrid');
