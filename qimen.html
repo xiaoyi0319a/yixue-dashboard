@@ -1221,7 +1221,11 @@
                     console.log('宫位' + gongNum + '调试:', {
                         star, tpGan, dpGan, shen, men, 
                         yg: yg || '(empty)',
-                        yinGanObj: yinGan
+                        yinGanKeys: Object.keys(yinGan),
+                        yinGanRaw: yinGan,
+                        gongNumType: typeof gongNum,
+                        key3Value: yinGan[3],
+                        keyStr3Value: yinGan['3']
                     });
                 }
                 
