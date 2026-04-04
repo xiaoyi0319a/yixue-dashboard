@@ -1218,8 +1218,12 @@
                 // 调试：打印关键宫位的值
                 if (gongNum === 8 || gongNum === 1 || gongNum === 3) {
                     console.log('宫位' + gongNum + '调试:', {
-                        star, tpGan, dpGan, shen, men, yg,
+                        star, tpGan, dpGan, shen, men, 
+                        yg: yg || '(empty)',
+                        yinGanKey: yinGan[gongNum],
+                        yinGanKeyStr: yinGan[String(gongNum)],
                         yinGanObj: yinGan,
+                        gongNumType: typeof gongNum,
                         tianPanObj: tianPan[gongNum]
                     });
                 }
