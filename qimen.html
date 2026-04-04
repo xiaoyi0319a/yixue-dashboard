@@ -732,7 +732,7 @@
         };
         
         // 九星
-        const JIU_XING = {1: '天蓬', 8: '天任', 3: '天冲', 4: '天辅', 9: '天英', 2: '天芮', 7: '天柱', 6: '天心', 5: '天禽'};
+        const JIU_XING = {1: '天蓬', 2: '天芮', 3: '天冲', 4: '天辅', 5: '天禽', 6: '天心', 7: '天柱', 8: '天任', 9: '天英'};
         
         // 八门
         const BA_MEN = {1: '休门', 8: '生门', 3: '伤门', 4: '杜门', 9: '景门', 2: '死门', 7: '惊门', 6: '开门'};
@@ -921,7 +921,7 @@
                 }
             }
             
-            const starOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
+            const starOrder = ['天蓬', '天芮', '天冲', '天辅', '天心', '天柱', '天任', '天英'];
             const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(hourGanGong);
             
