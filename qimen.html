@@ -978,27 +978,30 @@
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
             const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
             
-            // 地支顺序：寅→卯→辰→巳→午→未→申→酉→戌→亥→子→丑
+            // 地支顺序：寅→卯→辰→巳→午→未→申→酉→戌→亥→子→丑（用于排宫位）
             const diZhiOrder = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'];
-            const diZhiIdx = diZhiOrder.indexOf(zhiFuInfo.xunShou[2]); // 取"甲辰"中的"辰"
-            const hourZhiName = diZhiOrder[(hourZhi - 1) % 12]; // hourZhi 1-12 转地支名
+            // 标准地支顺序（用于hourZhi转地支名）
+            const standardDiZhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+            
+            const diZhiIdx = diZhiOrder.indexOf(zhiFuInfo.xunShou.slice(0, 2)[1]); // 取"甲辰壬"中的"辰"
+            const hourZhiName = standardDiZhi[hourZhi - 1]; // hourZhi 1-12 转地支名（1=子, 7=午）
             
             // 旬首地支序号 = 旬首宫宫位号
             const xunShouNum = zhiFuInfo.xunShouGong;
             
             // 给每个地支分配宫位（阳顺阴逆）
             const diZhiToGong = {};
+            console.log('排八门循环调试:', {diZhiIdx, xunShouNum, isYang});
             for (let i = 0; i < 12; i++) {
                 let gong;
                 if (isYang) {
-                    // 阳遁顺排
                     gong = ((xunShouNum - 1 + i) % 9) + 1;
                 } else {
-                    // 阴遁逆排
                     gong = ((xunShouNum - 1 - i + 9) % 9) + 1;
                 }
                 const dz = diZhiOrder[(diZhiIdx + i) % 12];
                 diZhiToGong[dz] = gong;
+                console.log(`  i=${i}, dz=${dz}, gong=${gong}`);
             }
             
             // 时辰地支对应的宫位就是值使门落宫
@@ -1009,7 +1012,9 @@
                 xunShouGong: zhiFuInfo.xunShouGong,
                 hourZhi: hourZhiName,
                 zhiShiGong,
-                diZhiToGong
+                diZhiToGong: diZhiToGongStr,
+                diZhiIdx,
+                xunShouNum
             });
             
             // 从值使门落宫开始，顺时针排八门
