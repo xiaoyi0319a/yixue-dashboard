@@ -972,43 +972,48 @@
             return baShen;
         }
         
-        // 排八门（修正版 - 使用旬首宫作为基数）
+        // 排八门（按老师规则：旬首地支序号=旬首宫，地支顺序阳顺阴逆）
         function paiBaMen(zhiFuInfo, hourZhi, isYang) {
             const baMen = {};
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
             const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
             
-            // 使用旬首宫（六仪所在宫位）作为起点序号
-            const xunShouGongNum = zhiFuInfo.xunShouGong;
+            // 地支顺序：寅→卯→辰→巳→午→未→申→酉→戌→亥→子→丑
+            const diZhiOrder = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'];
+            const diZhiIdx = diZhiOrder.indexOf(zhiFuInfo.xunShou[2]); // 取"甲辰"中的"辰"
+            const hourZhiName = diZhiOrder[(hourZhi - 1) % 12]; // hourZhi 1-12 转地支名
             
-            // 计算步数：从旬首宫序号数到时辰地支序号
-            let steps;
-            if (isYang) {
-                steps = (hourZhi - xunShouGongNum + 12) % 12;
-            } else {
-                steps = (xunShouGongNum - hourZhi + 12) % 12;
+            // 旬首地支序号 = 旬首宫宫位号
+            const xunShouNum = zhiFuInfo.xunShouGong;
+            
+            // 给每个地支分配宫位（阳顺阴逆）
+            const diZhiToGong = {};
+            for (let i = 0; i < 12; i++) {
+                let gong;
+                if (isYang) {
+                    // 阳遁顺排
+                    gong = ((xunShouNum - 1 + i) % 9) + 1;
+                } else {
+                    // 阴遁逆排
+                    gong = ((xunShouNum - 1 - i + 9) % 9) + 1;
+                }
+                const dz = diZhiOrder[(diZhiIdx + i) % 12];
+                diZhiToGong[dz] = gong;
             }
+            
+            // 时辰地支对应的宫位就是值使门落宫
+            const zhiShiGong = diZhiToGong[hourZhiName];
             
             console.log('paiBaMen调试:', {
                 xunShou: zhiFuInfo.xunShou,
-                xunShouGong: xunShouGongNum,
-                hourZhi,
-                steps
+                xunShouGong: zhiFuInfo.xunShouGong,
+                hourZhi: hourZhiName,
+                zhiShiGong,
+                diZhiToGong
             });
             
-            // 从旬首宫开始走
-            let currentGong = zhiFuInfo.xunShouGong;
-            
-            // 每步走一宫
-            for (let i = 0; i < steps; i++) {
-                const idx = CLOCKWISE_ORDER.indexOf(currentGong);
-                currentGong = CLOCKWISE_ORDER[(idx + (isYang ? 1 : -1) + 8) % 8];
-                console.log(`第${i+1}步到:`, currentGong);
-            }
-            
-            console.log('最终值使门落宫:', currentGong);
-            
-            const startIndex = CLOCKWISE_ORDER.indexOf(currentGong);
+            // 从值使门落宫开始，顺时针排八门
+            const startIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
             
             console.log('八门排布:');
             for (let i = 0; i < 8; i++) {
@@ -1019,7 +1024,7 @@
                 console.log(`  宫${gong}: ${menOrder[menIdx]}`);
             }
             
-            return {baMen, zhiShiGong: currentGong};
+            return {baMen, zhiShiGong};
         }
         
         // 排隐干
