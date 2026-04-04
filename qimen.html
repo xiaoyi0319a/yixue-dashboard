@@ -592,8 +592,10 @@
             XUNSHOU_MAP[JIAZI[i]] = XUNSHOU_LIST[xunIndex];
         }
         
-        // 旬首地支
-        const XUNSHOU_DIZHI = {'甲子': 1, '甲戌': 11, '甲申': 7, '甲午': 5, '甲辰': 5, '甲寅': 3};
+        // 旬首地支 - 修正为旬首六仪所在的宫位号
+        // 甲辰壬在坎一宫，所以'甲辰': 1
+        // 需要根据定局动态计算，这里先修正甲辰的值
+        const XUNSHOU_DIZHI = {'甲子': 1, '甲戌': 6, '甲申': 7, '甲午': 9, '甲辰': 1, '甲寅': 8};
         
         // 马星（时支定）
         // 申子辰马在寅(2), 寅午戌马在申(8), 巳酉丑马在亥(11), 亥卯未马在巳(5)
@@ -970,33 +972,28 @@
             return baShen;
         }
         
-        // 排八门（修正版）
+        // 排八门（修正版 - 使用旬首宫作为基数）
         function paiBaMen(zhiFuInfo, hourZhi, isYang) {
             const baMen = {};
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
             const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
             
-            // 计算值使门落宫：从旬首宫开始，数时辰地支
-            const xunShouZhi = XUNSHOU_DIZHI[zhiFuInfo.xunShou.slice(0, 2)]; // 取"甲辰壬"中的"甲辰"
+            // 使用旬首宫（六仪所在宫位）作为起点序号
+            const xunShouGongNum = zhiFuInfo.xunShouGong;
             
-            // 修正步数计算：从旬首地支数到时辰地支
+            // 计算步数：从旬首宫序号数到时辰地支序号
             let steps;
             if (isYang) {
-                // 阳遁顺行：从旬首地支数到时辰地支
-                steps = (hourZhi - xunShouZhi + 12) % 12;
-                if (steps === 0) steps = 0; // 同地支不动
+                steps = (hourZhi - xunShouGongNum + 12) % 12;
             } else {
-                // 阴遁逆行
-                steps = (xunShouZhi - hourZhi + 12) % 12;
-                if (steps === 0) steps = 0;
+                steps = (xunShouGongNum - hourZhi + 12) % 12;
             }
             
             console.log('paiBaMen调试:', {
                 xunShou: zhiFuInfo.xunShou,
-                xunShouZhi,
+                xunShouGong: xunShouGongNum,
                 hourZhi,
-                steps,
-                xunShouGong: zhiFuInfo.xunShouGong
+                steps
             });
             
             // 从旬首宫开始走
