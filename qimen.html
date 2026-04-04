@@ -1216,9 +1216,10 @@
                 // 第三行：八门 | 地盘干
                 
                 // 调试：打印关键宫位的值
-                if (gongNum === 8 || gongNum === 1) {
+                if (gongNum === 8 || gongNum === 1 || gongNum === 3) {
                     console.log('宫位' + gongNum + '调试:', {
                         star, tpGan, dpGan, shen, men, yg,
+                        yinGanObj: yinGan,
                         tianPanObj: tianPan[gongNum]
                     });
                 }
