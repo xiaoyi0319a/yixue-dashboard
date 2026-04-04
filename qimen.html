@@ -899,7 +899,8 @@
             // 找六仪在地盘的宫位
             let xunShouGong = null;
             for (let gong in diPan) {
-                if (diPan[gong] === liuYi) {
+                // 处理组合地盘干（如"乙癸"），检查是否包含六仪
+                if (diPan[gong] && diPan[gong].includes(liuYi)) {
                     xunShouGong = parseInt(gong);
                     break;
                 }
