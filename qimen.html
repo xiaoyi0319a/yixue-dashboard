@@ -945,8 +945,11 @@
         
         // 找值符值使（修正版 - 处理中五宫）
         function findZhiFuZhiShi(hourGanZhi, diPan) {
+            console.log('findZhiFuZhiShi输入:', hourGanZhi);
             const xunShou = XUNSHOU_MAP[hourGanZhi];
+            console.log('旬首:', xunShou);
             const liuYi = XUNSHOU_LIUYI[xunShou]; // 六仪：戊己庚辛壬癸
+            console.log('六仪:', liuYi);
             
             // 找六仪在地盘的宫位（优先检查中五宫）
             let xunShouGong = null;
@@ -1026,6 +1029,7 @@
             
             // 值符星到实际落宫（坤二宫），带旬首的六仪
             const liuYi = zhiFuInfo.xunShou.slice(2);
+            console.log('paiTianPan - xunShou:', zhiFuInfo.xunShou, 'liuYi:', liuYi);
             // 显示"芮禽"（天禽寄天芮）
             let zhiFuDisplay = '芮禽';
             tianPan[zhiFuGong] = {
