@@ -1127,10 +1127,17 @@
             return {baMen, zhiShiGong};
         }
         
-        // 排隐干
-        function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang) {
+        // 排隐干（修正版 - 处理甲隐遁）
+        function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang, xunShou) {
             const yinGan = {};
-            const hourGan = hourGanZhi[0]; // 起局时辰的天干
+            let hourGan = hourGanZhi[0]; // 起局时辰的天干
+            
+            // 处理甲隐遁：如果时干是甲，用旬首的六仪代替
+            // 甲隐于戊(甲子旬)、己(甲戌旬)、庚(甲申旬)、辛(甲午旬)、壬(甲辰旬)、癸(甲寅旬)
+            if (hourGan === '甲') {
+                // 从旬首获取六仪（xunShou格式如"甲戌己"）
+                hourGan = xunShou.slice(2); // 取第三个字符，如"己"
+            }
             
             // 隐干顺序：戊(1)→己(2)→庚(3)→辛(4)→壬(5)→癸(6)→丁(7)→丙(8)→乙(9)
             const yinGanOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
@@ -1143,12 +1150,13 @@
             
             // 确定时干起点
             let startIdx; // 在numOrder中的索引
+            // 检查值使宫地盘干是否等于时干（考虑组合地盘干如"乙癸"）
             if (zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan)) {
-                // 情况一：值使宫地盘干 = 时干 → 时干在中五（序号5）
-                startIdx = 4; // 中五是numOrder的第5个元素，索引4
-            } else {
-                // 情况二：值使宫地盘干 ≠ 时干 → 时干在值使门落宫
+                // 情况一：值使宫地盘干包含时干 → 时干在值使宫
                 startIdx = numOrder.indexOf(parseInt(zhiShiGong));
+            } else {
+                // 情况二：值使宫地盘干不包含时干 → 时干在中五（序号5）
+                startIdx = 4; // 中五是numOrder的第5个元素，索引4
             }
             
             // 从时干开始，按顺序填入各宫
@@ -1251,8 +1259,8 @@
             // 排八门
             const {baMen, zhiShiGong} = paiBaMen(zhiFuInfo, hour, juInfo.isYang);
             
-            // 排隐干
-            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
+            // 排隐干（传入旬首以处理甲隐遁）
+            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang, zhiFuInfo.xunShou);
             
             // 马星
             const maXingZhi = MAXING[hour]; // 1-12序号
