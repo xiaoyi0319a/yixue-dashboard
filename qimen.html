@@ -991,12 +991,19 @@
             
             // 找时干在地盘的宫位（值符星要飞到这里）
             let hourGanGong = null;
-            for (let gongStr in diPan) {
-                const gongNum = parseInt(gongStr);
-                // 坤二宫可能是"乙癸"，要检查是否包含时干
-                if (diPan[gongStr] && diPan[gongStr].includes(hourGan)) {
-                    hourGanGong = gongNum;
-                    break;
+            
+            // 先检查中五宫（避免寄宫干扰）
+            if (diPan[5] && diPan[5].includes(hourGan)) {
+                hourGanGong = 5;
+            } else {
+                // 中五宫没有，再检查其他宫
+                for (let gongStr in diPan) {
+                    const gongNum = parseInt(gongStr);
+                    // 坤二宫可能是"乙癸"，要检查是否包含时干
+                    if (diPan[gongStr] && diPan[gongStr].includes(hourGan)) {
+                        hourGanGong = gongNum;
+                        break;
+                    }
                 }
             }
             
