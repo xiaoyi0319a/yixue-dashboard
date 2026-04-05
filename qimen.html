@@ -995,6 +995,7 @@
         
         // 排天盘干和九星（修正版）
         function paiTianPan(hourGanZhi, diPan, zhiFuInfo, isYang) {
+            console.log('paiTianPan - zhiFuInfo.xunShou:', zhiFuInfo.xunShou, 'liuYi:', zhiFuInfo.xunShou.slice(2));
             const tianPan = {};
             const hourGan = hourGanZhi[0];
             
