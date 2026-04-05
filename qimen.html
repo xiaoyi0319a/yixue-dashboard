@@ -1167,10 +1167,8 @@
         // 主排盘函数
         function qiPan() {
             const dateInput = document.getElementById('date').value;
-            console.log('日期输入值:', dateInput);
             const [y, m, d] = dateInput.split('-').map(Number);
             const date = new Date(y, m - 1, d);
-            console.log('解析后Date:', date.toString(), '年月日:', date.getFullYear(), date.getMonth()+1, date.getDate());
             const hour = parseInt(document.getElementById('hour').value);
             
             // 先获取节气（用于月柱计算）
