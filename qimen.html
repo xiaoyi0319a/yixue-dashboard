@@ -1250,6 +1250,7 @@
             const diPan = paiDiPan(juInfo.ju, juInfo.isYang);
             
             // 找值符值使
+            console.log('qiPan - hourGZ.ganZhi:', hourGZ.ganZhi);
             const zhiFuInfo = findZhiFuZhiShi(hourGZ.ganZhi, diPan);
             
             // 排天盘
@@ -1324,21 +1325,12 @@
                 const tpGan = tp.gan || '';
                 const dpGan = diPan[gongNum] || '';
                 
-                // 调试坤二宫
-                if (gongNum === 2) {
-                    console.log('渲染坤二宫 - gongNum:', gongNum, 'dpGan:', dpGan, 'diPan[2]:', diPan[2]);
-                    console.log('dpGan长度:', dpGan.length, 'dpGan字符:', [...dpGan]);
-                }
-                
-                // 确保dpGan是字符串
-                const dpGanStr = String(dpGan);
-                
                 const shen = baShen[gongNum] || '';
                 const men = baMen[gongNum] || '';
                 // 修复：同时尝试数字和字符串类型的键
                 const yg = yinGan[gongNum] || yinGan[String(gongNum)] || '';
                 
-                // 检测四害（使用原始dpGan）
+                // 检测四害
                 const sihai = checkSiHai(gongNum, dpGan, tpGan, men, star, yg);
                 const geju = checkGeJu(tpGan, dpGan);
                 
