@@ -956,7 +956,12 @@
             }
             
             // 中五宫的值符星是天禽星（不是天芮）
-            let zhiFuXing = JIU_XING[xunShouGong];
+            let zhiFuXing;
+            if (xunShouGong === 5) {
+                zhiFuXing = '天禽'; // 强制中五宫为天禽星
+            } else {
+                zhiFuXing = JIU_XING[xunShouGong];
+            }
             
             // 值使门：中五宫寄坤二宫
             let zhiShiMenGong = xunShouGong;
