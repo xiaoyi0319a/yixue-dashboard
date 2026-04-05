@@ -937,7 +937,7 @@
             '甲午': '辛', '甲辰': '壬', '甲寅': '癸'
         };
         
-        // 找值符值使（修正版）
+        // 找值符值使（修正版 - 处理中五宫）
         function findZhiFuZhiShi(hourGanZhi, diPan) {
             const xunShou = XUNSHOU_MAP[hourGanZhi];
             const liuYi = XUNSHOU_LIUYI[xunShou]; // 六仪：戊己庚辛壬癸
@@ -952,11 +952,23 @@
                 }
             }
             
+            // 中五宫寄坤二宫，值符星用天芮
+            let zhiFuXing = JIU_XING[xunShouGong];
+            if (xunShouGong === 5) {
+                zhiFuXing = '天芮'; // 天禽寄天芮
+            }
+            
+            // 值使门：中五宫寄坤二宫
+            let zhiShiMenGong = xunShouGong;
+            if (xunShouGong === 5) {
+                zhiShiMenGong = 2; // 寄坤二宫
+            }
+            
             return {
                 xunShou: xunShou + liuYi, // 如：甲辰壬
                 xunShouGong,
-                zhiFuXing: JIU_XING[xunShouGong],
-                zhiShiMen: BA_MEN[xunShouGong]
+                zhiFuXing, // 天禽寄天芮
+                zhiShiMen: BA_MEN[zhiShiMenGong] // 中五宫寄坤二
             };
         }
         
@@ -1039,12 +1051,14 @@
             const diZhiIdx = diZhiOrder.indexOf(zhiFuInfo.xunShou.slice(0, 2)[1]); // 取"甲辰壬"中的"辰"
             const hourZhiName = standardDiZhi[hourZhi - 1]; // hourZhi 1-12 转地支名（1=子, 7=午）
             
-            // 旬首地支序号 = 旬首宫宫位号
-            const xunShouNum = zhiFuInfo.xunShouGong;
+            // 旬首地支序号 = 旬首宫宫位号（中五宫寄坤二宫）
+            let xunShouNum = zhiFuInfo.xunShouGong;
+            if (xunShouNum === 5) {
+                xunShouNum = 2; // 中五宫寄坤二宫
+            }
             
             // 给每个地支分配宫位（阳顺阴逆）
             const diZhiToGong = {};
-            console.log('排八门循环调试:', {diZhiIdx, xunShouNum, isYang});
             for (let i = 0; i < 12; i++) {
                 let gong;
                 if (isYang) {
@@ -1052,34 +1066,29 @@
                 } else {
                     gong = ((xunShouNum - 1 - i + 9) % 9) + 1;
                 }
+                // 跳过中五宫（5宫）
+                if (gong === 5) {
+                    if (isYang) {
+                        gong = 6;
+                    } else {
+                        gong = 4;
+                    }
+                }
                 const dz = diZhiOrder[(diZhiIdx + i) % 12];
                 diZhiToGong[dz] = gong;
-                console.log(`  i=${i}, dz=${dz}, gong=${gong}`);
             }
             
             // 时辰地支对应的宫位就是值使门落宫
             const zhiShiGong = diZhiToGong[hourZhiName];
             
-            console.log('paiBaMen调试:', {
-                xunShou: zhiFuInfo.xunShou,
-                xunShouGong: zhiFuInfo.xunShouGong,
-                hourZhi: hourZhiName,
-                zhiShiGong,
-                diZhiToGong,
-                diZhiIdx,
-                xunShouNum
-            });
-            
             // 从值使门落宫开始，顺时针排八门
             const startIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
             
-            console.log('八门排布:');
             for (let i = 0; i < 8; i++) {
                 const gongIndex = (startIndex + i) % 8;
                 const gong = CLOCKWISE_ORDER[gongIndex];
                 const menIdx = (zhiShiIndex + i) % 8;
                 baMen[gong] = menOrder[menIdx];
-                console.log(`  宫${gong}: ${menOrder[menIdx]}`);
             }
             
             return {baMen, zhiShiGong};
