@@ -265,7 +265,7 @@
             border: 2px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             font-size: 0.8rem;
             min-height: 110px;
         }
@@ -380,6 +380,7 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.9rem;
+            gap: 4px;
         }
         
         .gong .row3 .men-left {
@@ -395,8 +396,10 @@
         
         .gong .row3 .dp-right {
             color: #95e1d3;
-            flex: 1;
             text-align: right;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            min-width: 2em;
         }
         
         .gong .geju-new {
