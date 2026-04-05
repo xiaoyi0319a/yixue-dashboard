@@ -768,14 +768,45 @@
             return {gan, zhi, ganZhi: TIANGAN[gan] + DIZHI[zhi]};
         }
         
-        // 计算日干支
+        // 计算日干支（修复时区问题）
         function getDayGanZhi(date) {
-            console.log('getDayGanZhi输入:', date.toString());
-            const baseDate = new Date(1900, 0, 31);
-            const diffTime = date.getTime() - baseDate.getTime();
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            // 使用年月日字符串计算，避免时区问题
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            
+            // 基准日期：1900年1月31日
+            const baseYear = 1900;
+            const baseMonth = 1;
+            const baseDay = 31;
+            
+            // 计算从基准日期到目标日期的天数差
+            const getDayOfYear = (y, m, d) => {
+                const daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                // 闰年判断
+                const isLeap = (y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0);
+                if (isLeap) daysInMonth[2] = 29;
+                
+                let days = d;
+                for (let i = 1; i < m; i++) {
+                    days += daysInMonth[i];
+                }
+                return days;
+            };
+            
+            // 计算目标日期是第几天（从公元1年算起简化处理）
+            let targetDays = 0;
+            for (let i = baseYear; i < year; i++) {
+                targetDays += ((i % 4 === 0 && i % 100 !== 0) || (i % 400 === 0)) ? 366 : 365;
+            }
+            targetDays += getDayOfYear(year, month, day);
+            
+            // 基准日期是第几天
+            let baseDays = getDayOfYear(baseYear, baseMonth, baseDay);
+            
+            const diffDays = targetDays - baseDays;
             const index = (40 + diffDays) % 60;
-            console.log('日柱计算: diffDays=' + diffDays + ', index=' + index + ', result=' + JIAZI[index]);
+            
             return {
                 gan: index % 10,
                 zhi: index % 12,
