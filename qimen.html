@@ -952,11 +952,8 @@
                 }
             }
             
-            // 中五宫寄坤二宫，值符星用天芮
+            // 中五宫的值符星是天禽星（不是天芮）
             let zhiFuXing = JIU_XING[xunShouGong];
-            if (xunShouGong === 5) {
-                zhiFuXing = '天芮'; // 天禽寄天芮
-            }
             
             // 值使门：中五宫寄坤二宫
             let zhiShiMenGong = xunShouGong;
@@ -967,7 +964,7 @@
             return {
                 xunShou: xunShou + liuYi, // 如：甲辰壬
                 xunShouGong,
-                zhiFuXing, // 天禽寄天芮
+                zhiFuXing, // 中五宫为天禽星
                 zhiShiMen: BA_MEN[zhiShiMenGong] // 中五宫寄坤二
             };
         }
@@ -989,12 +986,25 @@
             }
             
             const starOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
-            const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
+            
+            // 处理天禽星：如果值符是天禽，在starOrder中映射为天芮（因为天禽寄天芮）
+            let zhiFuXingForIndex = zhiFuInfo.zhiFuXing;
+            if (zhiFuXingForIndex === '天禽') {
+                zhiFuXingForIndex = '天芮'; // 天禽星位置与天芮相同（寄宫）
+            }
+            
+            const zhiFuIndex = starOrder.indexOf(zhiFuXingForIndex);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(hourGanGong);
             
             // 值符星到时干宫，带旬首的六仪
             const liuYi = zhiFuInfo.xunShou.slice(2);
-            const zhiFuDisplay = zhiFuInfo.zhiFuXing === '天芮' ? '芮禽' : zhiFuInfo.zhiFuXing;
+            // 天禽星显示为"禽"或"天禽"，天芮星显示为"芮禽"（两者同宫时）
+            let zhiFuDisplay = zhiFuInfo.zhiFuXing;
+            if (zhiFuInfo.zhiFuXing === '天芮') {
+                zhiFuDisplay = '芮禽';
+            } else if (zhiFuInfo.zhiFuXing === '天禽') {
+                zhiFuDisplay = '禽'; // 或"天禽"
+            }
             tianPan[hourGanGong] = {
                 star: zhiFuDisplay,
                 gan: liuYi
@@ -1011,8 +1021,11 @@
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
                 const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
-                // 天禽寄天芮
-                const starDisplay = star === '天芮' ? '芮禽' : star;
+                // 天禽星显示为"禽"，天芮星显示为"芮禽"
+                let starDisplay = star;
+                if (star === '天芮') {
+                    starDisplay = '芮禽';
+                }
                 tianPan[gong] = {
                     star: starDisplay,
                     gan: diPan[origGong]
