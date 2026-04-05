@@ -1260,6 +1260,7 @@
             document.getElementById('jieqi').textContent = jieQi.name;
             document.getElementById('jushu').textContent = `${juInfo.type}${juInfo.ju}局 (${juInfo.yuan})`;
             document.getElementById('xunshou').textContent = zhiFuInfo.xunShou;
+            console.log('值符星调试:', zhiFuInfo.zhiFuXing, '旬首宫:', zhiFuInfo.xunShouGong);
             document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing;
             document.getElementById('zhishi').textContent = zhiFuInfo.zhiShiMen;
             document.getElementById('maxing').textContent = DIZHI[maXingZhi - 1];
