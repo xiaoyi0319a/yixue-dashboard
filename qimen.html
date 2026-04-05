@@ -843,15 +843,28 @@
             return JIEQI_DATA[0];
         }
         
-        // 定局数
+        // 日干定元表（正确的定局方式）
+        const DAY_YUAN = {
+            '上元': ['甲子', '乙丑', '丙寅', '丁卯', '戊辰',
+                     '己卯', '庚辰', '辛巳', '壬午', '癸未',
+                     '甲午', '乙未', '丙申', '丁酉', '戊戌',
+                     '己酉', '庚戌', '辛亥', '壬子', '癸丑'],
+            '中元': ['己巳', '庚午', '辛未', '壬申', '癸酉',
+                     '甲申', '乙酉', '丙戌', '丁亥', '戊子',
+                     '己亥', '庚子', '辛丑', '壬寅', '癸卯',
+                     '甲寅', '乙卯', '丙辰', '丁巳', '戊午'],
+            '下元': ['甲戌', '乙亥', '丙子', '丁丑', '戊寅',
+                     '己丑', '庚寅', '辛卯', '壬辰', '癸巳',
+                     '甲辰', '乙巳', '丙午', '丁未', '戊申',
+                     '己未', '庚申', '辛酉', '壬戌', '癸亥']
+        };
+
+        // 定局数（使用日干定元表）
         function determineJuShu(jieQi, dayGanZhi) {
-            const xunShou = XUNSHOU_MAP[dayGanZhi];
-            const fuTouZhi = DIZHI.indexOf(xunShou[1]);
-            
             let yuan;
-            if ([0, 6, 3, 9].includes(fuTouZhi)) {
+            if (DAY_YUAN['上元'].includes(dayGanZhi)) {
                 yuan = 0;
-            } else if ([2, 8, 5, 11].includes(fuTouZhi)) {
+            } else if (DAY_YUAN['中元'].includes(dayGanZhi)) {
                 yuan = 1;
             } else {
                 yuan = 2;
