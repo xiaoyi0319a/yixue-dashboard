@@ -945,11 +945,8 @@
         
         // 找值符值使（修正版 - 处理中五宫）
         function findZhiFuZhiShi(hourGanZhi, diPan) {
-            console.log('findZhiFuZhiShi输入:', hourGanZhi);
             const xunShou = XUNSHOU_MAP[hourGanZhi];
-            console.log('旬首:', xunShou);
             const liuYi = XUNSHOU_LIUYI[xunShou]; // 六仪：戊己庚辛壬癸
-            console.log('六仪:', liuYi);
             
             // 找六仪在地盘的宫位（优先检查中五宫）
             let xunShouGong = null;
@@ -1029,7 +1026,6 @@
             
             // 值符星到实际落宫（坤二宫），带旬首的六仪
             const liuYi = zhiFuInfo.xunShou.slice(2);
-            console.log('paiTianPan - xunShou:', zhiFuInfo.xunShou, 'liuYi:', liuYi);
             // 显示"芮禽"（天禽寄天芮）
             let zhiFuDisplay = '芮禽';
             tianPan[zhiFuGong] = {
@@ -1256,10 +1252,7 @@
             const zhiFuInfo = findZhiFuZhiShi(hourGZ.ganZhi, diPan);
             
             // 排天盘
-            console.log('排天盘前diPan:', JSON.stringify(diPan));
-            console.log('局数:', juInfo.type + juInfo.ju + '局', 'isYang:', juInfo.isYang);
             const {tianPan, hourGanGong} = paiTianPan(hourGZ.ganZhi, diPan, zhiFuInfo, juInfo.isYang);
-            console.log('排天盘后diPan:', JSON.stringify(diPan));
             
             // 排八神（从值符实际落宫开始）
             const baShen = paiBaShen(zhiFuInfo.zhiFuGong, juInfo.isYang);
@@ -1293,8 +1286,6 @@
             document.getElementById('jieqi').textContent = jieQi.name;
             document.getElementById('jushu').textContent = `${juInfo.type}${juInfo.ju}局 (${juInfo.yuan})`;
             document.getElementById('xunshou').textContent = zhiFuInfo.xunShou;
-            console.log('值符星调试:', zhiFuInfo.zhiFuXing, '旬首宫:', zhiFuInfo.xunShouGong, '值符落宫:', zhiFuInfo.zhiFuGong);
-            console.log('坤二宫地盘干:', diPan[2]); // 调试地盘干
             document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing + ' (' + zhiFuInfo.zhiFuGong + '宫)';
             document.getElementById('zhishi').textContent = zhiFuInfo.zhiShiMen;
             document.getElementById('maxing').textContent = DIZHI[maXingZhi - 1];
@@ -1311,7 +1302,6 @@
             document.getElementById('infoSection').classList.add('active');
             
             // 渲染九宫
-            console.log('渲染前diPan[2]:', diPan[2]);
             renderPan(diPan, tianPan, baShen, baMen, yinGan, zhiFuInfo);
             
             document.getElementById('panSection').classList.add('active');
@@ -1369,7 +1359,7 @@
                     </div>
                     <div class="row3">
                         <span class="men-left ${sihai.includes('门迫') ? 'menpo' : ''}">${men}${sihai.includes('门迫') ? '迫' : ''}</span>
-                        <span class="dp-right" style="background:rgba(255,0,0,0.3);min-width:30px;">${dpGanStr}</span>
+                        <span class="dp-right">${dpGan}</span>
                     </div>
                     ${geju ? `<div class="geju-new">${geju}</div>` : ''}
                 `;
