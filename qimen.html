@@ -770,10 +770,12 @@
         
         // 计算日干支
         function getDayGanZhi(date) {
+            console.log('getDayGanZhi输入:', date.toString());
             const baseDate = new Date(1900, 0, 31);
             const diffTime = date.getTime() - baseDate.getTime();
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
             const index = (40 + diffDays) % 60;
+            console.log('日柱计算: diffDays=' + diffDays + ', index=' + index + ', result=' + JIAZI[index]);
             return {
                 gan: index % 10,
                 zhi: index % 12,
@@ -1134,8 +1136,10 @@
         // 主排盘函数
         function qiPan() {
             const dateInput = document.getElementById('date').value;
+            console.log('日期输入值:', dateInput);
             const [y, m, d] = dateInput.split('-').map(Number);
             const date = new Date(y, m - 1, d);
+            console.log('解析后Date:', date.toString(), '年月日:', date.getFullYear(), date.getMonth()+1, date.getDate());
             const hour = parseInt(document.getElementById('hour').value);
             
             // 先获取节气（用于月柱计算）
