@@ -800,13 +800,11 @@
         
         // 计算月干支（按节气）
         function getMonthGanZhi(yearGan, jieQiName) {
-            // 年上起月口诀：
-            // 甲己之年丙作首(丙寅), 乙庚之岁戊为头(戊寅), 
-            // 丙辛之岁寻庚上(庚寅), 丁壬壬位顺行流(壬寅),
-            // 若问戊癸何方发, 甲寅之上好追求(甲寅)
-            const startGan = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0][yearGan]; // 正月的干
+            console.log('getMonthGanZhi called:', 'yearGan=' + yearGan, 'jieQiName=' + jieQiName);
             
-            // 根据节气确定月份（正月从立春/惊蛰开始）
+            const startGan = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0][yearGan];
+            console.log('startGan:', startGan, '(' + TIANGAN[startGan] + ')');
+            
             const jieqiToMonth = {
                 '立春': 0, '雨水': 0, '惊蛰': 1, '春分': 1,
                 '清明': 2, '谷雨': 2, '立夏': 3, '小满': 3,
@@ -817,8 +815,13 @@
             };
             
             const monthOffset = jieqiToMonth[jieQiName] || 0;
+            console.log('monthOffset:', monthOffset);
+            
             const gan = (startGan + monthOffset) % 10;
-            const zhi = (2 + monthOffset) % 12; // 正月建寅(2)
+            const zhi = (2 + monthOffset) % 12;
+            
+            console.log('月干:', TIANGAN[gan], '月支:', DIZHI[zhi]);
+            console.log('月柱:', TIANGAN[gan] + DIZHI[zhi]);
             
             return {
                 gan,
