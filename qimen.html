@@ -800,10 +800,7 @@
         
         // 计算月干支（按节气）
         function getMonthGanZhi(yearGan, jieQiName) {
-            console.log('getMonthGanZhi called:', 'yearGan=' + yearGan, 'jieQiName=' + jieQiName);
-            
             const startGan = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0][yearGan];
-            console.log('startGan:', startGan, '(' + TIANGAN[startGan] + ')');
             
             const jieqiToMonth = {
                 '立春': 0, '雨水': 0, '惊蛰': 1, '春分': 1,
@@ -815,13 +812,8 @@
             };
             
             const monthOffset = jieqiToMonth[jieQiName] || 0;
-            console.log('monthOffset:', monthOffset);
-            
             const gan = (startGan + monthOffset) % 10;
             const zhi = (2 + monthOffset) % 12;
-            
-            console.log('月干:', TIANGAN[gan], '月支:', DIZHI[zhi]);
-            console.log('月柱:', TIANGAN[gan] + DIZHI[zhi]);
             
             return {
                 gan,
@@ -1142,18 +1134,12 @@
         // 主排盘函数
         function qiPan() {
             const dateInput = document.getElementById('date').value;
-            // 手动解析日期确保本地时间
             const [y, m, d] = dateInput.split('-').map(Number);
             const date = new Date(y, m - 1, d);
             const hour = parseInt(document.getElementById('hour').value);
             
-            console.log('Date input:', dateInput);
-            console.log('Parsed date:', date.toString());
-            console.log('Year:', date.getFullYear(), 'Month:', date.getMonth()+1, 'Day:', date.getDate());
-            
             // 先获取节气（用于月柱计算）
             const jieQi = getJieQi(date);
-            console.log('节气:', jieQi.name);
             
             // 四柱
             const yearGZ = getYearGanZhi(date.getFullYear());
