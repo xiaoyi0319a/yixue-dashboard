@@ -945,13 +945,20 @@
             const xunShou = XUNSHOU_MAP[hourGanZhi];
             const liuYi = XUNSHOU_LIUYI[xunShou]; // 六仪：戊己庚辛壬癸
             
-            // 找六仪在地盘的宫位
+            // 找六仪在地盘的宫位（优先检查中五宫，避免寄宫干扰）
             let xunShouGong = null;
-            for (let gong in diPan) {
-                // 处理组合地盘干（如"乙癸"），检查是否包含六仪
-                if (diPan[gong] && diPan[gong].includes(liuYi)) {
-                    xunShouGong = parseInt(gong);
-                    break;
+            
+            // 先检查中五宫（如果中五宫包含六仪，优先用中五宫）
+            if (diPan[5] && diPan[5].includes(liuYi)) {
+                xunShouGong = 5;
+            } else {
+                // 中五宫没有，再检查其他宫
+                for (let gong in diPan) {
+                    // 处理组合地盘干（如"乙癸"），检查是否包含六仪
+                    if (diPan[gong] && diPan[gong].includes(liuYi)) {
+                        xunShouGong = parseInt(gong);
+                        break;
+                    }
                 }
             }
             
