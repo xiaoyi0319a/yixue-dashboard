@@ -1250,6 +1250,7 @@
             
             // 排天盘
             console.log('排天盘前diPan:', JSON.stringify(diPan));
+            console.log('局数:', juInfo.type + juInfo.ju + '局', 'isYang:', juInfo.isYang);
             const {tianPan, hourGanGong} = paiTianPan(hourGZ.ganZhi, diPan, zhiFuInfo, juInfo.isYang);
             console.log('排天盘后diPan:', JSON.stringify(diPan));
             
