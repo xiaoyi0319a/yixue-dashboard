@@ -1126,7 +1126,13 @@
             
             // 按原始宫位顺序（1,8,3,4,9,2,7,6）排列九星和天盘干
             const originalOrder = [1, 8, 3, 4, 9, 2, 7, 6];
-            let liuYiIdx = 0; // 从旬首六仪开始
+            
+            // 先找到值符星在原始顺序中的位置
+            const zhiFuOrigGong = starOriginalGong[zhiFuInfo.zhiFuXing];
+            const zhiFuPosition = originalOrder.indexOf(zhiFuOrigGong);
+            
+            // 按顺序分配天盘干，跳过值符星的位置（值符星单独用旬首六仪）
+            let liuYiIdx = 1; // 从第二个六仪开始（第一个是癸，给值符星）
             
             for (let i = 0; i < 8; i++) {
                 const origGong = originalOrder[i];
@@ -1142,19 +1148,19 @@
                     starDisplay = '芮禽';
                 }
                 
-                // 天盘干：值符星用旬首六仪，其他按六仪顺序
+                // 天盘干：值符星用旬首六仪，其他按六仪顺序（跳过值符星的位置）
                 let gan;
-                if (star === zhiFuInfo.zhiFuXing) {
+                if (i === zhiFuPosition) {
                     gan = liuYi; // 值符星用旬首六仪
                 } else {
                     const ganIndex = (startIndex + liuYiIdx) % 9;
                     gan = liuYiOrder[ganIndex];
+                    liuYiIdx++;
                 }
                 tianPan[newGong] = {
                     star: starDisplay,
                     gan: gan
                 };
-                liuYiIdx++;
             }
             
             return {tianPan, hourGanGong};
