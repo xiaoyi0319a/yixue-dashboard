@@ -1124,46 +1124,58 @@
             if (offset < 0) offset += 9;
             if (offset === 0) offset = 9; // 偏移9宫等于原位，但用9便于计算
             
-            // 按原始宫位顺序（1,8,3,4,9,2,7,6）排列九星和天盘干
+            // 按原始宫位顺序（1,8,3,4,9,2,7,6）排列九星
             const originalOrder = [1, 8, 3, 4, 9, 2, 7, 6];
             
-            // 先找到值符星在原始顺序中的位置
-            const zhiFuOrigGong = starOriginalGong[zhiFuInfo.zhiFuXing];
-            const zhiFuPosition = originalOrder.indexOf(zhiFuOrigGong);
-            
-            // 按顺序分配天盘干，跳过值符星的位置（值符星单独用旬首六仪）
-            let liuYiIdx = 1; // 从第二个六仪开始（第一个是癸，给值符星）
+            // 计算值符星的偏移量
+            const zhiFuOriginalGong = starOriginalGong[zhiFuInfo.zhiFuXing];
+            let offset = zhiFuGong - zhiFuOriginalGong;
+            if (offset < 0) offset += 9;
+            if (offset === 0) offset = 9;
             
             for (let i = 0; i < 8; i++) {
                 const origGong = originalOrder[i];
-                // 计算新宫位：原始宫位 + 偏移量
                 let newGong = origGong + offset;
                 if (newGong > 9) newGong -= 9;
-                if (newGong === 5) newGong = 2; // 中五宫寄坤二宫
+                if (newGong === 5) newGong = 2;
                 
-                // 找到对应的星
                 const star = Object.keys(starOriginalGong).find(s => starOriginalGong[s] === origGong);
                 let starDisplay = star;
                 if (star === '天芮') {
                     starDisplay = '芮禽';
                 }
                 
-                // 天盘干：值符星用旬首六仪，其他按六仪顺序（跳过值符星的位置）
-                let gan;
-                if (i === zhiFuPosition) {
-                    gan = liuYi; // 值符星用旬首六仪
-                } else {
-                    const ganIndex = (startIndex + liuYiIdx) % 9;
-                    gan = liuYiOrder[ganIndex];
-                    liuYiIdx++;
-                }
                 tianPan[newGong] = {
                     star: starDisplay,
-                    gan: gan
+                    gan: '' // 天盘干稍后安排
                 };
             }
             
             return {tianPan, hourGanGong};
+        }
+        
+        // 排天盘干（在九星和八门之后）
+        function paiTianPanGan(tianPan, zhiFuInfo, diPan, isYang) {
+            const liuYi = zhiFuInfo.xunShou.slice(2);
+            const liuYiOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
+            const startIndex = liuYiOrder.indexOf(liuYi);
+            
+            // 从值符星位置开始，顺时针排天盘干
+            const zhiFuGong = zhiFuInfo.zhiFuGong;
+            const startIdx = CLOCKWISE_ORDER.indexOf(zhiFuGong);
+            
+            for (let i = 0; i < 8; i++) {
+                const gongIdx = (startIdx + i) % 8;
+                const gong = CLOCKWISE_ORDER[gongIdx];
+                if (gong === 5) continue; // 跳过中五宫
+                
+                const ganIndex = (startIndex + i) % 9;
+                if (tianPan[gong]) {
+                    tianPan[gong].gan = liuYiOrder[ganIndex];
+                }
+            }
+            
+            return tianPan;
         }
         
         // 排八神
@@ -1361,7 +1373,7 @@
             console.log('qiPan - hourGZ.ganZhi:', hourGZ.ganZhi);
             const zhiFuInfo = findZhiFuZhiShi(hourGZ.ganZhi, diPan);
             
-            // 排天盘
+            // 排九星（先排星，不排天盘干）
             const {tianPan, hourGanGong} = paiTianPan(hourGZ.ganZhi, diPan, zhiFuInfo, juInfo.isYang);
             
             // 排八神（从值符实际落宫开始）
@@ -1369,6 +1381,9 @@
             
             // 排八门
             const {baMen, zhiShiGong} = paiBaMen(zhiFuInfo, hour, juInfo.isYang);
+            
+            // 排天盘干（在九星和八门之后）
+            paiTianPanGan(tianPan, zhiFuInfo, diPan, juInfo.isYang);
             
             // 排隐干（传入旬首以处理甲隐遁）
             const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang, zhiFuInfo.xunShou);
