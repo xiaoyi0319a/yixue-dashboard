@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>奇门遁甲排盘工具 - V3.50</title>
+    <title>奇门遁甲排盘工具 - V3.55</title>
     <style>
         * {
             margin: 0;
@@ -470,7 +470,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.50 移位法版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
+        <p class="subtitle">V3.55 移位法版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
         
         <div class="input-section">
             <div class="input-row">
@@ -1196,10 +1196,12 @@
             
             // 天盘干按顺时针九宫顺序（从zhiFuGong开始）分配
             for (let i = 0; i < 8; i++) {
+                // 从zhiFuGong开始，按顺时针顺序
                 const gongIdx = (zhiFuGongIndex + i) % 8;
                 const gong = CLOCKWISE_ORDER[gongIdx];
                 if (gong === 5) continue;
                 
+                // tianPanGanOrder[0]是癸，应该给zhiFuGong
                 const gan = tianPanGanOrder[i] || '';
                 
                 tianPan[gong] = {
