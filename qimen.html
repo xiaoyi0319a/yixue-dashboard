@@ -1142,11 +1142,17 @@
                     starDisplay = '芮禽';
                 }
                 
-                // 天盘干按六仪顺序
-                const ganIndex = (startIndex + liuYiIdx) % 9;
+                // 天盘干：值符星用旬首六仪，其他按六仪顺序
+                let gan;
+                if (star === zhiFuInfo.zhiFuXing) {
+                    gan = liuYi; // 值符星用旬首六仪
+                } else {
+                    const ganIndex = (startIndex + liuYiIdx) % 9;
+                    gan = liuYiOrder[ganIndex];
+                }
                 tianPan[newGong] = {
                     star: starDisplay,
-                    gan: liuYiOrder[ganIndex]
+                    gan: gan
                 };
                 liuYiIdx++;
             }
