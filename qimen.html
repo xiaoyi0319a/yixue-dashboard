@@ -1029,7 +1029,7 @@
             const xunShou = XUNSHOU_MAP[hourGanZhi];
             const liuYi = XUNSHOU_LIUYI[xunShou]; // 六仪：戊己庚辛壬癸
             
-            // 找六仪在地盘的宫位（优先检查中五宫）
+            // 找六仪在地盘的宫位（优先检查中五宫）- 这是旬首宫，用于确定值符星和值使门
             let xunShouGong = null;
             
             // 先检查中五宫
@@ -1045,20 +1045,32 @@
                 }
             }
             
-            // 确定值符星和落宫
+            // 确定值符星（由旬首六仪所在宫决定）
             let zhiFuXing;
-            let zhiFuGong; // 值符实际落宫
-            
             if (xunShouGong === 5) {
-                // 中五宫：值符星为天禽，但寄给天芮，实际落在坤二宫
-                zhiFuXing = '天芮'; // 天禽寄天芮，显示天芮
-                zhiFuGong = 2; // 实际落在坤二宫
+                zhiFuXing = '天芮'; // 天禽寄天芮
             } else {
                 zhiFuXing = JIU_XING[xunShouGong];
-                zhiFuGong = xunShouGong;
             }
             
-            // 值使门：中五宫寄坤二宫
+            // 值符星落宫：由时干在地盘的位置决定
+            const hourGan = hourGanZhi[0]; // 时干
+            let zhiFuGong = null;
+            
+            // 找时干在地盘的宫位
+            if (diPan[5] && diPan[5].includes(hourGan)) {
+                zhiFuGong = 2; // 中五宫寄坤二宫
+            } else {
+                for (let gong in diPan) {
+                    if (diPan[gong] && diPan[gong].includes(hourGan)) {
+                        zhiFuGong = parseInt(gong);
+                        if (zhiFuGong === 5) zhiFuGong = 2; // 中五宫寄坤二
+                        break;
+                    }
+                }
+            }
+            
+            // 值使门：由旬首六仪所在宫决定
             let zhiShiMenGong = xunShouGong;
             if (xunShouGong === 5) {
                 zhiShiMenGong = 2; // 寄坤二宫
@@ -1066,9 +1078,9 @@
             
             return {
                 xunShou: xunShou + liuYi,
-                xunShouGong, // 旬首所在地盘宫（中五）
-                zhiFuXing, // 显示天芮（天禽寄天芮）
-                zhiFuGong, // 值符实际落宫（坤二）
+                xunShouGong, // 旬首所在地盘宫
+                zhiFuXing, // 值符星
+                zhiFuGong, // 值符星实际落宫（由时干决定）
                 zhiShiMen: BA_MEN[zhiShiMenGong],
                 zhiShiMenGong
             };
@@ -1122,16 +1134,10 @@
             const zhiFuOriginalGong = starOriginalGong[zhiFuInfo.zhiFuXing];
             let offset = zhiFuGong - zhiFuOriginalGong;
             if (offset < 0) offset += 9;
-            if (offset === 0) offset = 9; // 偏移9宫等于原位，但用9便于计算
+            if (offset === 0) offset = 9;
             
             // 按原始宫位顺序（1,8,3,4,9,2,7,6）排列九星
             const originalOrder = [1, 8, 3, 4, 9, 2, 7, 6];
-            
-            // 计算值符星的偏移量
-            const zhiFuOriginalGong = starOriginalGong[zhiFuInfo.zhiFuXing];
-            let offset = zhiFuGong - zhiFuOriginalGong;
-            if (offset < 0) offset += 9;
-            if (offset === 0) offset = 9;
             
             for (let i = 0; i < 8; i++) {
                 const origGong = originalOrder[i];
