@@ -1369,13 +1369,21 @@
             }
             
             const data = currentPanData;
-            let output = `=== 奇门遁甲排盘 ===\n`;
-            output += `日期: ${new Date().toLocaleString()}\n\n`;
-            output += `【四柱】\n`;
+            const gongNames = {1: '坎一宫(北)', 2: '坤二宫(西南)', 3: '震三宫(东)', 4: '巽四宫(东南)', 
+                              5: '中五宫', 6: '乾六宫(西北)', 7: '兑七宫(西)', 8: '艮八宫(东北)', 9: '离九宫(南)'};
+            const gongOrder = [4, 9, 2, 3, 5, 7, 8, 1, 6]; // 九宫格显示顺序
+            
+            let output = `==============================================\n`;
+            output += `         奇门遁甲排盘 - 完整盘面\n`;
+            output += `==============================================\n`;
+            output += `导出时间: ${new Date().toLocaleString()}\n\n`;
+            
+            output += `【四柱八字】\n`;
             output += `年柱: ${data.sizhu.year.ganZhi}\n`;
             output += `月柱: ${data.sizhu.month.ganZhi}\n`;
-            output += `日柱: ${data.sizhu.day.ganZhi}\n`;
-            output += `时柱: ${data.sizhu.hour.ganZhi}\n\n`;
+            output += `日柱: ${data.sizhu.day.ganZhi} (日干:${data.sizhu.day.gan})\n`;
+            output += `时柱: ${data.sizhu.hour.ganZhi} (时干:${data.sizhu.hour.gan})\n\n`;
+            
             output += `【局信息】\n`;
             output += `节气: ${data.jieQi.name}\n`;
             output += `局数: ${data.juInfo.type}${data.juInfo.ju}局 (${data.juInfo.yuan})\n`;
@@ -1384,10 +1392,47 @@
             output += `值使: ${data.zhiFuInfo.zhiShiMen}\n`;
             output += `马星: ${data.maXing}\n\n`;
             
+            output += `【交易用神速查】\n`;
+            output += `日干(股价): ${data.sizhu.day.gan} - 需查所在宫位\n`;
+            output += `时干(时机): ${data.sizhu.hour.gan} - 需查所在宫位\n`;
+            output += `值符(大势): ${data.zhiFuInfo.zhiFuXing} (${data.zhiFuInfo.zhiFuGong}宫)\n`;
+            output += `乙奇(买盘): 需查所在宫位\n`;
+            output += `庚金(卖盘): 需查所在宫位\n\n`;
+            
+            output += `==============================================\n`;
+            output += `              九宫格完整盘面\n`;
+            output += `==============================================\n\n`;
+            
+            // 按九宫格顺序输出每个宫的信息
+            gongOrder.forEach(gongNum => {
+                const tp = data.tianPan[gongNum] || {};
+                const star = tp.star || '';
+                const tpGan = tp.gan || '';
+                const dpGan = data.diPan[gongNum] || '';
+                const shen = data.baShen[gongNum] || '';
+                const men = data.baMen[gongNum] || '';
+                const yg = data.yinGan[gongNum] || data.yinGan[String(gongNum)] || '';
+                const isZhiFuGong = (gongNum == data.zhiFuInfo.zhiFuGong) ? ' [值符宫]' : '';
+                
+                output += `【${gongNames[gongNum]}${isZhiFuGong}】\n`;
+                output += `  八神: ${shen || '无'}\n`;
+                output += `  天盘: ${tpGan || '无'} (${star || '无'})\n`;
+                output += `  地盘: ${dpGan || '无'}\n`;
+                output += `  八门: ${men || '无'}\n`;
+                output += `  隐干: ${yg || '无'}\n\n`;
+            });
+            
+            output += `==============================================\n`;
+            output += `【地盘干全表】\n`;
+            output += `==============================================\n`;
+            for (let i = 1; i <= 9; i++) {
+                output += `${gongNames[i]}: ${data.diPan[i] || '无'}\n`;
+            }
+            
             console.log(output);
             
             // 创建下载
-            const blob = new Blob([output], {type: 'text/plain'});
+            const blob = new Blob([output], {type: 'text/plain;charset=utf-8'});
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
