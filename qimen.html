@@ -1140,6 +1140,9 @@
             // 值符星位置（zhiFuGong）的天盘干是旬首六仪（在找值符值使时确定）
             const liuYi = zhiFuInfo.xunShou.slice(2); // 旬首六仪，如"癸"
             
+            // 天盘干顺序：癸→戊→丙→庚→辛→乙→壬己→丁
+            const tianPanGanOrder = ['癸', '戊', '丙', '庚', '辛', '乙', '壬己', '丁'];
+            
             for (let i = 0; i < 8; i++) {
                 // 蓬在zhiFuGong前面第7位（或后面第1位）
                 const gongIdx = (zhiFuGongIndex - 7 + i + 8) % 8;
@@ -1152,11 +1155,8 @@
                     starDisplay = '芮禽';
                 }
                 
-                // 值符星位置设旬首六仪作为天盘干起点
-                let gan = '';
-                if (gong === zhiFuGong) {
-                    gan = liuYi; // 旬首六仪作为起点
-                }
+                // 按顺序设置天盘干
+                const gan = tianPanGanOrder[i];
                 
                 tianPan[gong] = {
                     star: starDisplay,
@@ -1164,7 +1164,7 @@
                 };
             }
             
-            return {tianPan, hourGanGong, liuYi};
+            return {tianPan, hourGanGong};
         }
         
         // 排天盘干（从值符星位置开始，按固定顺序排列）
@@ -1184,7 +1184,7 @@
                 const gongIdx = (startIdx + i) % 8;
                 const gong = clockwiseOrder[gongIdx];
                 
-                if (tianPan[gong]) {
+                if (tianPan[gong] && gong !== zhiFuGong) {
                     tianPan[gong].gan = tianPanGanOrder[i];
                 }
             }
