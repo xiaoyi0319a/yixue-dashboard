@@ -1368,9 +1368,9 @@
             
             // 显示信息
             document.getElementById('jieqi').textContent = jieQi.name;
-            document.getElementById('jushu').textContent = `${juInfo.type}${juInfo.ju}局 (${juInfo.yuan})`;
+            document.getElementById('jushu').textContent = `${juInfo.type}${juInfo.ju}局`;
             document.getElementById('xunshou').textContent = zhiFuInfo.xunShou;
-            document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing + ' (' + zhiFuInfo.zhiFuGong + '宫)';
+            document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing;
             document.getElementById('zhishi').textContent = zhiFuInfo.zhiShiMen;
             document.getElementById('maxing').textContent = DIZHI[maXingZhi - 1];
             
@@ -1468,16 +1468,16 @@
             
             output += `【局信息】\n`;
             output += `节气: ${data.jieQi.name}\n`;
-            output += `局数: ${data.juInfo.type}${data.juInfo.ju}局 (${data.juInfo.yuan})\n`;
+            output += `局数: ${data.juInfo.type}${data.juInfo.ju}局\n`;
             output += `旬首: ${data.zhiFuInfo.xunShou}\n`;
-            output += `值符: ${data.zhiFuInfo.zhiFuXing} (${data.zhiFuInfo.zhiFuGong}宫)\n`;
+            output += `值符: ${data.zhiFuInfo.zhiFuXing}\n`;
             output += `值使: ${data.zhiFuInfo.zhiShiMen}\n`;
             output += `马星: ${data.maXing}\n\n`;
             
             output += `【交易用神速查】\n`;
             output += `日干(股价): ${data.sizhu.day.gan} - 需查所在宫位\n`;
             output += `时干(时机): ${data.sizhu.hour.gan} - 需查所在宫位\n`;
-            output += `值符(大势): ${data.zhiFuInfo.zhiFuXing} (${data.zhiFuInfo.zhiFuGong}宫)\n`;
+            output += `值符(大势): ${data.zhiFuInfo.zhiFuXing}\n`;
             output += `乙奇(买盘): 需查所在宫位\n`;
             output += `庚金(卖盘): 需查所在宫位\n\n`;
             
