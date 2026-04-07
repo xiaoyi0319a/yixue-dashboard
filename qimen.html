@@ -1112,8 +1112,11 @@
             const liuYiOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
             const startIndex = liuYiOrder.indexOf(liuYi);
             
-            // 显示"芮禽"（天禽寄天芮）
-            let zhiFuDisplay = '芮禽';
+            // 值符星显示
+            let zhiFuDisplay = zhiFuInfo.zhiFuXing;
+            if (zhiFuInfo.zhiFuXing === '天芮') {
+                zhiFuDisplay = '芮禽';
+            }
             tianPan[zhiFuGong] = {
                 star: zhiFuDisplay,
                 gan: liuYi
@@ -1130,7 +1133,7 @@
                 
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
-                // 天禽星显示为"禽"，天芮星显示为"芮禽"
+                // 天芮星显示为"芮禽"
                 let starDisplay = star;
                 if (star === '天芮') {
                     starDisplay = '芮禽';
