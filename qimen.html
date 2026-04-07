@@ -1137,12 +1137,30 @@
             const zhiFuGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             // 从蓬开始（天心往前数7位），按顺时针排列
-            // 天盘干排列：按用户指定的对应关系
-            // 3宫癸, 4宫戊, 9宫丙, 2宫庚, 7宫辛, 6宫乙, 1宫己, 8宫丁
-            const tianPanGanMap = {
-                3: '癸', 4: '戊', 9: '丙', 2: '庚',
-                7: '辛', 6: '乙', 1: '己', 8: '丁'
-            };
+            
+            // 天盘干计算（移位法）：
+            // 1. 获取地盘干按顺时针九宫顺序（从值符星位置开始）
+            // 2. 找到旬首六仪位置，把前面的移到后面
+            const clockwiseOrder = [3, 4, 9, 2, 7, 6, 1, 8];
+            const zhiFuGongIdx = clockwiseOrder.indexOf(zhiFuGong);
+            const liuYi = zhiFuInfo.xunShou.slice(2); // 旬首六仪
+            
+            // 按顺时针顺序收集地盘干（从值符星位置开始）
+            const diPanGanOrder = [];
+            for (let i = 0; i < 8; i++) {
+                const gongIdx = (zhiFuGongIdx + i) % 8;
+                const gong = clockwiseOrder[gongIdx];
+                diPanGanOrder.push(diPan[gong] || '');
+            }
+            
+            // 找到旬首六仪位置，移位
+            const liuYiIndex = diPanGanOrder.indexOf(liuYi);
+            let tianPanGanOrder = [];
+            if (liuYiIndex !== -1) {
+                tianPanGanOrder = diPanGanOrder.slice(liuYiIndex).concat(diPanGanOrder.slice(0, liuYiIndex));
+            } else {
+                tianPanGanOrder = diPanGanOrder; // fallback
+            }
             
             for (let i = 0; i < 8; i++) {
                 // 蓬在zhiFuGong前面第7位（或后面第1位）
@@ -1156,8 +1174,8 @@
                     starDisplay = '芮禽';
                 }
                 
-                // 按指定对应关系设置天盘干
-                const gan = tianPanGanMap[gong] || '';
+                // 按移位后的顺序设置天盘干
+                const gan = tianPanGanOrder[i] || '';
                 
                 tianPan[gong] = {
                     star: starDisplay,
