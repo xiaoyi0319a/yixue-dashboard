@@ -743,22 +743,6 @@
             };
         }
         
-        // 计算年干支（简化：以立春为界，实际需精确计算）
-        function getYearGanZhi(year) {
-            // 2023年是癸卯年
-            const baseYear = 2023;
-            const baseGan = 9; // 癸
-            const baseZhi = 3; // 卯
-            const diff = year - baseYear;
-            const ganIndex = (baseGan + diff) % 10;
-            const zhiIndex = (baseZhi + diff) % 12;
-            return {
-                gan: (ganIndex + 10) % 10,
-                zhi: (zhiIndex + 12) % 12,
-                ganZhi: TIANGAN[(ganIndex + 10) % 10] + DIZHI[(zhiIndex + 12) % 12]
-            };
-        }
-        
         // ==================== 节气精确计算（Cope简化公式）====================
         
         // 节气基础数据（1900-2100年，黄经度数）
@@ -984,60 +968,6 @@
                 zhi: hourZhi0,
                 ganZhi: TIANGAN[gan] + DIZHI[hourZhi0]
             };
-        }
-        
-        // 计算月干支（按节气）
-        function getMonthGanZhi(yearGan, jieQiName) {
-            const startGan = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0][yearGan];
-            
-            const jieqiToMonth = {
-                '立春': 0, '雨水': 0, '惊蛰': 1, '春分': 1,
-                '清明': 2, '谷雨': 2, '立夏': 3, '小满': 3,
-                '芒种': 4, '夏至': 4, '小暑': 5, '大暑': 5,
-                '立秋': 6, '处暑': 6, '白露': 7, '秋分': 7,
-                '寒露': 8, '霜降': 8, '立冬': 9, '小雪': 9,
-                '大雪': 10, '冬至': 10, '小寒': 11, '大寒': 11
-            };
-            
-            const monthOffset = jieqiToMonth[jieQiName] || 0;
-            const gan = (startGan + monthOffset) % 10;
-            const zhi = (2 + monthOffset) % 12;
-            
-            return {
-                gan,
-                zhi,
-                ganZhi: TIANGAN[gan] + DIZHI[zhi]
-            };
-        }
-        
-        // 获取节气
-        function getJieQi(date) {
-            // 使用本地日期字符串进行比较，避免时区问题
-            const targetYear = date.getFullYear();
-            const targetMonth = String(date.getMonth() + 1).padStart(2, '0');
-            const targetDay = String(date.getDate()).padStart(2, '0');
-            const targetDateStr = `${targetYear}-${targetMonth}-${targetDay}`;
-            
-            // 先找同年的节气
-            let candidates = [];
-            for (let i = 0; i < JIEQI_DATA.length; i++) {
-                const jqDate = JIEQI_DATA[i].date;
-                // 提取节气的年份
-                const jqYear = parseInt(jqDate.split('-')[0]);
-                if (jqYear === targetYear || jqYear === targetYear - 1) {
-                    candidates.push({...JIEQI_DATA[i], index: i});
-                }
-            }
-            
-            // 在候选中找最后一个不大于目标日期的节气
-            for (let i = candidates.length - 1; i >= 0; i--) {
-                if (targetDateStr >= candidates[i].date) {
-                    return candidates[i];
-                }
-            }
-            
-            // 如果没找到，返回最后一个候选
-            return candidates[candidates.length - 1] || JIEQI_DATA[0];
         }
         
         // 日干定元表（正确的定局方式）
