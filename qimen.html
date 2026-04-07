@@ -1112,28 +1112,31 @@
             const liuYiOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
             const startIndex = liuYiOrder.indexOf(liuYi);
             
-            // 值符星显示
-            let zhiFuDisplay = zhiFuInfo.zhiFuXing;
-            if (zhiFuInfo.zhiFuXing === '天芮') {
-                zhiFuDisplay = '芮禽';
-            }
-            tianPan[zhiFuGong] = {
-                star: zhiFuDisplay,
-                gan: liuYi
+            // 九星原始宫位
+            const starOriginalGong = {
+                '天蓬': 1, '天任': 8, '天冲': 3, '天辅': 4,
+                '天英': 9, '天芮': 2, '天柱': 6, '天心': 7
             };
             
-            // 其他星按顺序排，天盘干按六仪顺序
-            let liuYiIdx = 1; // 从第二个六仪开始
-            for (let i = 1; i < 8; i++) {
-                currentGongIndex = (currentGongIndex + 1) % 8;
-                const gong = CLOCKWISE_ORDER[currentGongIndex];
+            // 计算值符星的偏移量
+            const zhiFuOriginalGong = starOriginalGong[zhiFuInfo.zhiFuXing];
+            let offset = zhiFuGong - zhiFuOriginalGong;
+            if (offset < 0) offset += 9;
+            if (offset === 0) offset = 9; // 偏移9宫等于原位，但用9便于计算
+            
+            // 按原始宫位顺序（1,8,3,4,9,2,7,6）排列九星和天盘干
+            const originalOrder = [1, 8, 3, 4, 9, 2, 7, 6];
+            let liuYiIdx = 0; // 从旬首六仪开始
+            
+            for (let i = 0; i < 8; i++) {
+                const origGong = originalOrder[i];
+                // 计算新宫位：原始宫位 + 偏移量
+                let newGong = origGong + offset;
+                if (newGong > 9) newGong -= 9;
+                if (newGong === 5) newGong = 2; // 中五宫寄坤二宫
                 
-                // 跳过已经设置的值符宫
-                if (gong === zhiFuGong) continue;
-                
-                const starIndex = (zhiFuIndex + i) % 8;
-                const star = starOrder[starIndex];
-                // 天芮星显示为"芮禽"
+                // 找到对应的星
+                const star = Object.keys(starOriginalGong).find(s => starOriginalGong[s] === origGong);
                 let starDisplay = star;
                 if (star === '天芮') {
                     starDisplay = '芮禽';
@@ -1141,7 +1144,7 @@
                 
                 // 天盘干按六仪顺序
                 const ganIndex = (startIndex + liuYiIdx) % 9;
-                tianPan[gong] = {
+                tianPan[newGong] = {
                     star: starDisplay,
                     gan: liuYiOrder[ganIndex]
                 };
