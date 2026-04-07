@@ -917,8 +917,18 @@
             const year = now.getFullYear();
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const day = String(now.getDate()).padStart(2, '0');
-            document.getElementById('date').value = `${year}-${month}-${day}`;
-            document.getElementById('hour').value = (Math.floor((now.getHours() + 1) / 2) % 12) + 1;
+            const dateStr = `${year}-${month}-${day}`;
+            const dateEl = document.getElementById('date');
+            if (dateEl) {
+                dateEl.value = dateStr;
+                console.log('useNow: date set to', dateStr);
+            } else {
+                console.log('useNow: date element not found');
+            }
+            const hourEl = document.getElementById('hour');
+            if (hourEl) {
+                hourEl.value = (Math.floor((now.getHours() + 1) / 2) % 12) + 1;
+            }
         }
         
         // 页面加载时自动设置当前时间
