@@ -1167,28 +1167,9 @@
             return {tianPan, hourGanGong};
         }
         
-        // 排天盘干（从值符星位置开始，按固定顺序排列）
+        // 排天盘干（已在paiTianPan中完成，此函数保留以兼容调用）
         function paiTianPanGan(tianPan, zhiFuInfo, diPan, isYang) {
-            // 天盘干固定顺序：癸→戊→丙→庚→辛→乙→壬己→丁
-            const tianPanGanOrder = ['癸', '戊', '丙', '庚', '辛', '乙', '壬己', '丁'];
-            
-            // 顺时针九宫顺序
-            const clockwiseOrder = [3, 4, 9, 2, 7, 6, 1, 8];
-            
-            // 从值符星位置开始
-            const zhiFuGong = zhiFuInfo.zhiFuGong;
-            const startIdx = clockwiseOrder.indexOf(zhiFuGong);
-            
-            // 按顺时针顺序排列天盘干
-            for (let i = 0; i < 8; i++) {
-                const gongIdx = (startIdx + i) % 8;
-                const gong = clockwiseOrder[gongIdx];
-                
-                if (tianPan[gong] && gong !== zhiFuGong) {
-                    tianPan[gong].gan = tianPanGanOrder[i];
-                }
-            }
-            
+            // 天盘干已在paiTianPan中设置完成，这里直接返回
             return tianPan;
         }
         
