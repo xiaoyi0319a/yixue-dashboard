@@ -671,6 +671,30 @@
         
         // 节气数据
         const JIEQI_DATA = [
+            {name: '冬至', date: '2023-12-22', type: 'yang'},
+            {name: '小寒', date: '2024-01-06', type: 'yang'},
+            {name: '大寒', date: '2024-01-20', type: 'yang'},
+            {name: '立春', date: '2024-02-04', type: 'yang'},
+            {name: '雨水', date: '2024-02-19', type: 'yang'},
+            {name: '惊蛰', date: '2024-03-05', type: 'yang'},
+            {name: '春分', date: '2024-03-20', type: 'yang'},
+            {name: '清明', date: '2024-04-04', type: 'yang'},
+            {name: '谷雨', date: '2024-04-19', type: 'yang'},
+            {name: '立夏', date: '2024-05-05', type: 'yang'},
+            {name: '小满', date: '2024-05-20', type: 'yang'},
+            {name: '芒种', date: '2024-06-05', type: 'yang'},
+            {name: '夏至', date: '2024-06-21', type: 'yin'},
+            {name: '小暑', date: '2024-07-06', type: 'yin'},
+            {name: '大暑', date: '2024-07-22', type: 'yin'},
+            {name: '立秋', date: '2024-08-07', type: 'yin'},
+            {name: '处暑', date: '2024-08-22', type: 'yin'},
+            {name: '白露', date: '2024-09-07', type: 'yin'},
+            {name: '秋分', date: '2024-09-22', type: 'yin'},
+            {name: '寒露', date: '2024-10-08', type: 'yin'},
+            {name: '霜降', date: '2024-10-23', type: 'yin'},
+            {name: '立冬', date: '2024-11-07', type: 'yin'},
+            {name: '小雪', date: '2024-11-22', type: 'yin'},
+            {name: '大雪', date: '2024-12-06', type: 'yin'},
             {name: '冬至', date: '2024-12-21', type: 'yang'},
             {name: '小寒', date: '2025-01-05', type: 'yang'},
             {name: '大寒', date: '2025-01-20', type: 'yang'},
@@ -869,12 +893,26 @@
             const targetDay = String(date.getDate()).padStart(2, '0');
             const targetDateStr = `${targetYear}-${targetMonth}-${targetDay}`;
             
-            for (let i = JIEQI_DATA.length - 1; i >= 0; i--) {
-                if (targetDateStr >= JIEQI_DATA[i].date) {
-                    return JIEQI_DATA[i];
+            // 先找同年的节气
+            let candidates = [];
+            for (let i = 0; i < JIEQI_DATA.length; i++) {
+                const jqDate = JIEQI_DATA[i].date;
+                // 提取节气的年份
+                const jqYear = parseInt(jqDate.split('-')[0]);
+                if (jqYear === targetYear || jqYear === targetYear - 1) {
+                    candidates.push({...JIEQI_DATA[i], index: i});
                 }
             }
-            return JIEQI_DATA[0];
+            
+            // 在候选中找最后一个不大于目标日期的节气
+            for (let i = candidates.length - 1; i >= 0; i--) {
+                if (targetDateStr >= candidates[i].date) {
+                    return candidates[i];
+                }
+            }
+            
+            // 如果没找到，返回最后一个候选
+            return candidates[candidates.length - 1] || JIEQI_DATA[0];
         }
         
         // 日干定元表（正确的定局方式）
