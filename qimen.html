@@ -922,9 +922,14 @@
         }
         
         // 页面加载时自动设置当前时间
-        document.addEventListener('DOMContentLoaded', function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                useNow();
+            });
+        } else {
+            // DOM already loaded
             useNow();
-        });
+        }
         
         // 计算年干支
         // 计算年干支（以立春为界，调用时需传入是否已立春）
