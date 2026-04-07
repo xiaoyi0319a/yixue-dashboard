@@ -1137,9 +1137,8 @@
             const zhiFuGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             // 从蓬开始（天心往前数7位），按顺时针排列
-            // 天盘干顺序：癸→戊→丙→庚→辛→乙→壬己→丁
-            const tianPanGanOrder = ['癸', '戊', '丙', '庚', '辛', '乙', '壬己', '丁'];
-            
+            // 天盘干排列：每个宫位的天盘干 = 地盘干[(宫位+5-1)%9+1]
+            // 即：3宫取6宫癸，4宫取9宫戊，9宫取4宫丙，2宫取7宫庚，7宫取2宫辛，6宫取1宫乙，1宫取6宫己，8宫取3宫丁
             for (let i = 0; i < 8; i++) {
                 // 蓬在zhiFuGong前面第7位（或后面第1位）
                 const gongIdx = (zhiFuGongIndex - 7 + i + 8) % 8;
@@ -1152,8 +1151,9 @@
                     starDisplay = '芮禽';
                 }
                 
-                // 按顺序设置天盘干
-                const gan = tianPanGanOrder[i];
+                // 天盘干 = 地盘干[(gong+5-1)%9+1]
+                const sourceGong = (gong + 5 - 1) % 9 + 1;
+                const gan = diPan[sourceGong] || '';
                 
                 tianPan[gong] = {
                     star: starDisplay,
