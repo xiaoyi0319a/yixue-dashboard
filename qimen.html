@@ -696,6 +696,12 @@
         
         // 计算两个日期之间的天数差（目标日期 - 基准日期）
         function daysBetween(year1, month1, day1, year2, month2, day2) {
+            // 如果目标日期在基准日期之前，交换参数并取负数
+            if (year2 < year1 || (year2 === year1 && month2 < month1) || 
+                (year2 === year1 && month2 === month1 && day2 < day1)) {
+                return -daysBetween(year2, month2, day2, year1, month1, day1);
+            }
+            
             let days = 0;
             
             // 同年同月
@@ -713,7 +719,7 @@
                 return days;
             }
             
-            // 不同年
+            // 不同年（year1 < year2）
             days += getMonthDays(year1, month1) - day1;
             for (let m = month1 + 1; m <= 12; m++) {
                 days += getMonthDays(year1, m);
