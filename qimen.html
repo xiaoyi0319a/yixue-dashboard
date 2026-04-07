@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>奇门遁甲排盘工具 - V3.56</title>
+    <title>奇门遁甲排盘工具 - V3.57</title>
     <style>
         * {
             margin: 0;
@@ -470,7 +470,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.56 隐干修正版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
+        <p class="subtitle">V3.57 隐干修正版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
         
         <div class="input-section">
             <div class="input-row">
@@ -1291,19 +1291,20 @@
             return {baMen, zhiShiGong};
         }
         
-        // 排隐干（V3.56 - 按老师规则修正）
+        // 排隐干（V3.57 - 按老师指定序列修正）
         // 规则：
-        // 1. 如果值使门落宫地盘干 = 起局时辰天干 → 隐干写在中五宫
-        // 2. 如果值使门落宫地盘干 ≠ 起局时辰天干 → 从时干所在宫位开始排
-        // 3. 排列顺序：九宫数字顺序 1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
-        // 4. 天干顺序：戊己庚辛壬癸丁丙乙循环（阳遁顺排，阴遁逆排）
+        // 1. 如果值使门落宫地盘干 = 起局时辰天干：
+        //    - 阳遁：戊3己4庚5辛6壬7癸8丁9丙1乙2
+        //    - 阴遁：戊9己8庚7辛6壬5癸4丁3丙2乙1
+        // 2. 如果值使门落宫地盘干 ≠ 起局时辰天干：
+        //    - 从时干所在宫位开始，按数字顺序（阳遁1→9，阴遁9→1）排天干
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang, xunShou) {
             const yinGan = {};
             let hourGan = hourGanZhi[0]; // 起局时辰的天干
             
             // 处理甲隐遁：如果时干是甲，用旬首的六仪代替
             if (hourGan === '甲') {
-                hourGan = xunShou.slice(2); // 取第三个字符，如"己"
+                hourGan = xunShou.slice(2);
             }
             
             // 隐干顺序：戊(1)→己(2)→庚(3)→辛(4)→壬(5)→癸(6)→丁(7)→丙(8)→乙(9)
@@ -1320,8 +1321,16 @@
             
             if (isSameGan) {
                 // 情况一：值使门落宫地盘干 = 起局时辰天干
-                // 隐干（时干）只写在中五宫
-                yinGan[5] = hourGan;
+                // 按老师指定序列排列
+                // 阳遁：戊3己4庚5辛6壬7癸8丁9丙1乙2
+                // 阴遁：戊9己8庚7辛6壬5癸4丁3丙2乙1
+                const sequence = isYang 
+                    ? [3, 4, 5, 6, 7, 8, 9, 1, 2]   // 阳遁顺序
+                    : [9, 8, 7, 6, 5, 4, 3, 2, 1];  // 阴遁顺序
+                
+                for (let i = 0; i < 9; i++) {
+                    yinGan[sequence[i]] = yinGanOrder[i];
+                }
             } else {
                 // 情况二：值使门落宫地盘干 ≠ 起局时辰天干
                 // 先找到时干在地盘的宫位
