@@ -1130,26 +1130,26 @@
                 '天英': 9, '天芮': 2, '天柱': 6, '天心': 7
             };
             
-            // 九星排列顺序（蓬→任→冲→辅→英→芮→柱→心）
+            // 计算偏移量：值符星应该落在zhiFuGong，需要从原始位置移动多少
+            const zhiFuOriginalGong = starOriginalGong[zhiFuInfo.zhiFuXing];
+            let offset = zhiFuGong - zhiFuOriginalGong;
+            if (offset < 0) offset += 9;
+            
+            // 按蓬→任→冲→辅→英→芮→柱→心的顺序，整体旋转offset
             const starArrangeOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
             
-            // 从值符星位置开始，按物理顺时针排列九星
-            const startIdx = CLOCKWISE_ORDER.indexOf(zhiFuGong);
-            const zhiFuIndex = starArrangeOrder.indexOf(zhiFuInfo.zhiFuXing);
-            
-            for (let i = 0; i < 8; i++) {
-                const gongIdx = (startIdx + i) % 8;
-                const gong = CLOCKWISE_ORDER[gongIdx];
-                if (gong === 5) continue;
+            for (let star of starArrangeOrder) {
+                const origGong = starOriginalGong[star];
+                let newGong = origGong + offset;
+                if (newGong > 9) newGong -= 9;
+                if (newGong === 5) newGong = 2; // 中五宫寄坤二宫
                 
-                const starIndex = (zhiFuIndex + i) % 8;
-                const star = starArrangeOrder[starIndex];
                 let starDisplay = star;
                 if (star === '天芮') {
                     starDisplay = '芮禽';
                 }
                 
-                tianPan[gong] = {
+                tianPan[newGong] = {
                     star: starDisplay,
                     gan: '' // 天盘干稍后安排
                 };
