@@ -1137,6 +1137,9 @@
             const zhiFuGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             // 从蓬开始（天心往前数7位），按顺时针排列
+            // 值符星位置（zhiFuGong）的天盘干是旬首六仪（在找值符值使时确定）
+            const liuYi = zhiFuInfo.xunShou.slice(2); // 旬首六仪，如"癸"
+            
             for (let i = 0; i < 8; i++) {
                 // 蓬在zhiFuGong前面第7位（或后面第1位）
                 const gongIdx = (zhiFuGongIndex - 7 + i + 8) % 8;
@@ -1149,17 +1152,26 @@
                     starDisplay = '芮禽';
                 }
                 
+                // 值符星位置设旬首六仪作为天盘干起点
+                let gan = '';
+                if (gong === zhiFuGong) {
+                    gan = liuYi; // 旬首六仪作为起点
+                }
+                
                 tianPan[gong] = {
                     star: starDisplay,
-                    gan: '' // 天盘干稍后安排
+                    gan: gan
                 };
             }
             
-            return {tianPan, hourGanGong};
+            return {tianPan, hourGanGong, liuYi};
         }
         
-        // 排天盘干（从值符星位置开始，按顺时针取地盘干）
+        // 排天盘干（从值符星位置开始，按固定顺序排列）
         function paiTianPanGan(tianPan, zhiFuInfo, diPan, isYang) {
+            // 天盘干固定顺序：癸→戊→丙→庚→辛→乙→壬己→丁
+            const tianPanGanOrder = ['癸', '戊', '丙', '庚', '辛', '乙', '壬己', '丁'];
+            
             // 顺时针九宫顺序
             const clockwiseOrder = [3, 4, 9, 2, 7, 6, 1, 8];
             
@@ -1167,17 +1179,13 @@
             const zhiFuGong = zhiFuInfo.zhiFuGong;
             const startIdx = clockwiseOrder.indexOf(zhiFuGong);
             
-            // 按顺时针顺序，取对应宫位的天盘干
+            // 按顺时针顺序排列天盘干
             for (let i = 0; i < 8; i++) {
                 const gongIdx = (startIdx + i) % 8;
                 const gong = clockwiseOrder[gongIdx];
                 
-                // 取该位置对应的地盘干
-                const targetGong = clockwiseOrder[(startIdx + i) % 8];
-                let gan = diPan[targetGong];
-                
                 if (tianPan[gong]) {
-                    tianPan[gong].gan = gan;
+                    tianPan[gong].gan = tianPanGanOrder[i];
                 }
             }
             
