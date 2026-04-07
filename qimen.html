@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>奇门遁甲排盘工具 - V3.55</title>
+    <title>奇门遁甲排盘工具 - V3.56</title>
     <style>
         * {
             margin: 0;
@@ -470,7 +470,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.55 移位法版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
+        <p class="subtitle">V3.56 隐干修正版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
         
         <div class="input-section">
             <div class="input-row">
@@ -1291,15 +1291,18 @@
             return {baMen, zhiShiGong};
         }
         
-        // 排隐干（修正版 - 处理甲隐遁）
+        // 排隐干（V3.56 - 按老师规则修正）
+        // 规则：
+        // 1. 如果值使门落宫地盘干 = 起局时辰天干 → 隐干写在中五宫
+        // 2. 如果值使门落宫地盘干 ≠ 起局时辰天干 → 从时干所在宫位开始排
+        // 3. 排列顺序：九宫数字顺序 1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
+        // 4. 天干顺序：戊己庚辛壬癸丁丙乙循环（阳遁顺排，阴遁逆排）
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang, xunShou) {
             const yinGan = {};
             let hourGan = hourGanZhi[0]; // 起局时辰的天干
             
             // 处理甲隐遁：如果时干是甲，用旬首的六仪代替
-            // 甲隐于戊(甲子旬)、己(甲戌旬)、庚(甲申旬)、辛(甲午旬)、壬(甲辰旬)、癸(甲寅旬)
             if (hourGan === '甲') {
-                // 从旬首获取六仪（xunShou格式如"甲戌己"）
                 hourGan = xunShou.slice(2); // 取第三个字符，如"己"
             }
             
@@ -1312,33 +1315,49 @@
             // 值使门落宫的地盘干
             const zhiShiDiPanGan = diPan[zhiShiGong];
             
-            // 确定时干起点
-            let startIdx; // 在numOrder中的索引
-            // 检查值使宫地盘干是否等于时干（考虑组合地盘干如"乙癸"）
-            if (zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan)) {
-                // 情况一：值使宫地盘干包含时干 → 时干在值使宫
-                startIdx = numOrder.indexOf(parseInt(zhiShiGong));
-            } else {
-                // 情况二：值使宫地盘干不包含时干 → 时干在中五（序号5）
-                startIdx = 4; // 中五是numOrder的第5个元素，索引4
-            }
+            // 判断值使门落宫地盘干是否等于起局时辰天干
+            const isSameGan = zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan);
             
-            // 从时干开始，按顺序填入各宫
-            for (let i = 0; i < 9; i++) {
-                // 确定当前宫序号
-                let gongIdx;
-                if (isYang) {
-                    // 阳遁：数字顺序1→9
-                    gongIdx = (startIdx + i) % 9;
-                } else {
-                    // 阴遁：数字顺序9→1（即反向）
-                    gongIdx = (startIdx - i + 9) % 9;
+            if (isSameGan) {
+                // 情况一：值使门落宫地盘干 = 起局时辰天干
+                // 隐干（时干）只写在中五宫
+                yinGan[5] = hourGan;
+            } else {
+                // 情况二：值使门落宫地盘干 ≠ 起局时辰天干
+                // 先找到时干在地盘的宫位
+                let hourGanGong = null;
+                for (let gongStr in diPan) {
+                    const gongNum = parseInt(gongStr);
+                    if (diPan[gongStr] && diPan[gongStr].includes(hourGan)) {
+                        hourGanGong = gongNum;
+                        break;
+                    }
                 }
-                const gongNum = numOrder[gongIdx];
                 
-                // 确定隐干（从时干开始，按戊己庚辛壬癸丁丙乙顺序）
-                const ganIdx = (yinGanOrder.indexOf(hourGan) + i) % 9;
-                yinGan[gongNum] = yinGanOrder[ganIdx];
+                // 如果没找到，默认在中五宫
+                if (hourGanGong === null) {
+                    hourGanGong = 5;
+                }
+                
+                // 从时干所在宫位开始，按数字顺序排列
+                const startIdx = numOrder.indexOf(hourGanGong);
+                
+                for (let i = 0; i < 9; i++) {
+                    // 确定当前宫序号（数字顺序）
+                    let gongIdx;
+                    if (isYang) {
+                        // 阳遁：数字顺序1→9
+                        gongIdx = (startIdx + i) % 9;
+                    } else {
+                        // 阴遁：数字顺序9→1（即反向）
+                        gongIdx = (startIdx - i + 9) % 9;
+                    }
+                    const gongNum = numOrder[gongIdx];
+                    
+                    // 确定隐干（从时干开始，按戊己庚辛壬癸丁丙乙顺序）
+                    const ganIdx = (yinGanOrder.indexOf(hourGan) + i) % 9;
+                    yinGan[gongNum] = yinGanOrder[ganIdx];
+                }
             }
             
             return yinGan;
