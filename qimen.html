@@ -1106,8 +1106,12 @@
             const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
-            // 值符星到实际落宫（坤二宫），带旬首的六仪
+            // 值符星到实际落宫，带旬首的六仪
             const liuYi = zhiFuInfo.xunShou.slice(2);
+            // 六仪顺序：戊己庚辛壬癸丁丙乙
+            const liuYiOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
+            const startIndex = liuYiOrder.indexOf(liuYi);
+            
             // 显示"芮禽"（天禽寄天芮）
             let zhiFuDisplay = '芮禽';
             tianPan[zhiFuGong] = {
@@ -1115,7 +1119,8 @@
                 gan: liuYi
             };
             
-            // 其他星按顺序排，带原始宫的地盘干
+            // 其他星按顺序排，天盘干按六仪顺序
+            let liuYiIdx = 1; // 从第二个六仪开始
             for (let i = 1; i < 8; i++) {
                 currentGongIndex = (currentGongIndex + 1) % 8;
                 const gong = CLOCKWISE_ORDER[currentGongIndex];
@@ -1125,16 +1130,19 @@
                 
                 const starIndex = (zhiFuIndex + i) % 8;
                 const star = starOrder[starIndex];
-                const origGong = Object.keys(JIU_XING).find(k => JIU_XING[k] === star);
                 // 天禽星显示为"禽"，天芮星显示为"芮禽"
                 let starDisplay = star;
                 if (star === '天芮') {
                     starDisplay = '芮禽';
                 }
+                
+                // 天盘干按六仪顺序
+                const ganIndex = (startIndex + liuYiIdx) % 9;
                 tianPan[gong] = {
                     star: starDisplay,
-                    gan: diPan[origGong]
+                    gan: liuYiOrder[ganIndex]
                 };
+                liuYiIdx++;
             }
             
             return {tianPan, hourGanGong};
