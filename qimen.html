@@ -1134,9 +1134,8 @@
             const starArrangeOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
             
             // 从值符星位置开始，按顺时针倒排九星（心→柱→芮→英→辅→冲→任→蓬）
-            const zhiFuGong = zhiFuInfo.zhiFuGong;
             const startIdx = CLOCKWISE_ORDER.indexOf(zhiFuGong);
-            const zhiFuIndex = starArrangeOrder.indexOf(zhiFuInfo.zhiFuXing);
+            const zhiFuStarIndex = starArrangeOrder.indexOf(zhiFuInfo.zhiFuXing);
             
             for (let i = 0; i < 8; i++) {
                 const gongIdx = (startIdx + i) % 8;
@@ -1144,7 +1143,7 @@
                 if (gong === 5) continue;
                 
                 // 从值符星往前数i个位置
-                const starIndex = (zhiFuIndex - i + 8) % 8;
+                const starIndex = (zhiFuStarIndex - i + 8) % 8;
                 const star = starArrangeOrder[starIndex];
                 let starDisplay = star;
                 if (star === '天芮') {
