@@ -1158,24 +1158,26 @@
             return {tianPan, hourGanGong};
         }
         
-        // 排天盘干（在九星和八门之后）
+        // 排天盘干（从值符星位置开始，按顺时针取地盘干）
         function paiTianPanGan(tianPan, zhiFuInfo, diPan, isYang) {
-            const liuYi = zhiFuInfo.xunShou.slice(2);
-            const liuYiOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
-            const startIndex = liuYiOrder.indexOf(liuYi);
+            // 顺时针九宫顺序
+            const clockwiseOrder = [3, 4, 9, 2, 7, 6, 1, 8];
             
-            // 从值符星位置开始，顺时针排天盘干
+            // 从值符星位置开始
             const zhiFuGong = zhiFuInfo.zhiFuGong;
-            const startIdx = CLOCKWISE_ORDER.indexOf(zhiFuGong);
+            const startIdx = clockwiseOrder.indexOf(zhiFuGong);
             
+            // 按顺时针顺序，取对应宫位的天盘干
             for (let i = 0; i < 8; i++) {
                 const gongIdx = (startIdx + i) % 8;
-                const gong = CLOCKWISE_ORDER[gongIdx];
-                if (gong === 5) continue; // 跳过中五宫
+                const gong = clockwiseOrder[gongIdx];
                 
-                const ganIndex = (startIndex + i) % 9;
+                // 取该位置对应的地盘干
+                const targetGong = clockwiseOrder[(startIdx + i) % 8];
+                let gan = diPan[targetGong];
+                
                 if (tianPan[gong]) {
-                    tianPan[gong].gan = liuYiOrder[ganIndex];
+                    tianPan[gong].gan = gan;
                 }
             }
             
