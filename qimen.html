@@ -1177,6 +1177,8 @@
                 tianPanGanOrder = diPanGanOrder; // fallback
             }
             
+            // 九星排列（蓬在心前一位，按顺时针）
+            const starAtGong = {}; // 记录每个宫对应的星
             for (let i = 0; i < 8; i++) {
                 // 蓬在zhiFuGong前面第7位（或后面第1位）
                 const gongIdx = (zhiFuGongIndex - 7 + i + 8) % 8;
@@ -1189,11 +1191,19 @@
                     starDisplay = '芮禽';
                 }
                 
-                // 按移位后的顺序设置天盘干
+                starAtGong[gong] = starDisplay;
+            }
+            
+            // 天盘干按顺时针九宫顺序（从zhiFuGong开始）分配
+            for (let i = 0; i < 8; i++) {
+                const gongIdx = (zhiFuGongIndex + i) % 8;
+                const gong = CLOCKWISE_ORDER[gongIdx];
+                if (gong === 5) continue;
+                
                 const gan = tianPanGanOrder[i] || '';
                 
                 tianPan[gong] = {
-                    star: starDisplay,
+                    star: starAtGong[gong],
                     gan: gan
                 };
             }
