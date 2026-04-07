@@ -1115,7 +1115,7 @@
             // 值符星实际落宫（考虑天禽寄坤二的情况）
             const zhiFuGong = zhiFuInfo.zhiFuGong;
             
-            const zhiFuIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
+            const zhiFuStarIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
             let currentGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             // 值符星到实际落宫，带旬首的六仪
@@ -1134,12 +1134,12 @@
             const starArrangeOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
             
             // 天心落在zhiFuGong，蓬在它前面一个宫位（顺时针的逆方向）
-            const zhiFuIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
+            const zhiFuGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             // 从蓬开始（天心往前数7位），按顺时针排列
             for (let i = 0; i < 8; i++) {
                 // 蓬在zhiFuGong前面第7位（或后面第1位）
-                const gongIdx = (zhiFuIndex - 7 + i + 8) % 8;
+                const gongIdx = (zhiFuGongIndex - 7 + i + 8) % 8;
                 const gong = CLOCKWISE_ORDER[gongIdx];
                 if (gong === 5) continue;
                 
