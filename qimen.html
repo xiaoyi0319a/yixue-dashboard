@@ -734,8 +734,8 @@
         // 计算日干支
         function getDayGanZhi(year, month, day) {
             const diff = daysBetween(BASE_YEAR, BASE_MONTH, BASE_DAY, year, month, day);
-            const ganIndex = (BASE_GAN_INDEX + diff) % 10;
-            const zhiIndex = (BASE_ZHI_INDEX + diff) % 12;
+            const ganIndex = ((BASE_GAN_INDEX + diff) % 10 + 10) % 10;
+            const zhiIndex = ((BASE_ZHI_INDEX + diff) % 12 + 12) % 12;
             return {
                 gan: ganIndex,
                 zhi: zhiIndex,
