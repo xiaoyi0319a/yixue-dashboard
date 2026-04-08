@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>奇门遁甲排盘工具 - V3.57</title>
+    <title>奇门遁甲排盘工具 - V3.59</title>
     <style>
         * {
             margin: 0;
@@ -470,7 +470,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.58 九星排列修正版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
+        <p class="subtitle">V3.59 修复版 | 拆补法 · 寄坤宫 · 四害检测 · 格局显示</p>
         
         <div class="input-section">
             <div class="input-row">
@@ -1131,7 +1131,7 @@
             const zhiFuGong = zhiFuInfo.zhiFuGong;
             
             const zhiFuStarIndex = starOrder.indexOf(zhiFuInfo.zhiFuXing);
-            let currentGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
+            const zhiFuGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
             
             // 值符星到实际落宫，带旬首的六仪
             const liuYi = zhiFuInfo.xunShou.slice(2);
@@ -1149,20 +1149,19 @@
             const starArrangeOrder = ['天蓬', '天任', '天冲', '天辅', '天英', '天芮', '天柱', '天心'];
             
             // 修正：值符星落在zhiFuGong，其他星按顺序排列
-            const zhiFuGongIndex = CLOCKWISE_ORDER.indexOf(zhiFuGong);
-            const zhiFuStarIndex = starArrangeOrder.indexOf(zhiFuInfo.zhiFuXing);
+            // zhiFuGongIndex 和 zhiFuStarIndex 已在上方定义，这里直接使用
             
             // 天盘干计算（移位法）：
             // 1. 获取地盘干按顺时针九宫顺序（从值符星位置开始）
             // 2. 找到旬首六仪位置，把前面的移到后面
             const clockwiseOrder = [3, 4, 9, 2, 7, 6, 1, 8];
-            const zhiFuGongIdx = clockwiseOrder.indexOf(zhiFuGong);
+            // zhiFuGongIndex 已在上文定义
             // liuYi已在上方定义
             
             // 按顺时针顺序收集地盘干（从值符星位置开始）
             const diPanGanOrder = [];
             for (let i = 0; i < 8; i++) {
-                const gongIdx = (zhiFuGongIdx + i) % 8;
+                const gongIdx = (zhiFuGongIndex + i) % 8;
                 const gong = clockwiseOrder[gongIdx];
                 diPanGanOrder.push(diPan[gong] || '');
             }
