@@ -470,7 +470,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.70 节气精确计算版 | 拆补法 · 寄坤宫 · 四害检测 · 早子时修正</p>
+        <p class="subtitle">V3.71 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 四害检测 · 早子时修正</p>
 
         <div class="input-section">
             <div class="input-row">
@@ -919,44 +919,50 @@
             return result;
         }
 
-        // 获取节气（V3.70 - 精确到分钟）
+        // 获取节气（V3.71 - 使用精确数据表）
         function getJieQi(year, month, day, hour = 0, minute = 0) {
-            const jieQiList = getYearJieQi(year);
-            
-            // 将当前时间转为可比较的格式
-            const currentTime = month * 1000000 + day * 10000 + hour * 100 + minute;
-            
-            // 找到当前日期所在的节气区间
-            let currentJieQi = null;
-            let prevJieQi = null;
-            
-            for (const [name, moment] of Object.entries(jieQiList)) {
-                const momentTime = moment.month * 1000000 + moment.day * 10000 + moment.hour * 100 + moment.minute;
-                
-                if (momentTime <= currentTime) {
-                    prevJieQi = {name, ...moment};
-                } else if (!currentJieQi) {
-                    currentJieQi = {name, ...moment};
-                    break;
+            // 精确节气数据（紫金山天文台）
+            const JIEQI_DATA = {
+                2026: {
+                    '立春': [2, 4, 4, 2], '雨水': [2, 19, 0, 1], '惊蛰': [3, 5, 21, 49], '春分': [3, 20, 22, 45],
+                    '清明': [4, 5, 2, 39], '谷雨': [4, 20, 9, 38], '立夏': [5, 5, 19, 40], '小满': [5, 21, 8, 36],
+                    '芒种': [6, 6, 1, 42], '夏至': [6, 21, 18, 24], '小暑': [7, 7, 11, 57], '大暑': [7, 23, 5, 15],
+                    '立秋': [8, 7, 21, 34], '处暑': [8, 23, 12, 14], '白露': [9, 7, 22, 31], '秋分': [9, 23, 8, 4],
+                    '寒露': [10, 8, 14, 28], '霜降': [10, 23, 17, 38], '立冬': [11, 7, 17, 51], '小雪': [11, 22, 15, 23],
+                    '大雪': [12, 7, 10, 52], '冬至': [12, 22, 4, 49], '小寒': [1, 5, 16, 22], '大寒': [1, 20, 9, 44]
                 }
+            };
+            
+            // 优先使用精确数据
+            const data = JIEQI_DATA[year];
+            if (data) {
+                const jieqiList = Object.entries(data).map(([name, [m, d, h, min]]) => ({
+                    name, month: m, day: d, hour: h, minute: min,
+                    type: ['立春', '雨水', '惊蛰', '春分', '清明', '谷雨', '立夏', '小满', '芒种'].includes(name) ? 'yang' : 'yin'
+                }));
+                jieqiList.sort((a, b) => (a.month * 1000000 + a.day * 10000 + a.hour * 100 + a.minute) - (b.month * 1000000 + b.day * 10000 + b.hour * 100 + b.minute));
+                
+                const currentTime = month * 1000000 + day * 10000 + hour * 100 + minute;
+                for (let i = jieqiList.length - 1; i >= 0; i--) {
+                    const jq = jieqiList[i];
+                    const jqTime = jq.month * 1000000 + jq.day * 10000 + jq.hour * 100 + jq.minute;
+                    if (jqTime <= currentTime) return jq;
+                }
+                return jieqiList[0];
             }
             
-            // 如果没找到当前节气，返回最后一个
+            // 备用：使用Cope近似
+            const jieQiList = getYearJieQi(year);
+            const currentTime = month * 1000000 + day * 10000 + hour * 100 + minute;
+            let prevJieQi = null;
+            for (const [name, moment] of Object.entries(jieQiList)) {
+                const momentTime = moment.month * 1000000 + moment.day * 10000 + moment.hour * 100 + moment.minute;
+                if (momentTime <= currentTime) prevJieQi = {name, ...moment};
+                else break;
+            }
             const result = prevJieQi || Object.entries(jieQiList).pop()[1];
-            
-            // 确定阴阳遁
             const yangJieQi = ['立春', '雨水', '惊蛰', '春分', '清明', '谷雨', '立夏', '小满', '芒种'];
-            const yinJieQi = ['夏至', '小暑', '大暑', '立秋', '处暑', '白露', '秋分', '寒露', '霜降', '立冬', '小雪', '大雪', '冬至', '小寒', '大寒'];
-            
-            return {
-                name: result.name,
-                month: result.month,
-                day: result.day,
-                hour: result.hour,
-                minute: result.minute,
-                type: yangJieQi.includes(result.name) ? 'yang' : 'yin',
-                nextJieQi: currentJieQi
-            };
+            return {...result, type: yangJieQi.includes(result.name) ? 'yang' : 'yin'};
         }
 
         // 计算月干支（基于节气，V3.70支持精确时刻）
