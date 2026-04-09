@@ -1235,7 +1235,8 @@
             console.log('CLOCKWISE_ORDER:', CLOCKWISE_ORDER);
 
             for (let i = 0; i < 8; i++) {
-                const gongIndex = isYang ? (zhiFuIndex + i) % 8 : (zhiFuIndex - i + 8) % 8;
+                // 修正：阳遁逆时针，阴遁顺时针（与老师确认后的规则）
+                const gongIndex = isYang ? (zhiFuIndex - i + 8) % 8 : (zhiFuIndex + i) % 8;
                 const gong = CLOCKWISE_ORDER[gongIndex];
                 baShen[gong] = shenOrder[i];
                 console.log(`i=${i}, gongIndex=${gongIndex}, gong=${gong}, shen=${shenOrder[i]}`);
