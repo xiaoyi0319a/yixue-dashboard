@@ -1332,6 +1332,12 @@
             // 判断值使门落宫地盘干是否等于起局时辰天干
             const isSameGan = zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan);
             
+            // 调试信息
+            console.log('=== paiYinGan 调试 ===');
+            console.log('zhiShiGong:', zhiShiGong, 'diPan[zhiShiGong]:', zhiShiDiPanGan);
+            console.log('hourGan:', hourGan, 'hourGanZhi:', hourGanZhi);
+            console.log('isSameGan:', isSameGan, 'isYang:', isYang);
+            
             // 确定起始宫位和天干起始索引
             let startGong;
             let ganStartIdx;
@@ -1350,6 +1356,8 @@
             // 从起始宫位开始，按数字顺序（阳遁1→9，阴遁9→1）排天干
             const startIdx = numOrder.indexOf(startGong);
             
+            console.log('startGong:', startGong, 'startIdx:', startIdx, 'ganStartIdx:', ganStartIdx);
+            
             for (let i = 0; i < 9; i++) {
                 // 确定当前宫序号（数字顺序）
                 let gongNum;
@@ -1366,7 +1374,11 @@
                 // 确定隐干（从ganStartIdx开始）
                 const ganIdx = (ganStartIdx + i) % 9;
                 yinGan[gongNum] = yinGanOrder[ganIdx];
+                
+                console.log(`i=${i}, gongNum=${gongNum}, gan=${yinGanOrder[ganIdx]}`);
             }
+            
+            console.log('=== 隐干结果 ===', yinGan);
             
             return yinGan;
         }
