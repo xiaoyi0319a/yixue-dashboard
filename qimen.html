@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>奇门遁甲排盘工具 - V3.60</title>
+    <title>奇门遁甲排盘工具 - V3.62</title>
     <style>
         * {
             margin: 0;
@@ -1302,11 +1302,12 @@
             return {baMen, zhiShiGong};
         }
 
-        // 排隐干（V3.61 - 修正：情况一从时干所在宫位开始）
+        // 排隐干（V3.62 - 修正：情况一从中五宫开始，天干从时干开始）
         // 规则：
         // 1. 如果值使门落宫地盘干 = 起局时辰天干（情况一）：
-        //    - 从时干所在宫位开始，依九宫数字顺序（1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离）
-        //    - 排天干：戊己庚辛壬癸丁丙乙（阳遁顺排，阴遁逆排）
+        //    - 从【中五宫】开始，依九宫数字顺序（1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离）
+        //    - 排天干：从【时干】开始，按戊己庚辛壬癸丁丙乙顺序（阳遁顺排，阴遁逆排）
+        //    - 例：丙辰时，丙在中五宫(序号5)，顺序为：戊7己8庚9辛1壬2癸3丁4丙5乙6
         // 2. 如果值使门落宫地盘干 ≠ 起局时辰天干（情况二）：
         //    - 从值使门落宫开始，依九宫数字顺序
         //    - 排天干：从起局时辰天干开始，按戊己庚辛壬癸丁丙乙顺序
@@ -1331,28 +1332,23 @@
             // 判断值使门落宫地盘干是否等于起局时辰天干
             const isSameGan = zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan);
             
-            // 确定起始宫位
+            // 确定起始宫位和天干起始索引
             let startGong;
+            let ganStartIdx;
+            
             if (isSameGan) {
-                // 情况一：从时干所在宫位开始（值符星落宫就是时干所在宫）
-                startGong = zhiFuGong;
+                // 情况一：从中五宫开始，天干从时干开始
+                startGong = 5; // 中五宫
+                // 找到时干在yinGanOrder中的位置作为起始
+                ganStartIdx = yinGanOrder.indexOf(hourGan);
             } else {
-                // 情况二：从值使门落宫开始
+                // 情况二：从值使门落宫开始，天干从时干开始
                 startGong = zhiShiGong;
+                ganStartIdx = yinGanOrder.indexOf(hourGan);
             }
             
             // 从起始宫位开始，按数字顺序（阳遁1→9，阴遁9→1）排天干
             const startIdx = numOrder.indexOf(startGong);
-            
-            // 确定天干起始索引
-            let ganStartIdx;
-            if (isSameGan) {
-                // 情况一：从戊开始
-                ganStartIdx = 0;
-            } else {
-                // 情况二：从时干开始
-                ganStartIdx = yinGanOrder.indexOf(hourGan);
-            }
             
             for (let i = 0; i < 9; i++) {
                 // 确定当前宫序号（数字顺序）
@@ -1367,7 +1363,7 @@
                     gongNum = numOrder[gongIdx];
                 }
                 
-                // 确定隐干
+                // 确定隐干（从ganStartIdx开始）
                 const ganIdx = (ganStartIdx + i) % 9;
                 yinGan[gongNum] = yinGanOrder[ganIdx];
             }
