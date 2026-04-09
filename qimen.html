@@ -1297,8 +1297,8 @@
 
             const zhiShiGong = numOrder[currentIdx];
 
-            // 从值使门落宫开始，顺时针排八门
-            const startIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
+            // 从值使门原始宫位开始，顺时针排八门（修正：不是从落宫开始）
+            const startIndex = CLOCKWISE_ORDER.indexOf(zhiFuInfo.zhiShiMenGong);
 
             for (let i = 0; i < 8; i++) {
                 const gongIndex = (startIndex + i) % 8;
