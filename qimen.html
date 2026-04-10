@@ -470,7 +470,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.71 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 四害检测 · 早子时修正</p>
+        <p class="subtitle">V3.72 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 四害检测 · 时间选择优化</p>
 
         <div class="input-section">
             <div class="input-row">
@@ -479,25 +479,8 @@
                     <input type="date" id="date">
                 </div>
                 <div class="input-group">
-                    <label>时辰</label>
-                    <select id="hour">
-                        <option value="1">子时 (23:00-00:59)</option>
-                        <option value="2">丑时 (01:00-02:59)</option>
-                        <option value="3">寅时 (03:00-04:59)</option>
-                        <option value="4">卯时 (05:00-06:59)</option>
-                        <option value="5">辰时 (07:00-08:59)</option>
-                        <option value="6">巳时 (09:00-10:59)</option>
-                        <option value="7" selected>午时 (11:00-12:59)</option>
-                        <option value="8">未时 (13:00-14:59)</option>
-                        <option value="9">申时 (15:00-16:59)</option>
-                        <option value="10">酉时 (17:00-18:59)</option>
-                        <option value="11">戌时 (19:00-20:59)</option>
-                        <option value="12">亥时 (21:00-22:59)</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>分钟</label>
-                    <input type="number" id="minute" value="0" min="0" max="59">
+                    <label>时间（几点几分）</label>
+                    <input type="time" id="time" value="12:00">
                 </div>
             </div>
 
@@ -1065,13 +1048,13 @@
             } else {
                 console.log('useNow: date element not found');
             }
-            const hourEl = document.getElementById('hour');
-            if (hourEl) {
-                hourEl.value = (Math.floor((now.getHours() + 1) / 2) % 12) + 1;
-            }
-            const minuteEl = document.getElementById('minute');
-            if (minuteEl) {
-                minuteEl.value = now.getMinutes();
+            
+            // 设置时间为当前时分
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const timeEl = document.getElementById('time');
+            if (timeEl) {
+                timeEl.value = `${hours}:${minutes}`;
             }
         }
 
@@ -1168,10 +1151,9 @@
                 diPan[gong] = TIANGAN[ganIndex];
             }
 
-            // 中五宫寄坤二宫（保留原来的癸，叠加乙），但中五宫仍保留用于显示
+            // 中五宫寄坤二宫（本位在前，寄宫在后）
             if (diPan[5]) {
-                diPan[2] = diPan[5] + (diPan[2] || ''); // 乙 + 癸 = "乙癸"
-                // 中五宫保留原值用于显示
+                diPan[2] = (diPan[2] || '') + diPan[5]; // 丙 + 己 = "丙己"
             }
 
             return diPan;
@@ -1569,13 +1551,40 @@
             return JIGE[key] || null;
         }
 
+        // 根据小时和分钟计算时辰（1-12）
+        function getShiChen(hours, minutes) {
+            // 时辰转换：每个时辰2小时，从23点开始
+            // 23-1: 子时(1), 1-3: 丑时(2), 3-5: 寅时(3)...
+            // 23点和0点都属于子时
+            const totalMinutes = hours * 60 + minutes;
+            // 23:00 = 1380分钟，从23:00开始算一个新周期
+            // (1380 + 120 - totalMinutes) % 1440 / 120
+            let shiChen;
+            if (hours === 23) {
+                shiChen = 1; // 子时
+            } else {
+                shiChen = Math.floor((hours + 1) / 2) % 12 + 1;
+            }
+            return shiChen;
+        }
+
         // 主排盘函数（V3.70 - 支持精确时分和早子时）
         function qiPan() {
             const dateInput = document.getElementById('date').value;
             const [y, m, d] = dateInput.split('-').map(Number);
             const date = new Date(y, m - 1, d);
-            const hour = parseInt(document.getElementById('hour').value);
-            const minute = parseInt(document.getElementById('minute').value) || 0;
+            
+            // 从时间输入框获取小时和分钟
+            const timeInput = document.getElementById('time').value;
+            let hours = 12, minutes = 0;
+            if (timeInput) {
+                const [h, min] = timeInput.split(':').map(Number);
+                hours = h;
+                minutes = min || 0;
+            }
+            
+            // 计算时辰
+            const hour = getShiChen(hours, minutes);
             
             // 计算实际时辰（用于时柱）
             // 子时分早子时(23-24)和夜子时(0-1)
@@ -1585,17 +1594,17 @@
                 // 23:00-23:59是早子(时柱为子，日柱当天)
                 // 00:00-00:59是夜子(时柱为子，日柱次日)
                 // hour=1表示选择了子时，需要额外判断
-                if (minute < 30) {
+                if (minutes < 30) {
                     // 默认按早子时处理，用户可以通过选择日期来区分
                 }
             }
             
             // 获取精确节气（到分钟）
-            const jieQi = getJieQi(y, m, d, actualHourZhi === 0 ? 0 : (actualHourZhi + 1) * 2, minute);
+            const jieQi = getJieQi(y, m, d, actualHourZhi === 0 ? 0 : (actualHourZhi + 1) * 2, minutes);
             
             // 判断月柱是否需要按下一个节气
             const jieQiTime = jieQi.month * 1000000 + jieQi.day * 10000 + jieQi.hour * 100 + jieQi.minute;
-            const currentTime = m * 1000000 + d * 10000 + (actualHourZhi === 0 ? 0 : actualHourZhi + 1) * 2 * 100 + minute;
+            const currentTime = m * 1000000 + d * 10000 + (actualHourZhi === 0 ? 0 : actualHourZhi + 1) * 2 * 100 + minutes;
             
             // 如果当前时间已过节气时刻，使用下一个节气
             let effectiveJieQi = jieQi;
@@ -1605,8 +1614,8 @@
 
             // 四柱（传入时分）
             const yearGZ = getYearGanZhi(y, effectiveJieQi.name !== '立春' && effectiveJieQi.name !== '雨水' && effectiveJieQi.name !== '惊蛰');
-            const monthGZ = getMonthGanZhi(y, m, d, actualHourZhi === 0 ? 0 : (actualHourZhi + 1) * 2, minute);
-            const dayGZ = getDayGanZhi(y, m, d, actualHourZhi === 0 ? 23 : (actualHourZhi + 1) * 2 - 1, minute);
+            const monthGZ = getMonthGanZhi(y, m, d, actualHourZhi === 0 ? 0 : (actualHourZhi + 1) * 2, minutes);
+            const dayGZ = getDayGanZhi(y, m, d, actualHourZhi === 0 ? 23 : (actualHourZhi + 1) * 2 - 1, minutes);
             const hourGZ = getHourGanZhi(dayGZ.gan, actualHourZhi);
 
             // 显示四柱
