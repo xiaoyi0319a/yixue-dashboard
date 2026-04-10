@@ -203,36 +203,15 @@
         }
 
         .sihai-section {
-            background: rgba(255, 107, 107, 0.1);
-            border-radius: 10px;
-            padding: 12px;
-            border: 1px solid rgba(255, 107, 107, 0.3);
+            margin-top: 15px;
+            padding: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .sihai-section h3 {
-            color: #ff6b6b;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            text-align: center;
-        }
-
-        .sihai-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            text-align: center;
-        }
-
-        .sihai-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-        }
-
-        .sihai-item.has-sihai {
-            background: rgba(255, 107, 107, 0.2);
-            border: 1px solid #ff6b6b;
+        .sihai-section p {
+            margin: 0;
+            color: #888;
+            font-size: 0.85rem;
         }
 
         .pan-section {
@@ -460,17 +439,13 @@
             h1 {
                 font-size: 1.6rem;
             }
-
-            .sihai-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.72 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 四害检测 · 时间选择优化</p>
+        <p class="subtitle">V3.73 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 时间选择优化</p>
 
         <div class="input-section">
             <div class="input-row">
@@ -523,11 +498,6 @@
                     <p id="maxing">-</p>
                 </div>
             </div>
-
-            <div class="sihai-section" id="sihaiSection">
-                <h3>四害检测</h3>
-                <div class="sihai-grid" id="sihaiGrid"></div>
-            </div>
         </div>
 
         <div class="pan-section" id="panSection">
@@ -558,6 +528,10 @@
                     <div class="legend-color" style="background: #aa96da;"></div>
                     <span>隐干</span>
                 </div>
+            </div>
+
+            <div class="sihai-section" id="sihaiSection">
+                <p id="sihaiText" style="text-align: center; color: #ff6b6b; font-size: 0.9rem;">四害：门迫（门克宫）、击刑（地支刑）、入墓（天干墓）、伏吟（天地同）</p>
             </div>
         </div>
     </div>
@@ -1681,15 +1655,6 @@
             document.getElementById('zhifu').textContent = zhiFuInfo.zhiFuXing;
             document.getElementById('zhishi').textContent = zhiFuInfo.zhiShiMen;
             document.getElementById('maxing').textContent = DIZHI[maXingZhi - 1];
-
-            // 显示四害
-            const sihaiGrid = document.getElementById('sihaiGrid');
-            sihaiGrid.innerHTML = `
-                <div class="sihai-item"><strong>门迫</strong><br>门克宫</div>
-                <div class="sihai-item"><strong>击刑</strong><br>地支刑</div>
-                <div class="sihai-item"><strong>入墓</strong><br>天干墓</div>
-                <div class="sihai-item"><strong>伏吟</strong><br>天地同</div>
-            `;
 
             document.getElementById('infoSection').classList.add('active');
 
