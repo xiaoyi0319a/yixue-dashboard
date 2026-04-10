@@ -445,7 +445,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.73 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 时间选择优化</p>
+        <p class="subtitle">V3.74 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 时间选择优化 · 八神修正</p>
 
         <div class="input-section">
             <div class="input-row">
@@ -1335,8 +1335,8 @@
             console.log('CLOCKWISE_ORDER:', CLOCKWISE_ORDER);
 
             for (let i = 0; i < 8; i++) {
-                // 修正：阳遁逆时针，阴遁顺时针（与老师确认后的规则）
-                const gongIndex = isYang ? (zhiFuIndex - i + 8) % 8 : (zhiFuIndex + i) % 8;
+                // 正确规则：阳遁顺时针，阴遁逆时针
+                const gongIndex = isYang ? (zhiFuIndex + i) % 8 : (zhiFuIndex - i + 8) % 8;
                 const gong = CLOCKWISE_ORDER[gongIndex];
                 baShen[gong] = shenOrder[i];
                 console.log(`i=${i}, gongIndex=${gongIndex}, gong=${gong}, shen=${shenOrder[i]}`);
