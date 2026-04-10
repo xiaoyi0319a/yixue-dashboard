@@ -445,7 +445,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.74 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 时间选择优化 · 八神修正</p>
+        <p class="subtitle">V3.75 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 时间选择优化 · 八神修正</p>
 
         <div class="input-section">
             <div class="input-row">
@@ -1003,7 +1003,7 @@
         const GONG_NAMES = {1: '坎一', 2: '坤二', 3: '震三', 4: '巽四', 5: '中五', 6: '乾六', 7: '兑七', 8: '艮八', 9: '离九'};
 
         // 物理顺时针顺序 (v3.66 fixed)
-        const CLOCKWISE_ORDER = [1, 8, 3, 4, 9, 2, 7, 6]; // 坎→艮→震→巽→离→坤→兑→乾
+        const CLOCKWISE_ORDER = [6, 1, 8, 3, 4, 9, 2, 7]; // 乾→坎→艮→震→巽→离→坤→兑（九宫格物理顺时针）
 
         // 当前盘面数据
         let currentPanData = null;
