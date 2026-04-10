@@ -445,7 +445,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.76 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 时间选择优化 · 八门修正</p>
+        <p class="subtitle">V3.77 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 时间选择优化 · 地盘干修正</p>
 
         <div class="input-section">
             <div class="input-row">
@@ -1125,9 +1125,9 @@
                 diPan[gong] = TIANGAN[ganIndex];
             }
 
-            // 中五宫寄坤二宫（本位在前，寄宫在后）
+            // 中五宫寄坤二宫（寄宫在前，本位在后）
             if (diPan[5]) {
-                diPan[2] = (diPan[2] || '') + diPan[5]; // 丙 + 己 = "丙己"
+                diPan[2] = diPan[5] + (diPan[2] || ''); // 壬 + 己 = "壬己"
             }
 
             return diPan;
