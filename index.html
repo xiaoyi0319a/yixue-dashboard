@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羿学交易智囊团 | 2026-04-10</title>
+    <title>羿学交易智囊团 | 2026-04-14</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -105,6 +105,14 @@
             border-top: 1px dashed #a371f7;
             margin-top: 15px;
             font-size: 0.95em;
+        }
+        .qimen-pending {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px dashed #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            color: #ffc107;
         }
         
         /* 方向卡片 */
@@ -209,6 +217,68 @@
             background: rgba(255,255,255,0.02);
         }
         
+        /* 个股卡片 */
+        .stocks-section {
+            margin-bottom: 30px;
+        }
+        .stocks-section h2 {
+            color: #00d4ff;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stock-card {
+            background: linear-gradient(135deg, #1a2332 0%, #1a2a3a 100%);
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .stock-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.15);
+            border-color: #00d4ff;
+        }
+        .stock-card .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .stock-card .stock-name {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .stock-card .stock-code {
+            color: #8b9dc3;
+            font-size: 0.9em;
+        }
+        .stock-card .stock-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .stock-card .tag-s { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .stock-card .tag-a { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
+        .stock-card .stock-desc {
+            color: #b0c4de;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        .stock-card .stock-data {
+            color: #8b9dc3;
+            font-size: 0.85em;
+        }
+        
         .footer {
             text-align: center;
             padding: 30px;
@@ -227,198 +297,221 @@
         <!-- 头部 -->
         <div class="header">
             <h1>🎯 羿学交易智囊团</h1>
-            <div class="date">2026年4月10日 星期五 | 丙午年 壬辰月 甲寅日</div>
+            <div class="date">2026年4月14日 星期一 | 丙午年 壬辰月 己未日</div>
         </div>
         
         <!-- 奇门预测 -->
         <div class="qimen-section">
             <h2>🔮 奇门君今日预测</h2>
-            <div class="qimen-trend">
-                <div class="trend-title">📊 卦象</div>
-                <div>水泽节变火泽睽。值符临兑，坎水入泽，本有节制收敛之象；然离宫火旺，戊土虽得生，白虎坐镇，主外强中干。</div>
-            </div>
-            <div class="qimen-strategy">
-                <div class="strategy-title">📜 大势判语</div>
-                <div>天蓬值符临兑宫，大势有托而不稳；戊土离宫逢白虎，价格虚高带血光；乙奇分散杜门闭，买盘无力难抬轿；庚临本位玄武助，空方暗算势更强。</div>
-            </div>
-            <div class="qimen-strategy">
-                <div class="strategy-title">⏰ 时辰推演</div>
-                <div>巳时（9-11点）火旺，戊土得助，或有脉冲上冲；然庚金在兑七宫玄武助，10:30后空方力量渐显。未时（13-15点）土旺生金，庚金得令，支撑趋弱。</div>
-            </div>
-            <div class="qimen-esoteric">
-                📜 清明下元阳遁七局，甲寅癸旬首，戊临离宫白虎，主波动剧烈；值符天蓬入兑，主口舌是非；玄武庚临本位，空方暗藏杀机；乙奇归巽杜门，多方欲动而势不能。
-            </div>
-        </div>
-        
-        <!-- 并购重组专题报道 -->
-        <div class="directions-section" style="margin-bottom: 30px;">
-            <h2 style="color: #ff6b6b;">🚨 盘后重大政策：创业板并购重组松绑</h2>
-            <div style="background: linear-gradient(135deg, #1a1a2e 0%, #2d1f1f 100%); border: 2px solid #ff6b6b; border-radius: 15px; padding: 25px; box-shadow: 0 0 30px rgba(255, 107, 107, 0.2);">
-                <div style="margin-bottom: 20px;">
-                    <span style="background: rgba(255, 107, 107, 0.2); color: #ff6b6b; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold;">政策红利</span>
-                    <span style="background: rgba(255, 193, 7, 0.2); color: #ffd700; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold; margin-left: 10px;">制度层面</span>
-                </div>
-                <p style="color: #e0e6ed; line-height: 1.8; margin-bottom: 15px;">
-                    国务院同意，证监会正式发布<strong style="color: #ff6b6b;">《关于深化创业板改革 更好服务新质生产力发展的意见》</strong>，核心突破包括：再融资储架发行制度、并购重组"并购六条"落地、可吸收合并境内上市未满三年公司。
-                </p>
-                <p style="color: #b0c4de; line-height: 1.6; margin-bottom: 20px;">
-                    我们精选5只具备并购重组预期的创业板标的进行深度分析：
-                </p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    <div onclick="location.href='stock-301109.html'" style="background: rgba(76, 175, 80, 0.1); border: 1px solid #4caf50; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #4caf50; font-weight: bold;">301109 军信股份</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">并购整合+出海</div>
-                        <div style="color: #4caf50; font-size: 0.85em; margin-top: 5px;">⭐ 买入</div>
-                    </div>
-                    <div onclick="location.href='stock-300341.html'" style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ffc107; font-weight: bold;">300341 麦克奥迪</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">光刻机注入预期</div>
-                        <div style="color: #ffc107; font-size: 0.85em; margin-top: 5px;">⚖️ 观望</div>
-                    </div>
-                    <div onclick="location.href='stock-300302.html'" style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ffc107; font-weight: bold;">300302 同有科技</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">存储芯片重组</div>
-                        <div style="color: #ffc107; font-size: 0.85em; margin-top: 5px;">⚖️ 持有/观望</div>
-                    </div>
-                    <div onclick="location.href='stock-300247.html'" style="background: rgba(0, 212, 255, 0.1); border: 1px solid #00d4ff; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #00d4ff; font-weight: bold;">300247 融捷健康</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">壳资源+实控人光环</div>
-                        <div style="color: #00d4ff; font-size: 0.85em; margin-top: 5px;">👀 观望</div>
-                    </div>
-                    <div onclick="location.href='stock-301288.html'" style="background: rgba(255, 107, 107, 0.1); border: 1px solid #ff6b6b; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ff6b6b; font-weight: bold;">301288 清研环境</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">困境反转+保壳博弈</div>
-                        <div style="color: #ff6b6b; font-size: 0.85em; margin-top: 5px;">🔴 高风险</div>
-                    </div>
-                </div>
-                
-                <div style="color: #8b9dc3; font-size: 0.9em; border-top: 1px solid #2d3a4f; padding-top: 15px;">
-                    💡 点击查看个股深度分析报告 | 数据来源：深交所公告、公司年报
-                </div>
-            </div>
-        </div>
-        
-        <!-- 并购重组第二波标的 -->
-        <div class="directions-section" style="margin-bottom: 30px;">
-            <h2 style="color: #00d4ff;">🔍 并购重组第二波：已确认信号标的</h2>
-            <div style="background: linear-gradient(135deg, #1a2332 0%, #1a2a3a 100%); border: 1px solid #00d4ff; border-radius: 15px; padding: 25px; box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);">
-                <div style="margin-bottom: 20px;">
-                    <span style="background: rgba(0, 212, 255, 0.2); color: #00d4ff; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold;">公开信号</span>
-                    <span style="background: rgba(76, 175, 80, 0.2); color: #4caf50; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold; margin-left: 10px;">已公告/已发生</span>
-                </div>
-                <p style="color: #b0c4de; line-height: 1.6; margin-bottom: 20px;">
-                    基于实控人变更公告、筹划停牌、董监高集体辞职、司法拍卖等公开信号挖掘的标的：
-                </p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    <div onclick="location.href='stock-300807.html'" style="background: rgba(76, 175, 80, 0.1); border: 1px solid #4caf50; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #4caf50; font-weight: bold;">300807 天迈科技</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">启明创投入主</div>
-                        <div style="color: #4caf50; font-size: 0.85em; margin-top: 5px;">✅ 已完成</div>
-                    </div>
-                    <div onclick="location.href='stock-301057.html'" style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ffc107; font-weight: bold;">301057 汇隆新材</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">筹划控制权转让</div>
-                        <div style="color: #ffc107; font-size: 0.85em; margin-top: 5px;">⏳ 进行中</div>
-                    </div>
-                    <div onclick="location.href='stock-300163.html'" style="background: rgba(255, 107, 107, 0.1); border: 1px solid #ff6b6b; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ff6b6b; font-weight: bold;">300163 先锋新材</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">壳质极佳+被立案</div>
-                        <div style="color: #ff6b6b; font-size: 0.85em; margin-top: 5px;">⚠️ 高风险</div>
-                    </div>
-                    <div onclick="location.href='stock-300176.html'" style="background: rgba(0, 212, 255, 0.1); border: 1px solid #00d4ff; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #00d4ff; font-weight: bold;">300176 鸿特科技</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">万和系新主入驻</div>
-                        <div style="color: #00d4ff; font-size: 0.85em; margin-top: 5px;">🔍 观察中</div>
-                    </div>
-                    <div onclick="location.href='stock-300478.html'" style="background: rgba(255, 107, 107, 0.1); border: 1px solid #ff6b6b; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ff6b6b; font-weight: bold;">300478 杭州高新</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">7名高管集体辞职</div>
-                        <div style="color: #ff6b6b; font-size: 0.85em; margin-top: 5px;">🔥 人事地震</div>
-                    </div>
-                </div>
-                
-                <div style="color: #8b9dc3; font-size: 0.9em; border-top: 1px solid #2d3a4f; padding-top: 15px;">
-                    💡 基于已公告/已发生的控制权变更信号挖掘 | 点击查看详细分析
-                </div>
-            </div>
-        </div>
-        
-        <!-- 并购重组第三波标的 -->
-        <div class="directions-section" style="margin-bottom: 30px;">
-            <h2 style="color: #00d4ff;">🌊 并购重组第三波：国资入主+资产注入预期</h2>
-            <div style="background: linear-gradient(135deg, #1a2332 0%, #1a2a3a 100%); border: 1px solid #ff6b6b; border-radius: 15px; padding: 25px; box-shadow: 0 0 20px rgba(255, 107, 107, 0.15);">
-                
-                <div style="margin-bottom: 20px;">
-                    <span style="background: rgba(255, 107, 107, 0.2); color: #ff6b6b; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold;">政策驱动</span>
-                    <span style="background: rgba(0, 212, 255, 0.2); color: #00d4ff; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold; margin-left: 10px;">国资背景</span>
-                </div>
-                
-                <p style="color: #b0c4de; line-height: 1.6; margin-bottom: 20px;">
-                    聚焦国资背景、政策红利、资产注入预期的标的，具有更强的资源支持和确定性：
-                </p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    <div onclick="location.href='stock-300300.html'" style="background: rgba(255, 107, 107, 0.1); border: 1px solid #ff6b6b; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ff6b6b; font-weight: bold;">300300 海峡创新</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">平潭唯一国资平台</div>
-                        <div style="color: #ff6b6b; font-size: 0.85em; margin-top: 5px;">🔥 两岸融合智算中心</div>
-                    </div>
-                    <div onclick="location.href='stock-300266.html'" style="background: rgba(0, 212, 255, 0.1); border: 1px solid #00d4ff; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #00d4ff; font-weight: bold;">300266 兴源环境</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">宁波奉化国资入主</div>
-                        <div style="color: #00d4ff; font-size: 0.85em; margin-top: 5px;">🔵 筹划定增中</div>
-                    </div>
-                    <div onclick="location.href='stock-300234.html'" style="background: rgba(76, 175, 80, 0.1); border: 1px solid #4caf50; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #4caf50; font-weight: bold;">300234 开尔新材</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">碳资产+新能源</div>
-                        <div style="color: #4caf50; font-size: 0.85em; margin-top: 5px;">🌿 碳交易概念</div>
-                    </div>
-                    <div onclick="location.href='stock-300204.html'" style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.3s;">
-                        <div style="color: #ffc107; font-weight: bold;">300204 舒泰神</div>
-                        <div style="color: #b0c4de; font-size: 0.9em;">2025年涨幅前十</div>
-                        <div style="color: #ffc107; font-size: 0.85em; margin-top: 5px;">📈 387%涨幅</div>
-                    </div>
-                </div>
-                
-                <div style="color: #8b9dc3; font-size: 0.9em; border-top: 1px solid #2d3a4f; padding-top: 15px;">
-                    💡 聚焦国资背景+政策红利+资产注入预期 | 点击查看详细分析
-                </div>
+            <div class="qimen-pending">
+                ⏳ 待奇门君今日09:15起盘后更新...
+                <br><span style="font-size: 0.9em; color: #8b9dc3;">根据老师指令，奇门预测由独立子agent"奇门君"专门负责</span>
             </div>
         </div>
         
         <!-- 预期差方向 -->
         <div class="directions-section">
-            <h2>📈 今日预期差方向</h2>
+            <h2>📈 今日预期差方向（3个）</h2>
             <div class="direction-grid">
                 <div class="direction-card hot" onclick="location.href='direction-1-energy.html'">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>能源地缘博弈</h3>
-                    <p>美伊明天要谈判，中方出面担保；伊朗那边霍尔木兹海峡限流，沙特管道还被炸了。市场两头怕：怕谈崩油价飙，又怕谈成油价崩。</p>
+                    <p>美伊谈判4月12日谈崩了，特朗普宣布13日起封锁伊朗港口。WTI油价直接飙到105美元/桶。市场光盯着油价，没注意到油运/油服/化工的传导链还没定价。</p>
                     <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                <div class="direction-card hot" onclick="location.href='direction-2-lithium.html'">
+                <div class="direction-card hot" onclick="location.href='direction-2-earnings.html'">
                     <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>锂资源供给侧收缩</h3>
-                    <p>江西宜春4家锂矿5月可能要停产换证，津巴布韦也搞出口配额+2027年禁出口。市场还在担心"产能过剩"，没注意到供给侧已经有人在收缩了。</p>
+                    <h3>一季报业绩超预期</h3>
+                    <p>87家公司披露一季报预告，86%预喜，8家预增超10倍。医药（创新药/GLP-1）、有色（铝/金）、半导体（存储/AI芯片）三大赛道业绩爆发，公募正在加仓。</p>
                     <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                <div class="direction-card watch" onclick="location.href='direction-3-computing.html'">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>AI算力成本传导</h3>
-                    <p>腾讯云5月9日起AI算力涨价5%，Meta那边还在疯狂加单。成本涨+需求旺，说明算力定价权正在往头部集中，行业价格战可能要缓和。</p>
+                <div class="direction-card hot" onclick="location.href='direction-3-aisecurity.html'">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>AI网络安全</h3>
+                    <p>Anthropic发布Mythos模型，能识别并利用操作系统漏洞。美国财长紧急召集银行开会评估风险。AI安全是AI应用的"卖铲子"环节，预期差大。</p>
                     <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                <div class="direction-card">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>海南封关零关税</h3>
-                    <p>海南2026年要搞"岛内居民消费进境商品零关税"，还要研究封关后的税制改革。封关不是远水，今年就要落地了。</p>
+            </div>
+        </div>
+        
+        <!-- 核心标的 -->
+        <div class="stocks-section">
+            <h2>📊 核心关注标的（Top 15）</h2>
+            
+            <h3 style="color: #ff6b6b; margin: 20px 0 15px;">🔥 能源地缘博弈</h3>
+            <div class="stock-grid">
+                <div class="stock-card" onclick="location.href='stock-601872.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">招商轮船</span>
+                            <span class="stock-code">601872</span>
+                        </div>
+                        <span class="stock-tag tag-s">S级</span>
+                    </div>
+                    <div class="stock-desc">国内VLCC运力第一，油运龙头，运价上涨净利润弹性+200%</div>
+                    <div class="stock-data">2025年净利润60.12亿元 (+17.71%)</div>
                 </div>
-                <div class="direction-card">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>港股IPO爆发</h3>
-                    <p>Q1港股IPO全球第一，40宗募资1100亿港元，其中15宗A+H贡献了六成。市场还在说港股流动性枯竭，但IPO市场其实已经热起来了。</p>
+                <div class="stock-card" onclick="location.href='stock-600026.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">中远海能</span>
+                            <span class="stock-code">600026</span>
+                        </div>
+                        <span class="stock-tag tag-s">S级</span>
+                    </div>
+                    <div class="stock-desc">央企油运平台，全球VLCC运力前三，运距拉长受益</div>
+                    <div class="stock-data">Q4净利润13.1亿元 (+124.6%)</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-601975.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">招商南油</span>
+                            <span class="stock-code">601975</span>
+                        </div>
+                        <span class="stock-tag tag-s">S级</span>
+                    </div>
+                    <div class="stock-desc">成品油运输龙头，MR型油轮市占率国内第一</div>
+                    <div class="stock-data">2025年净利润12亿元，PE 10倍</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-601808.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">中海油服</span>
+                            <span class="stock-code">601808</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">中海油旗下唯一油服平台，海上钻井市占率70%+</div>
+                    <div class="stock-data">在手订单&gt;200亿元</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-600426.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">华鲁恒升</span>
+                            <span class="stock-code">600426</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">煤头尿素龙头，伊朗甲醇供应中断，国产替代受益</div>
+                    <div class="stock-data">2025年净利润39亿元，尿素产能105万吨</div>
+                </div>
+            </div>
+            
+            <h3 style="color: #00d4ff; margin: 20px 0 15px;">📈 一季报业绩超预期</h3>
+            <div class="stock-grid">
+                <div class="stock-card" onclick="location.href='stock-002439.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">启明星辰</span>
+                            <span class="stock-code">002439</span>
+                        </div>
+                        <span class="stock-tag tag-s">S级</span>
+                    </div>
+                    <div class="stock-desc">网络安全龙头，中国移动子公司，云安全市占率第一</div>
+                    <div class="stock-data">Q1预增2279%-3281%</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-002653.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">海思科</span>
+                            <span class="stock-code">002653</span>
+                        </div>
+                        <span class="stock-tag tag-s">S级</span>
+                    </div>
+                    <div class="stock-desc">创新药龙头，环泊酚等核心产品快速放量</div>
+                    <div class="stock-data">Q1预增923%-1095%</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-001309.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">德明利</span>
+                            <span class="stock-code">001309</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">存储芯片模组龙头，全自研主控芯片</div>
+                    <div class="stock-data">Q1扭亏为盈，预计31.5-36.5亿元</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-601600.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">中国铝业</span>
+                            <span class="stock-code">601600</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">国内铝业龙头，氧化铝自给率高</div>
+                    <div class="stock-data">Q1预增50%-58%</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-688365.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">强一股份</span>
+                            <span class="stock-code">688365</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">MEMS探针卡龙头，AI算力芯片测试核心标的</div>
+                    <div class="stock-data">Q1预增655%-762%</div>
+                </div>
+            </div>
+            
+            <h3 style="color: #a371f7; margin: 20px 0 15px;">🛡️ AI网络安全</h3>
+            <div class="stock-grid">
+                <div class="stock-card" onclick="location.href='stock-002439.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">启明星辰</span>
+                            <span class="stock-code">002439</span>
+                        </div>
+                        <span class="stock-tag tag-s">S级</span>
+                    </div>
+                    <div class="stock-desc">网络安全龙头，中国移动子公司，AI安全产品矩阵完善</div>
+                    <div class="stock-data">Q1预增2279%-3281%</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-300454.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">深信服</span>
+                            <span class="stock-code">300454</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">网络安全+云计算双轮驱动，零信任架构领先</div>
+                    <div class="stock-data">云安全增速&gt;30%</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-688561.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">奇安信</span>
+                            <span class="stock-code">688561</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">政企安全龙头，冬奥网络安全官方服务商</div>
+                    <div class="stock-data">在手订单&gt;150亿元</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-688023.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">安恒信息</span>
+                            <span class="stock-code">688023</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">数据安全龙头，AI安全检测产品落地</div>
+                    <div class="stock-data">数据安全增速&gt;40%</div>
+                </div>
+                <div class="stock-card" onclick="location.href='stock-300369.html'">
+                    <div class="stock-header">
+                        <div>
+                            <span class="stock-name">绿盟科技</span>
+                            <span class="stock-code">300369</span>
+                        </div>
+                        <span class="stock-tag tag-a">A级</span>
+                    </div>
+                    <div class="stock-desc">入侵检测/防御龙头，AI威胁检测技术储备丰富</div>
+                    <div class="stock-data">海外收入占比15%</div>
                 </div>
             </div>
         </div>
@@ -433,33 +526,33 @@
                     <th>验证逻辑</th>
                 </tr>
                 <tr>
-                    <td>4月11日</td>
-                    <td>美伊巴基斯坦首轮谈判</td>
-                    <td>若达成停火框架+霍尔木兹通航恢复，油运紧张缓和</td>
+                    <td>4月14日</td>
+                    <td>霍尔木兹海峡通行情况</td>
+                    <td>若封锁持续，油价维持高位，油运运价继续跳涨</td>
                 </tr>
                 <tr>
-                    <td>4月中下旬</td>
-                    <td>江西锂矿停产换证进度</td>
-                    <td>若4家锂矿确认停产，碳酸锂供应收紧，价格企稳</td>
+                    <td>4月15-30日</td>
+                    <td>一季报密集披露期</td>
+                    <td>若启明星辰、海思科等龙头业绩超预告上限，验证景气度</td>
                 </tr>
                 <tr>
-                    <td>5月9日</td>
-                    <td>腾讯云AI算力涨价落地</td>
-                    <td>若涨价顺利传导，行业定价权转移确认</td>
+                    <td>4月下旬</td>
+                    <td>油运企业Q1财报</td>
+                    <td>若招商轮船、中远海能Q1净利润同比增长&gt;50%，运价传导确认</td>
                 </tr>
                 <tr>
-                    <td>持续关注</td>
-                    <td>Meta/亚马逊 capex 数据</td>
-                    <td>若北美云厂商capex继续上修，算力需求持续强劲</td>
+                    <td>5月前</td>
+                    <td>AI安全专项政策</td>
+                    <td>若工信部/网信办出台AI安全政策，网络安全板块催化</td>
                 </tr>
             </table>
         </div>
         
         <!-- 底部 -->
         <div class="footer">
-            <p>📊 数据更新于：2026年4月10日 08:30</p>
+            <p>📊 数据更新于：2026年4月14日 08:30</p>
             <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
-            <p>🔧 版本：v2.2 | 数据来源：Wind/东方财富/新浪财经</p>
+            <p>🔧 版本：v2.3 | 数据来源：iFinD/东方财富/新浪财经</p>
         </div>
     </div>
 </body>
