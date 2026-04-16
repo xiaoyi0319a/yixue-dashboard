@@ -1431,14 +1431,10 @@
             // 数字顺序：1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
             const numOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             
-            // 值使门落宫的地盘干（取本位，排除寄宫）
-            let zhiShiDiPanGan = diPan[zhiShiGong];
-            // 坤二宫包含寄宫（寄宫"丙"在前，本位"辛"在后），只取后半部分（本位）判断
-            if (zhiShiGong === 2 && zhiShiDiPanGan && zhiShiDiPanGan.length > 1) {
-                zhiShiDiPanGan = zhiShiDiPanGan.slice(1); // 取后半部分（本位）
-            }
+            // 值使门落宫的地盘干
+            const zhiShiDiPanGan = diPan[zhiShiGong];
             
-            // 判断值使门落宫地盘干是否等于起局时辰天干
+            // 判断值使门落宫地盘干是否等于起局时辰天干（严格相等）
             const isSameGan = zhiShiDiPanGan === hourGan;
             
             // 确定时干应该在哪个宫（目标宫）
