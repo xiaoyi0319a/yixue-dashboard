@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羿学交易智囊团 | 2026-04-15</title>
+    <title>羿学交易智囊团 | 2026-04-17</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -53,46 +53,59 @@
             align-items: center;
             gap: 10px;
         }
-        .qimen-trend {
-            background: rgba(255, 107, 107, 0.1);
-            border-left: 4px solid #ff6b6b;
+        .qimen-content {
+            color: #e0e6ed;
+        }
+        .qimen-hexagram {
+            background: rgba(163, 113, 247, 0.1);
+            border-left: 4px solid #a371f7;
             padding: 15px;
             border-radius: 0 10px 10px 0;
             margin: 15px 0;
         }
-        .qimen-trend .trend-title {
-            color: #ff6b6b;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .qimen-hexagram h4 {
+            color: #a371f7;
+            margin-bottom: 8px;
         }
-        .qimen-strategy {
+        .qimen-verdict {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffd700;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .qimen-verdict h4 {
+            color: #ffd700;
+            margin-bottom: 8px;
+        }
+        .qimen-time {
             background: rgba(0, 212, 255, 0.1);
             border-left: 4px solid #00d4ff;
             padding: 15px;
             border-radius: 0 10px 10px 0;
             margin: 15px 0;
         }
-        .qimen-strategy .strategy-title {
+        .qimen-time h4 {
             color: #00d4ff;
-            font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         .qimen-esoteric {
             color: #a371f7;
             font-style: italic;
-            padding: 10px;
+            padding: 15px;
             border-top: 1px dashed #a371f7;
             margin-top: 15px;
             font-size: 0.95em;
+            line-height: 1.8;
         }
-        .qimen-pending {
-            background: rgba(255, 193, 7, 0.1);
-            border: 1px dashed #ffc107;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            color: #ffc107;
+        .qimen-rating {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
+        .rating-neutral { background: rgba(255, 193, 7, 0.2); color: #ffd700; }
         
         /* 方向卡片 */
         .directions-section h2 {
@@ -196,68 +209,6 @@
             background: rgba(255,255,255,0.02);
         }
         
-        /* 个股卡片 */
-        .stocks-section {
-            margin-bottom: 30px;
-        }
-        .stocks-section h2 {
-            color: #00d4ff;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-        .stock-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .stock-card {
-            background: linear-gradient(135deg, #1a2332 0%, #1a2a3a 100%);
-            border: 1px solid #2d3a4f;
-            border-radius: 10px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .stock-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.15);
-            border-color: #00d4ff;
-        }
-        .stock-card .stock-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .stock-card .stock-name {
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        .stock-card .stock-code {
-            color: #8b9dc3;
-            font-size: 0.9em;
-        }
-        .stock-card .stock-tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            font-weight: bold;
-        }
-        .stock-card .tag-s { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
-        .stock-card .tag-a { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
-        .stock-card .stock-desc {
-            color: #b0c4de;
-            font-size: 0.9em;
-            margin-bottom: 8px;
-        }
-        .stock-card .stock-data {
-            color: #8b9dc3;
-            font-size: 0.85em;
-        }
-        
         .footer {
             text-align: center;
             padding: 30px;
@@ -269,6 +220,10 @@
             margin: 5px 0;
             font-size: 0.9em;
         }
+        .footer .update-time {
+            color: #58a6ff;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -276,220 +231,143 @@
         <!-- 头部 -->
         <div class="header">
             <h1>🎯 羿学交易智囊团</h1>
-            <div class="date">2026年4月15日 星期二 | 丙午年 壬辰月 庚申日</div>
+            <div class="date">2026年4月17日 星期五 | 丙午年 壬辰月 辛亥日</div>
         </div>
         
         <!-- 奇门预测 -->
         <div class="qimen-section">
-            <h2>🔮 奇门君今日预测</h2>
-            <div class="qimen-pending">
-                ⏳ 待奇门君起盘分析...<br>
-                <span style="font-size: 0.9em; color: #8b9dc3;">预计09:15左右更新</span>
+            <h2>🔮 奇门君明日预测</h2>
+            <div class="qimen-content">
+                <div class="qimen-rating rating-neutral">★★★☆☆ 中性偏强</div>
+                
+                <div class="qimen-hexagram">
+                    <h4>📊 卦象</h4>
+                    <p>阳遁七局，值符天辅星临巽宫，杜门太阴主收敛蓄势。艮宫生门天任星坐镇，日干辛金得九地之固，价格根基尚稳。</p>
+                </div>
+                
+                <div class="qimen-verdict">
+                    <h4>📜 大势判语</h4>
+                    <p>生门有支撑，死门制资金，比和主震荡，轻仓短线行。</p>
+                </div>
+                
+                <div class="qimen-time">
+                    <h4>⏰ 时辰推演</h4>
+                    <p><strong>巳时（09:00-11:30）</strong>：时干癸水落坤宫临死门，资金犹豫，开盘可能小幅高开或平开，随后震荡。建议开盘后30分钟观察方向。</p>
+                    <p><strong>未时（13:00-15:00）</strong>：未土生辛金，下午或有反弹，但整体仍受时干死门制约，反弹空间有限。</p>
+                </div>
+                
+                <div class="qimen-esoteric">
+                    <strong>玄学解析：</strong>日干辛金落艮八宫，逢生门、天任星、九地，虽旺相为"囚"，但门星神皆吉，主价格有支撑，不易大跌。时干癸水落坤二宫，临死门、天芮星、螣蛇，时机面不佳，资金犹豫、成交缩量。艮坤皆土，土土比和，多空力量均衡，大势以震荡为主，难有单边行情。四害检查：无击刑、无门迫、无入墓，白虎仅临震三宫非主宫，风险可控。
+                </div>
             </div>
         </div>
         
         <!-- 预期差方向 -->
         <div class="directions-section">
-            <h2>📈 今日预期差方向（5个）</h2>
+            <h2>📈 明日预期差方向（6个）</h2>
             <div class="direction-grid">
-                <div class="direction-card hot" onclick="location.href='direction-1-pharma.html'">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>创新药定价机制</h3>
-                    <p>国务院发文件，支持高水平创新药上市初期定高价，保持价格相对稳定。这不是集采杀价，是给创新药定价松绑。市场还在担心集采压制，但政策已转向支持。</p>
-                    <div class="click-hint">点击查看详细分析 →</div>
-                </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>商业航天竞赛</h3>
-                    <p>亚马逊116亿美元收购全球星，要挑战SpaceX的星链。SpaceX也在申请太空数据中心。巨头真金白银砸进来，商业航天从"讲故事"变成"真打仗"。</p>
+                    <h3>6G通信产业链</h3>
+                    <p>工信部明确"加快推进"6G研发，前瞻布局6G网络。5G建设进入尾声，6G成为通信设备新增长点。市场关注5G后周期，6G布局被低估，通信设备股估值处于历史低位。</p>
+                    <div class="click-hint">预期差：政策加速 + 估值低位 →</div>
                 </div>
+                
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>锂矿供应收紧</h3>
-                    <p>宜春四矿换证进展，可能5月进入停产换证阶段。四部门开座谈会要规范动力储能电池竞争秩序。供给端开始收缩，价格反弹可能比预期快。</p>
+                    <h3>跨境电商+海外仓</h3>
+                    <p>商务部等9部门联合发文支持跨境电商出口，推进海外仓建设。美国关税压力下，外贸多元化迫切。市场低估海外仓建设加速，跨境物流成本下降带来利润空间。</p>
+                    <div class="click-hint">预期差：政策力度 + 海外仓REITs化 →</div>
                 </div>
-                <div class="direction-card watch" onclick="location.href='direction-4-fuelcell.html'">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>燃料电池订单潮</h3>
-                    <p>Bloom Energy暴涨23%创历史新高，甲骨文签了2.8GW燃料电池大单。燃料电池在数据中心备用电源领域开始放量，国内供应链可能有映射机会。</p>
-                    <div class="click-hint">点击查看详细分析 →</div>
+                
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>AI算力/智能制造</h3>
+                    <p>工信部推动AI赋能新型工业化，AI+工业化上升为国家战略。智算中心建设加速，制造业AI渗透率仍低（<10%）。国产算力芯片替代空间大，工业软件国产替代加速。</p>
+                    <div class="click-hint">预期差：渗透率提升 + 国产替代 →</div>
                 </div>
+                
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>新能源大基地</h3>
+                    <p>发改委直接点名"加快推进"大型风光基地建设。大基地必配储能，储能配比从10%提升至20%，储能需求爆发。储能成本下降超预期，大基地项目集中开工。</p>
+                    <div class="click-hint">预期差：储能配比提升 + 成本下降 →</div>
+                </div>
+                
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
-                    <h3>金刚石散热</h3>
-                    <p>中科院金刚石/铜散热模组首次在国家超算集群部署，传热能力提升80%。AI芯片功耗越来越高，散热是瓶颈。这是全球首次大规模应用。</p>
+                    <h3>制造业绿色低碳</h3>
+                    <p>国常会审议通过《制造业绿色低碳发展行动方案（2025-2027年）》，钢铁、有色、建材、石化行业绿色改造需求明确，3年行动方案时间窗口确定。</p>
+                    <div class="click-hint">预期差：改造需求 + 时间窗口 →</div>
+                </div>
+                
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>农业强农惠农</h3>
+                    <p>财政部、农业农村部发布2025年重点强农惠农政策，种业振兴政策持续，农机购置补贴延续，粮食安全战略支撑明确。</p>
+                    <div class="click-hint">预期差：政策延续 + 种业振兴 →</div>
                 </div>
             </div>
         </div>
         
-        <!-- 关键验证节点 -->
+        <!-- 验证节点 -->
         <div class="verification-section">
-            <h2>📅 关键验证节点</h2>
+            <h2>📋 关键验证节点</h2>
             <table class="verification-table">
-                <tr>
-                    <th>时间</th>
-                    <th>事件</th>
-                    <th>验证逻辑</th>
-                </tr>
-                <tr>
-                    <td>4月15日</td>
-                    <td>央行5000亿买断式逆回购</td>
-                    <td>流动性宽松信号</td>
-                </tr>
-                <tr>
-                    <td>4月15日</td>
-                    <td>中际旭创一季报提前披露</td>
-                    <td>光模块业绩验证</td>
-                </tr>
-                <tr>
-                    <td>4月28日</td>
-                    <td>长征十号乙首发</td>
-                    <td>商业航天进展</td>
-                </tr>
-                <tr>
-                    <td>5月</td>
-                    <td>宜春四矿停产换证</td>
-                    <td>锂矿供应收缩验证</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>方向</th>
+                        <th>验证时间</th>
+                        <th>验证事件</th>
+                        <th>验证逻辑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>6G通信</td>
+                        <td>2025 Q3</td>
+                        <td>6G标准立项</td>
+                        <td>标准立项启动 → 设备商提前备货</td>
+                    </tr>
+                    <tr>
+                        <td>跨境电商</td>
+                        <td>每月跟踪</td>
+                        <td>海外仓建设面积</td>
+                        <td>建设面积增速 >30% → 景气确认</td>
+                    </tr>
+                    <tr>
+                        <td>AI算力</td>
+                        <td>每月跟踪</td>
+                        <td>智算中心招标</td>
+                        <td>招标量环比提升 → 需求验证</td>
+                    </tr>
+                    <tr>
+                        <td>新能源大基地</td>
+                        <td>能源局月度</td>
+                        <td>大基地项目核准</td>
+                        <td>核准规模超预期 → 装机放量</td>
+                    </tr>
+                    <tr>
+                        <td>制造业绿色低碳</td>
+                        <td>2025 Q2</td>
+                        <td>改造补贴政策落地</td>
+                        <td>补贴细则出台 → 订单启动</td>
+                    </tr>
+                    <tr>
+                        <td>农业强农惠农</td>
+                        <td>2025 Q2</td>
+                        <td>农机补贴目录更新</td>
+                        <td>目录扩容 → 销售旺季</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         
-        <!-- 核心标的 -->
-        <div class="stocks-section">
-            <h2>📊 盘前热点相关标的</h2>
-            
-            <h3 style="color: #ff6b6b; margin: 20px 0 15px;">💊 创新药</h3>
-            <div class="stock-grid">
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">舒泰神</span>
-                            <span class="stock-code">300204</span>
-                        </div>
-                        <span class="stock-tag tag-s">S级</span>
-                    </div>
-                    <div class="stock-desc">创新药龙头，STSP-0601等核心产品快速放量</div>
-                </div>
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">广生堂</span>
-                            <span class="stock-code">300436</span>
-                        </div>
-                        <span class="stock-tag tag-a">A级</span>
-                    </div>
-                    <div class="stock-desc">乙肝创新药GST-HG141临床进展顺利</div>
-                </div>
-            </div>
-            
-            <h3 style="color: #00d4ff; margin: 20px 0 15px;">🚀 商业航天</h3>
-            <div class="stock-grid">
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">航天工程</span>
-                            <span class="stock-code">603698</span>
-                        </div>
-                        <span class="stock-tag tag-s">S级</span>
-                    </div>
-                    <div class="stock-desc">航天科技集团旗下，运载火箭核心配套</div>
-                </div>
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">巨力索具</span>
-                            <span class="stock-code">002342</span>
-                        </div>
-                        <span class="stock-tag tag-a">A级</span>
-                    </div>
-                    <div class="stock-desc">海上发射平台索具供应商</div>
-                </div>
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">西部材料</span>
-                            <span class="stock-code">002149</span>
-                        </div>
-                        <span class="stock-tag tag-a">A级</span>
-                    </div>
-                    <div class="stock-desc">SpaceX供应链，稀有金属复合材料</div>
-                </div>
-            </div>
-            
-            <h3 style="color: #a371f7; margin: 20px 0 15px;">🔋 锂电/燃料电池</h3>
-            <div class="stock-grid">
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">京城股份</span>
-                            <span class="stock-code">600860</span>
-                        </div>
-                        <span class="stock-tag tag-s">S级</span>
-                    </div>
-                    <div class="stock-desc">燃料电池储氢瓶龙头，数据中心备用电源</div>
-                </div>
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">雄韬股份</span>
-                            <span class="stock-code">002733</span>
-                        </div>
-                        <span class="stock-tag tag-a">A级</span>
-                    </div>
-                    <div class="stock-desc">燃料电池系统龙头，数据中心应用</div>
-                </div>
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">潍柴动力</span>
-                            <span class="stock-code">000338</span>
-                        </div>
-                        <span class="stock-tag tag-a">A级</span>
-                    </div>
-                    <div class="stock-desc">燃料电池发动机龙头，大功率路线</div>
-                </div>
-            </div>
-            
-            <h3 style="color: #ffd700; margin: 20px 0 15px;">💎 金刚石散热</h3>
-            <div class="stock-grid">
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">黄河旋风</span>
-                            <span class="stock-code">600172</span>
-                        </div>
-                        <span class="stock-tag tag-s">S级</span>
-                    </div>
-                    <div class="stock-desc">人造金刚石龙头，散热材料核心标的</div>
-                </div>
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">力量钻石</span>
-                            <span class="stock-code">301071</span>
-                        </div>
-                        <span class="stock-tag tag-a">A级</span>
-                    </div>
-                    <div class="stock-desc">培育钻石+金刚石散热双轮驱动</div>
-                </div>
-                <div class="stock-card">
-                    <div class="stock-header">
-                        <div>
-                            <span class="stock-name">四方达</span>
-                            <span class="stock-code">300179</span>
-                        </div>
-                        <span class="stock-tag tag-a">A级</span>
-                    </div>
-                    <div class="stock-desc">超硬材料龙头，CVD金刚石布局</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 底部 -->
+        <!-- 页脚 -->
         <div class="footer">
-            <p>🎯 羿学交易智囊团 | 技术分析 + 奇门遁甲 + 预期差挖掘</p>
-            <p>更新时间：2026-04-15 09:45 | 数据来源：公开市场信息</p>
-            <p style="font-size: 0.85em; margin-top: 10px;">⚠️ 本内容仅供学习交流，不构成投资建议</p>
+            <p>🎯 羿学交易智囊团 | 以技术分析为基础的交易体系</p>
+            <p>⚠️ 本页面内容仅供学习交流，不构成任何投资建议</p>
+            <p class="update-time">📊 数据更新时间：2026-04-16 19:25 | 奇门预测：2026-04-17 盘前</p>
         </div>
     </div>
 </body>
