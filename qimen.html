@@ -1675,6 +1675,9 @@
                 const men = baMen[gongNum] || '';
                 // 修复：同时尝试数字和字符串类型的键
                 const yg = yinGan[gongNum] || yinGan[String(gongNum)] || '';
+                
+                // 调试：输出每个宫的隐干
+                console.log(`renderPan - gongNum:${gongNum}, yg:${yg}, yinGan[${gongNum}]:${yinGan[gongNum]}, yinGan["${gongNum}"]:${yinGan[String(gongNum)]}`);
 
                 // 检测四害
                 const sihai = checkSiHai(gongNum, dpGan, tpGan, men, star, yg);
