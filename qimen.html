@@ -1125,9 +1125,9 @@
                 diPan[gong] = TIANGAN[ganIndex];
             }
 
-            // 中五宫寄坤二宫（寄宫在前，本位在后）
+            // 中五宫寄坤二宫（本位在前，寄宫在后）
             if (diPan[5]) {
-                diPan[2] = diPan[5] + (diPan[2] || ''); // 壬 + 己 = "壬己"
+                diPan[2] = (diPan[2] || '') + diPan[5]; // 辛 + 丙 = "辛丙"
             }
 
             return diPan;
@@ -1431,11 +1431,15 @@
             // 数字顺序：1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
             const numOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             
-            // 值使门落宫的地盘干
-            const zhiShiDiPanGan = diPan[zhiShiGong];
+            // 值使门落宫的地盘干（取本位，排除寄宫）
+            let zhiShiDiPanGan = diPan[zhiShiGong];
+            // 坤二宫可能包含中五寄宫，只取第一个字符（本位）
+            if (zhiShiGong === 2 && zhiShiDiPanGan && zhiShiDiPanGan.length > 1) {
+                zhiShiDiPanGan = zhiShiDiPanGan[0];
+            }
             
             // 判断值使门落宫地盘干是否等于起局时辰天干
-            const isSameGan = zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan);
+            const isSameGan = zhiShiDiPanGan === hourGan;
             
             // 确定时干应该在哪个宫（目标宫）
             const targetGong = isSameGan ? 5 : zhiShiGong;
