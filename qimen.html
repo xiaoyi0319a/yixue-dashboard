@@ -1609,6 +1609,13 @@
 
             // 排隐干（传入旬首和值符落宫以处理甲隐遁和情况一）
             const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang, zhiFuInfo.xunShou, zhiFuInfo.zhiFuGong);
+            
+            // 调试：输出隐干对象
+            console.log('=== 隐干调试 ===');
+            console.log('zhiShiGong:', zhiShiGong, typeof zhiShiGong);
+            console.log('yinGan对象:', JSON.stringify(yinGan));
+            console.log('yinGan[2]:', yinGan[2]);
+            console.log('yinGan["2"]:', yinGan["2"]);
 
             // 马星
             const maXingZhi = MAXING[hour]; // 1-12序号
