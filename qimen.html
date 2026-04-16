@@ -1410,15 +1410,12 @@
             return {baMen, zhiShiGong};
         }
 
-        // 排隐干（V3.62 - 修正：情况一从中五宫开始，天干从时干开始）
+        // 排隐干（V3.80 - 修正：正确计算戊的起始位置，使时干落在目标宫）
         // 规则：
-        // 1. 如果值使门落宫地盘干 = 起局时辰天干（情况一）：
-        //    - 从【中五宫】开始，依九宫数字顺序（1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离）
-        //    - 排天干：从【时干】开始，按戊己庚辛壬癸丁丙乙顺序（阳遁顺排，阴遁逆排）
-        //    - 例：丙辰时，丙在中五宫(序号5)，顺序为：戊7己8庚9辛1壬2癸3丁4丙5乙6
-        // 2. 如果值使门落宫地盘干 ≠ 起局时辰天干（情况二）：
-        //    - 从值使门落宫开始，依九宫数字顺序
-        //    - 排天干：从起局时辰天干开始，按戊己庚辛壬癸丁丙乙顺序
+        // 1. 如果值使门落宫地盘干 = 起局时辰天干（情况一）：时干在中五宫（序号5）
+        // 2. 如果值使门落宫地盘干 ≠ 起局时辰天干（情况二）：时干在值使门落宫
+        // 阳遁顺排：戊→己→庚→辛→壬→癸→丁→丙→乙，按数字顺序1→9
+        // 阴遁逆排：戊→己→庚→辛→壬→癸→丁→丙→乙，按数字顺序9→1
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang, xunShou, zhiFuGong) {
             const yinGan = {};
             let hourGan = hourGanZhi[0]; // 起局时辰的天干
@@ -1428,7 +1425,7 @@
                 hourGan = xunShou.slice(2);
             }
             
-            // 隐干顺序：戊(1)→己(2)→庚(3)→辛(4)→壬(5)→癸(6)→丁(7)→丙(8)→乙(9)
+            // 隐干顺序：戊(0)→己(1)→庚(2)→辛(3)→壬(4)→癸(5)→丁(6)→丙(7)→乙(8)
             const yinGanOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
             
             // 数字顺序：1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
@@ -1440,53 +1437,40 @@
             // 判断值使门落宫地盘干是否等于起局时辰天干
             const isSameGan = zhiShiDiPanGan && zhiShiDiPanGan.includes(hourGan);
             
-            // 调试信息
-            console.log('=== paiYinGan 调试 ===');
-            console.log('zhiShiGong:', zhiShiGong, 'diPan[zhiShiGong]:', zhiShiDiPanGan);
-            console.log('hourGan:', hourGan, 'hourGanZhi:', hourGanZhi);
-            console.log('isSameGan:', isSameGan, 'isYang:', isYang);
+            // 确定时干应该在哪个宫（目标宫）
+            const targetGong = isSameGan ? 5 : zhiShiGong;
             
-            // 确定起始宫位和天干起始索引
-            let startGong;
-            let ganStartIdx;
+            // 时干在yinGanOrder中的索引
+            const hourGanIdx = yinGanOrder.indexOf(hourGan);
             
-            if (isSameGan) {
-                // 情况一：从中五宫开始，天干从时干开始
-                startGong = 5; // 中五宫
-                // 找到时干在yinGanOrder中的位置作为起始
-                ganStartIdx = yinGanOrder.indexOf(hourGan);
+            // 计算戊应该在哪个宫（倒推）
+            // 阳遁：从戊开始顺排到目标宫，正好落在时干
+            // 阴遁：从戊开始逆排到目标宫，正好落在时干
+            let wuGongIdx; // 戊在numOrder中的索引
+            if (isYang) {
+                // 阳遁：目标宫索引 = (戊索引 + 时干索引) % 9
+                // 所以：戊索引 = (目标宫索引 - 时干索引 + 9) % 9
+                wuGongIdx = (numOrder.indexOf(targetGong) - hourGanIdx + 9) % 9;
             } else {
-                // 情况二：从值使门落宫开始，天干从时干开始
-                startGong = zhiShiGong;
-                ganStartIdx = yinGanOrder.indexOf(hourGan);
+                // 阴遁：目标宫索引 = (戊索引 - 时干索引 + 9) % 9
+                // 所以：戊索引 = (目标宫索引 + 时干索引) % 9
+                wuGongIdx = (numOrder.indexOf(targetGong) + hourGanIdx) % 9;
             }
             
-            // 从起始宫位开始，按数字顺序（阳遁1→9，阴遁9→1）排天干
-            const startIdx = numOrder.indexOf(startGong);
-            
-            console.log('startGong:', startGong, 'startIdx:', startIdx, 'ganStartIdx:', ganStartIdx);
-            
+            // 从戊开始排天干
             for (let i = 0; i < 9; i++) {
-                // 确定当前宫序号（数字顺序）
-                let gongNum;
+                let gongIdx;
                 if (isYang) {
                     // 阳遁：数字顺序1→9
-                    const gongIdx = (startIdx + i) % 9;
-                    gongNum = numOrder[gongIdx];
+                    gongIdx = (wuGongIdx + i) % 9;
                 } else {
-                    // 阴遁：数字顺序9→1（从startIdx反向）
-                    const gongIdx = (startIdx - i + 9) % 9;
-                    gongNum = numOrder[gongIdx];
+                    // 阴遁：数字顺序9→1（从戊索引反向）
+                    gongIdx = (wuGongIdx - i + 9) % 9;
                 }
-                
-                // 确定隐干（从ganStartIdx开始）
-                const ganIdx = (ganStartIdx + i) % 9;
-                yinGan[gongNum] = yinGanOrder[ganIdx];
-                
-                console.log(`i=${i}, gongNum=${gongNum}, gan=${yinGanOrder[ganIdx]}`);
+                const gongNum = numOrder[gongIdx];
+                const gan = yinGanOrder[i]; // 从戊(0)开始
+                yinGan[gongNum] = gan;
             }
-            
-            console.log('=== 隐干结果 ===', yinGan);
             
             return yinGan;
         }
