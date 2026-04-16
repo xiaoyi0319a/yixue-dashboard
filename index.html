@@ -87,7 +87,68 @@
         }
         .qimen-time h4 {
             color: #00d4ff;
+            margin-bottom: 12px;
+        }
+        
+        /* 时辰推演 - 手机优化版 */
+        .time-slot {
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        .time-slot:last-child {
+            margin-bottom: 0;
+        }
+        .time-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 8px;
+        }
+        .time-name {
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-width: 45px;
+        }
+        .time-range {
+            color: #8b9dc3;
+            font-size: 0.9em;
+            background: rgba(139, 157, 195, 0.15);
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+        .time-info {
+            color: #b0c4de;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .time-verdict {
+            font-size: 0.95em;
+            font-weight: 500;
+            line-height: 1.5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .time-verdict.up {
+            color: #ffd700;
+            border-left: 3px solid #ffd700;
+        }
+        .time-verdict.down {
+            color: #ff6b6b;
+            border-left: 3px solid #ff6b6b;
+        }
+        .time-verdict.neutral {
+            color: #ffd700;
+            border-left: 3px solid #ffd700;
+        }
+        .time-verdict.stable {
+            color: #00d4ff;
+            border-left: 3px solid #00d4ff;
         }
         .qimen-esoteric {
             color: #a371f7;
@@ -310,32 +371,38 @@
                 
                 <div class="qimen-time">
                     <h4>⏰ 时辰推演</h4>
-                    <table style="width:100%;margin-top:8px;font-size:0.9em;border-collapse:collapse;">
-                        <tr style="border-bottom:1px solid #2d3a4f;">
-                            <td style="padding:8px;color:#00d4ff;width:80px;"><strong>巳时</strong></td>
-                            <td style="padding:8px;color:#8b9dc3;width:100px;">09:30-10:30</td>
-                            <td style="padding:8px;">火旺生土，戊土得助，螣蛇主虚</td>
-                            <td style="padding:8px;color:#ffd700;">开盘或有脉冲，但虚涨，10点后资金退潮</td>
-                        </tr>
-                        <tr style="border-bottom:1px solid #2d3a4f;">
-                            <td style="padding:8px;color:#00d4ff;"><strong>午时</strong></td>
-                            <td style="padding:8px;color:#8b9dc3;">10:30-11:30</td>
-                            <td style="padding:8px;">午火克辛，金气受制</td>
-                            <td style="padding:8px;color:#ff6b6b;">冲高回落，不宜追涨</td>
-                        </tr>
-                        <tr style="border-bottom:1px solid #2d3a4f;">
-                            <td style="padding:8px;color:#00d4ff;"><strong>未时</strong></td>
-                            <td style="padding:8px;color:#8b9dc3;">13:00-14:30</td>
-                            <td style="padding:8px;">未土生辛，支撑渐强</td>
-                            <td style="padding:8px;color:#ffd700;">下午或有企稳，但死门未开，反弹有限</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:8px;color:#00d4ff;"><strong>申时</strong></td>
-                            <td style="padding:8px;color:#8b9dc3;">14:30-15:00</td>
-                            <td style="padding:8px;">金气得助，尾盘守稳</td>
-                            <td style="padding:8px;color:#00d4ff;">尾盘或有小翘，但整体平淡收局</td>
-                        </tr>
-                    </table>
+                    <div class="time-slot">
+                        <div class="time-header">
+                            <span class="time-name">巳时</span>
+                            <span class="time-range">09:30-10:30</span>
+                        </div>
+                        <div class="time-info">火旺生土，戊土得助，螣蛇主虚</div>
+                        <div class="time-verdict up">开盘或有脉冲，但虚涨，10点后资金退潮</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time-header">
+                            <span class="time-name">午时</span>
+                            <span class="time-range">10:30-11:30</span>
+                        </div>
+                        <div class="time-info">午火克辛，金气受制</div>
+                        <div class="time-verdict down">冲高回落，不宜追涨</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time-header">
+                            <span class="time-name">未时</span>
+                            <span class="time-range">13:00-14:30</span>
+                        </div>
+                        <div class="time-info">未土生辛，支撑渐强</div>
+                        <div class="time-verdict neutral">下午或有企稳，但死门未开，反弹有限</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time-header">
+                            <span class="time-name">申时</span>
+                            <span class="time-range">14:30-15:00</span>
+                        </div>
+                        <div class="time-info">金气得助，尾盘守稳</div>
+                        <div class="time-verdict stable">尾盘或有小翘，但整体平淡收局</div>
+                    </div>
                 </div>
                 
                 <div class="qimen-esoteric">
