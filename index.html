@@ -118,7 +118,7 @@
         }
         .direction-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -127,7 +127,6 @@
             border: 1px solid #2d3a4f;
             border-radius: 10px;
             padding: 20px;
-            cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -168,13 +167,57 @@
             line-height: 1.5;
             margin-bottom: 15px;
         }
-        .click-hint {
-            color: #58a6ff;
-            font-size: 0.9em;
+        
+        /* 个股列表 */
+        .stock-list {
+            margin-top: 15px;
+            border-top: 1px dashed #2d3a4f;
+            padding-top: 15px;
+        }
+        .stock-list h4 {
+            color: #00d4ff;
+            font-size: 0.95em;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 5px;
         }
+        .stock-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 0.9em;
+        }
+        .stock-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        .stock-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .stock-name {
+            color: #fff;
+            font-weight: 500;
+        }
+        .stock-code {
+            color: #8b9dc3;
+            font-size: 0.85em;
+        }
+        .stock-tag {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .tag-s { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-a { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
+        .tag-b { background: rgba(139, 157, 195, 0.2); color: #8b9dc3; }
+        .tag-horse { background: rgba(255, 193, 7, 0.2); color: #ffd700; }
         
         /* 验证节点表格 */
         .verification-section {
@@ -269,43 +312,295 @@
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>6G通信产业链</h3>
-                    <p>工信部明确"加快推进"6G研发，前瞻布局6G网络。5G建设进入尾声，6G成为通信设备新增长点。市场关注5G后周期，6G布局被低估，通信设备股估值处于历史低位。</p>
-                    <div class="click-hint">预期差：政策加速 + 估值低位 →</div>
+                    <p>工信部明确"加快推进"6G研发，前瞻布局6G网络。5G建设进入尾声，6G成为通信设备新增长点。市场关注5G后周期，6G布局被低估。</p>
+                    <div class="stock-list">
+                        <h4>📋 重点标的（5只）</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">中兴通讯</span>
+                                <span class="stock-code">000063</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">6G核心设备商</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">光迅科技</span>
+                                <span class="stock-code">002281</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">光模块龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">信维通信</span>
+                                <span class="stock-code">300136</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">射频天线</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">武汉凡谷</span>
+                                <span class="stock-code">002194</span>
+                                <span class="stock-tag tag-horse">🐎黑马</span>
+                            </div>
+                            <span style="color:#ffd700;font-size:0.8em">基站滤波器隐形冠军</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">盛路通信</span>
+                                <span class="stock-code">002446</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">军工+民用天线</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>跨境电商+海外仓</h3>
-                    <p>商务部等9部门联合发文支持跨境电商出口，推进海外仓建设。美国关税压力下，外贸多元化迫切。市场低估海外仓建设加速，跨境物流成本下降带来利润空间。</p>
-                    <div class="click-hint">预期差：政策力度 + 海外仓REITs化 →</div>
+                    <p>商务部等9部门联合发文支持跨境电商出口，推进海外仓建设。美国关税压力下，外贸多元化迫切。市场低估海外仓建设加速。</p>
+                    <div class="stock-list">
+                        <h4>📋 重点标的（5只）</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">顺丰控股</span>
+                                <span class="stock-code">002352</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">国际物流龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">跨境通</span>
+                                <span class="stock-code">002640</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">跨境电商龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">华贸物流</span>
+                                <span class="stock-code">603128</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">跨境物流核心</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">嘉友国际</span>
+                                <span class="stock-code">603871</span>
+                                <span class="stock-tag tag-horse">🐎黑马</span>
+                            </div>
+                            <span style="color:#ffd700;font-size:0.8em">中亚跨境物流龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">东航物流</span>
+                                <span class="stock-code">601156</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">航空货运龙头</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>AI算力/智能制造</h3>
-                    <p>工信部推动AI赋能新型工业化，AI+工业化上升为国家战略。智算中心建设加速，制造业AI渗透率仍低（<10%）。国产算力芯片替代空间大，工业软件国产替代加速。</p>
-                    <div class="click-hint">预期差：渗透率提升 + 国产替代 →</div>
+                    <p>工信部推动AI赋能新型工业化，AI+工业化上升为国家战略。智算中心建设加速，制造业AI渗透率仍低（<10%）。国产算力芯片替代空间大。</p>
+                    <div class="stock-list">
+                        <h4>📋 重点标的（5只）</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">中科曙光</span>
+                                <span class="stock-code">603019</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">国产服务器龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">浪潮信息</span>
+                                <span class="stock-code">000977</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">AI服务器龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">宝信软件</span>
+                                <span class="stock-code">600845</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">工业互联网平台</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">赛意信息</span>
+                                <span class="stock-code">300687</span>
+                                <span class="stock-tag tag-horse">🐎黑马</span>
+                            </div>
+                            <span style="color:#ffd700;font-size:0.8em">智能制造软件龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">能科科技</span>
+                                <span class="stock-code">603859</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">工业软件+数字孪生</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>新能源大基地</h3>
-                    <p>发改委直接点名"加快推进"大型风光基地建设。大基地必配储能，储能配比从10%提升至20%，储能需求爆发。储能成本下降超预期，大基地项目集中开工。</p>
-                    <div class="click-hint">预期差：储能配比提升 + 成本下降 →</div>
+                    <p>发改委直接点名"加快推进"大型风光基地建设。大基地必配储能，储能配比从10%提升至20%，储能需求爆发。储能成本下降超预期。</p>
+                    <div class="stock-list">
+                        <h4>📋 重点标的（5只）</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">宁德时代</span>
+                                <span class="stock-code">300750</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">储能电池龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">阳光电源</span>
+                                <span class="stock-code">300274</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">储能系统龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">隆基绿能</span>
+                                <span class="stock-code">601012</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">光伏组件龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">科华数据</span>
+                                <span class="stock-code">002335</span>
+                                <span class="stock-tag tag-horse">🐎黑马</span>
+                            </div>
+                            <span style="color:#ffd700;font-size:0.8em">储能PCS细分龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">晶澳科技</span>
+                                <span class="stock-code">002459</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">光伏组件龙头</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>制造业绿色低碳</h3>
-                    <p>国常会审议通过《制造业绿色低碳发展行动方案（2025-2027年）》，钢铁、有色、建材、石化行业绿色改造需求明确，3年行动方案时间窗口确定。</p>
-                    <div class="click-hint">预期差：改造需求 + 时间窗口 →</div>
+                    <p>国常会审议通过《制造业绿色低碳发展行动方案（2025-2027年）》，钢铁、有色、建材、石化行业绿色改造需求明确。</p>
+                    <div class="stock-list">
+                        <h4>📋 重点标的（5只）</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">中材国际</span>
+                                <span class="stock-code">600970</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">水泥工程龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">龙净环保</span>
+                                <span class="stock-code">600388</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">大气治理龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">中钢国际</span>
+                                <span class="stock-code">000928</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">钢铁工程龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">凯美特气</span>
+                                <span class="stock-code">002549</span>
+                                <span class="stock-tag tag-horse">🐎黑马</span>
+                            </div>
+                            <span style="color:#ffd700;font-size:0.8em">工业尾气回收+碳捕集</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">雪浪环境</span>
+                                <span class="stock-code">300385</span>
+                                <span class="stock-tag tag-b">B</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">烟气治理龙头</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>农业强农惠农</h3>
-                    <p>财政部、农业农村部发布2025年重点强农惠农政策，种业振兴政策持续，农机购置补贴延续，粮食安全战略支撑明确。</p>
-                    <div class="click-hint">预期差：政策延续 + 种业振兴 →</div>
+                    <p>财政部、农业农村部发布2025年重点强农惠农政策，种业振兴政策持续，农机购置补贴延续。</p>
+                    <div class="stock-list">
+                        <h4>📋 重点标的（5只）</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">隆平高科</span>
+                                <span class="stock-code">000998</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">种业龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">一拖股份</span>
+                                <span class="stock-code">601038</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">拖拉机龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">登海种业</span>
+                                <span class="stock-code">002041</span>
+                                <span class="stock-tag tag-b">B</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">玉米种业龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">中联重科</span>
+                                <span class="stock-code">000157</span>
+                                <span class="stock-tag tag-horse">🐎黑马</span>
+                            </div>
+                            <span style="color:#ffd700;font-size:0.8em">农业机械+工程机械</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">北大荒</span>
+                                <span class="stock-code">600598</span>
+                                <span class="stock-tag tag-b">B</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">粮食种植龙头</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
