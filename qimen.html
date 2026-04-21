@@ -463,6 +463,7 @@
                 <button class="btn-primary" onclick="qiPan()">起盘</button>
                 <button class="btn-secondary" onclick="useNow()">使用当前时间</button>
                 <button class="btn-secondary" onclick="exportPan()">导出盘面</button>
+                <button class="btn-secondary" onclick="exportForXiaoyi()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📋 复制给小羿</button>
             </div>
         </div>
 
@@ -1785,6 +1786,77 @@
             a.download = `奇门排盘_${data.sizhu.day.ganZhi}_${data.sizhu.hour.ganZhi}.txt`;
             a.click();
             URL.revokeObjectURL(url);
+
+            // 同时复制到剪贴板
+            navigator.clipboard.writeText(output).then(() => {
+                alert('盘面数据已导出并复制到剪贴板！可直接粘贴给小羿分析。');
+            }).catch(() => {
+                alert('盘面数据已导出！请手动复制下载文件内容给小羿。');
+            });
+        }
+
+        // 快速导出 - 专供小羿分析用（简洁格式）
+        function exportForXiaoyi() {
+            if (!currentPanData) {
+                alert('请先起盘！');
+                return;
+            }
+
+            const data = currentPanData;
+            const gongNames = {1: '坎一', 2: '坤二', 3: '震三', 4: '巽四',
+                              5: '中五', 6: '乾六', 7: '兑七', 8: '艮八', 9: '离九'};
+
+            let output = `【奇门排盘数据包】\n`;
+            output += `日期: ${data.sizhu.day.ganZhi} ${data.sizhu.hour.ganZhi}\n`;
+            output += `局数: ${data.juInfo.type}${data.juInfo.ju}局\n`;
+            output += `旬首: ${data.zhiFuInfo.xunShou} | 值符: ${data.zhiFuInfo.zhiFuXing} | 值使: ${data.zhiFuInfo.zhiShiMen}\n`;
+            output += `日干: ${data.sizhu.day.gan} | 时干: ${data.sizhu.hour.gan}\n\n`;
+
+            output += `【九宫格】\n`;
+            output += `┌─────────┬─────────┬─────────┐\n`;
+            
+            const positions = [
+                [4, 9, 2],
+                [3, 5, 7],
+                [8, 1, 6]
+            ];
+            
+            positions.forEach(row => {
+                output += `│`;
+                row.forEach(gongNum => {
+                    const tp = data.tianPan[gongNum] || {};
+                    const star = tp.star ? tp.star.substring(0, 2) : '';
+                    const tpGan = tp.gan || '';
+                    const dpGan = data.diPan[gongNum] || '';
+                    const shen = data.baShen[gongNum] ? data.baShen[gongNum].substring(0, 2) : '';
+                    const men = data.baMen[gongNum] ? data.baMen[gongNum].substring(0, 2) : '';
+                    const yg = data.yinGan[gongNum] || data.yinGan[String(gongNum)] || '';
+                    
+                    output += `${gongNames[gongNum]}${shen}${star}${tpGan}${men}${dpGan}${yg}│`;
+                });
+                output += `\n`;
+            });
+            output += `└─────────┴─────────┴─────────┘\n\n`;
+
+            output += `【用神速查】\n`;
+            output += `日干(股价): ${data.sizhu.day.gan} = 查上表位置\n`;
+            output += `时干(时机): ${data.sizhu.hour.gan} = 查上表位置\n`;
+            output += `乙奇(买盘): 乙 = 查上表位置\n`;
+            output += `庚金(卖盘): 庚 = 查上表位置\n`;
+            output += `甲子戊(本金): 戊 = 查上表位置\n`;
+            output += `生门(利润): 查上表位置\n\n`;
+
+            output += `【四害标注】\n`;
+            output += `门迫: 杜门/开门/死门 = 需人工核对\n`;
+            output += `击刑: 天干与地支相刑 = 需人工核对\n`;
+            output += `入墓: 天干入墓库宫 = 需人工核对\n`;
+            output += `白虎: 凶煞临宫 = 需人工核对\n`;
+
+            navigator.clipboard.writeText(output).then(() => {
+                alert('小羿专用数据包已复制到剪贴板！请直接粘贴给小羿。');
+            }).catch(() => {
+                alert('复制失败，请手动复制。');
+            });
         }
     </script>
 </body>
