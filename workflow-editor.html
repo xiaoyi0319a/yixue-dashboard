@@ -882,21 +882,24 @@
             if (!name) return;
             
             const presets = {
+                        const presets = {
                 ztb: {
                     nodes: [
                         { type: 'input', x: 50, y: 50, title: '涨停数据', desc: '接收截图/名单/表格', icon: '📥' },
                         { type: 'task', x: 300, y: 50, title: '任务1：提取逻辑线', desc: '从41只里分6个方向\n生成JSON清单', icon: '⚙️' },
                         { type: 'decision', x: 550, y: 50, title: '等待指令', desc: '回报6条逻辑线\n等待老师下一步', icon: '❓' },
-                        { type: 'task', x: 550, y: 200, title: '任务2：单逻辑线分析', desc: '产业链扩展\n补涨标的筛选', icon: '⚙️' },
-                        { type: 'task', x: 300, y: 200, title: '任务3：合并报告', desc: '跨线性价比排序\n生成完整报告', icon: '⚙️' },
-                        { type: 'output', x: 50, y: 200, title: '完整涨停板梳理', desc: '输出markdown报告', icon: '📤' }
+                        { type: 'task', x: 550, y: 200, title: '任务2：单逻辑线分析', desc: '产业链结构\n方向核心逻辑(200字)\n催化时间线\n持续性评级\n❌不出个股', icon: '⚙️' },
+                        { type: 'decision', x: 300, y: 200, title: '等待指令', desc: '单逻辑线分析完成\n等待老师下一步', icon: '❓' },
+                        { type: 'task', x: 300, y: 350, title: '任务3：合并报告', desc: '跨线按持续性排序\n标注🔥/⭐/👀\n❌不出个股', icon: '⚙️' },
+                        { type: 'output', x: 50, y: 350, title: '完整涨停板梳理', desc: '只出方向逻辑\n不出个股', icon: '📤' }
                     ],
                     connections: [
                         { source: 'node-0', target: 'node-1' },
                         { source: 'node-1', target: 'node-2' },
                         { source: 'node-2', target: 'node-3' },
                         { source: 'node-3', target: 'node-4' },
-                        { source: 'node-4', target: 'node-5' }
+                        { source: 'node-4', target: 'node-5' },
+                        { source: 'node-5', target: 'node-6' }
                     ]
                 },
                 yqc: {
