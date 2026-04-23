@@ -454,8 +454,8 @@
                     <input type="date" id="date">
                 </div>
                 <div class="input-group">
-                    <label>时间（几点几分）</label>
-                    <input type="time" id="time" value="12:00">
+                    <label>时间（交易时间: 09:30/10:30/13:00/14:00）</label>
+                    <input type="time" id="time" value="09:30">
                 </div>
             </div>
 
@@ -1623,7 +1623,7 @@
             const maXingGong = Object.keys(diPan).find(k => DIZHI.indexOf(diPan[k]) + 1 === maXingZhi);
 
             // 保存数据
-            currentPanData = {
+            currentPanData = window.qimenPanData = {
                 sizhu: {year: yearGZ, month: monthGZ, day: dayGZ, hour: hourGZ},
                 jieQi,
                 juInfo,
