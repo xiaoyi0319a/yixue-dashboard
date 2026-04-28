@@ -91,15 +91,6 @@
         .time-verdict.down { color: #ff6b6b; border-left: 3px solid #ff6b6b; }
         .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
         .time-verdict.stable { color: #00d4ff; border-left: 3px solid #00d4ff; }
-        .qimen-esoteric {
-            color: #a371f7;
-            font-style: italic;
-            padding: 15px;
-            border-top: 1px dashed #a371f7;
-            margin-top: 15px;
-            font-size: 0.95em;
-            line-height: 1.8;
-        }
         .directions-section {
             background: #1a2332;
             border: 1px solid #2d3a4f;
@@ -215,6 +206,8 @@
             padding: 20px;
             margin-bottom: 20px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         .ztb-card:hover {
             border-color: #00d4ff;
@@ -259,7 +252,7 @@
             <div class="date">2026年4月28日 星期二 | 丙午年 壬辰月 壬申日</div>
         </div>
         
-        <!-- ========== 任务1：奇门预测区更新 ========== -->
+        <!-- ========== 奇门预测区 ========== -->
         <div class="qimen-section">
             <h2>🔮 奇门君今日预测</h2>
             <div class="qimen-content">
@@ -312,9 +305,9 @@
             </div>
         </div>
         
-        <!-- ========== 涨停板方向整理 ========== -->
-                <div class="ztb-section">
-            <h2>📈 涨停板方向（65只·2026-04-28）</h2>
+        <!-- ========== 涨停板方向整理（4月27日） ========== -->
+        <div class="ztb-section">
+            <h2>📈 涨停板方向（84只·封板率71.79%·2026-04-27）</h2>
             <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>工作流：</strong>涨停板数据 → 方向整理 → 从方向挖掘预期差机会</p>
             
             <div class="ztb-grid">
@@ -322,94 +315,82 @@
                 <!-- 方向1：半导体/国产算力链 -->
                 <div class="ztb-card hot">
                     <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#ff6b6b,#ffd700);"></div>
-                    <h3>🔥 半导体/国产算力链（9只）</h3>
-                    <div class="logic">DeepSeek-V4上线→国产算力生态加速→设备/材料需求激增。科创板20cm集中：帝奥微、华兴源创。</div>
-                    <div class="chain">帝奥微(+20%)→华兴源创(+20%)→豪威集团→格林达→光华科技→天津普林→江海股份→景旺电子→英飞特</div>
+                    <h3>🔥 半导体/国产算力链（12只）</h3>
+                    <div class="logic">DeepSeek-V4适配国产算力+光芯片紧缺+CPU涨价。科创板20cm集中：欧莱新材、芯源微、帝奥微。</div>
+                    <div class="chain">欧莱新材(+20%)→芯源微(+20%)→帝奥微(+20%)→光华科技→格林达→长川科技→富瀚微→金宏气体</div>
                     
                     <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;margin-top:10px;border-left:3px solid #ffd700;">
-                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#ffd700">⭐ 预期差：</strong>汉钟精机（002158）半导体真空泵已进入中芯国际/北方华创供应链，2025年半导体真空泵收入预计翻倍。<strong style="color:#ffd700"> [A+]</strong></p>
-                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#ffd700">⭐ 预期差：</strong>恒运昌（688785）等离子体射频电源系统，2024年中国大陆国产化率不足12%，2026年1月科创板上市。<strong style="color:#ffd700"> [S]</strong></p>
-                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：帝奥微（英伟达认证已兑现）、华兴源创（翻倍已完成）、景旺电子（PCB逻辑已充分认知）</p>
+                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#ffd700">⭐ 预期差：</strong>中际旭创（300308）1.6T光模块龙头，微软追加订单，渗透率或超预期达45%。<strong style="color:#ffd700"> [S]</strong></p>
+                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#ffd700">⭐ 预期差：</strong>源杰科技（688498）光芯片国产替代，海外Lumentum产能售罄两个季度内。<strong style="color:#ffd700"> [S]</strong></p>
+                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：欧莱新材（半导体靶材逻辑已部分定价）、芯源微（两存扩产已定价）</p>
                     </div>
                 </div>
                 
-                <!-- 方向2：电力/能源 -->
+                <!-- 方向2：机器人概念 -->
                 <div class="ztb-card hot">
                     <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#ff6b6b,#ffd700);"></div>
-                    <h3>🔥 电力/能源（5只·连板集中地）</h3>
-                    <div class="logic">能源安全+夏季用电高峰预期。燃气/电力连板集中：水发燃气4连板/华电能源3连板/众合科技3连板。</div>
-                    <div class="chain">水发燃气(4连板)→华电能源(3连板)→华电辽能→德龙汇能→众合科技(3连板)</div>
+                    <h3>🔥 机器人概念（20+只涨停/大涨）</h3>
+                    <div class="logic">国家电网具身智能采购8500台/68亿元+特斯拉Optimus V3年中亮相。多股午后垂直涨停。</div>
+                    <div class="chain">维科技术(+10%)→科森科技(+10%)→申昊科技(+15.94%)→泰坦股份(+10%)→晋拓股份(+10%)→越剑智能(+10%)</div>
                     
                     <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;margin-top:10px;border-left:3px solid #ffd700;">
-                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#ffd700">⭐ 预期差：</strong>南网科技（688248）虚拟电厂+储能双轮驱动，2025Q3营收+25%，新型电力系统建设核心受益者。<strong style="color:#ffd700"> [A+]</strong></p>
-                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#ffd700">⭐ 预期差：</strong>科林电气（603050）智能电网+分布式光伏，2023年净利润2.99亿创历史新高，虚拟电厂平台已落地。<strong style="color:#ffd700"> [A]</strong></p>
-                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：水发燃气（4连板已定价能源安全）、华电能源（夏季用电预期已部分定价）、众合科技（SiC逻辑已部分定价）</p>
+                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#ffd700">⭐ 预期差：</strong>绿的谐波（688017）谐波减速器龙头，特斯拉Optimus+国产链双轮驱动。<strong style="color:#ffd700"> [S]</strong></p>
+                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#ffd700">⭐ 预期差：</strong>兆威机电（003021）灵巧手核心，自由度从12提升到22，微型传动系统需求翻倍。<strong style="color:#ffd700"> [A+]</strong></p>
+                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：维科技术（国家电网采购已部分定价）、科森科技（机器人结构件已定价）</p>
                     </div>
                 </div>
                 
-                <!-- 方向3：化工/新材料 -->
+                <!-- 方向3：消费电子/苹果链 -->
+                <div class="ztb-card hot">
+                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#ff6b6b,#ffd700);"></div>
+                    <h3>🔥 消费电子/苹果链（4只）</h3>
+                    <div class="logic">苹果WWDC预期+立讯精密获超50亿主力资金净流入。立讯精密大涨9.05%创新高。</div>
+                    <div class="chain">立讯精密(+9.05%)→信维通信(+8.81%)→科森科技(+10%)→力鼎光电</div>
+                    
+                    <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;margin-top:10px;border-left:3px solid #ffd700;">
+                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#ffd700">⭐ 预期差：</strong>立讯精密（002475）Vision Pro主力供应商，2025年MR设备营收预计翻倍，PE仅20x。<strong style="color:#ffd700"> [A+]</strong></p>
+                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#ffd700">⭐ 预期差：</strong>歌尔股份（002241）Meta Quest 4核心供应商，VR业务拆分预期。<strong style="color:#ffd700"> [A]</strong></p>
+                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：立讯精密（Vision Pro已部分定价）、科森科技（AR/VR逻辑已部分定价）</p>
+                    </div>
+                </div>
+                
+                <!-- 方向4：化工/PCB/固态电池 -->
                 <div class="ztb-card watch">
                     <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00d4ff,#58a6ff);"></div>
-                    <h3>👀 化工/新材料（5只）</h3>
-                    <div class="logic">新材料国产替代+化工品涨价预期。欧莱新材20cm涨停，专精特新小巨人活跃。</div>
-                    <div class="chain">欧莱新材(+20%)→东方材料→渝三峡A→常青科技→山东玻纤</div>
+                    <h3>👀 化工/PCB/固态电池（2只）</h3>
+                    <div class="logic">光华科技业绩爆发+硫化锂固态电池材料。光华科技Q1营收+64.89%，净利润+63.19%。</div>
+                    <div class="chain">光华科技(+9.98%)→欧莱新材(+20%)</div>
                     
                     <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;margin-top:10px;border-left:3px solid #00d4ff;">
-                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#00d4ff">⭐ 预期差：</strong>彤程新材（603650）光刻胶国产替代龙头，KrF光刻胶已通过中芯国际验证，2025年产能翻倍。<strong style="color:#00d4ff"> [A+]</strong></p>
-                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#00d4ff">⭐ 预期差：</strong>华特气体（688268）电子特气进口替代，中芯国际/长江存储核心供应商，2025年西南基地投产。<strong style="color:#00d4ff"> [A]</strong></p>
-                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：欧莱新材（半导体靶材逻辑已部分定价）、常青科技（固态电池材料预期已定价）</p>
+                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#00d4ff">⭐ 预期差：</strong>光华科技（002741）PCB化学品龙头+固态电池材料双核，硫化锂成本仅为海外竞品13%。<strong style="color:#00d4ff"> [A+]</strong></p>
+                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#00d4ff">⭐ 预期差：</strong>上海洗霸（603200）氧化物电解质差异化路线，与硫化物路线互补。<strong style="color:#00d4ff"> [A]</strong></p>
+                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：光华科技（PCB业绩已定价，固态电池材料待验证）</p>
                     </div>
                 </div>
                 
-                <!-- 方向4：消费电子/苹果链 -->
+                <!-- 方向5：电力/能源 -->
                 <div class="ztb-card watch">
                     <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00d4ff,#58a6ff);"></div>
-                    <h3>👀 消费电子/苹果链（4只）</h3>
-                    <div class="logic">苹果WWDC预期+消费电子复苏。科森科技精密制造、力鼎光电光学镜头、彩虹股份面板活跃。</div>
-                    <div class="chain">科森科技→合力泰→力鼎光电→彩虹股份</div>
+                    <h3>👀 电力/能源（2只）</h3>
+                    <div class="logic">电网4万亿投资+夏季用电高峰。华电能源盘中上演"地天板"，众合科技3连板。</div>
+                    <div class="chain">华电能源(地天板)→众合科技(3连板)</div>
                     
                     <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;margin-top:10px;border-left:3px solid #00d4ff;">
-                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#00d4ff">⭐ 预期差：</strong>立讯精密（002475）苹果Vision Pro主力供应商，2025年MR设备营收预计翻倍，PE仅20x vs 行业35x。<strong style="color:#00d4ff"> [A]</strong></p>
-                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#00d4ff">⭐ 预期差：</strong>歌尔股份（002241）Meta Quest 4核心供应商，声学/光学模组市占率70%，VR业务拆分预期。<strong style="color:#00d4ff"> [A-]</strong></p>
-                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：科森科技（AR/VR逻辑已部分定价）、力鼎光电（光学镜头预期已定价）</p>
-                    </div>
-                </div>
-                
-                <!-- 方向5：消费/服装 -->
-                <div class="ztb-card watch">
-                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00d4ff,#58a6ff);"></div>
-                    <h3>👀 消费/服装（9只·数量多但分散）</h3>
-                    <div class="logic">五一消费旺季预期+服装超跌反弹。高标仅双枪科技2连板，其余首板，持续性存疑。</div>
-                    <div class="chain">双枪科技(2连板)→盛泰集团→东百集团→荣泰健康→春光科技→麒盛科技→科沃斯→七匹狼→红豆股份→报喜鸟</div>
-                    
-                    <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;margin-top:10px;border-left:3px solid #666;">
-                        <p style="font-size:0.85em;color:#8b9dc3;">⚠️ 预期差有限：板块整体缺乏强催化，五一消费预期已被部分定价，无显著黑马标的。</p>
-                    </div>
-                </div>
-                
-                <!-- 方向6：其他活跃方向 -->
-                <div class="ztb-card watch">
-                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00d4ff,#58a6ff);"></div>
-                    <h3>👀 其他活跃方向</h3>
-                    <div class="logic">AI/传媒(杰创智能+20%)、医药(前沿生物+20%)、汽车(江淮华为合作)、锂矿(西藏珠峰2连板)、物流(韵达/飞马)</div>
-                    <div class="chain">杰创智能(+20%)→东方明珠→粤传媒 | 前沿生物(+20%)→广济药业 | 江淮汽车→晋拓 | 西藏珠峰(2连板)→万里石 | 韵达→飞马</div>
-                    
-                    <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;margin-top:10px;border-left:3px solid #00d4ff;">
-                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#00d4ff">⭐ 预期差：</strong>赣锋锂业（002460）阿根廷Cauchari-Olaroz盐湖4万吨产能2025年投产，成本4万/吨 vs 当前锂价8万。<strong style="color:#00d4ff"> [A-]</strong></p>
-                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#00d4ff">⭐ 预期差：</strong>艾迪药业（688488）HIV创新药ACC007已纳入医保，2025年放量预期，出海非洲布局中。<strong style="color:#00d4ff"> [B+]</strong></p>
-                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：西藏珠峰（盐湖提锂逻辑已部分定价）、前沿生物（HIV出海预期已定价）</p>
+                        <p style="font-size:0.85em;color:#b0c4de;"><strong style="color:#00d4ff">⭐ 预期差：</strong>万马股份（002276）超高压绝缘料国内唯一，电网中标额同比+136%。<strong style="color:#00d4ff"> [A]</strong></p>
+                        <p style="font-size:0.85em;color:#b0c4de;margin-top:5px;"><strong style="color:#00d4ff">⭐ 预期差：</strong>南网科技（688248）虚拟电厂+储能双轮驱动，新型电力系统核心受益者。<strong style="color:#00d4ff"> [A-]</strong></p>
+                        <p style="font-size:0.85em;color:#8b9dc3;margin-top:5px;">⚠️ 涨停股参考：华电能源（夏季用电已定价）、众合科技（3连板已充分定价）</p>
                     </div>
                 </div>
             </div>
             
             <!-- 连板天梯 -->
             <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;margin-top:20px;border:1px solid #2d3a4f;">
-                <h3 style="color:#ffd700;font-size:1.1em;margin-bottom:15px;">🏆 连板天梯</h3>
+                <h3 style="color:#ffd700;font-size:1.1em;margin-bottom:15px;">🏆 连板天梯（4月27日）</h3>
                 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;">
                     <div style="text-align:center;background:rgba(255,107,107,0.1);border-radius:8px;padding:12px;border:1px solid rgba(255,107,107,0.3);">
-                        <div style="color:#ff6b6b;font-size:0.85em;font-weight:bold;margin-bottom:5px;">4连板🔥</div>
-                        <div style="color:#fff;font-size:1.1em;">水发燃气</div>
-                        <div style="color:#8b9dc3;font-size:0.8em;">燃气·已充分定价</div>
+                        <div style="color:#ff6b6b;font-size:0.85em;font-weight:bold;margin-bottom:5px;">7连板🔥</div>
+                        <div style="color:#fff;font-size:1.1em;">*ST岩石</div>
+                        <div style="color:#8b9dc3;font-size:0.8em;">ST·已充分定价</div>
                     </div>
                     <div style="text-align:center;background:rgba(255,193,7,0.1);border-radius:8px;padding:12px;border:1px solid rgba(255,193,7,0.3);">
                         <div style="color:#ffd700;font-size:0.85em;font-weight:bold;margin-bottom:5px;">3连板</div>
@@ -419,39 +400,32 @@
                     <div style="text-align:center;background:rgba(255,193,7,0.1);border-radius:8px;padding:12px;border:1px solid rgba(255,193,7,0.3);">
                         <div style="color:#ffd700;font-size:0.85em;font-weight:bold;margin-bottom:5px;">3连板</div>
                         <div style="color:#fff;font-size:1.1em;">华电能源</div>
-                        <div style="color:#8b9dc3;font-size:0.8em;">电力·已部分定价</div>
+                        <div style="color:#8b9dc3;font-size:0.8em;">电力·地天板</div>
                     </div>
                 </div>
-                <p style="color:#8b9dc3;font-size:0.85em;margin-top:15px;">2连板：深圳华强(电子分销) / 双枪科技(消费) / 泰坦股份(纺织机械) / 维科技术(电池) / 西藏珠峰(锂矿·B+) / 联翔股份(软装)</p>
+                <p style="color:#8b9dc3;font-size:0.85em;margin-top:15px;">2连板：深圳华强(电子分销) / 双枪科技(消费) / 泰坦股份(纺织机械) / 维科技术(电池) / 西藏珠峰(锂矿) / 联翔股份(软装)</p>
             </div>
         </div>
-<!-- ========== 任务2：预期差方向卡片更新（周末新闻） ========== -->
+
+        <!-- ========== 预期差方向（Top 15·4月27日驱动） ========== -->
         <div class="directions-section">
-            <h2>📰 预期差方向（6个·周末新闻驱动）</h2>
-            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;">方法论：周末新闻提取→6维度信息差挖掘（催化强度/信息时滞/认知分歧/定价偏差/验证成本/持续周期）→评分定级→大白话润色 | 数据来源：万得新闻+公开渠道</p>
+            <h2>📰 预期差方向（5个·4月27日涨停板驱动）</h2>
+            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;">方法论：涨停板方向整理→产业链横向扩展→预期差深挖→评分定级 | 数据来源：互联网公开信息+iFinD</p>
             <div class="direction-grid">
-                <!-- P1: AI算力/光通信 -->
+                <!-- P1: 半导体/国产算力链 -->
                 <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>AI算力/光通信（S级）</h3>
-                    <p>DeepSeek-V4正式上线并大幅降价（输入0.25元/百万Tokens），百度千帆Day0适配。国产算力生态加速，光模块和上游材料需求爆发。<strong>预期差</strong>：市场关注度高，但上游材料（磷化铟/薄膜铌酸锂）和CPO设备尚未被充分认知。</p>
+                    <span class="tag tag-hot">🔥 S级·重点看</span>
+                    <h3>半导体/国产算力链</h3>
+                    <p>DeepSeek-V4适配国产算力+光芯片紧缺（Lumentum产能售罄）+CPU涨价10-20%。国产算力生态加速，半导体设备/材料需求爆发。<strong>预期差</strong>：光芯片国产替代窗口打开，电子特气需求激增。</p>
                     <div class="stock-list">
-                        <h4>📋 重点标的</h4>
+                        <h4>📋 Top 5 标的</h4>
                         <div class="stock-item">
                             <div class="stock-info">
                                 <span class="stock-name">中际旭创</span>
                                 <span class="stock-code">300308</span>
                                 <span class="stock-tag tag-s">S</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">全球光模块龙头，Q1营收+192%</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">天孚通信</span>
-                                <span class="stock-code">300394</span>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">光器件龙头，1.6T光引擎量产</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">1.6T光模块龙头，微软追加订单</span>
                         </div>
                         <div class="stock-item">
                             <div class="stock-info">
@@ -459,190 +433,181 @@
                                 <span class="stock-code">688498</span>
                                 <span class="stock-tag tag-s">S</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">国内唯一IDM光芯片，50G放量</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">光芯片国产替代，海外产能售罄</span>
                         </div>
                         <div class="stock-item">
                             <div class="stock-info">
-                                <span class="stock-name">罗博特科</span>
-                                <span class="stock-code">300757</span>
-                                <span class="stock-tag tag-horse">黑马</span>
+                                <span class="stock-name">芯源微</span>
+                                <span class="stock-code">688037</span>
+                                <span class="stock-tag tag-a">A</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">CPO封装设备全球寡头，新签6亿订单</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">涂胶显影设备，两存扩产受益</span>
                         </div>
                         <div class="stock-item">
                             <div class="stock-info">
-                                <span class="stock-name">云南锗业</span>
-                                <span class="stock-code">002428</span>
+                                <span class="stock-name">欧莱新材</span>
+                                <span class="stock-code">688530</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">半导体靶材，今日20cm涨停</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">华特气体</span>
+                                <span class="stock-code">688268</span>
                                 <span class="stock-tag tag-horse">黑马</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">国内唯一量产磷化铟衬底，缺口70%+</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">电子特气，氦气涨价受益</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- P2: 资本市场改革 -->
+                <!-- P2: 机器人概念 -->
                 <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>资本市场改革（A级）</h3>
-                    <p>创业板第四套标准启用+REITs扩容（4只商业不动产REITs获批，募资145亿）+重组简易审核首单受理（中微公司）+交易规则修订（盘后固定价格扩展至全部A股）。<strong>预期差</strong>：受益标的市场未完全识别，创投概念和壳资源价值重估。</p>
+                    <span class="tag tag-hot">🔥 A级·重点看</span>
+                    <h3>机器人概念</h3>
+                    <p>国家电网具身智能采购8500台/68亿元+特斯拉Optimus V3年中亮相+零部件快速降本。产业链从发散到收敛，量产确定性标的受益。<strong>预期差</strong>：灵巧手/轻量化等新技术方向尚未被充分认知。</p>
                     <div class="stock-list">
-                        <h4>📋 重点标的</h4>
+                        <h4>📋 Top 5 标的</h4>
                         <div class="stock-item">
                             <div class="stock-info">
-                                <span class="stock-name">国泰海通</span>
-                                <span class="stock-code">601211</span>
+                                <span class="stock-name">绿的谐波</span>
+                                <span class="stock-code">688017</span>
                                 <span class="stock-tag tag-s">S</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">券商龙头，REITs业务领先</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">谐波减速器龙头，Optimus量产</span>
                         </div>
                         <div class="stock-item">
                             <div class="stock-info">
-                                <span class="stock-name">中信建投</span>
-                                <span class="stock-code">601066</span>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">投行龙头，并购重组业务优势</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">鲁信创投</span>
-                                <span class="stock-code">600783</span>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">山东国资创投平台，项目储备丰富</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- P3: 氢能/储能 -->
-                <div class="direction-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>氢能/储能（B+级）</h3>
-                    <p>首个百万方级盐穴储氢示范项目在河南平顶山投产，补齐氢能大规模、低成本储存关键短板，氢能"制—储—输—用"正式迈入产业化新阶段。<strong>预期差</strong>：氢能储运瓶颈突破的意义被市场低估，储氢设备和氢气管网标的未被充分认知。</p>
-                    <div class="stock-list">
-                        <h4>📋 重点标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">雪人股份</span>
-                                <span class="stock-code">002639</span>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">氢燃料电池空压机+液氢装备</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">富瑞特装</span>
-                                <span class="stock-code">300228</span>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">LNG/氢能储运设备，储氢瓶技术</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">京城股份</span>
-                                <span class="stock-code">600860</span>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">氢能储运容器，国资背景</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- P4: 军工/能源安全 -->
-                <div class="direction-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>军工/能源安全（B级）</h3>
-                    <p>美伊和谈与军事打击风险并存，美军或打击伊朗在霍尔木兹海峡一带的军事力量及能源设施。霍尔木兹海峡封锁风险上升。<strong>预期差</strong>：和谈vs军事，结果高度不确定，事件驱动持续性弱。</p>
-                    <div class="stock-list">
-                        <h4>📋 重点标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">中航沈飞</span>
-                                <span class="stock-code">600760</span>
+                                <span class="stock-name">三花智控</span>
+                                <span class="stock-code">002050</span>
                                 <span class="stock-tag tag-s">S</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">战斗机龙头，军工核心资产</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">Tier1龙头，特斯拉深度绑定</span>
                         </div>
                         <div class="stock-item">
                             <div class="stock-info">
-                                <span class="stock-name">中国船舶</span>
-                                <span class="stock-code">600150</span>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">船舶龙头，海军装备受益</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">中曼石油</span>
-                                <span class="stock-code">603619</span>
+                                <span class="stock-name">兆威机电</span>
+                                <span class="stock-code">003021</span>
                                 <span class="stock-tag tag-horse">黑马</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">民营油服，海外油田资产</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">灵巧手核心，自由度提升</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">鸣志电器</span>
+                                <span class="stock-code">603728</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">空心杯电机，降本50%</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">奥比中光</span>
+                                <span class="stock-code">688322</span>
+                                <span class="stock-tag tag-horse">黑马</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">视觉传感器，3D结构光</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- P5: 新能源汽车 -->
-                <div class="direction-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>新能源汽车（B级）</h3>
-                    <p>5月1日起全国施行GB38031-2025《电动汽车用动力蓄电池安全要求》，首次将动力电池"不起火、不爆炸"列为强制性要求。日本EV补贴提升至最高185万日元（约9万元）。<strong>预期差</strong>：电池安全标准提高，固态电池和高安全材料受益，但市场已有部分预期。</p>
+                <!-- P3: 消费电子/苹果链 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 A-级·重点看</span>
+                    <h3>消费电子/苹果链</h3>
+                    <p>苹果WWDC预期+立讯精密获超50亿主力资金净流入+Vision Pro第二代发布在即。<strong>预期差</strong>：MR设备放量速度被市场低估，车载/AR镜头第二曲线。</p>
                     <div class="stock-list">
-                        <h4>📋 重点标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">宁德时代</span>
-                                <span class="stock-code">300750</span>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">电池龙头，固态电池技术领先</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">当升科技</span>
-                                <span class="stock-code">300073</span>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">高镍正极材料，安全性提升受益</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">天赐材料</span>
-                                <span class="stock-code">002709</span>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">电解液龙头，新型锂盐布局</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- P6: 消费电子 -->
-                <div class="direction-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>消费电子（C级）</h3>
-                    <p>华为Pura X Max 4月25日开售即售罄，售价10999元起，各个版本均已断货。折叠屏热度提升。<strong>预期差</strong>：已定价，市场已有预期，持续性弱，不建议追高。</p>
-                    <div class="stock-list">
-                        <h4>📋 重点标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <span class="stock-name">京东方A</span>
-                                <span class="stock-code">000725</span>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">折叠屏面板核心供应商</span>
-                        </div>
+                        <h4>📋 Top 3 标的</h4>
                         <div class="stock-item">
                             <div class="stock-info">
                                 <span class="stock-name">立讯精密</span>
                                 <span class="stock-code">002475</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">Vision Pro主力，获50亿净流入</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">歌尔股份</span>
+                                <span class="stock-code">002241</span>
                                 <span class="stock-tag tag-a">A</span>
                             </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">精密制造龙头，苹果+华为供应链</span>
+                            <span style="color:#8b9dc3;font-size:0.8em">VR业务拆分预期</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">舜宇光学</span>
+                                <span class="stock-code">2382.HK</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">手机/车载/AR镜头</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- P4: 化工/PCB/固态电池 -->
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 B+级·可关注</span>
+                    <h3>化工/PCB/固态电池</h3>
+                    <p>光华科技业绩爆发（Q1营收+64.89%）+硫化锂固态电池材料成本仅为海外竞品13%。<strong>预期差</strong>：PCB化学品国产替代空间+固态电池材料产业化窗口。</p>
+                    <div class="stock-list">
+                        <h4>📋 Top 2 标的</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">光华科技</span>
+                                <span class="stock-code">002741</span>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">PCB龙头+固态电池材料</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">上海洗霸</span>
+                                <span class="stock-code">603200</span>
+                                <span class="stock-tag tag-horse">黑马</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">氧化物电解质差异化路线</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- P5: 电力/能源 -->
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 B级·可关注</span>
+                    <h3>电力/能源</h3>
+                    <p>电网4万亿投资+夏季用电高峰+算电协同纳入新基建。华电能源地天板。<strong>预期差</strong>：虚拟电厂政策2026年落地，超高压绝缘料国产替代。</p>
+                    <div class="stock-list">
+                        <h4>📋 Top 3 标的</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">万马股份</span>
+                                <span class="stock-code">002276</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">超高压绝缘料国内唯一</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">亨通光电</span>
+                                <span class="stock-code">600487</span>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">光纤涨价超150%</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <span class="stock-name">南网科技</span>
+                                <span class="stock-code">688248</span>
+                                <span class="stock-tag tag-horse">黑马</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">虚拟电厂+储能双轮驱动</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <!-- 关键验证节点 -->
         <div class="verification-section">
             <h2>📅 关键验证节点</h2>
@@ -656,29 +621,29 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2026-04-28</td>
-                        <td>光模块龙头Q1财报（中际旭创/新易盛）</td>
-                        <td>若1.6T出货量环比+20%→确认上游材料爆发</td>
+                        <td>2026-05</td>
+                        <td>英伟达财报 / 特斯拉Optimus进展 / 电网中标公告</td>
+                        <td>若1.6T出货量环比+20%→确认光模块爆发；若Optimus产线进展→确认机器人订单</td>
                     </tr>
                     <tr>
-                        <td>2026-04-30</td>
-                        <td>红宝丽Q1财报</td>
-                        <td>若PO装置复产进度超预期→验证成本下降逻辑</td>
+                        <td>2026-05</td>
+                        <td>制冷剂月度价格 / 两存招标公告</td>
+                        <td>若R32价格维持5.95万/吨→确认氟化工利润；若长存长鑫扩产→确认设备材料需求</td>
                     </tr>
                     <tr>
-                        <td>2026-05-15</td>
-                        <td>达仁堂AI项目进展</td>
-                        <td>若AI+中医药项目获实质订单→验证中药AI化</td>
+                        <td>2026-06</td>
+                        <td>光博会 / 苹果WWDC / ASCO数据</td>
+                        <td>若硅光新品发布→确认技术迭代；若iOS 20 AI功能→确认换机潮预期</td>
                     </tr>
                     <tr>
-                        <td>2026-05-07</td>
-                        <td>保变电气股东大会</td>
-                        <td>若集团资产整合议案出现→确认央企整合加速</td>
+                        <td>2026-06</td>
+                        <td>半导体材料展会 / 国资委改革会议</td>
+                        <td>若电子特气国产替代进展→确认材料景气；若央企重组政策→确认资产注入预期</td>
                     </tr>
                     <tr>
-                        <td>2026-05-20</td>
-                        <td>药明康德Q2订单数据</td>
-                        <td>若新增订单环比+15%→确认CXO景气持续</td>
+                        <td>2026-07-08</td>
+                        <td>中报季</td>
+                        <td>各方向业绩验证关键窗口：光模块/机器人/消费电子Q2订单兑现度</td>
                     </tr>
                 </tbody>
             </table>
@@ -687,7 +652,7 @@
         <div class="footer">
             <p>🎯 羿学交易智囊团 | 基于奇门遁甲 + 预期差分析 + 涨停板梳理</p>
             <p>免责声明：本页面所有内容仅供参考，不构成投资建议</p>
-            <p class="update-time">更新时间：2026-04-28 00:30</p>
+            <p class="update-time">更新时间：2026-04-28 10:30</p>
         </div>
     </div>
 </body>
