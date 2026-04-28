@@ -108,9 +108,12 @@
         }
         .direction-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin-bottom: 30px;
+        }
+        @media (max-width: 768px) {
+            .direction-grid { grid-template-columns: 1fr; }
         }
         .direction-card {
             background: #1a2332;
@@ -195,9 +198,12 @@
         }
         .ztb-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .ztb-grid { grid-template-columns: 1fr; }
         }
         .ztb-card {
             background: #1a2332;
@@ -286,11 +292,19 @@
                     </div>
                     <div class="time-slot">
                         <div class="time-header">
-                            <span class="time-name">未时</span>
-                            <span class="time-range">13:00-15:00</span>
+                            <span class="time-name">未时·午盘初</span>
+                            <span class="time-range">13:00-14:00</span>
                         </div>
                         <div class="time-info">己土克癸水,未土燥土克水,继续承压</div>
-                        <div class="time-verdict down">未时土旺克水急,尾盘难改收阴局</div>
+                        <div class="time-verdict down">未时土旺克水急,空方得势难抬头</div>
+                    </div>
+                    <div class="time-slot">
+                        <div class="time-header">
+                            <span class="time-name">未时·午盘末</span>
+                            <span class="time-range">14:00-15:00</span>
+                        </div>
+                        <div class="time-info">未土当令,己土继续克癸水,尾盘弱势难改</div>
+                        <div class="time-verdict down">尾盘土旺水更囚,收阴定局莫强求</div>
                     </div>
                 </div>
         </div>
