@@ -249,6 +249,94 @@
             border-top: 1px solid #2d3a4f;
             margin-top: 30px;
         }
+        .meeting-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .meeting-section h2 {
+            color: #c9a84c;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .meeting-highlight {
+            background: rgba(201, 168, 76, 0.1);
+            border-left: 4px solid #c9a84c;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .meeting-highlight h4 { color: #c9a84c; margin-bottom: 8px; }
+        .meeting-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .meeting-grid { grid-template-columns: 1fr; }
+        }
+        .meeting-card {
+            background: #1a1a1a;
+            border: 1px solid #3a2a1a;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .meeting-card:hover {
+            border-color: #c9a84c;
+            box-shadow: 0 5px 20px rgba(201, 168, 76, 0.15);
+        }
+        .meeting-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c9a84c, #ffd700);
+        }
+        .meeting-card h3 {
+            color: #c9a84c;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .meeting-card .logic {
+            color: #ffd700;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 6px;
+            border-left: 3px solid #ffd700;
+        }
+        .meeting-card .chain {
+            color: #8b9dc3;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .meeting-verdict {
+            color: #e0c090;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .tag-policy {
+            background: rgba(201, 168, 76, 0.2);
+            color: #c9a84c;
+        }
     </style>
 </head>
 <body>
@@ -307,6 +395,126 @@
                         <div class="time-verdict down">尾盘土旺水更囚,收阴定局莫强求</div>
                     </div>
                 </div>
+        </div>
+
+        <!-- ========== 政治局会议深度解读 ========== -->
+        <div class="meeting-section">
+            <h2>🏛️ 政治局会议深度解读 | 2026-04-28</h2>
+            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>会议核心:</strong>"六网"建设首次提出(水网/新型电网/算力网/新一代通信网/城市地下管网/物流网),估算投资7万亿;"深入整治内卷式竞争"置于产业体系首要位置;"全面实施AI+行动";新增"系统应对外部冲击挑战"。</p>
+
+            <div class="meeting-highlight">
+                <h4>📜 一句话判断</h4>
+                <p style="color:#e0c090;font-style:italic;">没有强刺激惊喜,但有调结构明确信号——从"铁公基"到"数智基",从"百花齐放"到"龙头集中"。</p>
+            </div>
+
+            <div class="meeting-grid">
+
+                <!-- 方向1:算力基础设施/AI+ -->
+                <div class="meeting-card">
+                    <h3>🔥 算力基础设施/AI+</h3>
+                    <div class="logic">算力网首次纳入国家基建框架,与AI+形成政策组合拳;7万亿中算力网是核心增量</div>
+                    <div class="chain">国家级算力枢纽→智算中心密集开工→光模块/服务器/液冷/算力租赁→国产算力芯片替代</div>
+                    <div class="meeting-verdict"><strong>预期差:</strong>市场还在炒AI应用概念,底层算力基础设施才是政策确定性的核心。</div>
+                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">润泽科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300442</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">字节第一大IDC,豆包核心算力底座</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中际旭创</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300308</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">1.6T光模块龙头,微软追加订单</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">浪潮信息</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000977</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">AI服务器全球龙头,元脑架构</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中科曙光</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603019</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">超算+智算双龙头,液冷领先</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">网宿科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300017</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">CDN+边缘算力,流量爆发受益</span></div>
+                    </div>
+                </div>
+
+                <!-- 方向2:新型电网/储能 -->
+                <div class="meeting-card">
+                    <h3>🔥 新型电网/储能</h3>
+                    <div class="logic">"新型电网"纳入六网+"十五五"4万亿投资;源网荷储一体化从概念走向国家级基建</div>
+                    <div class="chain">特高压/智能电网/储能建设提速→新能源消纳→算电协同(算力网需要新型电网支撑)</div>
+                    <div class="meeting-verdict"><strong>预期差:</strong>没看到"新型电网"与"算力网"的协同效应——算电协同。</div>
+                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">国电南瑞</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600406</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">电网自动化龙头,换流阀市占率50%</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">思源电气</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002028</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">配网自动化市占率前三,海外订单+45%</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">特变电工</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600089</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">变压器全球龙头,特高压换流变35%</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">许继电气</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000400</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">直流换流阀市占率50%+,柔直领先</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">安科瑞</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300286</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">用户侧能源管理+微电网</span></div>
+                    </div>
+                </div>
+
+                <!-- 方向3:反内卷龙头 -->
+                <div class="meeting-card">
+                    <h3>🔥 反内卷龙头</h3>
+                    <div class="logic">"深入整治内卷式竞争"置于现代化产业体系段落首要位置,政策优先级超预期</div>
+                    <div class="chain">反内卷政策→产能约束/能耗标准提升→中小产能出清→龙头市占率提升+定价权恢复</div>
+                    <div class="meeting-verdict"><strong>预期差:</strong>市场把光伏/锂电当"周期股"定价,但反内卷政策意味着龙头从"价格战受害者"变为"政策受益者"。</div>
+                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">宁德时代</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300750</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">全球锂电龙头,市占率36%+</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">隆基绿能</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601012</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">光伏组件龙头,BC技术领先</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">万华化学</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600309</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">MDI全球龙头,市占率30%+</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">通威股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600438</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">硅料+电池片双龙头,成本最低</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">璞泰来</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603659</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">负极材料龙头,隔膜+涂覆一体化</span></div>
+                    </div>
+                </div>
+
+                <!-- 方向4:城市地下管网/水利 -->
+                <div class="meeting-card">
+                    <h3>👀 城市地下管网/水利</h3>
+                    <div class="logic">"城市地下管网"+"水网"纳入六网;城市更新"里子工程",比房地产更有确定性</div>
+                    <div class="chain">城市更新+管网改造→管材/检测设备/泵阀/智慧城市→专项债重点投向</div>
+                    <div class="meeting-verdict"><strong>预期差:</strong>"水网"首次与"算力网"并列,水利工程从"农业灌溉"升级为"国家水安全"。</div>
+                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">伟星新材</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002372</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">PPR管材龙头,市占率行业第一</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">青龙管业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002457</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">混凝土管道龙头,水利工程核心</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国电建</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601669</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">水利工程EPC龙头,在手订单万亿</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">首创环保</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600008</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">水务运营龙头,管网运维一体化</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">正元地信</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688509</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">地下管网测绘+检测+信息化</span></div>
+                    </div>
+                </div>
+
+                <!-- 方向5:能源安全/油服 -->
+                <div class="meeting-card">
+                    <h3>👀 能源安全/油服</h3>
+                    <div class="logic">新增"系统应对外部冲击挑战",中东局势不确定性;地缘风险溢价未被A股充分定价</div>
+                    <div class="chain">能源安全战略升级→油气增储上产+战略储备+关键矿产自主可控→油服/油运/稀土锂矿</div>
+                    <div class="meeting-verdict"><strong>预期差:</strong>油价上涨对油服利润传导有6-12个月滞后,市场只看到当前油价,没看到未来订单爆发。</div>
+                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中海油服</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601808</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">海上油服龙头,中海油核心供应商</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中远海能</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600026</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">油运龙头,VLCC市占率全球第一</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">海油工程</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600583</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">海洋工程EPCI总包龙头</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国石油</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601857</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">上游油气龙头,战略储备核心</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">广晟有色</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600259</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">稀土龙头,广东国资背景</span></div>
+                    </div>
+                </div>
+
+                <!-- 方向6:通信网络/卫星互联网 -->
+                <div class="meeting-card">
+                    <h3>👀 通信网络/卫星互联网</h3>
+                    <div class="logic">"新一代通信网"纳入六网,从地面5G升级为天地一体化(卫星互联网+6G)</div>
+                    <div class="chain">5G-A/6G部署+卫星互联网组网→基站设备/光模块/卫星制造/运营服务</div>
+                    <div class="meeting-verdict"><strong>预期差:</strong>与"算力网"协同(算力调度需要低时延通信网支撑),卫星互联网是新增增量。</div>
+                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中兴通讯</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000063</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">5G-A/6G设备龙头,全球前三</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">光迅科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002281</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">光模块龙头,800G/1.6T量产</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国卫星</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600118</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">小卫星制造龙头,星网60%研制</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">海格通信</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002465</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">军用通信+卫星导航,北斗终端龙头</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">盛路通信</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002446</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">基站天线+卫星通信终端</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 方向强度评分 -->
+            <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;margin-top:20px;border:1px solid #3a2a1a;">
+                <h3 style="color:#c9a84c;font-size:1.1em;margin-bottom:15px;">📊 方向强度评分(v5.7定级)</h3>
+                <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
+                    <thead><tr style="background:rgba(201,168,76,0.1);"><th style="padding:10px;text-align:left;color:#c9a84c;">方向</th><th style="padding:10px;text-align:center;color:#c9a84c;">逻辑强度</th><th style="padding:10px;text-align:center;color:#c9a84c;">时效新颖</th><th style="padding:10px;text-align:center;color:#c9a84c;">市场矛盾</th><th style="padding:10px;text-align:center;color:#c9a84c;">研报覆盖</th><th style="padding:10px;text-align:center;color:#c9a84c;">总分</th><th style="padding:10px;text-align:center;color:#c9a84c;">定级</th></tr></thead>
+                    <tbody>
+                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">算力基础设施/AI+</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">2</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">19</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">反内卷龙头</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">19</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">新型电网/储能</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">4</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">2</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">18</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">城市地下管网/水利</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">4</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">18</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">能源安全/油服</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">4</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">18</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">通信网络/卫星互联网</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">1</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">15</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- ========== 涨停板方向整理(4月28日60只涨停驱动) ========== -->
