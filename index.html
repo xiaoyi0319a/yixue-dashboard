@@ -92,6 +92,38 @@
         .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
         .time-verdict.stable { color: #00d4ff; border-left: 3px solid #00d4ff; }
         .time-verdict.up { color: #00ff88; border-left: 3px solid #00ff88; }
+        .ztb-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+        }
+        .ztb-section h2 {
+            color: #00d4ff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .news-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .news-section h2 {
+            color: #c9a84c;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .directions-section {
             background: #1a2332;
             border: 1px solid #2d3a4f;
@@ -249,174 +281,146 @@
             </div>
         </div>
 
-        <!-- ========== 预期差方向(4个·2026-04-30新闻+涨停驱动) ========== -->
-        <div class="directions-section">
-            <h2>📰 预期差方向(4个·2026-04-30新闻+涨停驱动)</h2>
-            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>方法论:</strong>新闻提炼v5.7→6维度挖掘→涨停数据验证→评分定级 | 隔夜美股:道指-0.57%，纳指+0.04%，油价冲破100美元</p>
+        <!-- ========== 涨停板方向整理 ========== -->
+        <div class="ztb-section">
+            <h2>📈 涨停板方向整理(4/29)</h2>
+            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>方法论:</strong>涨停池数据→板块集中度分析→三层过滤→评分定级 | 总涨停约95只，20cm涨停4+只</p>
+            
             <div class="direction-grid">
-                <!-- 方向1:算力/AI/数字经济 -->
+                <!-- 涨停方向1:锂矿/锂电 -->
                 <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 31分·重点看</span>
-                    <h3>算力/AI/数字经济</h3>
-                    <p>数字中国峰会开幕+Anthropic估值9000亿美元+科技巨头Q1财报强劲（Amazon+28%，Alphabet+22%，Meta+33%）+数据资源调查token用量增长100倍。四重催化共振。<strong>预期差</strong>:市场担心AI泡沫，但财报季证伪；国内数字中国提供政策兜底。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">莲花控股</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600186</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">算力租赁+业绩高增</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">利通电子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603629</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">算力+英伟达产业链</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">航锦科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000818</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">算力+AI应用</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">华升股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600156</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">算力租赁+2连板</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向2:稀土/钨/战略资源 -->
-                <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 30分·重点看</span>
-                    <h3>稀土/钨/战略资源</h3>
-                    <p>自然资源部宣布找矿突破，稀土/钨/锡等14种矿产储量世界第一；油价Brent$119.5创2022年6月以来新高；特朗普对伊朗海上封锁加剧能源紧张。资源重估+战略价值提升。<strong>预期差</strong>:稀土配额制度下供应刚性+新能源需求弹性，钨矿稀缺性被低估。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">北方稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600111</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">稀土开采龙头</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中国稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000831</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">中重稀土整合平台</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">章源钨业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002378</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">钨矿开采+深加工</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中钨高新</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000657</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">硬质合金龙头</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向3:锂矿/锂电/固态电池 -->
-                <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 30分·重点看</span>
+                    <span class="tag tag-hot">🔥 33分·重点看</span>
                     <h3>锂矿/锂电/固态电池</h3>
-                    <p>锂价周涨2.03%、月涨12.82%；澳洲Greenbushes减产下调全年产量预期；固态电池产业化加速（丰元股份布局固态正极）。13+只涨停，板块指数涨7.28%。<strong>预期差</strong>:市场此前极度悲观，锂价触底+供应收缩形成双击；2026年被视为固态电池元年。</p>
+                    <p>13+只涨停，板块指数涨7.28%。锂价周涨2.03%、月涨12.82%；澳洲Greenbushes减产下调全年产量预期；固态电池产业化加速。</p>
                     <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">永杉锂业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603399</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">锂盐产能扩张</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">永兴材料</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002756</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">云母提锂龙头</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">丰元股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002805</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">磷酸铁锂+固态电池</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">鹏辉能源</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300438</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">固态电池20cm涨停</span>
-                        </div>
+                        <h4>📋 涨停龙头</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">永杉锂业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603399</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">锂盐产能扩张</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">永兴材料</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002756</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">云母提锂龙头</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">丰元股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002805</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">磷酸铁锂+固态电池</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">鹏辉能源</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300438</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">固态电池20cm涨停</span></div>
                     </div>
                 </div>
 
-                <!-- 方向4:一季报业绩（真超预期） -->
+                <!-- 涨停方向2:稀土/钨 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 28分·重点看</span>
+                    <h3>稀土/钨/战略资源</h3>
+                    <p>8+只涨停。稀土涨价持续，钨精矿供应紧张+需求复苏，战略资源重估+地缘政治催化。</p>
+                    <div class="stock-list">
+                        <h4>📋 涨停龙头</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">北方稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600111</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">稀土开采龙头</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000831</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">中重稀土整合平台</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">章源钨业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002378</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">钨矿开采+深加工</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中钨高新</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000657</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">硬质合金龙头</span></div>
+                    </div>
+                </div>
+
+                <!-- 涨停方向3:算力/AI -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 21分·重点看</span>
+                    <h3>算力/AI/数字经济</h3>
+                    <p>8+只涨停。算力租赁+英伟达产业链催化，莲花控股、利通电子等连板。</p>
+                    <div class="stock-list">
+                        <h4>📋 涨停龙头</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">莲花控股</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600186</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">算力租赁+业绩高增</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">利通电子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603629</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">算力+英伟达产业链</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">华升股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600156</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">算力租赁+2连板</span></div>
+                    </div>
+                </div>
+
+                <!-- 涨停方向4:一季报业绩 -->
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 24分·可关注</span>
                     <h3>一季报业绩（真超预期）</h3>
-                    <p>4月30日披露截止，区分"真超预期"与"低基数/非主营"。保留标的特征：Q1净利增长有持续性、主营收入增长、有全年催化（产能/渠道/新产品）。<strong>预期差</strong>:披露期结束但全年逻辑仍在，市场可能错杀真超预期标的。</p>
+                    <p>20+只涨停，分散各行业。需区分"真超预期"vs"低基数/非主营"。</p>
                     <div class="stock-list">
-                        <h4>📋 保留标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">盐津铺子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002847</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">魔芋零食+渠道改革，全年逻辑</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中集集团</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000039</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">集装箱周期复苏</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">宏和科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603256</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">电子布龙头+产能释放</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">金新农</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002548</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">生猪+饲料，周期触底</span>
-                        </div>
+                        <h4>📋 涨停代表</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">盐津铺子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002847</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">魔芋零食+渠道改革</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中集集团</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000039</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">集装箱周期复苏</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">嘉美包装</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002969</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">Q1净利+432%+要约收购</span></div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 方向强度评分 -->
-            <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;margin-top:20px;border:1px solid #2d3a4f;">
-                <h3 style="color:#ffd700;font-size:1.1em;margin-bottom:15px;">📊 方向强度评分</h3>
+        <!-- ========== 新闻方向整理 ========== -->
+        <div class="news-section">
+            <h2>📰 新闻方向整理(4/29-4/30)</h2>
+            <p style="color:#e0c090;margin-bottom:20px;font-size:0.95em;"><strong>方法论:</strong>新闻提炼v5.7→6维度挖掘→评分定级 | 隔夜美股:道指-0.57%，纳指+0.04%，油价冲破100美元</p>
+            
+            <div class="direction-grid">
+                <!-- 新闻方向1:算力/AI/数字经济 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 31分·重点看</span>
+                    <h3>算力/AI/数字经济</h3>
+                    <p>数字中国峰会开幕+Anthropic估值9000亿美元+科技巨头Q1财报强劲（Amazon+28%，Alphabet+22%，Meta+33%）+数据资源调查token用量增长100倍。四重催化共振。</p>
+                    <div class="stock-list">
+                        <h4>📋 核心标的</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">莲花控股</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600186</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">算力租赁+业绩高增</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">利通电子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603629</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">算力+英伟达产业链</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">航锦科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000818</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">算力+AI应用</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">华升股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600156</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">算力租赁+2连板</span></div>
+                    </div>
+                </div>
+
+                <!-- 新闻方向2:稀土/钨/战略资源 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 30分·重点看</span>
+                    <h3>稀土/钨/战略资源</h3>
+                    <p>自然资源部宣布找矿突破，稀土/钨/锡等14种矿产储量世界第一；油价Brent$119.5创2022年6月以来新高；特朗普对伊朗海上封锁加剧能源紧张。资源重估+战略价值提升。</p>
+                    <div class="stock-list">
+                        <h4>📋 核心标的</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">北方稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600111</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">稀土开采龙头</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000831</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">中重稀土整合平台</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">章源钨业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002378</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">钨矿开采+深加工</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中钨高新</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000657</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">硬质合金龙头</span></div>
+                    </div>
+                </div>
+
+                <!-- 新闻方向3:锂矿/锂电/固态电池 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 30分·重点看</span>
+                    <h3>锂矿/锂电/固态电池</h3>
+                    <p>锂价周涨2.03%、月涨12.82%；澳洲Greenbushes减产下调全年产量预期；固态电池产业化加速（丰元股份布局固态正极）。13+只涨停，板块指数涨7.28%。</p>
+                    <div class="stock-list">
+                        <h4>📋 核心标的</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">永杉锂业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603399</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">锂盐产能扩张</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">永兴材料</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002756</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">云母提锂龙头</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">丰元股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002805</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">磷酸铁锂+固态电池</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">鹏辉能源</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300438</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">固态电池20cm涨停</span></div>
+                    </div>
+                </div>
+
+                <!-- 新闻方向4:一季报业绩 -->
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 24分·可关注</span>
+                    <h3>一季报业绩（真超预期）</h3>
+                    <p>4月30日披露截止，区分"真超预期"与"低基数/非主营"。保留标的特征：Q1净利增长有持续性、主营收入增长、有全年催化。</p>
+                    <div class="stock-list">
+                        <h4>📋 保留标的</h4>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">盐津铺子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002847</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">魔芋零食+渠道改革，全年逻辑</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中集集团</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000039</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">集装箱周期复苏</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">宏和科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603256</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">电子布龙头+产能释放</span></div>
+                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">金新农</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002548</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">生猪+饲料，周期触底</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 综合预期差方向 ========== -->
+        <div class="directions-section">
+            <h2>🎯 综合预期差方向(合并定级·4/30)</h2>
+            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>方法论:</strong>涨停板方向+新闻方向→多源交叉验证→合并评分→最终定级</p>
+            
+            <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;border:1px solid #2d3a4f;">
+                <h3 style="color:#ffd700;font-size:1.1em;margin-bottom:15px;">📊 最终定级</h3>
                 <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
-                    <thead><tr style="background:rgba(0,212,255,0.1);"><th style="padding:10px;text-align:left;color:#00d4ff;">方向</th><th style="padding:10px;text-align:center;color:#00d4ff;">逻辑强度</th><th style="padding:10px;text-align:center;color:#00d4ff;">时效新颖</th><th style="padding:10px;text-align:center;color:#00d4ff;">市场矛盾</th><th style="padding:10px;text-align:center;color:#00d4ff;">反应程度</th><th style="padding:10px;text-align:center;color:#00d4ff;">总分</th><th style="padding:10px;text-align:center;color:#00d4ff;">评级</th></tr></thead>
+                    <thead><tr style="background:rgba(0,212,255,0.1);"><th style="padding:10px;text-align:left;color:#00d4ff;">方向</th><th style="padding:10px;text-align:center;color:#00d4ff;">涨停分</th><th style="padding:10px;text-align:center;color:#00d4ff;">新闻分</th><th style="padding:10px;text-align:center;color:#00d4ff;">总分</th><th style="padding:10px;text-align:center;color:#00d4ff;">评级</th></tr></thead>
                     <tbody>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">算力/AI/数字经济</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">9</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">9</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">31</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">稀土/钨/战略资源</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">8</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">8</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">30</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">锂矿/锂电/固态电池</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">8</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">9</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">30</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">一季报业绩（真超预期）</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ffd700;font-weight:bold;">24</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">算力/AI/数字经济</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">21</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">31</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">31</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">稀土/钨/战略资源</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">28</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">30</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">30</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">锂矿/锂电/固态电池</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">33</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">30</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">33</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">一季报业绩（真超预期）</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">24</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">24</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ffd700;font-weight:bold;">24</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -434,36 +438,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>2026-05</td>
-                        <td>碳酸锂价格能否突破12万元/吨</td>
-                        <td>若突破→确认锂价反弹趋势确立，锂矿股业绩修复加速</td>
-                    </tr>
-                    <tr>
-                        <td>2026-05</td>
-                        <td>澳洲Greenbushes减产幅度扩大</td>
-                        <td>若减产超预期→供应端收缩确认，锂矿供需拐点</td>
-                    </tr>
-                    <tr>
-                        <td>2026-05</td>
-                        <td>固态电池企业订单/产能进展</td>
-                        <td>若产业化加速→2026固态电池元年逻辑验证</td>
-                    </tr>
-                    <tr>
-                        <td>2026-05</td>
-                        <td>稀土氧化物价格指数走势</td>
-                        <td>若持续上涨→稀土配额制度下供需缺口扩大</td>
-                    </tr>
-                    <tr>
-                        <td>2026-05</td>
-                        <td>各地智算中心建设进度</td>
-                        <td>若密集开工→算力需求从预期走向兑现</td>
-                    </tr>
-                    <tr>
-                        <td>2026-05</td>
-                        <td>Anthropic 9000亿估值融资落地</td>
-                        <td>若融资完成→AI基础设施需求爆发确认</td>
-                    </tr>
+                    <tr><td>2026-05</td><td>碳酸锂价格能否突破12万元/吨</td><td>若突破→确认锂价反弹趋势确立，锂矿股业绩修复加速</td></tr>
+                    <tr><td>2026-05</td><td>澳洲Greenbushes减产幅度扩大</td><td>若减产超预期→供应端收缩确认，锂矿供需拐点</td></tr>
+                    <tr><td>2026-05</td><td>固态电池企业订单/产能进展</td><td>若产业化加速→2026固态电池元年逻辑验证</td></tr>
+                    <tr><td>2026-05</td><td>稀土氧化物价格指数走势</td><td>若持续上涨→稀土配额制度下供需缺口扩大</td></tr>
+                    <tr><td>2026-05</td><td>各地智算中心建设进度</td><td>若密集开工→算力需求从预期走向兑现</td></tr>
+                    <tr><td>2026-05</td><td>Anthropic 9000亿估值融资落地</td><td>若融资完成→AI基础设施需求爆发确认</td></tr>
                 </tbody>
             </table>
         </div>
@@ -471,7 +451,7 @@
         <div class="footer">
             <p>🎯 羿学交易智囊团 | 基于奇门遁甲 + 预期差分析 + 涨停板梳理</p>
             <p>免责声明:本页面所有内容仅供参考,不构成投资建议</p>
-            <p class="update-time">更新时间:2026-04-30 08:20</p>
+            <p class="update-time">更新时间:2026-04-30 09:55</p>
         </div>
     </div>
 </body>
