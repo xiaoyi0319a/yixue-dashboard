@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羿学交易智囊团 | 2026-04-29</title>
+    <title>🎯 羿学交易智囊团 | 2026-04-30</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -91,6 +91,7 @@
         .time-verdict.down { color: #ff6b6b; border-left: 3px solid #ff6b6b; }
         .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
         .time-verdict.stable { color: #00d4ff; border-left: 3px solid #00d4ff; }
+        .time-verdict.up { color: #00ff88; border-left: 3px solid #00ff88; }
         .directions-section {
             background: #1a2332;
             border: 1px solid #2d3a4f;
@@ -98,7 +99,7 @@
             padding: 25px;
             margin-bottom: 30px;
         }
-        .directions-section h2, .ztb-section h2 {
+        .directions-section h2 {
             color: #ffd700;
             font-size: 1.5em;
             margin-bottom: 20px;
@@ -108,7 +109,7 @@
         }
         .direction-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -188,60 +189,6 @@
             font-weight: 600;
         }
         .verification-table td { padding: 12px; border-bottom: 1px solid #2d3a4f; color: #b0c4de; }
-        .ztb-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #00d4ff;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-        }
-        .ztb-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        @media (max-width: 768px) {
-            .ztb-grid { grid-template-columns: 1fr; }
-        }
-        .ztb-card {
-            background: #1a2332;
-            border: 1px solid #2d3a4f;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .ztb-card:hover {
-            border-color: #00d4ff;
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
-        }
-        .ztb-card h3 {
-            color: #00d4ff;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ztb-card .logic {
-            color: #ffd700;
-            font-size: 0.95em;
-            margin-bottom: 12px;
-            padding: 8px 12px;
-            background: rgba(255, 193, 7, 0.1);
-            border-radius: 6px;
-            border-left: 3px solid #ffd700;
-        }
-        .ztb-card .chain {
-            color: #8b9dc3;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
         .footer {
             text-align: center;
             padding: 30px;
@@ -249,101 +196,13 @@
             border-top: 1px solid #2d3a4f;
             margin-top: 30px;
         }
-        .meeting-section {
-            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
-            border: 2px solid #c9a84c;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
-        }
-        .meeting-section h2 {
-            color: #c9a84c;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .meeting-highlight {
-            background: rgba(201, 168, 76, 0.1);
-            border-left: 4px solid #c9a84c;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 15px 0;
-        }
-        .meeting-highlight h4 { color: #c9a84c; margin-bottom: 8px; }
-        .meeting-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        @media (max-width: 768px) {
-            .meeting-grid { grid-template-columns: 1fr; }
-        }
-        .meeting-card {
-            background: #1a1a1a;
-            border: 1px solid #3a2a1a;
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .meeting-card:hover {
-            border-color: #c9a84c;
-            box-shadow: 0 5px 20px rgba(201, 168, 76, 0.15);
-        }
-        .meeting-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #c9a84c, #ffd700);
-        }
-        .meeting-card h3 {
-            color: #c9a84c;
-            font-size: 1.15em;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .meeting-card .logic {
-            color: #ffd700;
-            font-size: 0.95em;
-            margin-bottom: 10px;
-            padding: 8px 12px;
-            background: rgba(255, 193, 7, 0.1);
-            border-radius: 6px;
-            border-left: 3px solid #ffd700;
-        }
-        .meeting-card .chain {
-            color: #8b9dc3;
-            font-size: 0.9em;
-            margin-bottom: 12px;
-            font-style: italic;
-        }
-        .meeting-verdict {
-            color: #e0c090;
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-        .tag-policy {
-            background: rgba(201, 168, 76, 0.2);
-            color: #c9a84c;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🎯 羿学交易智囊团</h1>
-            <div class="date">2026年4月29日 星期三 | 丙午年 壬辰月 癸酉日</div>
+            <div class="date">2026年4月30日 星期四 | 丙午年 壬辰月 甲戌日</div>
         </div>
 
         <!-- ========== 奇门预测区 ========== -->
@@ -352,12 +211,12 @@
             <div class="qimen-content">
                 <div class="qimen-hexagram">
                     <h4>📊 卦象</h4>
-                    <p><strong>"癸值艮宫丁来冲,螣蛇夭矫事难通;白虎猖狂坎宫里,惊恐破败震长空。庚金帝旺兑宫坐,玄武助势卖盘凶;乙奇入墓巽无力,多方欲动势不能。丁巳火旺时干旺,伤门争斗午未崩;今日大势偏弱势,振幅较大收阴容。"</strong></p>
+                    <p><strong>"甲戌阳遁八局起，天任值符临离宫；戊己伤门贵人狱，青龙华盖艮八逢。乙奇日干同宫旺，玄武开门暗中涌；庚金白虎坎一惧，卖盘泄气势难凶。离火生土时干助，收阳概率占上风。"</strong></p>
                 </div>
 
                 <div class="qimen-verdict">
                     <h4>📜 大势判语</h4>
-                    <p style="color:#c8a8ff;font-style:italic;">谷雨下元阳遁2局,癸酉日丁巳时。值符天柱破军落艮八,主大势有托而不稳;螣蛇夭矫癸丁冲,阴阳交战多方内耗。白虎猖狂辛乙惊门坎宫,大波动惊恐破败之象;庚金帝旺玄武兑七,空方暗藏杀机势凶。乙奇归巽入墓,买盘欲举而力不能;生门虽吉门迫在坎,利润预期受阻。丁巳火旺时干有力,然伤门主争斗,六合合中带克,冲高后必回落。今日四重凶格并现,收阴概率占上风。</p>
+                    <p style="color:#c8a8ff;font-style:italic;">谷雨下元阳遁8局，甲戌日己巳时。值符天任落离九，大势有护佑；然戊+己贵人入狱，暗中获利回吐压力。青龙华盖乙+戊，日干、乙奇、甲子戊三宫合一，买盘力量充沛。庚金白虎虽在坎宫，但金生水泄，卖盘力量受限。离火生艮土，时干生日干，时机有利。今日无凶格并现，多方占优，收阳概率高。</p>
                 </div>
 
                 <div class="qimen-time">
@@ -367,240 +226,183 @@
                             <span class="time-name">巳时</span>
                             <span class="time-range">09:30-11:00</span>
                         </div>
-                        <div class="time-info">丁火旺相,可能小幅冲高,但伤门争斗,冲高后回落</div>
-                        <div class="time-verdict down">火旺相冲高莫追,伤门争斗终回落</div>
+                        <div class="time-info">己火旺相，与日干甲合（甲己合化土），开盘有托，可能小幅冲高后震荡整固</div>
+                        <div class="time-verdict up">巳时火旺土生金，开盘有托势不空</div>
                     </div>
                     <div class="time-slot">
                         <div class="time-header">
                             <span class="time-name">午时</span>
                             <span class="time-range">11:00-13:00</span>
                         </div>
-                        <div class="time-info">戊土克癸水,午火旺相,空方力量增强</div>
-                        <div class="time-verdict down">午火土旺克日干,空方得令主下跌</div>
+                        <div class="time-info">午火旺相生艮土，庚金透出但有午火克制，盘中强势震荡，多方占优</div>
+                        <div class="time-verdict up">午火土旺生金急，盘中震荡多方依</div>
                     </div>
                     <div class="time-slot">
                         <div class="time-header">
-                            <span class="time-name">未时·午盘初</span>
-                            <span class="time-range">13:00-14:00</span>
+                            <span class="time-name">未时</span>
+                            <span class="time-range">13:00-15:00</span>
                         </div>
-                        <div class="time-info">己土克癸水,未土燥土克水,继续承压</div>
-                        <div class="time-verdict down">未时土旺克水急,空方得势难抬头</div>
-                    </div>
-                    <div class="time-slot">
-                        <div class="time-header">
-                            <span class="time-name">未时·午盘末</span>
-                            <span class="time-range">14:00-15:00</span>
-                        </div>
-                        <div class="time-info">未土当令,己土继续克癸水,尾盘弱势难改</div>
-                        <div class="time-verdict down">尾盘土旺水更囚,收阴定局莫强求</div>
+                        <div class="time-info">未土助艮宫，辛未与日干甲戌无冲克，下午盘稳中带强，尾盘或收小阳</div>
+                        <div class="time-verdict up">未时土旺水更休，收阳定局势难忧</div>
                     </div>
                 </div>
-        </div>
-
-        <!-- ========== 政治局会议深度解读 ========== -->
-        <div class="meeting-section">
-            <h2>🏛️ 政治局会议深度解读 | 2026-04-28</h2>
-            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>会议核心:</strong>"六网"建设首次提出(水网/新型电网/算力网/新一代通信网/城市地下管网/物流网),估算投资7万亿;"深入整治内卷式竞争"置于产业体系首要位置;"全面实施AI+行动";新增"系统应对外部冲击挑战"。</p>
-
-            <div class="meeting-highlight">
-                <h4>📜 一句话判断</h4>
-                <p style="color:#e0c090;font-style:italic;">没有强刺激惊喜,但有调结构明确信号——从"铁公基"到"数智基",从"百花齐放"到"龙头集中"。</p>
-            </div>
-
-            <div class="meeting-grid">
-
-                <!-- 方向1:算力基础设施/AI+ -->
-                <div class="meeting-card">
-                    <h3>🔥 算力基础设施/AI+</h3>
-                    <div class="logic">算力网首次纳入国家基建框架,与AI+形成政策组合拳;7万亿中算力网是核心增量</div>
-                    <div class="chain">国家级算力枢纽→智算中心密集开工→光模块/服务器/液冷/算力租赁→国产算力芯片替代</div>
-                    <div class="meeting-verdict"><strong>预期差:</strong>市场还在炒AI应用概念,底层算力基础设施才是政策确定性的核心。</div>
-                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">润泽科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300442</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">字节第一大IDC,豆包核心算力底座</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中际旭创</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300308</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">1.6T光模块龙头,微软追加订单</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">浪潮信息</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000977</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">AI服务器全球龙头,元脑架构</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中科曙光</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603019</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">超算+智算双龙头,液冷领先</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">网宿科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300017</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">CDN+边缘算力,流量爆发受益</span></div>
-                    </div>
-                </div>
-
-                <!-- 方向2:新型电网/储能 -->
-                <div class="meeting-card">
-                    <h3>🔥 新型电网/储能</h3>
-                    <div class="logic">"新型电网"纳入六网+"十五五"4万亿投资;源网荷储一体化从概念走向国家级基建</div>
-                    <div class="chain">特高压/智能电网/储能建设提速→新能源消纳→算电协同(算力网需要新型电网支撑)</div>
-                    <div class="meeting-verdict"><strong>预期差:</strong>没看到"新型电网"与"算力网"的协同效应——算电协同。</div>
-                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">国电南瑞</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600406</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">电网自动化龙头,换流阀市占率50%</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">思源电气</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002028</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">配网自动化市占率前三,海外订单+45%</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">特变电工</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600089</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">变压器全球龙头,特高压换流变35%</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">许继电气</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000400</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">直流换流阀市占率50%+,柔直领先</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">安科瑞</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300286</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">用户侧能源管理+微电网</span></div>
-                    </div>
-                </div>
-
-                <!-- 方向3:反内卷龙头 -->
-                <div class="meeting-card">
-                    <h3>🔥 反内卷龙头</h3>
-                    <div class="logic">"深入整治内卷式竞争"置于现代化产业体系段落首要位置,政策优先级超预期</div>
-                    <div class="chain">反内卷政策→产能约束/能耗标准提升→中小产能出清→龙头市占率提升+定价权恢复</div>
-                    <div class="meeting-verdict"><strong>预期差:</strong>市场把光伏/锂电当"周期股"定价,但反内卷政策意味着龙头从"价格战受害者"变为"政策受益者"。</div>
-                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">宁德时代</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300750</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">全球锂电龙头,市占率36%+</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">隆基绿能</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601012</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">光伏组件龙头,BC技术领先</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">万华化学</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600309</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">MDI全球龙头,市占率30%+</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">通威股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600438</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">硅料+电池片双龙头,成本最低</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">璞泰来</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603659</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">负极材料龙头,隔膜+涂覆一体化</span></div>
-                    </div>
-                </div>
-
-                <!-- 方向4:城市地下管网/水利 -->
-                <div class="meeting-card">
-                    <h3>👀 城市地下管网/水利</h3>
-                    <div class="logic">"城市地下管网"+"水网"纳入六网;城市更新"里子工程",比房地产更有确定性</div>
-                    <div class="chain">城市更新+管网改造→管材/检测设备/泵阀/智慧城市→专项债重点投向</div>
-                    <div class="meeting-verdict"><strong>预期差:</strong>"水网"首次与"算力网"并列,水利工程从"农业灌溉"升级为"国家水安全"。</div>
-                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">伟星新材</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002372</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">PPR管材龙头,市占率行业第一</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">青龙管业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002457</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">混凝土管道龙头,水利工程核心</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国电建</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601669</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">水利工程EPC龙头,在手订单万亿</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">首创环保</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600008</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">水务运营龙头,管网运维一体化</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">正元地信</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688509</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">地下管网测绘+检测+信息化</span></div>
-                    </div>
-                </div>
-
-                <!-- 方向5:能源安全/油服 -->
-                <div class="meeting-card">
-                    <h3>👀 能源安全/油服</h3>
-                    <div class="logic">新增"系统应对外部冲击挑战",中东局势不确定性;地缘风险溢价未被A股充分定价</div>
-                    <div class="chain">能源安全战略升级→油气增储上产+战略储备+关键矿产自主可控→油服/油运/稀土锂矿</div>
-                    <div class="meeting-verdict"><strong>预期差:</strong>油价上涨对油服利润传导有6-12个月滞后,市场只看到当前油价,没看到未来订单爆发。</div>
-                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中海油服</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601808</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">海上油服龙头,中海油核心供应商</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中远海能</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600026</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">油运龙头,VLCC市占率全球第一</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">海油工程</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600583</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">海洋工程EPCI总包龙头</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国石油</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601857</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">上游油气龙头,战略储备核心</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">广晟有色</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600259</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">稀土龙头,广东国资背景</span></div>
-                    </div>
-                </div>
-
-                <!-- 方向6:通信网络/卫星互联网 -->
-                <div class="meeting-card">
-                    <h3>👀 通信网络/卫星互联网</h3>
-                    <div class="logic">"新一代通信网"纳入六网,从地面5G升级为天地一体化(卫星互联网+6G)</div>
-                    <div class="chain">5G-A/6G部署+卫星互联网组网→基站设备/光模块/卫星制造/运营服务</div>
-                    <div class="meeting-verdict"><strong>预期差:</strong>与"算力网"协同(算力调度需要低时延通信网支撑),卫星互联网是新增增量。</div>
-                    <div class="stock-list" style="border-top:1px dashed #3a2a1a;padding-top:12px;">
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中兴通讯</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000063</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">5G-A/6G设备龙头,全球前三</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">光迅科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002281</div></div><span class="stock-tag tag-policy">S</span></div><span style="color:#8b9dc3;font-size:0.8em">光模块龙头,800G/1.6T量产</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国卫星</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600118</div></div><span class="stock-tag tag-policy">A</span></div><span style="color:#8b9dc3;font-size:0.8em">小卫星制造龙头,星网60%研制</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">海格通信</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002465</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">军用通信+卫星导航,北斗终端龙头</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">盛路通信</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002446</div></div><span class="stock-tag tag-policy">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">基站天线+卫星通信终端</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 方向强度评分 -->
-            <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;margin-top:20px;border:1px solid #3a2a1a;">
-                <h3 style="color:#c9a84c;font-size:1.1em;margin-bottom:15px;">📊 方向强度评分(v5.7定级)</h3>
-                <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
-                    <thead><tr style="background:rgba(201,168,76,0.1);"><th style="padding:10px;text-align:left;color:#c9a84c;">方向</th><th style="padding:10px;text-align:center;color:#c9a84c;">逻辑强度</th><th style="padding:10px;text-align:center;color:#c9a84c;">时效新颖</th><th style="padding:10px;text-align:center;color:#c9a84c;">市场矛盾</th><th style="padding:10px;text-align:center;color:#c9a84c;">研报覆盖</th><th style="padding:10px;text-align:center;color:#c9a84c;">总分</th><th style="padding:10px;text-align:center;color:#c9a84c;">定级</th></tr></thead>
-                    <tbody>
-                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">算力基础设施/AI+</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">2</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">19</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">反内卷龙头</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">19</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">新型电网/储能</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">4</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">2</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">18</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">城市地下管网/水利</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">4</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">18</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">能源安全/油服</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">4</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">18</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #3a2a1a;">通信网络/卫星互联网</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">3</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;">1</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;color:#ffd700;font-weight:bold;">15</td><td style="padding:10px;border-bottom:1px solid #3a2a1a;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
-                    </tbody>
-                </table>
             </div>
         </div>
 
-        <!-- ========== 涨停板方向整理(4月28日60只涨停驱动) ========== -->
-        <div class="ztb-section">
-            <h2>📈 涨停板方向整理(5方向·60只涨停驱动)</h2>
-            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>方法论:</strong>涨停板数据 → 方向归纳 → 预期差深挖 → 评分定级 → 未涨停补涨标的 | 全部25只标的已验证4月28日未涨停</p>
-
-            <div class="ztb-grid">
-
-                <!-- 方向1:算力/AI算力链 -->
-                <div class="ztb-card hot">
-                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#ff6b6b,#ffd700);"></div>
-                    <h3>🔥 算力/AI算力链(15+只涨停)</h3>
-                    <div class="logic">AI算力需求持续强劲,Token周环比增长31.48%;算力租赁涨价20-30%;800G光模块小批量出货;半导体材料国产替代加速。</div>
-                    <div class="chain">算力租赁:利通电子(2板)→群兴玩具→三人行→中嘉博创→盈峰环境→华升股份→仁东控股 | 半导体:格林达(2板)→赛腾股份→综艺股份→中晶科技→兴欣新材→扬子新材→宝光股份→中天精装 | AI硬件:铭普光磁(2板)→好上好→比依股份</div>
-                    <div class="stock-list" style="margin-top:15px;border-top:1px dashed #2d3a4f;padding-top:15px;">
-                        <h4 style="color:#00d4ff;font-size:0.95em;margin-bottom:10px;">📋 补涨标的</h4>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中际旭创</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300308</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">1.6T光模块龙头</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">源杰科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688498</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">光芯片国产替代</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">协创数据</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300857</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">算力租赁龙头,Q1净利增284-402%</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">润泽科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300442</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">液冷+算力租赁,字节订单60%</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">华特气体</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688268</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">电子特气,氦气涨价受益</span></div>
+        <!-- ========== 预期差方向(4个·2026-04-30新闻+涨停驱动) ========== -->
+        <div class="directions-section">
+            <h2>📰 预期差方向(4个·2026-04-30新闻+涨停驱动)</h2>
+            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>方法论:</strong>新闻提炼v5.7→6维度挖掘→涨停数据验证→评分定级 | 隔夜美股:道指-0.57%，纳指+0.04%，油价冲破100美元</p>
+            <div class="direction-grid">
+                <!-- 方向1:算力/AI/数字经济 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 31分·重点看</span>
+                    <h3>算力/AI/数字经济</h3>
+                    <p>数字中国峰会开幕+Anthropic估值9000亿美元+科技巨头Q1财报强劲（Amazon+28%，Alphabet+22%，Meta+33%）+数据资源调查token用量增长100倍。四重催化共振。<strong>预期差</strong>:市场担心AI泡沫，但财报季证伪；国内数字中国提供政策兜底。</p>
+                    <div class="stock-list">
+                        <h4>📋 核心标的</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">莲花控股</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600186</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">算力租赁+业绩高增</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">利通电子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603629</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">算力+英伟达产业链</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">航锦科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000818</div></div>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">算力+AI应用</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">华升股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600156</div></div>
+                                <span class="stock-tag tag-horse">黑马</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">算力租赁+2连板</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 方向2:医药/CXO -->
-                <div class="ztb-card hot">
-                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#ff6b6b,#ffd700);"></div>
-                    <h3>🔥 医药/CXO(5只涨停)</h3>
-                    <div class="logic">一季报业绩大增+GLP-1产业链+创新药出海加速。药明康德CRDMO增长,凯莱英GLP-1多肽订单饱满,礼来Orforglipron上市在即。</div>
-                    <div class="chain">药明康德→凯莱英→润都股份→汉森制药→津药药业</div>
-                    <div class="stock-list" style="margin-top:15px;border-top:1px dashed #2d3a4f;padding-top:15px;">
-                        <h4 style="color:#00d4ff;font-size:0.95em;margin-bottom:10px;">📋 补涨标的</h4>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">康龙化成</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300759</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">CXO龙头,一体化平台</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">泰格医药</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300347</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">临床CRO龙头,出海加速</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">昭衍新药</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603127</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">临床前CRO,安评龙头</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">海特生物</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300683</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">礼来Orforglipron链上弹性CXO</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">诺泰生物</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688076</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">多肽原料药,GLP-1产业链</span></div>
+                <!-- 方向2:稀土/钨/战略资源 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 30分·重点看</span>
+                    <h3>稀土/钨/战略资源</h3>
+                    <p>自然资源部宣布找矿突破，稀土/钨/锡等14种矿产储量世界第一；油价Brent$119.5创2022年6月以来新高；特朗普对伊朗海上封锁加剧能源紧张。资源重估+战略价值提升。<strong>预期差</strong>:稀土配额制度下供应刚性+新能源需求弹性，钨矿稀缺性被低估。</p>
+                    <div class="stock-list">
+                        <h4>📋 核心标的</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">北方稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600111</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">稀土开采龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">中国稀土</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000831</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">中重稀土整合平台</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">章源钨业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002378</div></div>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">钨矿开采+深加工</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">中钨高新</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000657</div></div>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">硬质合金龙头</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 方向3:电力/氢能/能源 -->
-                <div class="ztb-card watch">
-                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00d4ff,#58a6ff);"></div>
-                    <h3>👀 电力/氢能/能源(8只涨停)</h3>
-                    <div class="logic">国家能源局:一季度氢能投资加快释放;夏季用电高峰;氦气国产替代(水发燃气5板引领)。华电能源4板,维科技术3板。</div>
-                    <div class="chain">电力:华电能源(4板)→华银电力→昊华能源 | 氢能/燃气:水发燃气(5板)→德龙汇能→雄韬股份 | 新能源:维科技术(3板)→拓日新能</div>
-                    <div class="stock-list" style="margin-top:15px;border-top:1px dashed #2d3a4f;padding-top:15px;">
-                        <h4 style="color:#00d4ff;font-size:0.95em;margin-bottom:10px;">📋 补涨标的</h4>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国核电</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601985</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">核电龙头,首个民营核电并网</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">国电电力</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600795</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">火电+新能源,央企背景</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">东方电气</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600875</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">氢能装备+核电全产业链</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">冰轮环境</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000811</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">氢能压缩机,冷链+氢能</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">亿华通</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688339</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">燃料电池系统龙头</span></div>
+                <!-- 方向3:锂矿/锂电/固态电池 -->
+                <div class="direction-card hot">
+                    <span class="tag tag-hot">🔥 30分·重点看</span>
+                    <h3>锂矿/锂电/固态电池</h3>
+                    <p>锂价周涨2.03%、月涨12.82%；澳洲Greenbushes减产下调全年产量预期；固态电池产业化加速（丰元股份布局固态正极）。13+只涨停，板块指数涨7.28%。<strong>预期差</strong>:市场此前极度悲观，锂价触底+供应收缩形成双击；2026年被视为固态电池元年。</p>
+                    <div class="stock-list">
+                        <h4>📋 核心标的</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">永杉锂业</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603399</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">锂盐产能扩张</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">永兴材料</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002756</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">云母提锂龙头</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">丰元股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002805</div></div>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">磷酸铁锂+固态电池</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">鹏辉能源</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300438</div></div>
+                                <span class="stock-tag tag-horse">黑马</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">固态电池20cm涨停</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 方向4:机器人/智能制造 -->
-                <div class="ztb-card watch">
-                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00d4ff,#58a6ff);"></div>
-                    <h3>👀 机器人/智能制造(6只涨停)</h3>
-                    <div class="logic">特斯拉Optimus V3年中亮相,2026年量产5-10万台;减速器订单排到2027年;恒工精密Q1净利+210%,新增人形机器人本体业务。</div>
-                    <div class="chain">越剑智能(2板)→东方智造(2板)→恒工精密→浙江鼎力→杭齿前进→振华重工</div>
-                    <div class="stock-list" style="margin-top:15px;border-top:1px dashed #2d3a4f;padding-top:15px;">
-                        <h4 style="color:#00d4ff;font-size:0.95em;margin-bottom:10px;">📋 补涨标的</h4>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">绿的谐波</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688017</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">谐波减速器龙头,订单排到明年</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">三花智控</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002050</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">Tier1龙头,特斯拉深度绑定</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">兆威机电</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">003021</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">灵巧手核心,自由度提升</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">鸣志电器</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603728</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">空心杯电机,降本50%</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">奥比中光</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688322</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">视觉传感器,3D结构光</span></div>
-                    </div>
-                </div>
-
-                <!-- 方向5:商业航天 -->
-                <div class="ztb-card watch">
-                    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00d4ff,#58a6ff);"></div>
-                    <h3>👀 商业航天(5只涨停)</h3>
-                    <div class="logic">长征十号乙4月28日首飞验证海上网系回收;朱雀三号遥二冲刺回收;商业航天企业密集IPO;发射成本有望降至2万元/公斤。</div>
-                    <div class="chain">拓日新能→宏英智能→博云新材→蜀道装备→金螳螂</div>
-                    <div class="stock-list" style="margin-top:15px;border-top:1px dashed #2d3a4f;padding-top:15px;">
-                        <h4 style="color:#00d4ff;font-size:0.95em;margin-bottom:10px;">📋 补涨标的</h4>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">中国卫星</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600118</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">小卫星制造龙头,星网60%研制</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">航天动力</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600343</div></div><span class="stock-tag tag-s">S</span></div><span style="color:#8b9dc3;font-size:0.8em">液体火箭发动机,市占率70%+</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">铖昌科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">001270</div></div><span class="stock-tag tag-horse">黑马</span></div><span style="color:#8b9dc3;font-size:0.8em">相控阵T/R芯片,单星需数百颗</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">斯瑞新材</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688102</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">火箭推力室材料,耐受3000°C</span></div>
-                        <div class="stock-item"><div class="stock-info"><div><div class="stock-name">航天宏图</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688066</div></div><span class="stock-tag tag-a">A</span></div><span style="color:#8b9dc3;font-size:0.8em">遥感应用龙头,女娲星座114颗</span></div>
+                <!-- 方向4:一季报业绩（真超预期） -->
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 24分·可关注</span>
+                    <h3>一季报业绩（真超预期）</h3>
+                    <p>4月30日披露截止，区分"真超预期"与"低基数/非主营"。保留标的特征：Q1净利增长有持续性、主营收入增长、有全年催化（产能/渠道/新产品）。<strong>预期差</strong>:披露期结束但全年逻辑仍在，市场可能错杀真超预期标的。</p>
+                    <div class="stock-list">
+                        <h4>📋 保留标的</h4>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">盐津铺子</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002847</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">魔芋零食+渠道改革，全年逻辑</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">中集集团</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000039</div></div>
+                                <span class="stock-tag tag-s">S</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">集装箱周期复苏</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">宏和科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603256</div></div>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">电子布龙头+产能释放</span>
+                        </div>
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div><div class="stock-name">金新农</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002548</div></div>
+                                <span class="stock-tag tag-a">A</span>
+                            </div>
+                            <span style="color:#8b9dc3;font-size:0.8em">生猪+饲料，周期触底</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -609,292 +411,14 @@
             <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;margin-top:20px;border:1px solid #2d3a4f;">
                 <h3 style="color:#ffd700;font-size:1.1em;margin-bottom:15px;">📊 方向强度评分</h3>
                 <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
-                    <thead><tr style="background:rgba(0,212,255,0.1);"><th style="padding:10px;text-align:left;color:#00d4ff;">方向</th><th style="padding:10px;text-align:center;color:#00d4ff;">涨停数</th><th style="padding:10px;text-align:center;color:#00d4ff;">连板高度</th><th style="padding:10px;text-align:center;color:#00d4ff;">总分</th><th style="padding:10px;text-align:center;color:#00d4ff;">评级</th></tr></thead>
+                    <thead><tr style="background:rgba(0,212,255,0.1);"><th style="padding:10px;text-align:left;color:#00d4ff;">方向</th><th style="padding:10px;text-align:center;color:#00d4ff;">逻辑强度</th><th style="padding:10px;text-align:center;color:#00d4ff;">时效新颖</th><th style="padding:10px;text-align:center;color:#00d4ff;">市场矛盾</th><th style="padding:10px;text-align:center;color:#00d4ff;">反应程度</th><th style="padding:10px;text-align:center;color:#00d4ff;">总分</th><th style="padding:10px;text-align:center;color:#00d4ff;">评级</th></tr></thead>
                     <tbody>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">算力/AI算力链</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">15+</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">2板×4</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">19</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">医药/CXO</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">首板</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">15</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">电力/氢能/能源</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">8</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">5板</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ffd700;font-weight:bold;">14</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">机器人/智能制造</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">2板×2</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ffd700;font-weight:bold;">14</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
-                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">商业航天</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">首板</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ffd700;font-weight:bold;">13</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">算力/AI/数字经济</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">9</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">9</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">31</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">稀土/钨/战略资源</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">8</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">8</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">30</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">锂矿/锂电/固态电池</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">8</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">9</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">6</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ff6b6b;font-weight:bold;">30</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#ff6b6b;">🔥</span></td></tr>
+                        <tr><td style="padding:10px;border-bottom:1px solid #2d3a4f;">一季报业绩（真超预期）</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">7</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;">5</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;color:#ffd700;font-weight:bold;">24</td><td style="padding:10px;border-bottom:1px solid #2d3a4f;text-align:center;"><span style="color:#00d4ff;">👀</span></td></tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-
-        <!-- ========== 预期差方向(6个·2026-04-29新闻驱动) ========== -->
-        <div class="directions-section">
-            <h2>📰 新闻方向整理(6个·2026-04-29重大新闻驱动)</h2>
-            <p style="color:#8b9dc3;margin-bottom:20px;font-size:0.95em;"><strong>方法论:</strong>新闻提炼v5.7→6维度挖掘→三层过滤→评分定级→预期差生产v6.4 | 全部36只标的已验证4月28日未涨停</p>
-            <div class="direction-grid">
-                <!-- 方向1:AI芯片/国产替代 -->
-                <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 19分·重点看</span>
-                    <h3>AI芯片/国产替代</h3>
-                    <p>DeepSeek V4发布即适配昇腾/寒武纪/海光信息Day0;Manus被禁外资收购;微软OpenAI合作重构。三重催化指向同一结论--AI自主可控紧迫性空前提升。<strong>预期差</strong>:市场还在炒AI应用,底层算力自主可控才是根本。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">寒武纪</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688256</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">思元系列Day0适配DeepSeek V4</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">海光信息</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688041</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">深算三号对标国际旗舰</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">芯原股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688521</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">NPU IP授权"卖铲人",出货超1亿颗</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">景嘉微</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300474</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">JM11系列云端GPU国产替代</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">安路科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688107</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">FPGA芯片,AI加速+5G基站</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向2:商业航天 -->
-                <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 17分·重点看</span>
-                    <h3>商业航天</h3>
-                    <p>工信部/国家航天局召开高质量发展会议,14家企业参会;4月"超级发射月"多型可回收火箭验证在即。发射成本有望降至2万元/公斤,卫星互联网组网加速。<strong>预期差</strong>:市场认为是主题炒作,实际是政策落地+技术突破+订单确认。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中国卫星</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600118</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">小卫星制造国家队,星网60%研制任务</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">航天动力</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600343</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">A股唯一液体火箭发动机,市占率70%+</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">铖昌科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">001270</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">相控阵T/R芯片,单颗卫星需数百颗</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">斯瑞新材</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688102</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">火箭推力室材料,耐受3000°C</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">航天宏图</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688066</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">遥感应用龙头,"女娲星座"114颗卫星</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向3:氢能 -->
-                <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 17分·重点看</span>
-                    <h3>氢能(十五五规划)</h3>
-                    <p>国家能源局明确"十五五"氢能产业发展目标任务,首次进入国家级五年规划。隆基氢能中标吉电股份17台套电解槽,阳光氢能中标12台。<strong>预期差</strong>:市场认为氢能商业化远,但十五五规划意味着补贴和项目加速。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">隆基绿能</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601012</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">隆基氢能碱性电解槽龙头,市占率近四成</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">阳光电源</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300274</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">阳光氢能PEM电解槽,光伏制氢一体化</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">亿华通</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688339</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">燃料电池系统龙头,冬奥会主力供应商</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">美锦能源</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">000723</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">焦化转型氢能,大湾区加氢站网络</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">华电重工</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601226</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">央企碱性电解槽,参与风光制氢示范</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向4:存储芯片 -->
-                <div class="direction-card hot">
-                    <span class="tag tag-hot">🔥 17分·重点看</span>
-                    <h3>存储芯片</h3>
-                    <p>江波龙Q1净利38.6亿扭亏,佰维存储Q1营收+341%,德明利Q1净利31.5-36.5亿。全球存储供不应求,闪迪股价一年涨28倍。<strong>预期差</strong>:市场已知存储周期,但对Q1业绩力度和持续性认知不足。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">江波龙</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">301308</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">存储模组龙头,Q1净利38.62亿</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">德明利</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">001309</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">模组+自研主控芯片双轮驱动</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">佰维存储</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">688525</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">存储+晶圆级先进封测一体化</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">兆易创新</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603986</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">NOR Flash国产龙头,全球第二</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">香农芯创</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300475</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">存储分销龙头,Q1净利+7835%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向5:石油/能源安全 -->
-                <div class="direction-card watch">
-                    <span class="tag tag-watch">👀 16分·可关注</span>
-                    <h3>石油/能源安全</h3>
-                    <p>花旗上调Q2油价至110美元,伊朗局势+霍尔木兹海峡危机。能源安全战略地位提升。<strong>预期差</strong>:市场认为是高股息避险,实际是地缘驱动+油价弹性。三桶油已被充分配置,弹性在油服和油运。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中国海油</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600938</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">海上油气龙头,桶油成本低,高股息</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中海油服</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601808</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">海上油服龙头,Q1营收112.96亿</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中远海能</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600026</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">全球油运龙头,地缘冲突→运距增加</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">中国石油</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">601857</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">国内最大油气生产商,全产业链</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">广汇能源</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">600256</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">民营油气+LNG综合龙头</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向6:手机产业链/端侧AI -->
-                <div class="direction-card watch">
-                    <span class="tag tag-watch">👀 15分·可关注</span>
-                    <h3>手机产业链/端侧AI</h3>
-                    <p>OpenAI计划自研手机用联发科/高通芯片(预计2028年量产);国内5G手机占比93%。<strong>预期差</strong>:OpenAI手机是远期概念,但端侧AI(AI手机/AI眼镜)趋势确定。短期看国内手机出货量下降是利空,但5G占比提升+AI功能渗透是长期趋势。</p>
-                    <div class="stock-list">
-                        <h4>📋 核心标的</h4>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">立讯精密</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002475</div></div>
-                                <span class="stock-tag tag-s">S</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">精密制造龙头,苹果核心供应商</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">舜宇光学</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">02382.HK</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">光学镜头龙头,手机+车载+AR</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">歌尔股份</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">002241</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">声学+VR,AI交互核心部件</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">蓝思科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">300433</div></div>
-                                <span class="stock-tag tag-a">A</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">玻璃结构件龙头,手机+新能源车</span>
-                        </div>
-                        <div class="stock-item">
-                            <div class="stock-info">
-                                <div><div class="stock-name">汇顶科技</div><div style="font-size:0.75em;color:#8b9dc3;margin-top:2px;">603160</div></div>
-                                <span class="stock-tag tag-horse">黑马</span>
-                            </div>
-                            <span style="color:#8b9dc3;font-size:0.8em">触控芯片龙头,超声波指纹升级</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -912,33 +436,33 @@
                 <tbody>
                     <tr>
                         <td>2026-05</td>
-                        <td>寒武纪/海光信息Q2订单数据</td>
-                        <td>若国产AI芯片出货量环比+30%→确认DeepSeek V4适配转化为实际订单</td>
+                        <td>碳酸锂价格能否突破12万元/吨</td>
+                        <td>若突破→确认锂价反弹趋势确立，锂矿股业绩修复加速</td>
                     </tr>
                     <tr>
                         <td>2026-05</td>
-                        <td>Manus国产替代方案落地</td>
-                        <td>若替代方案明确→确认AI应用端国产替代加速</td>
+                        <td>澳洲Greenbushes减产幅度扩大</td>
+                        <td>若减产超预期→供应端收缩确认，锂矿供需拐点</td>
                     </tr>
                     <tr>
                         <td>2026-05</td>
-                        <td>可回收火箭验证发射</td>
-                        <td>若成功→发射成本降至2万元/公斤,卫星互联网组网加速</td>
+                        <td>固态电池企业订单/产能进展</td>
+                        <td>若产业化加速→2026固态电池元年逻辑验证</td>
                     </tr>
                     <tr>
-                        <td>2026-06</td>
-                        <td>十五五氢能规划细则发布</td>
-                        <td>若补贴力度超预期→确认绿氢项目大规模落地</td>
+                        <td>2026-05</td>
+                        <td>稀土氧化物价格指数走势</td>
+                        <td>若持续上涨→稀土配额制度下供需缺口扩大</td>
                     </tr>
                     <tr>
-                        <td>2026-07</td>
-                        <td>存储芯片Q2业绩披露</td>
-                        <td>若江波龙/佰维/德明利Q2业绩持续高增→确认超级周期持续性</td>
+                        <td>2026-05</td>
+                        <td>各地智算中心建设进度</td>
+                        <td>若密集开工→算力需求从预期走向兑现</td>
                     </tr>
                     <tr>
-                        <td>2026-07-08</td>
-                        <td>中报季</td>
-                        <td>各方向业绩验证关键窗口:AI芯片订单/商业航天订单/氢能项目/存储业绩</td>
+                        <td>2026-05</td>
+                        <td>Anthropic 9000亿估值融资落地</td>
+                        <td>若融资完成→AI基础设施需求爆发确认</td>
                     </tr>
                 </tbody>
             </table>
@@ -947,7 +471,7 @@
         <div class="footer">
             <p>🎯 羿学交易智囊团 | 基于奇门遁甲 + 预期差分析 + 涨停板梳理</p>
             <p>免责声明:本页面所有内容仅供参考,不构成投资建议</p>
-            <p class="update-time">更新时间:2026-04-29 07:30</p>
+            <p class="update-time">更新时间:2026-04-30 08:20</p>
         </div>
     </div>
 </body>
