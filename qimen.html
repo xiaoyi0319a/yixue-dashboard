@@ -1346,48 +1346,14 @@
             return baShen;
         }
 
-        // 排八门（V3.99 - 按图片规则：从旬首地支开始，按十二地支顺序数到时支，阳遁+1阴遁-1）
+        // 排八门（V3.99 - 修正：值使门落宫 = 值符落宫 = 时干的地盘干所在宫）
         function paiBaMen(zhiFuInfo, hourGanZhi, diPan, isYang) {
             const baMen = {};
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
             const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
             
-            // 旬首地支（如"甲戌"→"戌"）
-            const xunShouZhi = zhiFuInfo.xunShou.substring(1, 2);
-            // 旬首六仪（如"甲戌己"→"己"）
-            const xunShouLiuYi = zhiFuInfo.xunShou.slice(2);
-            
-            // 找旬首六仪在地盘的宫位（中五寄坤二）
-            let xunShouGong = null;
-            if (diPan[5] && diPan[5].includes(xunShouLiuYi)) {
-                xunShouGong = 2; // 中五寄坤二
-            } else {
-                for (let gong in diPan) {
-                    if (diPan[gong] && diPan[gong].includes(xunShouLiuYi)) {
-                        xunShouGong = parseInt(gong);
-                        if (xunShouGong === 5) xunShouGong = 2;
-                        break;
-                    }
-                }
-            }
-            
-            // 时支
-            const hourZhi = hourGanZhi[1];
-            
-            // 十二地支循环顺序（寅卯辰巳午未申酉戌亥子丑）
-            const diZhiCycle = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'];
-            const startIdx = diZhiCycle.indexOf(xunShouZhi);
-            const endIdx = diZhiCycle.indexOf(hourZhi);
-            const steps = (endIdx - startIdx + 12) % 12;
-            
-            // 计算值使门落宫（九宫数字循环）
-            let zhiShiGong;
-            if (isYang) {
-                zhiShiGong = (xunShouGong + steps - 1) % 9 + 1;
-            } else {
-                zhiShiGong = (xunShouGong - steps - 1 + 9) % 9 + 1;
-                if (zhiShiGong <= 0) zhiShiGong += 9;
-            }
+            // 值使门落宫 = 值符落宫（时干的地盘干所在宫）
+            const zhiShiGong = zhiFuInfo.zhiFuGong;
             
             // 从值使门落宫开始，阳遁顺时针/阴遁逆时针排八门
             const startMenIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
