@@ -1369,20 +1369,34 @@
             return {baMen, zhiShiGong};
         }
 
-        // 排隐干（V4.0 - 修正：从值使门落宫起，天干固定从戊开始，按九宫数字顺序阳遁顺/阴遁逆排列）
+        // 排隐干（V4.0 - 图片规则：条件一/二判断起点宫，从时干开始，阳顺阴逆）
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang) {
             const yinGan = {};
             const ganOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
+            const hourGan = hourGanZhi[0];
+            const hourGanIndex = ganOrder.indexOf(hourGan);
+            
+            // 条件判断：值使宫地盘干是否严格等于时干
+            let startGong;
+            const zhiShiGongDiPan = diPan[zhiShiGong];
+            if (zhiShiGongDiPan === hourGan) {
+                startGong = 5; // 条件一：起点在中五宫
+            } else {
+                startGong = zhiShiGong; // 条件二：起点在值使宫
+            }
             
             const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-            const startIndex = gongOrder.indexOf(zhiShiGong);
+            const startIndex = gongOrder.indexOf(startGong);
             
             for (let i = 0; i < 9; i++) {
                 const gongIdx = isYang 
                     ? (startIndex + i) % 9 
                     : (startIndex - i + 9) % 9;
                 const gong = gongOrder[gongIdx];
-                yinGan[gong] = ganOrder[i]; // 固定从戊(i=0)开始
+                const ganIdx = isYang
+                    ? (hourGanIndex + i) % 9  // 阳遁顺排
+                    : (hourGanIndex - i + 9) % 9; // 阴遁逆排
+                yinGan[gong] = ganOrder[ganIdx];
             }
             
             return yinGan;
