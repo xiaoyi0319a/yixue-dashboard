@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>奇门遁甲排盘工具 - V3.86</title>
+    <title>奇门遁甲排盘工具 - V3.90</title>
     <style>
         * {
             margin: 0;
@@ -445,7 +445,7 @@
 <body>
     <div class="container">
         <h1>☯ 奇门遁甲排盘工具</h1>
-        <p class="subtitle">V3.86 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 隐干排序修正</p>
+        <p class="subtitle">V3.90 紫金山天文台数据版 | 拆补法 · 寄坤宫 · 排盘逻辑修正</p>
 
         <div class="input-section">
             <div class="input-row">
@@ -1259,20 +1259,19 @@
             // 天盘干计算（移位法）：
             // 1. 获取地盘干按顺时针九宫顺序（从值符星位置开始）
             // 2. 找到旬首六仪位置，把前面的移到后面
-            const clockwiseOrder = [3, 4, 9, 2, 7, 6, 1, 8];
             // zhiFuGongIndex 已在上文定义
             // liuYi已在上方定义
 
-            // 按顺时针顺序收集地盘干（从值符星位置开始）
+            // 按顺时针顺序收集地盘干（从值符星位置开始，统一用 CLOCKWISE_ORDER）
             const diPanGanOrder = [];
             for (let i = 0; i < 8; i++) {
                 const gongIdx = (zhiFuGongIndex + i) % 8;
-                const gong = clockwiseOrder[gongIdx];
+                const gong = CLOCKWISE_ORDER[gongIdx];
                 diPanGanOrder.push(diPan[gong] || '');
             }
 
-            // 找到旬首六仪位置，移位
-            const liuYiIndex = diPanGanOrder.indexOf(liuYi);
+            // 找到旬首六仪位置，移位（考虑寄宫：用 includes 匹配寄宫组合如"己丙"）
+            const liuYiIndex = diPanGanOrder.findIndex(gan => gan && gan.includes(liuYi));
             let tianPanGanOrder = [];
             if (liuYiIndex !== -1) {
                 tianPanGanOrder = diPanGanOrder.slice(liuYiIndex).concat(diPanGanOrder.slice(0, liuYiIndex));
@@ -1336,8 +1335,8 @@
             console.log('CLOCKWISE_ORDER:', CLOCKWISE_ORDER);
 
             for (let i = 0; i < 8; i++) {
-                // 正确规则：阳遁顺时针，阴遁逆时针
-                const gongIndex = isYang ? (zhiFuIndex + i) % 8 : (zhiFuIndex - i + 8) % 8;
+                // 修正：无论阳遁阴遁，宫位永远物理顺时针；阴遁只逆排八神顺序（通过 BA_SHEN_YIN 实现）
+                const gongIndex = (zhiFuIndex + i) % 8;
                 const gong = CLOCKWISE_ORDER[gongIndex];
                 baShen[gong] = shenOrder[i];
                 console.log(`i=${i}, gongIndex=${gongIndex}, gong=${gong}, shen=${shenOrder[i]}`);
@@ -1348,62 +1347,37 @@
             return baShen;
         }
 
-        // 排八门（按老师规则：旬首地支序号=旬首宫，地支顺序阳顺阴逆）
+        // 排八门（V3.90 - 修正：值使随时支，从值使宫起子顺/逆数到时支落宫）
         function paiBaMen(zhiFuInfo, hourZhi, isYang) {
             const baMen = {};
             const menOrder = ['休门', '生门', '伤门', '杜门', '景门', '死门', '惊门', '开门'];
             const zhiShiIndex = menOrder.indexOf(zhiFuInfo.zhiShiMen);
 
-            // 标准地支顺序
-            const standardDiZhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
-
-            // 获取旬首地支（如"甲寅"取"寅"）
-            const xunShou = zhiFuInfo.xunShou.slice(0, 2); // "甲寅"
-            const xunShouDiZhi = xunShou[1]; // "寅"
-            const hourZhiName = standardDiZhi[hourZhi - 1]; // hourZhi 1-12 转地支名
-
-            // 旬首地支序号 = 旬首宫宫位号（中五宫寄坤二宫）
-            let xunShouGong = zhiFuInfo.xunShouGong;
-            if (xunShouGong === 5) {
-                xunShouGong = 2; // 中五宫寄坤二宫
+            // 值使原始宫（旬首宫，中五寄坤二）
+            let zhiShiOriginalGong = zhiFuInfo.xunShouGong;
+            if (zhiShiOriginalGong === 5) {
+                zhiShiOriginalGong = 2;
             }
 
-            // 计算从旬首地支到时辰地支的步数（在12地支中的位置差）
-            const xunShouIdx = standardDiZhi.indexOf(xunShouDiZhi);
-            const hourIdx = standardDiZhi.indexOf(hourZhiName);
-            let steps;
+            // 从值使宫起子，阳遁顺/阴遁逆，每个宫对应一个地支，数到时支落宫
+            // hourZhi 1-12（子=1..亥=12），走 hourZhi-1 步
+            const startIndex = CLOCKWISE_ORDER.indexOf(zhiShiOriginalGong);
+            let gongIndex;
             if (isYang) {
-                // 阳遁顺行
-                steps = (hourIdx - xunShouIdx + 12) % 12;
+                gongIndex = (startIndex + (hourZhi - 1)) % 8;
             } else {
-                // 阴遁逆行
-                steps = (xunShouIdx - hourIdx + 12) % 12;
+                gongIndex = (startIndex - (hourZhi - 1) + 8) % 8;
             }
-            
-            // 规则：值使门落宫按数字顺序（1-9循环）走步数，不跳过中五宫
+            const zhiShiGong = CLOCKWISE_ORDER[gongIndex];
 
-            // 从旬首宫开始，按九宫数字顺序走steps步（不跳过中五宫）
-            // 数字顺序：1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离（循环）
-            const numOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-            let currentIdx = numOrder.indexOf(xunShouGong);
-
-            for (let i = 0; i < steps; i++) {
-                if (isYang) {
-                    currentIdx = (currentIdx + 1) % 9;
-                } else {
-                    currentIdx = (currentIdx - 1 + 9) % 9;
-                }
-                // 不再跳过中五宫
-            }
-
-            const zhiShiGong = numOrder[currentIdx];
-
-            // 从值使门落宫开始，顺时针排八门
-            const startIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
+            // 从值使门落宫开始，阳遁顺时针/阴遁逆时针排八门
+            const startMenIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
 
             for (let i = 0; i < 8; i++) {
-                const gongIndex = (startIndex + i) % 8;
-                const gong = CLOCKWISE_ORDER[gongIndex];
+                const gongIdx = isYang
+                    ? (startMenIndex + i) % 8
+                    : (startMenIndex - i + 8) % 8;
+                const gong = CLOCKWISE_ORDER[gongIdx];
                 const menIdx = (zhiShiIndex + i) % 8;
                 baMen[gong] = menOrder[menIdx];
             }
@@ -1411,12 +1385,9 @@
             return {baMen, zhiShiGong};
         }
 
-        // 排隐干（V3.80 - 修正：正确计算戊的起始位置，使时干落在目标宫）
-        // 规则：
-        // 1. 如果值使门落宫地盘干 = 起局时辰天干（情况一）：时干在中五宫（序号5）
-        // 2. 如果值使门落宫地盘干 ≠ 起局时辰天干（情况二）：时干在值使门落宫
-        // 阳遁顺排：戊→己→庚→辛→壬→癸→丁→丙→乙，按数字顺序1→9
-        // 阴遁逆排：戊→己→庚→辛→壬→癸→丁→丙→乙，按数字顺序9→1
+        // 排隐干（V3.90 - 修正：时干加在值使门上，按三奇六仪原始顺序排列）
+        // 三奇六仪原始顺序：戊→己→庚→辛→壬→癸→丁→丙→乙
+        // 阳遁按数字顺序1→9，阴遁按数字顺序9→1
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang, xunShou, zhiFuGong) {
             const yinGan = {};
             let hourGan = hourGanZhi[0]; // 起局时辰的天干
@@ -1426,50 +1397,32 @@
                 hourGan = xunShou.slice(2);
             }
             
-            // 隐干顺序：戊(0)→己(1)→庚(2)→辛(3)→壬(4)→癸(5)→丁(6)→丙(7)→乙(8)
-            const yinGanOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
+            // 三奇六仪原始顺序
+            const qimenOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
             
             // 数字顺序：1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
             const numOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             
-            // 值使门落宫的地盘干
-            const zhiShiDiPanGan = diPan[zhiShiGong];
+            // 时干在原始顺序中的索引
+            const hourGanIdx = qimenOrder.indexOf(hourGan);
             
-            // 判断值使门落宫地盘干是否等于起局时辰天干（严格相等）
-            const isSameGan = zhiShiDiPanGan === hourGan;
+            // 值使门落宫在numOrder中的索引
+            const zhiShiIdx = numOrder.indexOf(zhiShiGong);
             
-            // 确定时干应该在哪个宫（目标宫）
-            const targetGong = isSameGan ? 5 : zhiShiGong;
-            
-            // 时干在yinGanOrder中的索引
-            const hourGanIdx = yinGanOrder.indexOf(hourGan);
-            
-            // 计算戊应该在哪个宫（倒推）
-            // 阳遁：从戊开始顺排到目标宫，正好落在时干
-            // 阴遁：从戊开始逆排到目标宫，正好落在时干
-            let wuGongIdx; // 戊在numOrder中的索引
-            if (isYang) {
-                // 阳遁：目标宫索引 = (戊索引 + 时干索引) % 9
-                // 所以：戊索引 = (目标宫索引 - 时干索引 + 9) % 9
-                wuGongIdx = (numOrder.indexOf(targetGong) - hourGanIdx + 9) % 9;
-            } else {
-                // 阴遁：目标宫索引 = (戊索引 - 时干索引 + 9) % 9
-                // 所以：戊索引 = (目标宫索引 + 时干索引) % 9
-                wuGongIdx = (numOrder.indexOf(targetGong) + hourGanIdx) % 9;
-            }
-            
-            // 从戊开始排天干
+            // 从时干开始，按原始顺序排，放在值使门落宫，然后按数字顺序展开
             for (let i = 0; i < 9; i++) {
+                const gan = qimenOrder[(hourGanIdx + i) % 9];
+                
                 let gongIdx;
                 if (isYang) {
                     // 阳遁：数字顺序1→9
-                    gongIdx = (wuGongIdx + i) % 9;
+                    gongIdx = (zhiShiIdx + i) % 9;
                 } else {
-                    // 阴遁：数字顺序9→1（从戊索引反向）
-                    gongIdx = (wuGongIdx - i + 9) % 9;
+                    // 阴遁：数字顺序9→1
+                    gongIdx = (zhiShiIdx - i + 9) % 9;
                 }
+                
                 const gongNum = numOrder[gongIdx];
-                const gan = yinGanOrder[i]; // 从戊(0)开始
                 yinGan[gongNum] = gan;
             }
             
