@@ -1384,45 +1384,23 @@
             return {baMen, zhiShiGong};
         }
 
-        // 排隐干（V3.98 - 按图片规则：值使门落宫地盘干=时干则起点中宫，否则起点值使门落宫，按数字顺序排戊己庚辛壬癸丁丙乙）
-        function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang, xunShou, zhiFuGong) {
+        // 排隐干（V3.99 - 改回V3.90逻辑：时干加在值使门上，按三奇六仪顺序排列）
+        function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang) {
             const yinGan = {};
+            const ganOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
             const hourGan = hourGanZhi[0]; // 时干
+            const hourGanIndex = ganOrder.indexOf(hourGan);
             
-            // 值使门落宫的地盘干
-            const zhiShiDiPanGan = diPan[zhiShiGong] || '';
+            const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            const startIndex = gongOrder.indexOf(zhiShiGong);
             
-            // 确定隐干起点
-            let startGong;
-            if (zhiShiDiPanGan.includes(hourGan)) {
-                // 值使门落宫地盘干 = 时干，起点在中宫
-                startGong = 5;
-            } else {
-                // 不同，起点在值使门落宫
-                startGong = zhiShiGong;
-            }
-            
-            // 天干顺序：戊己庚辛壬癸丁丙乙
-            const qimenOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
-            // 九宫数字顺序：1坎→2坤→3震→4巽→5中→6乾→7兑→8艮→9离
-            const numOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-            
-            // 起点宫位在numOrder中的索引
-            const startIdx = numOrder.indexOf(startGong);
-            
-            // 从起点开始，按数字顺序排列天干
             for (let i = 0; i < 9; i++) {
-                const gan = qimenOrder[i];
-                let gongIdx;
-                if (isYang) {
-                    // 阳遁：数字顺序1→9
-                    gongIdx = (startIdx + i) % 9;
-                } else {
-                    // 阴遁：数字顺序9→1
-                    gongIdx = (startIdx - i + 9) % 9;
-                }
-                const gongNum = numOrder[gongIdx];
-                yinGan[gongNum] = gan;
+                const ganIdx = (hourGanIndex + i) % 9;
+                const gongIdx = isYang 
+                    ? (startIndex + i) % 9 
+                    : (startIndex - i + 9) % 9;
+                const gong = gongOrder[gongIdx];
+                yinGan[gong] = ganOrder[ganIdx];
             }
             
             return yinGan;
@@ -1560,8 +1538,8 @@
             // 排天盘干（在九星和八门之后）
             paiTianPanGan(tianPan, zhiFuInfo, diPan, juInfo.isYang);
 
-            // 排隐干（传入旬首和值符落宫以处理甲隐遁和情况一）
-            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang, zhiFuInfo.xunShou, zhiFuInfo.zhiFuGong);
+            // 排隐干
+            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
             
             // 调试：输出隐干对象
             console.log('=== 隐干调试 ===');
