@@ -1369,23 +1369,20 @@
             return {baMen, zhiShiGong};
         }
 
-        // 排隐干（V3.99 - 改回V3.90逻辑：时干加在值使门上，按三奇六仪顺序排列）
+        // 排隐干（V4.0 - 修正：从值使门落宫起，天干固定从戊开始，按九宫数字顺序阳遁顺/阴遁逆排列）
         function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang) {
             const yinGan = {};
             const ganOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
-            const hourGan = hourGanZhi[0]; // 时干
-            const hourGanIndex = ganOrder.indexOf(hourGan);
             
             const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             const startIndex = gongOrder.indexOf(zhiShiGong);
             
             for (let i = 0; i < 9; i++) {
-                const ganIdx = (hourGanIndex + i) % 9;
                 const gongIdx = isYang 
                     ? (startIndex + i) % 9 
                     : (startIndex - i + 9) % 9;
                 const gong = gongOrder[gongIdx];
-                yinGan[gong] = ganOrder[ganIdx];
+                yinGan[gong] = ganOrder[i]; // 固定从戊(i=0)开始
             }
             
             return yinGan;
