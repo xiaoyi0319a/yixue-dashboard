@@ -701,19 +701,18 @@
 
         // 计算日干支（V3.70 - 支持早子时修正）
         function getDayGanZhi(year, month, day, hour = 12, minute = 0) {
-            // 早子时修正：23:00-00:00属当天，00:00-01:00属次日
+            // 子时修正：23:00-00:59均属次日
             let adjustedYear = year;
             let adjustedMonth = month;
             let adjustedDay = day;
             
-            if (hour === 0) {
-                // 00:00-00:59 夜子时，日柱用次日
+            if (hour === 23 || hour === 0) {
+                // 23:00-00:59 子时，日柱用次日
                 const nextDay = new Date(year, month - 1, day + 1);
                 adjustedYear = nextDay.getFullYear();
                 adjustedMonth = nextDay.getMonth() + 1;
                 adjustedDay = nextDay.getDate();
             }
-            // hour === 23 时（23:00-23:59 早子时），日柱保持当天
             
             const diff = daysBetween(BASE_YEAR, BASE_MONTH, BASE_DAY, adjustedYear, adjustedMonth, adjustedDay);
             const ganIndex = ((BASE_GAN_INDEX + diff) % 10 + 10) % 10;
