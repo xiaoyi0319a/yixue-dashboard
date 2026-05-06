@@ -1,4 +1,4 @@
-// 本地运行奇门排盘 - V3.99
+// 本地运行奇门排盘 - V4.0
 // 用法: node run_qimen_local.js [YYYY-MM-DD] [HH:MM]
 // 默认: 今天 09:30
 
