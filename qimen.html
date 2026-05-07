@@ -1187,42 +1187,37 @@
             // 值使门落宫需要按时辰地支移动
             let zhiShiMenGong = zhiShiMenBaseGong;
             
-            // 六甲序号 = 旬首六仪在地盘宫位（寄宫处理）
-            let jiaIndex = xunShouGong;
-            if (xunShouGong === 5) jiaIndex = 2;
-            
-            // 地支顺序
-            const zhiList = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'];
+            // 修正值使门落宫计算：从旬首地支开始，按地支顺序，阳遁递增/阴遁递减九宫数字
+            const zhiList = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+            const xunShouZhi = xunShou[1]; // 旬首地支，如"甲戌"取"戌"
+            const xunShouZhiIndex = zhiList.indexOf(xunShouZhi);
             const hourZhi = hourGanZhi[1]; // 时支
-            const hourZhiIndex = zhiList.indexOf(hourZhi); // 时支位置（0-11）
-            // 从六甲地支到时支的步数（阳遁顺数/阴遁逆数）
-            const xunShouZhi = xunShou[1]; // 旬首地支，如"甲辰"取"辰"
-            const jiaZhiIndex = zhiList.indexOf(xunShouZhi); // 六甲地支位置
-            let step;
-            if (isYang) {
-                // 阳遁：顺数到时支
-                step = (hourZhiIndex - jiaZhiIndex + 12) % 12;
-            } else {
-                // 阴遁：逆数到时支
-                step = (jiaZhiIndex - hourZhiIndex + 12) % 12;
+            
+            // 创建从旬首开始的九宫数字映射（不跳过中五，完整1-9循环）
+            let startGong = xunShouGong;
+            if (startGong === 5) startGong = 2; // 旬首在中五时寄到2
+            let currentGong = startGong;
+            const zhiToGong = {};
+            
+            for (let i = 0; i < 12; i++) {
+                const zhiIdx = (xunShouZhiIndex + i) % 12;
+                const zhi = zhiList[zhiIdx];
+                zhiToGong[zhi] = currentGong;
+                
+                // 下一个九宫数字（完整1-9循环，不跳过中五）
+                if (isYang) {
+                    // 阳遁递增：1->2->3->4->5->6->7->8->9->1...
+                    currentGong++;
+                    if (currentGong > 9) currentGong = 1;
+                } else {
+                    // 阴遁递减：9->8->7->6->5->4->3->2->1->9...
+                    currentGong--;
+                    if (currentGong < 1) currentGong = 9;
+                }
             }
             
-            // 九宫步数（步数 mod 8，因为九宫有8个可用宫）
-            const gongStep = step % 8;
-            
-            // 九宫数字递增顺序（阳遁），递减顺序（阴遁）
-            const gongOrder = [1, 2, 3, 4, 6, 7, 8, 9]; // 跳过5（中五寄宫已处理）
-            const startIdx = gongOrder.indexOf(jiaIndex);
-            
-            let finalIdx;
-            if (isYang) {
-                finalIdx = (startIdx + gongStep) % 8;
-            } else {
-                finalIdx = (startIdx - gongStep + 8) % 8;
-            }
-            zhiShiMenGong = gongOrder[finalIdx];
-            
-            // 寄宫处理（如果落在5，寄到2）
+            // 值使门落宫 = 时辰地支对应的九宫数字（如果落在5，寄到2）
+            zhiShiMenGong = zhiToGong[hourZhi];
             if (zhiShiMenGong === 5) zhiShiMenGong = 2;
             
             // 如果时干是甲（旬首本身），值符星不动，留在旬首宫
@@ -1390,13 +1385,14 @@
             // 值使门落宫 = zhiShiMenGong（值使门实际移动后的落宫）
             const zhiShiGong = zhiFuInfo.zhiShiMenGong;
             
-            // 从值使门落宫开始，阳遁顺时针/阴遁逆时针排八门
-            const startMenIndex = CLOCKWISE_ORDER.indexOf(zhiShiGong);
+            // 九宫顺时针顺序（从震三开始）
+            const clockwiseOrder = [3, 4, 9, 2, 7, 6, 1, 8];
+            
+            // 从值使门落宫开始，按顺时针顺序排布八门
+            const startMenIndex = clockwiseOrder.indexOf(zhiShiGong);
             for (let i = 0; i < 8; i++) {
-                const gongIdx = isYang
-                    ? (startMenIndex + i) % 8
-                    : (startMenIndex - i + 8) % 8;
-                const gong = CLOCKWISE_ORDER[gongIdx];
+                const gongIdx = (startMenIndex + i) % 8;
+                const gong = clockwiseOrder[gongIdx];
                 const menIdx = (zhiShiIndex + i) % 8;
                 baMen[gong] = menOrder[menIdx];
             }
@@ -1433,13 +1429,13 @@
             const startIndex = gongOrder.indexOf(startGong);
             
             for (let i = 0; i < 9; i++) {
-                const gongIdx = isYang 
-                    ? (startIndex + i) % 9 
-                    : (startIndex - i + 9) % 9;
+                // 宫位从起点开始递增（1→2→3→4→5→6→7→8→9→1循环），不管阳遁阴遁
+                const gongIdx = (startIndex + i) % 9;
                 const gong = gongOrder[gongIdx];
+                // 阳遁：天干递增；阴遁：天干递减
                 const ganIdx = isYang
-                    ? (hourGanIndex + i) % 9  // 阳遁顺排
-                    : (hourGanIndex - i + 9) % 9; // 阴遁逆排
+                    ? (hourGanIndex + i) % 9
+                    : (hourGanIndex - i + 9) % 9;
                 yinGan[gong] = ganOrder[ganIdx];
             }
             
