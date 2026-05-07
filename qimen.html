@@ -1225,6 +1225,11 @@
             // 寄宫处理（如果落在5，寄到2）
             if (zhiShiMenGong === 5) zhiShiMenGong = 2;
             
+            // 如果时干是甲（旬首本身），值符星不动，留在旬首宫
+            if (!zhiFuGong && hourGan === '甲') {
+                zhiFuGong = xunShouGong === 5 ? 2 : xunShouGong;
+            }
+            
             return {
                 xunShou: xunShou + liuYi,
                 xunShouGong,
@@ -1400,19 +1405,28 @@
         }
 
         // 排隐干（V4.0 - 图片规则：条件一/二判断起点宫，从时干开始，阳顺阴逆）
-        function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang) {
+        function paiYinGan(zhiShiGong, diPan, hourGanZhi, isYang, xunShouLiuYi) {
             const yinGan = {};
             const ganOrder = ['戊', '己', '庚', '辛', '壬', '癸', '丁', '丙', '乙'];
             const hourGan = hourGanZhi[0];
-            const hourGanIndex = ganOrder.indexOf(hourGan);
             
-            // 条件判断：值使宫地盘干是否严格等于时干
+            // 隐干起点天干：一般情况=时柱天干，特殊情况（时干为甲）=旬首六仪
+            let startGan;
+            if (hourGan === '甲' && xunShouLiuYi) {
+                startGan = xunShouLiuYi;  // 甲隐于六仪
+            } else {
+                startGan = hourGan;  // 一般情况
+            }
+            
+            const hourGanIndex = ganOrder.indexOf(startGan);
+            
+            // 条件判断：值使宫地盘干是否等于旬首六仪（甲隐于六仪）
             let startGong;
             const zhiShiGongDiPan = diPan[zhiShiGong];
-            if (zhiShiGongDiPan === hourGan) {
-                startGong = 5; // 条件一：起点在中五宫
+            if (zhiShiGongDiPan === xunShouLiuYi) {
+                startGong = 5; // 情况一：起点在中五宫
             } else {
-                startGong = zhiShiGong; // 条件二：起点在值使宫
+                startGong = zhiShiGong; // 情况二：起点在值使宫
             }
             
             const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -1565,7 +1579,7 @@
             paiTianPanGan(tianPan, zhiFuInfo, diPan, juInfo.isYang);
 
             // 排隐干
-            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang);
+            const yinGan = paiYinGan(zhiShiGong, diPan, hourGZ.ganZhi, juInfo.isYang, zhiFuInfo.xunShou.slice(2));
             
             // 调试：输出隐干对象
             console.log('=== 隐干调试 ===');
