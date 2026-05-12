@@ -1416,16 +1416,16 @@
             
             const hourGanIndex = ganOrder.indexOf(startGan);
             
-            // 条件判断：值使宫地盘干是否等于旬首六仪（甲隐于六仪）
+            // 隐干起点判断：值使门落宫地盘干 vs 起局时干
             let startGong;
             const zhiShiGongDiPan = diPan[zhiShiGong];
-            if (zhiShiGongDiPan === xunShouLiuYi) {
-                startGong = 5; // 情况一：起点在中五宫
+            if (zhiShiGongDiPan === hourGan) {
+                startGong = 5; // 情况一：值使宫地盘干 = 起局时干，起点在中宫
             } else {
-                startGong = zhiShiGong; // 情况二：起点在值使宫
+                startGong = zhiShiGong; // 情况二：不同，起点在值使门旁
             }
             
-            const gongOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            const gongOrder = isYang ? [1, 2, 3, 4, 5, 6, 7, 8, 9] : [9, 8, 7, 6, 5, 4, 3, 2, 1];
             const startIndex = gongOrder.indexOf(startGong);
             
             for (let i = 0; i < 9; i++) {
