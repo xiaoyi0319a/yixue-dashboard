@@ -35,6 +35,26 @@
             color: #8b9dc3;
             font-size: 1.1em;
         }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            color: #58a6ff;
+            text-decoration: none;
+            padding: 6px 14px;
+            border: 1px solid #2d3a4f;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: #58a6ff;
+        }
         .qimen-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             border: 2px solid #a371f7;
@@ -230,6 +250,17 @@
         }
     </style>
 </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 羿学交易智囊团</h1>
+            <p class="date">2026-05-13</p>
+            <div class="nav">
+                <a href="qimen.html">🔮 奇门起盘</a>
+                <a href="reports.html">📊 个股报告</a>
+            </div>
+        </div>
+
 <!-- ========== 奇门预测区 ========== -->
         <div class="qimen-section">
             <h2>🔮 奇门君今日预测</h2>
