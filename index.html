@@ -13,297 +13,176 @@
             min-height: 100vh;
             line-height: 1.6;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #2d3a4f;
-            margin-bottom: 30px;
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
         }
         .header h1 {
             font-size: 2.5em;
             background: linear-gradient(90deg, #00d4ff, #a371f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
-        .header .date {
-            color: #8b9dc3;
-            font-size: 1.1em;
-        }
-        .nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        .nav a {
-            color: #58a6ff;
-            text-decoration: none;
-            padding: 6px 14px;
-            border: 1px solid #2d3a4f;
-            border-radius: 8px;
-            font-size: 0.9em;
-            transition: all 0.3s;
-        }
-        .nav a:hover {
-            background: rgba(88, 166, 255, 0.1);
-            border-color: #58a6ff;
-        }
+        .header .date { color: #8b9dc3; font-size: 1.1em; }
         .qimen-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #a371f7;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(163, 113, 247, 0.2);
+            border: 2px solid #a371f7; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(163, 113, 247, 0.2);
         }
-        .qimen-section h2 {
-            color: #a371f7;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .qimen-content { color: #e0e6ed; }
-        .qimen-hexagram {
-            background: rgba(163, 113, 247, 0.1);
-            border-left: 4px solid #a371f7;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 15px 0;
-        }
+        .qimen-section h2 { color: #a371f7; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .qimen-hexagram { background: rgba(163, 113, 247, 0.1); border-left: 4px solid #a371f7; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
         .qimen-hexagram h4 { color: #a371f7; margin-bottom: 8px; }
-        .qimen-verdict {
-            background: rgba(255, 107, 107, 0.1);
-            border-left: 4px solid #ff6b6b;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 15px 0;
-        }
+        .qimen-verdict { background: rgba(255, 107, 107, 0.1); border-left: 4px solid #ff6b6b; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
         .qimen-verdict h4 { color: #ff6b6b; margin-bottom: 8px; }
-        .qimen-time {
-            background: rgba(0, 212, 255, 0.1);
-            border-left: 4px solid #00d4ff;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 15px 0;
-        }
+        .qimen-time { background: rgba(0, 212, 255, 0.1); border-left: 4px solid #00d4ff; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
         .qimen-time h4 { color: #00d4ff; margin-bottom: 12px; }
-        .time-slot {
-            background: rgba(0, 212, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
+        .time-slot { background: rgba(0, 212, 255, 0.05); border-radius: 10px; padding: 15px; margin-bottom: 12px; border: 1px solid rgba(0, 212, 255, 0.2); }
         .time-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
         .time-name { color: #00d4ff; font-weight: bold; font-size: 1.1em; min-width: 45px; }
         .time-range { color: #8b9dc3; font-size: 0.9em; background: rgba(139, 157, 195, 0.15); padding: 3px 10px; border-radius: 15px; }
-        .time-info { color: #b0c4de; font-size: 0.95em; margin-bottom: 8px; }
         .time-verdict { font-size: 0.95em; font-weight: 500; padding: 8px 12px; border-radius: 6px; background: rgba(255,255,255,0.05); }
-        .time-verdict.up { color: #00ff88; border-left: 3px solid #00ff88; }
         .time-verdict.down { color: #ff6b6b; border-left: 3px solid #ff6b6b; }
         .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
         .ztb-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #00d4ff;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+            border: 2px solid #00d4ff; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
         }
-        .ztb-section h2 {
-            color: #00d4ff;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .ztb-section h2 { color: #00d4ff; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .news-section {
             background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
-            border: 2px solid #c9a84c;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+            border: 2px solid #c9a84c; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
         }
-        .news-section h2 {
-            color: #c9a84c;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .news-section h2 { color: #c9a84c; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .direction-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 30px;
         }
         @media (max-width: 768px) {
             .direction-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
         }
         .direction-card {
-            background: #1a2332;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid #2d3a4f;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 20px;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         .direction-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            border-color: #00d4ff;
+            transform: translateY(-3px);
+            border-color: #3d4a5f;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
-        .direction-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
+        .direction-card.hot {
+            border-left: 4px solid #ff6b6b;
         }
-        .direction-card.hot::before { background: linear-gradient(90deg, #ff6b6b, #ffd700); }
-        .direction-card.watch::before { background: linear-gradient(90deg, #00d4ff, #58a6ff); }
+        .direction-card.watch {
+            border-left: 4px solid #ffd700;
+        }
         .tag {
             display: inline-block;
             padding: 4px 12px;
-            border-radius: 20px;
+            border-radius: 15px;
             font-size: 0.85em;
             font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.3); }
+        .tag-watch { background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
+        .direction-card h3 {
+            font-size: 1.3em;
             margin-bottom: 10px;
+            color: #f0f4f8;
         }
-        .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
-        .tag-watch { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
-        .direction-card h3 { color: #fff; font-size: 1.2em; margin-bottom: 10px; }
-        .direction-card p { color: #b0c4de; font-size: 0.95em; line-height: 1.5; margin-bottom: 15px; }
-        .stock-list { margin-top: 15px; border-top: 1px dashed #2d3a4f; padding-top: 15px; }
-        .stock-list h4 { color: #00d4ff; font-size: 0.95em; margin-bottom: 10px; }
-        .stock-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 10px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 6px;
-            margin-bottom: 6px;
-            font-size: 0.9em;
+        .direction-card p {
+            color: #a0aec0;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
-        .stock-item:hover { background: rgba(0, 212, 255, 0.1); }
-        .stock-info { display: flex; align-items: center; gap: 8px; }
-        .stock-name { color: #fff; font-weight: 500; }
-        .stock-code { color: #8b9dc3; font-size: 0.85em; }
-        .stock-tag { padding: 2px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold; }
-        .tag-s { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
-        .tag-a { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
-        .tag-horse { background: rgba(255, 193, 7, 0.2); color: #ffd700; }
-        .verification-section {
-            background: #1a2332;
-            border: 1px solid #2d3a4f;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .verification-section h2 { color: #00d4ff; font-size: 1.3em; margin-bottom: 15px; }
-        .verification-table { width: 100%; border-collapse: collapse; }
-        .verification-table th {
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .verification-table td { padding: 12px; border-bottom: 1px solid #2d3a4f; color: #b0c4de; }
-        .footer {
-            text-align: center;
-            padding: 30px;
+        .stocks-line {
             color: #8b9dc3;
-            border-top: 1px solid #2d3a4f;
-            margin-top: 30px;
+            font-size: 0.9em;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(139, 157, 195, 0.2);
+        }
+        .stocks-line strong { color: #c9a84c; font-weight: normal; }
+        .verification-section {
+            background: linear-gradient(135deg, #0d1b0d 0%, #1a2e1a 100%);
+            border: 2px solid #4caf50; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(76, 175, 80, 0.15);
+        }
+        .verification-section h2 { color: #4caf50; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .verify-list { list-style: none; }
+        .verify-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #2d3a4f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .verify-list li:last-child { border-bottom: none; }
+        .verify-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; }
+        .footer {
+            text-align: center; padding: 30px 0;
+            border-top: 1px solid #2d3a4f; margin-top: 30px;
+            color: #5a6a7a; font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- 头部 -->
         <div class="header">
             <h1>🎯 羿学交易智囊团</h1>
-            <p class="date">2026-05-15</p>
-            <div class="nav" style="display:none;">
-                <a href="qimen.html">🔮 奇门起盘</a>
-                <a href="reports.html">📊 个股报告</a>
-            </div>
+            <div class="date">2026年5月15日 星期五 | 数据截止：前一交易日收盘</div>
         </div>
 
-        <!-- ========== 奇门预测区 ========== -->
+        <!-- ========== 奇门君今日预测 ========== -->
         <div class="qimen-section">
             <h2>🔮 奇门君今日预测</h2>
-            <div class="qimen-content">
-                <div class="qimen-hexagram">
-                    <h4>📊 卦象</h4>
-                    <p>丙午年 癸巳月 己丑日 己巳时，立夏下元阳遁7局。旬首甲子戊，值符天柱星落艮八宫，值使惊门落震三宫。</p>
-                    <p>值符天柱落艮土之宫，死门同宫——大势沉闷，无生气。日干己土临离火之宫，巳月火旺生土，己得月令而旺，然己+庚刑杀返名+休门门迫，旺中有伤。四害遍布七处：三处门迫（惊、开、休），入墓两处（庚、癸），白虎临生门。</p>
+            <div class="qimen-hexagram">
+                <h4>📜 起局信息</h4>
+                <p>阳遁7局 · 己丑日 · 己巳时 | 值符：天柱星落艮八宫 | 值使：惊门落震三宫 | 四害：7处（3门迫+1击刑+2入墓+1白虎）</p>
+            </div>
+            <div class="qimen-verdict">
+                <h4>⚡ 大势判语</h4>
+                <p>己丑日己巳时，阳遁7局。值符天柱落艮八宫（旺），值使惊门落震三宫（门迫）。四害7处：景门宫迫（午火克酉金，情绪受压）、开门宫迫（申金克巳火，政策发力受阻）、惊门宫迫（惊门本位震三宫受刑）、甲申庚+甲子戊击刑（资金决策混乱）、天柱星入墓（大势信号衰减）、日干己入墓（价格动能不足）、白虎临乾宫（尾盘或现急跌）。</p>
+                <p style="margin-top:10px; color:#ff6b6b; font-weight:bold;">→ 谨慎看空。今日收阴概率约70%，己巳时己+庚刑杀返名，短线操作宜防午前冲高回落。</p>
+            </div>
+            <div class="qimen-time">
+                <h4>⏰ 时辰推演（交易时段映射）</h4>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">巳时</span>
+                        <span class="time-range">09:30-10:30</span>
+                    </div>
+                    <div class="time-verdict down">开门宫迫+击刑，早盘或现高开低走，不宜追高</div>
                 </div>
-                <div class="qimen-verdict">
-                    <h4>📜 大势判语</h4>
-                    <p style="line-height:1.8; font-style:italic;">
-                        值符死门大势沉，己虽得火旺中存。<br>
-                        刑杀返名休门迫，四害七处压盘阴。<br>
-                        庚墓癸藏空方弱，乙惊门迫买盘虚。<br>
-                        白虎生门利润煞，收阴概率占七成。<br>
-                        <strong>今日大势：谨慎看空，偏弱震荡，收阴概率约70%。</strong>
-                    </p>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">午时</span>
+                        <span class="time-range">11:00-11:30</span>
+                    </div>
+                    <div class="time-verdict down">景门宫迫+天柱入墓，午前情绪受压，量能萎缩</div>
                 </div>
-                <div class="qimen-time">
-                    <h4>⏰ 时辰推演</h4>
-                    <div class="time-slot">
-                        <div class="time-header">
-                            <span class="time-name">巳时</span>
-                            <span class="time-range">09:30-10:30</span>
-                        </div>
-                        <p class="time-info">上午开盘</p>
-                        <div class="time-verdict down">己巳时，日干时干同宫。己+庚刑杀返名主暗藏阻力，休门门迫主高开低走或低开震荡。前一日大跌后惯性低开概率大。</div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">未时</span>
+                        <span class="time-range">13:00-14:00</span>
                     </div>
-                    <div class="time-slot">
-                        <div class="time-header">
-                            <span class="time-name">午时</span>
-                            <span class="time-range">10:30-11:30</span>
-                        </div>
-                        <p class="time-info">上午尾盘</p>
-                        <div class="time-verdict neutral">午火当令，火生土（己更旺）。日干得令有支撑，上午尾盘可能小幅企稳，但反弹力度有限（惊门门迫振幅受限）。</div>
-                    </div>
-                    <div class="time-slot">
-                        <div class="time-header">
-                            <span class="time-name">未时</span>
-                            <span class="time-range">13:00-14:00</span>
-                        </div>
-                        <p class="time-info">下午开盘</p>
-                        <div class="time-verdict neutral">未土当令，生门更旺。但白虎临生门，未时土旺可能激活白虎凶性。下午或有短暂反弹，但白虎压利润，反弹难持续。</div>
-                    </div>
-                    <div class="time-slot">
-                        <div class="time-header">
-                            <span class="time-name">申时</span>
-                            <span class="time-range">14:00-15:00</span>
-                        </div>
-                        <p class="time-info">下午尾盘</p>
-                        <div class="time-verdict down">申金当令，庚金出墓，空方力量略有恢复。申金泄土（己日干被泄），尾盘承压下行，可能收在低位。</div>
-                    </div>
+                    <div class="time-verdict neutral">庚+戊刑杀返名，午后或现震荡，观望为宜</div>
                 </div>
-                <div class="qimen-hexagram">
-                    <h4>📜 玄学解析</h4>
-                    <p style="font-style:italic; color:#b388ff;">
-                        值符天柱落艮八，死门同宫——大势沉闷，无生气。天柱星属金，夏令囚于火月，艮宫土生金亦无力回天。日干己土落离九，巳月火旺生土，己得月令而旺，然己+庚"刑杀返名"凶格同宫，主诉讼、阻力、暗中受损；休门（水）落离宫（火）为门迫，水克火、门克宫——做多受伤。旺中有伤，支撑不牢。四害之重，为近期罕见：三处门迫主市场情绪全面受压；庚金入墓、癸水入墓，主空方蓄势待发、盈利预期不实；白虎临坤二生门宫，凶煞直扑利润——此最为凶险，主盘中或有急跌。吉凶格局：丙辛合在坎一、青龙转光在兑七、华盖逢星在震三，三吉格分散各宫，护佑之力分散。凶格刑杀返名在日干宫、白虎临生门在利润宫，两凶格直击中军，危害集中。
-                    </p>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">申时</span>
+                        <span class="time-range">14:00-15:00</span>
+                    </div>
+                    <div class="time-verdict down">白虎临乾宫，尾盘或现急跌，空仓避险</div>
                 </div>
             </div>
         </div>
@@ -311,124 +190,61 @@
         <!-- ========== 涨停板方向整理 ========== -->
         <div class="ztb-section">
             <h2>📈 涨停板方向整理（5月14日）</h2>
-            <p style="color:#8b9dc3; margin-bottom:20px;">数据来源：54只涨停股，识别出9大方向</p>
+            <p style="color:#c9a84c; margin-bottom:20px;">数据来源：54只涨停股，识别出9大方向</p>
             <div class="direction-grid">
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>半导体产业链</h3>
                     <p>5只涨停，中船特气4天3板。日本六氟化钨减产+国产替代加速。市场认为电子特气只是周期波动，未意识到六氟化钨面临"供给硬缺口"。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中船特气</span><span class="stock-code">688146</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">晶升股份</span><span class="stock-code">688478</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中瓷电子</span><span class="stock-code">003031</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">南大光电</span><span class="stock-code">300346</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">彤程新材</span><span class="stock-code">603650</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>雅克科技(002409)、安集科技(688019)、鼎龙股份(300054)、晶瑞电材(300655)、彤程新材(603650)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>光伏/新能源</h3>
                     <p>7只涨停。光伏产业链持续活跃，协鑫集成、双良节能、耀皮玻璃等涨停。行业从"阶段性供需错配"向"产能去化完成+需求回暖"切换。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">联泓新科</span><span class="stock-code">003022</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">协鑫集成</span><span class="stock-code">002506</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">双良节能</span><span class="stock-code">600481</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">连城数控</span><span class="stock-code">835368</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">京能电力</span><span class="stock-code">600578</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>福斯特(603806)、迈为股份(300751)、中信博(688408)、阳光电源(300274)、TCL中环(002129)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>化工/新材料</h3>
                     <p>6只涨停。环氧丙烷涨价+地缘冲突加速海外化工供给出清。泰和新材3天2板，芳纶涂覆隔膜适配半固态电池的新能源属性被忽略。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">泰和新材</span><span class="stock-code">002254</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">红宝丽</span><span class="stock-code">002165</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">晨光新材</span><span class="stock-code">605399</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">红墙股份</span><span class="stock-code">002809</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">万润股份</span><span class="stock-code">002643</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>万华化学(600309)、华鲁恒升(600426)、扬农化工(600486)、滨化股份(601678)、齐翔腾达(002408)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>地产/基建/建材</h3>
                     <p>6只涨停，蒙娜丽莎5连板（市场最高标）。地产链政策预期+陶瓷基板跨界概念。蒙娜丽莎"陶瓷基板"跨界概念的估值溢价存在争议。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">蒙娜丽莎</span><span class="stock-code">002918</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">合肥城建</span><span class="stock-code">002208</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">宁夏建材</span><span class="stock-code">600449</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">东方雨虹</span><span class="stock-code">002271</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">花王股份</span><span class="stock-code">603007</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>东方雨虹(002271)、坚朗五金(002791)、三棵树(603737)、科顺股份(300737)、兔宝宝(002043)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>机器人/智能制造</h3>
                     <p>7只涨停。机器人概念持续扩散，北自科技、星德胜、麒盛科技等多股涨停。人形机器人产业加速→减速器、传感器、执行器需求激增。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">北自科技</span><span class="stock-code">603082</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">星德胜</span><span class="stock-code">603344</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">欧克科技</span><span class="stock-code">001223</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">绿的谐波</span><span class="stock-code">688017</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">麒盛科技</span><span class="stock-code">603610</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>汇川技术(300124)、绿的谐波(688017)、鸣志电器(603728)、江苏雷利(300660)、五洲新春(603667)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>光通信/AI硬件</h3>
                     <p>4只涨停，可川科技3连板。CPO板块崩盘后的超跌反弹，低位独立标的受资金青睐。鸿海CPO交换机全年出货预计1万台。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">可川科技</span><span class="stock-code">603052</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">共进股份</span><span class="stock-code">603118</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">金富科技</span><span class="stock-code">003018</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中际旭创</span><span class="stock-code">300308</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">盛视科技</span><span class="stock-code">002990</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>中际旭创(300308)、天孚通信(300394)、新易盛(300502)、光迅科技(002281)、太辰光(300570)</div>
                 </div>
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>养殖/农业</h3>
                     <p>4只涨停。猪价回暖+能繁母猪存栏去化完成。农业农村部修订生猪产能调控方案，能繁母猪正常保有量下调至3750万头。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">天邦食品</span><span class="stock-code">002124</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">神农集团</span><span class="stock-code">605296</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">华统股份</span><span class="stock-code">002840</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">天域生物</span><span class="stock-code">603717</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">海大集团</span><span class="stock-code">3115.HK</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>牧原股份(002714)、温氏股份(300498)、海大集团(002311)、唐人神(002567)、傲农生物(603363)</div>
                 </div>
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>电力/燃气/能源</h3>
                     <p>4只涨停。绿电+能源安全概念活跃，京能电力2连板。能源安全政策加码→天然气/电力基础设施建设加速。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">天富能源</span><span class="stock-code">600509</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">贵州燃气</span><span class="stock-code">600903</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">金房能源</span><span class="stock-code">001210</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">长江电力</span><span class="stock-code">600900</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">国际实业</span><span class="stock-code">000159</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>中国核电(601985)、长江电力(600900)、三峡能源(600905)、国电电力(600795)、华能国际(600011)</div>
                 </div>
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>消费/零售/家电</h3>
                     <p>4只涨停，利仁科技4连板。消费复苏+小家电需求回暖。利仁科技电饼铛/空气炸锅市占率领先，4连板市场活跃标的。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">利仁科技</span><span class="stock-code">001259</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">友阿股份</span><span class="stock-code">002277</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">宁波中百</span><span class="stock-code">600857</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">飞科电器</span><span class="stock-code">603868</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">威龙股份</span><span class="stock-code">603779</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>美的集团(000333)、海尔智家(600690)、格力电器(000651)、飞科电器(603868)、苏泊尔(002032)</div>
                 </div>
             </div>
         </div>
@@ -442,121 +258,89 @@
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>半导体/芯片</h3>
                     <p>三星下调芯片产量应对罢工，全面罢工损失或达4600亿元。台积电抛出AI芯片"三层蛋糕"理论，预测2030年全球芯片市场规模达1.5万亿美元。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中船特气</span><span class="stock-code">688146</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">南大光电</span><span class="stock-code">300346</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">北方华创</span><span class="stock-code">002371</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">彤程新材</span><span class="stock-code">603650</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">世名科技</span><span class="stock-code">300522</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>海光信息(688041)、寒武纪(688256)、北方华创(002371)、韦尔股份(603501)、中芯国际(688981)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>光通信/AI硬件</h3>
                     <p>光引擎技术正式进入商业化落地阶段，POET Technologies与Lumilens达成5亿美元订单。鸿海CPO交换机全年出货预计1万台，AI机架出货量全年有望翻倍。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中际旭创</span><span class="stock-code">300308</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">天孚通信</span><span class="stock-code">300394</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">新易盛</span><span class="stock-code">300502</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">光迅科技</span><span class="stock-code">002281</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">致尚科技</span><span class="stock-code">301486</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>中际旭创(300308)、天孚通信(300394)、新易盛(300502)、光迅科技(002281)、太辰光(300570)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>中美经贸</h3>
                     <p>习特会构建"中美建设性战略稳定关系"，为未来3年中美关系提供战略指引。李强会见苹果/英伟达/特斯拉/波音/高盛等15家美国工商界代表。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">立讯精密</span><span class="stock-code">002475</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">美的集团</span><span class="stock-code">000333</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">工业富联</span><span class="stock-code">601138</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">华凯易佰</span><span class="stock-code">300592</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">拓普集团</span><span class="stock-code">601689</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>立讯精密(002475)、歌尔股份(002241)、工业富联(601138)、华凯易佰(300592)、拓普集团(601689)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>新能源汽车</h3>
-                    <p>超15家新能源车企宣布涨价或缩减优惠，单车涨幅2000-10000元。碳酸锂价格从6万元/吨暴涨至18-20万元/吨，车规存储芯片涨幅超150%。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">宁德时代</span><span class="stock-code">300750</span></div><span class="stock-tag tag-s">S级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">比亚迪</span><span class="stock-code">002594</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">赛轮轮胎</span><span class="stock-code">601058</span></div><span class="stock-tag tag-a">A级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">天赐材料</span><span class="stock-code">002709</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">拓普集团</span><span class="stock-code">601689</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <p>超15家新能源车企宣布涨价或缩减优惠，碳酸锂从6万元/吨暴涨至18-20万元/吨。车规存储芯片涨幅超150%，单车成本增加3000-7000元。</p>
+                    <div class="stocks-line"><strong>代表票：</strong>宁德时代(300750)、比亚迪(002594)、赛轮轮胎(601058)、天赐材料(002709)、拓普集团(601689)</div>
                 </div>
                 <div class="direction-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>养殖/猪肉</h3>
                     <p>农业农村部修订生猪产能调控方案，能繁母猪正常保有量下调至3750万头。A股猪肉板块逆势走强，天邦食品4天2板。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">天邦食品</span><span class="stock-code">002124</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">神农集团</span><span class="stock-code">605296</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">华统股份</span><span class="stock-code">002840</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">天域生物</span><span class="stock-code">603717</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">海大集团</span><span class="stock-code">3115.HK</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                    </div>
+                    <div class="stocks-line"><strong>代表票：</strong>牧原股份(002714)、温氏股份(300498)、海大集团(002311)、唐人神(002567)、傲农生物(603363)</div>
                 </div>
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>商业航天</h3>
-                    <p>蓝箭航天朱雀二号改进型遥五发射成功，送入900公里轨道。商业液氧甲烷火箭进入规模化应用阶段，可执行一箭多星、大运力部署等任务。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">蓝箭航天</span><span class="stock-code">未上市</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">星际荣耀</span><span class="stock-code">未上市</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">航天电子</span><span class="stock-code">600879</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <p>蓝箭航天朱雀二号改进型遥五运载火箭发射成功，将2.8吨定制化试验载荷送入900公里轨道，标志着商业液氧甲烷火箭进入规模化应用阶段。</p>
+                    <div class="stocks-line"><strong>代表票：</strong>航天电子(600879)、中国卫星(600118)、航天晨光(600501)、中航光电(002179)、雷电微力(301050)</div>
                 </div>
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>医药/减肥药</h3>
-                    <p>上海多家药房GLP-1药物需凭纸质处方购买，处方需在三天有效期内。减肥药销售政策收紧，医保基金飞行检查正式启动。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">诺泰生物</span><span class="stock-code">688076</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">华东医药</span><span class="stock-code">000963</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">药明康德</span><span class="stock-code">603259</span></div><span class="stock-tag tag-s">B级</span></div>
-                    </div>
+                    <p>上海多家零售药房5月15日起GLP-1药物需凭医院纸质处方购买，处方有效期三天。减肥药销售政策收紧，合规龙头受益。</p>
+                    <div class="stocks-line"><strong>代表票：</strong>华东医药(000963)、恒瑞医药(600276)、药明康德(603259)、信达生物(01801.HK)、诺泰生物(688076)</div>
+                </div>
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>地产政策</h3>
+                    <p>海南优化调整住房公积金贷款政策，单人缴存最高贷款基准额度统一提高至100万元，双人缴存提高至120万元，人才额度上调20%。</p>
+                    <div class="stocks-line"><strong>代表票：</strong>万科A(000002)、保利发展(600048)、招商蛇口(001979)、金地集团(600383)、新城控股(601155)</div>
+                </div>
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>加密货币</h3>
+                    <p>美国参议院银行委员会审议《明晰法案》加密货币监管立法，英国央行拟放宽稳定币监管规则。加密货币监管框架趋于明确。</p>
+                    <div class="stocks-line"><strong>代表票：</strong>御银股份(002177)、飞天诚信(300386)、四方精创(300468)、拉卡拉(300773)、新国都(300130)</div>
                 </div>
                 <div class="direction-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>能源/原油</h3>
-                    <p>欧佩克+计划继续增产，拟9月底前恢复停产产能。美油102美元/桶，布油106美元/桶。霍尔木兹海峡局势存在不确定性，支撑油价。</p>
-                    <div class="stock-list">
-                        <h4>重点关注标的</h4>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中国海油</span><span class="stock-code">600938</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中国石油</span><span class="stock-code">601857</span></div><span class="stock-tag tag-s">B级</span></div>
-                        <div class="stock-item"><div class="stock-info"><span class="stock-name">中远海能</span><span class="stock-code">600026</span></div><span class="stock-tag tag-horse">黑马</span></div>
-                    </div>
+                    <p>美油主力合约收涨0.99%报102.02美元/桶，布油涨0.91%报106.59美元/桶。全球原油库存快速下降+成品油供应紧张+霍尔木兹海峡局势不确定性支撑油价。</p>
+                    <div class="stocks-line"><strong>代表票：</strong>中国石油(601857)、中国海油(600938)、中国石化(600028)、广汇能源(600256)、新潮能源(600777)</div>
+                </div>
+                <div class="direction-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>宏观/金融</h3>
+                    <p>央行开展3000亿元买断式逆回购操作，本月净回笼5000亿元。4月新增贷款历史罕见负值，业内称贷款增速放缓或成新常态。</p>
+                    <div class="stocks-line"><strong>代表票：</strong>招商银行(600036)、宁波银行(002142)、平安银行(000001)、兴业银行(601166)、东方财富(300059)</div>
                 </div>
             </div>
         </div>
 
         <!-- ========== 关键验证节点 ========== -->
         <div class="verification-section">
-            <h2>🔍 关键验证节点</h2>
-            <table class="verification-table">
-                <tr><th>时间</th><th>事件</th><th>验证逻辑</th></tr>
-                <tr><td>5月15日</td><td>特朗普访华结束</td><td>若达成经贸协议→风险偏好回升，出口链受益</td></tr>
-                <tr><td>5月15日盘中</td><td>A股开盘验证</td><td>奇门预测"谨慎看空"验证→若收阴则模型准确</td></tr>
-                <tr><td>5月中下旬</td><td>六氟化钨订单落地</td><td>若中船特气签订大额订单→半导体材料方向强化</td></tr>
-                <tr><td>5月底</td><td>碳酸锂价格走势</td><td>若维持18-20万元/吨→新能源车涨价传导顺利</td></tr>
-                <tr><td>6月起</td><td>夏季用电高峰</td><td>全社会用电量增速→电力股盈利修复验证</td></tr>
-                <tr><td>6月</td><td>生猪均价走势</td><td>若环比上涨>10%→养殖周期反转确认</td></tr>
-                <tr><td>Q2财报季</td><td>各方向核心标的财报</td><td>光刻胶订单/液冷订单/国产芯片出货→确认放量逻辑</td></tr>
-            </table>
+            <h2>🔍 关键验证节点（2026-05-15）</h2>
+            <p style="color:#4caf50; margin-bottom:15px; font-size:0.95em;">以下验证节点将决定各方向预期差能否兑现。盘中/盘后跟踪验证，达标→预期差确认，不达标→方向降级。</p>
+            <ul class="verify-list">
+                <li><span class="verify-dot"></span><span>半导体：日本六氟化钨减产是否扩大？国产替代订单是否有新公告？</span></li>
+                <li><span class="verify-dot"></span><span>光伏：工信部光伏产能置换政策是否落地？光伏组件价格是否止跌？</span></li>
+                <li><span class="verify-dot"></span><span>化工：环氧丙烷价格是否继续上涨？泰和新材芳纶订单是否有新能源客户确认？</span></li>
+                <li><span class="verify-dot"></span><span>地产：是否有新的地产政策出台？蒙娜丽莎陶瓷基板是否有实质性订单？</span></li>
+                <li><span class="verify-dot"></span><span>机器人：人形机器人产业是否有新订单/政策？减速器/传感器供应链是否有订单公告？</span></li>
+                <li><span class="verify-dot"></span><span>光通信：CPO交换机出货量是否达到鸿海预测（1万台）？光引擎订单是否有新公告？</span></li>
+                <li><span class="verify-dot"></span><span>新能源汽车：碳酸锂价格是否继续上涨？涨价车企订单是否受到影响？</span></li>
+            </ul>
         </div>
 
         <div class="footer">
-            <p>🎯 羿学交易智囊团 | 奇门遁甲 + 预期差挖掘 | 2026-05-15</p>
-            <p style="font-size:0.9em; margin-top:10px;">数据来源：iFinD专业数据库 + 公开渠道搜索 | 仅供参考，不构成投资建议</p>
+            <p>🎯 羿学交易智囊团 | 每日更新 | 数据截止前一交易日收盘</p>
+            <p>预测仅供参考，不构成投资建议</p>
         </div>
     </div>
 </body>
