@@ -1188,14 +1188,15 @@
             let zhiShiMenGong = zhiShiMenBaseGong;
             
             // 修正值使门落宫计算：从旬首地支开始，按地支顺序，阳遁递增/阴遁递减九宫数字
+            // 【修正2026-05-13】计数起点用原始宫号（含中五），仅在最终落在5时寄宫
             const zhiList = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
             const xunShouZhi = xunShou[1]; // 旬首地支，如"甲戌"取"戌"
             const xunShouZhiIndex = zhiList.indexOf(xunShouZhi);
             const hourZhi = hourGanZhi[1]; // 时支
             
-            // 创建从旬首开始的九宫数字映射（不跳过中五，完整1-9循环）
-            let startGong = xunShouGong;
-            if (startGong === 5) startGong = 2; // 旬首在中五时寄到2
+            // 创建从旬首开始的九宫数字映射（完整1-9循环，中五保留为5）
+            // 起点用原始xunShouGong（即使为5），不提前寄宫
+            let startGong = xunShouGong; // 【修正】不再提前改成2
             let currentGong = startGong;
             const zhiToGong = {};
             
