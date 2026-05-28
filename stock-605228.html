@@ -1,46 +1,230 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>605228 神通科技 - 羿学交易智囊团</title>
+    <title>605228 神通科技 - 个股深度分析 | 羿学交易智囊团</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%); color: #e0e6ed; min-height: 100vh; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; padding: 30px 0; border-bottom: 1px solid #2d3a4f; margin-bottom: 30px; }
-        .header h1 { font-size: 2em; color: #00d4ff; margin-bottom: 10px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
         .header .code { color: #8b9dc3; font-size: 1.2em; }
         .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
         .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
         .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
         .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
-        .section { background: #1a2332; border: 1px solid #2d3a4f; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
-        .section h2 { color: #ffd700; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
-        .section h3 { color: #00d4ff; font-size: 1.1em; margin: 15px 0 10px; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
         .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
         th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
         th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
         td { color: #b0c4de; }
         .highlight { color: #ffd700; font-weight: 600; }
-        .tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
         .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
         .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
-        .tag-strong { background: rgba(0, 255, 136, 0.2); color: #00ff88; border: 1px solid #00ff88; }
-        .tag-mid { background: rgba(0, 212, 255, 0.2); color: #00d4ff; border: 1px solid #00d4ff; }
-        .resonance-box { background: rgba(0, 255, 136, 0.05); border: 1px solid #00ff88; border-radius: 8px; padding: 15px; margin: 15px 0; }
-        .resonance-box h4 { color: #00ff88; margin-bottom: 10px; }
-        .footer { text-align: center; padding: 30px; color: #8b9dc3; border-top: 1px solid #2d3a4f; margin-top: 30px; font-size: 0.9em; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>605228 神通科技</h1>
-            <p class="code">汽车零部件 · 智能化升级 · 光学镜片 · 业绩反转</p>
-            <p class="date">分析日期：2026-05-14 | V4.3（含行业景气度×共振检查）</p>
+            <h1>神通科技</h1>
+            <p class="code">605228.SH · 汽车零部件 · 汽车智能化 · 光学镜片</p>
+            <p class="date">分析日期：2026-05-28 | 分析师：小羿 | 版本：V4.3 | 数据截止：2026-05-27</p>
             <div class="nav">
                 <a href="index.html">🏠 首页</a>
                 <a href="reports.html">📊 报告库</a>
@@ -48,196 +232,352 @@
             </div>
         </div>
 
+        <!-- ===== 大白话三问（置顶，30秒入口） ===== -->
+        <div class="dabaohua-section">
+            <h2>🔥 大白话三问（30秒读完）</h2>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【贵不贵】</div>
+                <div class="q-answer">不贵了。股价从5月中的15元跌到13元，PE从48倍压缩到约40倍。2025年净利1.33亿，2026Q1净利4643万（+420%），如果全年净利2亿+，PE就只有30倍出头。<span class="anchor-tag" onclick="document.getElementById('step4').scrollIntoView({behavior:'smooth'})">← Step 4</span></div>
+            </div>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【有没有故事】</div>
+                <div class="q-answer">有真故事——业绩拐点已确认（2024年亏3200万→2025年赚1.33亿→Q1再+420%），毛利率24.25%同比+10pct；有远期故事——光学镜片（激光雷达/HUD/毫米波雷达透镜）2027年投产1020万套产能。<span class="anchor-tag" onclick="document.getElementById('step1-5').scrollIntoView({behavior:'smooth'})">← Step 1.5</span></div>
+            </div>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【最坏会怎样】</div>
+                <div class="q-answer">Q2业绩环比大幅下滑（排除季节性），说明Q1的+420%是昙花一现；光学镜片2026H2仍无头部客户定点，远期故事证伪；股价跌回10元以下（-25%）。<span class="anchor-tag" onclick="document.getElementById('step3').scrollIntoView({behavior:'smooth'})">← Step 3</span></div>
+            </div>
+            
+            <div class="dabaohua-summary">
+                <h4>📌 四句话总结（说给别人听）</h4>
+                <p>一家传统汽零企业2024年亏了3200万，2025年靠主动式油气分离器扭亏赚了1.33亿，2026Q1净利再暴涨420%。现在切入汽车智能化光学镜片赛道，激光雷达和HUD透镜2027年产能释放。股价从15元回调到13元，估值压力减轻。Q2中报是验证业绩持续性的生死线。</p>
+            </div>
+            
+            <div class="dabaohua-source">以上结论来自下方 Step 2/3/4 详细分析 ↓</div>
+        </div>
+
+        <!-- ===== 执行摘要 ===== -->
         <div class="section">
             <h2>📋 执行摘要</h2>
-            <p><strong>分析日期</strong>：2026-05-14</p>
-            <p><strong>核心变化</strong>：2024年亏损-3198万→2025年营收18.84亿（+35.7%）/净利1.33亿（扭亏）→2026Q1营收4.12亿（+20.4%）/净利4643万（+420.14%）；主动式油气分离器批量交付（国内首家）；切入车规级光学镜片（激光雷达/HUD/毫米波雷达透镜）+神通光场屏后装市场</p>
-            <p><strong>投资价值</strong>：<span class="highlight">高价值</span>（业绩拐点已确认+新赛道布局清晰+市值适中）</p>
-            <p><strong>预期差等级</strong>：<span class="highlight">中高预期差</span></p>
-            <p><strong>跟踪周期</strong>：中期（1-2年，业绩持续验证+光学镜片产能释放）</p>
-            <p><strong>关键验证</strong>：2026中报（Q2业绩持续性+毛利率+光学镜片订单）</p>
-            <p><strong>证伪信号</strong>：Q2业绩环比大幅下滑（排除季节性因素后）/光学镜片无实质订单/应收账款恶化</p>
+            <p><strong>核心变化</strong>：2024年亏损-3198万→2025年营收18.84亿（+35.70%）/净利1.33亿（扭亏）→2026Q1营收4.12亿（+20.40%）/净利4643万（+420.14%），毛利率24.25%（同比+10pct）；主动式油气分离器批量交付（国内首家）；切入车规级光学镜片（激光雷达/HUD/毫米波雷达透镜），湖北明源项目2027年7月投产，规划1020万套产能。</p>
+            <p><strong>投资价值</strong>：<span class="highlight">高价值</span> | <strong>预期差</strong>：中高（20-50%） | <strong>跟踪周期</strong>：中期（1-2年）</p>
+            <p><strong>关键验证</strong>：2026-08-30 中报（Q2业绩持续性+光学镜片订单+客户导入进展）</p>
+            <div class="insight">
+                ⚠️ <strong>核心风险提示</strong>：当前PE约40倍（股价回调后），Q1净利+420%含基数效应；应收账款/利润比偏高（回款压力大）；光学镜片当前收入占比极小，纯远期故事。
+            </div>
         </div>
 
+        <!-- ===== Step 1：变化识别 ===== -->
         <div class="section">
-            <h2>🔍 变化识别（Step 1）</h2>
-            <h3>基础画像（极简数据）</h3>
-            <table>
-                <tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
-                <tr><td>股票名称</td><td>神通科技</td><td>-</td></tr>
-                <tr><td>股票代码</td><td>605228.SH</td><td>-</td></tr>
-                <tr><td>当前股价</td><td>15.0元</td><td>证券之星 2026-05-11</td></tr>
-                <tr><td>市值</td><td>约64亿</td><td>证券之星</td></tr>
-                <tr><td>所属行业</td><td>汽车零部件/汽车智能化/光学镜片</td><td>年报</td></tr>
-                <tr><td>实控人</td><td>方立锋（董事长，家族企业）</td><td>年报</td></tr>
-            </table>
-
-            <h3>核心变化识别</h3>
-            <table>
-                <tr><th>变化类型</th><th>具体事件</th><th>发生时间</th><th>信息来源</th></tr>
-                <tr><td>业绩大反转</td><td>2024年亏损-3198万→2025年营收18.84亿（+35.7%）/净利1.33亿（扭亏）→2026Q1净利4643万（+420%），毛利率24.25%（同比+10pct）</td><td>2025年报/2026Q1</td><td>年报/一季报</td></tr>
-                <tr><td>主动式油气分离器</td><td>2025年批量交付，国内首家掌握该技术；研发能力延伸至软硬件集成（自研PCB+电机控制算法+CAN/LIN交互）</td><td>2025年</td><td>年报</td></tr>
-                <tr><td>车规级光学镜片</td><td>切入激光雷达/毫米波雷达/HUD光学镜片；神通光场屏后装市场；湖北明源项目2027年7月投产，规划1020万套透镜产能</td><td>2025-2027年</td><td>年报/投资者关系</td></tr>
-            </table>
-
-            <p class="highlight">🔍 一句话核心发现：传统汽零企业实现业绩大反转（2024年亏损→2025年净利1.33亿→Q1净利+420%），同时切入汽车智能化光学镜片赛道，具备"主业复苏+新赛道放量"的双重逻辑。</p>
-        </div>
-
-        <div class="section">
-            <h2>⚖️ 变化权重排序（Step 1.5）</h2>
-            <table>
-                <tr><th>排序</th><th>变化</th><th>权重等级</th><th>当前股价贡献</th><th>未来演变</th></tr>
-                <tr><td>1</td><td>业绩大反转（扭亏为盈→高增长）</td><td><span class="tag tag-base">底</span></td><td>部分已兑现，市场可能怀疑持续性</td><td>若Q2-Q3业绩稳健增长则底扎实</td></tr>
-                <tr><td>2</td><td>车规级光学镜片布局</td><td><span class="tag tag-top">顶</span></td><td>远期估值溢价（2027年产能释放）</td><td>若2026H2头部客户定点则顶兑现</td></tr>
-                <tr><td>3</td><td>主动式油气分离器批量交付</td><td><span class="tag tag-base">底</span></td><td>已贡献2025年收入和利润增长</td><td>若持续放量则增厚底</td></tr>
-                <tr><td>4</td><td>神通光场屏后装市场</td><td><span class="tag tag-top">顶</span></td><td>远期估值溢价</td><td>若高端车型渗透率提升则兑现</td></tr>
-            </table>
-        </div>
-
-        <div class="section">
-            <h2>🔄 行业景气度×公司共振检查（Step 1.6，⭐新增V4.3）</h2>
-            <div class="resonance-box">
-                <h4>📊 共振检查结果：中→强</h4>
-                <p><strong>行业方向</strong>：向上加速——汽车智能化渗透率快速提升，激光雷达/HUD/毫米波雷达光学镜片需求爆发</p>
-                <p><strong>行业斜率</strong>：陡峭（50%+）——激光雷达全球市场CAGR 38%，AR-HUD CAGR 24%，毫米波雷达中国市场+16%</p>
-                <p><strong>公司卡位</strong>：从传统汽零向智能化光学镜片升级，依托注塑工艺+精密模具+光学技术积累；湖北明源项目规划1020万套产能；国内首家主动式油气分离器</p>
-                <p><strong>受益顺序</strong>：已传导（传统汽零+油气分离器）/ 传导中（光学镜片少量出货，2027年产能释放）</p>
-                <p><strong>共振强度</strong>：<span class="tag tag-mid">中→强</span>（主业与汽车智能化共振，光学镜片尚未放量）</p>
+            <h2>🔎 Step 1：变化识别（发生了什么）</h2>
+            
+            <div class="info-card">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">当前股价</span>
+                        <span class="info-value">~13.17元（5月27日）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">总市值</span>
+                        <span class="info-value">~63亿</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">PE(TTM)</span>
+                        <span class="info-value">~40倍（股价回调后）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">PB</span>
+                        <span class="info-value">~2.7倍</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2026Q1营收</span>
+                        <span class="info-value">4.12亿（+20.4%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2026Q1归母净利</span>
+                        <span class="info-value">4643万（+420.14%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2025全年营收</span>
+                        <span class="info-value">18.84亿（+35.70%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2025全年归母净利</span>
+                        <span class="info-value">1.33亿（扭亏）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Q1毛利率</span>
+                        <span class="info-value">24.25%（同比+10pct）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">经营现金流Q1</span>
+                        <span class="info-value">2517万（去年同期-3496万）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">负债率</span>
+                        <span class="info-value">24.76%（极低）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">实控人</span>
+                        <span class="info-value">方立锋（董事长，家族企业）</span>
+                    </div>
+                </div>
             </div>
 
-            <h3>三层检查详情</h3>
+            <h3>核心变化（3个）</h3>
             <table>
-                <tr><th>检查项</th><th>评估</th><th>依据</th></tr>
-                <tr><td>①行业方向</td><td>向上加速</td><td>汽车智能化渗透率快速提升，L2+/L3加速落地；中国车载传感器市场2021-2025年CAGR 39%</td></tr>
-                <tr><td>②行业斜率</td><td>陡峭（50%+）</td><td>激光雷达CAGR 38%，AR-HUD CAGR 24%，毫米波雷达+16%</td></tr>
-                <tr><td>③公司卡位</td><td>传统汽零→智能化光学升级</td><td>湖北明源项目1020万套产能；国内首家油气分离器；神通光场屏</td></tr>
-                <tr><td>④受益顺序</td><td>已传导/传导中</td><td>传统汽零+油气分离器已传导；光学镜片少量出货，2027年释放</td></tr>
-                <tr><td>⑤共振强度</td><td><span class="tag tag-mid">中→强</span></td><td>主业与汽车智能化共振，光学镜片尚未放量；若2026H2头部客户定点可上调至"强"</td></tr>
+                <tr><th>排序</th><th>变化类型</th><th>具体事件</th><th>时间</th></tr>
+                <tr>
+                    <td>1</td>
+                    <td>业绩大反转</td>
+                    <td>2024年亏损→2025年净利1.33亿→2026Q1净利+420%，毛利率24.25%（同比+10pct），经营现金流转正</td>
+                    <td>2025年报/2026Q1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>主动式油气分离器批量交付</td>
+                    <td>国内首家掌握该技术，分离效率达国际一流水平，从结构制造延伸至软硬件集成（自研PCB+电机控制算法+CAN/LIN交互）</td>
+                    <td>2025年</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>车规级光学镜片布局</td>
+                    <td>切入激光雷达透镜、HUD透镜、毫米波雷达透镜；神通光场屏后装市场推进；湖北明源项目2027年7月投产，规划1020万套产能</td>
+                    <td>2025-2027年</td>
+                </tr>
             </table>
-
-            <p class="highlight">关键发现：神通科技处于"传统汽零复苏"与"汽车智能化升级"的共振交汇点——2025年营收+35.7%/毛利率23.10%（+4.57pct），2026Q1毛利率24.25%（+10pct），确认拐点真实。但光学镜片业务尚未放量，共振强度暂判定"中→强"。</p>
+            
+            <div class="quote">
+                🔍 <strong>一句话核心发现</strong>：传统汽零企业实现业绩大反转（2024年亏损→2025年净利1.33亿→Q1净利+420%），同时切入汽车智能化光学镜片赛道（激光雷达/HUD/毫米波雷达透镜），具备"主业复苏+新赛道放量"的双重逻辑。
+            </div>
         </div>
 
-        <div class="section">
-            <h2>📈 变化价值（Step 2）</h2>
+        <!-- ===== Step 1.5：变化权重排序 ===== -->
+        <div class="section" id="step1-5">
+            <h2>⚖️ Step 1.5：变化权重排序</h2>
+            <div>
+                <span class="tag tag-base">底：业绩大反转</span>
+                <span class="tag tag-base">底：主动式油气分离器</span>
+                <span class="tag tag-top">顶：光学镜片布局</span>
+                <span class="tag tag-top">顶：神通光场屏</span>
+            </div>
+            <table style="margin-top:15px;">
+                <tr><th>排序</th><th>变化</th><th>权重</th><th>说明</th><th>关键验证时点</th></tr>
+                <tr>
+                    <td>1</td>
+                    <td>业绩大反转</td>
+                    <td><span class="tag tag-base">底</span></td>
+                    <td>已验证方向正确，Q1净利+420%确认拐点力度强劲</td>
+                    <td>2026-08-30 中报</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>主动式油气分离器</td>
+                    <td><span class="tag tag-base">底</span></td>
+                    <td>已贡献2025年收入和利润增长，国内首家技术壁垒</td>
+                    <td>2026中报</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>光学镜片布局</td>
+                    <td><span class="tag tag-top">顶</span></td>
+                    <td>远期期权，湖北项目2027年投产，当前少量出货</td>
+                    <td>2026年年报</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>神通光场屏</td>
+                    <td><span class="tag tag-top">顶</span></td>
+                    <td>预计Q3上车M9等车型，远期故事，当前无收入</td>
+                    <td>2026-2027年</td>
+                </tr>
+            </table>
+            <p><strong>一句话权重判断</strong>：业绩反转（扭亏为盈+高增长）是<strong style="color:#00ff88;">底</strong>（已验证方向正确，力度强劲），光学镜片布局是<strong style="color:#a371f7;">顶</strong>（远期期权，2027年产能释放），主动式油气分离器是<strong style="color:#00ff88;">底</strong>（已贡献增量），光场屏是<strong style="color:#a371f7;">顶</strong>（远期故事）。底已夯实，顶待验证。</p>
+        </div>
 
+        <!-- ===== Step 1.6：行业景气度×共振检查 ===== -->
+        <div class="section">
+            <h2>📊 Step 1.6：行业景气度×公司共振检查</h2>
+            <table>
+                <tr><th>检查项</th><th>判断</th></tr>
+                <tr><td>①行业方向（未来6-12个月）</td><td>向上加速——汽车智能化渗透率快速提升，激光雷达/HUD/毫米波雷达光学镜片需求爆发</td></tr>
+                <tr><td>②行业斜率</td><td>陡峭（50%+）——激光雷达全球市场CAGR 38%，AR-HUD CAGR 24%，毫米波雷达中国市场+16%</td></tr>
+                <tr><td>③公司卡位</td><td>从传统汽零（动力系统/饰件）向智能化光学镜片升级，依托注塑工艺+精密模具+光学技术积累；湖北明源项目规划1020万套产能</td></tr>
+                <tr><td>④受益顺序</td><td>已传导（主业复苏+油气分离器放量）/ 传导中（光学镜片少量出货）/ 待传导（光场屏后装市场）</td></tr>
+                <tr><td>⑤共振强度</td><td><strong style="color:#ffd700;">中→强</strong>——主业与汽车智能化大方向共振，但光学镜片尚未放量；若2026H2获得头部客户定点，可上调至"强"</td></tr>
+            </table>
+            <div class="quote">
+                💡 <strong>共振结论</strong>：神通科技处于"传统汽零复苏"与"汽车智能化升级"的共振交汇点。2025年毛利率23.10%（同比+4.57pct），2026Q1毛利率24.25%（同比+10pct），说明结构优化+订单放量已产生真实利润。共振强度暂判定"中→强"，需2026H2客户定点确认。
+            </div>
+        </div>
+
+        <!-- ===== Step 2：变化价值 ===== -->
+        <div class="section">
+            <h2>💡 Step 2：变化价值——能带来什么？</h2>
+            
             <h3>变化一：业绩大反转</h3>
             <table>
-                <tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th></tr>
-                <tr><td>短期</td><td>2025年营收+35.7%/净利1.33亿（扭亏）；Q1营收+20.4%/净利+420%/毛利率24.25%（+10pct）；经营现金流Q1转正</td><td>复苏期→成长期</td><td>已验证</td></tr>
-                <tr><td>中期</td><td>若客户订单持续放量+产品结构优化，全年净利有望达2-2.5亿</td><td>成长期</td><td>中高</td></tr>
-                <tr><td>长期</td><td>若光学镜片业务放量（2027年湖北项目投产1020万套），营收和净利再上台阶</td><td>成长期→成熟期</td><td>中</td></tr>
+                <tr><th>时间维度</th><th>能带来什么</th><th>可行性</th><th>量化空间</th></tr>
+                <tr>
+                    <td>短期（已验证）</td>
+                    <td>2025年营收18.84亿（+35.7%）/净利1.33亿；2026Q1营收4.12亿（+20.4%）/净利4643万（+420%）/毛利率24.25%</td>
+                    <td>已验证</td>
+                    <td>2025年净利1.33亿；2026Q1净利4643万</td>
+                </tr>
+                <tr>
+                    <td>中期（1-2年）</td>
+                    <td>客户订单持续放量+产品结构优化（高毛利光学镜片占比提升），全年净利有望达2-2.5亿</td>
+                    <td>中高</td>
+                    <td>全年净利预估2-2.5亿（机构预测2.32亿）</td>
+                </tr>
+                <tr>
+                    <td>长期（2年+）</td>
+                    <td>光学镜片业务放量（2027年湖北项目投产1020万套），营收和净利再上台阶</td>
+                    <td>中</td>
+                    <td>光学镜片项目达产后预计新增营收10.2亿/净利1.26亿</td>
+                </tr>
             </table>
-
-            <p><strong>演变路径</strong>：</p>
+            <h4>演变路径</h4>
             <ul>
-                <li><strong>乐观</strong>：Q2-Q3业绩延续高增长 → 全年净利2.5亿+（+88%）</li>
-                <li><strong>基准</strong>：Q2季节性波动但全年净利2-2.3亿（+50-73%）</li>
-                <li><strong>悲观</strong>：Q2环比大幅下滑+毛利率回落 → 全年净利&lt;1.5亿</li>
+                <li><strong>乐观</strong>：Q2-Q3业绩延续高增长，全年净利2.5亿+（+88%），毛利率维持24%+，估值修复至25-30倍PE</li>
+                <li><strong>基准</strong>：Q2业绩季节性波动但全年净利2-2.3亿（+50-73%），毛利率22-24%，股价稳步上行</li>
+                <li><strong>悲观</strong>：Q2业绩环比大幅下滑（排除季节性因素后）+毛利率回落，全年净利低于1.5亿，估值压缩</li>
             </ul>
-
-            <h3>关键质疑点</h3>
-            <table>
-                <tr><th>质疑</th><th>事实</th><th>影响</th></tr>
-                <tr><td>业绩暴增是否含一次性因素？</td><td>公司解释"客户订单持续放量+毛利率提升"；2024年亏损主因资产减值5158万，2025年减值大幅减少</td><td>Q1扣非+403.71%确认主业真实改善</td></tr>
-                <tr><td>应收账款/利润=310%</td><td>回款压力较大</td><td>2025年经营现金流3.99亿（+171.65%）说明现金流改善，但需持续跟踪</td></tr>
-                <tr><td>毛利率24.25%能否维持？</td><td>2025年全年23.10%，Q1 24.25%（同比+10pct）</td><td>若客户结构优化+高毛利产品占比提升则有支撑</td></tr>
-            </table>
+            <div class="insight">
+                ⚠️ <strong>关键质疑</strong>：Q1同比+420%有基数效应（2024Q1仅893万），但2025年全年净利1.33亿，2026Q1占全年约35%，比例合理。毛利率24.25%能否维持？若客户结构优化+高毛利产品占比提升，则有支撑；若价格战则下滑。
+            </div>
 
             <h3>变化二：车规级光学镜片布局</h3>
             <table>
-                <tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th></tr>
-                <tr><td>短期</td><td>已有D/Z/H等客户在不同阶段，少量出货</td><td>导入期</td><td>低</td></tr>
-                <tr><td>中期</td><td>湖北明源项目2027年7月投产，规划1020万套，达产后预计新增营收10.2亿/净利1.26亿</td><td>导入期→成长期</td><td>中</td></tr>
-                <tr><td>长期</td><td>若激光雷达/HUD渗透率持续提升，公司作为国产供应商受益</td><td>成长期</td><td>中</td></tr>
+                <tr><th>时间维度</th><th>能带来什么</th><th>可行性</th></tr>
+                <tr>
+                    <td>短期（已验证）</td>
+                    <td>已有D客户、Z客户、H客户等在不同阶段（订单/合同/定点）；少量出货</td>
+                    <td>低</td>
+                </tr>
+                <tr>
+                    <td>中期（1-2年）</td>
+                    <td>湖北明源光学镜片项目预计2027年7月投产，规划1020万套各类透镜产能，达产后预计新增营收10.2亿/净利1.26亿</td>
+                    <td>中</td>
+                </tr>
+                <tr>
+                    <td>长期（2年+）</td>
+                    <td>若激光雷达/HUD/毫米波雷达渗透率持续提升，公司作为国产光学镜片供应商受益</td>
+                    <td>中</td>
+                </tr>
             </table>
+            <div class="insight">
+                ⚠️ <strong>关键质疑</strong>：公司未单独披露光学镜片收入，2025年"其他"收入仅1678万（占比0.9%），当前收入贡献极小，纯远期故事。竞争格局：宇瞳光学、舜宇光学、水晶光电等已有车载光学布局，后发竞争压力大。
+            </div>
 
-            <h3>关键质疑点</h3>
-            <table>
-                <tr><th>质疑</th><th>事实</th><th>影响</th></tr>
-                <tr><td>光学镜片当前收入占比？</td><td>2025年"其他"收入1678万（占比0.9%）</td><td>当前收入贡献极小，纯远期故事</td></tr>
-                <tr><td>竞争格局如何？</td><td>宇瞳光学、舜宇光学、水晶光电等已有布局</td><td>后发竞争压力大，需差异化</td></tr>
-                <tr><td>客户导入进度？</td><td>公司披露D/Z/H等客户在不同阶段，但未公告具体订单金额</td><td>信息不透明，难以量化</td></tr>
-            </table>
+            <h3>变化三：神通光场屏后装市场</h3>
+            <p>预计Q3上车M9等车型，BOM占比20%（ASP约550元/车）。光场屏属于智能座舱创新产品，处于导入期（0→1），市场接受度和渗透率不确定。公司提及消费电子拓展空间百亿+，但无具体计划——<strong>纯远期故事，不纳入当前定价</strong>。</p>
         </div>
 
-        <div class="section">
-            <h2>🎯 可信度裁决（Step 3）</h2>
-
+        <!-- ===== Step 3：可信度裁决 ===== -->
+        <div class="section" id="step3">
+            <h2>🎯 Step 3：可信度裁决——值不值得投？</h2>
+            
             <h3>三情景推演</h3>
             <table>
-                <tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率权重</th></tr>
-                <tr><td>乐观</td><td>+50-80%</td><td>全年净利2.5亿++毛利率维持24%+光学镜片头部客户定点+光场屏上车顺利</td><td>25%</td></tr>
-                <tr><td>基准</td><td>+20-40%</td><td>全年净利2-2.3亿+毛利率22-24%+光学镜片稳步推进</td><td>55%</td></tr>
-                <tr><td>悲观</td><td>-20-30%</td><td>Q2业绩环比大幅下滑+全年净利&lt;1.5亿+毛利率回落至20%以下</td><td>20%</td></tr>
+                <tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+                <tr>
+                    <td><strong style="color:#4caf50;">乐观</strong></td>
+                    <td>+50-80%（目标价20-24元）</td>
+                    <td>全年净利2.5亿+（+88%）+毛利率维持24%+光学镜片获得头部客户定点+光场屏上车顺利</td>
+                    <td>25%</td>
+                </tr>
+                <tr>
+                    <td><strong style="color:#ffd700;">基准</strong></td>
+                    <td>+20-40%（股价15.6-18.4元）</td>
+                    <td>全年净利2-2.3亿（+50-73%）+毛利率22-24%+光学镜片稳步推进+光场屏按计划推进</td>
+                    <td>55%</td>
+                </tr>
+                <tr>
+                    <td><strong style="color:#ff6b6b;">悲观</strong></td>
+                    <td>-20-30%（股价9-10.5元）</td>
+                    <td>Q2业绩环比大幅下滑+全年净利低于1.5亿+毛利率回落至20%以下+光学镜片无进展</td>
+                    <td>20%</td>
+                </tr>
             </table>
+            <p><strong>加权预期收益</strong>：+23.75% | <strong>风险收益比</strong>：2.6:1 | <strong>预期差大小</strong>：<span style="color:#ffd700;">中高（20-50%）</span></p>
 
-            <p><strong>加权预期</strong>：+23.75% | <strong>风险收益比</strong>：2.6:1 | <strong>预期差</strong>：<span class="highlight">中高（20-50%）</span></p>
-
-            <h3>证伪信号</h3>
-            <ul>
-                <li>Q2业绩环比大幅下滑（排除季节性因素）→ 2025年扭亏为一次性因素</li>
-                <li>Q2毛利率回落至20%以下 → 价格战加剧或产品结构恶化</li>
-                <li>全年净利低于1.5亿 → 高增长不可持续</li>
-                <li>光学镜片2026H2仍无头部客户定点公告 → 新赛道布局成空口号</li>
-                <li>应收账款继续恶化（&gt;350%）→ 盈利质量下降</li>
-            </ul>
+            <h3>证伪信号（什么时候放弃）</h3>
+            <table>
+                <tr><th>信号</th><th>含义</th><th>出现概率</th></tr>
+                <tr><td>Q2业绩环比大幅下滑（排除季节性因素）</td><td>2025年扭亏为一次性因素，主业未真实改善</td><td>中</td></tr>
+                <tr><td>Q2毛利率回落至20%以下</td><td>价格战加剧或产品结构恶化</td><td>中低</td></tr>
+                <tr><td>全年净利低于1.5亿</td><td>高增长不可持续，估值支撑不足</td><td>中</td></tr>
+                <tr><td>光学镜片2026H2仍无头部客户定点公告</td><td>新赛道布局成空口号</td><td>中</td></tr>
+                <tr><td>应收账款继续恶化（&gt;350%）</td><td>盈利质量下降，现金流承压</td><td>中</td></tr>
+            </table>
 
             <h3>关键验证节点</h3>
             <table>
-                <tr><th>时间</th><th>事件</th><th>验证什么</th><th>距分析日</th><th>如果miss怎么办</th></tr>
-                <tr><td>2026-08-30</td><td>2026中报</td><td>Q2业绩持续性+毛利率+光学镜片订单</td><td>3.5个月</td><td>若Q2净利环比大幅下滑且无季节性解释，则证伪高增长，放弃</td></tr>
-                <tr><td>2026-10月</td><td>三季报</td><td>Q3延续性+全年是否有望达机构预测2.32亿</td><td>5个月</td><td>若Q3净利&lt;4000万，则全年2.32亿无望</td></tr>
-                <tr><td>2026-2027年</td><td>光学镜片客户定点/订单公告</td><td>光学镜片是否有实质性突破</td><td>6-18个月</td><td>若2026H2仍无头部客户定点，则顶消散，降级为中价值</td></tr>
+                <tr><th>时间</th><th>事件</th><th>验证什么</th><th>miss怎么办</th></tr>
+                <tr><td>2026-07-15</td><td>Q2业绩预告</td><td>Q2单季净利是否维持同比增长</td><td>若环比大幅下滑且无季节性解释，则证伪高增长</td></tr>
+                <tr><td>2026-08-30</td><td>中报披露</td><td>Q2业绩持续性+毛利率+光学镜片订单</td><td>若Q2净利大幅下滑+毛利率回落，则放弃</td></tr>
+                <tr><td>2026-10月</td><td>三季报</td><td>Q3延续性+全年是否有望达机构预测2.32亿</td><td>若Q3净利&lt;4000万，则全年2.32亿无望</td></tr>
+                <tr><td>2026-2027年</td><td>光学镜片客户定点/订单公告</td><td>光学镜片业务是否有实质性突破</td><td>若2026H2仍无头部客户定点，则顶消散，降级为中价值</td></tr>
+            </table>
+        </div>
+
+        <!-- ===== Step 4：投资逻辑 ===== -->
+        <div class="section" id="step4">
+            <h2>🏁 Step 4：投资逻辑——买入是为了什么？</h2>
+            
+            <div class="verdict-box positive">
+                <h4>✅ 可以买入——业绩拐点已确认+估值回调提供安全边际</h4>
+                <p>股价从15元回调到13元，PE从48倍压缩到约40倍。若2026年全年净利达2.32亿（机构预测），则PE降至27倍，估值回归合理区间。负债率仅24.76%，财务健康。</p>
+            </div>
+
+            <h3>估值匹配检查</h3>
+            <table>
+                <tr><th>检查项</th><th>实际值</th><th>合理区间</th><th>结论</th></tr>
+                <tr><td>PE(TTM)</td><td>~40倍（股价13.17元）</td><td>25-35倍（汽零+智能化）</td><td><span style="color:#ffd700;">偏高但可接受</span></td></tr>
+                <tr><td>PEG（按2026E）</td><td>~0.45（40倍PE÷88%增速）</td><td>0.5-1.0</td><td><span style="color:#4caf50;">低估区间</span></td></tr>
+                <tr><td>PB</td><td>~2.7倍</td><td>2-4倍（汽零）</td><td><span style="color:#4caf50;">合理</span></td></tr>
+                <tr><td>毛利率</td><td>24.25%（Q1）</td><td>≥20%</td><td><span style="color:#4caf50;">达标</span></td></tr>
+                <tr><td>负债率</td><td>24.76%</td><td>&lt;50%</td><td><span style="color:#4caf50;">极低</span></td></tr>
+                <tr><td>机构评级</td><td>2家增持</td><td>—</td><td><span style="color:#4caf50;">正面</span></td></tr>
             </table>
 
-            <p class="highlight">🔍 一句话核心发现：加权预期收益约+23.75%，风险收益比2.6:1——价值在于"业绩拐点已确认+汽车智能化光学镜片赛道"的双重逻辑，但当前PE约48倍偏高，需业绩持续高增长消化估值。</p>
+            <h3>持有周期</h3>
+            <table>
+                <tr><th>维度</th><th>判断</th></tr>
+                <tr><td>故事能走多远</td><td>中期（1-2年，业绩持续验证+光学镜片产能释放）</td></tr>
+                <tr><td>判断节点</td><td>2026-08-30 中报（Q2业绩持续性+毛利率+光学镜片订单）</td></tr>
+                <tr><td>中途退出条件</td><td>Q2净利环比大幅下滑且无季节性解释 / 全年净利&lt;1.5亿 / 光学镜片2026H2无头部客户定点</td></tr>
+                <tr><td>最短持有</td><td>6个月（等中报验证）</td></tr>
+                <tr><td>最长持有</td><td>2年（等光学镜片产能释放）</td></tr>
+            </table>
+
+            <div class="quote">
+                <strong>一句话核心逻辑</strong>：买入是为了博弈"2026年利润拐点兑现+汽车智能化光学镜片赛道"的双轮驱动，这个变化在6-12个月内有80%概率正向推进（乐观+基准），核心验证节点是2026中报，如果Q2业绩环比大幅下滑则证伪高增长、放弃跟踪。
+            </div>
         </div>
 
+        <!-- ===== 数据来源 ===== -->
         <div class="section">
-            <h2>💡 综合研判（Step 4）</h2>
-
-            <h3>0. 流动性环境</h3>
-            <p><strong>当前判断</strong>：<span class="highlight">存量博弈</span></p>
-            <p>存量博弈下，神通科技这种"业绩拐点已确认（Q1净利+420%）+新赛道布局（光学镜片）"的标的，具备结构性机会。当前PE约48倍（市值64亿÷净利1.33亿），若2026年全年净利达2.32亿（机构预测），则PE降至27.6倍，估值将回归合理。关键在于业绩能否持续兑现。</p>
-
-            <h3>1. 投资价值评估</h3>
-            <ul>
-                <li><strong>评估</strong>：<span class="highlight">高价值</span></li>
-                <li><strong>核心依据</strong>：业绩拐点已确认+汽车智能化光学镜片赛道景气度高（激光雷达CAGR 38%，HUD CAGR 24%）+市值适中（64亿）+机构覆盖（2家增持评级）</li>
-                <li><strong>最大风险</strong>：当前PE约48倍偏高，若Q2业绩环比大幅下滑则戴维斯双杀；应收账款/利润=310%，回款压力大</li>
-                <li><strong>情景概率</strong>：乐观+基准合计80%，加权预期收益+23.75%</li>
-            </ul>
-
-            <h3>2. 投资价值等级</h3>
-            <p><strong>预期差等级</strong>：中高预期差（加权收益+23.75%）</p>
-            <p><strong>价值等级</strong>：高价值</p>
-
-            <h3>3. 跟踪周期</h3>
-            <p><strong>周期</strong>：中期（1-2年，业绩持续验证+光学镜片产能释放）</p>
-            <p><strong>判断节点</strong>：2026中报（Q2业绩持续性+毛利率+光学镜片订单）</p>
-            <p><strong>中途退出条件</strong>：Q2净利环比大幅下滑且无季节性解释 / 全年净利&lt;1.5亿 / 光学镜片2026H2无头部客户定点</p>
-
-            <p class="highlight">🔍 一句话核心发现：业绩拐点已确认（Q1净利+420%）+汽车智能化光学镜片赛道强共振，但PE约48倍偏高——高价值、中高预期差，中报验证业绩持续性是关键，若Q2环比下滑则估值承压。</p>
-        </div>
-
-        <div class="section">
-            <h2>📎 附录：数据来源清单</h2>
+            <h2>📚 数据来源清单</h2>
             <table>
                 <tr><th>数据</th><th>来源</th><th>时间</th></tr>
-                <tr><td>股价/市值</td><td>证券之星/同花顺</td><td>2026-05-11</td></tr>
-                <tr><td>2026Q1财务数据</td><td>2026年第一季度报告</td><td>2026-04-13</td></tr>
-                <tr><td>2025年年报</td><td>2025年年度报告</td><td>2026-03-31</td></tr>
-                <tr><td>汽车传感器行业数据</td><td>华经产业研究院/Yole/前瞻产业研究院</td><td>2021-2026年</td></tr>
-                <tr><td>车载光学镜片预测</td><td>潮电智库/高工智能汽车研究院</td><td>2023-2029年</td></tr>
+                <tr><td>2026Q1财务数据</td><td>公司一季报公告</td><td>2026-04-13</td></tr>
+                <tr><td>2025年年报</td><td>公司年报公告</td><td>2026-03-31</td></tr>
                 <tr><td>投资者关系活动</td><td>2026年4月28日业绩说明会</td><td>2026-04-28</td></tr>
-                <tr><td>机构评级</td><td>证券之星/机构研报</td><td>2026-04-28</td></tr>
+                <tr><td>行业数据（激光雷达/HUD）</td><td>华经产业研究院/Yole/前瞻产业研究院</td><td>2021-2026年</td></tr>
+                <tr><td>股价/市值/资金流向</td><td>证券之星/新浪财经</td><td>2026-05-27</td></tr>
+                <tr><td>机构评级</td><td>证券之星</td><td>2026-05-06</td></tr>
             </table>
         </div>
 
         <div class="footer">
-            <p>🎯 羿学交易智囊团 | 神通科技（605228）投资分析报告</p>
-            <p style="margin-top:8px; font-size:0.85em;">版本：个股分析V4.3（含行业景气度×共振检查）| 数据来源：公开渠道搜索 | 仅供学习交流，不构成投资建议</p>
+            <p>🎯 羿学交易智囊团 | 个股深度分析报告</p>
+            <p>分析规范：V4.3（大白话+框架双轨） | 数据截止：2026-05-27</p>
+            <p>预测仅供参考，不构成投资建议</p>
         </div>
     </div>
 </body>
