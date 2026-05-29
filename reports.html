@@ -240,7 +240,11 @@
                 <span class="filter-tag" data-tag="半导体封测">半导体封测</span>
                 <span class="filter-tag" data-tag="面板设备">面板设备</span>
                 <span class="filter-tag" data-tag="消费电子">消费电子</span>
-                <span class="filter-tag" data-tag="汽车连接器">汽车连接器</span>
+                <span class="filter-tag" data-tag="新能源连接器">新能源连接器</span>
+                <span class="filter-tag" data-tag="人形机器人">人形机器人</span>
+                <span class="filter-tag" data-tag="精密零组件">精密零组件</span>
+                <span class="filter-tag" data-tag="核电">核电</span>
+                <span class="filter-tag" data-tag="电力">电力</span>
             </div>
         </div>
 
@@ -280,7 +284,7 @@
 
         async function loadReports() {
             try {
-                const response = await fetch('reports.json');
+                const response = await fetch('reports.json?t=' + Date.now());
                 allReports = await response.json();
                 // 按日期倒序
                 allReports.sort((a, b) => new Date(b.date) - new Date(a.date));
