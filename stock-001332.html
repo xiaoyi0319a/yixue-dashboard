@@ -1,259 +1,578 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>锡装股份（001332）投资分析报告 | 羿学交易</title>
-<style>
-:root {
-  --bg-primary: #0a0a0a;
-  --bg-card: #111111;
-  --bg-elevated: #1a1a1a;
-  --border: #222;
-  --text-primary: #e0e0e0;
-  --text-secondary: #888;
-  --text-muted: #555;
-  --accent: #c9a050;
-  --accent-glow: rgba(201, 160, 80, 0.2);
-  --success: #4caf50;
-  --warning: #ff9800;
-  --danger: #f44336;
-  --info: #2196f3;
-}
-body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  line-height: 1.8;
-  margin: 0;
-  padding: 0;
-}
-.container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 20px 16px;
-}
-.header {
-  text-align: center;
-  padding: 40px 0 24px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 32px;
-}
-.header h1 {
-  font-size: 1.8rem;
-  color: var(--accent);
-  margin: 0 0 8px;
-}
-.header .subtitle {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-}
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 16px;
-}
-.card h2 {
-  color: var(--accent);
-  font-size: 1.2rem;
-  margin: 0 0 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.card h3 {
-  color: var(--text-primary);
-  font-size: 1rem;
-  margin: 16px 0 8px;
-}
-.card p {
-  color: var(--text-secondary);
-  margin: 8px 0;
-  font-size: 0.95rem;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.85rem;
-  margin: 12px 0;
-}
-th {
-  background: var(--bg-elevated);
-  color: var(--accent);
-  padding: 10px 8px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 1px solid var(--border);
-}
-td {
-  padding: 10px 8px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-secondary);
-}
-tr:last-child td {
-  border-bottom: none;
-}
-.tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  margin: 2px;
-  background: var(--bg-elevated);
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-.tag.success {
-  background: rgba(76, 175, 80, 0.15);
-  color: var(--success);
-  border-color: rgba(76, 175, 80, 0.3);
-}
-.tag.warning {
-  background: rgba(255, 152, 0, 0.15);
-  color: var(--warning);
-  border-color: rgba(255, 152, 0, 0.3);
-}
-.tag.danger {
-  background: rgba(244, 67, 54, 0.15);
-  color: var(--danger);
-  border-color: rgba(244, 67, 54, 0.3);
-}
-.tag.accent {
-  background: rgba(201, 160, 80, 0.15);
-  color: var(--accent);
-  border-color: rgba(201, 160, 80, 0.3);
-}
-.highlight {
-  background: var(--accent-glow);
-  border-left: 3px solid var(--accent);
-  padding: 12px 16px;
-  margin: 16px 0;
-  border-radius: 0 8px 8px 0;
-}
-.highlight p {
-  margin: 0;
-  color: var(--text-primary);
-  font-size: 1rem;
-}
-.conclusion {
-  background: var(--accent-glow);
-  border: 1px solid var(--accent);
-  border-radius: 12px;
-  padding: 24px;
-  text-align: center;
-  margin: 24px 0;
-}
-.conclusion h2 {
-  color: var(--accent);
-  margin: 0 0 12px;
-  border: none;
-  font-size: 1.4rem;
-}
-.conclusion p {
-  color: var(--text-primary);
-  font-size: 1.1rem;
-  margin: 0;
-}
-.footer {
-  text-align: center;
-  padding: 24px 0;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  border-top: 1px solid var(--border);
-  margin-top: 32px;
-}
-.back-link {
-  display: inline-block;
-  color: var(--accent);
-  text-decoration: none;
-  margin-bottom: 16px;
-  font-size: 0.9rem;
-}
-.back-link:hover {
-  text-decoration: underline;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>001332 锡装股份 - 个股深度分析 | 羿学交易智囊团</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <a href="reports.html" class="back-link">← 返回报告库</a>
+    <div class="container">
+        <div class="header">
+            <h1>锡装股份</h1>
+            <p class="code">001332.SZ · 金属压力容器 · 核电 · 高技术船舶</p>
+            <p class="date">分析日期：2026-05-29 | 分析师：小羿 | 版本：V4.3 | 数据截止：2026-05-28</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
 
-  <div class="header">
-    <h1>锡装股份（001332）</h1>
-    <p class="subtitle">金属压力容器 → 高端装备平台 | 2026-05-29</p>
-  </div>
+        <div class="dabaohua-section">
+            <h2>🔥 大白话三问（30秒读完）</h2>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【贵不贵】</div>
+                <div class="q-answer">不贵。当前动态PE约20倍（Q1年化），负债率26%，在手订单18.79亿（超过1.5年营收）。但股价从40元涨到65元（+63%），Q1拐点已经定价了一部分。<span class="anchor-tag" onclick="document.getElementById('step4').scrollIntoView({behavior:'smooth'})">← Step 4</span></div>
+            </div>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【有没有故事】</div>
+                <div class="q-answer">有真故事——Q1业绩爆发（营收+83%，净利+97%，毛利率44%），确认高端转型拐点；有远期故事——核电资质稀缺（国内鲜少有企业能做国际核级压力容器），高技术船舶占比从1%提升至10%。<span class="anchor-tag" onclick="document.getElementById('step1-5').scrollIntoView({behavior:'smooth'})">← Step 1.5</span></div>
+            </div>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【最坏会怎样】</div>
+                <div class="q-answer">Q1高增长只是脉冲，Q2利润掉回5000万以下，全年利润2.5亿，PE 29倍，股价跌回45-55元（-15%~-25%）。或者核电订单只是"故事"，占比始终上不去，估值切换失败。<span class="anchor-tag" onclick="document.getElementById('step3').scrollIntoView({behavior:'smooth'})">← Step 3</span></div>
+            </div>
+            
+            <div class="dabaohua-summary">
+                <h4>📌 四句话总结（说给别人听）</h4>
+                <p>一家做金属压力容器的公司，2025年业绩下滑，但2026Q1营收净利双双爆发近翻倍，毛利率从36%跳到44%。公司正从传统石化设备向核电、高技术船舶转型，核电资质国内稀缺。股价65元已经涨了60%+，翻倍需要核电故事真正兑现。中报是验证拐点持续性的生死线。</p>
+            </div>
+            
+            <div class="dabaohua-source">以上结论来自下方 Step 2/3/4 详细分析 ↓</div>
+        </div>
 
-  <div class="card">
-    <h2>核心数据</h2>
-    <table>
-      <tr><td>股价</td><td>65.81元</td><td>市值</td><td>约72亿</td></tr>
-      <tr><td>PE(TTM)</td><td>约32倍</td><td>动态PE</td><td>约20倍</td></tr>
-      <tr><td>负债率</td><td>26.27%</td><td>在手订单</td><td>18.79亿</td></tr>
-      <tr><td>2025年净利</td><td>2.27亿（-11%）</td><td>2026Q1净利</td><td>9129万（+97%）</td></tr>
-      <tr><td>毛利率</td><td>44.31%（Q1）</td><td>机构评级</td><td>1家买入</td></tr>
-    </table>
-  </div>
+        <div class="section">
+            <h2>📋 执行摘要</h2>
+            <p><strong>核心变化</strong>：2026Q1业绩爆发（营收3.54亿+83%，净利9129万+97%，毛利率44.31%）确认高端转型拐点；产品结构向核电/高技术船舶转型（高技术船舶占比从1%→10.78%）；核电资质稀缺（国内鲜少有企业能向国际核电项目供应核级压力容器）。</p>
+            <p><strong>投资价值</strong>：<span class="highlight">中高价值</span> | <strong>预期差</strong>：中等（10-30%） | <strong>跟踪周期</strong>：中期（1-2年）</p>
+            <p><strong>关键验证</strong>：2026-07-15 中报预告（Q2利润是否7000-8000万）、2026-08-30 中报披露（毛利率是否维持40%）</p>
+            <div class="insight">
+                ⚠️ <strong>核心风险提示</strong>：Q1同比+96%有基数效应（2025Q1净利仅4638万）；新增订单同比-13.5%（2025年13.33亿 vs 2024年15.41亿）；核电收入占比仍低，故事大于实质。
+            </div>
+        </div>
 
-  <div class="card">
-    <h2>大白话三问</h2>
-    <p><strong>1. 这公司靠不靠谱？</strong><br>靠谱。负债率26%，在手订单18.79亿（超过1.5年营收），现金流健康。不像那些讲故事的公司，这公司是真有钱赚。</p>
-    <p><strong>2. 股价还能涨吗？</strong><br>能涨，但翻倍不容易。当前价65元已涨了60%+，如果再翻倍到130元，需要利润翻2倍+估值再提升，这得靠核电故事真正兑现。</p>
-    <p><strong>3. 最大的风险是什么？</strong><br>Q1业绩是脉冲还是拐点？如果Q2利润掉回5000万以下，全年利润2.5亿，当前PE就29倍了，不便宜。还有就是核电订单只是"故事"，占比还很小。</p>
-  </div>
+        <div class="section">
+            <h2>🔎 Step 1：变化识别（发生了什么）</h2>
+            
+            <div class="info-card">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">当前股价</span>
+                        <span class="info-value">65.81元（5月28日）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">总市值</span>
+                        <span class="info-value">约72亿</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">PE(TTM)</span>
+                        <span class="info-value">约32倍</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">动态PE</span>
+                        <span class="info-value">约20倍（Q1年化）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">负债率</span>
+                        <span class="info-value">26.27%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">在手订单</span>
+                        <span class="info-value">18.79亿元</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2025年营收</span>
+                        <span class="info-value">11.81亿（-23%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2025年净利</span>
+                        <span class="info-value">2.27亿（-11%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2026Q1营收</span>
+                        <span class="info-value">3.54亿（+83%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2026Q1净利</span>
+                        <span class="info-value">9129万（+97%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Q1毛利率</span>
+                        <span class="info-value">44.31%（年报36.46%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">机构评级</span>
+                        <span class="info-value">1家买入</span>
+                    </div>
+                </div>
+            </div>
 
-  <div class="card">
-    <h2>变化权重排序</h2>
-    <table>
-      <tr><th>排序</th><th>变化</th><th>权重</th><th>说明</th></tr>
-      <tr><td>1</td><td>Q1业绩爆发+毛利率跃升</td><td><span class="tag success">底</span></td><td>已部分兑现，中报验证持续性</td></tr>
-      <tr><td>2</td><td>核电资质稀缺+国际订单</td><td><span class="tag accent">顶</span></td><td>最大未兑现逻辑，需订单占比提升</td></tr>
-      <tr><td>3</td><td>高技术船舶占比提升</td><td><span class="tag accent">顶</span></td><td>从1%到10%，继续提升至15%+</td></tr>
-      <tr><td>4</td><td>2025年全年业绩下滑</td><td><span class="tag warning">噪</span></td><td>周期低点，被Q1反弹掩盖</td></tr>
-    </table>
-  </div>
+            <h3>核心变化（2个）</h3>
+            <table>
+                <tr><th>排序</th><th>变化类型</th><th>具体事件</th><th>时间</th></tr>
+                <tr>
+                    <td>1</td>
+                    <td>业绩拐点</td>
+                    <td>Q1营收3.54亿（+83%），净利9129万（+97%），毛利率44.31%（年报36.46%），确认高端转型拐点</td>
+                    <td>2026-04（Q1财报）</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>产品结构转型</td>
+                    <td>高技术船舶及海工占比从1.01%提升至10.78%（+9.77pct），核电领域持续获得国际订单（欣克利角/塞兹维尔C）</td>
+                    <td>2025年全年</td>
+                </tr>
+            </table>
+            
+            <div class="quote">
+                🔍 <strong>一句话核心发现</strong>：Q1业绩爆发确认了高端转型拐点（毛利率44% vs 去年36%），叠加核电资质稀缺性（国内鲜少有企业能做国际核级压力容器），公司正从周期型石化设备商向高端装备平台转型。
+            </div>
+        </div>
 
-  <div class="card">
-    <h2>三情景推演</h2>
-    <table>
-      <tr><th>情景</th><th>概率</th><th>股价区间</th><th>核心假设</th></tr>
-      <tr><td><span class="tag success">乐观</span></td><td>25%</td><td>90-105元</td><td>毛利率40%维持，核电占比15%，30倍PE</td></tr>
-      <tr><td><span class="tag">基准</span></td><td>50%</td><td>65-80元</td><td>全年利润3-3.5亿，20-25倍PE</td></tr>
-      <tr><td><span class="tag danger">悲观</span></td><td>25%</td><td>45-55元</td><td>Q1脉冲，毛利率回落，核电延迟</td></tr>
-    </table>
-    <p>加权预期收益：<strong>+8.75%</strong> | 风险收益比：<strong>0.35:1</strong></p>
-  </div>
+        <div class="section" id="step1-5">
+            <h2>⚖️ Step 1.5：变化权重排序</h2>
+            <div>
+                <span class="tag tag-base">底：Q1业绩爆发</span>
+                <span class="tag tag-top">顶：核电资质稀缺</span>
+                <span class="tag tag-top">顶：高技术船舶占比提升</span>
+                <span class="tag tag-noise">噪：2025年全年下滑</span>
+            </div>
+            <table style="margin-top:15px;">
+                <tr><th>排序</th><th>变化</th><th>权重</th><th>说明</th><th>关键验证时点</th></tr>
+                <tr>
+                    <td>1</td>
+                    <td>Q1业绩爆发+毛利率跃升</td>
+                    <td><span class="tag tag-base">底</span></td>
+                    <td>已部分兑现（从40元涨至66元），中报验证持续性</td>
+                    <td>2026-08-30 中报</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>核电资质稀缺+国际订单</td>
+                    <td><span class="tag tag-top">顶</span></td>
+                    <td>最大未兑现逻辑，需订单占比提升</td>
+                    <td>2026-07-15 订单窗口</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>高技术船舶及海工占比提升</td>
+                    <td><span class="tag tag-top">顶</span></td>
+                    <td>从1%到10%，继续提升至15%+</td>
+                    <td>2026-08-30 中报</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>2025年全年业绩下滑</td>
+                    <td><span class="tag tag-noise">噪</span></td>
+                    <td>周期低点，被Q1反弹掩盖/误读</td>
+                    <td>2026-07-15 Q2预告</td>
+                </tr>
+            </table>
+            <p><strong>一句话权重判断</strong>：Q1业绩爆发是<strong style="color:#00ff88;">底</strong>（已部分兑现），核电资质稀缺性是<strong style="color:#a371f7;">顶</strong>（最大未兑现逻辑），高技术船舶是<strong style="color:#a371f7;">顶</strong>（从1%到10%+），2025年下滑是<strong style="color:#ff6b6b;">噪</strong>（被Q1掩盖了周期属性）。</p>
+        </div>
 
-  <div class="card">
-    <h2>即时错配</h2>
-    <p><strong>认知差</strong>：市场把锡装当周期股（15-20倍PE），实际它在向高端装备平台转型（核电+高技术船舶），估值锚应切换。</p>
-    <p><strong>信息差</strong>：Q1爆发被当成低基数脉冲，但18.79亿在手订单+产能释放意味着持续性可能超预期。</p>
-  </div>
+        <div class="section">
+            <h2>📊 Step 1.6：行业景气度×公司共振检查</h2>
+            <table>
+                <tr><th>检查项</th><th>判断</th></tr>
+                <tr><td>①行业方向（未来6-12个月）</td><td>核电+高技术船舶<strong style="color:#00ff88;">向上</strong>，传统石化化工<strong style="color:#ff6b6b;">横盘/向下</strong></td></tr>
+                <tr><td>②行业斜率</td><td>核电<strong style="color:#ffd700;">爆发</strong>（全球重启，中国每年6-8台核准），高技术船舶<strong style="color:#ffd700;">陡峭</strong>（50%+），传统石化<strong style="color:#8b9dc3;">温和</strong>（10-20%）</td></tr>
+                <tr><td>③公司卡位</td><td>核电国内稀缺核级压力容器供应商，绑定法马通/壳牌/巴斯夫；高技术船舶换热容器核心供应商，新产能12000吨已投产</td></tr>
+                <tr><td>④受益顺序</td><td>核电已传导（欣克利角已交付），高技术船舶传导中（占比10.78%→？）</td></tr>
+                <tr><td>⑤共振强度</td><td><strong style="color:#ffd700;">强</strong>——核电斜率>100%且公司为核心卡位，自动上调；传统石化占比下降削弱部分共振，但高端领域斜率足够高</td></tr>
+            </table>
+            <div class="quote">
+                💡 <strong>共振结论</strong>：锡装股份处于"传统石化周期低点"与"核电+高技术船舶爆发"的共振交汇点。Q1毛利率44%说明高端订单已开始贡献真实利润，共振强度判定为"强"，需中报确认持续性。
+            </div>
+        </div>
 
-  <div class="card">
-    <h2>关键验证节点</h2>
-    <table>
-      <tr><th>时间</th><th>事件</th><th>验证什么</th><th>如果miss</th></tr>
-      <tr><td>07-15</td><td>中报预告</td><td>Q2利润是否7000-8000万</td><td>悲观概率上调</td></tr>
-      <tr><td>08-30</td><td>中报披露</td><td>毛利率是否维持40%</td><td>顶逻辑弱化</td></tr>
-      <tr><td>09-30</td><td>订单披露</td><td>核电/船舶新签订单</td><td>乐观概率下调</td></tr>
-      <tr><td>10-28</td><td>三季报</td><td>全年利润能否达3.5亿</td><td>估值承压</td></tr>
-    </table>
-  </div>
+        <div class="section">
+            <h2>💡 Step 2：变化价值——能带来什么？</h2>
+            
+            <h3>变化一：Q1业绩爆发+毛利率跃升（底）</h3>
+            <table>
+                <tr><th>时间维度</th><th>能带来什么</th><th>可行性</th><th>量化空间</th></tr>
+                <tr>
+                    <td>短期（已验证）</td>
+                    <td>Q1营收3.54亿/净利9129万/毛利率44.31%，在手订单18.79亿</td>
+                    <td>已验证</td>
+                    <td>全年利润3.5-4亿（vs 2025年2.27亿+55%~76%）</td>
+                </tr>
+                <tr>
+                    <td>中期（1-2年）</td>
+                    <td>产能释放+订单消化，年营收重回15亿+，净利4-5亿</td>
+                    <td>中</td>
+                    <td>利润4-5亿（+76~120%）</td>
+                </tr>
+                <tr>
+                    <td>长期（2年+）</td>
+                    <td>高端装备平台化，核电+船舶占比超30%</td>
+                    <td>中</td>
+                    <td>利润5-6亿，25-30倍PE=150-180亿市值</td>
+                </tr>
+            </table>
+            <h4>演变路径</h4>
+            <ul>
+                <li><strong>乐观</strong>：Q2-Q4毛利率维持40%+，订单交付正常，全年利润4亿+，PE降至18倍，估值修复至80-90亿</li>
+                <li><strong>基准</strong>：Q1是订单集中交付脉冲，后续季度利润6000-7000万，全年3亿，PE 24倍，当前价基本合理</li>
+                <li><strong>悲观</strong>：原材料涨价或订单交付延迟，Q2利润低于5000万，全年利润2.5亿，PE 29倍，股价回调</li>
+            </ul>
+            <div class="insight">
+                ⚠️ <strong>关键质疑</strong>：Q1同比+97%有基数效应（2025Q1净利仅4638万）；新增订单同比-13.5%（2025年13.33亿 vs 2024年15.41亿），在手订单虽充足但新增动力在减弱；毛利率44%能否持续？2025年报仅36.46%，若Q2回落至38%以下则利润预测需下调。
+            </div>
 
-  <div class="highlight">
-    <p><strong>一句话核心发现：</strong>锡装股份的<strong>底</strong>（Q1业绩+在手订单）支撑了当前72亿市值，<strong>顶</strong>（核电稀缺性+高端转型）是翻倍的关键——如果核电收入占比从&lt;5%提升至15%+且毛利率维持40%，估值从周期股的20倍切换至成长股的30倍，市值有望从72亿→120亿（+67%）。</p>
-  </div>
+            <h3>变化二：核电资质稀缺+国际订单（顶）</h3>
+            <table>
+                <tr><th>时间维度</th><th>能带来什么</th><th>可行性</th></tr>
+                <tr>
+                    <td>短期（已验证）</td>
+                    <td>核电订单收入确认（塞兹维尔C等），增厚收入1-2亿</td>
+                    <td>高</td>
+                </tr>
+                <tr>
+                    <td>中期（1-2年）</td>
+                    <td>全球核电重启带来新订单，核电收入占比提升至5-8%</td>
+                    <td>中</td>
+                </tr>
+                <tr>
+                    <td>长期（2年+）</td>
+                    <td>核电成为第二增长曲线，估值从周期股→成长股切换</td>
+                    <td>低</td>
+                </tr>
+            </table>
+            <div class="insight">
+                ⚠️ <strong>关键质疑</strong>：核电收入占比仍低（2025年报未单独披露，高技术船舶+海工+核电+太阳能合计约24%）；国际核电订单周期长（欣克利角从签约到交付耗时数年）；国内竞争者（兰石重装、宝色股份）也在布局核电，资质壁垒存在但非绝对垄断。
+            </div>
+        </div>
 
-  <div class="conclusion">
-    <h2>最终结论</h2>
-    <p>锡装股份有翻倍基因，但概率不高（25%）。<br>底很扎实，顶很诱人，但当前价已部分定价。<br>翻倍需要：核电占比提升+毛利率维持+估值切换。</p>
-  </div>
+        <div class="section">
+            <h2>🔍 Step 2.5：即时错配识别</h2>
+            
+            <h3>错配一：认知差——周期股vs成长股</h3>
+            <p><strong>市场怎么看</strong>：金属压力容器=传统周期股，估值锚15-20倍PE</p>
+            <p><strong>实际情况</strong>：公司正从周期型石化设备向高端装备平台转型，核电资质稀缺+高技术船舶放量，具备成长股特征</p>
+            <p><strong>纠正催化剂</strong>：中报确认毛利率维持40%+，核电订单占比提升</p>
+            <p><strong>空间</strong>：估值从20倍→30倍，利润3.5亿对应105亿市值（+46%）</p>
 
-  <div class="footer">
-    <p>羿学交易智囊团 | V4.3变化驱动分析法 | 数据截至2026-05-29</p>
-    <p>风险提示：本报告基于公开信息，不构成投资建议。据此操作，风险自担。</p>
-  </div>
-</div>
+            <h3>错配二：信息差——Q1爆发被低估</h3>
+            <p><strong>市场怎么看</strong>：Q1增长是低基数脉冲，全年仍下滑</p>
+            <p><strong>实际情况</strong>：在手订单18.79亿（>1.5年营收），产能释放中，Q1毛利率44%说明订单质量高</p>
+            <p><strong>纠正催化剂</strong>：Q2预告（7月15日）确认利润持续性</p>
+            <p><strong>空间</strong>：如果Q2利润7000-8000万，全年3.5-4亿，当前PE仅18-20倍，有估值修复空间</p>
+        </div>
+
+        <div class="section" id="step3">
+            <h2>🎯 Step 3：可信度裁决——值不值得投？</h2>
+            
+            <h3>三情景推演</h3>
+            <table>
+                <tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+                <tr>
+                    <td><strong style="color:#4caf50;">乐观</strong></td>
+                    <td>+37-60%（目标价90-105元）</td>
+                    <td>毛利率40%维持，核电占比15%，30倍PE</td>
+                    <td>25%</td>
+                </tr>
+                <tr>
+                    <td><strong style="color:#ffd700;">基准</strong></td>
+                    <td>-1%~+22%（股价65-80元）</td>
+                    <td>全年利润3-3.5亿，20-25倍PE</td>
+                    <td>50%</td>
+                </tr>
+                <tr>
+                    <td><strong style="color:#ff6b6b;">悲观</strong></td>
+                    <td>-15~-25%（股价45-55元）</td>
+                    <td>Q1脉冲，毛利率回落，核电延迟</td>
+                    <td>25%</td>
+                </tr>
+            </table>
+            <p><strong>加权预期收益</strong>：+8.75% | <strong>风险收益比</strong>：0.35:1 | <strong>预期差大小</strong>：<span style="color:#ffd700;">中等（10-30%）</span></p>
+
+            <h3>证伪信号（什么时候放弃）</h3>
+            <table>
+                <tr><th>信号</th><th>含义</th><th>时间</th></tr>
+                <tr><td>Q2毛利率<35%</td><td>订单质量下滑，高端转型证伪</td><td>2026-08-30</td></tr>
+                <tr><td>Q2新增订单<5亿</td><td>订单增长乏力，后续收入无保障</td><td>2026-07-15</td></tr>
+                <tr><td>核电项目交付延迟公告</td><td>核电故事证伪，顶逻辑坍塌</td><td>随时关注</td></tr>
+                <tr><td>股东减持</td><td>内部人看空，信心不足</td><td>随时关注</td></tr>
+            </table>
+
+            <h3>关键验证节点</h3>
+            <table>
+                <tr><th>时间</th><th>事件</th><th>验证什么</th><th>miss怎么办</th></tr>
+                <tr><td>2026-07-15</td><td>中报预告</td><td>Q2利润是否7000-8000万</td><td>若<5000万→悲观概率上调</td></tr>
+                <tr><td>2026-08-30</td><td>中报披露</td><td>毛利率是否维持40%</td><td>若<35%→顶逻辑弱化</td></tr>
+                <tr><td>2026-09-30</td><td>订单披露</td><td>核电/船舶新签订单</td><td>若无新订单→乐观概率下调</td></tr>
+                <tr><td>2026-10-28</td><td>三季报</td><td>全年利润能否达3.5亿</td><td>若<3亿→估值承压</td></tr>
+            </table>
+        </div>
+
+        <div class="section" id="step4">
+            <h2>🏁 Step 4：投资逻辑——买入是为了什么？</h2>
+            
+            <div class="verdict-box neutral">
+                <h4>⚠️ 谨慎买入——底扎实但顶未验证，当前价已部分定价</h4>
+                <p>股价65元已涨了60%+，Q1拐点已经定价了一部分。动态PE约20倍看似不贵，但翻倍需要乐观情景兑现（核电占比大幅提升+毛利率维持+估值切换），概率仅25%。</p>
+            </div>
+
+            <h3>估值匹配检查</h3>
+            <table>
+                <tr><th>检查项</th><th>实际值</th><th>合理区间</th><th>结论</th></tr>
+                <tr><td>PE(TTM)</td><td>~32倍</td><td>20-30倍（高端装备）</td><td><span style="color:#ffd700;">偏高</span></td></tr>
+                <tr><td>动态PE</td><td>~20倍</td><td>15-25倍</td><td><span style="color:#4caf50;">合理</span></td></tr>
+                <tr><td>PB</td><td>~2.8倍</td><td>2-4倍</td><td><span style="color:#4caf50;">合理</span></td></tr>
+                <tr><td>毛利率</td><td>44.31%（Q1）</td><td>≥35%</td><td><span style="color:#4caf50;">优秀</span></td></tr>
+                <tr><td>负债率</td><td>26.27%</td><td><50%</td><td><span style="color:#4caf50;">极低</span></td></tr>
+                <tr><td>机构评级</td><td>1家买入</td><td>—</td><td><span style="color:#ffd700;">覆盖度低</span></td></tr>
+            </table>
+
+            <h3>持有周期</h3>
+            <table>
+                <tr><th>维度</th><th>判断</th></tr>
+                <tr><td>故事能走多远</td><td>中期（1-2年，业绩持续验证+核电订单放量）</td></tr>
+                <tr><td>判断节点</td><td>2026-08-30 中报（Q2业绩持续性+毛利率+核电订单）</td></tr>
+                <tr><td>中途退出条件</td><td>Q2利润<5000万 / 毛利率<35% / 核电订单无进展</td></tr>
+                <tr><td>最短持有</td><td>6个月（等中报验证）</td></tr>
+                <tr><td>最长持有</td><td>2年（等核电占比提升）</td></tr>
+            </table>
+
+            <div class="quote">
+                <strong>一句话核心逻辑</strong>：买入是为了博弈"Q1拐点持续+核电稀缺性估值切换"的双轮驱动，这个变化在6-12个月内有50%概率正向推进（基准情景），但翻倍需要乐观情景兑现（概率25%）。核心验证节点是2026中报，如果Q2利润大幅下滑则证伪拐点、放弃跟踪。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 数据来源清单</h2>
+            <table>
+                <tr><th>数据</th><th>来源</th><th>时间</th></tr>
+                <tr><td>2026Q1财务数据</td><td>公司一季报公告</td><td>2026-04</td></tr>
+                <tr><td>2025年年报</td><td>公司年报公告</td><td>2026-03</td></tr>
+                <tr><td>核电订单信息</td><td>雪球/证券之星</td><td>2024-2025</td></tr>
+                <tr><td>股价/市值/资金流向</td><td>证券之星/新浪财经</td><td>2026-05-28</td></tr>
+                <tr><td>行业数据（核电/船舶）</td><td>公开报道</td><td>2026</td></tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学交易智囊团 | 个股深度分析报告</p>
+            <p>分析规范：V4.3（大白话+框架双轨） | 数据截止：2026-05-28</p>
+            <p>预测仅供参考，不构成投资建议</p>
+        </div>
+    </div>
 </body>
 </html>
