@@ -6,44 +6,225 @@
     <title>603990 麦迪科技 - 羿学交易智囊团</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%); color: #e0e6ed; min-height: 100vh; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; padding: 30px 0; border-bottom: 1px solid #2d3a4f; margin-bottom: 30px; }
-        .header h1 { font-size: 2em; color: #00d4ff; margin-bottom: 10px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
         .header .code { color: #8b9dc3; font-size: 1.2em; }
         .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
         .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
         .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
         .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
-        .section { background: #1a2332; border: 1px solid #2d3a4f; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
-        .section h2 { color: #ffd700; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
-        .section h3 { color: #00d4ff; font-size: 1.1em; margin: 15px 0 10px; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
         .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
         th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
         th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
         td { color: #b0c4de; }
         .highlight { color: #ffd700; font-weight: 600; }
         .warning { color: #ff6b6b; font-weight: 600; }
-        .tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; }
-        .tag-green { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
-        .tag-red { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; }
-        .tag-yellow { background: rgba(255, 193, 7, 0.15); color: #ffd700; }
-        .tag-blue { background: rgba(0, 212, 255, 0.15); color: #00d4ff; }
-        .tag-purple { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
-        .conclusion-box { background: rgba(255, 107, 107, 0.05); border: 1px solid #ff6b6b; border-radius: 8px; padding: 15px; margin: 15px 0; }
-        .conclusion-box h4 { color: #ff6b6b; margin-bottom: 10px; }
-        .conclusion-box.green { background: rgba(0, 255, 136, 0.05); border-color: #00ff88; }
-        .conclusion-box.green h4 { color: #00ff88; }
-        .footer { text-align: center; padding: 30px; color: #8b9dc3; border-top: 1px solid #2d3a4f; margin-top: 30px; font-size: 0.9em; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>603990 麦迪科技</h1>
-            <p class="code">医疗信息化 + AI医疗 + 机器人概念 + 华为合作 + 低空经济</p>
-            <p class="date">分析日期：2026-05-31</p>
+      <div class="header">
+            <h1>麦迪科技</h1>
+            <p class="code">603990.SH · 医疗信息化 · AI医疗 · 机器人概念 · 华为合作 · 低空经济</p>
+            <p class="date">分析日期：2026-05-31 | 分析师：小羿 | 版本：V4.3 | 数据截止：2026-05-29</p>
             <div class="nav">
                 <a href="index.html">🏠 首页</a>
                 <a href="reports.html">📊 报告库</a>
@@ -51,205 +232,383 @@
             </div>
         </div>
 
-        <!-- 执行摘要 -->
+        <!-- ===== 大白话三问（置顶，30秒入口） ===== -->
+        <div class="dabaohua-section">
+            <h2>🔥 大白话三问（30秒读完）</h2>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【贵不贵】</div>
+                <div class="q-answer">极贵。PE 310倍，Q1归母仅384万，扣非-565万。一个月前PE还是132倍，现在股价+28%但基本面没变——估值纯靠概念撑。<span class="anchor-tag" onclick="document.getElementById('step4').scrollIntoView({behavior:'smooth'})">← Step 4</span></div>
+            </div>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【有没有故事】</div>
+                <div class="q-answer">有11个故事，但全是借来的。AI医疗、机器人、华为、低空经济、辅助生殖……市场热点它都蹭，但没有一个概念能拿出真金白银的收入。产品是有的，订单是没有的。<span class="anchor-tag" onclick="document.getElementById('step1-5').scrollIntoView({behavior:'smooth'})">← Step 1.5</span></div>
+            </div>
+            
+            <div class="dabaohua-q">
+                <div class="q-label">【最坏会怎样】</div>
+                <div class="q-answer">板块退潮时第一个被扔下去。5/26涨停后放量滞涨，5/29已收阴。一旦机器人或AI医疗板块回调，资金会立即从这种纯概念小盘撤出。回到15-17元是合理估值（-15%~-25%）。<span class="anchor-tag" onclick="document.getElementById('step3').scrollIntoView({behavior:'smooth'})">← Step 3</span></div>
+            </div>
+            
+            <div class="dabaohua-summary">
+                <h4>📌 四句话总结（说给别人听）</h4>
+                <p>一家医疗信息化公司，市值60亿但年利润不到4000万，PE 310倍。股价一个月涨了28%不是靠业绩，是靠贴了11个热门概念标签。当AI医疗、机器人、低空经济板块轮动时它跟着涨，但自身没有任何实质性订单或收入。这是一个典型的"弱势抱团标的"——资金无处可去时抱团的小盘概念票，一旦有新热点就会立即被抛弃。</p>
+            </div>
+            
+            <div class="dabaohua-source">以上结论来自下方 Step 2/3/4 详细分析 ↓</div>
+        </div>
+
+        <!-- ===== 执行摘要 ===== -->
         <div class="section">
             <h2>📋 执行摘要</h2>
-            <div class="conclusion-box">
-                <h4>🔍 一句话核心发现</h4>
-                <p>麦迪科技当前不是"贵不贵"的问题，是"这个概念抱团游戏还能玩多久"的问题。它像一张借来的船票，船（AI医疗/机器人板块）还在开，它就能跟着漂；船一旦停，它就会被第一个扔下去。</p>
+            <p><strong>核心变化</strong>：5月股价+28.5%（15.28→19.63），5/26涨停，概念标签从"医疗信息化"扩展至11个热门概念（AI医疗/机器人/低空经济/华为等）。10日换手率78%，筹码快速交换，游资主导。</p>
+            <p><strong>投资价值</strong>：<span class="highlight">低价值</span> | <strong>预期差</strong>：弱（&lt;10%） | <strong>跟踪周期</strong>：短期（1-3个月）</p>
+            <p><strong>关键验证</strong>：2026年6月底（AI医疗产品是否中标？机器人是否有订单？）</p>
+            <div class="insight">
+                ⚠️ <strong>核心风险提示</strong>：310倍PE、Q1扣非-565万、概念标签无实质收入、涨停后放量滞涨、创始人减持进行中。这不是"贵但有价值"，是"纯靠情绪撑着的概念票"。
+            </div>
+        </div>
+
+        <!-- ===== Step 1：变化识别 ===== -->
+        <div class="section">
+            <h2>🔎 Step 1：变化识别（发生了什么）</h2>
+            
+            <div class="info-card">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">当前股价</span>
+                        <span class="info-value">19.63元（5月29日）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">总市值</span>
+                        <span class="info-value">约60亿（总股本3.06亿股）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">PE(TTM)</span>
+                        <span class="info-value">310倍</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">PB</span>
+                        <span class="info-value">~7.2倍</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">负债率</span>
+                        <span class="info-value">~32%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">毛利率</span>
+                        <span class="info-value">60.4%（2025年报）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2025年净利</span>
+                        <span class="info-value">3916万（扭亏）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2026Q1营收</span>
+                        <span class="info-value">0.6亿（-13.3%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2026Q1净利</span>
+                        <span class="info-value">384万（+1233%）</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">2026Q1扣非</span>
+                        <span class="info-value">-565万</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">10日换手率</span>
+                        <span class="info-value">78.67%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">机构目标价</span>
+                        <span class="info-value">17.85元（已透支10%）</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>核心变化（1个）</h3>
+            <table>
+                <tr><th>排序</th><th>变化类型</th><th>具体事件</th><th>时间</th></tr>
+                <tr>
+                    <td>1</td>
+                    <td>概念标签爆发+弱势抱团</td>
+                    <td>股价一个月+28.5%，5/26涨停（+10.01%），11个热门概念标签（AI医疗/机器人/低空经济/华为等），10日换手78.67%</td>
+                    <td>2026-04-20至05-29</td>
+                </tr>
+            </table>
+            
+            <div class="quote">
+                🔍 <strong>一句话核心发现</strong>：麦迪科技的基本面没有发生任何实质变化，变化的是"市场情绪和概念轮动"——它从一只普通的医疗信息化小盘股，被资金贴上了11个热门概念标签，变成了弱势环境下的抱团标的。
+            </div>
+        </div>
+
+        <!-- ===== Step 1.5：变化权重排序 ===== -->
+        <div class="section" id="step1-5">
+            <h2>⚖️ Step 1.5：变化权重排序</h2>
+            <div>
+                <span class="tag tag-top">顶：概念标签爆发（11个）</span>
+                <span class="tag tag-noise">噪：Q1归母+1233%（实际扣非亏损）</span>
+                <span class="tag tag-fog">雾：AI医疗产品存在但无中标</span>
+            </div>
+            <table style="margin-top:15px;">
+                <tr><th>排序</th><th>变化</th><th>权重</th><th>说明</th><th>关键验证时点</th></tr>
+                <tr>
+                    <td>1</td>
+                    <td>概念标签爆发（11个热门概念）</td>
+                    <td><span class="tag tag-top">顶</span></td>
+                    <td>AI医疗、机器人、低空经济、华为……热点轮动时都能蹭到，但自身无实质订单或收入，属于纯题材驱动</td>
+                    <td>2026-06 是否中标/订单</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Q1归母+1233%（扣非-565万）</td>
+                    <td><span class="tag tag-noise">噪</span></td>
+                    <td>利润暴增是基数效应（2025Q1仅28万），扣非实际亏损，主业造血能力未恢复</td>
+                    <td>2026-08 中报</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>AI医疗/机器人产品存在但未落地</td>
+                    <td><span class="tag tag-fog">雾</span></td>
+                    <td>产品与优必选、华为合作"有"，但商业化进展模糊，市场无法证伪也无法验证</td>
+                    <td>2026年底</td>
+                </tr>
+            </table>
+            <p><strong>一句话权重判断</strong>：概念标签是<strong style="color:#a371f7;">顶</strong>（提供炒作借口但无实质价值），Q1利润是<strong style="color:#ff6b6b;">噪</strong>（表面好看实则亏损），AI产品进展是<strong style="color:#8b9dc3;">雾</strong>（看不清真假）。</p>
+        </div>
+
+        <!-- ===== Step 1.6：行业景气度×共振检查 ===== -->
+        <div class="section">
+            <h2>📊 Step 1.6：行业景气度×公司共振检查</h2>
+            <table>
+                <tr><th>行业</th><th>方向</th><th>斜率</th><th>公司卡位</th><th>共振强度</th></tr>
+                <tr>
+                    <td>AI医疗</td>
+                    <td>向上</td>
+                    <td>陡峭</td>
+                    <td>有产品（急危重症大模型）但未中标，非板块龙头（润达医疗、卫宁健康领先）</td>
+                    <td>🟡 弱共振（蹭热度）</td>
+                </tr>
+                <tr>
+                    <td>人形机器人</td>
+                    <td>向上</td>
+                    <td>陡峭</td>
+                    <td>与优必选合资（苏州优麦），控股51%，但产品未批量交付，无收入贡献</td>
+                    <td>🟡 弱共振（概念阶段）</td>
+                </tr>
+                <tr>
+                    <td>低空经济</td>
+                    <td>向上</td>
+                    <td>中等</td>
+                    <td>AED无人机首飞完成，但属于边缘概念，非核心业务</td>
+                    <td>🔴 无共振（纯蹭）</td>
+                </tr>
+                <tr>
+                    <td>医疗信息化</td>
+                    <td>平稳</td>
+                    <td>平缓</td>
+                    <td>细分龙头（CIS领域），覆盖2400+家医院，但2025年营收仅3亿，增速放缓</td>
+                    <td>🟢 主业共振（但体量小）</td>
+                </tr>
+            </table>
+            <div class="insight">
+                ⚠️ <strong>共振判断</strong>：麦迪科技在3个热门赛道（AI医疗/机器人/低空经济）都"有概念无实质"，主业医疗信息化增速放缓。这不是"行业景气+公司卡位"的双击，而是"行业热+公司蹭"的单击——涨的是板块贝塔，不是自身阿尔法。
+            </div>
+        </div>
+
+        <!-- ===== Step 2：变化价值分析 ===== -->
+        <div class="section" id="step2">
+            <h2>💎 Step 2：变化价值分析</h2>
+            
+            <h3>变化1：概念标签爆发（11个）</h3>
+            <table>
+                <tr><th>维度</th><th>评估</th></tr>
+                <tr>
+                    <td><strong>这个变化值多少钱？</strong></td>
+                    <td>不值钱，但"有用"。概念标签不创造收入，但创造"资金关注度"。在弱势市场，资金无处可去时会抱团有标签的小盘股，这是<strong>交易价值</strong>而非<strong>投资价值</strong>。</td>
+                </tr>
+                <tr>
+                    <td><strong>这个变化能持续多久？</strong></td>
+                    <td>取决于板块轮动速度。AI医疗、机器人、低空经济任一板块持续热度，它就能跟着涨。一旦板块退潮，它跌得更快。</td>
+                </tr>
+                <tr>
+                    <td><strong>这个变化能复制吗？</strong></td>
+                    <td>不需要复制——标签已经贴上，不需要再贴。但如果没有新的催化剂（中标/订单），标签会褪色。</td>
+                </tr>
+            </table>
+            <div class="verdict-box">
+                <h4>价值裁决</h4>
+                <p>概念标签的价值 = <strong>0</strong>（不创造收入），但交易价值 = <strong>高</strong>（资金抱团标的）。</p>
+            </div>
+
+            <h3>变化2：Q1归母+1233%</h3>
+            <table>
+                <tr><th>维度</th><th>评估</th></tr>
+                <tr>
+                    <td><strong>这个变化值多少钱？</strong></td>
+                    <td>负值。+1233%是基数效应（2025Q1仅28万），扣非-565万说明主业仍在亏损。这是"数字游戏"而非"经营改善"。</td>
+                </tr>
+                <tr>
+                    <td><strong>这个变化能持续多久？</strong></td>
+                    <td>不可持续。基数效应一次性，Q2开始同比基数恢复正常，增速将大幅回落。</td>
+                </tr>
+                <tr>
+                    <td><strong>这个变化能复制吗？</strong></td>
+                    <td>不能。基数效应是历史遗留，不是经营能力。</td>
+                </tr>
+            </table>
+            <div class="verdict-box">
+                <h4>价值裁决</h4>
+                <p>Q1利润增长的价值 = <strong>0</strong>（甚至为负，因为掩盖了真实亏损）。</p>
+            </div>
+        </div>
+
+        <!-- ===== Step 2.5：实控人能力边界与交易本质 ===== -->
+        <div class="section" id="step2-5">
+            <h2>🎯 Step 2.5：实控人能力边界与交易本质</h2>
+            
+            <h3>实控人画像</h3>
+            <table>
+                <tr><th>维度</th><th>详情</th></tr>
+                <tr><td>实控人</td><td>绵阳市安州区国资办（穿透后14.46%）</td></tr>
+                <tr><td>创始人</td><td>翁康（6.00%，第二大股东）</td></tr>
+                <tr><td>实控人变更</td><td>2021-2023年：自然人→绵阳国资（混合所有制改革）</td></tr>
+                <tr><td>资本运作历史</td><td>2019收购玛丽医院（成功）→2023跨界光伏（失败）→2025剥离光伏（止损）→2024与优必选合资（进行中）</td></tr>
+                <tr><td>当前动作</td><td>翁康拟减持1.7024%（约520万股），进行中</td></tr>
+            </table>
+
+            <h3>能力边界判断</h3>
+            <table>
+                <tr><th>能力</th><th>评估</th><th>依据</th></tr>
+                <tr>
+                    <td>战略判断力</td>
+                    <td>🟡 中等</td>
+                    <td>光伏跨界失败证明非主业扩张有风险，但止损果断</td>
+                </tr>
+                <tr>
+                    <td>执行力</td>
+                    <td>🟡 中等</td>
+                    <td>国资控股后决策效率可能降低，但财务规范性提升</td>
+                </tr>
+                <tr>
+                    <td>资源整合</td>
+                    <td>🟢 较好</td>
+                    <td>与优必选、华为合作显示一定的资源对接能力</td>
+                </tr>
+                <tr>
+                    <td>利益一致性</td>
+                    <td>🔴 存疑</td>
+                    <td>创始人减持进行中，与中小股东利益不一致</td>
+                </tr>
+            </table>
+
+            <div class="verdict-box neutral">
+                <h4>交易本质判断</h4>
+                <p>麦迪科技当前不是"价值投资者的机会"，而是<strong>"博弈者的筹码"</strong>。实控人国资背景提供信用背书，但创始人减持+310倍PE+无实质收入=典型的"讲故事→找人接盘"结构。交易本质：谁接最后一棒。</p>
+            </div>
+        </div>
+
+        <!-- ===== Step 3：演变路径与质疑点 ===== -->
+        <div class="section" id="step3">
+            <h2>🔮 Step 3：演变路径与质疑点</h2>
+            
+            <h3>乐观情景（概率：20%）</h3>
+            <div class="verdict-box positive">
+                <h4>条件</h4>
+                <p>AI医疗产品中标千万级订单 + 机器人板块再来一波 + 中报营收转正</p>
+                <p><strong>目标价</strong>：22-25元（+12%~+27%）</p>
+                <p><strong>时间</strong>：2-3个月</p>
             </div>
             <table>
-                <tr><th>维度</th><th>结论</th><th>关键数据</th></tr>
-                <tr><td>基本面层</td><td class="warning">极贵</td><td>PE 310倍，Q1归母仅384万</td></tr>
-                <tr><td>市场层</td><td class="highlight">能涨，但涨的是概念贝塔</td><td>11个概念标签，弱势抱团标的</td></tr>
-                <tr><td>短期趋势</td><td class="warning">顶部信号</td><td>5/26涨停后放量滞涨，5/29收阴</td></tr>
-                <tr><td>筹码结构</td><td class="warning">脆弱</td><td>机构目标价17.85已透支，减持进行中</td></tr>
+                <tr><th>质疑点</th><th>回答</th></tr>
+                <tr><td>AI产品能中标吗？</td><td>急危重症大模型存在，但截至5月底无公开中标公告</td></tr>
+                <tr><td>机器人有订单吗？</td><td>苏州优麦产品"已售罄"但无批量交付数据</td></tr>
             </table>
-        </div>
 
-        <!-- 基本信息 -->
-        <div class="section">
-            <h2>📊 基本信息</h2>
+            <h3>基准情景（概率：40%）</h3>
+            <div class="verdict-box neutral">
+                <h4>条件</h4>
+                <p>板块不冷不热，18-20元区间横盘消化筹码</p>
+                <p><strong>目标价</strong>：18-20元（-8%~+2%）</p>
+                <p><strong>时间</strong>：1-3个月</p>
+            </div>
             <table>
-                <tr><th>指标</th><th>数值</th><th>判断</th></tr>
-                <tr><td>当前股价</td><td>19.63元</td><td>一个月+28.5%</td></tr>
-                <tr><td>总市值</td><td>60.12亿</td><td>小盘股</td></tr>
-                <tr><td>PE(TTM)</td><td>309.77倍</td><td class="warning">极高</td></tr>
-                <tr><td>流通股本</td><td>3.06亿</td><td>全流通，无解禁</td></tr>
-                <tr><td>股东户数</td><td>3.50万户</td><td>散户为主</td></tr>
-                <tr><td>机构目标价</td><td>17.85元</td><td class="warning">已透支10%</td></tr>
+                <tr><th>质疑点</th><th>回答</th></tr>
+                <tr><td>能横住吗？</td><td>取决于换手率能否维持。10日78%说明筹码快速交换，若缩量至5%以下，横盘结束</td></tr>
+                <tr><td>减持会冲击吗？</td><td>5/22公告后股价未跌，但具体减持时间和数量未知</td></tr>
             </table>
-        </div>
 
-        <!-- 股价时间线 -->
-        <div class="section">
-            <h2>📈 股价时间线（近一个月）</h2>
+            <h3>悲观情景（概率：40%）</h3>
+            <div class="verdict-box">
+                <h4>条件</h4>
+                <p>板块退潮 + 减持压力 + 中报无改善</p>
+                <p><strong>目标价</strong>：15-17元（-15%~-25%）</p>
+                <p><strong>时间</strong>：1-2个月</p>
+            </div>
             <table>
-                <tr><th>日期</th><th>股价</th><th>事件</th></tr>
-                <tr><td>2026-04-20</td><td>15.28元</td><td>旧版分析基准价</td></tr>
-                <tr><td>2026-05-08</td><td>15.94元</td><td>+2.91%，换手4.92%</td></tr>
-                <tr><td>2026-05-15</td><td>16.56元</td><td>+2.16%，主力净流入1723万</td></tr>
-                <tr><td>2026-05-26</td><td class="highlight">18.57元</td><td class="highlight">涨停+10.01%，换手8.09%</td></tr>
-                <tr><td>2026-05-27</td><td>19.59元</td><td>+0.72%，换手11.69%，成交7.00亿</td></tr>
-                <tr><td>2026-05-28</td><td>20.06元</td><td>+2.40%，换手9.52%</td></tr>
-                <tr><td>2026-05-29</td><td class="warning">19.63元</td><td class="warning">-2.14%，换手9.22%</td></tr>
+                <tr><th>质疑点</th><th>回答</th></tr>
+                <tr><td>跌到15元合理吗？</td><td>4月21日分析基准价15.28元，PE 132倍。当前基本面未变，15元是合理估值锚</td></tr>
+                <tr><td>会跌更多吗？</td><td>若Q2继续扣非亏损，PE回归可能触发更深回调</td></tr>
             </table>
         </div>
 
-        <!-- 基本面层 -->
-        <div class="section">
-            <h2>🏗️ 基本面层（前置分析 2026-04-21）</h2>
-            <p>前置分析基于个股分析V3.4规范（Step1-12），核心结论：</p>
-            <table>
-                <tr><th>维度</th><th>结论</th><th>关键数据</th></tr>
-                <tr><td>估值</td><td class="warning">极贵</td><td>PE 132倍（4月）→ 310倍（5月）</td></tr>
-                <tr><td>盈利质量</td><td class="warning">弱</td><td>2025扣非-2138万，2026Q1归母仅384万</td></tr>
-                <tr><td>主业</td><td>医疗信息化</td><td>增速放缓，毛利率40%</td></tr>
-                <tr><td>剥离光伏</td><td>完成</td><td>2025年扭亏，但利润质量低</td></tr>
-                <tr><td>AI医疗产品</td><td>存在但无中标</td><td>急危重症大模型，尚未形成收入</td></tr>
-            </table>
-            <p><span class="tag tag-red">基本面结论</span> 基本面完全支撑不了60亿市值，更支撑不了310倍PE。</p>
-        </div>
-
-        <!-- 市场层 -->
-        <div class="section">
-            <h2>🎯 市场层（两层分析法补完）</h2>
+        <!-- ===== Step 4：综合研判 ===== -->
+        <div class="section" id="step4">
+            <h2>⚖️ Step 4：综合研判</h2>
             
-            <h3>概念标签（11个）</h3>
-            <p>
-                <span class="tag tag-blue">机器人</span>
-                <span class="tag tag-blue">人形机器人</span>
-                <span class="tag tag-blue">低空经济</span>
-                <span class="tag tag-blue">人工智能</span>
-                <span class="tag tag-blue">华为概念</span>
-                <span class="tag tag-blue">计算机</span>
-                <span class="tag tag-purple">信创</span>
-                <span class="tag tag-purple">互联医疗</span>
-                <span class="tag tag-purple">智慧医疗</span>
-                <span class="tag tag-green">辅助生殖</span>
-                <span class="tag tag-green">多胎概念</span>
-            </p>
-            
-            <h3>核心叙事热度</h3>
+            <h3>四步裁决</h3>
             <table>
-                <tr><th>叙事</th><th>热度</th><th>持续性</th><th>当前状态</th></tr>
-                <tr><td>AI医疗大模型</td><td class="highlight">高</td><td>中</td><td>产品有，但未中标</td></tr>
-                <tr><td>康养机器人</td><td class="highlight">高</td><td>中</td><td>概念阶段，无订单</td></tr>
-                <tr><td>华为合作</td><td>中</td><td class="highlight">高</td><td>已合作，无新增大订单</td></tr>
-                <tr><td>低空经济/医疗</td><td>中</td><td>低</td><td>边缘概念</td></tr>
-                <tr><td>剥离光伏扭亏</td><td>低</td><td>已定价</td><td>旧叙事已消化</td></tr>
+                <tr><th>问题</th><th>裁决</th><th>理由</th></tr>
+                <tr>
+                    <td><strong>能不能买入？</strong></td>
+                    <td class="highlight">❌ 不能</td>
+                    <td>310倍PE、Q1扣非亏损、无实质收入、创始人减持、涨停后滞涨。这不是"贵但有价值"，是"纯靠情绪撑着的概念票"，不具备投资安全边际。</td>
+                </tr>
+                <tr>
+                    <td><strong>能买多少？</strong></td>
+                    <td class="highlight">0</td>
+                    <td>无买入理由。</td>
+                </tr>
+                <tr>
+                    <td><strong>持有多久？</strong></td>
+                    <td class="highlight">不适用</td>
+                    <td>不建议持有。</td>
+                </tr>
+                <tr>
+                    <td><strong>什么时候可以重新评估？</strong></td>
+                    <td>2026年8月（中报）</td>
+                    <td>若中报营收转正、扣非盈利、AI产品中标，可重新评估。</td>
+                </tr>
             </table>
 
-            <h3>成交活跃度</h3>
-            <table>
-                <tr><th>指标</th><th>数值</th><th>判断</th></tr>
-                <tr><td>5日换手率</td><td>53.15%</td><td class="warning">极高</td></tr>
-                <tr><td>10日换手率</td><td>78.67%</td><td class="warning">极高，筹码快速交换</td></tr>
-                <tr><td>5/29量比</td><td>0.84</td><td>缩量</td></tr>
-                <tr><td>5/29成交额</td><td>5.61亿</td><td>对60亿市值占比9.3%</td></tr>
-                <tr><td>涨停后走势</td><td>放量滞涨</td><td class="warning">短期顶部信号</td></tr>
-            </table>
-
-            <h3>龙头标签与辨识度</h3>
-            <p><span class="tag tag-red">不是板块龙头</span> AI医疗龙头是润达医疗、卫宁健康；机器人龙头不在医疗信息化。</p>
-            <p><span class="tag tag-yellow">概念套利标的</span> 当AI医疗或机器人板块涨时跟涨，板块跌时跟跌——涨的是<strong>板块贝塔</strong>，不是自身阿尔法。</p>
-
-            <h3>筹码风险</h3>
-            <table>
-                <tr><th>风险项</th><th>状态</th></tr>
-                <tr><td>机构目标价压制</td><td class="warning">17.85元已突破，现价溢价10%</td></tr>
-                <tr><td>股东减持</td><td class="warning">翁康拟减持1.7024%（约520万股），进行中</td></tr>
-                <tr><td>机构参与度</td><td class="warning">低，主要靠游资+散户</td></tr>
-                <tr><td>资金环境</td><td>弱势抱团——资金无处可去，抱团有故事的小盘</td></tr>
-            </table>
+            <h3>一句话投资逻辑</h3>
+            <div class="quote">
+                麦迪科技当前不是"贵不贵"的问题，是"这个概念抱团游戏还能玩多久"的问题。它像一张借来的船票，船（AI医疗/机器人板块）还在开，它就能跟着漂；船一旦停，它就会被第一个扔下去。
+            </div>
         </div>
 
-        <!-- 两层对比 + 炒作逻辑判断 -->
+        <!-- ===== 数据来源清单 ===== -->
         <div class="section">
-            <h2>⚖️ 两层对比与炒作逻辑判断</h2>
+            <h2>📚 数据来源清单</h2>
             <table>
-                <tr><th>层级</th><th>4月21日回答</th><th>5月31日修正</th></tr>
-                <tr>
-                    <td><strong>基本面层</strong></td>
-                    <td>贵。PE 132倍，PEG≈29</td>
-                    <td class="warning">更贵。PE 310倍，基本面没变，股价涨28%</td>
-                </tr>
-                <tr>
-                    <td><strong>市场层</strong></td>
-                    <td class="warning">❌ 缺失</td>
-                    <td class="highlight">能涨，但涨的是概念贝塔。当前是弱势抱团标的，涨取决于板块热度。</td>
-                </tr>
-            </table>
-            <p>在A股弱势环境下，"贵"和"能涨"不矛盾。关键是判断<strong>叙事窗口还有多长</strong>。</p>
-            
-            <h3>🎯 炒作逻辑判断：有没有继续炒的理由？</h3>
-            <p><strong>结论：有，但很脆弱，属于"剩者为王"逻辑而非"强者恒强"逻辑。</strong></p>
-            <table>
-                <tr><th>支撑因素</th><th>判断</th><th>可持续性</th></tr>
-                <tr>
-                    <td>11个概念标签</td>
-                    <td>无论AI医疗、机器人、华为哪个板块轮动，都能蹭到</td>
-                    <td>中——只要板块轮动不停，它就有套利价值</td>
-                </tr>
-                <tr>
-                    <td>小盘+全流通</td>
-                    <td>60亿市值、3.06亿流通盘，游资拉抬成本低</td>
-                    <td>高——物理属性不变</td>
-                </tr>
-                <tr>
-                    <td>高换手维持活跃度</td>
-                    <td>10日换手78%，成交5-7亿/天，有人气</td>
-                    <td>低——若缩量至2亿以下，流动性枯竭</td>
-                </tr>
-                <tr>
-                    <td>减持未造成冲击</td>
-                    <td>翁康5/22公告减持后股价未跌，市场"无视"利空</td>
-                    <td>低——一旦开始实际卖出，压力显现</td>
-                </tr>
-                <tr>
-                    <td>产品未证伪</td>
-                    <td>AI医疗大模型存在、机器人产品有，市场无法证伪</td>
-                    <td>中——6月底若仍无中标，叙事受损</td>
-                </tr>
-            </table>
-            <p><strong>关键问题</strong>：这不是"有确定催化剂所以能涨"，而是"没有确定利空所以还没跌"。继续炒的理由是<strong>"无利空+有概念"</strong>，不是<strong>"有业绩+有订单"</strong>。属于存量博弈下的弱势抱团逻辑，一旦大盘反弹或出现新热点，资金会立即撤出这种纯概念标的。</p>
-        </div>
-
-        <!-- 情景推演 -->
-        <div class="section">
-            <h2>🔮 情景推演</h2>
-            <table>
-                <tr><th>情景</th><th>概率</th><th>条件</th></tr>
-                <tr><td>短期继续涨</td><td>30%</td><td>机器人/AI板块再来一波，目标22-25元</td></tr>
-                <tr><td>横盘震荡</td><td>40%</td><td>板块不冷不热，18-20元区间消化筹码</td></tr>
-                <tr><td>回调</td><td>30%</td><td>板块退潮+减持压力，回到15-17元</td></tr>
-            </table>
-            <h3>关键时间节点</h3>
-            <table>
-                <tr><th>时间</th><th>事件</th><th>影响</th></tr>
-                <tr><td>6月底</td><td>Q2财报预告</td><td>AI医疗/机器人无实质收入→叙事受损</td></tr>
-                <tr><td>7-8月</td><td>半年报披露</td><td>扣非利润能否验证经营改善</td></tr>
-                <tr><td>减持窗口</td><td>翁康减持</td><td>具体时间和数量未知</td></tr>
-            </table>
-        </div>
-
-        <!-- 退出信号 -->
-        <div class="section">
-            <h2>🚨 退出信号监控</h2>
-            <table>
-                <tr><th>信号类型</th><th>具体阈值</th><th>当前状态</th></tr>
-                <tr><td>成交额萎缩</td><td>日成交跌破2亿</td><td>5/29为5.61亿，<span class="tag tag-green">未触发</span></td></tr>
-                <tr><td>换手率骤降</td><td>单日换手低于5%</td><td>5/29为9.22%，<span class="tag tag-green">未触发</span></td></tr>
-                <tr><td>板块退潮</td><td>机器人板块成交额萎缩30%+</td><td>5/29暴跌-5%，<span class="tag tag-yellow">观察中</span></td></tr>
-                <tr><td>叙事证伪</td><td>AI医疗产品落地失败/无中标</td><td><span class="tag tag-green">尚未证伪</span></td></tr>
-                <tr><td>减持冲击</td><td>翁康减持公告后股价未企稳</td><td>5/22公告后股价仍在涨，<span class="tag tag-green">未受冲击</span></td></tr>
-                <tr><td>机构目标价压制</td><td>现价距目标价溢价>20%</td><td>已溢价10%，<span class="tag tag-yellow">接近警戒</span></td></tr>
+                <tr><th>数据类型</th><th>来源</th><th>时效性</th><th>可信度</th></tr>
+                <tr><td>2025年报数据</td><td>公司公告（2026-03-18）</td><td>🟢 最新</td><td>高</td></tr>
+                <tr><td>2026Q1财务数据</td><td>公司公告（2026-04-29）</td><td>🟢 最新</td><td>高</td></tr>
+                <tr><td>股价/市值/PE</td><td>iFinD/同花顺（2026-05-29）</td><td>🟢 实时</td><td>高</td></tr>
+                <tr><td>机构目标价</td><td>券商研报（2026年4月）</td><td>🟡 2个月前</td><td>中</td></tr>
+                <tr><td>概念标签</td><td>同花顺/东方财富（2026-05-29）</td><td>🟢 实时</td><td>高</td></tr>
+                <tr><td>换手率/成交量</td><td>iFinD（2026-05-29）</td><td>🟢 实时</td><td>高</td></tr>
+                <tr><td>股东减持</td><td>公司公告（2026-05-22）</td><td>🟢 最新</td><td>高</td></tr>
+                <tr><td>实控人/股权结构</td><td>天眼查 + 年报</td><td>🟡 2025年底</td><td>高</td></tr>
+                <tr><td>合资公司信息</td><td>天眼查 + 公司公告（2024-09）</td><td>🟡 8个月前</td><td>高</td></tr>
+                <tr><td>华为合作</td><td>公司公告 + 华为官方新闻稿</td><td>🟡 2024-2025年</td><td>高</td></tr>
             </table>
         </div>
 
         <div class="footer">
             <p>🎯 羿学交易智囊团</p>
-            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 前置分析：2026-04-21 Step1-12 | 更新：2026-05-31</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 前置分析：2026-04-21 Step1-12（V3.4）| 更新：2026-05-31 V4.3</p>
             <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
         </div>
     </div>
