@@ -197,6 +197,76 @@
             border-top: 1px solid #2d3a4f; margin-top: 30px;
             color: #5a6a7a; font-size: 0.9em;
         }
+
+        /* ========== 时间轴 ========== */
+        .timeline-section {
+            background: linear-gradient(135deg, #0a1628 0%, #1a2332 100%);
+            border: 2px solid #00d4ff; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+        }
+        .timeline-section h2 { color: #00d4ff; font-size: 1.5em; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .timeline-wrapper {
+            position: relative;
+            padding: 20px 0;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 212, 255, 0.6), rgba(0, 212, 255, 0.6), transparent);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute;
+            left: 18px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #00d4ff;
+            border: 3px solid #0a1628;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+            z-index: 1;
+        }
+        .timeline-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #2d3a4f;
+            border-radius: 12px;
+            padding: 16px 20px;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        .timeline-card:hover {
+            border-color: #3d4a5f;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        .timeline-date {
+            color: #00d4ff;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+        .timeline-date:hover { color: #4caf50; text-decoration: underline; }
+        .timeline-title {
+            font-size: 1.15em;
+            color: #f0f4f8;
+            font-weight: 600;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -781,6 +851,38 @@
                 <li><span class="verify-dot"></span><strong>新能安×张雪机车合作落地</strong> — 验证电摩赛道</li>
                 <li><span class="verify-dot"></span><strong>华虹Q2业绩</strong> — 验证半导体周期上行</li>
             </ul>
+        </div>
+
+        <!-- ========== 时间轴 ========== -->
+        <div class="timeline-section">
+            <h2>📅 近期重要事件</h2>
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <a href="qimen.html" class="timeline-date">2026-06-01</a>
+                        <h3 class="timeline-title">奇门君预测：阳遁8局，小阳格局</h3>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <a href="news.html" class="timeline-date">2026-05-31</a>
+                        <h3 class="timeline-title">方向整理：4个🔥方向，20只补涨标的</h3>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <a href="reports.html" class="timeline-date">2026-05-30</a>
+                        <h3 class="timeline-title">翻倍基因库：11只新标的入库</h3>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 底部 -->
