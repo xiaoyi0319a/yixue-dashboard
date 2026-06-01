@@ -50,21 +50,21 @@
         .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
         .time-verdict.up { color: #4caf50; border-left: 3px solid #4caf50; }
 
-        /* ========== 新闻方向 ========== */
-        .news-section {
-            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
-            border: 2px solid #c9a84c; border-radius: 15px; padding: 25px;
-            margin-bottom: 30px; box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        /* ========== 涨停板方向 ========== */
+        .ztb-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #00d4ff; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
         }
-        .news-section h2 { color: #c9a84c; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .news-grid {
+        .ztb-section h2 { color: #00d4ff; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .ztb-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;
         }
         @media (max-width: 768px) {
-            .news-grid { grid-template-columns: 1fr; }
+            .ztb-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.8em; }
         }
-        .news-card {
+        .ztb-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid #2d3a4f;
             border-radius: 12px;
@@ -73,13 +73,13 @@
             position: relative;
             overflow: hidden;
         }
-        .news-card:hover {
+        .ztb-card:hover {
             transform: translateY(-3px);
             border-color: #3d4a5f;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
-        .news-card.hot { border-left: 4px solid #ff6b6b; }
-        .news-card.watch { border-left: 4px solid #ffd700; }
+        .ztb-card.hot { border-left: 4px solid #ff6b6b; }
+        .ztb-card.watch { border-left: 4px solid #ffd700; }
         .tag {
             display: inline-block;
             padding: 4px 12px;
@@ -90,22 +90,15 @@
         }
         .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.3); }
         .tag-watch { background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
-        .news-card h3 {
+        .ztb-card h3 {
             font-size: 1.3em;
             margin-bottom: 10px;
             color: #f0f4f8;
         }
-        .news-card p {
+        .ztb-card p {
             color: #a0aec0;
             font-size: 0.95em;
             line-height: 1.6;
-        }
-        .news-meta {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #2d3a4f;
-            font-size: 0.85em;
-            color: #8b9dc3;
         }
 
         /* 补涨标的格式 */
@@ -134,6 +127,53 @@
         .bz-s { background: rgba(255,107,107,0.2); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.3); }
         .bz-a { background: rgba(255,215,0,0.15); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
         .bz-h { background: rgba(76,175,80,0.15); color: #4caf50; border: 1px solid rgba(76,175,80,0.3); }
+
+        /* ========== 新闻方向 ========== */
+        .news-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .news-section h2 { color: #c9a84c; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .news-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;
+        }
+        @media (max-width: 768px) {
+            .news-grid { grid-template-columns: 1fr; }
+        }
+        .news-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #2d3a4f;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .news-card:hover {
+            transform: translateY(-3px);
+            border-color: #3d4a5f;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        .news-card.hot { border-left: 4px solid #ff6b6b; }
+        .news-card.watch { border-left: 4px solid #ffd700; }
+        .news-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #f0f4f8;
+        }
+        .news-card p {
+            color: #a0aec0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .news-meta {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #2d3a4f;
+            font-size: 0.85em;
+            color: #8b9dc3;
+        }
 
         /* ========== 验证节点 ========== */
         .verification-section {
@@ -266,10 +306,18 @@
                 
                 <div class="time-slot">
                     <div class="time-header">
-                        <span class="time-name">未时·下午</span>
-                        <span class="time-range">13:00 - 15:00</span>
+                        <span class="time-name">未时·午盘初</span>
+                        <span class="time-range">13:00 - 14:00</span>
                     </div>
-                    <div class="time-verdict neutral">土气渐旺泄火，小幅回落整理，震荡收尾，多方略占优</div>
+                    <div class="time-verdict neutral">土气渐旺泄火，午后开盘承接，小幅整理</div>
+                </div>
+                
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">未时·午盘末</span>
+                        <span class="time-range">14:00 - 15:00</span>
+                    </div>
+                    <div class="time-verdict neutral">尾盘震荡收尾，多方略占优，收小阳</div>
                 </div>
             </div>
             
@@ -279,16 +327,285 @@
             </div>
         </div>
 
+        <!-- ========== 涨停板方向整理 ========== -->
+        <div class="ztb-section">
+            <h2>📈 涨停板方向整理（6方向·49只涨停驱动）</h2>
+            
+            <div class="ztb-grid">
+                <!-- 方向1：创新药/ASCO -->
+                <div class="ztb-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>创新药/ASCO</h3>
+                    <p>ASCO年会5/29-6/2召开，13项中国研究入选LBA创历史新高。涨停：舒泰神、三生制药、百济神州、诺诚健华等。</p>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">恒瑞医药</div>
+                                <div class="buzhang-code">600276</div>
+                                <div class="buzhang-logic">创新药龙头，152亿美元BD出海刷新纪录</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">科伦博泰</div>
+                                <div class="buzhang-code">6990.HK</div>
+                                <div class="buzhang-logic">ADC技术领先，核心数据入选ASCO LBA</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">迪哲医药</div>
+                                <div class="buzhang-code">688192</div>
+                                <div class="buzhang-logic">第四代EGFR TKI，悟空28研究LBA口头报告</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">百利天恒</div>
+                                <div class="buzhang-code">688506</div>
+                                <div class="buzhang-logic">全球首创双抗ADC，iza-bren双终点阳性</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">泽璟制药</div>
+                                <div class="buzhang-code">688266</div>
+                                <div class="buzhang-logic">PD-1/TIGIT双抗+CD3/DLL3三抗，联合肝癌数据</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">黑马</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 方向2：电力/能源 -->
+                <div class="ztb-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>电力/能源</h3>
+                    <p>夏炒电+算电协同+煤价下行+容量电价。涨停：粤电力A、华电辽能、内蒙华电、华电能源、韶能股份、华银电力、辽宁能源、美能能源。</p>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">皖能电力</div>
+                                <div class="buzhang-code">000543</div>
+                                <div class="buzhang-logic">安徽火电龙头，煤价下行+容量电价双重改善</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">甘肃能源</div>
+                                <div class="buzhang-code">000791</div>
+                                <div class="buzhang-logic">西北绿电龙头，算电协同+绿电交易</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">浙江新能</div>
+                                <div class="buzhang-code">600032</div>
+                                <div class="buzhang-logic">浙江水电+绿电，汛期来水+电价修复</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">豫能控股</div>
+                                <div class="buzhang-code">001896</div>
+                                <div class="buzhang-logic">河南火电，灵活性改造+调峰收益</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">黑马</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">节能风电</div>
+                                <div class="buzhang-code">601016</div>
+                                <div class="buzhang-logic">风电运营商，成本优势，装机增长</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">黑马</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 方向3：商业零售/促消费 -->
+                <div class="ztb-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>商业零售/促消费</h3>
+                    <p>促消费政策+国企改革+夏季消费旺季。涨停：丽尚国潮、步步高、孩子王、东百集团、永辉超市等。</p>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">合肥百货</div>
+                                <div class="buzhang-code">000417</div>
+                                <div class="buzhang-logic">安徽商业龙头，国企改革+资产重估</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">大商股份</div>
+                                <div class="buzhang-code">600694</div>
+                                <div class="buzhang-logic">东北商业龙头，高分红+估值修复</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">王府井</div>
+                                <div class="buzhang-code">600859</div>
+                                <div class="buzhang-logic">免税+百货双轮，海南免税政策催化</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">重庆百货</div>
+                                <div class="buzhang-code">600729</div>
+                                <div class="buzhang-logic">西南商业龙头，混改完成+效率提升</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">南宁百货</div>
+                                <div class="buzhang-code">600712</div>
+                                <div class="buzhang-logic">广西商业，东盟消费+国企改革</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">黑马</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 方向4：电力设备/算电协同 -->
+                <div class="ztb-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>电力设备/算电协同</h3>
+                    <p>十五五电网投资4万亿+国网招标密集落地。涨停：宏发股份、三星医疗、汇金通、新联电子等。</p>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">国电南瑞</div>
+                                <div class="buzhang-code">600406</div>
+                                <div class="buzhang-logic">电网设备龙头，智能电网核心，国网招标</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">许继电气</div>
+                                <div class="buzhang-code">000400</div>
+                                <div class="buzhang-logic">直流输电+储能系统，特高压建设</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">平高电气</div>
+                                <div class="buzhang-code">600312</div>
+                                <div class="buzhang-logic">高压开关龙头，GIS核心，特高压放量</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">思源电气</div>
+                                <div class="buzhang-code">002028</div>
+                                <div class="buzhang-logic">民营电力设备龙头，海外订单+配网升级</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">中国西电</div>
+                                <div class="buzhang-code">601179</div>
+                                <div class="buzhang-logic">央企电力设备，特高压全套，中标15.83亿</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">黑马</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 方向5：建材/基建 -->
+                <div class="ztb-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>建材/基建</h3>
+                    <p>基建投资+地产链修复。涨停：四川金顶、鸿路钢构、龙泉股份等。</p>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">海螺水泥</div>
+                                <div class="buzhang-code">600585</div>
+                                <div class="buzhang-logic">水泥龙头，基建复苏+供给收缩</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">东方雨虹</div>
+                                <div class="buzhang-code">002271</div>
+                                <div class="buzhang-logic">防水材料龙头，地产链+基建双驱动</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">北新建材</div>
+                                <div class="buzhang-code">000786</div>
+                                <div class="buzhang-logic">石膏板龙头，国企改革+产能整合</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 方向6：白酒/消费 -->
+                <div class="ztb-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>白酒/消费</h3>
+                    <p>端午消费预期+白酒低位修复。涨停：水井坊、酒鬼酒、金种子酒等。</p>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">贵州茅台</div>
+                                <div class="buzhang-code">600519</div>
+                                <div class="buzhang-logic">白酒之王，批价企稳+分红率75%</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">五粮液</div>
+                                <div class="buzhang-code">000858</div>
+                                <div class="buzhang-logic">浓香龙头，渠道库存降至2个月</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">泸州老窖</div>
+                                <div class="buzhang-code">000568</div>
+                                <div class="buzhang-logic">中高端白酒，渠道改革+费用优化</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ========== 新闻方向整理 ========== -->
         <div class="news-section">
-            <h2>📰 今日预期差方向（6月1日）</h2>
+            <h2>📰 新闻方向整理（3个·2026-06-01新闻驱动）</h2>
             
             <div class="news-grid">
                 <!-- 方向1：半导体/存储 -->
                 <div class="news-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>半导体/存储</h3>
-                    <p>一季度集成电路出口724.7亿美元（+77.5%），存储器出口459.9亿美元（+174.2%）。5月全球投资者净抛售韩国股票636亿美元，资金转向中国半导体。国产存储企业扩产，产能提升50-150%。</p>
+                    <p>一季度集成电路出口724.7亿美元（+77.5%），存储器出口459.9亿美元（+174.2%）。5月全球投资者净抛售韩国股票636亿美元，资金转向中国半导体。</p>
                     <div class="buzhang-list">
                         <div class="buzhang-item">
                             <div class="buzhang-left">
@@ -334,61 +651,11 @@
                     <div class="news-meta">验证节点：存储价格走势、韩股资金持续流向、Q2存储企业业绩</div>
                 </div>
 
-                <!-- 方向2：创新药/ASCO -->
-                <div class="news-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>创新药/ASCO</h3>
-                    <p>ASCO年会5/29-6/2召开，13项中国研究入选LBA创历史新高。恒瑞BD出海152亿美元刷新纪录。国家医保局发布2026年药品目录调整方案，首次建立商保创新药目录衔接。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">恒瑞医药</div>
-                                <div class="buzhang-code">600276</div>
-                                <div class="buzhang-logic">创新药龙头，152亿美元BD出海刷新纪录</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">科伦博泰</div>
-                                <div class="buzhang-code">6990.HK</div>
-                                <div class="buzhang-logic">ADC技术领先，核心数据入选ASCO LBA</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">迪哲医药</div>
-                                <div class="buzhang-code">688192</div>
-                                <div class="buzhang-logic">第四代EGFR TKI，悟空28研究LBA口头报告</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">百利天恒</div>
-                                <div class="buzhang-code">688506</div>
-                                <div class="buzhang-logic">全球首创双抗ADC，iza-bren双终点阳性</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">泽璟制药</div>
-                                <div class="buzhang-code">688266</div>
-                                <div class="buzhang-logic">PD-1/TIGIT双抗+CD3/DLL3三抗，联合肝癌数据</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
-                    <div class="news-meta">验证节点：ASCO数据持续披露、恒瑞BD进展、医保目录调整</div>
-                </div>
-
-                <!-- 方向3：AI算力/太空算力 -->
+                <!-- 方向2：AI算力/太空算力 -->
                 <div class="news-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>AI算力/太空算力</h3>
-                    <p>北京太空算力产业创新中心6月1日官宣，国电高科发布天启星座规划。广州十五五重点突破AI算力芯片适配与具身智能。美股半导体爆发，ARM涨5%创新高，Anthropic 360亿美元融资。</p>
+                    <p>北京太空算力产业创新中心6月1日官宣，国电高科发布天启星座规划。广州十五五重点突破AI算力芯片适配与具身智能。</p>
                     <div class="buzhang-list">
                         <div class="buzhang-item">
                             <div class="buzhang-left">
@@ -434,111 +701,11 @@
                     <div class="news-meta">验证节点：太空算力中心进展、天启星座建设、广州AI芯片突破</div>
                 </div>
 
-                <!-- 方向4：电力/夏季用电 -->
-                <div class="news-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>电力/夏季用电</h3>
-                    <p>厄尔尼诺+夏季用电高峰，容量电价改善火电盈利。中电联预测2026年用电量10.9-11万亿千瓦时（+5-6%），5月代理购电电价环比修复。算电协同政策加持。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">皖能电力</div>
-                                <div class="buzhang-code">000543</div>
-                                <div class="buzhang-logic">安徽火电龙头，煤价下行+容量电价双重改善</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">甘肃能源</div>
-                                <div class="buzhang-code">000791</div>
-                                <div class="buzhang-logic">西北绿电龙头，算电协同+绿电交易</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">浙江新能</div>
-                                <div class="buzhang-code">600032</div>
-                                <div class="buzhang-logic">浙江水电+绿电，汛期来水+电价修复</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">豫能控股</div>
-                                <div class="buzhang-code">001896</div>
-                                <div class="buzhang-logic">河南火电，灵活性改造+调峰收益</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">节能风电</div>
-                                <div class="buzhang-code">601016</div>
-                                <div class="buzhang-logic">风电运营商，成本优势，装机增长</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
-                    <div class="news-meta">验证节点：6月用电量数据、气温走势、容量电价细则</div>
-                </div>
-
-                <!-- 方向5：电力设备/算电协同 -->
-                <div class="news-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>电力设备/算电协同</h3>
-                    <p>十五五电网投资4万亿，2026Q1电网投资超1600亿。3月电力设备出口同比+40%。国网招标密集落地，平高电气中标13.27亿、许继电气12.75亿、中国西电15.83亿。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">国电南瑞</div>
-                                <div class="buzhang-code">600406</div>
-                                <div class="buzhang-logic">电网设备龙头，智能电网核心，国网招标</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">许继电气</div>
-                                <div class="buzhang-code">000400</div>
-                                <div class="buzhang-logic">直流输电+储能系统，特高压建设</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">平高电气</div>
-                                <div class="buzhang-code">600312</div>
-                                <div class="buzhang-logic">高压开关龙头，GIS核心，特高压放量</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">思源电气</div>
-                                <div class="buzhang-code">002028</div>
-                                <div class="buzhang-logic">民营电力设备龙头，海外订单+配网升级</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">中国西电</div>
-                                <div class="buzhang-code">601179</div>
-                                <div class="buzhang-logic">央企电力设备，特高压全套，中标15.83亿</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
-                    <div class="news-meta">验证节点：国网第二批招标、特高压核准开工、出口数据</div>
-                </div>
-
-                <!-- 方向6：钠电池/新能源 -->
+                <!-- 方向3：钠电池/新能源 -->
                 <div class="news-card watch">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>钠电池/新能源</h3>
-                    <p>宁德时代首席科学家确认2026年钠离子电池规模量产，原材料资源广、成本更低。锂空气电池为未来布局重点。电动两轮车/储能场景替代。</p>
+                    <p>宁德时代首席科学家确认2026年钠离子电池规模量产，原材料资源广、成本更低。电动两轮车/储能场景替代。</p>
                     <div class="buzhang-list">
                         <div class="buzhang-item">
                             <div class="buzhang-left">
