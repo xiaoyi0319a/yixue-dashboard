@@ -252,7 +252,114 @@
             </div>
         </div>
 
-        {{ content }}
+        <div class="content">{{ content }}</div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // 只处理直接子元素中的 h2，避免破坏已有的手动 div 包裹
+            const directChildren = Array.from(content.children);
+            const h2Indices = directChildren.map((child, index) => child.tagName === 'H2' ? index : -1).filter(i => i !== -1);
+            if (h2Indices.length === 0) return;
+
+            // 从后往前分组，避免操作影响前面索引
+            for (let i = h2Indices.length - 1; i >= 0; i--) {
+                const startIdx = h2Indices[i];
+                const endIdx = i < h2Indices.length - 1 ? h2Indices[i + 1] : directChildren.length;
+                const elements = directChildren.slice(startIdx, endIdx);
+
+                const h2 = elements[0];
+                const h2Text = h2.textContent;
+
+                const wrapper = document.createElement('div');
+                if (h2Text.includes('大白话三问')) {
+                    wrapper.className = 'dabaohua-section';
+                } else {
+                    wrapper.className = 'section';
+                    const stepMatch = h2Text.match(/Step\s*(\d+)/i);
+                    if (stepMatch) {
+                        wrapper.id = 'step' + stepMatch[1];
+                    }
+                }
+
+                elements.forEach(el => wrapper.appendChild(el));
+
+                const insertPoint = directChildren[startIdx];
+                if (insertPoint && insertPoint.parentNode === content) {
+                    content.insertBefore(wrapper, insertPoint);
+                }
+            }
+
+            // 处理 dabaohua-section 内部：把包含【】的 p 转为 dabaohua-q
+            document.querySelectorAll('.dabaohua-section').forEach(section => {
+                section.querySelectorAll('p').forEach(p => {
+                    const text = p.textContent;
+                    if (text.includes('【') && text.includes('】')) {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'dabaohua-q';
+
+                        const strong = p.querySelector('strong');
+                        if (strong) {
+                            const label = document.createElement('div');
+                            label.className = 'q-label';
+                            label.textContent = strong.textContent;
+                            wrapper.appendChild(label);
+
+                            const answer = document.createElement('div');
+                            answer.className = 'q-answer';
+                            const clone = p.cloneNode(true);
+                            const s = clone.querySelector('strong');
+                            if (s) s.remove();
+                            answer.innerHTML = clone.innerHTML;
+                            wrapper.appendChild(answer);
+                        } else {
+                            wrapper.innerHTML = p.innerHTML;
+                        }
+
+                        p.replaceWith(wrapper);
+                    }
+                });
+
+                // 四句话总结转为 dabaohua-summary
+                section.querySelectorAll('h4').forEach(h4 => {
+                    if (h4.textContent.includes('四句话总结')) {
+                        const summary = document.createElement('div');
+                        summary.className = 'dabaohua-summary';
+
+                        const prev = h4.previousElementSibling;
+                        let el = h4.nextElementSibling;
+                        const elements = [];
+                        while (el && el.tagName !== 'H4' && el.tagName !== 'H2') {
+                            elements.push(el);
+                            el = el.nextElementSibling;
+                        }
+
+                        summary.appendChild(h4);
+                        elements.forEach(e => summary.appendChild(e));
+
+                        if (prev) {
+                            prev.after(summary);
+                        } else if (section.firstChild) {
+                            section.insertBefore(summary, section.firstChild);
+                        }
+                    }
+                });
+            });
+
+            // 锚点跳转：给大白话三问内的 ← Step X 链接加点击事件
+            document.querySelectorAll('.dabaohua-section .q-answer').forEach(answer => {
+                const html = answer.innerHTML;
+                const newHtml = html.replace(/←\s*Step\s*(\d+)/gi, function(match, num) {
+                    return '<span class="anchor-tag" onclick="document.getElementById(\'step' + num + '\').scrollIntoView({behavior:\'smooth\'})" style="cursor:pointer">' + match + '</span>';
+                });
+                if (newHtml !== html) {
+                    answer.innerHTML = newHtml;
+                }
+            });
+        });
+        </script>
 
         <div class="footer">
             <p>🎯 羿学交易智囊团</p>
