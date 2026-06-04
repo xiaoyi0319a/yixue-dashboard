@@ -13,285 +13,197 @@
             min-height: 100vh;
             line-height: 1.6;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #2d3a4f;
-            margin-bottom: 30px;
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
         }
         .header h1 {
             font-size: 2.5em;
             background: linear-gradient(90deg, #00d4ff, #a371f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
-        .header .date {
-            color: #8b9dc3;
-            font-size: 1.1em;
-        }
-        
-        /* 奇门预测区 */
+        .header .date { color: #8b9dc3; font-size: 1.1em; }
+        .header .ganzhi { color: #5a6a7a; font-size: 0.9em; margin-top: 5px; }
+
+        /* ========== 奇门预测区 ========== */
         .qimen-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #a371f7;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(163, 113, 247, 0.2);
+            border: 2px solid #a371f7; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(163, 113, 247, 0.2);
         }
-        .qimen-section h2 {
-            color: #a371f7;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .qimen-section h2 { color: #a371f7; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .qimen-hexagram { background: rgba(163, 113, 247, 0.1); border-left: 4px solid #a371f7; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
+        .qimen-hexagram h4 { color: #a371f7; margin-bottom: 8px; }
+        .qimen-verdict { background: rgba(255, 107, 107, 0.1); border-left: 4px solid #ff6b6b; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
+        .qimen-verdict h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .qimen-verdict p { color: #d0d8e8; font-style: italic; }
+        .qimen-time { background: rgba(0, 212, 255, 0.1); border-left: 4px solid #00d4ff; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
+        .qimen-time h4 { color: #00d4ff; margin-bottom: 12px; }
+        .time-slot { background: rgba(0, 212, 255, 0.05); border-radius: 10px; padding: 15px; margin-bottom: 12px; border: 1px solid rgba(0, 212, 255, 0.2); }
+        .time-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .time-name { color: #00d4ff; font-weight: bold; font-size: 1.1em; }
+        .time-range { color: #8b9dc3; font-size: 0.9em; background: rgba(139, 157, 195, 0.15); padding: 3px 10px; border-radius: 15px; }
+        .time-verdict { font-size: 0.95em; font-weight: 500; padding: 8px 12px; border-radius: 6px; background: rgba(255,255,255,0.05); }
+        .time-verdict.down { color: #ff6b6b; border-left: 3px solid #ff6b6b; }
+        .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
+        .time-verdict.up { color: #4caf50; border-left: 3px solid #4caf50; }
+
+        /* ========== 涨停板方向 ========== */
+        .ztb-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #00d4ff; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
         }
-        .qimen-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
+        .ztb-section h2 { color: #00d4ff; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .ztb-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;
         }
-        .qimen-item {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 10px;
+        @media (max-width: 768px) {
+            .ztb-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
         }
-        .qimen-item .label {
-            color: #8b9dc3;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-        .qimen-item .value {
-            color: #00d4ff;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .qimen-trend {
-            background: rgba(255, 107, 107, 0.1);
-            border-left: 4px solid #ff6b6b;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 15px 0;
-        }
-        .qimen-trend .trend-title {
-            color: #ff6b6b;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .qimen-strategy {
-            background: rgba(0, 212, 255, 0.1);
-            border-left: 4px solid #00d4ff;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            margin: 15px 0;
-        }
-        .qimen-strategy .strategy-title {
-            color: #00d4ff;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .qimen-guaxiang {
-            background: rgba(163, 113, 247, 0.1);
-            border: 1px solid #a371f7;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-            font-size: 1.1em;
-            line-height: 2;
-            text-align: center;
-        }
-        .qimen-panyu {
-            color: #a371f7;
-            font-style: italic;
-            padding: 15px;
-            border-top: 1px dashed #a371f7;
-            margin-top: 15px;
-            font-size: 1em;
-            line-height: 1.8;
-        }
-        .qimen-shichen {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .shichen-card {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #00d4ff;
-        }
-        .shichen-card .time-label {
-            color: #00d4ff;
-            font-weight: bold;
-            font-size: 0.95em;
-            margin-bottom: 8px;
-        }
-        .shichen-card .time-desc {
-            color: #b0c4de;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        
-        /* 方向卡片 */
-        .directions-section h2 {
-            color: #ffd700;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .direction-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .direction-card {
-            background: #1a2332;
+        .ztb-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid #2d3a4f;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 20px;
-            cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        .direction-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-            border-color: #00d4ff;
+        .ztb-card:hover {
+            transform: translateY(-3px);
+            border-color: #3d4a5f;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
-        .direction-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-        }
-        .direction-card.hot::before { background: linear-gradient(90deg, #ff6b6b, #ffd700); }
-        .direction-card.watch::before { background: linear-gradient(90deg, #00d4ff, #58a6ff); }
+        .ztb-card.hot { border-left: 4px solid #ff6b6b; }
+        .ztb-card.watch { border-left: 4px solid #ffd700; }
         .tag {
             display: inline-block;
             padding: 4px 12px;
-            border-radius: 20px;
+            border-radius: 15px;
             font-size: 0.85em;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
-        .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
-        .tag-watch { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
-        .direction-card h3 {
-            color: #fff;
-            font-size: 1.2em;
+        .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.3); }
+        .tag-watch { background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
+        .ztb-card h3 {
+            font-size: 1.3em;
             margin-bottom: 10px;
+            color: #f0f4f8;
         }
-        .direction-card p {
-            color: #b0c4de;
+        .ztb-card p {
+            color: #a0aec0;
             font-size: 0.95em;
-            line-height: 1.5;
-            margin-bottom: 15px;
+            line-height: 1.6;
         }
-        .click-hint {
-            color: #58a6ff;
-            font-size: 0.9em;
+        .ztb-meta {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #2d3a4f;
+            font-size: 0.85em;
+            color: #8b9dc3;
+        }
+
+        /* 补涨标的格式 */
+        .buzhang-list { margin-top: 12px; }
+        .buzhang-item {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .buzhang-left { flex: 1; }
+        .buzhang-name { font-size: 1em; color: #f0f4f8; font-weight: 500; }
+        .buzhang-code { font-size: 0.75em; color: #8b9dc3; margin-top: 2px; }
+        .buzhang-logic { font-size: 0.85em; color: #a0aec0; margin-top: 4px; line-height: 1.4; }
+        .buzhang-tag {
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .bz-s { background: rgba(255,107,107,0.2); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.3); }
+        .bz-a { background: rgba(255,215,0,0.15); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
+        .bz-h { background: rgba(76,175,80,0.15); color: #4caf50; border: 1px solid rgba(76,175,80,0.3); }
+
+        /* ========== 新闻方向 ========== */
+        .news-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .news-section h2 { color: #c9a84c; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .news-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;
+        }
+        @media (max-width: 768px) {
+            .news-grid { grid-template-columns: 1fr; }
+        }
+        .news-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #2d3a4f;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .news-card:hover {
+            transform: translateY(-3px);
+            border-color: #3d4a5f;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        .news-card.hot { border-left: 4px solid #ff6b6b; }
+        .news-card.watch { border-left: 4px solid #ffd700; }
+        .news-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #f0f4f8;
+        }
+        .news-card p {
+            color: #a0aec0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .news-meta {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #2d3a4f;
+            font-size: 0.85em;
+            color: #8b9dc3;
+        }
+
+        /* ========== 验证节点 ========== */
+        .verification-section {
+            background: linear-gradient(135deg, #0d1b0d 0%, #1a2e1a 100%);
+            border: 2px solid #4caf50; border-radius: 15px; padding: 25px;
+            margin-bottom: 30px; box-shadow: 0 0 30px rgba(76, 175, 80, 0.15);
+        }
+        .verification-section h2 { color: #4caf50; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .verify-list { list-style: none; }
+        .verify-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #2d3a4f;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
         }
-        
-        /* 验证节点表格 */
-        .verification-section {
-            background: #1a2332;
-            border: 1px solid #2d3a4f;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .verification-section h2 {
-            color: #00d4ff;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-        .verification-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .verification-table th {
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .verification-table td {
-            padding: 12px;
-            border-bottom: 1px solid #2d3a4f;
-            color: #b0c4de;
-        }
-        .verification-table tr:hover td {
-            background: rgba(255,255,255,0.02);
-        }
-        
+        .verify-list li:last-child { border-bottom: none; }
+        .verify-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; }
+
         .footer {
-            text-align: center;
-            padding: 30px;
-            color: #8b9dc3;
-            border-top: 1px solid #2d3a4f;
-            margin-top: 30px;
-        }
-        .footer p {
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-        
-        /* 涨停统计 */
-        .limitup-section {
-            background: #1a2332;
-            border: 1px solid #2d3a4f;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .limitup-section h2 {
-            color: #ffd700;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-        .limitup-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .limitup-item {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #00d4ff;
-        }
-        .limitup-item .label {
-            color: #8b9dc3;
-            font-size: 0.9em;
-        }
-        .limitup-item .value {
-            color: #ffd700;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        .limitup-item .stocks {
-            color: #b0c4de;
-            font-size: 0.85em;
-            margin-top: 5px;
+            text-align: center; padding: 30px 0;
+            border-top: 1px solid #2d3a4f; margin-top: 30px;
+            color: #5a6a7a; font-size: 0.9em;
         }
     </style>
 </head>
@@ -299,154 +211,128 @@
     <div class="container">
         <!-- 头部 -->
         <div class="header">
-            <h1>🎯 羿学交易智囊团</h1>
-            <div class="date">2026年6月4日 星期四 | 丙午年 癸巳月 己酉日</div>
+            <h1>羿学交易智囊团</h1>
+            <div class="date">2026年6月4日 星期四</div>
+            <div class="ganzhi">丙午年 癸巳月 己酉日 | 阳遁5局 小满后14日</div>
         </div>
-        
-        <!-- 奇门预测 -->
+
+        <!-- ========== 奇门预测区 ========== -->
         <div class="qimen-section">
             <h2>🔮 奇门君今日预测</h2>
-            <div class="qimen-grid">
-                <div class="qimen-item">
-                    <div class="label">局数</div>
-                    <div class="value">阳遁5局</div>
-                </div>
-                <div class="qimen-item">
-                    <div class="label">值符</div>
-                    <div class="value">天芮/天禽（乾六宫）</div>
-                </div>
-                <div class="qimen-item">
-                    <div class="label">值使</div>
-                    <div class="value">死门</div>
-                </div>
-                <div class="qimen-item">
-                    <div class="label">日干</div>
-                    <div class="value">己（艮八宫·游魂入墓）</div>
-                </div>
+            
+            <div class="qimen-hexagram">
+                <h4>📊 卦象</h4>
+                <p>阳遁五局，己酉日己巳时，小满后十四日。<br>
+                旬首甲子戊，值符天芮/天禽落乾六，值使死门居坎一。<br>
+                己土逢墓时干同，四害九处凶格五。<br>
+                戊入墓空吉格困，辛乙白虎猖狂凶。</p>
             </div>
 
+            <div class="qimen-verdict">
+                <h4>📜 大势判语</h4>
+                <p><strong>下跌，小跌。</strong></p>
+                <p>值符天芮/天禽落乾六，戊+丁青龙华盖吉格，然景门门迫、戊入墓、空亡三重压制，吉格无力，大势被压。值符之势虽在，四害叠加而难发。</p>
+                <p>日干己在艮八，己+辛游魂入墓，惊门当令，凶格叠加。时干己同日干，同落艮八凶格，时机不利。乙奇在坤二，入墓+击刑+伤门门迫，买盘几乎枯竭。庚金在坎一，死门门迫+庚+癸大格，卖盘被困但仍有压制。甲子戊在乾六，入墓+空亡+门迫，本金紧张，资金匮乏。生门在离九，丙+壬火入天罗+玄武，利润预期差，投机氛围浓。四害九处凶格五，盘面极度凶险。大势被压制，情绪极度低迷，股价弱势，时机不利。综合来看，今日下跌，小跌，幅度约-0.2%~-0.5%，量能低迷。</p>
+            </div>
 
-            <div class="qimen-guaxiang">
-                📊 值符吉格逢四害，买盘入墓资金空。<br>
-                游魂入墓日时宜，谨慎观望莫冲动。
-            </div>
-            <div class="qimen-panyu">
-                📜 大势判语：四害九处凶格五，盘面极度凶险。值符宫戊+丁青龙华盖被景门门迫、戊入墓、空亡三重压制，吉格无力。日干时干同落艮八己+辛游魂入墓，惊门当令，全天无有力支撑。乙奇入墓击刑，买盘枯竭；甲子戊入墓空亡，本金紧张。生门临玄武，利润预期差，投机氛围浓。大势被压制，情绪极度低迷，股价弱势，时机不利。
-            </div>
-            <div class="qimen-shichen">
-                <div class="shichen-card">
-                    <div class="time-label">09:30-11:00（己巳时）</div>
-                    <div class="time-desc">时干己落艮八游魂入墓，弱势开盘，低开概率大</div>
+            <div class="qimen-time">
+                <h4>⏰ 时辰推演</h4>
+                
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">己巳时</span>
+                        <span class="time-range">09:30 - 11:00</span>
+                    </div>
+                    <div class="time-verdict down">时干己落艮八游魂入墓，弱势开盘，低开概率大</div>
                 </div>
-                <div class="shichen-card">
-                    <div class="time-label">11:00-13:00（庚午时）</div>
-                    <div class="time-desc">庚金卖盘临坎一，门迫大格，卖压被困但仍有压制</div>
+                
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">庚午时</span>
+                        <span class="time-range">11:00 - 13:00</span>
+                    </div>
+                    <div class="time-verdict down">庚金卖盘临坎一，门迫大格，卖压被困但仍有压制</div>
                 </div>
-                <div class="shichen-card">
-                    <div class="time-label">13:00-14:00（辛未时·午盘初）</div>
-                    <div class="time-desc">辛落巽四白虎猖狂，午后可能加速下跌</div>
+                
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">辛未时·午盘初</span>
+                        <span class="time-range">13:00 - 14:00</span>
+                    </div>
+                    <div class="time-verdict down">辛落巽四白虎猖狂，午后可能加速下跌</div>
                 </div>
-                <div class="shichen-card">
-                    <div class="time-label">14:00-15:00（辛未时·午盘末）</div>
-                    <div class="time-desc">白虎猖狂持续，注意尾盘波动</div>
+                
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">辛未时·午盘末</span>
+                        <span class="time-range">14:00 - 15:00</span>
+                    </div>
+                    <div class="time-verdict down">白虎猖狂持续，注意尾盘波动</div>
                 </div>
             </div>
         </div>
-        
-        <!-- 新闻方向整理 -->
-        <div class="directions-section">
-            <h2>📰 新闻方向整理（6月4日新闻驱动）</h2>
-            <div class="direction-grid">
-                <div class="direction-card hot" onclick="location.href='direction-1-computing.html'">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>AI算力基建（光纤光缆/光模块）</h3>
-                    <p>AI算力爆发，数据中心往绿电区搬，光纤光缆订单排到2027年，满负荷生产。亨通一季度产出+35%，海外发货+55%。光棒成扩产瓶颈，供不应求。</p>
-                    <div class="click-hint">点击查看详细分析 →</div>
-                </div>
-                <div class="direction-card hot" onclick="location.href='direction-2-iran.html'">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>美伊谈判与霍尔木兹通航</h3>
-                    <p>特朗普说"非常接近"达成协议，霍尔木兹海峡要通航。但"史诗怒火"军事行动刚结束，伊朗还保着反击能力。众议院叫停军事行动，博弈还没完。</p>
-                    <div class="click-hint">点击查看详细分析 →</div>
-                </div>
-                <div class="direction-card hot" onclick="location.href='direction-3-ai-model.html'">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>AI大模型商业化加速</h3>
-                    <p>DeepSeek融资70亿美元（腾讯、宁德时代领投），微信AI智能体是腾讯内部"最高优先级"，豆包专业版覆盖软件开发、金融分析。大模型从烧钱进入变现阶段。</p>
-                    <div class="click-hint">点击查看详细分析 →</div>
-                </div>
-                <div class="direction-card watch" onclick="location.href='direction-4-robot.html'">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>人形机器人/具身智能</h3>
-                    <p>比亚迪确认人形机器人研发中，未来可能经销商网络销售。宇树科技六个月内实现任意动作生成。特斯拉Optimus V3年中量产概率极大。但板块已涨过一波，预期差有限。</p>
-                    <div class="click-hint">点击查看详细分析 →</div>
-                </div>
-                <div class="direction-card watch" onclick="location.href='direction-5-chemical.html'">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>化工/新材料（氦气涨价）</h3>
-                    <p>俄罗斯氦气出口管制，进口管束氦气周均价涨31.89%。华特气体氦气收入占12%，构建了"进口+国产化"双引擎。光棒瓶颈制约光纤扩产，亨通光电等龙头受益。</p>
-                    <div class="click-hint">点击查看详细分析 →</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 涨停板方向整理（当日无数据，暂不显示） -->
+
+        <!-- ========== 涨停板方向整理（当日无数据，暂不显示） ========== -->
         <!--
-        <div class="limitup-section">
-            <h2>📈 涨停板方向整理（N方向·M只涨停驱动）</h2>
-            <div class="direction-grid">
-                <!-- 方向卡片按V3.0格式：名称+🔥/👀标签+核心逻辑+涨停梯队+补涨标的 -->
+        <div class="ztb-section">
+            <h2>📈 涨停板方向整理（0方向·0只涨停驱动）</h2>
+            <div class="ztb-grid">
             </div>
         </div>
         -->
-        
-        <!-- 关键验证节点 -->
-        <div class="verification-section">
-            <h2>⏰ 关键验证节点</h2>
-            <table class="verification-table">
-                <tr>
-                    <th>时间</th>
-                    <th>事件</th>
-                    <th>验证逻辑</th>
-                </tr>
-                <tr>
-                    <td>6月5日</td>
-                    <td>芒种节气</td>
-                    <td>节气切换，奇门换局，观察新局对走势的影响</td>
-                </tr>
-                <tr>
-                    <td>6月5日</td>
-                    <td>SpaceX IPO定价</td>
-                    <td>750亿美元募资，若定价超预期，流动性虹吸效应需关注</td>
-                </tr>
-                <tr>
-                    <td>6月6-7日</td>
-                    <td>缅甸外长访华</td>
-                    <td>若达成能源/基建协议，关注西南通道相关标的</td>
-                </tr>
-                <tr>
-                    <td>6月11日</td>
-                    <td>SpaceX上市交易</td>
-                    <td>若首日大涨，科技板块风险偏好可能提升</td>
-                </tr>
-                <tr>
-                    <td>6月中旬</td>
-                    <td>美伊谈判结果</td>
-                    <td>若达成协议，霍尔木兹通航，航运/能源价格回归</td>
-                </tr>
-                <tr>
-                    <td>6月</td>
-                    <td>微信AI智能体上线</td>
-                    <td>14亿用户入口，若监管获批，AI应用逻辑验证</td>
-                </tr>
-            </table>
+
+        <!-- ========== 新闻方向整理 ========== -->
+        <div class="news-section">
+            <h2>📰 新闻方向整理（5个·2026-06-04新闻驱动）</h2>
+            
+            <div class="news-grid">
+                <!-- 方向1：AI算力基建 -->
+                <div class="news-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>AI算力基建（光纤光缆/光模块）</h3>
+                    <p>AI算力爆发，数据中心往绿电区搬，光纤光缆订单排到2027年，满负荷生产。亨通一季度产出+35%，海外发货+55%。光棒成扩产瓶颈，供不应求。</p>
+                </div>
+
+                <!-- 方向2：美伊谈判 -->
+                <div class="news-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>美伊谈判与霍尔木兹通航</h3>
+                    <p>特朗普说"非常接近"达成协议，霍尔木兹海峡要通航。但"史诗怒火"军事行动刚结束，伊朗还保着反击能力。众议院叫停军事行动，博弈还没完。</p>
+                </div>
+
+                <!-- 方向3：AI大模型商业化 -->
+                <div class="news-card hot">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>AI大模型商业化加速</h3>
+                    <p>DeepSeek融资70亿美元（腾讯、宁德时代领投），微信AI智能体是腾讯内部"最高优先级"，豆包专业版覆盖软件开发、金融分析。大模型从烧钱进入变现阶段。</p>
+                </div>
+
+                <!-- 方向4：人形机器人 -->
+                <div class="news-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>人形机器人/具身智能</h3>
+                    <p>比亚迪确认人形机器人研发中，未来可能经销商网络销售。宇树科技六个月内实现任意动作生成。特斯拉Optimus V3年中量产概率极大。但板块已涨过一波，预期差有限。</p>
+                </div>
+
+                <!-- 方向5：化工新材料 -->
+                <div class="news-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>化工/新材料（氦气涨价）</h3>
+                    <p>俄罗斯氦气出口管制，进口管束氦气周均价涨31.89%。华特气体氦气收入占12%，构建了"进口+国产化"双引擎。光棒瓶颈制约光纤扩产，亨通光电等龙头受益。</p>
+                </div>
+            </div>
         </div>
-        
-        <!-- 底部 -->
+
+        <div class="verification-section">
+            <h2>🔍 关键验证节点</h2>
+            <ul class="verify-list">
+                <li><span class="verify-dot"></span><strong>2026-06-04 09:30</strong> | 奇门起盘 | 阳遁5局·己酉日·预测下跌（-0.2%~-0.5%）</li>
+                <li><span class="verify-dot"></span><strong>2026-06-04 15:00</strong> | 收盘验证 | 实际下跌-0.64%</li>
+            </ul>
+        </div>
+
         <div class="footer">
-            <p>📊 数据更新于：2026年6月4日 15:00</p>
-            <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
-            <p>🔧 版本：v3.0 | 数据来源：Wind/东方财富/新浪财经</p>
+            <p>羿学交易智囊团 · 数据截至 2026-06-04 09:50 · 仅供参考不构成投资建议</p>
         </div>
     </div>
 </body>
