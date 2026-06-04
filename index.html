@@ -98,13 +98,47 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-        .qimen-esoteric {
+        .qimen-guaxiang {
+            background: rgba(163, 113, 247, 0.1);
+            border: 1px solid #a371f7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-size: 1.1em;
+            line-height: 2;
+            text-align: center;
+        }
+        .qimen-panyu {
             color: #a371f7;
             font-style: italic;
-            padding: 10px;
+            padding: 15px;
             border-top: 1px dashed #a371f7;
             margin-top: 15px;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+        .qimen-shichen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .shichen-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+        }
+        .shichen-card .time-label {
+            color: #00d4ff;
+            font-weight: bold;
             font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+        .shichen-card .time-desc {
+            color: #b0c4de;
+            font-size: 0.9em;
+            line-height: 1.5;
         }
         
         /* 方向卡片 */
@@ -275,37 +309,56 @@
             <div class="qimen-grid">
                 <div class="qimen-item">
                     <div class="label">局数</div>
-                    <div class="value">阳遁8局</div>
+                    <div class="value">阳遁5局</div>
                 </div>
                 <div class="qimen-item">
                     <div class="label">值符</div>
-                    <div class="value">天辅星（坤二宫）</div>
+                    <div class="value">天芮/天禽（乾六宫）</div>
                 </div>
                 <div class="qimen-item">
                     <div class="label">值使</div>
-                    <div class="value">杜门（乾六宫）</div>
+                    <div class="value">死门</div>
                 </div>
                 <div class="qimen-item">
                     <div class="label">日干</div>
-                    <div class="value">己（兑七宫·泄气）</div>
+                    <div class="value">己（艮八宫·游魂入墓）</div>
                 </div>
             </div>
             <div class="qimen-trend">
-                <div class="trend-title">📊 走势判断：偏弱震荡 · 卖压极强</div>
-                <div>日干己土泄气于金，偏弱；时干丙火生己土但伤门曲折；庚金卖盘白虎+死门，卖压极强。总体偏弱震荡，收小阴或十字星概率大。</div>
+                <div class="trend-title">📊 走势判断：下跌 · 小跌</div>
+                <div>四害9处+凶格5处，盘面极度凶险。值符吉格被四害完全压制，日干时干同落凶格，全天无有力支撑。买盘枯竭，资金紧张，利润预期差。</div>
             </div>
-            <div class="qimen-strategy">
-                <div class="strategy-title">💡 操作策略</div>
-                <div>持仓者逢高减仓，空仓者观望为主。忌追高、忌赌消息、忌扛单。若早盘急跌超0.5%可小仓位试多，无量反弹则离场。</div>
+
+            <div class="qimen-guaxiang">
+                📜 值符吉格逢四害，买盘入墓资金空。<br>
+                游魂入墓日时宜，谨慎观望莫冲动。
             </div>
-            <div class="qimen-esoteric">
-                📜 玄学解析：己酉日丙辰时，阳遁八局。值符天辅落坤二宫，癸+辛网盖天牢，休门主静待。时干丙生己土，时机有利但伤门曲折。庚+戊值符飞宫，白虎临艮八宫，卖盘凶悍。巳月火旺，光伏芯片得月令，然白虎压制，追高必被套。谨慎偏空，莫要急躁。
+            <div class="qimen-panyu">
+                四害九处凶格五，盘面极度凶险。值符宫戊+丁青龙华盖被景门门迫、戊入墓、空亡三重压制，吉格无力。日干时干同落艮八己+辛游魂入墓，惊门当令，全天无有力支撑。乙奇入墓击刑，买盘枯竭；甲子戊入墓空亡，本金紧张。生门临玄武，利润预期差，投机氛围浓。大势被压制，情绪极度低迷，股价弱势，时机不利。
+            </div>
+            <div class="qimen-shichen">
+                <div class="shichen-card">
+                    <div class="time-label">09:30-11:00（己巳时）</div>
+                    <div class="time-desc">时干己落艮八游魂入墓，弱势开盘，低开概率大</div>
+                </div>
+                <div class="shichen-card">
+                    <div class="time-label">11:00-13:00（庚午时）</div>
+                    <div class="time-desc">庚金卖盘临坎一，门迫大格，卖压被困但仍有压制</div>
+                </div>
+                <div class="shichen-card">
+                    <div class="time-label">13:00-14:00（辛未时·午盘初）</div>
+                    <div class="time-desc">辛落巽四白虎猖狂，午后可能加速下跌</div>
+                </div>
+                <div class="shichen-card">
+                    <div class="time-label">14:00-15:00（辛未时·午盘末）</div>
+                    <div class="time-desc">白虎猖狂持续，注意尾盘波动</div>
+                </div>
             </div>
         </div>
         
-        <!-- 预期差方向 -->
+        <!-- 新闻方向整理 -->
         <div class="directions-section">
-            <h2>📈 今日预期差方向</h2>
+            <h2>📰 新闻方向整理（6月4日新闻驱动）</h2>
             <div class="direction-grid">
                 <div class="direction-card hot" onclick="location.href='direction-1-computing.html'">
                     <span class="tag tag-hot">🔥 重点看</span>
@@ -416,9 +469,9 @@
         
         <!-- 底部 -->
         <div class="footer">
-            <p>📊 数据更新于：2026年6月4日 09:30</p>
+            <p>📊 数据更新于：2026年6月4日 15:00</p>
             <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
-            <p>🔧 版本：v2.2 | 数据来源：Wind/东方财富/新浪财经</p>
+            <p>🔧 版本：v3.0 | 数据来源：Wind/东方财富/新浪财经</p>
         </div>
     </div>
 </body>
