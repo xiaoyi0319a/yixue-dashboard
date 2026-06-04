@@ -1,14 +1,9 @@
----
-layout: null
----
 [
-  {% for report in site.reports %}
   {
-    "code": "{{ report.code }}",
-    "name": "{{ report.title }}",
-    "date": "{{ report.date | date: '%Y-%m-%d' }}",
-    "file": "{{ report.url | relative_url }}",
-    "tags": {{ report.subtitle | split: ' · ' | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
+    "code": "300199",
+    "name": "翰宇药业",
+    "tags": ["多肽原料药", "GLP-1", "业绩拐点", "创新药"],
+    "date": "2026-06-04",
+    "file": "stock-300199.html"
+  }
 ]
