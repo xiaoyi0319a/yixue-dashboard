@@ -1168,10 +1168,9 @@
                 diPan[gong] = TIANGAN[ganIndex];
             }
 
-            // 中五宫寄坤二宫（保留原来的癸，叠加乙），但中五宫仍保留用于显示
+            // 中五宫寄坤二宫（本位在前，寄宫在后）
             if (diPan[5]) {
-                diPan[2] = diPan[5] + (diPan[2] || ''); // 乙 + 癸 = "乙癸"
-                // 中五宫保留原值用于显示
+                diPan[2] = (diPan[2] || '') + diPan[5]; // 丙 + 己 = "丙己"
             }
 
             return diPan;

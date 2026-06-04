@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羿学交易智囊团 | 2026-04-03</title>
+    <title>羿学交易智囊团 | 2026-06-04</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -220,6 +220,45 @@
             margin: 5px 0;
             font-size: 0.9em;
         }
+        
+        /* 涨停统计 */
+        .limitup-section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .limitup-section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        .limitup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .limitup-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+        }
+        .limitup-item .label {
+            color: #8b9dc3;
+            font-size: 0.9em;
+        }
+        .limitup-item .value {
+            color: #ffd700;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .limitup-item .stocks {
+            color: #b0c4de;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -227,7 +266,7 @@
         <!-- 头部 -->
         <div class="header">
             <h1>🎯 羿学交易智囊团</h1>
-            <div class="date">2026年4月3日 星期五 | 甲辰年 辛卯月 丁未日</div>
+            <div class="date">2026年6月4日 星期四 | 丙午年 癸巳月 己酉日</div>
         </div>
         
         <!-- 奇门预测 -->
@@ -236,31 +275,31 @@
             <div class="qimen-grid">
                 <div class="qimen-item">
                     <div class="label">局数</div>
-                    <div class="value">阳遁6局</div>
+                    <div class="value">阳遁8局</div>
                 </div>
                 <div class="qimen-item">
                     <div class="label">值符</div>
-                    <div class="value">天蓬星（坎一宫）</div>
+                    <div class="value">天辅星（坤二宫）</div>
                 </div>
                 <div class="qimen-item">
                     <div class="label">值使</div>
-                    <div class="value">休门（坎一宫）</div>
+                    <div class="value">杜门（乾六宫）</div>
                 </div>
                 <div class="qimen-item">
                     <div class="label">日干</div>
-                    <div class="value">丁（震三宫·休囚）</div>
+                    <div class="value">己（兑七宫·泄气）</div>
                 </div>
             </div>
             <div class="qimen-trend">
-                <div class="trend-title">📊 走势判断：小吉带凶，谨慎参与</div>
-                <div>大盘（值符）旺相临休门，大势稳健但主休息；股价（日干丁）休囚无力，临太阴暗动；白虎在离宫，防突发下跌风险。</div>
+                <div class="trend-title">📊 走势判断：偏弱震荡 · 卖压极强</div>
+                <div>日干己土泄气于金，偏弱；时干丙火生己土但伤门曲折；庚金卖盘白虎+死门，卖压极强。总体偏弱震荡，收小阴或十字星概率大。</div>
             </div>
             <div class="qimen-strategy">
                 <div class="strategy-title">💡 操作策略</div>
-                <div>早盘观望，小仓位试探，不宜重仓。等待白虎之凶过去后再择机操作，仓位控制在3成以内。</div>
+                <div>持仓者逢高减仓，空仓者观望为主。忌追高、忌赌消息、忌扛单。若早盘急跌超0.5%可小仓位试多，无量反弹则离场。</div>
             </div>
             <div class="qimen-esoteric">
-                📜 玄学解析：时干甲辰（隐干壬）临值符天蓬，壬水生丁火时机生助股价；然艮八宫庚临螣蛇，卖盘缠绕虚诈；离九宫白虎当令，突发利空需警惕。值使休门主静待，莫要急躁追高。
+                📜 玄学解析：己酉日丙辰时，阳遁八局。值符天辅落坤二宫，癸+辛网盖天牢，休门主静待。时干丙生己土，时机有利但伤门曲折。庚+戊值符飞宫，白虎临艮八宫，卖盘凶悍。巳月火旺，光伏芯片得月令，然白虎压制，追高必被套。谨慎偏空，莫要急躁。
             </div>
         </div>
         
@@ -268,29 +307,67 @@
         <div class="directions-section">
             <h2>📈 今日预期差方向</h2>
             <div class="direction-grid">
-                <div class="direction-card hot" onclick="location.href='direction-1-oil.html'">
+                <div class="direction-card hot" onclick="location.href='direction-1-computing.html'">
                     <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>中东局势/霍尔木兹海峡</h3>
-                    <p>特朗普放话要打伊朗，油价一天飙涨12%，霍尔木兹海峡这石油咽喉要地可能要关门，油气股、航运股直接受益。</p>
+                    <h3>AI算力基建（光纤光缆/光模块）</h3>
+                    <p>AI算力爆发，数据中心往绿电区搬，光纤光缆订单排到2027年，满负荷生产。亨通一季度产出+35%，海外发货+55%。光棒成扩产瓶颈，供不应求。</p>
                     <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                <div class="direction-card hot" onclick="location.href='direction-2-computing.html'">
+                <div class="direction-card hot" onclick="location.href='direction-2-iran.html'">
                     <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>算力银行/算力超市</h3>
-                    <p>工信部首次提出"算力银行"新概念，以后中小企业也能便宜租到算力，IDC和算力调度公司最受益。</p>
+                    <h3>美伊谈判与霍尔木兹通航</h3>
+                    <p>特朗普说"非常接近"达成协议，霍尔木兹海峡要通航。但"史诗怒火"军事行动刚结束，伊朗还保着反击能力。众议院叫停军事行动，博弈还没完。</p>
                     <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                <div class="direction-card watch" onclick="location.href='direction-3-robot.html'">
+                <div class="direction-card hot" onclick="location.href='direction-3-ai-model.html'">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>AI大模型商业化加速</h3>
+                    <p>DeepSeek融资70亿美元（腾讯、宁德时代领投），微信AI智能体是腾讯内部"最高优先级"，豆包专业版覆盖软件开发、金融分析。大模型从烧钱进入变现阶段。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
+                </div>
+                <div class="direction-card watch" onclick="location.href='direction-4-robot.html'">
                     <span class="tag tag-watch">👀 可关注</span>
                     <h3>人形机器人/具身智能</h3>
-                    <p>机器人公司开天价年薪抢人，具身智能技术竞赛白热化，但市场已经炒过一波，预期差有限。</p>
+                    <p>比亚迪确认人形机器人研发中，未来可能经销商网络销售。宇树科技六个月内实现任意动作生成。特斯拉Optimus V3年中量产概率极大。但板块已涨过一波，预期差有限。</p>
                     <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                <div class="direction-card watch" onclick="location.href='direction-4-ai-medical.html'">
+                <div class="direction-card watch" onclick="location.href='direction-5-chemical.html'">
                     <span class="tag tag-watch">👀 可关注</span>
-                    <h3>AI+药品监管</h3>
-                    <p>药监局要用AI来管药品审批，医疗IT公司有活干，但政策落地周期长，短期业绩难兑现。</p>
+                    <h3>化工/新材料（氦气涨价）</h3>
+                    <p>俄罗斯氦气出口管制，进口管束氦气周均价涨31.89%。华特气体氦气收入占12%，构建了"进口+国产化"双引擎。光棒瓶颈制约光纤扩产，亨通光电等龙头受益。</p>
                     <div class="click-hint">点击查看详细分析 →</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 涨停统计 -->
+        <div class="limitup-section">
+            <h2>📊 涨停板统计（66只）</h2>
+            <div class="limitup-grid">
+                <div class="limitup-item">
+                    <div class="label">光伏/储能</div>
+                    <div class="value">17只</div>
+                    <div class="stocks">联检科技、恒星科技、蓝科高新、豫能控股等</div>
+                </div>
+                <div class="limitup-item">
+                    <div class="label">化工/新材料</div>
+                    <div class="value">15只</div>
+                    <div class="stocks">华特气体、方大炭素、亨通光电、三祥新材等</div>
+                </div>
+                <div class="limitup-item">
+                    <div class="label">机器人</div>
+                    <div class="value">10只</div>
+                    <div class="stocks">迅捷兴、泰禾智能、德昌股份、国机精工等</div>
+                </div>
+                <div class="limitup-item">
+                    <div class="label">芯片/半导体</div>
+                    <div class="value">9只</div>
+                    <div class="stocks">华特气体、通富微电、一博科技、大唐电信等</div>
+                </div>
+                <div class="limitup-item">
+                    <div class="label">电力/能源</div>
+                    <div class="value">8只</div>
+                    <div class="stocks">广西能源、京能电力、华电辽能、西昌电力等</div>
                 </div>
             </div>
         </div>
@@ -305,31 +382,41 @@
                     <th>验证逻辑</th>
                 </tr>
                 <tr>
-                    <td>4月6日</td>
-                    <td>美伊和谈关键节点</td>
-                    <td>若和谈破裂+运价上涨>20%，能源安全主题延续</td>
+                    <td>6月5日</td>
+                    <td>芒种节气</td>
+                    <td>节气切换，奇门换局，观察新局对走势的影响</td>
                 </tr>
                 <tr>
-                    <td>4月15日前后</td>
-                    <td>Q1财报密集披露</td>
-                    <td>关注算力租赁订单、VLCC运价、人形机器人出货量</td>
+                    <td>6月5日</td>
+                    <td>SpaceX IPO定价</td>
+                    <td>750亿美元募资，若定价超预期，流动性虹吸效应需关注</td>
                 </tr>
                 <tr>
-                    <td>4月底</td>
-                    <td>工信部算力政策细则</td>
-                    <td>若政策超预期，算力银行概念持续发酵</td>
+                    <td>6月6-7日</td>
+                    <td>缅甸外长访华</td>
+                    <td>若达成能源/基建协议，关注西南通道相关标的</td>
                 </tr>
                 <tr>
-                    <td>5月</td>
-                    <td>药监局AI项目招标</td>
-                    <td>若招标启动，AI+药品监管逻辑验证</td>
+                    <td>6月11日</td>
+                    <td>SpaceX上市交易</td>
+                    <td>若首日大涨，科技板块风险偏好可能提升</td>
+                </tr>
+                <tr>
+                    <td>6月中旬</td>
+                    <td>美伊谈判结果</td>
+                    <td>若达成协议，霍尔木兹通航，航运/能源价格回归</td>
+                </tr>
+                <tr>
+                    <td>6月</td>
+                    <td>微信AI智能体上线</td>
+                    <td>14亿用户入口，若监管获批，AI应用逻辑验证</td>
                 </tr>
             </table>
         </div>
         
         <!-- 底部 -->
         <div class="footer">
-            <p>📊 数据更新于：2026年4月3日 09:00</p>
+            <p>📊 数据更新于：2026年6月4日 09:30</p>
             <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
             <p>🔧 版本：v2.2 | 数据来源：Wind/东方财富/新浪财经</p>
         </div>
