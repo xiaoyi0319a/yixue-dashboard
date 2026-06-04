@@ -1,0 +1,14 @@
+---
+layout: null
+---
+[
+  {% for report in site.reports %}
+  {
+    "code": "{{ report.code }}",
+    "name": "{{ report.title }}",
+    "date": "{{ report.date | date: '%Y-%m-%d' }}",
+    "file": "{{ report.url | relative_url }}",
+    "tags": {{ report.subtitle | split: ' · ' | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

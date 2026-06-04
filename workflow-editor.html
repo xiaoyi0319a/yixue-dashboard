@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羿学交易 - 拖拽式工作流编辑器</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #0a0e17;
+            color: #e0e6ed;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .container { display: flex; height: 100vh; }
+        
+        /* 左侧节点面板 */
+        .sidebar {
+            width: 220px;
+            background: #1a2332;
+            border-right: 1px solid #2d3a4f;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        .sidebar h2 {
+            font-size: 14px;
+            color: #00d4ff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .node-template {
+            background: #0f1923;
+            border: 2px dashed #2d3a4f;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: grab;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .node-template:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.05);
+        }
+        .node-template .icon { font-size: 24px; margin-bottom: 5px; }
+        .node-template .name { font-size: 12px; color: #b0c4de; }
+        .node-template.task { border-left: 3px solid #FFD700; }
+        .node-template.decision { border-left: 3px solid #FF6B6B; }
+        .node-template.input { border-left: 3px solid #90EE90; }
+        .node-template.output { border-left: 3px solid #00D4FF; }
+        .node-template.cron { border-left: 3px solid #DDA0DD; }
+        
+        /* 中间画布 */
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0,212,255,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(163,113,247,0.03) 0%, transparent 50%),
+                #0a0e17;
+        }
+        .canvas-grid {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(45,58,79,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45,58,79,0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+        .canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 3000px;
+            height: 2000px;
+        }
+        
+        /* 节点 */
+        .node {
+            position: absolute;
+            width: 180px;
+            background: #1a2332;
+            border: 2px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 12px;
+            cursor: move;
+            user-select: none;
+            transition: box-shadow 0.2s;
+            z-index: 10;
+        }
+        .node:hover { box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+        .node.selected {
+            border-color: #00d4ff;
+            box-shadow: 0 0 30px rgba(0,212,255,0.4);
+        }
+        .node.task { border-top: 3px solid #FFD700; }
+        .node.decision { border-top: 3px solid #FF6B6B; }
+        .node.input { border-top: 3px solid #90EE90; }
+        .node.output { border-top: 3px solid #00D4FF; }
+        .node.cron { border-top: 3px solid #DDA0DD; }
+        
+        .node-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .node-icon { font-size: 18px; }
+        .node-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            flex: 1;
+        }
+        .node-delete {
+            width: 18px; height: 18px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .node:hover .node-delete { opacity: 1; }
+        
+        .node-body {
+            font-size: 11px;
+            color: #8b9dc3;
+            line-height: 1.4;
+        }
+        
+        /* 连接端口 */
+        .port {
+            position: absolute;
+            width: 14px; height: 14px;
+            background: #2d3a4f;
+            border: 2px solid #8b9dc3;
+            border-radius: 50%;
+            cursor: crosshair;
+            z-index: 20;
+            transition: all 0.2s;
+        }
+        .port:hover {
+            background: #00d4ff;
+            border-color: #00d4ff;
+            transform: scale(1.3);
+        }
+        .port.input { left: -7px; top: 50%; transform: translateY(-50%); }
+        .port.output { right: -7px; top: 50%; transform: translateY(-50%); }
+        .port.input:hover { transform: translateY(-50%) scale(1.3); }
+        .port.output:hover { transform: translateY(-50%) scale(1.3); }
+        
+        /* 连线 */
+        .connection {
+            position: absolute;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .connection path {
+            fill: none;
+            stroke: #00d4ff;
+            stroke-width: 2;
+            opacity: 0.6;
+        }
+        .connection path:hover { opacity: 1; stroke-width: 3; }
+        .connection .delete-btn {
+            position: absolute;
+            width: 16px; height: 16px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 10px;
+            pointer-events: all;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .connection:hover .delete-btn { opacity: 1; }
+        
+        /* 连线中 */
+        .temp-line {
+            position: absolute;
+            pointer-events: none;
+            z-index: 15;
+        }
+        .temp-line path {
+            fill: none;
+            stroke: #00d4ff;
+            stroke-width: 2;
+            stroke-dasharray: 5,5;
+        }
+        
+        /* 右侧属性面板 */
+        .properties {
+            width: 280px;
+            background: #1a2332;
+            border-left: 1px solid #2d3a4f;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        .properties h2 {
+            font-size: 14px;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+        .prop-group {
+            margin-bottom: 15px;
+        }
+        .prop-label {
+            font-size: 11px;
+            color: #8b9dc3;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .prop-input {
+            width: 100%;
+            background: #0f1923;
+            border: 1px solid #2d3a4f;
+            border-radius: 6px;
+            padding: 8px 10px;
+            color: #e0e6ed;
+            font-size: 12px;
+            outline: none;
+        }
+        .prop-input:focus { border-color: #00d4ff; }
+        textarea.prop-input { resize: vertical; min-height: 60px; }
+        
+        /* 工具栏 */
+        .toolbar {
+            position: absolute;
+            top: 15px; left: 50%;
+            transform: translateX(-50%);
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 8px 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .toolbar-btn {
+            background: #0f1923;
+            border: 1px solid #2d3a4f;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: #b0c4de;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .toolbar-btn:hover {
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        .toolbar-btn.primary {
+            background: rgba(0,212,255,0.1);
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        
+        /* 预设工作流选择 */
+        .preset-panel {
+            position: absolute;
+            top: 15px; right: 15px;
+            z-index: 100;
+        }
+        .preset-select {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: #e0e6ed;
+            font-size: 12px;
+            outline: none;
+            cursor: pointer;
+        }
+        .preset-select:focus { border-color: #00d4ff; }
+        
+        /* 空状态 */
+        .empty-state {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #2d3a4f;
+            pointer-events: none;
+        }
+        .empty-state .icon { font-size: 48px; margin-bottom: 10px; }
+        .empty-state p { font-size: 14px; }
+        
+        /* 滚动条 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #2d3a4f; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3d4a5f; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧节点面板 -->
+        <div class="sidebar">
+            <h2>🔧 节点组件</h2>
+            <div class="node-template task" draggable="true" data-type="task">
+                <div class="icon">⚙️</div>
+                <div class="name">任务节点</div>
+            </div>
+            <div class="node-template decision" draggable="true" data-type="decision">
+                <div class="icon">❓</div>
+                <div class="name">判断节点</div>
+            </div>
+            <div class="node-template input" draggable="true" data-type="input">
+                <div class="icon">📥</div>
+                <div class="name">输入节点</div>
+            </div>
+            <div class="node-template output" draggable="true" data-type="output">
+                <div class="icon">📤</div>
+                <div class="name">输出节点</div>
+            </div>
+            <div class="node-template cron" draggable="true" data-type="cron">
+                <div class="icon">⏰</div>
+                <div class="name">定时任务</div>
+            </div>
+            
+            <h2 style="margin-top: 25px;">📋 预设工作流</h2>
+            <div class="node-template" onclick="loadPreset('ztb')" style="cursor: pointer;">
+                <div class="icon">📈</div>
+                <div class="name">涨停板梳理</div>
+            </div>
+            <div class="node-template" onclick="loadPreset('yqc')" style="cursor: pointer;">
+                <div class="icon">🔮</div>
+                <div class="name">预期差生产</div>
+            </div>
+            <div class="node-template" onclick="loadPreset('web')" style="cursor: pointer;">
+                <div class="icon">🌐</div>
+                <div class="name">网站更新</div>
+            </div>
+            <div class="node-template" onclick="loadPreset('qp')" style="cursor: pointer;">
+                <div class="icon">☯️</div>
+                <div class="name">奇门预测</div>
+            </div>
+        </div>
+        
+        <!-- 中间画布 -->
+        <div class="canvas-container" id="canvasContainer">
+            <div class="canvas-grid"></div>
+            <div class="canvas" id="canvas">
+                <div class="empty-state" id="emptyState">
+                    <div class="icon">🎯</div>
+                    <p>拖拽左侧节点到此处<br>或选择预设工作流</p>
+                </div>
+            </div>
+            
+            <!-- 工具栏 -->
+            <div class="toolbar">
+                <button class="toolbar-btn" onclick="clearCanvas()">🗑️ 清空</button>
+                <button class="toolbar-btn" onclick="exportWorkflow()">💾 导出</button>
+                <button class="toolbar-btn" onclick="importWorkflow()">📂 导入</button>
+                <button class="toolbar-btn primary" onclick="saveWorkflow()">✅ 保存</button>
+            </div>
+            
+            <!-- 预设选择 -->
+            <div class="preset-panel">
+                <select class="preset-select" onchange="loadPreset(this.value)">
+                    <option value="">加载预设...</option>
+                    <option value="ztb">涨停板梳理 V2.0</option>
+                    <option value="yqc">预期差生产 V6.5</option>
+                    <option value="web">网站更新 V2.0</option>
+                    <option value="qp">奇门预测 V2.0</option>
+                    <option value="daily">每日完整流程</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- 右侧属性面板 -->
+        <div class="properties" id="properties">
+            <h2>📋 属性面板</h2>
+            <p style="color: #2d3a4f; font-size: 12px; margin-top: 20px;">
+                点击画布中的节点<br>查看和编辑属性
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 状态管理 ====================
+        let nodes = [];
+        let connections = [];
+        let selectedNode = null;
+        let isDragging = false;
+        let dragNode = null;
+        let dragOffset = { x: 0, y: 0 };
+        let isConnecting = false;
+        let connectSource = null;
+        let tempLine = null;
+        let nodeIdCounter = 0;
+        let connIdCounter = 0;
+        
+        const canvas = document.getElementById('canvas');
+        const canvasContainer = document.getElementById('canvasContainer');
+        const properties = document.getElementById('properties');
+        const emptyState = document.getElementById('emptyState');
+        
+        // ==================== 节点类型定义 ====================
+        const nodeTypes = {
+            task: { icon: '⚙️', color: '#FFD700', label: '任务' },
+            decision: { icon: '❓', color: '#FF6B6B', label: '判断' },
+            input: { icon: '📥', color: '#90EE90', label: '输入' },
+            output: { icon: '📤', color: '#00D4FF', label: '输出' },
+            cron: { icon: '⏰', color: '#DDA0DD', label: '定时' }
+        };
+        
+        // ==================== 拖拽创建节点 ====================
+        document.querySelectorAll('.node-template').forEach(template => {
+            template.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('nodeType', template.dataset.type);
+            });
+        });
+        
+        canvasContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+        
+        canvasContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const type = e.dataTransfer.getData('nodeType');
+            if (!type) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left - 90;
+            const y = e.clientY - rect.top - 20;
+            
+            createNode(type, x, y);
+        });
+        
+        // ==================== 创建节点 ====================
+        function createNode(type, x, y, data = {}) {
+            const id = `node-${nodeIdCounter++}`;
+            const config = nodeTypes[type];
+            
+            const node = document.createElement('div');
+            node.className = `node ${type}`;
+            node.id = id;
+            node.style.left = `${x}px`;
+            node.style.top = `${y}px`;
+            
+            node.innerHTML = `
+                <div class="port input" data-port="in" data-node="${id}"></div>
+                <div class="port output" data-port="out" data-node="${id}"></div>
+                <div class="node-header">
+                    <span class="node-icon">${data.icon || config.icon}</span>
+                    <span class="node-title">${data.title || config.label + '节点'}</span>
+                    <span class="node-delete" onclick="deleteNode('${id}')">×</span>
+                </div>
+                <div class="node-body">${data.desc || '双击编辑描述'}</div>
+            `;
+            
+            // 节点事件
+            node.addEventListener('mousedown', (e) => {
+                if (e.target.classList.contains('port')) return;
+                if (e.target.classList.contains('node-delete')) return;
+                
+                selectNode(id);
+                isDragging = true;
+                dragNode = node;
+                dragOffset.x = e.clientX - node.offsetLeft;
+                dragOffset.y = e.clientY - node.offsetTop;
+                e.preventDefault();
+            });
+            
+            node.addEventListener('dblclick', () => {
+                editNodeTitle(id);
+            });
+            
+            // 端口事件
+            const outPort = node.querySelector('.port.output');
+            const inPort = node.querySelector('.port.input');
+            
+            outPort.addEventListener('mousedown', (e) => {
+                e.stopPropagation();
+                startConnection(id, 'out', e);
+            });
+            
+            inPort.addEventListener('mouseup', (e) => {
+                e.stopPropagation();
+                if (isConnecting && connectSource && connectSource.node !== id) {
+                    finishConnection(id, 'in');
+                }
+            });
+            
+            canvas.appendChild(node);
+            
+            nodes.push({
+                id, type, x, y,
+                title: data.title || config.label + '节点',
+                desc: data.desc || '',
+                icon: data.icon || config.icon,
+                script: data.script || ''
+            });
+            
+            updateEmptyState();
+            return node;
+        }
+        
+        // ==================== 节点选择 ====================
+        function selectNode(id) {
+            document.querySelectorAll('.node').forEach(n => n.classList.remove('selected'));
+            const node = document.getElementById(id);
+            if (node) node.classList.add('selected');
+            selectedNode = id;
+            showProperties(id);
+        }
+        
+        // ==================== 显示属性面板 ====================
+        function showProperties(id) {
+            const nodeData = nodes.find(n => n.id === id);
+            if (!nodeData) return;
+            
+            properties.innerHTML = `
+                <h2>📋 节点属性</h2>
+                <div class="prop-group">
+                    <div class="prop-label">节点ID</div>
+                    <input type="text" class="prop-input" value="${nodeData.id}" readonly>
+                </div>
+                <div class="prop-group">
+                    <div class="prop-label">类型</div>
+                    <input type="text" class="prop-input" value="${nodeData.type}" readonly>
+                </div>
+                <div class="prop-group">
+                    <div class="prop-label">标题</div>
+                    <input type="text" class="prop-input" value="${nodeData.title}" 
+                        onchange="updateNodeData('${id}', 'title', this.value)">
+                </div>
+                <div class="prop-group">
+                    <div class="prop-label">描述</div>
+                    <textarea class="prop-input" rows="3" 
+                        onchange="updateNodeData('${id}', 'desc', this.value)">${nodeData.desc}</textarea>
+                </div>
+                <div class="prop-group">
+                    <div class="prop-label">执行脚本/指令</div>
+                    <textarea class="prop-input" rows="5" placeholder="输入执行指令或脚本..."
+                        onchange="updateNodeData('${id}', 'script', this.value)">${nodeData.script || ''}</textarea>
+                </div>
+                <div class="prop-group">
+                    <div class="prop-label">位置</div>
+                    <input type="text" class="prop-input" value="X: ${Math.round(nodeData.x)}, Y: ${Math.round(nodeData.y)}" readonly>
+                </div>
+                <div class="prop-group">
+                    <button class="toolbar-btn" style="width: 100%;" onclick="deleteNode('${id}')">🗑️ 删除节点</button>
+                </div>
+            `;
+        }
+        
+        // ==================== 更新节点数据 ====================
+        function updateNodeData(id, field, value) {
+            const nodeData = nodes.find(n => n.id === id);
+            if (nodeData) {
+                nodeData[field] = value;
+                if (field === 'title' || field === 'desc') {
+                    const node = document.getElementById(id);
+                    if (field === 'title') node.querySelector('.node-title').textContent = value;
+                    if (field === 'desc') node.querySelector('.node-body').textContent = value || '双击编辑描述';
+                }
+            }
+        }
+        
+        // ==================== 连线功能 ====================
+        function startConnection(nodeId, portType, e) {
+            isConnecting = true;
+            connectSource = { node: nodeId, port: portType };
+            
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.classList.add('temp-line');
+            svg.style.width = '3000px';
+            svg.style.height = '2000px';
+            svg.innerHTML = '<path d="" />';
+            canvas.appendChild(svg);
+            tempLine = svg;
+            
+            const startNode = document.getElementById(nodeId);
+            const startPort = startNode.querySelector('.port.output');
+            const startX = startNode.offsetLeft + startPort.offsetLeft + 7;
+            const startY = startNode.offsetTop + startPort.offsetTop + 7;
+            
+            function updateLine(e) {
+                const rect = canvas.getBoundingClientRect();
+                const endX = e.clientX - rect.left;
+                const endY = e.clientY - rect.top;
+                
+                const path = svg.querySelector('path');
+                const midX = (startX + endX) / 2;
+                path.setAttribute('d', `M ${startX} ${startY} C ${midX} ${startY}, ${midX} ${endY}, ${endX} ${endY}`);
+            }
+            
+            function finish() {
+                document.removeEventListener('mousemove', updateLine);
+                document.removeEventListener('mouseup', finish);
+                if (tempLine) tempLine.remove();
+                tempLine = null;
+                isConnecting = false;
+                connectSource = null;
+            }
+            
+            document.addEventListener('mousemove', updateLine);
+            document.addEventListener('mouseup', finish);
+            updateLine(e);
+        }
+        
+        function finishConnection(targetNodeId, targetPort) {
+            if (!connectSource || connectSource.node === targetNodeId) return;
+            
+            const connId = `conn-${connIdCounter++}`;
+            connections.push({
+                id: connId,
+                source: connectSource.node,
+                target: targetNodeId
+            });
+            
+            drawConnection(connId, connectSource.node, targetNodeId);
+        }
+        
+        function drawConnection(connId, sourceId, targetId) {
+            const sourceNode = document.getElementById(sourceId);
+            const targetNode = document.getElementById(targetId);
+            if (!sourceNode || !targetNode) return;
+            
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.classList.add('connection');
+            svg.id = connId;
+            svg.style.width = '3000px';
+            svg.style.height = '2000px';
+            
+            const sourcePort = sourceNode.querySelector('.port.output');
+            const targetPort = targetNode.querySelector('.port.input');
+            
+            const x1 = sourceNode.offsetLeft + sourcePort.offsetLeft + 7;
+            const y1 = sourceNode.offsetTop + sourcePort.offsetTop + 7;
+            const x2 = targetNode.offsetLeft + targetPort.offsetLeft + 7;
+            const y2 = targetNode.offsetTop + targetPort.offsetTop + 7;
+            
+            const midX = (x1 + x2) / 2;
+            
+            svg.innerHTML = `
+                <path d="M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}" 
+                      id="path-${connId}" />
+                <foreignObject x="${(x1+x2)/2 - 8}" y="${(y1+y2)/2 - 8}" width="16" height="16">
+                    <div class="delete-btn" onclick="deleteConnection('${connId}')">×</div>
+                </foreignObject>
+            `;
+            
+            canvas.appendChild(svg);
+        }
+        
+        function updateConnections() {
+            connections.forEach(conn => {
+                const sourceNode = document.getElementById(conn.source);
+                const targetNode = document.getElementById(conn.target);
+                if (!sourceNode || !targetNode) return;
+                
+                const sourcePort = sourceNode.querySelector('.port.output');
+                const targetPort = targetNode.querySelector('.port.input');
+                
+                const x1 = sourceNode.offsetLeft + sourcePort.offsetLeft + 7;
+                const y1 = sourceNode.offsetTop + sourcePort.offsetTop + 7;
+                const x2 = targetNode.offsetLeft + targetPort.offsetLeft + 7;
+                const y2 = targetNode.offsetTop + targetPort.offsetTop + 7;
+                
+                const midX = (x1 + x2) / 2;
+                
+                const path = document.getElementById(`path-${conn.id}`);
+                if (path) {
+                    path.setAttribute('d', `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`);
+                }
+            });
+        }
+        
+        // ==================== 删除节点 ====================
+        function deleteNode(id) {
+            const node = document.getElementById(id);
+            if (node) node.remove();
+            
+            // 删除相关连线
+            connections.filter(c => c.source === id || c.target === id).forEach(c => {
+                const conn = document.getElementById(c.id);
+                if (conn) conn.remove();
+            });
+            connections = connections.filter(c => c.source !== id && c.target !== id);
+            
+            nodes = nodes.filter(n => n.id !== id);
+            
+            if (selectedNode === id) {
+                selectedNode = null;
+                properties.innerHTML = `
+                    <h2>📋 属性面板</h2>
+                    <p style="color: #2d3a4f; font-size: 12px; margin-top: 20px;">
+                        点击画布中的节点<br>查看和编辑属性
+                    </p>
+                `;
+            }
+            
+            updateEmptyState();
+        }
+        
+        // ==================== 删除连线 ====================
+        function deleteConnection(id) {
+            const conn = document.getElementById(id);
+            if (conn) conn.remove();
+            connections = connections.filter(c => c.id !== id);
+        }
+        
+        // ==================== 鼠标移动 ====================
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging && dragNode) {
+                const rect = canvas.getBoundingClientRect();
+                let x = e.clientX - rect.left - dragOffset.x;
+                let y = e.clientY - rect.top - dragOffset.y;
+                
+                dragNode.style.left = `${x}px`;
+                dragNode.style.top = `${y}px`;
+                
+                const nodeData = nodes.find(n => n.id === dragNode.id);
+                if (nodeData) {
+                    nodeData.x = x;
+                    nodeData.y = y;
+                }
+                
+                updateConnections();
+                
+                if (selectedNode === dragNode.id) {
+                    showProperties(dragNode.id);
+                }
+            }
+        });
+        
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            dragNode = null;
+        });
+        
+        // ==================== 画布点击 ====================
+        canvas.addEventListener('click', (e) => {
+            if (e.target === canvas || e.target.classList.contains('canvas-grid')) {
+                document.querySelectorAll('.node').forEach(n => n.classList.remove('selected'));
+                selectedNode = null;
+                properties.innerHTML = `
+                    <h2>📋 属性面板</h2>
+                    <p style="color: #2d3a4f; font-size: 12px; margin-top: 20px;">
+                        点击画布中的节点<br>查看和编辑属性
+                    </p>
+                `;
+            }
+        });
+        
+        // ==================== 空状态 ====================
+        function updateEmptyState() {
+            if (nodes.length === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+        
+        // ==================== 清空画布 ====================
+        function clearCanvas() {
+            if (!confirm('确定要清空画布吗？')) return;
+            
+            canvas.querySelectorAll('.node').forEach(n => n.remove());
+            canvas.querySelectorAll('.connection').forEach(c => c.remove());
+            nodes = [];
+            connections = [];
+            selectedNode = null;
+            nodeIdCounter = 0;
+            connIdCounter = 0;
+            
+            properties.innerHTML = `
+                <h2>📋 属性面板</h2>
+                <p style="color: #2d3a4f; font-size: 12px; margin-top: 20px;">
+                    点击画布中的节点<br>查看和编辑属性
+                </p>
+            `;
+            
+            updateEmptyState();
+        }
+        
+        // ==================== 导出工作流 ====================
+        function exportWorkflow() {
+            const data = {
+                version: '1.0',
+                created: new Date().toISOString(),
+                nodes: nodes,
+                connections: connections
+            };
+            
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `workflow-${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('工作流已导出！');
+        }
+        
+        // ==================== 导入工作流 ====================
+        function importWorkflow() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        loadWorkflow(data);
+                        alert('工作流已导入！');
+                    } catch (err) {
+                        alert('导入失败：' + err.message);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+        
+        // ==================== 加载工作流数据 ====================
+        function loadWorkflow(data) {
+            clearCanvas();
+            
+            if (data.nodes) {
+                data.nodes.forEach(n => {
+                    createNode(n.type, n.x, n.y, {
+                        title: n.title,
+                        desc: n.desc,
+                        icon: n.icon,
+                        script: n.script
+                    });
+                });
+            }
+            
+            if (data.connections) {
+                data.connections.forEach(c => {
+                    const connId = `conn-${connIdCounter++}`;
+                    connections.push({
+                        id: connId,
+                        source: c.source,
+                        target: c.target
+                    });
+                    drawConnection(connId, c.source, c.target);
+                });
+            }
+        }
+        
+        // ==================== 保存到本地存储 ====================
+        function saveWorkflow() {
+            const data = {
+                version: '1.0',
+                created: new Date().toISOString(),
+                nodes: nodes,
+                connections: connections
+            };
+            
+            localStorage.setItem('yixue_workflow', JSON.stringify(data));
+            alert('工作流已保存到浏览器本地存储！');
+        }
+        
+        // ==================== 加载预设工作流 ====================
+        function loadPreset(name) {
+            if (!name) return;
+            
+            const presets = {
+                        const presets = {
+                ztb: {
+                    nodes: [
+                        { type: 'input', x: 50, y: 50, title: '涨停数据', desc: '接收截图/名单/表格', icon: '📥' },
+                        { type: 'task', x: 300, y: 50, title: '任务1：提取逻辑线', desc: '从41只里分6个方向\n生成JSON清单', icon: '⚙️' },
+                        { type: 'decision', x: 550, y: 50, title: '等待指令', desc: '回报6条逻辑线\n等待老师下一步', icon: '❓' },
+                        { type: 'task', x: 550, y: 200, title: '任务2：单逻辑线分析', desc: '产业链结构\n方向核心逻辑(200字)\n催化时间线\n持续性评级\n❌不出个股', icon: '⚙️' },
+                        { type: 'decision', x: 300, y: 200, title: '等待指令', desc: '单逻辑线分析完成\n等待老师下一步', icon: '❓' },
+                        { type: 'task', x: 300, y: 350, title: '任务3：合并报告', desc: '跨线按持续性排序\n标注🔥/⭐/👀\n❌不出个股', icon: '⚙️' },
+                        { type: 'output', x: 50, y: 350, title: '完整涨停板梳理', desc: '只出方向逻辑\n不出个股', icon: '📤' }
+                    ],
+                    connections: [
+                        { source: 'node-0', target: 'node-1' },
+                        { source: 'node-1', target: 'node-2' },
+                        { source: 'node-2', target: 'node-3' },
+                        { source: 'node-3', target: 'node-4' },
+                        { source: 'node-4', target: 'node-5' },
+                        { source: 'node-5', target: 'node-6' }
+                    ]
+                },
+                yqc: {
+                    nodes: [
+                        { type: 'input', x: 50, y: 50, title: '方向清单', desc: '加载🔥重点看方向', icon: '📥' },
+                        { type: 'task', x: 300, y: 50, title: 'Step1：产业链扩展', desc: '向上游/下游/横向延伸\n挖掘黑马标的', icon: '⚙️' },
+                        { type: 'task', x: 550, y: 50, title: 'Step2：建立初筛池', desc: '8-12只标的\n财务筛选', icon: '⚙️' },
+                        { type: 'task', x: 550, y: 200, title: 'Step3：预期差计算', desc: '信息时滞×0.4\n认知分歧×0.4\n定价偏差×0.2', icon: '⚙️' },
+                        { type: 'task', x: 300, y: 200, title: 'Step4：输出清单', desc: 'S/A级分类\n标注黑马/验证节点', icon: '⚙️' },
+                        { type: 'output', x: 50, y: 200, title: '预期差清单', desc: 'markdown报告', icon: '📤' }
+                    ],
+                    connections: [
+                        { source: 'node-0', target: 'node-1' },
+                        { source: 'node-1', target: 'node-2' },
+                        { source: 'node-2', target: 'node-3' },
+                        { source: 'node-3', target: 'node-4' },
+                        { source: 'node-4', target: 'node-5' }
+                    ]
+                },
+                web: {
+                    nodes: [
+                        { type: 'input', x: 50, y: 50, title: '内容数据', desc: '奇门预测+方向卡片', icon: '📥' },
+                        { type: 'task', x: 250, y: 50, title: '任务1：奇门区', desc: '卦象+判语+时辰推演', icon: '⚙️' },
+                        { type: 'task', x: 450, y: 50, title: '任务2：方向卡片', desc: '大白话展示\n热度标签', icon: '⚙️' },
+                        { type: 'task', x: 450, y: 200, title: '任务3：详细页', desc: '预期差大的方向\n创建详细页', icon: '⚙️' },
+                        { type: 'task', x: 250, y: 200, title: '任务4：部署', desc: 'git add→commit→push', icon: '⚙️' },
+                        { type: 'output', x: 50, y: 200, title: 'GitHub Pages', desc: '自动部署生效', icon: '📤' }
+                    ],
+                    connections: [
+                        { source: 'node-0', target: 'node-1' },
+                        { source: 'node-1', target: 'node-2' },
+                        { source: 'node-2', target: 'node-3' },
+                        { source: 'node-3', target: 'node-4' },
+                        { source: 'node-4', target: 'node-5' }
+                    ]
+                },
+                qp: {
+                    nodes: [
+                        { type: 'cron', x: 50, y: 50, title: '08:00 cron触发', desc: '每日自动起盘', icon: '⏰' },
+                        { type: 'task', x: 250, y: 50, title: '本地jsdom起盘', desc: 'qimen_auto_get.js', icon: '⚙️' },
+                        { type: 'task', x: 450, y: 50, title: '提取10大用神', desc: '值符/景门/值使/日干/时干', icon: '⚙️' },
+                        { type: 'task', x: 450, y: 200, title: '四害+格局检查', desc: '白虎/青龙逃走/伏吟', icon: '⚙️' },
+                        { type: 'task', x: 250, y: 200, title: '生成判语', desc: '卦象+大势判语+时辰推演', icon: '⚙️' },
+                        { type: 'output', x: 50, y: 200, title: '奇门预测报告', desc: 'memory/奇门预测/', icon: '📤' }
+                    ],
+                    connections: [
+                        { source: 'node-0', target: 'node-1' },
+                        { source: 'node-1', target: 'node-2' },
+                        { source: 'node-2', target: 'node-3' },
+                        { source: 'node-3', target: 'node-4' },
+                        { source: 'node-4', target: 'node-5' }
+                    ]
+                },
+                daily: {
+                    nodes: [
+                        { type: 'cron', x: 30, y: 30, title: '06:00', desc: '加载记忆', icon: '⏰' },
+                        { type: 'cron', x: 30, y: 120, title: '08:00', desc: '奇门预测', icon: '⏰' },
+                        { type: 'input', x: 200, y: 30, title: '新闻集合', desc: '同花顺16条', icon: '📥' },
+                        { type: 'input', x: 200, y: 120, title: '涨停数据', desc: '41只截图', icon: '📥' },
+                        { type: 'input', x: 200, y: 210, title: '隔夜美股', desc: 'iFinD采集', icon: '📥' },
+                        { type: 'task', x: 400, y: 30, title: '方向整理', desc: '6维度挖掘', icon: '⚙️' },
+                        { type: 'task', x: 400, y: 120, title: '涨停板梳理', desc: '提取逻辑线→分析→合并', icon: '⚙️' },
+                        { type: 'task', x: 400, y: 210, title: '美股映射', desc: '四步法分析', icon: '⚙️' },
+                        { type: 'task', x: 600, y: 120, title: '预期差分析', desc: '强度评分', icon: '⚙️' },
+                        { type: 'task', x: 800, y: 120, title: '网站更新', desc: '全量重写部署', icon: '⚙️' },
+                        { type: 'output', x: 1000, y: 120, title: '网站生效', desc: 'GitHub Pages', icon: '📤' }
+                    ],
+                    connections: [
+                        { source: 'node-0', target: 'node-5' },
+                        { source: 'node-2', target: 'node-5' },
+                        { source: 'node-3', target: 'node-6' },
+                        { source: 'node-4', target: 'node-7' },
+                        { source: 'node-5', target: 'node-8' },
+                        { source: 'node-6', target: 'node-8' },
+                        { source: 'node-7', target: 'node-8' },
+                        { source: 'node-8', target: 'node-9' },
+                        { source: 'node-9', target: 'node-10' }
+                    ]
+                }
+            };
+            
+            const preset = presets[name];
+            if (preset) {
+                // 重置计数器
+                nodeIdCounter = 0;
+                connIdCounter = 0;
+                
+                // 先创建所有节点
+                preset.nodes.forEach(n => {
+                    createNode(n.type, n.x, n.y, {
+                        title: n.title,
+                        desc: n.desc,
+                        icon: n.icon
+                    });
+                });
+                
+                // 再创建连线
+                preset.connections.forEach((c, i) => {
+                    const connId = `conn-${connIdCounter++}`;
+                    // 需要映射节点ID，因为createNode会生成新的
+                    const sourceNode = nodes[c.source === 'node-0' ? 0 : 
+                                      c.source === 'node-1' ? 1 :
+                                      c.source === 'node-2' ? 2 :
+                                      c.source === 'node-3' ? 3 :
+                                      c.source === 'node-4' ? 4 :
+                                      c.source === 'node-5' ? 5 :
+                                      c.source === 'node-6' ? 6 :
+                                      c.source === 'node-7' ? 7 :
+                                      c.source === 'node-8' ? 8 :
+                                      c.source === 'node-9' ? 9 : 10];
+                    const targetNode = nodes[c.target === 'node-0' ? 0 : 
+                                      c.target === 'node-1' ? 1 :
+                                      c.target === 'node-2' ? 2 :
+                                      c.target === 'node-3' ? 3 :
+                                      c.target === 'node-4' ? 4 :
+                                      c.target === 'node-5' ? 5 :
+                                      c.target === 'node-6' ? 6 :
+                                      c.target === 'node-7' ? 7 :
+                                      c.target === 'node-8' ? 8 :
+                                      c.target === 'node-9' ? 9 : 10];
+                    
+                    if (sourceNode && targetNode) {
+                        connections.push({
+                            id: connId,
+                            source: sourceNode.id,
+                            target: targetNode.id
+                        });
+                        drawConnection(connId, sourceNode.id, targetNode.id);
+                    }
+                });
+            }
+        }
+        
+        // ==================== 编辑节点标题 ====================
+        function editNodeTitle(id) {
+            const nodeData = nodes.find(n => n.id === id);
+            if (!nodeData) return;
+            
+            const newTitle = prompt('编辑节点标题:', nodeData.title);
+            if (newTitle !== null && newTitle !== '') {
+                updateNodeData(id, 'title', newTitle);
+                showProperties(id);
+            }
+        }
+        
+        // ==================== 初始化 ====================
+        window.addEventListener('load', () => {
+            // 尝试加载上次保存的工作流
+            const saved = localStorage.getItem('yixue_workflow');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    loadWorkflow(data);
+                } catch (e) {
+                    console.log('没有保存的工作流');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

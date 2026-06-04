@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日重点关注 | 跨方向Top 5 | 羿学交易智囊团</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .date {
+            color: #8b9dc3;
+            font-size: 1em;
+        }
+        .back-link {
+            display: inline-block;
+            color: #00d4ff;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        .back-link:hover {
+            color: #ffd700;
+        }
+        .stock-detail {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        .stock-detail:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
+        }
+        .stock-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .stock-rank {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #fff;
+        }
+        .stock-title {
+            flex: 1;
+        }
+        .stock-title h2 {
+            color: #fff;
+            font-size: 1.3em;
+            margin-bottom: 4px;
+        }
+        .stock-title .meta {
+            color: #8b9dc3;
+            font-size: 0.85em;
+        }
+        .stock-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .tag-s { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-horse { background: rgba(255, 193, 7, 0.2); color: #ffd700; }
+        .tag-a { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
+        .section {
+            margin-bottom: 15px;
+        }
+        .section h4 {
+            color: #00d4ff;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .section p {
+            color: #b0c4de;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .highlight-box {
+            background: rgba(255, 193, 7, 0.05);
+            border-left: 3px solid #ffd700;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 10px 0;
+        }
+        .highlight-box p {
+            color: #ffd700;
+            font-size: 0.9em;
+        }
+        .risk-box {
+            background: rgba(255, 107, 107, 0.05);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 10px 0;
+        }
+        .risk-box p {
+            color: #ff6b6b;
+            font-size: 0.9em;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .data-table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.85em;
+        }
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid #2d3a4f;
+            color: #b0c4de;
+            font-size: 0.85em;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 今日重点关注</h1>
+            <div class="date">2026年4月27日 | 跨方向Top 5标的</div>
+        </div>
+        
+        <a href="index.html" class="back-link">← 返回首页</a>
+        
+        <!-- 罗博特科 -->
+        <div class="stock-detail">
+            <div class="stock-header">
+                <div class="stock-rank">1</div>
+                <div class="stock-title">
+                    <h2>罗博特科（300757）</h2>
+                    <div class="meta">方向：光通信/半导体/AI算力 | 强度：8.5 | 类型：黑马</div>
+                </div>
+                <span class="stock-tag tag-horse">黑马</span>
+            </div>
+            <div class="section">
+                <h4>🎯 核心逻辑</h4>
+                <p>CPO（共封装光学）封装设备全球寡头，纳米级耦合设备全球仅2家能量产，绑定NVIDIA/英特尔。2026年新签6亿元设备订单，2026E净利8.1亿元。</p>
+            </div>
+            <div class="section">
+                <h4>📈 卡位价值</h4>
+                <p>CPO是光模块下一代技术路线（将光引擎与交换机芯片封装在一起），罗博特科掌握纳米级光纤耦合设备，技术壁垒极高。高盛目标价688元。</p>
+            </div>
+            <div class="section">
+                <h4>⏰ 验证节点</h4>
+                <p>2026年Q2：CPO设备交付进度、新增订单金额；2026年6月：1.6T光模块出货量数据。</p>
+            </div>
+            <div class="highlight-box">
+                <p>💡 <strong>预期差</strong>：市场关注光模块龙头，但尚未充分认知CPO封装设备"卖铲子"逻辑。罗博特科是CPO时代确定性最高的设备标的。</p>
+            </div>
+            <div class="risk-box">
+                <p>⚠️ <strong>风险</strong>：CPO技术路线推广不及预期；订单交付周期长；估值快速上升后追高风险。</p>
+            </div>
+        </div>
+        
+        <!-- 保变电气 -->
+        <div class="stock-detail">
+            <div class="stock-header">
+                <div class="stock-rank">2</div>
+                <div class="stock-title">
+                    <h2>保变电气（600550）</h2>
+                    <div class="meta">方向：电力/能源+并购重组 | 强度：7.5 | 类型： obvious</div>
+                </div>
+                <span class="stock-tag tag-s">S级</span>
+            </div>
+            <div class="section">
+                <h4>🎯 核心逻辑</h4>
+                <p>中国电气装备集团旗下核心输变电企业，核电变压器国内市占率较高。2026Q1净利5956万（+110.39%），集团内部资产整合预期强烈（西电、许继、平高、山东电工电气等同属一集团）。</p>
+            </div>
+            <div class="section">
+                <h4>📈 卡位价值</h4>
+                <p>电网基建投资持续加大，变压器行业需求大幅提升。公司订单充足且陆续进入交付与确认周期。集团专业化整合将消除同业竞争，资产注入预期强烈。</p>
+            </div>
+            <div class="section">
+                <h4>⏰ 验证节点</h4>
+                <p>2026年5月7日：股东大会审议资产整合议案；2026年Q2：新增订单数据、集团重组公告。</p>
+            </div>
+            <div class="highlight-box">
+                <p>💡 <strong>预期差</strong>：市场关注其电力设备属性，但尚未充分认知中国电气装备集团专业化整合带来的资产注入预期。双主线驱动（电力+重组）。</p>
+            </div>
+            <div class="risk-box">
+                <p>⚠️ <strong>风险</strong>：资产负债率高；整合不确定性；已大幅上涨（2026年涨幅超30%），短期追高风险。</p>
+            </div>
+        </div>
+        
+        <!-- 药明康德 -->
+        <div class="stock-detail">
+            <div class="stock-header">
+                <div class="stock-rank">3</div>
+                <div class="stock-title">
+                    <h2>药明康德（603259）</h2>
+                    <div class="meta">方向：医药/创新药 | 强度：7.5 | 类型：obvious</div>
+                </div>
+                <span class="stock-tag tag-s">S级</span>
+            </div>
+            <div class="section">
+                <h4>🎯 核心逻辑</h4>
+                <p>全球CXO龙头，2025年营收454.6亿元（+15.8%），归母净利润191.5亿元（+102.6%），创上市以来新高。海外研发外包需求稳定回暖，国内BigPharma研发支出逐年提升。</p>
+            </div>
+            <div class="section">
+                <h4>📈 卡位价值</h4>
+                <p>具备成熟商业化体系与全球化能力，业绩确定性强。2026年一季度BD出海交易额快速增长，板块处于业绩兑现、估值修复、政策支持窗口期。</p>
+            </div>
+            <div class="section">
+                <h4>⏰ 验证节点</h4>
+                <p>2026年Q2：新增订单环比增速；2026年5月：BD交易新进展；2026年中报：营收增速是否维持15%+。</p>
+            </div>
+            <div class="highlight-box">
+                <p>💡 <strong>预期差</strong>：CXO行业2023-2024年连续增长放缓，市场对其持续性存疑。但2025年业绩已大幅回暖，2026年BD出海持续，景气度有望维持。</p>
+            </div>
+            <div class="risk-box">
+                <p>⚠️ <strong>风险</strong>：地缘政治风险（美国生物安全法案）；估值高位；行业竞争加剧。</p>
+            </div>
+        </div>
+        
+        <!-- 中际旭创 -->
+        <div class="stock-detail">
+            <div class="stock-header">
+                <div class="stock-rank">4</div>
+                <div class="stock-title">
+                    <h2>中际旭创（300308）</h2>
+                    <div class="meta">方向：光通信/半导体/AI算力 | 强度：7.8 | 类型：obvious</div>
+                </div>
+                <span class="stock-tag tag-s">S级</span>
+            </div>
+            <div class="section">
+                <h4>🎯 核心逻辑</h4>
+                <p>全球光模块龙头，2026Q1营收同比+192%，1.6T光模块开始放量。DeepSeek-V4发布+阿里云涨价推动AI算力需求爆发，800G/1.6T光模块需求井喷。</p>
+            </div>
+            <div class="section">
+                <h4>📈 卡位价值</h4>
+                <p>全球光模块市占率第一，技术领先（1.6T已量产），客户覆盖谷歌、英伟达、亚马逊等全球云厂商。AI算力爆发直接受益。</p>
+            </div>
+            <div class="section">
+                <h4>⏰ 验证节点</h4>
+                <p>2026年Q2：1.6T出货量环比增速；2026年中报：营收增速是否维持100%+；客户拓展（新客户导入进度）。</p>
+            </div>
+            <div class="highlight-box">
+                <p>💡 <strong>预期差</strong>：市场已知其为光模块龙头，但1.6T放量速度和毛利率提升空间可能超预期。</p>
+            </div>
+            <div class="risk-box">
+                <p>⚠️ <strong>风险</strong>：估值高位（PE较高）；光模块价格年降压力；技术路线变革（CPO替代传统光模块）。</p>
+            </div>
+        </div>
+        
+        <!-- 飞凯材料 -->
+        <div class="stock-detail">
+            <div class="stock-header">
+                <div class="stock-rank">5</div>
+                <div class="stock-title">
+                    <h2>飞凯材料（300398）</h2>
+                    <div class="meta">方向：化工新材料 | 强度：7.5 | 类型：obvious</div>
+                </div>
+                <span class="stock-tag tag-s">S级</span>
+            </div>
+            <div class="section">
+                <h4>🎯 核心逻辑</h4>
+                <p>光刻胶+半导体材料双轮驱动，i-line/KrF光刻胶稳定量产，先进封装厚膜负性光刻胶导入客户端。2025年净利润3.90亿元（+58.36%），丙烯酸酯及光刻胶产品升级改造项目2026年1月达产。</p>
+            </div>
+            <div class="section">
+                <h4>📈 卡位价值</h4>
+                <p>国内少数掌握半导体光刻胶量产技术的企业，产品覆盖显示材料、半导体材料、光纤涂覆材料。光刻胶国产替代紧迫性上升，公司处于产能释放期。</p>
+            </div>
+            <div class="section">
+                <h4>⏰ 验证节点</h4>
+                <p>2026年Q2：KrF光刻胶大客户认证通过情况；半导体光刻胶营收占比；新增客户拓展进度。</p>
+            </div>
+            <div class="highlight-box">
+                <p>💡 <strong>预期差</strong>：市场关注其光刻胶概念，但半导体光刻胶实际营收占比仍小。若KrF光刻胶大客户认证通过，营收结构将大幅改善。</p>
+            </div>
+            <div class="risk-box">
+                <p>⚠️ <strong>风险</strong>：半导体光刻胶营收占比仍小；面板光刻胶竞争加剧；估值已涨追高风险。</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🎯 羿学交易智囊团 | 基于奇门遁甲 + 预期差分析 + 涨停板梳理</p>
+            <p>免责声明：本页面所有内容仅供参考，不构成投资建议</p>
+            <p>更新时间：2026-04-26 20:30</p>
+        </div>
+    </div>
+</body>
+</html>
