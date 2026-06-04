@@ -13,197 +13,251 @@
             min-height: 100vh;
             line-height: 1.6;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
         .header {
-            text-align: center; padding: 30px 0;
-            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f;
+            margin-bottom: 30px;
         }
         .header h1 {
             font-size: 2.5em;
             background: linear-gradient(90deg, #00d4ff, #a371f7);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
-        .header .date { color: #8b9dc3; font-size: 1.1em; }
-        .header .ganzhi { color: #5a6a7a; font-size: 0.9em; margin-top: 5px; }
-
-        /* ========== 奇门预测区 ========== */
+        .header .date {
+            color: #8b9dc3;
+            font-size: 1.1em;
+        }
+        
+        /* 奇门预测区 */
         .qimen-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #a371f7; border-radius: 15px; padding: 25px;
-            margin-bottom: 30px; box-shadow: 0 0 30px rgba(163, 113, 247, 0.2);
-        }
-        .qimen-section h2 { color: #a371f7; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .qimen-hexagram { background: rgba(163, 113, 247, 0.1); border-left: 4px solid #a371f7; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
-        .qimen-hexagram h4 { color: #a371f7; margin-bottom: 8px; }
-        .qimen-verdict { background: rgba(255, 107, 107, 0.1); border-left: 4px solid #ff6b6b; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
-        .qimen-verdict h4 { color: #ff6b6b; margin-bottom: 8px; }
-        .qimen-verdict p { color: #d0d8e8; font-style: italic; }
-        .qimen-time { background: rgba(0, 212, 255, 0.1); border-left: 4px solid #00d4ff; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
-        .qimen-time h4 { color: #00d4ff; margin-bottom: 12px; }
-        .time-slot { background: rgba(0, 212, 255, 0.05); border-radius: 10px; padding: 15px; margin-bottom: 12px; border: 1px solid rgba(0, 212, 255, 0.2); }
-        .time-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-        .time-name { color: #00d4ff; font-weight: bold; font-size: 1.1em; }
-        .time-range { color: #8b9dc3; font-size: 0.9em; background: rgba(139, 157, 195, 0.15); padding: 3px 10px; border-radius: 15px; }
-        .time-verdict { font-size: 0.95em; font-weight: 500; padding: 8px 12px; border-radius: 6px; background: rgba(255,255,255,0.05); }
-        .time-verdict.down { color: #ff6b6b; border-left: 3px solid #ff6b6b; }
-        .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
-        .time-verdict.up { color: #4caf50; border-left: 3px solid #4caf50; }
-
-        /* ========== 涨停板方向 ========== */
-        .ztb-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid #00d4ff; border-radius: 15px; padding: 25px;
-            margin-bottom: 30px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-        }
-        .ztb-section h2 { color: #00d4ff; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .ztb-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;
-        }
-        @media (max-width: 768px) {
-            .ztb-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8em; }
-        }
-        .ztb-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #2d3a4f;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .ztb-card:hover {
-            transform: translateY(-3px);
-            border-color: #3d4a5f;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-        .ztb-card.hot { border-left: 4px solid #ff6b6b; }
-        .ztb-card.watch { border-left: 4px solid #ffd700; }
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
+            border: 2px solid #a371f7;
             border-radius: 15px;
-            font-size: 0.85em;
-            font-weight: bold;
-            margin-bottom: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(163, 113, 247, 0.2);
         }
-        .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.3); }
-        .tag-watch { background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
-        .ztb-card h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: #f0f4f8;
-        }
-        .ztb-card p {
-            color: #a0aec0;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-        .ztb-meta {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #2d3a4f;
-            font-size: 0.85em;
-            color: #8b9dc3;
-        }
-
-        /* 补涨标的格式 */
-        .buzhang-list { margin-top: 12px; }
-        .buzhang-item {
-            background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .buzhang-left { flex: 1; }
-        .buzhang-name { font-size: 1em; color: #f0f4f8; font-weight: 500; }
-        .buzhang-code { font-size: 0.75em; color: #8b9dc3; margin-top: 2px; }
-        .buzhang-logic { font-size: 0.85em; color: #a0aec0; margin-top: 4px; line-height: 1.4; }
-        .buzhang-tag {
-            font-size: 0.75em;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-        .bz-s { background: rgba(255,107,107,0.2); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.3); }
-        .bz-a { background: rgba(255,215,0,0.15); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
-        .bz-h { background: rgba(76,175,80,0.15); color: #4caf50; border: 1px solid rgba(76,175,80,0.3); }
-
-        /* ========== 新闻方向 ========== */
-        .news-section {
-            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
-            border: 2px solid #c9a84c; border-radius: 15px; padding: 25px;
-            margin-bottom: 30px; box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
-        }
-        .news-section h2 { color: #c9a84c; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .news-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;
-        }
-        @media (max-width: 768px) {
-            .news-grid { grid-template-columns: 1fr; }
-        }
-        .news-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #2d3a4f;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .news-card:hover {
-            transform: translateY(-3px);
-            border-color: #3d4a5f;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-        .news-card.hot { border-left: 4px solid #ff6b6b; }
-        .news-card.watch { border-left: 4px solid #ffd700; }
-        .news-card h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: #f0f4f8;
-        }
-        .news-card p {
-            color: #a0aec0;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-        .news-meta {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #2d3a4f;
-            font-size: 0.85em;
-            color: #8b9dc3;
-        }
-
-        /* ========== 验证节点 ========== */
-        .verification-section {
-            background: linear-gradient(135deg, #0d1b0d 0%, #1a2e1a 100%);
-            border: 2px solid #4caf50; border-radius: 15px; padding: 25px;
-            margin-bottom: 30px; box-shadow: 0 0 30px rgba(76, 175, 80, 0.15);
-        }
-        .verification-section h2 { color: #4caf50; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .verify-list { list-style: none; }
-        .verify-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #2d3a4f;
+        .qimen-section h2 {
+            color: #a371f7;
+            font-size: 1.5em;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .verify-list li:last-child { border-bottom: none; }
-        .verify-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; }
-
+        .qimen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .qimen-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .qimen-item .label {
+            color: #8b9dc3;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .qimen-item .value {
+            color: #00d4ff;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .qimen-trend {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .qimen-trend .trend-title {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .qimen-strategy {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .qimen-strategy .strategy-title {
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .qimen-esoteric {
+            color: #a371f7;
+            font-style: italic;
+            padding: 10px;
+            border-top: 1px dashed #a371f7;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+        
+        /* 方向卡片 */
+        .directions-section h2 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .direction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .direction-card {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .direction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+        }
+        .direction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        .direction-card.hot::before { background: linear-gradient(90deg, #ff6b6b, #ffd700); }
+        .direction-card.watch::before { background: linear-gradient(90deg, #00d4ff, #58a6ff); }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .tag-hot { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-watch { background: rgba(0, 212, 255, 0.2); color: #00d4ff; }
+        .direction-card h3 {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .direction-card p {
+            color: #b0c4de;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .click-hint {
+            color: #58a6ff;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* 验证节点表格 */
+        .verification-section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .verification-section h2 {
+            color: #00d4ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        .verification-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .verification-table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .verification-table td {
+            padding: 12px;
+            border-bottom: 1px solid #2d3a4f;
+            color: #b0c4de;
+        }
+        .verification-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+        
         .footer {
-            text-align: center; padding: 30px 0;
-            border-top: 1px solid #2d3a4f; margin-top: 30px;
-            color: #5a6a7a; font-size: 0.9em;
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        
+        /* 涨停统计 */
+        .limitup-section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .limitup-section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        .limitup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .limitup-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+        }
+        .limitup-item .label {
+            color: #8b9dc3;
+            font-size: 0.9em;
+        }
+        .limitup-item .value {
+            color: #ffd700;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .limitup-item .stocks {
+            color: #b0c4de;
+            font-size: 0.85em;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -211,566 +265,173 @@
     <div class="container">
         <!-- 头部 -->
         <div class="header">
-            <h1>羿学交易智囊团</h1>
-            <div class="date">2026年6月4日 星期四</div>
-            <div class="ganzhi">丙午年 癸巳月 己酉日 | 阳遁5局 小满后14日</div>
+            <h1>🎯 羿学交易智囊团</h1>
+            <div class="date">2026年6月4日 星期四 | 丙午年 癸巳月 己酉日</div>
         </div>
-
-        <!-- ========== 奇门预测区 ========== -->
+        
+        <!-- 奇门预测 -->
         <div class="qimen-section">
             <h2>🔮 奇门君今日预测</h2>
-            
-            <div class="qimen-hexagram">
-                <h4>📊 卦象</h4>
-                <p>阳遁五局，己酉日己巳时，小满后十四日。<br>
-                旬首甲子戊，值符天芮落乾六，值使死门居坎一。<br>
-                四害九处凶格五，吉格独一被压空。<br>
-                买盘入墓资金竭，游魂入墓日时宜。</p>
+            <div class="qimen-grid">
+                <div class="qimen-item">
+                    <div class="label">局数</div>
+                    <div class="value">阳遁8局</div>
+                </div>
+                <div class="qimen-item">
+                    <div class="label">值符</div>
+                    <div class="value">天辅星（坤二宫）</div>
+                </div>
+                <div class="qimen-item">
+                    <div class="label">值使</div>
+                    <div class="value">杜门（乾六宫）</div>
+                </div>
+                <div class="qimen-item">
+                    <div class="label">日干</div>
+                    <div class="value">己（兑七宫·泄气）</div>
+                </div>
             </div>
-
-            <div class="qimen-verdict">
-                <h4>📜 大势判语</h4>
-                <p><strong>下跌，收小阴，幅度约-0.2%~-0.5%。</strong></p>
-                <p>值符天芮落乾六，戊+丁青龙华盖吉格，然景门门迫、戊入墓、空亡三重压制，吉格无力。大势虽有心向上，被四害锁死。</p>
-                <p>日干己在艮八，九地天心惊门，己+辛游魂入墓，股价弱势全天。时干己同日干，时机不利。乙奇在坤二，入墓+击刑+伤门门迫，买盘几乎枯竭。甲子戊在乾六，入墓+空亡+门迫，本金紧张。</p>
-                <p>生门离九丙+壬火入天罗，玄武临宫，利润预期差而投机浓。值使死门坎一，庚+癸大格，门迫闭塞，幅度受限。四害九处+凶格五处，吉格仅一，盘面极度凶险。白虎猖狂在巽四，风木板块波动大。</p>
-                <p>综合判断：今日收小阴，跌幅有限（值使门迫限制），约-0.2%~-0.5%，量能低迷。</p>
+            <div class="qimen-trend">
+                <div class="trend-title">📊 走势判断：偏弱震荡 · 卖压极强</div>
+                <div>日干己土泄气于金，偏弱；时干丙火生己土但伤门曲折；庚金卖盘白虎+死门，卖压极强。总体偏弱震荡，收小阴或十字星概率大。</div>
             </div>
-
-            <div class="qimen-time">
-                <h4>⏰ 时辰推演</h4>
-                
-                <div class="time-slot">
-                    <div class="time-header">
-                        <span class="time-name">己巳时</span>
-                        <span class="time-range">09:30 - 11:00</span>
-                    </div>
-                    <div class="time-verdict down">时干己+辛游魂入墓，凶格。弱势开盘，力度疲弱，或小幅低开</div>
+            <div class="qimen-strategy">
+                <div class="strategy-title">💡 操作策略</div>
+                <div>持仓者逢高减仓，空仓者观望为主。忌追高、忌赌消息、忌扛单。若早盘急跌超0.5%可小仓位试多，无量反弹则离场。</div>
+            </div>
+            <div class="qimen-esoteric">
+                📜 玄学解析：己酉日丙辰时，阳遁八局。值符天辅落坤二宫，癸+辛网盖天牢，休门主静待。时干丙生己土，时机有利但伤门曲折。庚+戊值符飞宫，白虎临艮八宫，卖盘凶悍。巳月火旺，光伏芯片得月令，然白虎压制，追高必被套。谨慎偏空，莫要急躁。
+            </div>
+        </div>
+        
+        <!-- 预期差方向 -->
+        <div class="directions-section">
+            <h2>📈 今日预期差方向</h2>
+            <div class="direction-grid">
+                <div class="direction-card hot" onclick="location.href='direction-1-computing.html'">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>AI算力基建（光纤光缆/光模块）</h3>
+                    <p>AI算力爆发，数据中心往绿电区搬，光纤光缆订单排到2027年，满负荷生产。亨通一季度产出+35%，海外发货+55%。光棒成扩产瓶颈，供不应求。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                
-                <div class="time-slot">
-                    <div class="time-header">
-                        <span class="time-name">庚午时</span>
-                        <span class="time-range">11:00 - 13:00</span>
-                    </div>
-                    <div class="time-verdict down">庚金当令，午火旺生己土但庚金压制。上午尾盘偏弱，卖盘力量渐显</div>
+                <div class="direction-card hot" onclick="location.href='direction-2-iran.html'">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>美伊谈判与霍尔木兹通航</h3>
+                    <p>特朗普说"非常接近"达成协议，霍尔木兹海峡要通航。但"史诗怒火"军事行动刚结束，伊朗还保着反击能力。众议院叫停军事行动，博弈还没完。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                
-                <div class="time-slot">
-                    <div class="time-header">
-                        <span class="time-name">未时·午盘初</span>
-                        <span class="time-range">13:00 - 14:00</span>
-                    </div>
-                    <div class="time-verdict down">辛未时，辛落巽四白虎猖狂。午后开盘加速下行，风木板块波动大</div>
+                <div class="direction-card hot" onclick="location.href='direction-3-ai-model.html'">
+                    <span class="tag tag-hot">🔥 重点看</span>
+                    <h3>AI大模型商业化加速</h3>
+                    <p>DeepSeek融资70亿美元（腾讯、宁德时代领投），微信AI智能体是腾讯内部"最高优先级"，豆包专业版覆盖软件开发、金融分析。大模型从烧钱进入变现阶段。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
-                
-                <div class="time-slot">
-                    <div class="time-header">
-                        <span class="time-name">未时·午盘末</span>
-                        <span class="time-range">14:00 - 15:00</span>
-                    </div>
-                    <div class="time-verdict neutral">未时土旺，值使死门当令。尾盘跌幅受限，但弱势难改，谨慎观望</div>
+                <div class="direction-card watch" onclick="location.href='direction-4-robot.html'">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>人形机器人/具身智能</h3>
+                    <p>比亚迪确认人形机器人研发中，未来可能经销商网络销售。宇树科技六个月内实现任意动作生成。特斯拉Optimus V3年中量产概率极大。但板块已涨过一波，预期差有限。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
+                </div>
+                <div class="direction-card watch" onclick="location.href='direction-5-chemical.html'">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>化工/新材料（氦气涨价）</h3>
+                    <p>俄罗斯氦气出口管制，进口管束氦气周均价涨31.89%。华特气体氦气收入占12%，构建了"进口+国产化"双引擎。光棒瓶颈制约光纤扩产，亨通光电等龙头受益。</p>
+                    <div class="click-hint">点击查看详细分析 →</div>
                 </div>
             </div>
         </div>
-
-        <!-- ========== 涨停板方向整理 ========== -->
-        <div class="ztb-section">
-            <h2>📈 涨停板方向整理（6方向·66只涨停驱动）</h2>
-            
-            <div class="ztb-grid">
-                <!-- 方向1：核电/可控核聚变 -->
-                <div class="ztb-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>核电/可控核聚变</h3>
-                    <p>特朗普签署核能行政令，国内BEST装置持续推进，政策→实验堆→设备订单→上游材料传导链清晰。</p>
-                    <div class="ztb-meta">涨停梯队：中广核技→融发核电→国机重装→百利电气→永鼎股份</div>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">东方电气</div>
-                                <div class="buzhang-code">600875</div>
-                                <div class="buzhang-logic">核电设备龙头，覆盖三代/四代/聚变堆，订单放量</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">久立特材</div>
-                                <div class="buzhang-code">002318</div>
-                                <div class="buzhang-logic">核电蒸发器传热管市占率国内第一，毛利率高</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">应流股份</div>
-                                <div class="buzhang-code">603308</div>
-                                <div class="buzhang-logic">核一级泵阀铸件资质稀缺，卡位核岛关键设备</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">宝胜股份</div>
-                                <div class="buzhang-code">600973</div>
-                                <div class="buzhang-logic">核电缆龙头，K1类电缆资质，核电/聚变需求增长</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">图南股份</div>
-                                <div class="buzhang-code">300855</div>
-                                <div class="buzhang-logic">高温合金，核电/航空发动机需求增长</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向2：电力/煤炭（夏季用电高峰） -->
-                <div class="ztb-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>电力/煤炭（夏季用电高峰）</h3>
-                    <p>厄尔尼诺高温→用电负荷创新高→煤价上涨+容量电价落地，火电从周期向公用事业转型。</p>
-                    <div class="ztb-meta">涨停梯队：郑州煤电→大有能源→广西能源→京能电力→华电辽能</div>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">华能国际</div>
-                                <div class="buzhang-code">600011</div>
-                                <div class="buzhang-logic">火电龙头，容量电价+煤价下行双受益，Q2净利翻倍</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">国电电力</div>
-                                <div class="buzhang-code">600795</div>
-                                <div class="buzhang-logic">火电+水电+新能源综合龙头，煤电成本下降</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">内蒙华电</div>
-                                <div class="buzhang-code">600863</div>
-                                <div class="buzhang-logic">蒙西容量电价上调（100→165元），区域电价改革红利</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">皖能电力</div>
-                                <div class="buzhang-code">000543</div>
-                                <div class="buzhang-logic">安徽火电龙头，煤价下行+用电增长</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">韶能股份</div>
-                                <div class="buzhang-code">000601</div>
-                                <div class="buzhang-logic">小水电+生物质差异化，来水修复弹性大</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向3：化工/新材料（固态电池材料） -->
-                <div class="ztb-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>化工/新材料（固态电池材料）</h3>
-                    <p>固态电池技术突破→锆/锰/磷电解质材料需求增长，半导体国产化→电子特气需求。</p>
-                    <div class="ztb-meta">涨停梯队：三祥新材→红星发展→湘潭电化→东方锆业→华特气体</div>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">上海洗霸</div>
-                                <div class="buzhang-code">603200</div>
-                                <div class="buzhang-logic">固态电解质（锆基），卡位关键环节，技术确定弹性大</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">赣锋锂业</div>
-                                <div class="buzhang-code">002460</div>
-                                <div class="buzhang-logic">固态电池龙头，氧化物路线，量产进展</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">天赐材料</div>
-                                <div class="buzhang-code">002709</div>
-                                <div class="buzhang-logic">电解液龙头，布局固态电解质，份额+新增长</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">多氟多</div>
-                                <div class="buzhang-code">002407</div>
-                                <div class="buzhang-logic">六氟磷酸锂+固态电解质布局，价格修复</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">翔丰华</div>
-                                <div class="buzhang-code">300890</div>
-                                <div class="buzhang-logic">硅碳负极，固态电池负极材料需求增长</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向4：半导体/电子 -->
-                <div class="ztb-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>半导体/电子</h3>
-                    <p>AI算力+国产化持续，但部分标的已高位，资金分歧。逻辑成立但分散。</p>
-                    <div class="ztb-meta">涨停梯队：通富微电→一博科技→环旭电子→移远通信→亨通光电</div>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">北方华创</div>
-                                <div class="buzhang-code">002371</div>
-                                <div class="buzhang-logic">半导体设备龙头，国产替代核心</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">中微公司</div>
-                                <div class="buzhang-code">688012</div>
-                                <div class="buzhang-logic">刻蚀设备龙头，技术突破</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">沪硅产业</div>
-                                <div class="buzhang-code">688126</div>
-                                <div class="buzhang-logic">大硅片国产替代，半导体材料边缘黑马</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向5：汽车零部件 -->
-                <div class="ztb-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>汽车零部件</h3>
-                    <p>新能源汽车政策+智能化趋势，持续性逻辑但非最新催化。板块联动效应明显。</p>
-                    <div class="ztb-meta">涨停梯队：模塑科技→德昌股份→祥鑫科技→长华集团→一彬科技</div>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">拓普集团</div>
-                                <div class="buzhang-code">601689</div>
-                                <div class="buzhang-logic">汽车轻量化+底盘，特斯拉/比亚迪供应商</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">伯特利</div>
-                                <div class="buzhang-code">603596</div>
-                                <div class="buzhang-logic">线控制动龙头，智能化核心部件</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">精锻科技</div>
-                                <div class="buzhang-code">300258</div>
-                                <div class="buzhang-logic">精锻齿轮，新能源减速器需求，小市值弹性</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向6：央企/国企改革 -->
-                <div class="ztb-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>央企/国企改革</h3>
-                    <p>央企改革深化，专业化整合，但方向较散，个股驱动为主，缺乏板块联动。</p>
-                    <div class="ztb-meta">涨停梯队：大唐电信→国机精工→中广核技→实益达</div>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">中国船舶</div>
-                                <div class="buzhang-code">600150</div>
-                                <div class="buzhang-logic">船舶央企，集团整合预期</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">中航沈飞</div>
-                                <div class="buzhang-code">600760</div>
-                                <div class="buzhang-logic">军工央企，资产证券化预期</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">深深宝A</div>
-                                <div class="buzhang-code">000019</div>
-                                <div class="buzhang-logic">深圳国资改革，小市值弹性</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
+        
+        <!-- 个股深度研报 -->
+        <div class="directions-section">
+            <h2>📑 个股深度研报</h2>
+            <div class="direction-grid">
+                <div class="direction-card hot" onclick="location.href='stock-300199-hanyu.html'">
+                    <span class="tag tag-hot">🔥 深度覆盖</span>
+                    <h3>翰宇药业（300199）</h3>
+                    <p>GLP-1赛道"原料药+美国首仿"差异化选手，扭亏拐点已现但负债率高、Q1营收有隐忧。利拉鲁肽美国市占率25%，司美格鲁肽III期完成但获批可能延至2027Q2。评分72/100。</p>
+                    <div class="click-hint">点击查看完整研报 →</div>
                 </div>
             </div>
         </div>
-
-        <!-- ========== 新闻方向整理 ========== -->
-        <div class="news-section">
-            <h2>📰 新闻方向整理（6个·2026-06-04新闻驱动）</h2>
-            
-            <div class="news-grid">
-                <!-- 方向1：AI算力/光纤光缆 -->
-                <div class="news-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>AI算力/光纤光缆</h3>
-                    <p>AI算力建设拉动，光纤光缆企业订单排产至2027年，亨通光纤一季度产出同比增35%，海外发货增55%。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">长飞光纤</div>
-                                <div class="buzhang-code">601869</div>
-                                <div class="buzhang-logic">光纤光缆龙头，海外业务占比高，订单排产至2027年</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">中天科技</div>
-                                <div class="buzhang-code">600522</div>
-                                <div class="buzhang-logic">光通信+海洋业务，预制棒自给率高，光棒瓶颈受益</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">烽火通信</div>
-                                <div class="buzhang-code">600498</div>
-                                <div class="buzhang-logic">光通信设备+光纤光缆，运营商集采受益，设备端被忽视</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">光迅科技</div>
-                                <div class="buzhang-code">002281</div>
-                                <div class="buzhang-logic">光模块+光器件，800G/1.6T需求增长</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">科华数据</div>
-                                <div class="buzhang-code">002335</div>
-                                <div class="buzhang-logic">数据中心UPS，"算电协同"受益，市场认知不足</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
+        
+        <!-- 涨停统计 -->
+        <div class="limitup-section">
+            <h2>📊 涨停板统计（66只）</h2>
+            <div class="limitup-grid">
+                <div class="limitup-item">
+                    <div class="label">光伏/储能</div>
+                    <div class="value">17只</div>
+                    <div class="stocks">联检科技、恒星科技、蓝科高新、豫能控股等</div>
                 </div>
-
-                <!-- 方向2：AI应用/大模型 -->
-                <div class="news-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>AI应用/大模型</h3>
-                    <p>DeepSeek融资70亿美元（估值590亿），微信AI智能体上线，OpenAI合并Codex与ChatGPT。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">科大讯飞</div>
-                                <div class="buzhang-code">002230</div>
-                                <div class="buzhang-logic">国产大模型第一，星火大模型，Agent技术储备</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">昆仑万维</div>
-                                <div class="buzhang-code">300418</div>
-                                <div class="buzhang-logic">AI Agent布局领先，天工AI</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">南兴股份</div>
-                                <div class="buzhang-code">002757</div>
-                                <div class="buzhang-logic">微软合作边缘标的，AI Agent边缘黑马</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
+                <div class="limitup-item">
+                    <div class="label">化工/新材料</div>
+                    <div class="value">15只</div>
+                    <div class="stocks">华特气体、方大炭素、亨通光电、三祥新材等</div>
                 </div>
-
-                <!-- 方向3：人形机器人 -->
-                <div class="news-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>人形机器人</h3>
-                    <p>比亚迪执行副总裁确认正在开发人形机器人，汽车AI与机器人同源，未来或通过经销商网络销售。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">绿的谐波</div>
-                                <div class="buzhang-code">688017</div>
-                                <div class="buzhang-logic">谐波减速器龙头，机器人核心部件</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">双环传动</div>
-                                <div class="buzhang-code">002472</div>
-                                <div class="buzhang-logic">RV减速器+齿轮，机器人传动核心</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">鸣志电器</div>
-                                <div class="buzhang-code">603728</div>
-                                <div class="buzhang-logic">步进电机+伺服电机，机器人运动控制边缘黑马</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">黑马</span>
-                        </div>
-                    </div>
+                <div class="limitup-item">
+                    <div class="label">机器人</div>
+                    <div class="value">10只</div>
+                    <div class="stocks">迅捷兴、泰禾智能、德昌股份、国机精工等</div>
                 </div>
-
-                <!-- 方向4：外资态度 -->
-                <div class="news-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>外资态度</h3>
-                    <p>高盛维持A股"超配"，将港股下调至"标配"，认为增长前景改善、AI硬科技敞口支撑回报。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">贵州茅台</div>
-                                <div class="buzhang-code">600519</div>
-                                <div class="buzhang-logic">外资重仓，A股核心资产</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">宁德时代</div>
-                                <div class="buzhang-code">300750</div>
-                                <div class="buzhang-logic">新能源龙头，DeepSeek投资方，外资关注</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">美的集团</div>
-                                <div class="buzhang-code">000333</div>
-                                <div class="buzhang-logic">家电龙头，高股息，外资偏好</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                    </div>
+                <div class="limitup-item">
+                    <div class="label">芯片/半导体</div>
+                    <div class="value">9只</div>
+                    <div class="stocks">华特气体、通富微电、一博科技、大唐电信等</div>
                 </div>
-
-                <!-- 方向5：指数调整 -->
-                <div class="news-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>指数调整</h3>
-                    <p>富时中国A50纳入兆易创新、澜起科技、东山精密、胜宏科技、潍柴动力，被动资金流入。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">兆易创新</div>
-                                <div class="buzhang-code">603986</div>
-                                <div class="buzhang-logic">存储芯片龙头，新纳入A50，被动资金流入</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">澜起科技</div>
-                                <div class="buzhang-code">688008</div>
-                                <div class="buzhang-logic">内存接口芯片，新纳入A50</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">东山精密</div>
-                                <div class="buzhang-code">002384</div>
-                                <div class="buzhang-logic">PCB+新能源结构件，新纳入A50</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 方向6：美伊局势缓和 -->
-                <div class="news-card watch">
-                    <span class="tag tag-watch">👀 可关注</span>
-                    <h3>美伊局势缓和</h3>
-                    <p>特朗普称美伊谈判接近达成协议，霍尔木兹海峡将恢复通航，但伊朗警告以色列，局势仍有反复。</p>
-                    <div class="buzhang-list">
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">中远海控</div>
-                                <div class="buzhang-code">601919</div>
-                                <div class="buzhang-logic">航运龙头，霍尔木兹海峡通航直接受益</div>
-                            </div>
-                            <span class="buzhang-tag bz-s">S</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">招商轮船</div>
-                                <div class="buzhang-code">601872</div>
-                                <div class="buzhang-logic">油运龙头，通航后运价修复</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">中国船舶</div>
-                                <div class="buzhang-code">600150</div>
-                                <div class="buzhang-logic">船舶制造，航运景气传导</div>
-                            </div>
-                            <span class="buzhang-tag bz-a">A</span>
-                        </div>
-                    </div>
+                <div class="limitup-item">
+                    <div class="label">电力/能源</div>
+                    <div class="value">8只</div>
+                    <div class="stocks">广西能源、京能电力、华电辽能、西昌电力等</div>
                 </div>
             </div>
         </div>
-
-        <!-- ========== 关键验证节点 ========== -->
+        
+        <!-- 关键验证节点 -->
         <div class="verification-section">
-            <h2>🔍 关键验证节点</h2>
-            <ul class="verify-list">
-                <li><span class="verify-dot"></span><strong>2026-06-04 09:30</strong> | 奇门起盘 | 阳遁5局·己酉日·预测下跌（-0.2%~-0.5%）</li>
-                <li><span class="verify-dot"></span><strong>2026-06-04 15:00</strong> | 收盘验证 | 待填写实际涨跌</li>
-                <li><span class="verify-dot"></span><strong>2026-06-04</strong> | 特朗普称美伊谈判接近达成 | 霍尔木兹海峡恢复通航</li>
-                <li><span class="verify-dot"></span><strong>2026-06-04</strong> | 光纤光缆订单排产至2027年 | 亨通光纤一季度产出同比增35%，海外发货增55%</li>
-                <li><span class="verify-dot"></span><strong>2026-06-04</strong> | 高盛维持A股"超配" | 港股下调至"标配"</li>
-                <li><span class="verify-dot"></span><strong>2026-06-04</strong> | 比亚迪研发人形机器人 | 汽车AI与机器人同源</li>
-                <li><span class="verify-dot"></span><strong>2026-06-04</strong> | DeepSeek首轮融资70亿美元 | 腾讯/宁德时代参与</li>
-                <li><span class="verify-dot"></span><strong>2026-06-04</strong> | 富时A50指数调整 | 纳入兆易创新、澜起科技等5股</li>
-            </ul>
+            <h2>⏰ 关键验证节点</h2>
+            <table class="verification-table">
+                <tr>
+                    <th>时间</th>
+                    <th>事件</th>
+                    <th>验证逻辑</th>
+                </tr>
+                <tr>
+                    <td>6月5日</td>
+                    <td>芒种节气</td>
+                    <td>节气切换，奇门换局，观察新局对走势的影响</td>
+                </tr>
+                <tr>
+                    <td>6月5日</td>
+                    <td>SpaceX IPO定价</td>
+                    <td>750亿美元募资，若定价超预期，流动性虹吸效应需关注</td>
+                </tr>
+                <tr>
+                    <td>6月6-7日</td>
+                    <td>缅甸外长访华</td>
+                    <td>若达成能源/基建协议，关注西南通道相关标的</td>
+                </tr>
+                <tr>
+                    <td>6月11日</td>
+                    <td>SpaceX上市交易</td>
+                    <td>若首日大涨，科技板块风险偏好可能提升</td>
+                </tr>
+                <tr>
+                    <td>6月中旬</td>
+                    <td>美伊谈判结果</td>
+                    <td>若达成协议，霍尔木兹通航，航运/能源价格回归</td>
+                </tr>
+                <tr>
+                    <td>6月</td>
+                    <td>微信AI智能体上线</td>
+                    <td>14亿用户入口，若监管获批，AI应用逻辑验证</td>
+                </tr>
+            </table>
         </div>
-
+        
+        <!-- 底部 -->
         <div class="footer">
-            <p>羿学交易智囊团 · 数据截至 2026-06-04 09:20 · 仅供参考不构成投资建议</p>
+            <p>📊 数据更新于：2026年6月4日 09:30</p>
+            <p>💡 风险提示：本页面基于公开信息整理，不构成投资建议</p>
+            <p>🔧 版本：v2.2 | 数据来源：Wind/东方财富/新浪财经</p>
         </div>
     </div>
 </body>
