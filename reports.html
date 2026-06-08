@@ -292,6 +292,7 @@
                 allReports.sort((a, b) => new Date(b.date) - new Date(a.date));
                 applyFilters();
             } catch (e) {
+                console.error('加载 reports.json 失败:', e);
                 document.getElementById('reportGrid').innerHTML = 
                     '<div class="empty-state">加载失败，请刷新页面重试</div>';
             }
@@ -326,19 +327,25 @@
             if (pageReports.length === 0) {
                 grid.innerHTML = '<div class="empty-state">没有找到匹配的报告</div>';
             } else {
-                grid.innerHTML = pageReports.map(r => {
-                    const tagsHtml = r.tags.map(t => 
-                        `<span class="report-tag ${getTagClass(t)}">${t}</span>`
-                    ).join('');
-                    return `
-                        <a href="${r.file}" class="report-card">
-                            <div class="report-code">${r.code}</div>
-                            <div class="report-name">${r.name}</div>
-                            <div class="report-date">${r.date}</div>
-                            ${tagsHtml}
-                        </a>
-                    `;
-                }).join('');
+                try {
+                    grid.innerHTML = pageReports.map((r, i) => {
+                        const safeTags = Array.isArray(r.tags) ? r.tags : [];
+                        const tagsHtml = safeTags.map(t => 
+                            `<span class="report-tag ${getTagClass(t)}">${t}</span>`
+                        ).join('');
+                        return `
+                            <a href="${r.file}" class="report-card">
+                                <div class="report-code">${r.code}</div>
+                                <div class="report-name">${r.name}</div>
+                                <div class="report-date">${r.date}</div>
+                                ${tagsHtml}
+                            </a>
+                        `;
+                    }).join('');
+                } catch (err) {
+                    console.error('渲染卡片失败:', err);
+                    grid.innerHTML = '<div class="empty-state">渲染失败，请刷新重试</div>';
+                }
             }
 
             // 渲染分页按钮
