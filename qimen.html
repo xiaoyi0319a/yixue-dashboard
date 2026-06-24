@@ -1433,10 +1433,8 @@
                 // 宫位从起点开始递增（1→2→3→4→5→6→7→8→9→1循环），不管阳遁阴遁
                 const gongIdx = (startIndex + i) % 9;
                 const gong = gongOrder[gongIdx];
-                // 阳遁：天干递增；阴遁：天干递减
-                const ganIdx = isYang
-                    ? (hourGanIndex + i) % 9
-                    : (hourGanIndex - i + 9) % 9;
+                // 天干始终按固定顺序递增（阳遁阴遁都如此），九宫数字方向由gongOrder控制
+                const ganIdx = (hourGanIndex + i) % 9;
                 yinGan[gong] = ganOrder[ganIdx];
             }
             
