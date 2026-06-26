@@ -412,5 +412,16 @@
             </p>
         </div>
     </div>
+    <script>
+        // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+        setTimeout(function() {
+            var pv = document.getElementById('busuanzi_value_site_pv');
+            var uv = document.getElementById('busuanzi_value_site_uv');
+            var container = document.getElementById('busuanzi_container_site_pv');
+            if (pv && pv.innerText === '--' && uv && uv.innerText === '--' && container) {
+                container.style.display = 'none';
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
