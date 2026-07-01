@@ -12,8 +12,8 @@ with open('index.html', 'r', encoding='utf-8') as f:
 
 # 1. 更新标题日期
 content = content.replace(
-    '<title>羿学交易智囊团 | 2026-04-21</title>',
-    '<title>羿学交易智囊团 | 2026-04-22</title>'
+    '<title>羿学天天看 | 2026-04-21</title>',
+    '<title>羿学天天看 | 2026-04-22</title>'
 )
 
 # 2. 更新header日期
