@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="羿学天天看 | 2026-07-06 今日预测">
+    <meta property="og:title" content="羿学交易智囊团 | 2026-07-06 今日预测">
     <meta property="og:description" content="🔮 奇门中性·火金交战势均力 | 📈 6大涨停方向·160只驱动 | 📰 6大新闻方向·2026-07-06新闻驱动">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://xiaoyi0319a.github.io/yixue-dashboard/">
     <meta name="twitter:card" content="summary_large_image">
-    <title>羿学天天看 | 2026-07-06</title>
+    <title>羿学交易智囊团 | 2026-07-06</title>
     <link rel="stylesheet" href="css/style.css">
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>羿学天天看</h1>
+            <h1>羿学交易智囊团</h1>
             <div class="date">2026年7月6日 星期一</div>
             <div class="ganzhi">丙午年 甲午月 辛巳日 | 阴遁9局 值符天柱·巽四宫</div>
         </div>
@@ -63,155 +63,295 @@
             </div>
         </div>
         <div class="ztb-section">
-            <h2>📈 涨停板方向整理（5方向·160只涨停驱动）</h2>
+            <h2>📈 涨停板方向整理（6方向·160只涨停驱动）</h2>
             <div class="ztb-grid">
                 <div class="ztb-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>人形机器人/具身智能</h3>
-                    <p>7月3日40+只成分股涨停，全场最强方向。埃斯顿4天3板，日盈电子、浙江鼎力2连板。行业规模化商用提速，机构测算2026年多家厂商实现量产，镁合金需求有望爆发。电子皮肤/触觉感知技术突破（日盈电子入选常州科技计划）。</p>
-                    <div class="ztb-meta">驱动：量产元年+电子皮肤技术突破 | 40+只涨停</div>
+                    <p>人形机器人量产元年叙事持续兑现，宇树科技IPO注册获批+拟募资42.02亿元+科创板上市，催化产业链估值重塑。核心零部件（减速器、伺服电机、传感器、丝杠）国产替代加速，40+只概念股涨停，埃斯顿4天3板，资金认可度极高。适合中线布局，注意短期涨幅过大后的回调风险。</p>
+                    <div class="ztb-meta">驱动：宇树IPO获批+量产元年+政策催化 | 19分</div>
                     <div class="buzhang-list">
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">埃斯顿</div>
-                                <div class="buzhang-code">002747</div>
-                                <div class="buzhang-logic">4天3板，工业机器人龙头，人形机器人布局</div>
+                                <div class="buzhang-name">绿的谐波</div>
+                                <div class="buzhang-code">688017</div>
+                                <div class="buzhang-logic">谐波减速器国产龙头，宇树/特斯拉供应链，2026Q1营收+35%</div>
                             </div>
                             <span class="buzhang-tag bz-s">S</span>
                         </div>
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">日盈电子</div>
-                                <div class="buzhang-code">603286</div>
-                                <div class="buzhang-logic">2连板，电子皮肤/触觉感知，入选常州科技计划</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">🏔️</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">浙江鼎力</div>
-                                <div class="buzhang-code">603338</div>
-                                <div class="buzhang-logic">2连板，高空作业平台+机器人（船舶喷涂/隧道打孔）</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">🏔️</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">国茂股份</div>
-                                <div class="buzhang-code">603915</div>
-                                <div class="buzhang-logic">精密行星减速机，谐波减速器布局具身智能</div>
+                                <div class="buzhang-name">双环传动</div>
+                                <div class="buzhang-code">002472</div>
+                                <div class="buzhang-logic">RV+谐波减速器双布局，汽车工艺迁移机器人，2025年报营收+25%</div>
                             </div>
                             <span class="buzhang-tag bz-a">A</span>
                         </div>
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">拓普集团</div>
-                                <div class="buzhang-code">601689</div>
-                                <div class="buzhang-logic">轻量化底盘，机器人关节模组</div>
+                                <div class="buzhang-name">鸣志电器</div>
+                                <div class="buzhang-code">603728</div>
+                                <div class="buzhang-logic">无框力矩电机+空心杯电机，人形机器人电机核心供应商</div>
                             </div>
                             <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">南山智尚</div>
+                                <div class="buzhang-code">300918</div>
+                                <div class="buzhang-logic">超高分子量聚乙烯纤维（腱绳材料），灵巧手腱绳驱动被忽视环节</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">索辰科技</div>
+                                <div class="buzhang-code">688507</div>
+                                <div class="buzhang-logic">机器人仿真软件（"卖水人"），仿真训练需求爆发</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
                         </div>
                     </div>
                 </div>
                 <div class="ztb-card hot">
                     <span class="tag tag-hot">🔥 重点看</span>
                     <h3>黄金/贵金属</h3>
-                    <p>7月3日5只+涨停，招金黄金、赤峰黄金2连板。金价分析师预测至明年Q1上涨25%重回5000美元/盎司。地缘风险溢价+降息预期支撑。</p>
-                    <div class="ztb-meta">驱动：金价预期强+央行购金+避险需求 | 5只+涨停</div>
+                    <p>全球避险需求+央行连续增持+降息预期支撑金价，国际金价持续强势。金矿企业利润弹性释放，黄金股补涨。招金黄金、赤峰黄金2连板，四川黄金、西部黄金等涨停。适合趋势跟踪，注意金价短期过快上涨后的回调风险。</p>
+                    <div class="ztb-meta">驱动：金价强势+央行购金+避险需求 | 15分</div>
                     <div class="buzhang-list">
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">招金黄金</div>
-                                <div class="buzhang-code">000506</div>
-                                <div class="buzhang-logic">2连板，黄金+国企改革</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">🏔️</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">赤峰黄金</div>
-                                <div class="buzhang-code">600988</div>
-                                <div class="buzhang-logic">2连板，黄金+铜双主业</div>
-                            </div>
-                            <span class="buzhang-tag bz-h">🏔️</span>
-                        </div>
-                        <div class="buzhang-item">
-                            <div class="buzhang-left">
-                                <div class="buzhang-name">四川黄金</div>
-                                <div class="buzhang-code">001337</div>
-                                <div class="buzhang-logic">次新黄金股，弹性大，补涨空间大</div>
+                                <div class="buzhang-name">紫金矿业</div>
+                                <div class="buzhang-code">601899</div>
+                                <div class="buzhang-logic">全球金矿铜矿龙头，金价+铜价双涨，2025年报营收+18%</div>
                             </div>
                             <span class="buzhang-tag bz-a">A</span>
                         </div>
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">西部黄金</div>
-                                <div class="buzhang-code">601069</div>
-                                <div class="buzhang-logic">新疆黄金，区域龙头</div>
+                                <div class="buzhang-name">山东黄金</div>
+                                <div class="buzhang-code">600547</div>
+                                <div class="buzhang-logic">国内黄金龙头，纯金业务金价弹性大，2026Q1净利润+50%</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">湖南黄金</div>
+                                <div class="buzhang-code">002155</div>
+                                <div class="buzhang-logic">小市值金矿，锑矿共生，金价+锑价双涨弹性更大</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">贵研铂业</div>
+                                <div class="buzhang-code">600459</div>
+                                <div class="buzhang-logic">贵金属回收龙头，金价上涨→回收利润增厚，市值&lt;80亿</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">银泰黄金</div>
+                                <div class="buzhang-code">000975</div>
+                                <div class="buzhang-logic">高品位金矿，成本优势，低成本的金价弹性</div>
                             </div>
                             <span class="buzhang-tag bz-a">A</span>
                         </div>
                     </div>
                 </div>
-                <div class="ztb-card hot">
-                    <span class="tag tag-hot">🔥 重点看</span>
-                    <h3>电网设备/特高压</h3>
-                    <p>7月3日华明装备、金智科技涨停。华明装备CHVT型换流变分接开关在陇东-山东±800kV特高压直流输电工程实现批量化投运，率先掌握特高压分接开关制造技术并打破国外垄断。</p>
-                    <div class="ztb-meta">驱动：特高压建设+国产替代 | 核心卡位明确</div>
+                <div class="ztb-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>数据中心/AIDC（AI智算交换机）</h3>
+                    <p>锐捷网络AI智算交换机国产替代，中报业绩大幅超预期。国产算力资本开支（字节、阿里、腾讯）驱动AI智算交换机需求爆发，绑定核心供应商。国产替代逻辑硬，但市场关注度不及机器人，预期差明确。</p>
+                    <div class="ztb-meta">驱动：国产算力交换机+中报超预期+低覆盖 | 17分</div>
                     <div class="buzhang-list">
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">华明装备</div>
-                                <div class="buzhang-code">002270</div>
-                                <div class="buzhang-logic">国内分接开关细分市场领军企业，特高压唯一国产替代</div>
+                                <div class="buzhang-name">中际旭创</div>
+                                <div class="buzhang-code">300308</div>
+                                <div class="buzhang-logic">光模块全球龙头，800G/1.6T光模块放量</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">沪电股份</div>
+                                <div class="buzhang-code">002463</div>
+                                <div class="buzhang-logic">高速PCB龙头，AI服务器PCB核心供应商，2025年报营收+35%</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">中石科技</div>
+                                <div class="buzhang-code">300684</div>
+                                <div class="buzhang-logic">液冷散热材料，AI服务器功耗提升→散热需求爆发，市值&lt;50亿</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">盛科通信</div>
+                                <div class="buzhang-code">688702</div>
+                                <div class="buzhang-logic">国产交换芯片，国产替代核心环节，2025营收+40%</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">风华高科</div>
+                                <div class="buzhang-code">000636</div>
+                                <div class="buzhang-logic">被动元件（电容/电感），AI服务器被动元件用量大增</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ztb-card watch">
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>苹果概念/折叠屏</h3>
+                    <p>苹果折叠屏iPhone备货量增至1000万部，折叠屏放量确定性高。铰链/屏幕/电池/结构件供应商受益。但市场已有预期，预期差在于未进入供应链的潜在替代供应商。</p>
+                    <div class="ztb-meta">驱动：折叠屏iPhone放量+产业链受益 | 15分</div>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">立讯精密</div>
+                                <div class="buzhang-code">002475</div>
+                                <div class="buzhang-logic">苹果核心供应商，AirPods/iPhone组装，折叠屏导入预期</div>
                             </div>
                             <span class="buzhang-tag bz-s">S</span>
                         </div>
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">金智科技</div>
-                                <div class="buzhang-code">002090</div>
-                                <div class="buzhang-logic">稀土永磁+智能电网</div>
+                                <div class="buzhang-name">蓝思科技</div>
+                                <div class="buzhang-code">300433</div>
+                                <div class="buzhang-logic">玻璃盖板龙头，折叠屏UTG玻璃技术储备</div>
                             </div>
                             <span class="buzhang-tag bz-a">A</span>
                         </div>
-                    </div>
-                </div>
-                <div class="ztb-card watch">
-                    <span class="tag tag-watch">👀 观察</span>
-                    <h3>军工装备/成飞概念</h3>
-                    <p>7月3日甘化科工2连板，航发科技、航天环宇涨停。成飞概念持续发酵，军工订单景气度提升。持续性存疑，优先级次于机器人和黄金。</p>
-                    <div class="ztb-meta">驱动：成飞概念+订单放量预期 | 观察</div>
-                    <div class="buzhang-list">
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">甘化科工</div>
-                                <div class="buzhang-code">000576</div>
-                                <div class="buzhang-logic">2连板，军工电源</div>
+                                <div class="buzhang-name">精研科技</div>
+                                <div class="buzhang-code">300709</div>
+                                <div class="buzhang-logic">MIM铰链龙头，折叠屏核心部件供应商</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">科森科技</div>
+                                <div class="buzhang-code">603626</div>
+                                <div class="buzhang-logic">精密金属结构件，折叠屏铰链技术储备</div>
                             </div>
                             <span class="buzhang-tag bz-h">🏔️</span>
                         </div>
                         <div class="buzhang-item">
                             <div class="buzhang-left">
-                                <div class="buzhang-name">航发科技</div>
-                                <div class="buzhang-code">600391</div>
-                                <div class="buzhang-logic">航空发动机零部件</div>
+                                <div class="buzhang-name">东睦股份</div>
+                                <div class="buzhang-code">600114</div>
+                                <div class="buzhang-logic">粉末冶金结构件，折叠屏铰链MIM工艺</div>
                             </div>
-                            <span class="buzhang-tag bz-a">A</span>
+                            <span class="buzhang-tag bz-h">🏔️</span>
                         </div>
                     </div>
                 </div>
                 <div class="ztb-card watch">
-                    <span class="tag tag-watch">👀 观察</span>
-                    <h3>医药/创新药</h3>
-                    <p>7月3日ST惠程涨停（退市风险消除+医药业务布局+资金支持）。石药景峰2连板。个股事件驱动为主，整体性较弱。</p>
-                    <div class="ztb-meta">驱动：个股事件 | 优先级较低</div>
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>军工装备</h3>
+                    <p>军工装备板块持续走高，甘化科工2连板。地缘因素+军费增长驱动订单放量预期，航发科技、航天环宇等涨停。持续性存疑，优先级次于机器人和黄金。</p>
+                    <div class="ztb-meta">驱动：地缘催化+订单预期 | 13分</div>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">航发动力</div>
+                                <div class="buzhang-code">600893</div>
+                                <div class="buzhang-logic">航空发动机龙头，军工核心资产，订单放量预期</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">中航沈飞</div>
+                                <div class="buzhang-code">600760</div>
+                                <div class="buzhang-logic">战斗机龙头，军工主机厂核心，业绩稳健</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">中航光电</div>
+                                <div class="buzhang-code">002179</div>
+                                <div class="buzhang-logic">军工连接器龙头，防务+民品双轮驱动</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">高德红外</div>
+                                <div class="buzhang-code">002414</div>
+                                <div class="buzhang-logic">红外热成像，军民两用，芯片自主可控</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">钢研高纳</div>
+                                <div class="buzhang-code">300034</div>
+                                <div class="buzhang-logic">高温合金，航空发动机关键材料</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="ztb-card watch">
-                    <span class="tag tag-caution">⚠️ 回避</span>
-                    <h3>半导体材料/光刻胶</h3>
-                    <p>7月3日多氟多触及跌停，容大感光、南大光电、华特气体大跌。半导体材料板块整体震荡下挫，与设备端形成跷跷板。资金在半导体内部做高低切，短期回避材料端。</p>
-                    <div class="ztb-meta">⚠️ 分化严重，短期回避</div>
+                    <span class="tag tag-watch">👀 可关注</span>
+                    <h3>电网设备</h3>
+                    <p>特高压建设+新能源并网驱动电网投资，设备需求向好。华明装备、金智科技、中元股份涨停。长期景气赛道，但市场认知充分，短期预期差有限。</p>
+                    <div class="ztb-meta">驱动：特高压+新能源并网 | 11分</div>
+                    <div class="buzhang-list">
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">国电南瑞</div>
+                                <div class="buzhang-code">600406</div>
+                                <div class="buzhang-logic">电网自动化龙头，特高压+智能电网核心</div>
+                            </div>
+                            <span class="buzhang-tag bz-s">S</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">许继电气</div>
+                                <div class="buzhang-code">000400</div>
+                                <div class="buzhang-logic">特高压直流输电设备，电网投资受益</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">平高电气</div>
+                                <div class="buzhang-code">600312</div>
+                                <div class="buzhang-logic">GIS开关设备，特高压建设核心供应商</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">思源电气</div>
+                                <div class="buzhang-code">002028</div>
+                                <div class="buzhang-logic">电力设备综合供应商，出海+国内双增长</div>
+                            </div>
+                            <span class="buzhang-tag bz-a">A</span>
+                        </div>
+                        <div class="buzhang-item">
+                            <div class="buzhang-left">
+                                <div class="buzhang-name">中国西电</div>
+                                <div class="buzhang-code">601179</div>
+                                <div class="buzhang-logic">输配电设备央企，特高压全套设备</div>
+                            </div>
+                            <span class="buzhang-tag bz-h">🏔️</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -508,53 +648,6 @@
                 </div>
             </div>
         </div>
-        <div class="analysis-section">
-            <h2>📋 个股分析 · 中金岭南</h2>
-            <div class="analysis-card">
-                <div class="analysis-header">
-                    <h3>中金岭南 000060</h3>
-                    <span class="analysis-tag tag-watch">周期反转型</span>
-                </div>
-                <div class="analysis-summary">
-                    <p><strong>核心变化：</strong>2026H1业绩预增87.89%-114.73%（周期回暖+低基数），稀散金属概念加持</p>
-                    <p><strong>估值位置：</strong>PE 30.12倍，PB 1.61倍，市值321亿。周期股中估值合理偏贵</p>
-                </div>
-                <div class="analysis-details">
-                    <div class="detail-row">
-                        <span class="detail-label">变化权重排序：</span>
-                        <div class="detail-content">
-                            <span class="weight-tag base">底：铜锌涨价+冶炼扭亏</span>
-                            <span class="weight-tag noise">噪：低基数效应</span>
-                            <span class="weight-tag top">顶：镓锗铟概念</span>
-                        </div>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">翻倍基因匹配：</span>
-                        <span class="detail-content">模式5（景气共振型）55-60%匹配度，子类型5D周期反转型</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">即时错配：</span>
-                        <span class="detail-content">⚠️ 周期冶炼股被误定价为新材料概念股，若概念退潮有20-30%回调空间</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">三情景：</span>
-                        <div class="detail-content">
-                            <span class="scenario-opt">乐观+20%（金属大涨）</span>
-                            <span class="scenario-base">基准±10%（高位震荡）</span>
-                            <span class="scenario-pess">悲观-20%（价格回落）</span>
-                        </div>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">关键验证：</span>
-                        <span class="detail-content">2026-08-30中报（稀散金属收入占比）</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">投资建议：</span>
-                        <span class="detail-content">中价值，周期博弈型。若看好金属价格可参与，但需设好止损</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="verification-section">
             <h2>🔍 关键验证节点</h2>
             <ul class="verify-list">
@@ -569,7 +662,7 @@
             </ul>
         </div>
         <div class="footer">
-            <p>羿学天天看 · 数据截至 2026-07-06 08:00 · 仅供参考不构成投资意见</p>
+            <p>羿学交易智囊团 · 数据截至 2026-07-06 08:00 · 仅供参考不构成投资意见</p>
             <p class="site-stats" id="busuanzi_container_site_pv">
                 <span style="color:#5a6a7a;">📊 本站总访问量 </span><span id="busuanzi_value_site_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#5a6a7a;"> 次</span>
                 <span style="color:#5a6a7a;margin-left:12px;">👥 访客数 </span><span id="busuanzi_value_site_uv" style="color:#a371f7;font-weight:600;">--</span><span style="color:#5a6a7a;"> 人</span>
@@ -578,7 +671,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('羿学天天看 · 页面加载完成');
+            console.log('羿学交易智囊团 · 页面加载完成');
         });
     </script>
 </body>
