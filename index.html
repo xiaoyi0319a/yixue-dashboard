@@ -617,8 +617,8 @@
             <p class="site-stats" id="busuanzi_container_site_pv">
                 <span style="color:#5a6a7a;">📊 累计访问 </span><span id="busuanzi_value_site_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#5a6a7a;"> 次</span>
                 <span style="color:#5a6a7a;margin-left:12px;">👥 累计访客 </span><span id="busuanzi_value_site_uv" style="color:#a371f7;font-weight:600;">--</span><span style="color:#5a6a7a;"> 人</span>
-                <span style="color:#5a6a7a;margin-left:12px;">📈 今日浏览 </span><span id="today_pv" style="color:#00ff88;font-weight:600;">--</span><span style="color:#5a6a7a;"> 次</span>
-                <span style="color:#5a6a7a;font-size:0.75em;margin-left:6px;">（本机参考）</span>
+                <span style="color:#5a6a7a;margin-left:12px;">📈 今日访问 </span><span id="today_pv" style="color:#00ff88;font-weight:600;">--</span><span style="color:#5a6a7a;"> 次</span>
+                <span style="color:#5a6a7a;font-size:0.75em;margin-left:6px;">（自动计算）</span>
             </p>
         </div>
     </div>
@@ -626,15 +626,58 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('羿学天天看 · 页面加载完成');
             
-            // 今日浏览计数（本机参考）
+            // === 当日访客统计（基于不蒜子累计值自动计算） ===
             const today = new Date().toISOString().split('T')[0];
-            const todayKey = 'yixue_pv_' + today;
-            let todayCount = parseInt(localStorage.getItem(todayKey) || '0') + 1;
-            localStorage.setItem(todayKey, todayCount);
-            document.getElementById('today_pv').textContent = todayCount;
+            const storedDate = localStorage.getItem('yixue_stats_date');
+            const todayEl = document.getElementById('today_pv');
+            const totalEl = document.getElementById('busuanzi_value_site_pv');
             
-            // 清理旧数据（保留最近7天）
-            for (let i = 7; i > 30; i++) {
+            // 跨日期：新的一天，更新基准并清零当日
+            if (storedDate !== today) {
+                localStorage.setItem('yixue_stats_date', today);
+                // 标记需要更新基准（等不蒜子加载完成后）
+                localStorage.setItem('yixue_needs_base_update', '1');
+                if (todayEl) todayEl.textContent = '0';
+            }
+            
+            // 监听不蒜子累计PV变化，实时计算当日PV
+            function calcTodayPV() {
+                const totalStr = totalEl ? totalEl.textContent : '--';
+                const total = parseInt(totalStr);
+                if (isNaN(total) || total <= 0) return;
+                
+                // 检查是否需要更新基准（新的一天首次加载）
+                if (localStorage.getItem('yixue_needs_base_update') === '1') {
+                    localStorage.setItem('yixue_base_pv', total.toString());
+                    localStorage.removeItem('yixue_needs_base_update');
+                    if (todayEl) todayEl.textContent = '0';
+                    return;
+                }
+                
+                // 计算当日：当前累计 - 昨日基准
+                const base = parseInt(localStorage.getItem('yixue_base_pv') || '0');
+                const todayCount = Math.max(0, total - base);
+                if (todayEl) todayEl.textContent = todayCount;
+            }
+            
+            // 监听不蒜子数据异步加载
+            if (totalEl) {
+                // 初始尝试（可能已缓存）
+                calcTodayPV();
+                
+                // 监听DOM变化（不蒜子异步加载后更新）
+                const observer = new MutationObserver(function(mutations) {
+                    calcTodayPV();
+                });
+                observer.observe(totalEl, { childList: true, subtree: true, characterData: true });
+                
+                // 兜底：2秒后再次尝试
+                setTimeout(calcTodayPV, 2000);
+                setTimeout(calcTodayPV, 5000);
+            }
+            
+            // 清理7天前的旧基准数据（保留最近7天）
+            for (let i = 8; i <= 30; i++) {
                 const d = new Date();
                 d.setDate(d.getDate() - i);
                 const oldKey = 'yixue_pv_' + d.toISOString().split('T')[0];
