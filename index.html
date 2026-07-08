@@ -615,14 +615,31 @@
         <div class="footer">
             <p>羿学天天看 · 数据截至 2026-07-08 08:00 · 仅供参考不构成投资意见</p>
             <p class="site-stats" id="busuanzi_container_site_pv">
-                <span style="color:#5a6a7a;">📊 本站总访问量 </span><span id="busuanzi_value_site_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#5a6a7a;"> 次</span>
-                <span style="color:#5a6a7a;margin-left:12px;">👥 访客数 </span><span id="busuanzi_value_site_uv" style="color:#a371f7;font-weight:600;">--</span><span style="color:#5a6a7a;"> 人</span>
+                <span style="color:#5a6a7a;">📊 累计访问 </span><span id="busuanzi_value_site_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#5a6a7a;"> 次</span>
+                <span style="color:#5a6a7a;margin-left:12px;">👥 累计访客 </span><span id="busuanzi_value_site_uv" style="color:#a371f7;font-weight:600;">--</span><span style="color:#5a6a7a;"> 人</span>
+                <span style="color:#5a6a7a;margin-left:12px;">📈 今日浏览 </span><span id="today_pv" style="color:#00ff88;font-weight:600;">--</span><span style="color:#5a6a7a;"> 次</span>
+                <span style="color:#5a6a7a;font-size:0.75em;margin-left:6px;">（本机参考）</span>
             </p>
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('羿学天天看 · 页面加载完成');
+            
+            // 今日浏览计数（本机参考）
+            const today = new Date().toISOString().split('T')[0];
+            const todayKey = 'yixue_pv_' + today;
+            let todayCount = parseInt(localStorage.getItem(todayKey) || '0') + 1;
+            localStorage.setItem(todayKey, todayCount);
+            document.getElementById('today_pv').textContent = todayCount;
+            
+            // 清理旧数据（保留最近7天）
+            for (let i = 7; i > 30; i++) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const oldKey = 'yixue_pv_' + d.toISOString().split('T')[0];
+                localStorage.removeItem(oldKey);
+            }
         });
     </script>
 </body>
