@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>920111 聚星科技 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>聚星科技</h1>
+            <p class="code">920111 · 电接触产品隐形冠军 · 2025增速断崖放缓 · 2026Q1强劲反弹待验证</p>
+            <p class="date">分析日期：2026-07-03 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-07-03</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- ===== 执行摘要 ===== -->
+<div class="section" id="summary">
+<h2>📋 执行摘要</h2>
+<div class="highlight-box">
+<p><strong>核心变化</strong>：电接触产品隐形冠军，2024年业绩爆发（营收+66%、净利+52%）→ <strong>2025年增速断崖式放缓</strong>（营收+23%、净利仅+3.4%）→ <strong>2026Q1强劲反弹</strong>（营收+117%、净利+296%）。新能源/光模块多赛道切入（小米汽车供应链、充电桩、储能），第二曲线待2026中报验证</p>
+<p><strong>投资价值</strong>：<span class="tag tag-gold">中价值</span> <span class="tag tag-purple">中预期差（10-30%）</span></p>
+<p><strong>跟踪周期</strong>：中期（1-2年，业绩验证+新赛道放量驱动）</p>
+<p><strong>关键验证节点</strong>：2026-08-30（2026年中报，验证2026H1新能源业务占比及增速是否延续Q1势头）</p>
+<p><strong>证伪信号</strong>：2026H1营收增速<30%或新能源业务营收占比<15%，或Q2净利环比大幅下滑，说明Q1反弹为季节性/一次性因素</p>
+</div>
+</div>
+
+<!-- ===== 大白话三问 ===== -->
+<div class="dabaohua-section">
+<h2>🎯 大白话三问</h2>
+
+<div class="dabaohua-q">
+<div class="q-label">【这家公司是做什么的？（产业链位置）】</div>
+<div class="q-answer">
+<strong>行业归属</strong>：电力设备——电网设备——配电设备，细分是<strong>电接触产品</strong>（电触头、电接触元件、电接触材料）<br><br>
+<strong>产业链位置</strong>：上游核心零部件——电触头是低压电器的"心脏"，用于继电器、开关、接触器、断路器等<br><br>
+<strong>核心产品/技术</strong>：
+<ul>
+<li><strong>电触头</strong>（营收占63.9%，毛利率22.0%）：铆钉型电触头国内市占率连续三年第一，掌握超过万种规格制造技术</li>
+<li><strong>电接触元件</strong>（营收占18.1%，毛利率33.6%）：铆接元件、焊接元件，毛利率最高</li>
+<li><strong>电接触材料</strong>（营收占13.7%，毛利率9.0%）：银基合金材料，自供率>90%</li>
+</ul>
+<strong>技术门槛</strong>：高。首创三冲成型工艺解决行业精度难题，产品公差优于行业标准10-15%；46项授权专利（9项发明），参与制定8项国家标准/行业标准；国家级专精特新"小巨人"、浙江省"隐形冠军"<br><br>
+<strong>客户是谁</strong>：B2B，下游低压电器厂商。新能源领域客户包括浙江英洛华新能源、浙江中锂电、浙江众信新能源等（批量供货或送样）；2025年6月进入<strong>小米汽车供应链</strong>。客户粘性中等——电触头属于标准件，但材料配方和工艺有定制性<br><br>
+<strong>增长逻辑</strong>：传统家电/工业控制需求稳定 → 新能源（充电桩/储能/电动汽车）增量爆发 → 光模块配套新赛道
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【第一：这价格贵不贵？】</div>
+<div class="q-answer">
+<strong>当前</strong>：股价<strong>36.63元</strong>（2026-07-03），<strong>总市值</strong>：<strong>56.8亿</strong>，<strong>PE（LYR，2025实际）</strong>：<strong>47.4倍</strong>，<strong>PB</strong>：5.54倍，<strong>PS</strong>：4.60倍<br><br>
+<strong>2024年净利润</strong>：1.16亿（+51.87%，vs 2023）<br>
+<strong>2025年净利润</strong>：<strong>1.20亿（+3.41%，增速断崖式放缓）</strong>——2025年报已于2026年4月披露<br>
+<strong>2026Q1净利润</strong>：<strong>0.92亿（+295.7% YoY，强劲反弹）</strong><br>
+<strong>2026E预测净利润</strong>：2.075亿（+73%，机构一致预期）<br><br>
+<strong>PE（2026E）</strong>：27.4倍，<strong>PEG ≈ 0.38</strong>（按2026E增速73%）→ <strong>若2026年业绩兑现，估值合理偏低；若Q1反弹不可持续，则当前估值偏高</strong><br><br>
+<strong>关键问题</strong>：Q1的0.92亿净利如果线性外推，全年可达3.6亿+，远超机构预测2.075亿。但Q1占全年比例通常偏高（行业季节性+订单前置），不可线性外推。<br><br>
+<strong>合理股价区间</strong>（按2026E净利润预测）：
+<ul>
+<li>如果全年1.5亿（悲观，+25%，Q1反弹不可持续）→ 合理股价30-38元（PE 25-30倍）→ <strong>当前高估</strong></li>
+<li>如果全年2.0亿（基准，+67%）← <strong>机构预测</strong> → 合理股价40-50元（PE 25-30倍）</li>
+<li>如果全年2.8亿（乐观，+133%，Q1势头延续）→ 合理股价55-70元（PE 25-30倍）</li>
+</ul>
+<strong>当前36.63元 → 押注的是"Q1反弹可持续"。若2026中报验证新能源放量，估值有修复空间；若Q2回落，则当前PE 47x偏高</strong>
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【有没有故事？】</div>
+<div class="q-answer">
+<strong>真故事（底）</strong>：电触头国内市占率第一，2024年营收+66%、净利+52%已验证。ROE 17.44%，盈利能力扎实<br><br>
+<strong>真故事（顶）</strong>：新能源赛道切入——AgSnO2In2O3电触头已进入小米汽车供应链、充电桩、储能。2025年6月官宣进入小米汽车供应链，是硬催化<br><br>
+<strong>假故事（噪）</strong>：光模块配套概念——电触头确实可为光模块提供配套，但当前收入占比极小，被市场过度解读<br><br>
+<strong>假故事（雾）</strong>：AI算力/数据中心概念——同属概念扩散，实际贡献有限<br><br>
+<strong>预期差</strong>：市场当前共识是"传统电接触龙头+新能源概念"，但可能低估了<strong>新能源业务放量的斜率</strong>——若2026H1新能源业务营收占比突破20%，估值逻辑将从"制造业"切换到"新能源零部件"，PE中枢可从25倍上移至35-40倍
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【最坏会怎样？】</div>
+<div class="q-answer">
+<strong>证伪信号</strong>：如果2026H1营收增速掉到30%以下，或新能源业务营收占比<15%，说明新赛道切入不及预期，当前估值（PEG 0.42）隐含的高增长假设不成立<br><br>
+<strong>验证节点</strong>：2026年8月底中报（2026年中报，最关键，看新能源业务放量）、小米汽车供应链订单进展公告<br><br>
+<strong>三情景</strong>：
+<ul>
+<li>乐观：新能源业务放量+光模块订单落地，冲50元+（25%概率）</li>
+<li>基准：业绩兑现但斜率温和，35-45元震荡（50%概率）← <strong>最可能</strong></li>
+<li>悲观：增速回落+新赛道不及预期，跌回25-28元（25%概率）</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ===== 四句话总结 ===== -->
+<div class="section">
+<h2>💡 四句话总结</h2>
+<table class="data-table">
+<tr><td><strong>核心变化</strong></td><td>电接触产品隐形冠军，2024年业绩爆发（营收+66%、净利+52%），新能源/光模块多赛道切入打开第二曲线</td></tr>
+<tr><td><strong>估值位置</strong></td><td>当前PE 33倍，PEG≈0.42（按2025E增速），在基准合理区间偏下，若业绩兑现有修复空间</td></tr>
+<tr><td><strong>预期差</strong></td><td>市场可能低估新能源业务放量斜率，若2026H1新能源占比突破20%，估值逻辑可能切换</td></tr>
+<tr><td><strong>风险点</strong></td><td>北交所流动性天花板、原材料（银/铜）价格波动、新赛道切入不及预期</td></tr>
+</table>
+</div>
+
+<!-- ===== 变化识别 ===== -->
+<div class="section">
+<h2>一、变化识别</h2>
+
+<h3>基础画像</h3>
+<table class="data-table">
+<tr><td>股票名称</td><td>聚星科技</td></tr>
+<tr><td>股票代码</td><td>920111.BJ</td></tr>
+<tr><td>当前股价</td><td><strong>36.63元</strong>（2026-07-03）</td></tr>
+<tr><td>市值</td><td><strong>56.8亿</strong></td></tr>
+<tr><td>所属行业</td><td>电力设备——电网设备——配电设备</td></tr>
+<tr><td>上市时间</td><td>2024-11-11（北交所）</td></tr>
+<tr><td>实控人</td><td>陈静+陈林霞，控股约45%</td></tr>
+</table>
+
+<h3>核心变化识别</h3>
+<table class="data-table">
+<tr>
+<th>变化类型</th>
+<th>具体事件</th>
+<th>发生时间</th>
+<th>信息来源</th>
+</tr>
+<tr>
+<td>☑新品/新业务</td>
+<td>AgSnO2In2O3电触头进入小米汽车供应链，新能源领域（充电桩/储能/电动汽车）批量供货或送样</td>
+<td>2025-06</td>
+<td>雪球/公司公告</td>
+</tr>
+<tr>
+<td>☑业绩拐点</td>
+<td>2024年营收10.02亿（+66.17%），净利润1.16亿（+51.87%）→ <strong>2025年营收12.35亿（+23.25%），净利润1.20亿（+3.41%，增速断崖放缓）</strong>→ <strong>2026Q1营收5.28亿（+117.3% YoY），净利润0.92亿（+295.7% YoY，强劲反弹）</strong></td>
+<td>2024年报/2025年报/2026Q1</td>
+<td>iFinD</td>
+</tr>
+<tr>
+<td>☑技术突破</td>
+<td>电触头产品可为光模块等高速通信设备提供配套，切入AI算力/数据中心赛道</td>
+<td>2026-04</td>
+<td>雪球/财报解读</td>
+</tr>
+</table>
+
+<p><strong>一句话核心发现</strong>：电接触产品隐形冠军2024年高增→2025年增速断崖放缓（净利仅+3.4%）→2026Q1强劲反弹（+296%），<strong>核心悬念是Q1反弹是否可持续</strong>，2026中报是关键验证。</p>
+</div>
+
+<!-- ===== 变化权重排序 ===== -->
+<div class="section">
+<h2>一、变化权重排序</h2>
+<table class="data-table">
+<tr>
+<th>排序</th>
+<th>变化</th>
+<th>权重等级</th>
+<th>当前股价贡献</th>
+<th>未来演变</th>
+<th>关键验证时点</th>
+</tr>
+<tr>
+<td>1</td>
+<td>新能源赛道切入（小米汽车/充电桩/储能）</td>
+<td><strong>顶</strong></td>
+<td>概念溢价（待兑现）</td>
+<td>若2026H1新能源占比>20%，估值逻辑切换；若<10%，概念消退</td>
+<td>2026-08-30（2026年中报）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>业绩持续高增长</td>
+<td><strong>底</strong></td>
+<td>已兑现大部分</td>
+<td>2025年预测净利+79%，若兑现则估值支撑；若miss则回调</td>
+<td>2026-08-30（2026年中报）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>光模块配套概念</td>
+<td><strong>噪</strong></td>
+<td>被高估</td>
+<td>实际收入占比极小，概念热度退潮后回归基本面</td>
+<td>2026年年报（或已披露的2025年度年报）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AI算力/数据中心概念</td>
+<td><strong>雾</strong></td>
+<td>陪衬</td>
+<td>同属概念扩散，实际贡献有限</td>
+<td>无明确验证节点</td>
+</tr>
+</table>
+
+<p><strong>一句话权重判断</strong>：业绩高增长是底，新能源切入是顶，光模块概念是噪，AI算力概念是雾。</p>
+</div>
+
+<!-- ===== 变化价值 ===== -->
+<div class="section">
+<h2>二、变化价值——能带来什么？</h2>
+
+<h3>变化一：新能源赛道切入（小米汽车/充电桩/储能）</h3>
+
+<h4>行业景气度×共振检查</h4>
+<ul>
+<li><strong>行业方向</strong>：向上加速——新能源汽车渗透率突破35%，充电桩保有量超1000万台，储能装机量持续高增</li>
+<li><strong>行业斜率</strong>：陡峭（50%+）——新能源领域电接触产品需求增速远高于传统家电/工业控制</li>
+<li><strong>公司卡位</strong>：产业链上游核心零部件——电触头是低压电器"心脏"，AgSnO2In2O3材料适配大电流场景，已通过客户高压直流继电器产品应用至充电桩/储能</li>
+<li><strong>受益顺序</strong>：已传导——2025年6月进入小米汽车供应链，部分客户已批量供货</li>
+<li><strong>共振强度</strong>：强——行业斜率>50%，公司为核心卡位，且已确认受益</li>
+</ul>
+
+<h4>分层拆解</h4>
+<table class="data-table">
+<tr>
+<th>时间维度</th>
+<th>能带来什么</th>
+<th>产业周期位置</th>
+<th>可行性</th>
+<th>量化空间</th>
+</tr>
+<tr>
+<td>短期(已验证/6个月)</td>
+<td>小米汽车供应链进入，充电桩/储能客户批量供货</td>
+<td>成长期（1→10）</td>
+<td>高</td>
+<td>新能源业务营收占比从<5%提升至10-15%</td>
+</tr>
+<tr>
+<td>中期(1-2年)</td>
+<td>新能源业务成为第二大收入来源，营收占比突破20%</td>
+<td>成长期</td>
+<td>中高</td>
+<td>新增营收2-3亿/年</td>
+</tr>
+<tr>
+<td>长期(2年+)</td>
+<td>光模块/AI算力配套放量，成为新增长极</td>
+<td>导入期（0→1）</td>
+<td>低</td>
+<td>故事，不纳入定价</td>
+</tr>
+</table>
+
+<h4>演变路径</h4>
+<ul>
+<li><strong>乐观路径</strong>：如果2026H1新能源业务营收占比>20%，则市场将其视为"新能源零部件股"，PE中枢上移至35-40倍，股价可看45-55元</li>
+<li><strong>基准路径</strong>：如果新能源业务占比10-15%，则估值维持制造业PE 25-30倍，股价35-45元震荡</li>
+<li><strong>悲观路径</strong>：如果新能源业务占比<10%，则概念消退，回归传统制造业估值PE 20-25倍，股价跌回25-30元</li>
+</ul>
+
+<h4>关键质疑点</h4>
+<table class="data-table">
+<tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+<tr><td>新能源业务当前收入占比多少？</td><td>2024年新能源业务尚处小批量阶段，具体占比未披露，估计<5%</td><td>若占比过低，"第二曲线"故事不成立</td></tr>
+<tr><td>小米汽车供应链订单体量？</td><td>2025年6月官宣进入，具体订单量未披露</td><td>需中报验证放量节奏</td></tr>
+<tr><td>竞争格局？</td><td>电触头行业集中度低，公司市占率第一但体量小，优美科等国际巨头在中高端有优势</td><td>国产替代空间存在，但技术差距仍需追赶</td></tr>
+</table>
+
+<h3>变化二：业绩增速（2024高增→2025断崖→2026Q1反弹）</h3>
+
+<h4>分层拆解</h4>
+<table class="data-table">
+<tr>
+<th>时间维度</th>
+<th>能带来什么</th>
+<th>产业周期位置</th>
+<th>可行性</th>
+<th>量化空间</th>
+</tr>
+<tr>
+<td>短期(已验证)</td>
+<td>2024年营收+66%、净利+52%已验证；<strong>2025年营收+23%、净利仅+3.4%（增速断崖）</strong>；<strong>2026Q1营收+117%、净利+296%（强劲反弹）</strong></td>
+<td>成长期</td>
+<td>高（已验证）/ 低（Q1可持续性）</td>
+<td>2026E净利2.075亿（+73%）</td>
+</tr>
+<tr>
+<td>中期(1-2年)</td>
+<td>募投项目达产+新能源业务放量，若Q1势头延续则全年可能超预期</td>
+<td>成长期</td>
+<td>中（取决于新能源放量节奏）</td>
+<td>若全年净利>2.5亿，则超出机构预测20%</td>
+</tr>
+<tr>
+<td>长期(2年+)</td>
+<td>行业集中度提升，龙头份额扩大</td>
+<td>成熟期（10→100）</td>
+<td>中</td>
+<td>故事，不纳入定价</td>
+</tr>
+</table>
+
+<h4>关键质疑：2025年为什么增速断崖？</h4>
+<table class="data-table">
+<tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+<tr><td>2025年净利仅+3.4%，是行业性放缓还是公司特有问题？</td><td>2025年营收+23%尚可，但净利几乎零增长。可能原因：①原材料（银/铜）价格上涨侵蚀毛利；②新能源业务投入期费用增加；③传统家电/工业控制需求疲软</td><td>需2026中报拆分毛利和费用结构确认</td></tr>
+<tr><td>2026Q1净利+296%是一次性因素还是趋势反转？</td><td>Q1 2025基数极低（0.23亿），Q1 2026的0.92亿可能包含①季节性订单集中交付；②新能源客户批量订单启动；③原材料成本下降。不可简单线性外推</td><td>2026Q2环比数据是关键——若Q2净利>0.6亿，则全年2亿+可期；若Q2回落至0.3亿以下，则Q1为脉冲</td></tr>
+</table>
+
+<h4>演变路径</h4>
+<ul>
+<li><strong>乐观路径</strong>：如果2026H1净利>1.5亿（Q1 0.92亿+Q2>0.6亿），全年净利>2.8亿，则PE(2026E)<20x，估值修复至PE 30-35倍，股价可看60-70元</li>
+<li><strong>基准路径</strong>：如果全年净利1.8-2.2亿（机构预测2.075亿），则PE 25-30倍，股价40-50元 ← <strong>最可能</strong></li>
+<li><strong>悲观路径</strong>：如果Q2环比大幅下滑，全年净利<1.5亿，则2025年的增速塌方延续，PE>35x承压，股价回调至28-35元</li>
+</ul>
+</div>
+
+<!-- ===== 即时错配识别 ===== -->
+<div class="section">
+<h2>二点五、即时错配识别——为什么现在就能参与？</h2>
+
+<h3>估值锚验证（增速-估值匹配框架）</h3>
+<table class="data-table">
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>质量检查</th>
+<th>匹配判断</th>
+</tr>
+<tr>
+<td>净利润增速（2024年实际）</td>
+<td>+51.87%</td>
+<td>扣非增速+47.85%，差距<10%，质量高</td>
+<td>✅（历史）</td>
+</tr>
+<tr>
+<td>净利润增速（2025年实际）</td>
+<td><strong>+3.41%</strong></td>
+<td>营收+23.25%但净利仅+3.41%，利润增速远<营收增速，⚠️ 毛利或费用端承压</td>
+<td>⚠️ <strong>质量差</strong></td>
+</tr>
+<tr>
+<td>净利润增速（2026E预测）</td>
+<td>+73%</td>
+<td>基于2025年低基数（1.20亿）的反弹预测，机构一致预期</td>
+<td>待验证</td>
+</tr>
+<tr>
+<td>当前PE（LYR，2025实际）</td>
+<td><strong>47.4倍</strong></td>
+<td>行业平均PE约25-35倍</td>
+<td>⚠️ <strong>偏高</strong>（若2026E不兑现）</td>
+</tr>
+<tr>
+<td><strong>PE（2026E）</strong></td>
+<td><strong>27.4倍</strong></td>
+<td>若2026E 2.075亿兑现，则PE合理</td>
+<td>✅（基于预测）</td>
+</tr>
+<tr>
+<td><strong>PEG（2026E）</strong></td>
+<td><strong>0.38</strong></td>
+<td>&lt;0.5低估，但前提是2026E增速兑现</td>
+<td>✅（基于预测）</td>
+</tr>
+<tr>
+<td>营收增速（2025年）</td>
+<td>+23.25%</td>
+<td>量增为主，但增速较2024年（+66%）大幅放缓</td>
+<td>⚠️ 放缓</td>
+</tr>
+<tr>
+<td>2026Q1营收增速</td>
+<td><strong>+117.3%</strong></td>
+<td>基数效应（Q1 2025仅2.43亿）+可能的订单放量</td>
+<td>待验证</td>
+</tr>
+</table>
+
+<p><strong>增速质量检查</strong>：</p>
+<ul>
+<li>扣非增速 vs 归母增速：47.85% vs 51.87%，差距4%，✅ 水分极小</li>
+<li>营收增速 vs 利润增速：66.17% vs 51.87%，利润增速<营收增速，✅ 无成本压缩一次性收益</li>
+<li>增速持续性：2025Q1营收+38%、净利+45%，延续高增，✅ 有订单/产能支撑</li>
+<li>利润绝对值：2024年净利1.16亿，✅ 百分比增速有意义</li>
+</ul>
+
+<p><strong>估值锚结论</strong>：当前PEG=0.42（按2025E增速），处于低估区间。若2025年业绩兑现，估值有修复至PEG 0.6-0.8的空间（对应PE 40-50倍）。</p>
+
+<h3>股价敏感性分析</h3>
+<table class="data-table">
+<tr>
+<th>如果股价涨到</th>
+<th>对应市值</th>
+<th>需要全年净利润（按25倍PE）</th>
+<th>2025年实际净利</th>
+<th>增速要求（vs 2025）</th>
+</tr>
+<tr>
+<td>当前36.63元</td>
+<td>56.8亿</td>
+<td>2.27亿</td>
+<td>1.20亿</td>
+<td>+89%</td>
+</tr>
+<tr>
+<td>+20%（43.96元）</td>
+<td>68.2亿</td>
+<td>2.73亿</td>
+<td>1.20亿</td>
+<td>+128%</td>
+</tr>
+<tr>
+<td>+30%（47.62元）</td>
+<td>73.9亿</td>
+<td>2.95亿</td>
+<td>1.20亿</td>
+<td>+146%</td>
+</tr>
+<tr>
+<td>+50%（54.95元）</td>
+<td>85.3亿</td>
+<td>3.41亿</td>
+<td>1.20亿</td>
+<td>+184%</td>
+</tr>
+</table>
+
+<p><strong>判断</strong>：当前股价36.63元对应2025年实际净利1.20亿，PE高达47.4倍，显然不便宜。<strong>当前估值隐含了2026年业绩大幅反弹的预期</strong>（隐含全年净利需2亿+，即增速+67%）。若2026中报验证Q1势头可持续，则当前估值合理；若Q2回落，则PE 47x面临回调压力。核心驱动力不是"业绩兑现"，而是<strong>"Q1反弹是否可持续"</strong>。</p>
+
+<h3>错配一：认知差——新能源业务放量斜率被低估</h3>
+<table class="data-table">
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>B.认知差</td></tr>
+<tr><td>市场当前共识</td><td>"传统电接触龙头+新能源概念"，部分人可能仍未意识到2025年增速断崖，部分人可能因Q1反弹而过度乐观</td></tr>
+<tr><td>事实真相</td><td>新能源业务已从"送样"进入"批量供货"阶段，小米汽车供应链是硬催化；行业斜率>50%，公司为核心卡位</td></tr>
+<tr><td>价格隐含估值</td><td>PE 47.4倍（LYR，2025实际），隐含了对2026年业绩大幅反弹的预期</td></tr>
+<tr><td>真相定价</td><td>若2026H1新能源业务占比>20%且Q1势头延续，全年净利可能超2.5亿，PE降至20-25倍，估值切换至成长股逻辑</td></tr>
+<tr><td>错配幅度</td><td>若Q1反弹可持续，全年净利2.5亿+，PE降至20-25倍，+30-50%空间；若Q1为脉冲，则当前PE 47x偏高，-20-30%回调风险</td></tr>
+<tr><td>纠正催化剂</td><td>2026年8月底中报披露新能源业务营收占比及增速</td></tr>
+<tr><td>错配持续时间预估</td><td>维持至中报披露前（约2个月），若中报验证则纠正，若miss则证伪</td></tr>
+</table>
+
+<h3>错配二：信息差——光模块配套被市场忽视</h3>
+<table class="data-table">
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>A.信息差（轻度）</td></tr>
+<tr><td>市场当前共识</td><td>光模块概念已被市场充分挖掘，股价已反映</td></tr>
+<tr><td>事实真相</td><td>公司财报明确提到"电触头产品可以为光模块等高速通信设备提供配套"，但实际收入占比极小，属于远期故事</td></tr>
+<tr><td>价格隐含估值</td><td>光模块概念已部分定价</td></tr>
+<tr><td>真相定价</td><td>若光模块订单落地，可额外贡献PE 5-10倍溢价</td></tr>
+<tr><td>错配幅度</td><td>有限——概念已被市场知晓，差别在于落地节奏</td></tr>
+<tr><td>纠正催化剂</td><td>光模块客户订单公告（时间不确定）</td></tr>
+<tr><td>错配持续时间预估</td><td>概念热度维持至无新催化，预计3-6个月</td></tr>
+</table>
+
+<h3>即时错配综合判断</h3>
+<table class="data-table">
+<tr>
+<th>错配类型</th>
+<th>数量</th>
+<th>错配幅度合计</th>
+<th>纠正确定性</th>
+<th>交易意义</th>
+</tr>
+<tr>
+<td>A. 信息差</td>
+<td>1（光模块，轻度）</td>
+<td>有限</td>
+<td>低</td>
+<td>辅助</td>
+</tr>
+<tr>
+<td>B. 认知差</td>
+<td>1（新能源放量斜率）</td>
+<td>45-60%</td>
+<td>中</td>
+<td><strong>核心</strong></td>
+</tr>
+<tr>
+<td>C. 反应差</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</table>
+
+<p><strong>一句话错配判断</strong>：当前价格最大的错误是<strong>将新能源业务仅当作"概念"而非"已放量的第二曲线"</strong>，若纠正则有45-60%空间，催化剂是2026年8月底中报，预计中报前维持错配。</p>
+</div>
+
+<!-- ===== 可信度裁决 ===== -->
+<div class="section">
+<h2>三、可信度裁决——值不值得投？</h2>
+
+<h3>三情景推演</h3>
+<table class="data-table">
+<tr>
+<th>情景</th>
+<th>股价变化</th>
+<th>触发条件</th>
+<th>概率权重</th>
+</tr>
+<tr>
+<td>乐观</td>
+<td>+30%至48元</td>
+<td>2026H1净利>1.5亿（Q1 0.92亿+Q2持续强势）+全年净利>2.5亿+新能源业务占比>20%</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>基准</td>
+<td>+10%至40元</td>
+<td>Q2环比回落但H1仍可观（H1净利1.2-1.5亿），全年净利1.8-2.2亿（机构预测2.075亿），估值PE 25-30倍</td>
+<td>45%</td>
+</tr>
+<tr>
+<td>悲观</td>
+<td>-25%至28元</td>
+<td>Q2环比大幅下滑（Q2净利<0.3亿），全年净利<1.5亿，2025年增速塌方延续，PE压缩至20-25倍</td>
+<td>30%</td>
+</tr>
+</table>
+
+<p><strong>概率合计</strong>：100%</p>
+
+<h3>加权预期</h3>
+<ul>
+<li><strong>预期收益</strong>：+5%（25%×30% + 45%×10% + 30%×(-25%) = 5%）</li>
+<li><strong>风险收益比</strong>：1:1.2（上涨空间30% vs 下跌空间25%）——<strong>风险收益比收敛，不确定性高</strong></li>
+<li><strong>预期差大小</strong>：中（10-30%）</li>
+</ul>
+
+<h3>证伪信号（什么时候放弃）</h3>
+<table class="data-table">
+<tr><th>信号</th><th>含义</th><th>出现概率</th></tr>
+<tr><td>2026H1营收增速<30%</td><td>高增长不可持续，新赛道切入不及预期</td><td>中</td></tr>
+<tr><td>新能源业务营收占比<10%</td><td>"第二曲线"故事不成立</td><td>中</td></tr>
+<tr><td>毛利率连续两季度下滑</td><td>价格战或原材料成本压力侵蚀利润</td><td>低</td></tr>
+<tr><td>实控人减持</td><td>内部人对前景不看好</td><td>低（目前无减持记录）</td></tr>
+</table>
+
+<h3>关键验证节点</h3>
+<table class="data-table">
+<tr>
+<th>时间</th>
+<th>事件</th>
+<th>验证什么</th>
+<th>距分析日</th>
+<th>如果miss怎么办</th>
+</tr>
+<tr>
+<td>2026-08-30</td>
+<td>中报披露</td>
+<td>H1营收增速、新能源业务占比、毛利率</td>
+<td>~2个月</td>
+<td>若增速<30%或新能源占比<10%，下调至悲观情景</td>
+</tr>
+<tr>
+<td>2026-10-31</td>
+<td>三季报</td>
+<td>全年业绩趋势确认</td>
+<td>~4个月</td>
+<td>若Q3增速回落，基准情景概率下调</td>
+</tr>
+<tr>
+<td>2026-04</td>
+<td>年报</td>
+<td>全年业绩兑现度</td>
+<td>~9个月</td>
+<td>若全年净利<1.5亿，逻辑证伪</td>
+</tr>
+</table>
+
+<h3>模式演绎法评估</h3>
+<table class="data-table">
+<tr>
+<th>推演维度</th>
+<th>当前状态</th>
+<th>乐观(6个月)</th>
+<th>基准(6个月)</th>
+<th>悲观(6个月)</th>
+<th>概率</th>
+</tr>
+<tr>
+<td>催化落地</td>
+<td>小米汽车供应链已进入，光模块概念被挖掘</td>
+<td>新能源订单放量+光模块订单落地</td>
+<td>新能源稳步推进，无重大订单</td>
+<td>新赛道切入不及预期</td>
+<td>基准50%</td>
+</tr>
+<tr>
+<td>业绩验证</td>
+<td>2024年高增已验证；2025年增速塌方；2026Q1强劲反弹</td>
+<td>H1净利>1.5亿，全年>2.5亿，超预期</td>
+<td>H1净利1.0-1.5亿，全年1.8-2.2亿，符合预期</td>
+<td>H1净利<0.8亿，全年<1.5亿，miss</td>
+<td>基准45%</td>
+</tr>
+<tr>
+<td>估值修复</td>
+<td>PEG 0.42，低估</td>
+<td>PE上移至40倍</td>
+<td>PE维持25-35倍</td>
+<td>PE压缩至20倍</td>
+<td>基准50%</td>
+</tr>
+<tr>
+<td>外部冲击</td>
+<td>银/铜价格波动</td>
+<td>原材料价格回落</td>
+<td>价格平稳</td>
+<td>银价暴涨侵蚀毛利</td>
+<td>基准70%</td>
+</tr>
+</table>
+
+<p><strong>一句话核心发现</strong>：值不值得投的核心依据是<strong>2026年8月底中报能否验证新能源业务放量</strong>——若验证则认知差纠正，有45-60%空间；若miss则逻辑证伪，跌回25-30元。</p>
+</div>
+
+<!-- ===== 投资逻辑 ===== -->
+<div class="section">
+<h2>四、投资逻辑——买入是为了什么？</h2>
+
+<h3>0. 流动性环境</h3>
+<p><strong>当前判断</strong>：存量博弈——北交所日均成交多在1-3亿，大资金进出困难，容错率低。</p>
+<p>流动性环境不改变个股内在价值，但改变<strong>估值扩张的空间</strong>和<strong>容错率</strong>。北交所流动性约束下，只有硬逻辑+硬业绩才能涨，纯概念仓位要严控。</p>
+
+<h3>1. 投资价值评估</h3>
+
+<h4>估值匹配度检查</h4>
+<table class="data-table">
+<tr><th>检查项</th><th>判断</th><th>依据</th></tr>
+<tr><td>PEG匹配度</td><td>✅ 低估</td><td>PEG=0.42（2025E），<0.5低估</td></tr>
+<tr><td>增速质量</td><td>✅ 高</td><td>扣非增速47.85%，与归母差距<5%；营收增速>利润增速，无一次性收益</td></tr>
+<tr><td>估值安全边际</td><td>有</td><td>当前PE 33倍 vs 2025E PE 25.6倍，若业绩兑现有安全边际</td></tr>
+</table>
+
+<p><strong>估值匹配结论</strong>：当前PE 47.4x（按2025实际）显著偏高，但PE 27.4x（按2026E）合理。估值安全边际<strong>取决于2026中报能否确认Q1反弹可持续</strong>。</p>
+
+<ul>
+<li><strong>评估结论</strong>：中价值</li>
+<li><strong>核心依据</strong>：业绩高增确定性较高（已验证）+ 新能源赛道切入有想象空间（待验证）</li>
+<li><strong>最大风险</strong>：北交所流动性天花板+新赛道切入不及预期+原材料价格波动</li>
+<li><strong>情景概率</strong>：乐观+基准概率合计 75%</li>
+</ul>
+
+<h3>2. 投资价值等级</h3>
+<table class="data-table">
+<tr>
+<th>预期差等级</th>
+<th>判断依据</th>
+<th>价值等级</th>
+</tr>
+<tr>
+<td>大预期差</td>
+<td>三情景加权收益>30%，市场未充分认识新能源放量斜率</td>
+<td>—（概率25%，不满足）</td>
+</tr>
+<tr>
+<td>中预期差</td>
+<td>基准情景收益10-30%，市场部分认识</td>
+<td><strong>中价值</strong>（满足）</td>
+</tr>
+<tr>
+<td>小预期差</td>
+<td>乐观情景收益<10%，市场已充分定价</td>
+<td>—</td>
+</tr>
+</table>
+
+<h3>3. 跟踪周期判断</h3>
+<table class="data-table">
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>故事能走多远</td><td>中期（业绩验证+新赛道放量，1-2年）</td></tr>
+<tr><td>判断节点</td><td>2026-08-30（2026年中报）、2026-10-31三季报</td></tr>
+<tr><td>中途退出条件</td><td>H1营收增速<30%或新能源占比<10%或实控人减持</td></tr>
+</table>
+
+<p><strong>跟踪周期判断</strong>：中期跟踪——变化是业绩驱动（协同落地/产品放量），需要1-2年财报验证。</p>
+
+<h3>一句话核心逻辑</h3>
+<p>分析目的是<strong>验证新能源业务放量斜率是否被低估</strong>，这个变化在<strong>6个月内</strong>有<strong>50%</strong>概率带来<strong>10-30%</strong>收益，核心验证节点是<strong>2026年8月底中报</strong>，如果<strong>H1营收增速<30%</strong>则证伪放弃。</p>
+</div>
+
+<!-- ===== 风险地图 ===== -->
+<div class="section">
+<h2>五、风险地图</h2>
+<table class="data-table">
+<tr>
+<th>风险类型</th>
+<th>具体风险</th>
+<th>概率</th>
+<th>影响程度</th>
+<th>应对</th>
+</tr>
+<tr>
+<td>流动性风险</td>
+<td>北交所日均成交1-3亿，大资金进出困难，股价波动大</td>
+<td>高（持续存在）</td>
+<td>高</td>
+<td>严控仓位，不追高</td>
+</tr>
+<tr>
+<td>业绩miss风险</td>
+<td>2025年净利仅+3.4%已验证增速塌方；2026Q1+296%反弹可能不可持续；若Q2回落则全年可能miss机构预测2.075亿</td>
+<td>高</td>
+<td>高</td>
+<td>中报验证后再决策</td>
+</tr>
+<tr>
+<td>原材料价格波动</td>
+<td>银、铜为主要原材料，价格波动直接影响毛利率</td>
+<td>中</td>
+<td>中</td>
+<td>跟踪银价走势</td>
+</tr>
+<tr>
+<td>概念退潮风险</td>
+<td>光模块/AI算力概念若热度消退，估值溢价压缩</td>
+<td>中</td>
+<td>中</td>
+<td>不依赖概念定价</td>
+</tr>
+<tr>
+<td>竞争加剧风险</td>
+<td>电触头行业集中度低，国际巨头（优美科等）在中高端有优势</td>
+<td>低</td>
+<td>中</td>
+<td>跟踪市占率变化</td>
+</tr>
+<tr>
+<td>实控人风险</td>
+<td>陈静控股45%，若减持或决策失误影响大</td>
+<td>低（目前无减持）</td>
+<td>高</td>
+<td>跟踪公告</td>
+</tr>
+</table>
+</div>
+
+<!-- ===== 附录 ===== -->
+<div class="section">
+<h2>附录：数据来源清单</h2>
+<table class="data-table">
+<tr><th>数据</th><th>来源</th><th>时间</th></tr>
+<tr><td>股价/市值</td><td>iFinD（stock_finance_data）</td><td>2026-07-03</td></tr>
+<tr><td>财务数据（利润表）</td><td>iFinD（stock_finance_data）</td><td>2024年报/2025年报/2026Q1</td></tr>
+<tr><td>增长率数据</td><td>iFinD（stock_finance_data）</td><td>2024年报/2025年报/2026Q1</td></tr>
+<tr><td>业务结构</td><td>iFinD（stock_finance_data）</td><td>2025年报</td></tr>
+<tr><td>预测数据</td><td>iFinD（stock_finance_data）</td><td>2026-07-03（机构一致预期）</td></tr>
+<tr><td>股东信息</td><td>iFinD（stock_finance_data）</td><td>2026-07-03</td></tr>
+<tr><td>行业数据</td><td>市场研究报告/搜索</td><td>2025-2026</td></tr>
+<tr><td>公司公告</td><td>交易所官网/巨潮资讯</td><td>2024-2026</td></tr>
+<tr><td>新闻/研报</td><td>雪球/搜狐/东方财富</td><td>2024-2026</td></tr>
+</table>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-07-03 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

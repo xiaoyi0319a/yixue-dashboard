@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300913 兆龙互连 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>兆龙互连</h1>
+            <p class="code">300913 · 高速铜缆 · AI数据中心 · 业务纯度低</p>
+            <p class="date">分析日期：2026-06-03 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-06-03</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="header">
+<h1>300913 兆龙互连</h1>
+<p class="code">高速铜缆 · AI数据中心 · 业务纯度低</p>
+<p class="date">分析日期：2026-06-03</p>
+<div class="nav">
+<a href="index.html">🏠 首页</a>
+<a href="reports.html">📊 报告库</a>
+<a href="qimen.html">🔮 奇门</a>
+</div>
+</div>
+
+<div class="section">
+<h2>📋 执行摘要</h2>
+<p><strong>分析日期</strong>：2026-06-03</p>
+<p><strong>核心变化</strong>：AI数据中心建设带动高速铜缆需求，但50%收入仍是传统网线，铜缆纯度远不如沃尔核材</p>
+<p><strong>投资价值</strong>：<span class="highlight">低价值</span></p>
+<p><strong>预期差等级</strong>：<span class="highlight">低（&lt;&lt;10%）</span></p>
+<p><strong>跟踪周期</strong>：短期（1-3个月，概念驱动）</p>
+<p><strong>关键验证</strong>：2025年中报铜缆收入占比是否提升、毛利率是否改善</p>
+<p><strong>证伪信号</strong>：Q2铜缆收入占比未提升、毛利率继续下滑、沃尔核材拿下更多核心客户</p>
+</div>
+
+<div class="section">
+<h2>🔥 大白话三问</h2>
+
+<h3>【这家公司是做什么的？】</h3>
+<p>兆龙互连属于<strong>通信设备/数据电缆</strong>行业，在数据电缆/高速铜缆产业链<strong>中游制造环节</strong>。主营数据电缆（网线）、高速传输电缆（DAC铜缆）、连接产品三大类。</p>
+<p><strong>核心产品</strong>：数据电缆（普通网线，占约50%）、高速传输电缆（DAC铜缆，占约30-40%）、连接产品（占约10-20%）。高速铜缆用于数据中心服务器之间短距离高速传输，替代光模块的低成本方案。</p>
+<p><strong>客户</strong>：阿里、腾讯、百度等互联网大厂数据中心，以及海外云计算客户。</p>
+<p><strong>增长逻辑</strong>：AI数据中心建设爆发→服务器短距离连接需求大增→高速铜缆（DAC）受益→兆龙作为铜缆供应商订单放量。</p>
+
+<h3>【贵不贵？】</h3>
+<p>当前股价约48元，市值约60亿，PE（TTM）约<strong>70-80倍</strong>。非常贵。</p>
+<p>2025Q1营收+21%，但净利润绝对值很小（约2000-3000万级别）。</p>
+<p><strong>合理估值区间</strong>：</p>
+<ul>
+<li>悲观（2025年净利1亿，PE 30倍）→ 15-20元</li>
+<li>基准（2025年净利1.5亿，PE 40倍）→ 25-30元 ← <strong>当前股价远高于此</strong></li>
+<li>乐观（2025年净利2亿+铜缆爆发，PE 50倍）→ 35-40元</li>
+</ul>
+<p>当前48元 → <strong>在乐观区间上沿，估值透支严重</strong>。</p>
+
+<h3>【有没有故事？】</h3>
+<p><strong>真故事（底）</strong>：AI数据中心建设是真实趋势，高速铜缆需求在增长，兆龙确实有铜缆产品。</p>
+<p><strong>假故事（顶）</strong>：</p>
+<ul>
+<li><strong>铜缆纯度不够</strong>：远不如沃尔核材，沃尔才是GB200核心供应商</li>
+<li><strong>50%收入仍是传统网线</strong>：夕阳业务，增速低、利润薄</li>
+<li><strong>客户层级不高</strong>：未进入英伟达GB200核心供应链</li>
+</ul>
+<p><strong>预期差</strong>：市场把兆龙当成"铜缆龙头"在炒，实际上铜缆业务占比不高、纯度不够、客户层级不如沃尔核材。</p>
+
+<h3>【最坏会怎样？】</h3>
+<p><strong>三情景</strong>：</p>
+<ul>
+<li><strong>乐观（15%）</strong>：铜缆业务超预期放量 → 股价维持40-45元</li>
+<li><strong>基准（40%）← 最可能</strong>：业绩平稳增长但估值回归 → 股价跌回25-35元</li>
+<li><strong>悲观（45%）</strong>：铜缆订单不及预期+传统业务拖累 → 股价跌回20-25元</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>⚖️ 变化权重排序</h2>
+<table>
+<tr><th>排序</th><th>变化</th><th>权重</th><th>说明</th></tr>
+<tr><td>1</td><td>AI数据中心铜缆需求</td><td><span class="tag tag-noise">噪</span></td><td>行业真实趋势，但兆龙不是核心受益者，纯度/客户层级不如沃尔核材</td></tr>
+<tr><td>2</td><td>产品结构升级</td><td><span class="tag tag-fog">雾</span></td><td>高速产品占比提升，但传统网线仍占50%，升级进度慢</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📊 行业共振检查</h2>
+<table>
+<tr><th>行业</th><th>方向</th><th>斜率</th><th>公司卡位</th><th>共振强度</th></tr>
+<tr><td>AI数据中心/高速铜缆</td><td>向上</td><td>陡峭</td><td>有铜缆产品，但纯度不如沃尔核材，非核心供应商</td><td>🟡 弱共振（边缘受益）</td></tr>
+<tr><td>传统数据电缆（网线）</td><td>平稳/下滑</td><td>低</td><td>占收入50%，夕阳业务</td><td>🔴 无共振（拖累业绩）</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>💎 即时错配识别</h2>
+<p><strong>认知差</strong>：市场把兆龙当成"铜缆高速连接龙头"在定价，实际上<strong>50%收入是传统网线</strong>，铜缆纯度远不如沃尔核材，未进入GB200核心供应链。</p>
+<p><strong>真相定价</strong>：如果按传统电缆公司估值，PE 15-20倍是合理区间（对应12-15元），当前48元有<strong>50-70%概念溢价</strong>。</p>
+<p><strong>增速质量</strong>：营收+17%但净利润大幅下滑，增收不增利。PE 70倍 vs 增速21%，PEG 3.3，严重高估。</p>
+</div>
+
+<div class="section">
+<h2>🔮 可信度裁决</h2>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td>乐观</td><td>-10~0%（43-48元）</td><td>铜缆业务超预期放量+拿下核心客户</td><td>15%</td></tr>
+<tr><td>基准</td><td>-20~40%（29-38元）</td><td>业绩平稳增长但估值回归</td><td>40% ← <strong>最可能</strong></td></tr>
+<tr><td>悲观</td><td>-40~50%（24-29元）</td><td>铜缆订单不及预期+传统业务拖累</td><td>45%</td></tr>
+</table>
+<p><strong>加权预期收益</strong>：-25% | <strong>风险收益比</strong>：0.14:1（风险远大于收益）</p>
+</div>
+
+<div class="section">
+<h2>⚠️ 重要提示</h2>
+<p><strong>兆龙互连是一只"概念好听、业务不纯、估值最贵"的票。</strong></p>
+<ul>
+<li>AI数据中心铜缆需求是真实趋势，但<strong>兆龙不是核心受益者</strong></li>
+<li>沃尔核材才是GB200等高端方案的核心供应商，兆龙更多是边缘配套</li>
+<li><strong>50%收入仍是传统网线</strong>，夕阳业务拖累整体业绩</li>
+<li>当前PE 70-80倍，是三个标的中<strong>估值最贵</strong>的</li>
+<li>2024年净利润大幅下滑，<strong>增收不增利</strong></li>
+</ul>
+<p><strong>核心矛盾</strong>：市场按"铜缆龙头"给PE 70倍，实际上公司是"半个网线厂+边缘铜缆厂"。如果铜缆概念退潮，回调压力最大。</p>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-06-03 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

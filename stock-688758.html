@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>688758 赛分科技 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>赛分科技</h1>
+            <p class="code">688758 · 国产色谱填料龙头 · 生物制药上游 · 国产替代 · 抗体/GLP-1高景气</p>
+            <p class="date">分析日期：2026-07-13 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-07-13</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- ===== 执行摘要 ===== -->
+<div class="section" id="summary">
+<h2>📋 执行摘要</h2>
+<div class="highlight-box">
+<p><strong>核心变化</strong>：赛分科技是国产色谱填料唯一龙头，下游生物药（抗体/GLP-1）爆发带动工业纯化收入+45%（抗体+136%），国产替代进入"从0到1突破后的1到10放量阶段"，同时扬州二期+美国基地产能即将释放</p>
+<p><strong>投资价值</strong>：<span class="tag tag-gold">中价值</span> <span class="tag tag-purple">小预期差（&lt;10%）</span></p>
+<p><strong>跟踪周期</strong>：中期（1-2年，产能释放+业绩验证）</p>
+<p><strong>关键验证节点</strong>：2026-08-30中报（Q2增速、毛利率、现金流）</p>
+<p><strong>证伪信号</strong>：Q2营收增速&lt;30% 或 经营现金流连续2季度为负 或 毛利率回落至70%以下</p>
+</div>
+</div>
+
+<!-- ===== 大白话三问 ===== -->
+<div class="dabaohua-section">
+<h2>🎯 大白话三问</h2>
+
+<div class="dabaohua-q">
+<div class="q-label">【这家公司是做什么的？】</div>
+<div class="q-answer">
+赛分科技是生物制药上游的<strong>色谱层析材料</strong>供应商（卖"筛子"的），专门给生物药企做分离纯化用的填料和色谱柱。<br><br>
+<strong>核心产品</strong>：<br>
+• <strong>工业纯化填料</strong>（占收入67%）：大规模生产抗体/胰岛素/GLP-1时用的亲和填料、离子交换填料<br>
+• <strong>分析色谱柱</strong>（占收入33%）：研发检测用的色谱柱，用于药品质量控制<br><br>
+<strong>技术门槛</strong>：<strong>高</strong>。色谱微球合成、表面涂层、功能化修饰都是核心技术。赛分是<strong>国内唯一拿到FDA DMF备案</strong>的亲和填料企业，产品性能达到全球垄断者Cytiva同等水平。<br><br>
+<strong>客户</strong>：信达生物、复宏汉霖、甘李药业、百奥泰等生物药企。客户粘性极强——药品一旦进入临床，换填料成本极高。<br><br>
+<strong>增长逻辑</strong>：国产生物药进入临床后期和商业化→色谱填料需求爆发→赛分替代进口Cytiva→订单放量。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【贵不贵？】</div>
+<div class="q-answer">
+<strong>当前22.62元，不贵也不便宜，在基准情景中枢。</strong><br><br>
+市值94.1亿，PE(TTM)约74倍（2025年净利1.27亿），动态PE约55倍（2026E净利1.71亿）。<br><br>
+<strong>增速质量</strong>：2025年营收+28%，净利+49%，扣非+50%；2026Q1营收+36%，净利+50%。利润增速&gt;营收，规模效应显现。毛利率76.5%（同比+3.2pct），三费率20.3%（同比-13.6pct）。<br><br>
+<strong>PEG</strong>：动态PE 55 / 增速35% ≈ <strong>1.57</strong>，TTM PE 74 / 增速49% ≈ <strong>1.51</strong>。<strong>PEG&gt;1，估值偏高</strong>。<br><br>
+合理股价区间：
+<ul>
+<li>悲观（全年1.46亿，+15%）→ 合理股价16-19元（PE 45-50倍）</li>
+<li>基准（全年1.71亿，+35%）← <strong>最可能</strong> → 合理股价21-25元（PE 50-60倍）</li>
+<li>乐观（全年1.91亿，+50%）→ 合理股价27-32元（PE 55-65倍）</li>
+</ul>
+当前22.62元 → <strong>在基准情景的中枢位置</strong>。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【有没有故事？】</div>
+<div class="q-answer">
+<strong>真故事：国产替代龙头+生物药高景气+产能释放。</strong><br>
+• 国产替代：打破Cytiva垄断，123家客户审计全部通过，FDA DMF备案，新增29个临床III期及商业化项目（累计108个）<br>
+• 技术迭代：MabPurix InfiniteA亲和填料、Proteomix POR50系列、Agarosix复合填料持续升级<br>
+• 产能释放：扬州一期达产100%，二期2026年底建成（20万升），美国基地5万升建设中<br>
+• 多领域：抗体+136%、胰岛素/GLP-1+78%、ADC/mRNA/疫苗均有布局<br><br>
+<strong>假故事：</strong><br>
+• "分析色谱高增长"——实际仅+2.5%，基本盘增速慢<br>
+• "全球化爆发"——境外收入仅+20.6%，占比22.9%，美国基地还在建设<br><br>
+<strong>预期差</strong>：市场已充分定价高成长（PE 55-74倍），但<strong>盈利能力提升</strong>（毛利率76.5%创新高）和<strong>GLP-1第二增长曲线</strong>可能被低估。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【最坏会怎样？】</div>
+<div class="q-answer">
+<strong>三情景：</strong>
+<ul>
+<li><strong>乐观（25%概率）</strong>：全年净利+50%至1.91亿，毛利率维持76%+，扬州二期如期投产，股价冲27-32元（+20-40%）</li>
+<li><strong>基准（50%概率）← 最可能</strong>：全年净利+35%至1.71亿，PE 55倍，股价横盘22-25元（±10%）</li>
+<li><strong>悲观（25%概率）</strong>：全年净利+15%至1.46亿，竞争加剧，PE压缩至45倍，股价跌回16-19元（-20-30%）</li>
+</ul>
+<strong>证伪信号</strong>：①Q2营收增速&lt;30%；②应收账款/利润&gt;150%；③经营现金流连续2季度为负；④Cytiva/Thermo大幅降价。<br>
+<strong>验证节点</strong>：2026-08-30中报、2026-10-31三季报、2026-12-31扬州二期进度。
+</div>
+</div>
+</div>
+
+<!-- ===== 四句话总结 ===== -->
+<div class="section">
+<h2>📌 四句话总结</h2>
+<table>
+<tr><th>维度</th><th>大白话</th></tr>
+<tr><td>核心变化</td><td>赛分科技是国产色谱填料龙头，下游生物药（抗体/GLP-1）爆发带动工业纯化收入+45%，抗体领域+136%</td></tr>
+<tr><td>估值位置</td><td>当前PEG≈1.5，动态PE 55倍，在基准情景中枢位置，不贵但也不便宜</td></tr>
+<tr><td>预期差</td><td>市场已充分定价高成长，真正被低估的是规模效应带来的盈利能力提升（毛利率76.5%创新高）</td></tr>
+<tr><td>风险点</td><td>应收账款/利润已达118%，Q1经营现金流-919万；若Q2增速放缓或国际巨头降价，估值有压缩风险</td></tr>
+</table>
+<p><em>不给结论：以上分析供老师判断。不输出"买入/卖出/持有"。</em></p>
+</div>
+
+<!-- ===== Step 1：变化识别 ===== -->
+<div class="section" id="step1">
+<h2>🔍 Step 1：变化识别</h2>
+
+<h3>基础画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
+<tr><td>股票名称</td><td>赛分科技</td><td>-</td></tr>
+<tr><td>股票代码</td><td>688758.SH</td><td>-</td></tr>
+<tr><td>当前股价</td><td>22.62元</td><td>iFinD（2026-07-13 11:30）</td></tr>
+<tr><td>市值</td><td>94.1亿</td><td>iFinD</td></tr>
+<tr><td>PE(TTM)</td><td>约74倍</td><td>计算（2025年净利1.27亿）</td></tr>
+<tr><td>动态PE</td><td>约55倍</td><td>机构预测（2026E净利1.71亿）</td></tr>
+<tr><td>所属行业</td><td>生物制药上游/色谱层析材料</td><td>年报</td></tr>
+<tr><td>52周区间</td><td>15.52元 → 23.40元</td><td>iFinD</td></tr>
+</table>
+
+<h3>核心变化识别</h3>
+<table>
+<tr><th>变化类型</th><th>具体事件</th><th>发生时间</th><th>信息来源</th></tr>
+<tr><td>国产替代龙头地位确认</td><td>123家客户审计全部通过；FDA DMF备案；新增29个临床III期及商业化替代项目（累计108个）；打破Cytiva垄断</td><td>2025年全年</td><td>2025年年报</td></tr>
+<tr><td>内生技术升级+产能释放</td><td>新产品迭代（MabPurix InfiniteA/Proteomix POR50/Agarosix复合填料）；抗体领域收入+136.26%；扬州一期达产100%；二期2026年底建成（20万升）；美国基地5万升建设中</td><td>2025-2026年</td><td>年报/投资者关系活动</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话核心发现</strong>：赛分科技是<strong>国产色谱填料唯一龙头</strong>，下游生物药（抗体/GLP-1）爆发带动工业纯化收入+45%，同时产能（扬州二期+美国基地）即将释放，国产替代进入<strong>从0到1突破后的1到10放量阶段</strong>。</p>
+</div>
+</div>
+
+<!-- ===== Step 1.5：变化权重排序 ===== -->
+<div class="section" id="step1.5">
+<h2>⚖️ Step 1.5：变化权重排序</h2>
+<table>
+<tr><th>排序</th><th>变化</th><th>权重等级</th><th>当前股价贡献</th><th>未来演变</th><th>关键验证时点</th></tr>
+<tr><td>1</td><td>工业纯化填料放量（抗体+136%、GLP-1+78%）</td><td><strong>底</strong></td><td>已兑现大部分（2025年营收4.03亿，净利1.27亿）</td><td>扬州二期2026年底建成，产能从"不够用"到"充足"，放量加速</td><td>2026-08-30中报</td></tr>
+<tr><td>2</td><td>国产替代龙头地位（FDA DMF备案+123家客户审计）</td><td><strong>顶</strong></td><td>估值溢价来源（PE 55-74倍）</td><td>新增项目从108个→200个+，商业化渗透率提升</td><td>2026-10-31三季报</td></tr>
+<tr><td>3</td><td>盈利能力提升（毛利率76.5%创新高，三费率-13.6pct）</td><td><strong>噪</strong></td><td>被低估——市场关注营收增速，忽略利润质量</td><td>若规模效应持续，净利率有望从31%提升至35%+</td><td>2026-08-30中报</td></tr>
+<tr><td>4</td><td>分析色谱业务（+2.5%）</td><td><strong>雾</strong></td><td>陪衬——增速慢但毛利率75%提供稳定现金流</td><td>基本盘，不指望高增长</td><td>2026年年报</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话权重判断</strong>：<strong>工业纯化放量是底</strong>，<strong>国产替代龙头地位是顶</strong>，<strong>盈利能力提升是噪</strong>（被低估），<strong>分析色谱是雾</strong>（陪衬）。</p>
+</div>
+</div>
+
+<!-- ===== Step 2：变化价值 ===== -->
+<div class="section" id="step2">
+<h2>💎 Step 2：变化价值</h2>
+
+<h3>变化一：国产替代龙头地位确认</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期（已验证）</td><td>新增29个临床III期及商业化项目，累计108个；抗体领域收入+136%</td><td>成长期（渗透率快速提升）</td><td>高</td><td>2025年工业纯化2.72亿（+45%）</td></tr>
+<tr><td>中期（1-2年）</td><td>扬州二期20万升产能2026年底建成，美国5万升基地投产；项目从108→200+；商业化渗透率从5%→15%</td><td>成长期</td><td>中高</td><td>产能翻倍，支撑营收从4亿→8亿+</td></tr>
+<tr><td>长期（2年+）</td><td>全球色谱材料市场份额从&lt;1%→5%+；成为"中国Cytiva"</td><td>成长期→成熟期</td><td>中</td><td>故事，不纳入当前定价</td></tr>
+</table>
+
+<h4>演变路径</h4>
+<ul>
+<li><strong>乐观路径</strong>：如果扬州二期+美国基地如期投产，且国际客户认证顺利，2027年营收有望破8亿，净利破3亿</li>
+<li><strong>基准路径</strong>：如果产能释放顺利但国际拓展慢，2027年营收6-7亿，净利2-2.5亿</li>
+<li><strong>悲观路径</strong>：如果Cytiva降价反击或客户认证延迟，产能利用率不足，营收增速放缓至20%</li>
+</ul>
+
+<h4>关键质疑点</h4>
+<table>
+<tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+<tr><td>国际竞争对手会不会降价？</td><td>Cytiva（丹纳赫）全球市占率&gt;60%，有能力降价</td><td>若降价20%+，赛分毛利率可能压缩5-10pct</td></tr>
+<tr><td>客户集中度高不高？</td><td>未披露前5大客户占比</td><td>若单一客户&gt;30%，风险大</td></tr>
+<tr><td>应收账款增长快</td><td>2026Q1应收账款同比+37.32%，应收账款/利润=118.21%</td><td>现金流恶化，Q1经营现金流-919万</td></tr>
+</table>
+
+<h3>变化二：内生技术升级+盈利能力提升</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期（已验证）</td><td>毛利率76.5%（Q1同比+3.2pct），三费率20.3%（同比-13.6pct），净利率31.3%（同比+9.7pct）</td><td>成长期</td><td>高</td><td>Q1净利+50%</td></tr>
+<tr><td>中期（1-2年）</td><td>规模效应持续，净利率从31%→35%+；新产品（MabPurix P45 Excel/Agarosix HC45-HIC Butyl）放量</td><td>成长期</td><td>中高</td><td>每提升1pct净利率，增加利润约400万</td></tr>
+<tr><td>长期（2年+）</td><td>从"卖产品"到"产品+服务+解决方案"一体化；蛋白纯化系统商业化</td><td>导入期→成长期</td><td>中</td><td>故事，不纳入当前定价</td></tr>
+</table>
+
+<h3>行业景气度×共振检查</h3>
+<table>
+<tr><th>检查项</th><th>判断</th></tr>
+<tr><td>行业方向</td><td>向上加速——生物制药（抗体/GLP-1/ADC/mRNA）全球管线大爆发，中国进入商业化阶段</td></tr>
+<tr><td>行业斜率</td><td>陡峭（50%+）——中国色谱介质市场2026年预计203亿（+21.6%），生物药色谱介质132亿（+22.2%），抗体领域公司自身+136%</td></tr>
+<tr><td>公司卡位</td><td>产业链上游核心+不可替代——国内唯一FDA DMF备案亲和填料企业，唯一大规模进入商业化生产的国产企业，产品性能达Cytiva同等水平</td></tr>
+<tr><td>受益顺序</td><td>已传导——2025年营收+28%、净利+49%，2026Q1营收+36%、净利+50%，业绩已确认</td></tr>
+<tr><td>共振强度</td><td><strong>强</strong>——行业斜率&gt;50%且公司为核心卡位，已确认受益</td></tr>
+</table>
+</div>
+
+<!-- ===== Step 2.5：即时错配识别 ===== -->
+<div class="section" id="step2.5">
+<h2>🎯 Step 2.5：即时错配识别</h2>
+
+<h3>估值锚验证（增速-估值匹配框架）</h3>
+<table>
+<tr><th>指标</th><th>数值</th><th>质量检查</th><th>匹配判断</th></tr>
+<tr><td>净利润增速（2025年）</td><td>+49%</td><td>扣非增速+50%，差距小</td><td>✅</td></tr>
+<tr><td>当前PE(TTM)</td><td>约74倍</td><td>行业平均PE=?（色谱材料可比公司纳微科技约50-60倍）</td><td>⚠️ 偏高</td></tr>
+<tr><td><strong>PEG（动态）</strong></td><td><strong>1.57</strong>（55/35）</td><td>&gt;1.5高估</td><td>⚠️ 偏高</td></tr>
+<tr><td>营收增速（2025年）</td><td>+28%</td><td>量增（工业纯化+45%）</td><td>✅</td></tr>
+<tr><td>当前PS</td><td>23.4倍</td><td>-</td><td>⚠️ 偏高</td></tr>
+<tr><td>毛利率</td><td>76.5%</td><td>创新高</td><td>✅</td></tr>
+<tr><td>净利率</td><td>31.3%</td><td>同比+9.7pct</td><td>✅</td></tr>
+</table>
+
+<h3>股价敏感性分析</h3>
+<table>
+<tr><th>如果股价涨到</th><th>对应市值</th><th>需要全年净利（按合理PE）</th><th>当前Q1占全年比例</th><th>后续季度需达到</th></tr>
+<tr><td>当前价22.62元</td><td>94.1亿</td><td>1.71亿（按55倍PE）</td><td>20.7%</td><td>4350万/季度</td></tr>
+<tr><td>+10%（24.9元）</td><td>103.5亿</td><td>1.88亿（按55倍）</td><td>18.9%</td><td>4780万/季度</td></tr>
+<tr><td>+20%（27.1元）</td><td>112.9亿</td><td>2.05亿（按55倍）</td><td>17.3%</td><td>5220万/季度</td></tr>
+<tr><td>+30%（29.4元）</td><td>122.3亿</td><td>2.22亿（按55倍）</td><td>16.0%</td><td>5660万/季度</td></tr>
+</table>
+
+<p><strong>判断</strong>：Q1净利润3549万，如果全年需要1.71亿（按55倍PE），后续季度平均需要4350万/季度，是Q1的<strong>1.23倍</strong>。基于2025年Q2-Q4平均约3440万，2026年Q1已跳升至3549万，若产能释放+订单增长，后续季度达到4350万/季度（即同比+30-50%）是<strong>可行的</strong>。当前22.62元在基准情景中枢。</p>
+
+<h3>错配识别</h3>
+
+<h4>错配一：盈利能力提升被低估（认知差）</h4>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>B. 认知差</td></tr>
+<tr><td>市场当前共识</td><td>市场把赛分当成"高成长但高估值"的标的，只关注营收增速（+28%），按PE 55-74倍定价</td></tr>
+<tr><td>事实真相</td><td>2026Q1毛利率76.5%（同比+3.2pct，创新高），三费率20.3%（同比-13.6pct），净利率31.3%（同比+9.7pct）——<strong>盈利能力正在质变</strong></td></tr>
+<tr><td>价格隐含估值</td><td>当前价格隐含"营收高增长+利润跟随增长"的线性假设，未反映利润质量的提升</td></tr>
+<tr><td>真相定价</td><td>如果净利率从31%提升至35%（规模效应+产品结构优化），同等营收下利润多15%，合理估值应上调10-15%</td></tr>
+<tr><td>错配幅度</td><td>约10-15%（即股价低估2-3元）</td></tr>
+<tr><td>纠正催化剂</td><td>2026-08-30中报披露——若毛利率维持75%+且净利率提升，市场会重新定价</td></tr>
+</table>
+
+<h4>错配二：GLP-1/ADC/mRNA等新兴领域被低估（信息差）</h4>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>A. 信息差</td></tr>
+<tr><td>市场当前共识</td><td>市场主要关注抗体领域（+136%），认为赛分是"抗体填料公司"</td></tr>
+<tr><td>事实真相</td><td>胰岛素/多肽/GLP-1领域收入1.02亿（+78.3%），ADC/双抗专用分析柱已推出，mRNA/疫苗领域均有布局。GLP-1是全球最热赛道（司美格鲁肽/替尔泊肽），赛分是<strong>国内GLP-1纯化填料主要供应商之一</strong></td></tr>
+<tr><td>价格隐含估值</td><td>当前价格隐含"抗体驱动"单一叙事，未定价GLP-1第二增长曲线</td></tr>
+<tr><td>真相定价</td><td>若GLP-1领域2026年收入增长维持70%+，成为第二增长极，估值应增加5-10%溢价</td></tr>
+<tr><td>错配幅度</td><td>约5-10%</td></tr>
+<tr><td>纠正催化剂</td><td>2026-10-31三季报——若GLP-1收入增速披露且超预期，市场会修正认知</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话错配判断</strong>：当前价格最大的错误是<strong>低估了盈利能力提升和GLP-1第二增长曲线</strong>，若纠正有<strong>10-20%</strong>空间，催化剂是<strong>2026-08-30中报</strong>。</p>
+</div>
+</div>
+
+<!-- ===== Step 3：可信度裁决 ===== -->
+<div class="section" id="step3">
+<h2>⚖️ Step 3：可信度裁决</h2>
+
+<h3>三情景推演</h3>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td><strong style="color:#4caf50;">乐观</strong></td><td>+20%至27元</td><td>全年净利+50%至1.91亿，毛利率维持76%+，扬州二期如期投产</td><td>25%</td></tr>
+<tr><td><strong style="color:#ffd700;">基准</strong></td><td>±5%至21-24元</td><td>全年净利+35%至1.71亿，毛利率73-75%，产能释放顺利</td><td><strong>50%</strong></td></tr>
+<tr><td><strong style="color:#ff6b6b;">悲观</strong></td><td>-20%至18元</td><td>全年净利+15%至1.46亿，毛利率回落到70%，竞争加剧</td><td>25%</td></tr>
+</table>
+
+<p><strong>加权预期收益</strong>：0% | <strong>风险收益比</strong>：1.0 | <strong>预期差大小</strong>：<span class="tag tag-purple">小（&lt;10%）</span></p>
+
+<h3>证伪信号（什么时候放弃）</h3>
+<table>
+<tr><th>信号</th><th>含义</th><th>出现概率</th></tr>
+<tr><td>2026中报营收增速&lt;30%</td><td>下游需求放缓，故事结束</td><td>低</td></tr>
+<tr><td>应收账款/利润&gt;150%</td><td>现金流持续恶化，利润质量差</td><td>中</td></tr>
+<tr><td>经营现金流连续2季度为负</td><td>营运资本占用过大，增长不可持续</td><td>中</td></tr>
+<tr><td>Cytiva/Thermo宣布在华降价20%+</td><td>国际竞争加剧，毛利率压缩</td><td>低</td></tr>
+<tr><td>扬州二期建设延迟至2027年中</td><td>产能释放不及预期，增长断档</td><td>中</td></tr>
+</table>
+
+<h3>关键验证节点</h3>
+<table>
+<tr><th>时间</th><th>事件</th><th>验证什么</th><th>如果miss怎么办</th></tr>
+<tr><td>2026-08-30</td><td>2026年中报</td><td>Q2营收增速、毛利率、经营现金流</td><td>若营收增速&lt;30%或现金流继续恶化，下调至悲观情景</td></tr>
+<tr><td>2026-10-31</td><td>2026年三季报</td><td>全年趋势确认、GLP-1收入增速</td><td>若增速放缓至&lt;25%，放弃乐观情景</td></tr>
+<tr><td>2026-12-31</td><td>扬州二期建成进度</td><td>产能是否如期投产</td><td>若延迟至2027年中，2027年增长预期下调</td></tr>
+<tr><td>2027-03-31</td><td>2026年年报</td><td>全年业绩兑现、净利率水平</td><td>若净利&lt;1.5亿，估值压缩至45倍以下</td></tr>
+</table>
+</div>
+
+<!-- ===== Step 4：投资逻辑 ===== -->
+<div class="section" id="step4">
+<h2>🏁 Step 4：投资逻辑</h2>
+
+<div class="verdict-box neutral">
+<h4>⚠️ 中价值——国产替代龙头地位真实，但PE 55-74倍已充分定价，无安全边际</h4>
+<p>国产替代龙头×生物药高景气×内生技术升级×产能释放，工业纯化收入+45%（抗体+136%），业绩高增长已兑现。但PE 55-74倍已反映大部分预期，加权预期≈0%，风险收益比1.0。真正的机会在于<strong>盈利能力提升</strong>（毛利率76.5%创新高）和<strong>GLP-1第二增长曲线</strong>被市场低估，若纠正有10-20%空间。</p>
+</div>
+
+<h3>流动性环境</h3>
+<p><strong>存量博弈</strong>——A股成交维持万亿左右，资金偏向抱团高景气板块，容错率低。高估值成长股需要业绩持续验证才能维持估值。赛分科技虽然有真实业绩支撑，但PE 55-74倍在存量博弈下容错率低，一旦增速放缓估值压缩风险大。</p>
+
+<h3>估值匹配度检查</h3>
+<table>
+<tr><th>检查项</th><th>判断</th><th>依据</th></tr>
+<tr><td>PEG匹配度</td><td><span class="tag tag-gold">⚠️ 偏高</span></td><td>PEG≈1.5-1.6，&gt;1.5</td></tr>
+<tr><td>增速质量</td><td><span class="tag tag-green">✅ 高</span></td><td>扣非+50%，营收+28%，利润+49%，质量高</td></tr>
+<tr><td>估值安全边际</td><td><span class="tag tag-red">❌ 无</span></td><td>当前PE已反映高成长预期，无安全边际</td></tr>
+</table>
+
+<h3>投资价值等级</h3>
+<table>
+<tr><th>预期差等级</th><th>判断依据</th><th>价值等级</th></tr>
+<tr><td>小预期差（&lt;10%）</td><td>乐观情景收益&lt;20%，市场已充分定价</td><td><span class="tag tag-gold">☑ 中价值</span></td></tr>
+</table>
+
+<h3>跟踪周期判断</h3>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>故事能走多远</td><td><strong>中期（1-2年）</strong>——产能释放+业绩验证</td></tr>
+<tr><td>判断节点</td><td>2026-08-30中报、2026-12-31扬州二期投产</td></tr>
+<tr><td>中途退出条件</td><td>Q2营收增速&lt;30% 或 经营现金流连续2季度为负 或 毛利率回落至70%以下</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话核心逻辑</strong>：分析目的是判断国产替代龙头在产能释放期的业绩持续性，这个变化在<strong>1-2年内</strong>有<strong>中等概率</strong>带来<strong>0-20%收益</strong>，核心验证节点是<strong>2026-08-30中报</strong>，如果<strong>Q2营收增速&lt;30%或现金流继续恶化</strong>则证伪。</p>
+</div>
+</div>
+
+<!-- ===== 数据来源 ===== -->
+<div class="section">
+<h2>📚 数据来源清单</h2>
+<table>
+<tr><th>数据</th><th>来源</th><th>时间</th></tr>
+<tr><td>实时股价/市值</td><td>stock_finance_data（iFinD）</td><td>2026-07-13 11:30</td></tr>
+<tr><td>2024年年报</td><td>公司公告/巨潮资讯网</td><td>2025-04-28</td></tr>
+<tr><td>2025年年报</td><td>公司公告/新浪财经</td><td>2026-04-22</td></tr>
+<tr><td>2026年Q1季报</td><td>公司公告/腾讯新闻/证券之星</td><td>2026-04-21</td></tr>
+<tr><td>业务结构数据</td><td>stock_finance_data</td><td>2024年度</td></tr>
+<tr><td>行业市场规模</td><td>前瞻产业研究院</td><td>2025-2026</td></tr>
+<tr><td>投资者关系活动</td><td>公司公告/新浪财经</td><td>2026-04-27</td></tr>
+<tr><td>券商研报</td><td>东方证券（2025-05/2026-05）</td><td>公开研报</td></tr>
+<tr><td>股东信息</td><td>东方财富股吧</td><td>2026-03-31</td></tr>
+<tr><td>财务指标</td><td>stock_finance_data</td><td>2024-2025年度</td></tr>
+</table>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-07-13 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

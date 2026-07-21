@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>301329 信音电子 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>信音电子</h1>
+            <p class="code">301329 · 个股深度分析</p>
+            <p class="date">分析日期：2026-05-28 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-05-28</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            | <a href="#step3">跳至可信度裁决</a> | <a href="#step4">跳至投资逻辑</a>
+</p>
+</div>
+
+<div class="section">
+<h2>📊 关键数据快照</h2>
+<table class="data-table">
+<tr><th>指标</th><th>数值</th><th>同比</th><th>信号</th></tr>
+<tr><td>股价（约）</td><td>26.7元</td><td>—</td><td>—</td></tr>
+<tr><td>市值</td><td>约45亿</td><td>—</td><td>—</td></tr>
+<tr><td>2026Q1营收</td><td>2.85亿</td><td>+45.27%</td><td>⚠️ 并表驱动，非内生</td></tr>
+<tr><td>2026Q1归母净利</td><td>2854万</td><td>+106.66%</td><td>🔴 含1355万卖地收益</td></tr>
+<tr><td>2026Q1扣非净利</td><td>1570万</td><td>+33.00%</td><td>真实增速</td></tr>
+<tr><td>2026Q1经营现金流</td><td>3096万</td><td>+74.72%</td><td>🟢 不错</td></tr>
+<tr><td>2025全年营收</td><td>8.97亿</td><td>+14.04%</td><td>—</td></tr>
+<tr><td>2025全年归母净利</td><td>6164万</td><td>-11.64%</td><td>🔴 主业下滑</td></tr>
+<tr><td>2025Q4单季净利</td><td>同比-40.60%</td><td>—</td><td>🔴 恶化加速</td></tr>
+<tr><td>毛利率（Q1测算）</td><td>约22.1%</td><td>-1.16pct</td><td>🔴 下滑</td></tr>
+<tr><td>商誉</td><td>1.44亿</td><td>新增</td><td>⚠️ 减值风险</td></tr>
+<tr><td>负债率</td><td>22.6%</td><td>低</td><td>🟢 财务安全</td></tr>
+<tr><td>PE（2025年）</td><td>约74倍</td><td>—</td><td>🔴 偏高</td></tr>
+<tr><td>PE（Q1扣非年化）</td><td>约72倍</td><td>—</td><td>🔴 仍偏高</td></tr>
+</table>
+<div class="highlight-box">
+<strong>关键发现：</strong>Q1归母净利+106%非常亮眼，但其中<strong>1355万资产处置收益（出售土地使用权）</strong>占了47%，扣非增速仅+33%。营收+45%主要系"合并国联电子利润表所致"——这是并表带来的，不是原有业务增长。
+</div>
+</div>
+
+<a class="anchor" id="step1"></a>
+<div class="section">
+<h2>Step 1：变化识别——发生了什么变化</h2>
+
+<h3>1.1 上涨驱动归因</h3>
+<p>股价从并购公告前约20元涨至26元+，核心驱动力：</p>
+<ul>
+<li><strong>并购并表预期</strong>：2.2亿收购国联电子80%股权，切入比亚迪/小米/零跑供应链，市场给予溢价</li>
+<li><strong>Q1利润翻倍</strong>：归母净利+106%，表面业绩拐点</li>
+<li><strong>汽车连接器赛道</strong>：新能源汽车单车连接器价值1500元，行业增速高，估值溢价</li>
+</ul>
+
+<h3>1.2 变化权重排序</h3>
+<table class="data-table">
+<tr><th>变化</th><th>权重</th><th>等级</th><th>说明</th></tr>
+<tr><td>并购国联电子并表</td><td>高</td><td><span class="tag">底+顶</span></td><td>带来营收增量+客户资源（比亚迪/小米），但整合效果待验</td></tr>
+<tr><td>笔记本主业下滑</td><td>高</td><td><span class="tag hot">底·负向</span></td><td>2025年净利-11.6%，Q4-40.6%，基本盘在恶化</td></tr>
+<tr><td>资产出售美化利润</td><td>中</td><td><span class="tag caution">噪</span></td><td>卖地收益1355万让Q1利润翻倍，不可持续</td></tr>
+<tr><td>董事长退休</td><td>中</td><td><span class="tag caution">噪</span></td><td>林茂贤退休辞职，管理层变动影响未知</td></tr>
+<tr><td>暂缓募投项目</td><td>低</td><td><span class="tag">雾</span></td><td>5.11亿募投项目暂缓，说明原规划不达预期</td></tr>
+</table>
+
+<h3>1.3 核心矛盾识别</h3>
+<div class="risk-box">
+<strong>矛盾点：</strong>市场给的是"汽车连接器高成长"估值（70倍PE），但实际利润增长来自<strong>卖地+并表</strong>，原有笔记本主业在下滑。如果汽车业务整合不顺，高估值没有业绩支撑，双击变双杀。
+</div>
+</div>
+
+<a class="anchor" id="step2"></a>
+<div class="section">
+<h2>Step 2：变化价值——每个变化单独拆解</h2>
+
+<h3>变化A：并购国联电子（权重最高）</h3>
+<div class="scenario optimistic">
+<strong>乐观情景：</strong>国联电子整合顺利，2026年贡献营收2.5亿+，净利2000万+；信音借助国联客户资源打通比亚迪/小米/零跑供应链，汽车连接器业务放量。2026年全年营收突破12亿，净利1亿+，PE降至45倍。
+</div>
+<div class="scenario baseline">
+<strong>基准情景：</strong>国联电子并表贡献营收2亿，净利1500万；但原有笔记本主业继续下滑10%。全年营收11亿，净利7500万，PE维持60倍。估值偏贵，股价横盘震荡。
+</div>
+<div class="scenario pessimistic">
+<strong>悲观情景：</strong>国联电子整合不顺（管理层冲突、客户流失），2026年只贡献营收1.5亿；同时笔记本主业下滑20%。全年营收10亿，净利5000万，触发商誉减值风险。PE>90倍，股价大跌。
+</div>
+<p><strong>关键质疑：</strong>314%溢价收购，1.44亿商誉——如果国联电子2026年业绩不达预期（承诺营收2.68亿），商誉减值测试可能触发。国联电子2025年1-5月净利1615万几乎等于2024全年，这种高增长是否可持续？</p>
+
+<h3>变化B：笔记本主业下滑（负向）</h3>
+<p>2025年全年净利-11.6%，Q4单季-40.6%，说明：</p>
+<ul>
+<li>笔记本电脑连接器市场趋于饱和，增长乏力</li>
+<li>公司暂缓5.11亿募投项目，说明原有扩产计划不达预期</li>
+<li>应收账款增速高于营收增速（鹰眼预警），回款压力增大</li>
+</ul>
+<p>这是公司的现金牛业务，如果继续萎缩，将拖累整体业绩。</p>
+
+<h3>变化C：资产出售美化利润（一次性）</h3>
+<p>Q1资产处置收益1355万（出售土地使用权），占归母净利的47.5%。这属于非经常性损益，不可持续。如果剔除这部分，Q1净利仅约1500万，同比仅+8.5%，远没有那么好看。</p>
+</div>
+
+<a class="anchor" id="step3"></a>
+<div class="section">
+<h2>Step 3：可信度裁决——是真的吗？能兑现吗？</h2>
+
+<table class="data-table">
+<tr><th>变化</th><th>可信度</th><th>兑现概率</th><th>验证时点</th></tr>
+<tr><td>国联电子并表增收</td><td>🟢 高</td><td>80%</td><td>2026中报（并表后完整半年）</td></tr>
+<tr><td>国联电子净利贡献</td><td>🟡 中</td><td>60%</td><td>2026中报</td></tr>
+<tr><td>汽车客户协同（比亚迪/小米）</td><td>🟡 中</td><td>50%</td><td>2026年报/2027年</td></tr>
+<tr><td>笔记本主业企稳</td><td>🔴 低</td><td>30%</td><td>2026中报</td></tr>
+<tr><td>无商誉减值</td><td>🟡 中</td><td>60%</td><td>2026年报审计</td></tr>
+</table>
+
+<div class="highlight-box">
+<strong>可信度核心结论：</strong>并购是真实的（已完成工商变更），国联电子客户资源也是真实的（比亚迪、小米、零跑）。但<strong>利润增长的水分很大</strong>（卖地+并表），原有主业在恶化。并购整合效果需要6-12个月才能验证，当前定价已经透支了乐观预期。
+</div>
+</div>
+
+<a class="anchor" id="step4"></a>
+<div class="section">
+<h2>Step 4：投资逻辑——能不能买入</h2>
+
+<h3>4.1 预期差量化</h3>
+<table class="data-table">
+<tr><th>情景</th><th>概率</th><th>2026E净利</th><th>对应PE</th><th>股价隐含</th></tr>
+<tr><td>乐观</td><td>25%</td><td>1.0亿</td><td>45倍</td><td>35元（+31%）</td></tr>
+<tr><td>基准</td><td>50%</td><td>0.75亿</td><td>60倍</td><td>26元（持平）</td></tr>
+<tr><td>悲观</td><td>25%</td><td>0.45亿</td><td>100倍</td><td>16元（-40%）</td></tr>
+</table>
+<p><strong>加权预期收益：</strong>25%×31% + 50%×0% + 25%×(-40%) = <strong>-2.25%</strong></p>
+<p><strong>风险收益比：</strong>上涨空间约31%（乐观），下跌空间约40%（悲观）。<strong>风险大于收益</strong>。</p>
+
+<h3>4.2 能不能买入</h3>
+<div class="risk-box" style="text-align:center;font-size:18px;font-weight:bold;">
+当前不能买入。PE 74倍太贵，利润有水分，主业在下滑，并购整合尚未验证。
+</div>
+
+<h3>4.3 如果能买，什么条件下</h3>
+<div class="scenario optimistic">
+<strong>条件买入：</strong>股价跌至18-20元（市值30-34亿，对应PE 40-45倍），且2026中报确认以下信号：① 国联电子整合顺利，汽车业务营收占比提升至25%+；② 笔记本主业止跌；③ 无商誉减值迹象。
+</div>
+
+<h3>4.4 持有周期</h3>
+<p>如果已经持有：等待<strong>2026-08-30 中报</strong>验证。若中报显示国联电子协同良好、汽车业务放量，可继续持有；若主业继续恶化或商誉减值风险上升，考虑减仓。</p>
+
+<h3>4.5 核心风险清单</h3>
+<ul>
+<li><strong>商誉减值</strong>：1.44亿商誉，占净资产9%，若国联电子业绩不达预期可能触发</li>
+<li><strong>主业恶化</strong>：笔记本连接器市场饱和，2025年Q4净利-40%，趋势未止</li>
+<li><strong>管理层变动</strong>：创始人退休，新管理层战略方向不确定</li>
+<li><strong>并购整合失败</strong>：国联电子原团队流失、客户关系断裂</li>
+<li><strong>估值压缩</strong>：70倍PE需要持续高成长支撑，一旦增速放缓将杀估值</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>🔍 一句话核心发现</h2>
+<div class="highlight-box" style="border-left-color:#d4a843;background:rgba(212,168,67,0.15);">
+<strong>信音电子的Q1利润翻倍是"卖地+并表"撑起来的假象，原有笔记本主业在恶化，70倍PE撑不住。并购国联电子是真故事，但314%溢价+1.44亿商誉意味着整合风险不低。当前估值已经透支了乐观预期，风险收益比不利，等中报验证后再看。</strong>
+</div>
+</div>
+
+<div class="section">
+<h2>📅 关键验证节点</h2>
+<table class="data-table">
+<tr><th>时间</th><th>事件</th><th>验证重点</th></tr>
+<tr><td>2026-08-30</td><td>2026年中报</td><td>国联电子并表后完整半年业绩、汽车业务占比、商誉减值测试</td></tr>
+<tr><td>2026-10月</td><td>三季报预告</td><td>Q3单季主业是否企稳、国联电子全年业绩指引</td></tr>
+<tr><td>2027-04月</td><td>2026年报</td><td>全年净利是否达到1亿、商誉是否减值、管理层战略方向</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>🏷️ 标签与分类</h2>
+<p>
+<span class="tag">消费电子</span>
+<span class="tag">汽车连接器</span>
+<span class="tag">并购整合</span>
+<span class="tag">商誉风险</span>
+<span class="tag">主业下滑</span>
+<span class="tag hot">利润水分</span>
+<span class="tag caution">估值偏高</span>
+</p>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-05-28 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

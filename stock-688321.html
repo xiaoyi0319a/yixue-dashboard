@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>688321 微芯生物 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>微芯生物</h1>
+            <p class="code">688321 · 原创新药龙头 · 西格列他钠放量 · 扭亏为盈 · 专利风险</p>
+            <p class="date">分析日期：2026-05-14 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-05-14</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+<h2>🔥 大白话三问（30秒读完）</h2>
+
+<p><strong>【这家公司是做什么的？】</strong><br>
+行业归属：创新药/生物制药（科创板）。产业链位置：下游（原创新药研发→生产→销售）。<br>
+核心产品：两款原创新药——西达本胺（肿瘤，全球首个亚型选择性HDAC抑制剂）+ 西格列他钠（糖尿病，全球首个PPAR全激动剂）。<br>
+客户：医院（处方药）+ DTP药房 + 线上平台。增长逻辑：西格列他钠纳入医保后进入放量期（2025年+123%，2026Q1+217%），目标打造"代谢性疾病综合治疗基础药物"。</p>
+
+<p><strong>【贵不贵？】</strong><br>
+当前：股价31.05元，市值137.5亿，PE TTM 139.79倍。<br>
+5月14日：股价31.04元，PE TTM约270倍。变化：股价几乎没动，但PE腰斩（因为TTM净利润从亏损转正到9838万）。<br>
+PEG估算：假设2026全年净利1.0-1.2亿，增速100-150%，PEG≈0.9-1.4，估值从严重偏高回到合理偏高区间。<br>
+合理区间：悲观（8000万净利）→22-26元；基准（1.0-1.2亿）←<strong>最可能</strong>→28-35元；乐观（1.5亿+）→35-42元。<br>
+当前31.05元 → <strong>在基准区间中上沿</strong>。</p>
+
+<p><strong>【有没有故事？】</strong><br>
+真故事：西格列他钠持续翻倍放量（2025年3.12亿，2026Q1+217%），澳门获批（国际化里程碑），西奥罗尼卵巢癌三期达PFS终点（第三个新药商业化在即）。<br>
+假故事：创新药板块今日大涨7.35%，微芯跟涨9.99%——这是板块β，不是个股α。<br>
+预期差：市场可能低估了"西格列他钠放量+医保转常规乙类+海外首站"的组合价值，同时高估了西达本胺专利风险（5月8日部分无效后股价只跌2.4%，已消化）。</p>
+
+<p><strong>【最坏会怎样？】</strong><br>
+证伪信号：①2026中报西格列他钠增速跌破80%；②西达本胺Q2销售下滑；③西奥罗尼数据读出不及预期。<br>
+验证节点：2026-08-20中报（5周后）。<br>
+三情景：乐观冲38元+（全年净利1.5亿+，30%概率）/ 基准横盘28-35元（全年1.0-1.2亿，50%概率）← <strong>最可能</strong> / 悲观跌回22-25元（专利冲击+增速放缓，20%概率）。</p>
+</div>
+
+<div class="section">
+<h2>📌 四句话总结</h2>
+<table>
+<tr><th>维度</th><th>大白话</th></tr>
+<tr><td>核心变化</td><td>5月14日以来，股价横盘（31→31），但估值腰斩（PE 270→140），这是最大的变化</td></tr>
+<tr><td>估值位置</td><td>PEG≈0.9-1.4，在合理区间中上沿；5月时PEG>2，严重偏高</td></tr>
+<tr><td>预期差</td><td>医保转常规乙类+差异化定位被市场低估；西达本胺专利风险已过度定价</td></tr>
+<tr><td>风险点</td><td>中报（8月20日）若西格列他钠增速跌破80%或板块退潮，则逻辑受损</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📋 执行摘要</h2>
+<p><strong>分析日期</strong>：2026-07-15</p>
+<p><strong>距上次报告</strong>：2个月（2026-05-14 V4.3）</p>
+<p><strong>核心变化</strong>：股价两个月横盘（31.04→31.05），但PE TTM从~270倍降至139.79倍（估值压力减半）。新增催化：西格列他钠澳门获批（5月15日）、西奥罗尼卵巢癌三期达PFS终点、西达本胺转医保常规乙类（价格稳定）。专利风险持续但市场已消化。</p>
+<p><strong>投资价值</strong>：<span class="highlight">中价值</span>（估值压力大幅缓解，但高增速持续性待中报验证）</p>
+<p><strong>预期差等级</strong>：<span class="highlight">中预期差</span></p>
+<p><strong>跟踪周期</strong>：中期（1-2年，商业化放量验证）</p>
+<p><strong>关键验证</strong>：2026-08-20 中报（西格列他钠Q2增速 + 西达本胺趋势）</p>
+<p><strong>证伪信号</strong>：中报西格列他钠增速&lt;50% / 西达本胺销售下滑 / 板块退潮</p>
+</div>
+
+<div class="section">
+<h2>🔍 一、变化识别（Step 1）</h2>
+
+<h3>基础画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
+<tr><td>股票名称</td><td>微芯生物</td><td>-</td></tr>
+<tr><td>股票代码</td><td>688321.SH</td><td>-</td></tr>
+<tr><td>当前股价</td><td>31.05元（2026-07-15 11:30，盘中涨9.99%）</td><td>搜狐证券</td></tr>
+<tr><td>市值</td><td>137.53亿</td><td>搜狐证券</td></tr>
+<tr><td>所属行业</td><td>创新药/生物制药</td><td>年报</td></tr>
+<tr><td>实控人</td><td>鲁先平</td><td>年报</td></tr>
+</table>
+
+<h3>核心变化（对比5月14日）</h3>
+<table>
+<tr><th>变化</th><th>5月14日状态</th><th>当前状态</th><th>变化评估</th></tr>
+<tr><td>PE TTM腰斩</td><td>~270倍（高估值压力）</td><td>139.79倍（估值压力减半）</td><td><strong>底强化</strong>—盈利持续性确认</td></tr>
+<tr><td>西格列他钠澳门获批</td><td>未发生</td><td>已获批（2026-05-15）</td><td><strong>顶增强</strong>—国际化里程碑</td></tr>
+<tr><td>西达本胺专利风险</td><td>刚发生，影响未明</td><td>市场已消化（跌2.4%）</td><td><strong>雾→逐步明朗</strong></td></tr>
+<tr><td>西达本胺转常规乙类</td><td>未提及</td><td>已执行（2026-01-01）</td><td><strong>底增强</strong>—价格稳定</td></tr>
+<tr><td>西奥罗尼三期达终点</td><td>在研</td><td>达PFS终点</td><td><strong>顶增强</strong>—第三增长曲线</td></tr>
+<tr><td>创新药板块大涨</td><td>正常波动</td><td>今日+7.35%</td><td><strong>短期催化</strong>—板块β</td></tr>
+</table>
+
+<p class="highlight">🔍 一句话核心发现：股价两个月横盘（31→31），但PE TTM腰斩（270→140），这是最重要的变化——估值压力大幅缓解，同时新增了国际化里程碑和第三增长曲线两个催化。</p>
+</div>
+
+<div class="section">
+<h2>⚖️ 二、变化权重排序（Step 1.5）</h2>
+<table>
+<tr><th>排序</th><th>变化</th><th>权重</th><th>股价贡献</th><th>验证时点</th></tr>
+<tr><td>1</td><td>PE TTM腰斩（盈利持续性确认）</td><td><span class="tag tag-base">底</span></td><td>已部分兑现</td><td>2026-08-20中报</td></tr>
+<tr><td>2</td><td>西格列他钠持续放量</td><td><span class="tag tag-base">底</span></td><td>已产生真实收入</td><td>2026-08-20中报</td></tr>
+<tr><td>3</td><td>西格列他钠澳门获批</td><td><span class="tag tag-top">顶</span></td><td>概念溢价</td><td>2026H2-2027</td></tr>
+<tr><td>4</td><td>西奥罗尼卵巢癌三期达终点</td><td><span class="tag tag-top">顶</span></td><td>尚未定价</td><td>2026-2027</td></tr>
+<tr><td>5</td><td>创新药板块大涨（7.35%）</td><td><span class="tag tag-noise">噪</span></td><td>短期情绪驱动</td><td>2026-07-15后数日</td></tr>
+<tr><td>6</td><td>西达本胺专利风险</td><td><span class="tag tag-fog">雾→噪</span></td><td>利空已部分释放</td><td>2026H2-2027</td></tr>
+</table>
+
+<p><strong>一句话权重判断</strong>：盈利持续性确认和西格列他钠放量是<strong>底</strong>，澳门获批和西奥罗尼是<strong>顶</strong>，板块大涨是<strong>噪</strong>（短期），专利风险从<strong>雾</strong>向<strong>噪</strong>过渡但市场已消化。</p>
+</div>
+
+<div class="section">
+<h2>🔄 三、行业景气度×公司共振检查（Step 1.6）</h2>
+<div class="resonance-box">
+<h4>📊 共振检查结果：强共振</h4>
+<p><strong>行业方向</strong>：向上加速——今日创新药板块+7.35%，抗癌药物+7.40%</p>
+<p><strong>行业斜率</strong>：陡峭→爆发（50%+→100%+）——今日板块集体暴动，资金涌入</p>
+<p><strong>公司卡位</strong>：First-in-class原创新药先行者——西达本胺+西格列他钠均为全球首个</p>
+<p><strong>受益顺序</strong>：已传导——Q1营收+58%/净利+247%已确认</p>
+<p><strong>共振强度</strong>：<span class="tag tag-strong">强</span></p>
+</div>
+</div>
+
+<div class="section">
+<h2>📈 四、变化价值——能带来什么？（Step 2）</h2>
+
+<h3>变化一：PE TTM腰斩（盈利持续性确认）</h3>
+<table>
+<tr><th>时间</th><th>能带来什么</th><th>周期位置</th><th>可行性</th></tr>
+<tr><td>短期</td><td>TTM净利9838万（增速185.2%），PE从270降至139.79</td><td>成长期早期</td><td>已验证</td></tr>
+<tr><td>中期</td><td>若全年净利1.0-1.2亿，PE可降至100-120倍</td><td>成长期</td><td>中高</td></tr>
+<tr><td>长期</td><td>双轮驱动净利2亿+，PE降至70倍以下</td><td>成长期→成熟期</td><td>中（故事）</td></tr>
+</table>
+
+<h3>变化二：西格列他钠澳门获批</h3>
+<table>
+<tr><th>时间</th><th>能带来什么</th><th>周期位置</th><th>可行性</th></tr>
+<tr><td>短期</td><td>澳门获批，直接销售1000-3000万/年</td><td>导入期</td><td>已验证</td></tr>
+<tr><td>中期</td><td>若香港/东南亚获批，峰值上调10-20%</td><td>成长期早期</td><td>中</td></tr>
+<tr><td>长期</td><td>国际化提升估值溢价（BD+港股IPO）</td><td>成长期</td><td>中低（故事）</td></tr>
+</table>
+
+<h3>变化三：西奥罗尼三期达PFS终点</h3>
+<table>
+<tr><th>时间</th><th>能带来什么</th><th>周期位置</th><th>可行性</th></tr>
+<tr><td>短期</td><td>达PFS终点，商业化可期</td><td>导入期→成长期</td><td>已验证</td></tr>
+<tr><td>中期</td><td>若获批，成为第三款商业化药物</td><td>成长期</td><td>中</td></tr>
+<tr><td>长期</td><td>拓展胰腺癌等，峰值上调</td><td>成长期</td><td>中低（故事）</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>💡 五、即时错配识别（Step 2.5）</h2>
+
+<h3>估值锚验证</h3>
+<table>
+<tr><th>指标</th><th>5月14日</th><th>7月15日</th><th>变化</th></tr>
+<tr><td>PE TTM</td><td>~270倍</td><td>139.79倍</td><td>腰斩</td></tr>
+<tr><td>PEG</td><td>~1.09</td><td>~0.75</td><td>偏高→合理</td></tr>
+<tr><td>PS</td><td>~53倍</td><td>~13.7倍</td><td>大幅下降</td></tr>
+<tr><td>TTM净利</td><td>亏损/微盈</td><td>9838万</td><td>盈利确认</td></tr>
+</table>
+
+<h3>错配一：认知差（西格列他钠医保转常规乙类被低估）</h3>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>B. 认知差</td></tr>
+<tr><td>市场共识</td><td>西格列他钠是"又一个医保创新药"，担心2026年底续约降价</td></tr>
+<tr><td>事实真相</td><td>西达本胺已转常规乙类（不再强制国谈）；西格列他钠支付价格未变（2.92元/片）；已覆盖5800家医院、8000家药店</td></tr>
+<tr><td>价格隐含估值</td><td>PE 140倍，隐含2026年净利约1亿，对续约降价有担忧</td></tr>
+<tr><td>真相定价</td><td>若价格稳定+MASH数据积极，估值逻辑从"医保创新药"转向"代谢基础药物"</td></tr>
+<tr><td>错配幅度</td><td>当前31元→若纠正，合理33-38元（+6-22%）</td></tr>
+<tr><td>纠正催化剂</td><td>2026-08-20中报 + 2026年底医保续约结果</td></tr>
+</table>
+
+<h3>错配二：反应差（西达本胺专利风险过度定价）</h3>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>C. 反应差</td></tr>
+<tr><td>市场共识</td><td>5月8日部分无效后仍担忧"专利悬崖"</td></tr>
+<tr><td>事实真相</td><td>PTCL专利已全部无效（2025年9月），但西达本胺销售仍+16%；最长保护延至2042年；已进入1400+医院</td></tr>
+<tr><td>价格隐含估值</td><td>隐含2026年销售下滑10-20%</td></tr>
+<tr><td>真相定价</td><td>若持平或微增（+0-10%），则定价过于悲观</td></tr>
+<tr><td>错配幅度</td><td>当前31元→若重新评估，32-34元（+3-9%）</td></tr>
+<tr><td>纠正催化剂</td><td>2026-08-20中报（西达本胺销售趋势确认）</td></tr>
+</table>
+
+<p class="highlight">🔍 一句话错配判断：当前价格最大的错误是低估了西格列他钠"医保转常规乙类+差异化定位"的价值，同时高估了西达本胺专利风险。若中报确认高增长+西达本胺稳住，合计有9-31%修复空间。</p>
+</div>
+
+<div class="section">
+<h2>🎯 六、可信度裁决（Step 3）</h2>
+
+<h3>三情景推演</h3>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td>乐观</td><td>+20-35%</td><td>西格列他钠Q2增速&gt;100%+全年净利1.5亿+西达本胺稳住</td><td>25%</td></tr>
+<tr><td>基准</td><td>+0-10%</td><td>西格列他钠全年80-120%+全年净利1.0-1.2亿+专利未恶化</td><td>55%</td></tr>
+<tr><td>悲观</td><td>-15-25%</td><td>西格列他钠Q2&lt;50%+全年净利&lt;8000万+专利恶化</td><td>20%</td></tr>
+</table>
+
+<p><strong>加权预期</strong>：+6.375% | <strong>风险收益比</strong>：1.375:1 | <strong>预期差</strong>：中（10-30%）</p>
+
+<h3>证伪信号</h3>
+<table>
+<tr><th>信号</th><th>含义</th></tr>
+<tr><td>中报西格列他钠增速&lt;50%</td><td>医保放量红利快速消退，拐点证伪</td></tr>
+<tr><td>西达本胺2026H1销售下滑</td><td>专利无效影响开始显现</td></tr>
+<tr><td>西奥罗尼审批延迟</td><td>第三增长曲线证伪</td></tr>
+<tr><td>板块退潮+日成交额&lt;1亿</td><td>板块β消失，个股缺乏α</td></tr>
+<tr><td>西格列他钠续约降价&gt;10%</td><td>价格体系稳定性证伪</td></tr>
+</table>
+
+<h3>关键验证节点</h3>
+<table>
+<tr><th>时间</th><th>事件</th><th>验证什么</th></tr>
+<tr><td>2026-08-20</td><td>中报</td><td>Q2西格列他钠增速是否维持80%+；西达本胺是否稳住</td></tr>
+<tr><td>2026-10月</td><td>三季报</td><td>Q3延续性+全年展望</td></tr>
+<tr><td>2026年底</td><td>医保续约</td><td>价格是否稳定</td></tr>
+<tr><td>2026-2027</td><td>西奥罗尼NDA</td><td>第三增长曲线验证</td></tr>
+</table>
+
+<p class="highlight">🔍 一句话核心发现：加权预期收益约+6.4%，风险收益比1.375:1，预期差中等——比5月报告（+10%）收窄，因为PE腰斩和盈利转正已部分定价。核心验证节点是8月20日中报。</p>
+</div>
+
+<div class="section">
+<h2>💡 七、综合研判（Step 4）</h2>
+
+<h3>0. 流动性环境</h3>
+<p><strong>当前判断</strong>：<span class="highlight">增量市场</span>（创新药板块今日+7.35%，资金涌入）</p>
+<p>对比5月报告（存量博弈），当前板块暴动，容错率提高。但需注意：今日大涨可能与板块轮动有关，若大盘调整则板块可能退潮。</p>
+
+<h3>1. 投资价值评估</h3>
+<ul>
+<li><strong>评估结论</strong>：<span class="highlight">中价值</span>（偏上）（条件：若中报西格列他钠增速维持100%+，可升级为高价值）</li>
+<li><strong>核心依据</strong>：商业化拐点确认（西格列他钠+217%）+ 估值压力减半（PE 270→140）+ 行业强共振（板块+7.35%）</li>
+<li><strong>最大风险</strong>：西格列他钠增速快速回落 + 专利风险实质化 + 板块退潮 → 戴维斯双杀</li>
+<li><strong>情景概率</strong>：乐观+基准合计80%</li>
+</ul>
+
+<h3>2. 投资价值等级</h3>
+<table>
+<tr><th>预期差等级</th><th>判断依据</th><th>价值等级</th></tr>
+<tr><td>中预期差</td><td>三情景加权收益约+6.4%，市场已部分定价PE腰斩；但"医保转常规乙类+差异化定位"可能未完全定价</td><td>中价值</td></tr>
+</table>
+
+<h3>3. 跟踪周期判断</h3>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>故事能走多远</td><td>中期（1-2年）</td></tr>
+<tr><td>判断节点</td><td>2026-08-20中报、2026年底医保续约</td></tr>
+<tr><td>中途退出条件</td><td>①中报增速&lt;50%；②西达本胺下滑；③西奥罗尼延迟；④板块退潮+日成交额&lt;1亿</td></tr>
+</table>
+
+<p class="highlight">🔍 一句话核心发现：强共振+估值压力减半（PE 140倍）+新增国际化催化 vs 高增速持续性待验证+专利风险未消除——中价值、中预期差，中报是生死线，板块热度是双刃剑。</p>
+</div>
+
+<div class="section">
+<h2>📎 附录：数据来源</h2>
+<table>
+<tr><th>数据</th><th>来源</th><th>时间</th></tr>
+<tr><td>股价/市值/PE</td><td>搜狐证券</td><td>2026-07-15</td></tr>
+<tr><td>2025年报/2026Q1季报</td><td>公司年报/季报</td><td>2026-03/04</td></tr>
+<tr><td>澳门获批/专利无效</td><td>公司公告</td><td>2026-05</td></tr>
+<tr><td>西达本胺转常规乙类/西奥罗尼数据</td><td>中证鹏元跟踪评级</td><td>2026-06-26</td></tr>
+<tr><td>西格列他钠产销</td><td>中证鹏元跟踪评级</td><td>2026-06-26</td></tr>
+<tr><td>Q2预测</td><td>知乎/ZAKER</td><td>2026-06-05</td></tr>
+<tr><td>板块数据</td><td>搜狐证券</td><td>2026-07-15</td></tr>
+</table>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-05-14 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300698 万马科技 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>万马科技</h1>
+            <p class="code">300698 · 通信设备 → 车联网/智算数据中心跨界转型</p>
+            <p class="date">分析日期：2026-05-21 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-05-21</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="header">
+<h1>300698 万马科技</h1>
+<p class="code">通信设备 → 车联网/智算数据中心跨界转型</p>
+<p class="date">分析日期：2026-05-21 | 分析师：小羿 | 版本：V4.2 | 完整版</p>
+<div class="nav">
+<a href="index.html">🏠 首页</a>
+<a href="reports.html">📊 报告库</a>
+<a href="qimen.html">🔮 奇门</a>
+</div>
+</div>
+
+<div class="section">
+<h2>📋 执行摘要（30秒读懂）</h2>
+<p><strong>核心变化</strong>：万马科技从通信设备商向"车联网+智算数据中心"跨界转型，2025年车联网业务+58.35%，营收+29.24%。但转型尚未盈利——净利率仅6.5%，PE 114倍，车联网毛利率大幅下滑10.82pct。</p>
+<p><strong>投资价值</strong>：<span class="highlight">低价值</span> | <strong>预期差</strong>：中 | <strong>跟踪周期</strong>：短期（3个月-1年）</p>
+<p><strong>关键验证</strong>：2026-08-30中报（车联网毛利率能否回升）、智算订单公告</p>
+<div class="insight">
+⚠️ <strong>提前结论</strong>：转型方向正确但盈利未兑现，PE 114倍极高。车联网业务高增长但毛利率-10.82pct侵蚀利润。适合极小仓位参与（3-5%），中报若毛利率跌破30%则证伪。
+</div>
+</div>
+
+<div class="section">
+<h2>📊 基础画像</h2>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>股价/市值</td><td>40.18元 / ~54亿元</td></tr>
+<tr><td>2025年营收/净利</td><td>7.25亿（+29.24%）/ 4704万（+13.88%）</td></tr>
+<tr><td>2026Q1营收/净利</td><td>1.50亿 / 501万</td></tr>
+<tr><td>2025年毛利率/净利率</td><td>~32% / ~6.5%</td></tr>
+<tr><td>车联网收入</td><td>1.58亿（+58.35%，2025H1），占比46.5%</td></tr>
+<tr><td>经营现金流</td><td>5641万（2025全年，转正）</td></tr>
+<tr><td>总部</td><td>浙江</td></tr>
+</table>
+<div class="quote">
+🔍 <strong>一句话核心发现</strong>：万马科技从通信设备商向"车联网+智算数据中心"跨界转型，车联网业务+58%是亮点但毛利率-10.82pct侵蚀利润，转型尚未盈利。
+</div>
+</div>
+
+<div class="section">
+<h2>🔄 核心变化识别</h2>
+
+<h3>变化一：车联网业务爆发（+58.35%）</h3>
+<p>2025H1车联网业务1.58亿元（+58.35%），首次突破金融行业数据中心项目（银行项目）。但毛利率34.67%（-10.82pct），成本增速89.8%远超收入增速58.35%。</p>
+
+<h3>变化二：智算数据中心突破</h3>
+<p>切入车联网连接平台、智算与智驾工具链产品。按期完成广东韶关粤港澳数据中心项目设备。但智算业务尚未单独披露收入，贡献不明。</p>
+
+<h3>变化三：经营现金流转正</h3>
+<p>2025全年经营现金流5641万（vs 2024年-827万），回款改善。但Q1仅-23.7万，季度波动大。</p>
+</div>
+
+<div class="section">
+<h2>⚖️ 变化权重排序</h2>
+<table>
+<tr><th>排序</th><th>变化</th><th>权重</th><th>说明</th></tr>
+<tr><td>1</td><td>车联网业务爆发（+58%）</td><td><span class="tag tag-base">底</span></td><td>部分兑现（占比46.5%），但毛利率大幅下滑</td></tr>
+<tr><td>2</td><td>智算数据中心突破</td><td><span class="tag tag-top">顶</span></td><td>概念溢价（刚突破银行项目），收入贡献不明</td></tr>
+<tr><td>3</td><td>营收整体+29%</td><td><span class="tag tag-noise">噪</span></td><td>被高估（净利仅+13.88%，增收不增利）</td></tr>
+<tr><td>4</td><td>通信设备主业</td><td><span class="tag tag-fog">雾</span></td><td>陪衬（增速放缓，毛利下滑）</td></tr>
+</table>
+<div class="insight">
+💡 <strong>权重判断</strong>：车联网是<span class="tag tag-base">底</span>但毛利率-10.82pct；智算数据中心是<span class="tag tag-top">顶</span>但刚起步；营收增长是<span class="tag tag-noise">噪</span>；通信主业是<span class="tag tag-fog">雾</span>。
+</div>
+</div>
+
+<div class="section">
+<h2>🎯 行业景气度×共振检查</h2>
+<table>
+<tr><th>检查项</th><th>判断</th></tr>
+<tr><td>①行业方向</td><td>向上加速——AI算力基建+车联网渗透率提升</td></tr>
+<tr><td>②行业斜率</td><td>陡峭——车联网市场CAGR>30%</td></tr>
+<tr><td>③公司卡位</td><td>中游平台商——连接平台+工具链，非核心芯片/模组</td></tr>
+<tr><td>④受益顺序</td><td>已传导——车联网收入+58%已确认</td></tr>
+<tr><td>⑤共振强度</td><td><span class="highlight">中</span>——行业向上公司已受益，但卡位一般</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📈 三情景推演（值不值得投？）</h2>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td><span style="color:#00ff88">乐观</span></td><td>+50%~+100%</td><td>车联网毛利率回升至40%+、智算订单放量、净利增速提升至40%+</td><td>20%</td></tr>
+<tr><td><span style="color:#ffd700">基准</span></td><td>+10%~+30%</td><td>车联网收入持续高增但毛利率承压、净利增速15-20%</td><td>50%</td></tr>
+<tr><td><span style="color:#ff6b6b">悲观</span></td><td>-20%~-40%</td><td>车联网毛利率继续下滑、智算无实质进展、净利增速回落至10%以下</td><td>30%</td></tr>
+</table>
+<p><strong>加权预期收益</strong>：约+6% | <strong>风险收益比</strong>：约1.2:1 | <strong>预期差</strong>：<span class="highlight">中（10-30%）</span></p>
+</div>
+
+<div class="section">
+<h2>🔍 关键质疑点（自问自答）</h2>
+
+<details>
+<summary>❓ 质疑1：车联网毛利率为何大幅下滑10.82pct？</summary>
+<p>2025H1车联网毛利率34.67%（-10.82pct），成本增速89.8%>收入增速58.35%。可能原因：①价格战；②低毛利大客户占比提升；③新业务拓展期投入大。</p>
+</details>
+
+<details>
+<summary>❓ 质疑2：智算数据中心收入有多少？</summary>
+<p>年报未单独披露智算业务收入，仅提及"智算与智驾工具链产品及服务"。广东韶关项目按期完成，但收入贡献不明。可能目前仅为"概念"阶段。</p>
+</details>
+
+<details>
+<summary>❓ 质疑3：经营现金流转正是否可持续？</summary>
+<p>2025全年5641万（vs 2024年-827万），但Q1仅-23.7万。全年改善主要靠收款增加和预付款减少，Q1回款弱。可持续性待验证。</p>
+</details>
+
+<details>
+<summary>❓ 质疑4：PE 114倍如何支撑？</summary>
+<p>当前PE约114倍，净利率仅6.5%。若要支撑高估值，需净利从4700万→1亿+（增速100%+），或毛利率大幅回升至40%+。难度极大。</p>
+</details>
+</div>
+
+<div class="section">
+<h2>📋 综合研判——投资结论</h2>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>预期差等级</td><td>中预期差（10-30%）</td></tr>
+<tr><td>价值等级</td><td><span class="highlight">低价值</span></td></tr>
+<tr><td>流动性环境</td><td>存量博弈——容错率低，纯概念仓位严控</td></tr>
+<tr><td>仓位建议</td><td>不超过总仓位5%</td></tr>
+<tr><td>持有周期</td><td>短期（3个月-1年）</td></tr>
+<tr><td>中途退出</td><td>车联网毛利率跌破30%、Q2-Q3净利连续下滑、无智算订单</td></tr>
+</table>
+<div class="insight">
+💡 <strong>一句话核心逻辑</strong>：万马科技的变化是"通信设备→车联网+智算"跨界转型，车联网收入+58%是底但毛利率-10.82pct侵蚀利润，智算数据中心是顶但刚起步无收入贡献。有变化但盈利极薄（净利率6.5%）、估值极高（PE 114倍），翻倍基因不足。
+</div>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-05-21 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

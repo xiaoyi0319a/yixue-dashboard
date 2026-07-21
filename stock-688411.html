@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>688411 海博思创 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>海博思创</h1>
+            <p class="code">688411 · 储能系统集成 · 钠电池 · 海外高毛利 · 商业模式升级</p>
+            <p class="date">分析日期：2026-05-25 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-05-25</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="header">
+<h1>688411 海博思创</h1>
+<p class="code">储能系统集成 · 钠电池 · 海外高毛利 · 商业模式升级</p>
+<p class="date">分析日期：2026-05-25 | 分析师：小羿 | 版本：V4.2 | 完整版</p>
+<div class="nav">
+<a href="index.html">🏠 首页</a>
+<a href="reports.html">📊 报告库</a>
+<a href="qimen.html">🔮 奇门</a>
+</div>
+</div>
+
+<div class="section">
+<h2>📋 执行摘要（30秒读懂）</h2>
+<p><strong>核心变化</strong>：宁德时代3年60GWh钠电池独家订单（全球规模最大）+海外业务毛利率29.5% vs 国内17.2% + 从"卖设备"到"运维+算电协同"商业模式升级。</p>
+<p><strong>投资价值</strong>：<span class="highlight">中价值</span> | <strong>预期差</strong>：中（10-30%） | <strong>跟踪周期</strong>：中期（1-2年）</p>
+<p><strong>关键验证</strong>：2026Q2排产15GWh（6月底）、2026H1钠电示范项目落地（8月底）、2026年底海外10GWh确收</p>
+<div class="insight">
+⚠️ <strong>核心矛盾</strong>：海博思创当前22倍2026E PE、PEG约0.22，估值在成长股里不算贵，但也不是"捡便宜"。它的价值在于"成长性确定性"而非"预期差"。真正的预期差在于钠电规模化后的成本优势是否能让海博获取超越同行的毛利率，以及海外市场高毛利的持续性是否被低估。
+</div>
+</div>
+
+<div class="section">
+<h2>📊 基础画像</h2>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>股价/市值</td><td>263.99元 / ~474亿元</td></tr>
+<tr><td>所属行业</td><td>储能系统集成</td></tr>
+<tr><td>2025年营收/净利</td><td>116亿 / 9.5亿</td></tr>
+<tr><td>2026Q1营收/净利</td><td>28.5亿（+45%）/ 2.04亿（+117%）</td></tr>
+<tr><td>海外毛利率</td><td>29.52%（vs 国内17.18%）</td></tr>
+<tr><td>2026E PE</td><td>~22倍（机构一致预期）</td></tr>
+<tr><td>出货量目标</td><td>2026年70GWh（2025年26GWh）</td></tr>
+</table>
+<div class="quote">
+🔍 <strong>一句话核心发现</strong>：海博思创不是简单的"储能景气股"——它是钠电池规模化应用的第一落点、海外高毛利储能市场的桥头堡、以及储能行业商业模式从卖设备到卖服务的转型标杆，三重身份叠加，构成了区别于阳光电源/科华数据等同行的差异化叙事。
+</div>
+</div>
+
+<div class="section">
+<h2>🔬 Step 1 变化识别</h2>
+<h3>变化一：钠电池60GWh独家订单（新品/新业务）</h3>
+<p>与宁德时代签署3年60GWh钠离子电池独家订单，全球迄今规模最大。宁德时代2026年底量产钠新电池，标志产业化拐点。</p>
+<p><strong>关键事实</strong>：</p>
+<ul style="color:#b0c4de; margin-left:20px;">
+<li>协议为"首个储能钠电战略合作伙伴"，但未明确排他性</li>
+<li>宁德时代2026年扩产40GWh钠电池，福鼎时代总产能149GWh</li>
+<li>钠电池能量密度175Wh/kg，规模化后成本预计为锂电的70-80%</li>
+<li>公司计划2026年建设1GWh+钠电示范项目</li>
+</ul>
+
+<h3>变化二：海外业务放量+商业模式升级（行业格局变化）</h3>
+<p>海外业务毛利率29.52% vs 国内17.18%，商业模式从"卖设备"升级为"运维+算电协同"。</p>
+<p><strong>关键事实</strong>：</p>
+<ul style="color:#b0c4de; margin-left:20px;">
+<li>2025年海外收入9.52亿（+76.64%），已锁定10GWh订单</li>
+<li>2026Q1海外出货0.8GWh，毛利率26%已验证</li>
+<li>运维资产目标2026年底35-40GWh，2026Q1末已超10GWh</li>
+<li>与光大金租合作3-4个算电协同项目</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>⚖️ Step 1.5 变化权重排序</h2>
+<table>
+<tr><th>变化</th><th>权重等级</th><th>当前股价贡献</th><th>关键验证时点</th></tr>
+<tr><td>钠电池60GWh独家订单</td><td><span class="tag tag-top">顶</span></td><td>概念溢价（尚未兑现）</td><td>2026-08-30中报、2026-12-31量产确收</td></tr>
+<tr><td>海外业务放量（10GWh目标）</td><td><span class="tag tag-base">底</span>→<span class="tag tag-top">顶</span>过渡</td><td>部分兑现（2025年海外收入+76%已确认）</td><td>2026-07-15 Q2海外出货、2026-10-29 Q3海外确收</td></tr>
+<tr><td>商业模式升级（运维+算电协同）</td><td><span class="tag tag-top">顶</span></td><td>估值溢价（远期故事）</td><td>2026-08-30中报（运维资产规模）、2027-04年报运维收入占比</td></tr>
+<tr><td>出货量高增（26→70GWh）</td><td><span class="tag tag-base">底</span></td><td>已兑现大部分</td><td>持续跟踪每季度出货</td></tr>
+</table>
+<div class="quote">
+钠电池订单是顶（最大想象空间但兑现周期长），海外放量是底→顶过渡（已有验证但空间未完全定价），商业模式升级是顶（远期故事，2027年后），出货量高增是底（已充分定价）。
+</div>
+</div>
+
+<div class="section">
+<h2>📈 Step 1.6 行业景气度×共振检查</h2>
+<h3>变化一：钠电池60GWh独家订单</h3>
+<table>
+<tr><th>维度</th><th>判断</th><th>依据</th></tr>
+<tr><td>行业方向</td><td>向上加速</td><td>钠电池从实验室走向规模化，宁德时代2026年底量产</td></tr>
+<tr><td>行业斜率</td><td>陡峭（100%+）</td><td>60GWh订单是"从0到1"的量级跃迁，全球储能钠电2025年几乎为0</td></tr>
+<tr><td>公司卡位</td><td>核心受益+独家合作</td><td>宁德时代首个储能钠电战略合作伙伴，3年独家60GWh订单</td></tr>
+<tr><td>受益顺序</td><td>传导中</td><td>2026年建设1GWh+示范项目，2027年规模化确收</td></tr>
+<tr><td>共振强度</td><td><span class="highlight">强</span></td><td>行业斜率>100%非线性跃迁，公司为核心卡位+独家合作</td></tr>
+</table>
+
+<h3>变化二：海外业务放量+商业模式升级</h3>
+<table>
+<tr><th>维度</th><th>判断</th><th>依据</th></tr>
+<tr><td>行业方向</td><td>向上加速</td><td>全球储能2026年预计增速40-50%，海外市场增速更高</td></tr>
+<tr><td>行业斜率</td><td>陡峭（50%+）</td><td>2025年前三季度海外储能装机94GWh，同比+74%</td></tr>
+<tr><td>公司卡位</td><td>头部受益</td><td>全球新增装机前三，已锁定10GWh订单</td></tr>
+<tr><td>受益顺序</td><td>已传导</td><td>2025年海外毛利率29.52%已确认，2026Q1海外出货0.8GWh已落地</td></tr>
+<tr><td>共振强度</td><td><span class="highlight">强</span></td><td>行业斜率>50%且公司已确认高毛利受益</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>💰 Step 2 变化价值</h2>
+<h3>变化一：钠电池60GWh独家订单</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>产业周期</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期(已验证/6个月)</td><td>概念溢价+示范项目推进</td><td>导入期（0→1）</td><td>高</td><td>2026年钠电收入预计&lt;5亿（占比&lt;2%）</td></tr>
+<tr><td>中期(1-2年)</td><td>钠电成本优势兑现，毛利率提升</td><td>成长期（1→10）</td><td>中</td><td>如果钠电成本低于锂电20%，可获取3-5pct额外毛利</td></tr>
+<tr><td>长期(2年+)</td><td>钠电在长时储能场景替代锂电</td><td>成长期→成熟期</td><td>低→中</td><td>故事，不纳入当前定价</td></tr>
+</table>
+
+<h3>三情景演变路径</h3>
+<p><strong>乐观</strong>：宁德时代2026年底钠电池量产顺利、成本低于锂电15-20% → 海博2027年钠电储能系统毛利率可提升至22-25%（vs 当前18%）→ 带来5-8亿额外利润</p>
+<p><strong>基准</strong>：钠电池量产延迟或成本优势不及预期 → 60GWh订单更多是对现有锂电产能的补充 → 2027年钠电收入占比&lt;10%</p>
+<p><strong>悲观</strong>：钠电池技术路线被固态电池替代，或宁德时代产能爬坡不及预期 → 60GWh订单沦为"纸面协议"</p>
+
+<h3>变化二：海外业务放量+商业模式升级</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>产业周期</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期(已验证/6个月)</td><td>海外高毛利收入确收</td><td>成长期（1→10）</td><td>高</td><td>2026Q2排产提升至15GWh，海外占比提升</td></tr>
+<tr><td>中期(1-2年)</td><td>海外10GWh确收+运维资产35-40GWh</td><td>成长期</td><td>高</td><td>海外10GWh×0.7元/Wh=70亿收入，毛利26%=18亿毛利</td></tr>
+<tr><td>长期(2年+)</td><td>算电协同打开新市场</td><td>导入期（0→1）</td><td>低</td><td>故事，不纳入当前定价</td></tr>
+</table>
+
+<h3>三情景演变路径</h3>
+<p><strong>乐观</strong>：2026年海外10GWh确收顺利+运维资产35-40GWh达成 → 2026年净利可超20亿（vs 机构预测18.9亿）→ 动态PE降至20倍以下</p>
+<p><strong>基准</strong>：海外确收6-8GWh，运维资产25-30GWh → 2026年净利18-20亿，符合机构预期</p>
+<p><strong>悲观</strong>：海外项目交付延迟（地缘政治/关税/认证），或国内价格战导致毛利率下滑 → 2026年净利15-17亿，miss预期</p>
+</div>
+
+<div class="section">
+<h2>🎯 Step 3 可信度裁决</h2>
+<h3>三情景推演</h3>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td>乐观</td><td class="highlight">+30-50%（340-395元）</td><td>钠电示范项目顺利+海外10GWh确收+运维资产35GWh达成</td><td>25%</td></tr>
+<tr><td>基准</td><td>+10-20%（290-315元）</td><td>海外6-8GWh确收+钠电1GWh示范落地+运维资产25GWh</td><td>55%</td></tr>
+<tr><td>悲观</td><td>-15-25%（200-225元）</td><td>海外交付延迟+国内价格战毛利率下滑+钠电量产不及预期</td><td>20%</td></tr>
+</table>
+<p><strong>加权预期</strong>：+15.5%（25%×40% + 55%×15% + 20%×(-20%)）</p>
+<p><strong>风险收益比</strong>：1.3:1（上涨空间/下跌空间 = 25%/20%）</p>
+<p><strong>预期差</strong>：中（10-30%）</p>
+
+<h3>核心证伪信号</h3>
+<div class="insight">
+<strong>2026Q2营收&lt;35亿或海外毛利率&lt;22%</strong>：如果中报出现这两个信号，则海外高毛利窗口关闭+出货不及预期，投资逻辑证伪。
+</div>
+
+<h3>关键验证节点</h3>
+<table>
+<tr><th>时间</th><th>事件</th><th>验证什么</th><th>如果miss</th></tr>
+<tr><td>2026-07-15</td><td>中报预告</td><td>Q2营收是否≥35亿、海外出货是否≥2GWh</td><td>下调全年出货预期至60GWh</td></tr>
+<tr><td><strong>2026-08-30</strong></td><td><strong>半年报</strong></td><td><strong>钠电示范项目进度、运维资产规模、海外毛利率</strong></td><td>如果钠电无进展，下调钠电预期</td></tr>
+<tr><td>2026-10-29</td><td>三季报</td><td>Q3海外确收是否≥3GWh、全年出货是否达50GWh</td><td>如果海外miss，下调全年净利预期</td></tr>
+<tr><td>2027-01-31</td><td>年报预告</td><td>全年净利是否≥18亿、运维资产是否≥30GWh</td><td>如果miss，放弃跟踪</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>🧩 Step 4 综合研判</h2>
+<p><strong>流动性环境</strong>：存量博弈（政策真空期，储能板块政策利好已部分定价）。存量博弈下，只有"硬业绩+硬催化"才能涨。</p>
+<p><strong>投资价值等级</strong>：中价值（条件: 2026H1海外高毛利持续+钠电示范落地）</p>
+<p><strong>跟踪周期</strong>：中期（1-2年，业绩驱动）</p>
+
+<h3>核心矛盾</h3>
+<div class="insight">
+海博思创当前22倍2026E PE、PEG约0.22，估值在成长股里不算贵，但也不是"捡便宜"。它的价值在于"成长性确定性"而非"预期差"。机构一致预期2026年净利18.9亿（+99%），这个增速已经被市场部分定价。真正的预期差在于：钠电规模化后的成本优势是否能让海博获取超越同行的毛利率，以及海外市场高毛利的持续性是否被低估。
+</div>
+
+<div class="quote">
+🔍 <strong>一句话核心发现</strong>：海博思创的"值不值得投"取决于一个关键验证——2026H1海外高毛利是否能持续+钠电示范是否能落地。如果这两点兑现，当前22倍PE是低估；如果miss，22倍PE就是陷阱。预期差等级"中"，风险收益比1.3:1，不是高赔率标的，但成长性确定性较高。
+</div>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-05-25 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

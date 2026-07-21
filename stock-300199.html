@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300199 翰宇药业 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>翰宇药业</h1>
+            <p class="code">300199 · 多肽原料药 · GLP-1 · 业绩拐点 · 创新药</p>
+            <p class="date">分析日期：2026-06-04 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-06-04</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            ## 🔥 大白话三问（30秒读完）
+
+【贵不贵】
+从困境反转到修复中。2025年营收9.66亿（+63.7%），归母净利润3657万（扭亏）。但2026Q1营收同比-3.49%，增收不增利。负债率77.52%，定增9.68亿待落地。当前估值偏贵，需要利润持续验证。← Step 4
+
+【有没有故事】
+有真故事。全球GLP-1市场爆发（CAGR 17.5%），翰宇药业是国内多肽原料药龙头，20个美国DMF认证，利拉鲁肽首仿市占率25%，司美格鲁肽III期完成等效。HY3003三靶点创新药远期想象空间。但当前主要靠原料药，创新药尚处临床。← Step 1
+
+【最坏会怎样】
+Q2营收继续下滑+原料药价格战+定增稀释。若利润不能持续改善，股价可能回落至定增价附近。← Step 3
+
+#### 📌 四句话总结（说给别人听）
+
+一家多肽原料药龙头，2025年营收9.66亿（+63.7%），归母净利润3657万（扭亏）。20个美国DMF认证，利拉鲁肽首仿美国市占率25%，司美格鲁肽III期等效。但2026Q1营收同比-3.49%，负债率77.52%，增收不增利。GLP-1故事真，但当前估值需要利润持续验证。
+
+_以上结论来自下方 Step 2/3/4 详细分析 ↓_
+
+## 📋 执行摘要
+
+**核心变化**：2025年营收9.66亿（+63.7%）+ 归母净利润3657万（扭亏）+ 20个美国DMF认证 + 利拉鲁肽首仿市占率25%
+
+**投资价值**：中价值 | **预期差**：中等（10-20%） | **跟踪周期**：中期（6-12个月）
+
+**关键验证**：2026年Q2营收增速是否转正、原料药毛利率能否维持、司美格鲁肽等效进展
+
+⚠️ **核心风险提示**：负债率77.52%，定增9.68亿待落地，Q1营收同比-3.49%，增收不增利。
+
+## 🔎 Step 1：变化识别（发生了什么）
+
+**当前股价**：约10.5元（6月4日）
+
+**总市值**：约93亿（总股本8.83亿股）
+
+**PE(TTM)**：约250倍（偏高）
+
+**2025年营收**：9.66亿（+63.7%）
+
+**2025年归母净利润**：3657万（扭亏为盈）
+
+**2026Q1营收**：1.72亿（-3.49%）
+
+**2026Q1归母净利润**：1.28亿（+82.9%）
+
+**负债率**：77.52%
+
+**美国DMF认证**：20个
+
+### 核心变化（5个）
+
+| 排序 | 变化类型 | 具体事件 | 时间 |
+| --- | --- | --- | --- |
+| 1 | 营收高增 | 2025年营收9.66亿（+63.7%），归母净利润扭亏为3657万 | 2025年报 |
+| 2 | 认证积累 | 20个美国DMF认证，利拉鲁肽首仿市占率25% | 2025年 |
+| 3 | 产品突破 | 司美格鲁肽III期完成等效，美国ANDA待获批 | 2026年 |
+| 4 | 创新药布局 | HY3003三靶点创新药（GLP-1/GIP/GCG）临床推进 | 2026年 |
+| 5 | 定增融资 | 定增9.68亿待落地，补充流动资金和研发投入 | 2026年 |
+
+🔍 **一句话核心发现**：翰宇药业是多肽原料药龙头，GLP-1赛道故事真，但Q1营收下滑和77%负债率是硬伤，需要利润持续验证。
+
+## ⚖️ Step 1.5：变化权重排序
+
+| 排序 | 变化 | 权重 | 说明 | 关键验证时点 |
+| --- | --- | --- | --- | --- |
+| 1 | 2025年营收+63.7%（扭亏） | 底 | 收入增长真实，但利润薄，需要验证持续性 | 2026Q2 |
+| 2 | 20个DMF+利拉鲁肽首仿25% | 底 | 原料药业务壁垒高，客户粘性强 | 持续 |
+| 3 | 司美格鲁肽III期等效 | 顶→底 | 从临床→等效，若ANDA获批将带来增量收入 | 2026H2 |
+| 4 | HY3003三靶点创新药 | 顶 | 远期想象空间，但临床阶段，贡献遥远 | 2027+ |
+| 5 | 定增9.68亿 | 噪 | 补充资金但稀释股权，负债率高企 | 2026Q2 |
+
+**一句话权重判断**：原料药业务是 **底**（已验证），司美格鲁肽等效是 **顶→底**（待获批），HY3003是 **顶**（远期），定增是 **噪**（双刃剑）。
+
+## 💎 Step 2：变化价值分析
+
+### 变化一：2025年营收+63.7%（扭亏）
+
+| 维度 | 评估 |
+| --- | --- |
+| **这个变化值多少钱？** | 值。营收从5.9亿→9.66亿，增长真实，但净利润仅3657万，利润率极低。 |
+| **这个变化能持续多久？** | 短期。2026Q1营收-3.49%，增速回落，需要观察Q2是否恢复。 |
+| **这个变化能复制吗？** | 可复制。原料药增长靠订单，但利拉鲁肽已占25%市占率，增长空间有限。 |
+
+**价值裁决**：营收增长的价值 = **中**（增长真实但利润薄，增收不增利）。
+
+### 变化二：司美格鲁肽III期等效
+
+| 维度 | 评估 |
+| --- | --- |
+| **这个变化值多少钱？** | 值，但待兑现。司美格鲁肽是全球最畅销GLP-1药物，若ANDA获批，将打开新增长点。 |
+| **这个变化能持续多久？** | 长期。仿制药上市后，收入可维持3-5年。 |
+| **这个变化能复制吗？** | 难以复制。ANDA审批壁垒高，先发优势明显。 |
+
+**价值裁决**：司美格鲁肽等效的价值 = **高**（若获批，收入弹性大）。
+
+## 🔮 Step 3：演变路径与质疑点
+
+### 乐观情景（概率：25%）
+
+**条件**：Q2营收增速转正、司美格鲁肽ANDA获批、HY3003临床进展顺利
+
+**目标价**：13-15元（+24%~+43%）
+
+**时间**：6-12个月
+
+| 质疑点 | 回答 |
+| --- | --- |
+| Q2营收能转正吗？ | 需要新订单支撑，原料药客户订单波动大 |
+| 司美格鲁肽何时获批？ | 等效已完成，ANDA审批周期不确定 |
+
+### 基准情景（概率：55%）
+
+**条件**：Q2营收持平或微增、原料药维持现有订单、定增完成
+
+**目标价**：9-11元（-14%~+5%）
+
+**时间**：3-6个月
+
+### 悲观情景（概率：20%）
+
+**条件**：Q2营收继续下滑、原料药价格战、定增失败
+
+**目标价**：7-8元（-33%~-24%）
+
+**时间**：1-3个月
+
+| 质疑点 | 回答 |
+| --- | --- |
+| 负债率77%是否危险？ | 高负债是事实，定增若失败流动性风险加大 |
+| 增收不增利能改善吗？ | 原料药毛利率66%，但销售费用和管理费用高，净利率仅3.8% |
+
+## ⚖️ Step 4：综合研判
+
+### 四步裁决
+
+| 问题 | 裁决 | 理由 |
+| --- | --- | --- |
+| **能不能买入？** | ⚠️ 谨慎 | 营收增长真实但Q1下滑，负债率77%过高，定增未落地。估值偏高，需等待利润验证。 |
+| **能买多少？** | 小仓位或观望 | 若看好GLP-1赛道，可极小仓位试仓，等待Q2营收转正+定增完成。 |
+| **持有多久？** | 短期（3-6个月） | 需验证Q2营收、定增、司美格鲁肽ANDA进展。 |
+| **什么时候可以重新评估？** | 2026年Q2（中报） | 中报确认营收增速、利润改善、定增进展三大关键指标。 |
+
+### 一句话投资逻辑
+
+翰宇药业的 **底**（原料药业务+20个DMF+利拉鲁肽首仿）已经验证，但 **利润薄**（净利率3.8%）、**负债高**（77%）、**Q1营收下滑**（-3.5%）是硬伤。司美格鲁肽等效是 **顶→底**（待ANDA获批），HY3003是 **远期顶**。现在不是捡便宜，是赌困境反转。需要3-6个月验证利润改善。
+
+## 📚 数据来源清单
+
+| 数据类型 | 来源 | 时效性 | 可信度 |
+| --- | --- | --- | --- |
+| 2025年报数据 | 公司公告 | 🟢 最新 | 高 |
+| 2026Q1财务数据 | 公司公告 | 🟢 最新 | 高 |
+| DMF认证/首仿市占率 | 公司公告/行业数据 | 🟢 最新 | 中 |
+| 司美格鲁肽进展 | 公司公告 | 🟢 最新 | 高 |
+| 定增信息 | 公司公告 | 🟢 最新 | 高 |
+| 股价/市值 | 同花顺 | 🟢 实时 | 高 |
+
+_⚠️ 免责声明：本分析基于公开市场信息，不构成投资建议。股市有风险，投资需谨慎。数据来源已标注，时效性截至2026-06-04。_
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-06-04 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

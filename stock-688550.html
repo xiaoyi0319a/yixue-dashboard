@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>688550 瑞联新材 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>瑞联新材</h1>
+            <p class="code">688550 · OLED材料龙头 · 半导体光刻胶 · PSPI封装材料 · 医药CDMO</p>
+            <p class="date">分析日期：2026-07-13 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-07-13</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- ===== 执行摘要 ===== -->
+<div class="section" id="summary">
+<h2>📋 执行摘要</h2>
+<div class="highlight-box">
+<p><strong>核心变化</strong>：公司从"OLED材料单支柱"向"OLED+半导体+医药"三足鼎立转型，电子材料板块爆发（+141%），医药CDMO高增（+89.55%），但OLED基本盘增速放缓至+3.04%，2026Q1净利同比-4.34%引发对全年目标的担忧</p>
+<p><strong>投资价值</strong>：<span class="tag tag-gold">中价值</span> <span class="tag tag-purple">中预期差（10-30%）</span></p>
+<p><strong>跟踪周期</strong>：中期（1-2年，业绩驱动）</p>
+<p><strong>关键验证节点</strong>：2026-08-21中报（电子材料收入增速、Q2单季净利）</p>
+<p><strong>证伪信号</strong>：中报电子材料增速&lt;50% 或 Q2单季净利&lt;8000万</p>
+</div>
+</div>
+
+<!-- ===== 大白话三问 ===== -->
+<div class="dabaohua-section">
+<h2>🎯 大白话三问</h2>
+
+<div class="dabaohua-q">
+<div class="q-label">【这家公司是做什么的？】</div>
+<div class="q-answer">
+瑞联新材是专用有机新材料的上游供应商（卖铲子的），主要给高科技产业做配套材料，三大业务：<br><br>
+<strong>显示材料</strong>（78%收入）：给OLED面板厂提供发光材料中间体，客户是京东方、LG、三星等面板巨头，国内OLED中间体龙头。<br><br>
+<strong>医药中间体</strong>（17%收入）：给创新药企做CDMO（代工研发+生产），管线351个，毛利率高达64.83%。<br><br>
+<strong>电子材料</strong>（4%收入）：半导体光刻胶单体、PSPI封装材料，刚进入量产阶段，是"国产替代"的故事。<br><br>
+<strong>增长逻辑</strong>：下游OLED面板需求→发光材料订单增长；半导体国产替代→光刻胶材料切入。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【贵不贵？】</div>
+<div class="q-answer">
+<strong>当前55.20元，不贵也不便宜，在合理区间中枢。</strong><br><br>
+市值97.19亿，PE TTM 31.63倍，动态PE约24倍（按2026年预测净利4.03亿）。PEG=0.79，估值与增速基本匹配。<br><br>
+合理股价区间（按25倍PE）：
+<ul>
+<li>悲观（全年3.5亿，电子材料不及预期）→ 合理股价50-55元</li>
+<li>基准（全年4.0亿，稳步增长）← <strong>最可能</strong> → 合理股价55-62元</li>
+<li>乐观（全年4.5亿，电子材料放量）→ 合理股价65-72元</li>
+</ul>
+当前55.20元 → <strong>在基准情景的中枢位置</strong>。<br><br>
+⚠️ <strong>警示</strong>：2026Q1净利同比-4.34%，全年4亿目标需要后三季度大幅弥补，中报验证是关键。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【有没有故事？】</div>
+<div class="q-answer">
+<strong>真故事：电子材料板块爆发（+141%）。</strong><br>
+光刻胶单体已量产，PSPI封装材料导入客户，2027年5月PSPI项目完工（产能200吨）。这是"国产替代"的真实增量，但收入仅0.69亿，占总收入4%。<br><br>
+<strong>假故事：市场炒"半导体材料"概念。</strong><br>
+78%收入仍是OLED显示材料，半导体仅占4%。市场按"半导体材料"给的估值溢价，实际贡献极小。概念成分&gt;实际贡献。<br><br>
+<strong>被低估的故事：医药CDMO高毛利。</strong><br>
+医药板块毛利率64.83%，管线351个（创新药193个），高壁垒+高毛利，但市场可能按普通CDMO估值。<br><br>
+<strong>行业景气周期</strong>：OLED显示材料——秋天（成熟期增速放缓）；半导体材料——春天（导入期）；医药CDMO——夏天（成长期）。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【最坏会怎样？】</div>
+<div class="q-answer">
+<strong>三情景：</strong>
+<ul>
+<li><strong>乐观（25%概率）</strong>：电子材料放量+医药持续高增+OLED回暖，全年净利4.5亿，股价冲70元。为什么：PSPI产能释放+光刻胶单体大单落地。</li>
+<li><strong>基准（55%概率）← 最可能</strong>：电子材料稳步增长+医药维持+OLED平稳，全年净利4.0亿，股价55-60元震荡。为什么：基于2025年3.09亿+30%增速，Q1虽下滑但全年仍有希望。</li>
+<li><strong>悲观（20%概率）</strong>：电子材料验证不及预期+医药增速回落+OLED价格压力，全年净利3.5亿，股价跌回45元。为什么：Q1净利-4.34%是信号，若中报继续恶化则全年目标难达。</li>
+</ul>
+<strong>证伪信号</strong>：①中报电子材料收入增速&lt;50%；②医药毛利率大幅下滑；③OLED显示材料收入负增长。<br>
+<strong>验证节点</strong>：2026-08-21中报、2026-10三季报。
+</div>
+</div>
+</div>
+
+<!-- ===== 四句话总结 ===== -->
+<div class="section">
+<h2>📌 四句话总结</h2>
+<table>
+<tr><th>维度</th><th>大白话</th></tr>
+<tr><td>核心变化</td><td>公司从"纯OLED材料"向"OLED+半导体+医药"三足鼎立转型，电子材料和医药是增量，但OLED基本盘增速放缓</td></tr>
+<tr><td>估值位置</td><td>当前55元在基准情景中枢，PEG=0.79，不贵不便宜</td></tr>
+<tr><td>预期差</td><td>市场可能高估了电子材料（仅占4%收入）的短期贡献，但低估了医药CDMO的高毛利持续性</td></tr>
+<tr><td>风险点</td><td>2026Q1净利下滑-4.34%，若中报继续恶化则全年4亿目标难达</td></tr>
+</table>
+<p><em>不给结论：以上分析供老师判断。不输出"买入/卖出/持有"。</em></p>
+</div>
+
+<!-- ===== Step 1：变化识别 ===== -->
+<div class="section" id="step1">
+<h2>🔍 Step 1：变化识别</h2>
+
+<h3>基础画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
+<tr><td>股票名称</td><td>瑞联新材</td><td>-</td></tr>
+<tr><td>股票代码</td><td>688550.SH</td><td>-</td></tr>
+<tr><td>当前股价</td><td>55.20元</td><td>东方财富（2026-07-13实时）</td></tr>
+<tr><td>市值</td><td>97.19亿</td><td>东方财富（2026-07-13）</td></tr>
+<tr><td>PE TTM</td><td>31.63倍</td><td>东方财富</td></tr>
+<tr><td>所属行业</td><td>电子化学品/精细化工</td><td>iFinD</td></tr>
+</table>
+
+<h3>核心变化识别</h3>
+<table>
+<tr><th>变化类型</th><th>具体事件</th><th>发生时间</th><th>信息来源</th></tr>
+<tr><td>新品/新业务</td><td>电子材料板块收入同比+141.34%，半导体光刻胶单体+PSPI封装材料进入量产</td><td>2025年全年</td><td>2025年年报</td></tr>
+<tr><td>新品/新业务</td><td>医药中间体板块收入同比+89.55%，CDMO战略推进，管线351个</td><td>2025年全年</td><td>2025年年报</td></tr>
+<tr><td>业绩拐点</td><td>2026Q1归母净利润同比-4.34%，扣非+0.13%，增速明显放缓</td><td>2026-04</td><td>2026年一季报</td></tr>
+<tr><td>行业格局变化</td><td>OLED显示材料收入增速仅+3.04%，面临面板行业"量升价跌"压力</td><td>2025年全年</td><td>2025年年报</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话核心发现</strong>：瑞联新材的"第二增长曲线"（电子材料+医药）已启动，但基本盘（OLED）增速放缓，且新曲线收入占比仍小（合计21%），2026Q1业绩下滑是最大不确定性。</p>
+</div>
+</div>
+
+<!-- ===== Step 1.5：变化权重排序 ===== -->
+<div class="section" id="step1.5">
+<h2>⚖️ Step 1.5：变化权重排序</h2>
+<table>
+<tr><th>排序</th><th>变化</th><th>权重等级</th><th>当前股价贡献</th><th>未来演变</th><th>关键验证时点</th></tr>
+<tr><td>1</td><td>OLED显示材料</td><td><strong>底</strong></td><td>已兑现大部分（78%收入）</td><td>增速放缓至3%，中大尺寸OLED或带来增量</td><td>2026-08-21中报</td></tr>
+<tr><td>2</td><td>电子材料（半导体）</td><td><strong>顶</strong></td><td>概念溢价（待兑现）</td><td>PSPI项目2027-05完工，2年内难大幅放量</td><td>2026-08-21中报</td></tr>
+<tr><td>3</td><td>医药CDMO</td><td><strong>噪</strong></td><td>被部分认识</td><td>高增但基数小，商业化转化率不确定</td><td>2026-08-21中报</td></tr>
+<tr><td>4</td><td>参股出光电子</td><td><strong>雾</strong></td><td>陪衬</td><td>20%不并表，实际贡献极小</td><td>2026年年报</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话权重判断</strong>：<strong>OLED显示材料</strong>是底，<strong>电子材料</strong>是顶，<strong>医药高增</strong>是噪（基数小），<strong>参股出光</strong>是雾。</p>
+</div>
+</div>
+
+<!-- ===== Step 2：变化价值 ===== -->
+<div class="section" id="step2">
+<h2>💎 Step 2：变化价值</h2>
+
+<h3>变化一：电子材料板块爆发（半导体光刻胶+PSPI）</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期（已验证）</td><td>收入0.69亿，同比+141%，光刻胶单体已量产</td><td>导入期（0→1）</td><td>高</td><td>已验证</td></tr>
+<tr><td>中期（1-2年）</td><td>PSPI项目2027-05完工，产能200吨</td><td>导入期→成长期</td><td>中</td><td>收入有望达2-3亿</td></tr>
+<tr><td>长期（2年+）</td><td>国产替代大空间</td><td>成长期</td><td>低</td><td>故事，不纳入定价</td></tr>
+</table>
+
+<h3>行业景气度×共振检查</h3>
+<table>
+<tr><th>检查项</th><th>判断</th></tr>
+<tr><td>行业方向</td><td>向上加速——半导体国产替代+光刻胶卡脖子清单</td></tr>
+<tr><td>行业斜率</td><td>陡峭（50%+）——2025年电子材料板块+141%</td></tr>
+<tr><td>公司卡位</td><td>卡位上游核心材料——光刻胶单体、PSPI封装材料，国内少数能量产供应商</td></tr>
+<tr><td>受益顺序</td><td>传导中——已产生收入0.69亿，但占公司总收入仅4%</td></tr>
+<tr><td>共振强度</td><td>中——行业斜率高但公司收入占比极低，共振尚未完全传导</td></tr>
+</table>
+
+<h3>变化二：医药中间体板块高增（CDMO战略）</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期（已验证）</td><td>收入2.93亿，同比+89.55%，毛利率64.83%</td><td>成长期（1→10）</td><td>高</td><td>已验证</td></tr>
+<tr><td>中期（1-2年）</td><td>管线351个，原料药注册推进</td><td>成长期</td><td>中</td><td>收入有望达4-5亿</td></tr>
+<tr><td>长期（2年+）</td><td>"中间体+原料药"一体化CDMO平台</td><td>成长期→成熟期</td><td>低</td><td>故事</td></tr>
+</table>
+
+<h3>变化三：OLED显示材料增速放缓（基本盘承压）</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期（已验证）</td><td>收入13.14亿，同比仅+3.04%，面临"量升价跌"</td><td>成熟期（10→100）</td><td>高</td><td>已验证</td></tr>
+<tr><td>中期（1-2年）</td><td>折叠屏+中大尺寸OLED驱动增量</td><td>成熟期→衰退期？</td><td>中</td><td>收入维持13-15亿</td></tr>
+<tr><td>长期（2年+）</td><td>OLED渗透率见顶，MiniLED/MicroLED竞争</td><td>衰退期风险</td><td>低</td><td>不纳入定价</td></tr>
+</table>
+</div>
+
+<!-- ===== Step 2.5：即时错配识别 ===== -->
+<div class="section" id="step2.5">
+<h2>🎯 Step 2.5：即时错配识别</h2>
+
+<h3>估值锚验证</h3>
+<table>
+<tr><th>指标</th><th>数值</th><th>匹配判断</th></tr>
+<tr><td>净利润增速（2025年实际）</td><td>+22.87%</td><td>✅</td></tr>
+<tr><td>净利润增速（2026年预测）</td><td>+30.4%（机构预测4.03亿）</td><td>⚠️ Q1净利-4.34%，全年能否达标存疑</td></tr>
+<tr><td>当前PE（TTM）</td><td>31.63倍</td><td>✅ 行业平均30-40倍</td></tr>
+<tr><td>动态PE（2026E）</td><td>24.1倍</td><td>✅ 匹配</td></tr>
+<tr><td><strong>PEG</strong></td><td><strong>0.79</strong></td><td>✅ 匹配</td></tr>
+</table>
+
+<h3>股价敏感性分析</h3>
+<table>
+<tr><th>如果股价涨到</th><th>对应市值</th><th>需要全年净利润（按25倍PE）</th><th>后续季度平均需达到</th></tr>
+<tr><td>当前55.20元</td><td>97.19亿</td><td>3.89亿</td><td>9117万/季度（是Q1的2.09倍）</td></tr>
+<tr><td>+10%（60.72元）</td><td>106.9亿</td><td>4.28亿</td><td>1.01亿/季度</td></tr>
+<tr><td>+20%（66.24元）</td><td>116.6亿</td><td>4.66亿</td><td>1.10亿/季度</td></tr>
+<tr><td>+30%（71.76元）</td><td>126.4亿</td><td>5.06亿</td><td>1.20亿/季度</td></tr>
+</table>
+
+<p><strong>判断</strong>：Q1净利润4365万，后续季度若恢复至2025年Q2-Q3水平（1.0-1.2亿/季度），全年可达3.8-4.2亿。股价当前位置需要Q2业绩恢复至1亿左右才能匹配，概率中等。</p>
+
+<h3>错配识别</h3>
+
+<h4>错配一：认知差——"半导体材料"概念过度定价</h4>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>市场当前共识</td><td>瑞联新材是"半导体材料+OLED"双轮驱动，电子材料高增长=高估值</td></tr>
+<tr><td>事实真相</td><td>电子材料仅占收入的4.13%，OLED占78%且增速仅3%。公司是"OLED材料龙头+小比例半导体概念"</td></tr>
+<tr><td>价格隐含估值</td><td>当前24倍动态PE隐含了"半导体材料高成长"的估值溢价</td></tr>
+<tr><td>真相定价</td><td>如果按"OLED材料龙头（成熟期）+小比例高增新业务"定价，合理PE应为20-25倍</td></tr>
+<tr><td>错配幅度</td><td>当前价→真相定价约-10%~+5%，错配不大</td></tr>
+<tr><td>纠正催化剂</td><td>2026中报披露电子材料收入占比仍&lt;10%时，市场可能重新认知</td></tr>
+</table>
+
+<h4>错配二：信息差——医药板块高毛利被低估</h4>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>市场当前共识</td><td>医药板块是"CDMO代工"，毛利率低、竞争激烈</td></tr>
+<tr><td>事实真相</td><td>医药板块毛利率64.83%，管线351个（创新药193个），高毛利+高壁垒</td></tr>
+<tr><td>错配幅度</td><td>医药板块估值可能被低估20-30%</td></tr>
+<tr><td>纠正催化剂</td><td>2026中报披露医药板块毛利率维持60%+，且管线持续增加</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话错配判断</strong>：当前价格最大的错误是市场对"半导体材料"概念的过度定价（实际仅占4%收入），若中报电子材料占比仍低则概念溢价消退；但医药板块64.83%毛利率可能被低估，若持续验证则有修复空间。整体错配不大，股价当前位置基本合理。</p>
+</div>
+</div>
+
+<!-- ===== Step 3：可信度裁决 ===== -->
+<div class="section" id="step3">
+<h2>⚖️ Step 3：可信度裁决</h2>
+
+<h3>三情景推演</h3>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td><strong style="color:#4caf50;">乐观</strong></td><td>+27%至70元</td><td>电子材料放量（中报收入增速&gt;100%）+医药维持高增+OLED回暖</td><td>25%</td></tr>
+<tr><td><strong style="color:#ffd700;">基准</strong></td><td>0%~+10%至55-60元</td><td>电子材料稳步增长（中报收入增速50-100%）+医药增速回落至30-50%+OLED平稳</td><td><strong>55%</strong></td></tr>
+<tr><td><strong style="color:#ff6b6b;">悲观</strong></td><td>-18%至45元</td><td>电子材料验证不及预期（中报收入增速&lt;50%）+医药增速大幅回落+OLED价格压力加剧</td><td>20%</td></tr>
+</table>
+
+<p><strong>加权预期收益</strong>：+5.9% | <strong>风险收益比</strong>：0.83 | <strong>预期差大小</strong>：<span class="tag tag-gold">中（10-30%）</span></p>
+
+<h3>证伪信号（什么时候放弃）</h3>
+<table>
+<tr><th>信号</th><th>含义</th><th>出现概率</th></tr>
+<tr><td>2026中报电子材料收入增速&lt;50%</td><td>半导体故事证伪，概念溢价消退</td><td>30%</td></tr>
+<tr><td>2026中报医药毛利率&lt;55%</td><td>高毛利不可持续，CDMO竞争加剧</td><td>20%</td></tr>
+<tr><td>2026中报OLED收入负增长</td><td>基本盘恶化，全年业绩承压</td><td>25%</td></tr>
+<tr><td>2026Q2单季净利&lt;8000万</td><td>全年4亿目标难达，估值下修</td><td>35%</td></tr>
+</table>
+
+<h3>关键验证节点</h3>
+<table>
+<tr><th>时间</th><th>事件</th><th>验证什么</th><th>如果miss怎么办</th></tr>
+<tr><td>2026-08-21</td><td>2026年中报</td><td>电子材料收入增速、医药毛利率、Q2单季净利</td><td>若电子材料增速&lt;50%且Q2净利&lt;8000万，则悲观情景概率升至40%</td></tr>
+<tr><td>2026-10</td><td>2026年三季报</td><td>医药持续性、OLED趋势、全年业绩指引</td><td>若前三季净利&lt;2.5亿，则全年4亿目标大概率miss</td></tr>
+<tr><td>2027-05</td><td>PSPI项目完工</td><td>产能释放进度、客户验证结果</td><td>若延期或验证不及预期，电子材料故事证伪</td></tr>
+</table>
+</div>
+
+<!-- ===== Step 4：投资逻辑 ===== -->
+<div class="section" id="step4">
+<h2>🏁 Step 4：投资逻辑</h2>
+
+<div class="verdict-box neutral">
+<h4>⚠️ 中价值——转型逻辑清晰但验证期长，当前价格基本合理</h4>
+<p>三支柱转型逻辑清晰，但新支柱收入占比仍小（电子材料4%+医药17%），基本盘（OLED）增速放缓至3%。2026Q1净利下滑-4.34%是最大不确定性。低负债率（9.88%）+充裕现金提供安全边际，但业绩验证前难有大空间。</p>
+</div>
+
+<h3>流动性环境</h3>
+<p><strong>存量博弈</strong>——A股成交维持万亿左右，资金偏向抱团高景气板块，容错率低。存量博弈下，导入期概念（电子材料）的兑现周期会被拉长，只有硬业绩+硬逻辑才能支撑估值。瑞联新材处于"新旧交替"过渡期，需要业绩验证才能突破。</p>
+
+<h3>估值匹配度检查</h3>
+<table>
+<tr><th>检查项</th><th>判断</th><th>依据</th></tr>
+<tr><td>PEG匹配度</td><td><span class="tag tag-green">✅ 匹配</span></td><td>PEG=0.79，增速质量中高</td></tr>
+<tr><td>增速质量</td><td><span class="tag tag-gold">⚠️ 中</span></td><td>2025年增速好但2026Q1下滑，全年持续性待验证</td></tr>
+<tr><td>估值安全边际</td><td><span class="tag tag-gold">⚠️ 中等</span></td><td>负债率9.88%极低、现金充裕，但Q1业绩是隐忧</td></tr>
+</table>
+
+<h3>投资价值等级</h3>
+<table>
+<tr><th>预期差等级</th><th>判断依据</th><th>价值等级</th></tr>
+<tr><td>中预期差（10-30%）</td><td>基准情景收益5-10%</td><td><span class="tag tag-gold">☑ 中价值</span></td></tr>
+</table>
+
+<h3>跟踪周期判断</h3>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>故事能走多远</td><td><strong>中期（1-2年）</strong>——电子材料放量需要2027年PSPI项目完工，医药CDMO需要2-3年商业化转化</td></tr>
+<tr><td>判断节点</td><td>2026-08-21中报、2026-10三季报、2027-05 PSPI项目</td></tr>
+<tr><td>中途退出条件</td><td>中报电子材料增速&lt;50% 或 Q2单季净利&lt;8000万</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话核心逻辑</strong>：分析目的是判断"三支柱转型"能否在OLED基本盘放缓的背景下靠电子材料和医药接力，这个变化在<strong>1-2年内</strong>有<strong>55%概率</strong>带来<strong>5-10%收益</strong>，核心验证节点是<strong>2026-08-21中报</strong>，如果<strong>中报电子材料增速&lt;50%且Q2净利&lt;8000万</strong>则放弃。</p>
+</div>
+</div>
+
+<!-- ===== 数据来源 ===== -->
+<div class="section">
+<h2>📚 数据来源清单</h2>
+<table>
+<tr><th>数据</th><th>来源</th><th>时间</th></tr>
+<tr><td>股价/市值/PE</td><td>东方财富</td><td>2026-07-13实时</td></tr>
+<tr><td>2025年年报</td><td>巨潮资讯网/公司公告</td><td>2026-04-23</td></tr>
+<tr><td>2026年一季报</td><td>公司公告</td><td>2026-04</td></tr>
+<tr><td>机构预测</td><td>开源证券/天风证券研报</td><td>2026-05-09</td></tr>
+<tr><td>业务结构/财务数据</td><td>2025年年报</td><td>2026-04</td></tr>
+<tr><td>医药管线/电子材料进展</td><td>公司投资者交流纪要</td><td>2026-05-22</td></tr>
+<tr><td>PSPI项目进度</td><td>公司公告</td><td>2025年年报</td></tr>
+<tr><td>历史季度数据</td><td>各期季报/半年报</td><td>2025-2026</td></tr>
+<tr><td>资产负债表/现金流</td><td>iFinD/stock_finance_data</td><td>2025年报</td></tr>
+</table>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-07-13 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

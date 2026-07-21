@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>601995 中金公司 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>中金公司</h1>
+            <p class="code">601995 · 投行贵族 · 三合一券商重组 · 业绩暴增 · 汇金系整合</p>
+            <p class="date">分析日期：2026-07-15 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-07-15</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+<h2>🔥 大白话三问（30秒读完）</h2>
+
+<p><strong>【这家公司是做什么的？】</strong><br>
+行业归属：证券公司/投资银行（金融板块）。<br>
+产业链位置：中游——金融中介（帮助企业上市/融资、帮有钱人管钱、帮机构买卖股票）。<br>
+核心产品/业务：投资银行（IPO承销、并购重组）+ 股票业务（机构交易、衍生品）+ 财富管理（高净值客户资管）+ 固定收益（债券、ABS）+ 资产管理。<br>
+客户：企业（B2B，投行客户）+ 机构投资者（B2B，交易对手）+ 高净值个人（B2C，财富管理）。<br>
+增长逻辑：①资本市场牛市→交易量+IPO+资管规模三升；②三合一重组（吞并东兴+信达）→营收从行业第五跳至第三。</p>
+
+<p><strong>【贵不贵？】</strong><br>
+当前：股价37.65元，市值约1746亿，PE TTM约17.8倍。<br>
+2025年净利97.91亿，2026H1已预告77-82亿（+78%-90%），全年预估150-160亿（+53%-63%）。<br>
+动态PE≈11-12倍（1746/150），PEG≈0.2-0.3（增速60%+）。<br>
+合理区间：悲观（全年130亿）→25-30元；基准（全年150-160亿）← <strong>最可能</strong> → 35-42元；乐观（重组后协同+180亿）→ 45-55元。<br>
+当前37.65元 → <strong>在基准区间中上沿，动态估值偏低</strong>。<br>
+券商板块平均PE约15-20倍，中金动态PE 11-12倍，低于板块平均。</p>
+
+<p><strong>【有没有故事？】</strong><br>
+真故事：①业绩暴增——2026H1净利77-82亿（+78%-90%），全年有望150亿+；②三合一重组——吞并东兴+信达，营收从行业第五→第三，汇金系内部整合打造万亿券商；③重组获上交所+证监会双受理，进度超预期。<br>
+假故事：今日涨6.24%跟券商板块暴动——券商板块今日集体大涨，个股跟板块β，需区分。<br>
+预期差：市场可能对"三合一重组"的进度和协同价值认识不足（上交所+证监会已受理），同时对业绩暴增的持续性有疑虑（Q1+75% vs H1+78-90%，增速在加速而非放缓）。</p>
+
+<p><strong>【最坏会怎样？】</strong><br>
+证伪信号：①2026H2业绩增速断崖式回落至&lt;20%（市场转熊+交易量萎缩）；②重组被监管否决（小概率但致命）；③整合后文化冲突、人员流失、客户迁移不顺。<br>
+验证节点：2026-08-20（正式中报披露，确认H1业绩真实质量）。<br>
+三情景：乐观冲45元+（全年180亿+重组获批，25%概率）/ 基准横盘35-42元（全年150-160亿，55%概率）← <strong>最可能</strong> / 悲观跌回28-32元（H2业绩miss+重组延迟，20%概率）。</p>
+</div>
+
+<div class="section">
+<h2>📌 四句话总结</h2>
+<table>
+<tr><th>维度</th><th>大白话</th></tr>
+<tr><td>核心变化</td><td>三合一重组（东兴+信达）进入监管审核快车道，H1业绩暴增78-90%——估值与叙事双驱动</td></tr>
+<tr><td>估值位置</td><td>动态PE≈11-12倍，PEG≈0.2-0.3，低于券商板块平均15-20倍——估值偏低</td></tr>
+<tr><td>预期差</td><td>市场可能低估了重组进度（双受理）+业绩持续性（增速在加速），存在认知差</td></tr>
+<tr><td>风险点</td><td>H2业绩能否维持高增速；重组整合风险；今日跟涨券商板块，板块退潮则回调</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📋 执行摘要</h2>
+<p><strong>分析日期</strong>：2026-07-15</p>
+<p><strong>核心变化</strong>：①三合一重组（换股吸收合并东兴+信达）获上交所（6月12日）+证监会（7月14日）双受理，进度超预期；②2026H1业绩预增77-82亿（+78%-90%），增速在加速（Q1+75%→H1+78-90%）；③合并后营收从行业第五→第三，打造万亿级券商。</p>
+<p><strong>投资价值</strong>：<span class="highlight">中价值</span>（偏上）（业绩高增+重组催化，但券商板块强周期，H2持续性待验证）</p>
+<p><strong>预期差等级</strong>：<span class="highlight">中预期差</span>（10-30%）</p>
+<p><strong>跟踪周期</strong>：中期（1-2年，重组落地+整合效果验证）</p>
+<p><strong>关键验证</strong>：2026-08-20（正式中报）、重组证监会核准时间、2026Q3-Q4业绩持续性</p>
+<p><strong>证伪信号</strong>：中报实际净利低于预告下限（77亿）/ H2增速&lt;30% / 重组审批延迟超3个月</p>
+</div>
+
+<div class="section">
+<h2>🔍 一、变化识别（Step 1）</h2>
+
+<h3>基础画像（极简数据）</h3>
+<table>
+<tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
+<tr><td>股票名称</td><td>中金公司</td><td>-</td></tr>
+<tr><td>股票代码</td><td>601995.SH</td><td>-</td></tr>
+<tr><td>当前股价</td><td>37.65元（2026-07-15 11:30，涨6.24%）</td><td>搜狐证券/同花顺数据</td></tr>
+<tr><td>市值</td><td>约1746亿（A股）</td><td>搜狐证券</td></tr>
+<tr><td>所属行业</td><td>证券公司/投资银行</td><td>年报</td></tr>
+<tr><td>实控人</td><td>中央汇金（汇金系核心券商）</td><td>年报</td></tr>
+</table>
+
+<h3>核心变化识别（1-2个）</h3>
+<table>
+<tr><th>变化类型</th><th>具体事件</th><th>发生时间</th><th>信息来源</th></tr>
+<tr><td>并购重组</td><td>换股吸收合并东兴证券+信达证券，获上交所（6/12）+证监会（7/14）双受理，合并后营收从行业第五→第三</td><td>2026-06-12/2026-07-14</td><td>公司公告/上交所/证监会</td></tr>
+<tr><td>业绩拐点</td><td>2026H1业绩预增：归母净利77.08-82.27亿（+78%-90%），扣非75.52-80.62亿（+78%-90%），增速在加速</td><td>2026-07-08</td><td>公司业绩预告</td></tr>
+</table>
+
+<p><strong>变化简述</strong>：<br>
+&gt; 中金公司同时发生两个核心变化：①业绩层面——2026H1净利预增78-90%，增速在加速（Q1+75%→H1+78-90%），显示资本市场活跃度持续高涨；②结构层面——三合一重组（东兴+信达）获监管双受理，进度超预期，合并后将成为行业第三大券商（营收372亿），这是汇金系内部整合打造"中国高盛"的关键一步。两个变化共振：业绩高增提供了估值安全垫，重组提供了估值溢价。</p>
+
+<p class="highlight">🔍 一句话核心发现：业绩暴增（H1+78-90%）+三合一重组双受理——估值安全垫+估值溢价双驱动，这是券商板块最硬的两个逻辑同时发生。</p>
+</div>
+
+<div class="section">
+<h2>⚖️ 二、变化权重排序（Step 1.5）</h2>
+<table>
+<tr><th>排序</th><th>变化</th><th>权重</th><th>股价贡献</th><th>未来演变</th><th>验证时点</th></tr>
+<tr><td>1</td><td>2026H1业绩暴增（+78-90%）</td><td><span class="tag tag-base">底</span></td><td>已部分兑现（动态PE 11-12倍）</td><td>若H2维持+30%以上，则全年150亿+，底扎实</td><td>2026-08-20中报</td></tr>
+<tr><td>2</td><td>三合一重组（东兴+信达）</td><td><span class="tag tag-top">顶</span></td><td>概念溢价（重组未落地）</td><td>若证监会3个月内批准，则顶兑现；若延迟6个月+，则顶消散</td><td>2026Q3-Q4</td></tr>
+<tr><td>3</td><td>券商板块暴动（今日+6%）</td><td><span class="tag tag-noise">噪</span></td><td>短期情绪驱动</td><td>板块热度消退后个股回归自身逻辑</td><td>2026-07-15后数日</td></tr>
+</table>
+
+<p><strong>一句话权重判断</strong>：业绩暴增是<strong>底</strong>（已产生真实利润，动态PE仅11-12倍），三合一重组是<strong>顶</strong>（进度超预期但尚未落地），今日板块暴动是<strong>噪</strong>（短期情绪）。</p>
+</div>
+
+<div class="section">
+<h2>🔄 三、行业景气度×公司共振检查（Step 1.6）</h2>
+
+<div class="resonance-box">
+<h4>📊 共振检查结果：强共振</h4>
+<p><strong>行业方向</strong>：向上加速——资本市场活跃度提升（IPO回暖+交易量放大+并购重组活跃），券商行业进入业绩兑现期</p>
+<p><strong>行业斜率</strong>：陡峭（50%+）——2026H1券商业绩普遍暴增，行业斜率大于50%</p>
+<p><strong>公司卡位</strong>：投行贵族+汇金系核心——在IPO承销、跨境业务、高端财富管理领域长期领跑，重组后行业第三</p>
+<p><strong>受益顺序</strong>：已传导——H1业绩预增78-90%已确认，股票业务+投行+财富管理三升</p>
+<p><strong>共振强度</strong>：<span class="tag tag-strong">强</span>（公司核心业绩与券商行业向上周期高度共振，且重组催化额外加分）</p>
+</div>
+
+<h3>三层检查详情</h3>
+<table>
+<tr><th>检查项</th><th>评估</th><th>依据</th></tr>
+<tr><td>①行业方向</td><td>向上加速</td><td>资本市场活跃度提升，IPO回暖，交易量放大，并购重组政策放松（2026年"并购六条"）</td></tr>
+<tr><td>②行业斜率</td><td>陡峭（50%+）</td><td>2026H1券商业绩普遍暴增（中信、中信建投等同步高增长），行业斜率>50%</td></tr>
+<tr><td>③公司卡位</td><td>投行贵族+汇金系核心</td><td>IPO承销长期领跑，跨境业务优势，高端财富管理品牌；重组后行业第三（营收372亿）</td></tr>
+<tr><td>④受益顺序</td><td>已传导</td><td>H1业绩预增78-90%已确认，股票业务+106%、投行+149%、财富管理+41%三升</td></tr>
+<tr><td>⑤共振强度</td><td><span class="tag tag-strong">强</span></td><td>公司核心业绩与券商行业向上周期高度共振，且重组催化额外加分</td></tr>
+</table>
+
+<p><strong>关键发现</strong>：<br>
+&gt; 中金公司与券商行业周期<strong>强共振</strong>，且处于共振核心（投行+股票业务双轮驱动）。更特殊的是，公司额外拥有"三合一重组"这一板块内独一无二的催化，共振强度比同行更强。</p>
+</div>
+
+<div class="section">
+<h2>📈 四、变化价值——能带来什么？（Step 2）</h2>
+
+<h3>变化一：2026H1业绩暴增（+78-90%）</h3>
+
+<h4>分层拆解</h4>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>周期位置</th><th>可行性</th></th></tr>
+<tr><td>短期（已验证）</td><td>H1净利77-82亿（+78-90%），股票业务+106%、投行+149%、财富管理+41%</td><td>成长期</td><td>已验证</td></tr>
+<tr><td>中期（1-2年）</td><td>若全年150-160亿，动态PE 11-12倍，低于板块平均15-20倍，估值修复空间20-40%</td><td>成长期</td><td>中高</td></tr>
+<tr><td>长期（2年+）</td><td>若资本市场持续活跃，净利站稳200亿+，估值中枢上移至15-18倍</td><td>成熟期</td><td>中（取决于市场周期）</td></tr>
+</table>
+
+<p><strong>产业周期位置说明</strong>：<br>
+&gt; 券商行业是典型的周期性行业。当前处于资本市场活跃度上升的<strong>成长期</strong>（交易量放大、IPO回暖、并购活跃）。但券商周期与股市高度同步，若市场转熊则业绩快速回落。</p>
+
+<h4>演变路径</h4>
+<ul>
+<li><strong>乐观路径</strong>：如果H2资本市场维持高活跃度（日均成交&gt;1.5万亿），则全年净利180亿+，动态PE&lt;10倍，估值修复至45-55元（+20-45%）</li>
+<li><strong>基准路径</strong>：如果H2活跃度温和回落（日均成交1.0-1.5万亿），则全年净利150-160亿，动态PE 11-12倍，股价横盘35-42元（-5%~+12%）</li>
+<li><strong>悲观路径</strong>：如果H2市场转熊（日均成交&lt;1万亿），则全年净利&lt;130亿，动态PE&gt;13倍，股价跌回28-32元（-15%~-25%）</li>
+</ul>
+
+<h4>关键质疑点</h4>
+<table>
+<tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+<tr><td>增速是否可持续？</td><td>H1增速78-90% vs Q1增速75%，在加速。但2025年基数已高（97.91亿，+72%），2026年高增速后2027年基数更高</td><td>2027年增速大概率回落至20-30%甚至更低，券商强周期属性</td></tr>
+<tr><td>固收业务为何下滑？</td><td>2025年固收收入1716.69亿（-21.25%）</td><td>固收业务是券商收入压舱石，若持续下滑则平滑业绩能力减弱</td></tr>
+<tr><td>负债率84%是否过高？</td><td>券商负债率普遍较高（杠杆经营），但84%在行业中偏高</td><td>市场波动时风险敞口较大，但汇金系背景提供信用背书</td></tr>
+</table>
+
+<h3>变化二：三合一重组（东兴+信达）</h3>
+
+<h4>分层拆解</h4>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>周期位置</th><th>可行性</th></th></tr>
+<tr><td>短期（已验证）</td><td>上交所（6/12）+证监会（7/14）双受理，进度超预期</td><td>导入期</td><td>已验证</td></tr>
+<tr><td>中期（1-2年）</td><td>若获批，合并后营收372亿（行业第三），规模效应+协同降本，净利增厚10-20%</td><td>成长期</td><td>中高</td></tr>
+<tr><td>长期（2年+）</td><td>打造"中国高盛"，国际化+全牌照+规模优势，估值溢价5-10%</td><td>成长期→成熟期</td><td>中（故事，不纳入定价）</td></tr>
+</table>
+
+<p><strong>产业周期位置说明</strong>：<br>
+&gt; 券商行业整合处于<strong>导入期→成长期</strong>。2023年中央金融工作会议提出"培育一流投行"，2024-2025年政策持续推动，2026年进入落地期。中金三合一重组是政策导向+市场化整合的典型案例。</p>
+
+<h4>演变路径</h4>
+<ul>
+<li><strong>乐观路径</strong>：证监会3个月内批准，2026Q4完成交割，2027年并表贡献收入100亿+，协同效应显现，估值溢价兑现</li>
+<li><strong>基准路径</strong>：证监会6-12个月内批准，2027年并表，整合期文化冲突+人员流失，协同效应打折扣，营收增厚但利润增厚有限</li>
+<li><strong>悲观路径</strong>：监管审批延迟或附加条件（如业务剥离、资本金要求），整合成本超预期，1+1+1&lt;2</li>
+</ul>
+
+<h4>关键质疑点</h4>
+<table>
+<tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+<tr><td>换股价格是否公允？</td><td>中金36.68元 vs 当前37.65元（已高于换股价），东兴16.05元（溢价26%），信达19.11元（平价）</td><td>当前股价高于换股价，若重组后股价回落，换股股东可能受损</td></tr>
+<tr><td>股本稀释严重？</td><td>新发行31.04亿股，总股本从48.27亿增至79.31亿（+64%）</td><td>EPS稀释64%，但营收增厚30%+，需看利润增厚能否抵消稀释</td></tr>
+<tr><td>整合风险？</td><td>三家券商文化差异大（中金投行贵族 vs 东兴/信达国资背景），客户重叠、人员冗余</td><td>历史券商合并案例（如申万宏源）整合期阵痛3-5年，短期成本&gt;收益</td></tr>
+<tr><td>监管风险？</td><td>反垄断审查、资本金充足率、关联交易、利益冲突</td><td>汇金系内部整合监管阻力较小，但金融控股公司监管趋严</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>💡 五、即时错配识别（Step 2.5）</h2>
+
+<h3>估值锚验证</h3>
+<table>
+<tr><th>指标</th><th>数值</th><th>质量检查</th></th></tr>
+<tr><td>净利润增速(TTM)</td><td>约+75%（2025年+72%→2026H1+78-90%）</td><td>扣非增速与归母增速基本一致（75% vs 78-90%），质量高</td></tr>
+<tr><td>PE TTM</td><td>约17.8倍（1746/97.91）</td><td>券商板块平均15-20倍，处于区间下限</td></tr>
+<tr><td>动态PE（2026E）</td><td>约11-12倍（1746/150）</td><td>低于板块平均，显著偏低</td></tr>
+<tr><td><strong>PEG</strong></td><td><strong>约0.2-0.3</strong></td><td><strong>&lt;0.5，严重低估</strong></td></tr>
+<tr><td>PS</td><td>约6.1倍（1746/284.81）</td><td>券商板块PS约3-8倍，处于中等</td></tr>
+</table>
+
+<p><strong>增速质量检查</strong>：</p>
+<ul>
+<li>扣非增速 vs 归母增速：75.52-80.62亿（+78-90%）vs 77.08-82.27亿（+78-90%），差距&lt;5%，<strong>水分极低</strong></li>
+<li>营收增速 vs 利润增速：H1营收增速未知，但Q1营收+54%，利润+75%，利润增速&gt;营收增速，主要来自高毛利业务（投行、股票业务）占比提升，<strong>需警惕持续性</strong></li>
+<li>增速持续性：2025年+72%→2026H1+78-90%，<strong>在加速而非放缓</strong>，但2027年基数高后大概率回落</li>
+<li>利润绝对值：H1 77-82亿，<strong>有实际意义</strong>（非小基数）</li>
+</ul>
+
+<h3>股价敏感性分析</h3>
+<table>
+<tr><th>如果股价涨到</th><th>对应市值</th><th>需要全年净利（按PE 15倍）</th><th>H1占全年比例</th><th>H2需达到</th></tr>
+<tr><td>当前价37.65元</td><td>1746亿</td><td>116亿（按15倍PE）</td><td>H1中值79.5亿</td><td>H2需36.5亿（全年116亿）</td></tr>
+<tr><td>+10%（41.42元）</td><td>1921亿</td><td>128亿</td><td>62%</td><td>H2需48.5亿</td></tr>
+<tr><td>+20%（45.18元）</td><td>2095亿</td><td>140亿</td><td>57%</td><td>H2需60.5亿</td></tr>
+<tr><td>+30%（48.95元）</td><td>2270亿</td><td>151亿</td><td>53%</td><td>H2需71.5亿</td></tr>
+</table>
+
+<p><strong>判断</strong>：<br>
+H1中值79.5亿，若全年按116亿（PE 15倍），H2仅需36.5亿（是H1的46%）。历史上券商H2业绩通常与H1持平或略低（季节性不明显），36.5亿的目标并不高（2025H2约62亿）。<br>
+<strong>结论</strong>：当前价37.65元按15倍PE仅需全年116亿，远低于市场一致预期的150亿+。即使涨到+20%（45元），按15倍PE需要140亿，而H1已79.5亿，H2需60.5亿（2025H2约62亿，持平即可）。<strong>当前估值明显偏低，+20%仍有基本面支撑。</strong></p>
+
+<h3>错配一：认知差（业绩增速"加速"被市场误读为"高基数不可持续"）</h3>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>B. 认知差</td></tr>
+<tr><td>市场当前共识</td><td>"2025年净利+72%已是高基数，2026年增速必然放缓，H1+78-90%是短期市场热度，不可持续"</td></tr>
+<tr><td>事实真相</td><td>H1增速在加速（Q1+75%→H1+78-90%），不是放缓。扣非与归母增速一致，质量高。核心驱动（股票业务+106%、投行+149%）是资本市场活跃度提升，不是一次性收益</td></tr>
+<tr><td>价格隐含估值</td><td>当前动态PE 11-12倍，隐含市场认为2026全年净利仅130-140亿（增速40-50%），对H2极度悲观</td></tr>
+<tr><td>真相定价</td><td>若全年150-160亿（增速53-63%），按板块平均15倍PE，市值应为2250-2400亿，对应股价48-51元</td></tr>
+<tr><td>错配幅度</td><td>当前37.65元→若认知纠正，合理价48-51元（+28-35%）</td></tr>
+<tr><td>纠正催化剂</td><td>2026-08-20正式中报（确认H1业绩质量）+ 2026Q3-Q4业绩持续超预期</td></tr>
+<tr><td>错配持续时间预估</td><td>可维持至中报披露前（约5周），若中报超预期则立即纠正</td></tr>
+</table>
+
+<h3>错配二：反应差（重组进度超预期但市场反应不足）</h3>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td>C. 反应差</td></tr>
+<tr><td>市场当前共识</td><td>"重组是好事但审批时间长、整合风险大，股价已部分反映重组预期"</td></tr>
+<tr><td>事实真相</td><td>重组进度超预期：2025年11月停牌→2026年5月草案→6月股东会通过→6月12日交易所受理→7月14日证监会受理，7个月内完成从停牌到双受理。历史券商重组（如申万宏源）从预案到获批通常需1-2年</td></tr>
+<tr><td>价格隐含估值</td><td>当前价隐含"重组2027年才能获批"的预期</td></tr>
+<tr><td>真相定价</td><td>若2026Q4获批，2027年并表，则重组催化提前兑现，估值溢价5-10%</td></tr>
+<tr><td>错配幅度</td><td>当前37.65元→若重组进度超预期，合理价+5-10%（39-41元）</td></tr>
+<tr><td>纠正催化剂</td><td>证监会正式核准公告（预计2026Q3-Q4）</td></tr>
+<tr><td>错配持续时间预估</td><td>维持至证监会核准前，核准公告即纠正</td></tr>
+</table>
+
+<h3>即时错配综合判断</h3>
+<table>
+<tr><th>错配类型</th><th>数量</th><th>错配幅度合计</th><th>纠正确定性</th><th>交易意义</th></tr>
+<tr><td>A. 信息差</td><td>0</td><td>—</td><td>—</td><td>无</td></tr>
+<tr><td>B. 认知差</td><td>1（业绩增速加速被市场低估）</td><td>+28-35%</td><td>中高（中报可验证）</td><td>核心错配</td></tr>
+<tr><td>C. 反应差</td><td>1（重组进度超预期）</td><td>+5-10%</td><td>中（监管审批不确定）</td><td>辅助错配</td></tr>
+</table>
+
+<p class="highlight">🔍 一句话错配判断：当前价格最大的错误是低估了业绩增速的持续性（H1加速而非放缓），同时反应不足于重组进度超预期。若中报确认高增长，合计有28-45%修复空间，催化剂是2026-08-20中报。</p>
+</div>
+
+<div class="section">
+<h2>🎯 六、可信度裁决（Step 3）</h2>
+
+<h3>三情景推演</h3>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td>乐观</td><td>+20-45%（至45-55元）</td><td>H2业绩维持+30%以上+全年净利180亿+重组2026Q4获批+市场活跃度维持高位</td><td>25%</td></tr>
+<tr><td>基准</td><td>-5%~+15%（至35-43元）</td><td>H2增速回落至20-30%+全年净利150-160亿+重组2027年获批+市场温和回落</td><td>55%</td></tr>
+<tr><td>悲观</td><td>-15-25%（至28-32元）</td><td>H2业绩miss（H2净利&lt;40亿）+全年&lt;130亿+重组延迟6个月+市场转熊</td><td>20%</td></tr>
+</table>
+
+<p><strong>加权预期</strong>：25%×32.5% + 55%×5% + 20%×(-20%) = <strong>+6.875%</strong><br>
+<strong>风险收益比</strong>：32.5% / 20% = <strong>1.625:1</strong><br>
+<strong>预期差大小</strong>：☑中（10-30%）</p>
+
+<h3>证伪信号（什么时候放弃）</h3>
+<table>
+<tr><th>信号</th><th>含义</th><th>出现概率</th></tr>
+<tr><td>中报实际净利低于预告下限（77亿）</td><td>业绩预告质量差，H1增速虚高</td><td>低（预告通常保守）</td></tr>
+<tr><td>Q3营收增速&lt;20%或净利增速&lt;15%</td><td>业绩拐点确认，全年预期下调</td><td>中</td></tr>
+<tr><td>重组审批延迟超6个月或附加严苛条件</td><td>重组顶消散，估值溢价回撤</td><td>中低</td></tr>
+<tr><td>日均成交跌破1万亿持续2周以上</td><td>资本市场活跃度转熊，券商业绩基础动摇</td><td>中</td></tr>
+<tr><td>板块退潮+日成交额&lt;10亿持续3日</td><td>资金流出，流动性枯竭</td><td>中</td></tr>
+</table>
+
+<h3>关键验证节点</h3>
+<table>
+<tr><th>时间</th><th>事件</th><th>验证什么</th><th>距分析日</th><th>如果miss怎么办</th></tr>
+<tr><td>2026-08-20</td><td>2026中报</td><td>H1实际净利是否达预告区间；业务结构（股票/投行/财富管理）是否真实改善</td><td>5周</td><td>若实际净利&lt;77亿，则下调至悲观情景</td></tr>
+<tr><td>2026-10月</td><td>三季报</td><td>Q3业绩持续性+全年展望</td><td>3个月</td><td>若Q3净利环比大幅下滑（&lt;25亿），则全年预期下调至130亿以下</td></tr>
+<tr><td>2026Q3-Q4</td><td>重组证监会核准</td><td>重组催化是否兑现</td><td>3-6个月</td><td>若延迟至2027年，则顶消散，估值溢价回撤5-10%</td></tr>
+<tr><td>2026-2027年</td><td>整合效果</td><td>1+1+1是否&gt;2，协同效应是否显现</td><td>6-12个月</td><td>若整合成本超预期，则长期叙事受损</td></tr>
+</table>
+
+<p class="highlight">🔍 一句话核心发现：加权预期收益约+6.9%，风险收益比1.625:1，预期差中等——核心错配是业绩增速持续性被低估，验证节点是8月20日中报。</p>
+</div>
+
+<div class="section">
+<h2>💡 七、综合研判（Step 4）</h2>
+
+<h3>0. 流动性环境</h3>
+<p><strong>当前判断</strong>：<span class="highlight">增量市场</span>（券商板块今日集体大涨，资金涌入，资本市场活跃度提升）</p>
+<p>增量市场下，券商板块容错率提高，但需注意：券商是强周期板块，增量/退潮转换快。今日板块暴动可能跟市场对中报业绩高增的预期有关，若中报后业绩无法持续则板块可能快速退潮。</p>
+
+<h3>1. 投资价值评估</h3>
+<table>
+<tr><th>检查项</th><th>判断</th><th>依据</th></tr>
+<tr><td>PEG匹配度</td><td>✅ 严重低估</td><td>PEG≈0.2-0.3，增速质量高（扣非与归母一致）</td></tr>
+<tr><td>增速质量</td><td>✅ 高</td><td>扣非增速78-90%与归母一致，利润增速&gt;营收增速，但需警惕高毛利业务占比提升的持续性</td></tr>
+<tr><td>估值安全边际</td><td>有（较强）</td><td>动态PE 11-12倍低于板块平均15-20倍，即使业绩miss至130亿，PE也仅13.4倍，仍在板块下限</td></tr>
+</table>
+
+<p><strong>估值匹配结论</strong>：<br>
+&gt; 当前价格与增速<strong>严重低估</strong>，安全边际<strong>较强</strong>，<strong>业绩持续性</strong>是估值的最大支撑，<strong>市场周期转熊</strong>是最大风险。</p>
+
+<ul>
+<li><strong>评估结论</strong>：<span class="highlight">中价值</span>（偏上）（条件：若中报确认H1业绩质量且H2不大幅回落，可升级为高价值）</li>
+<li><strong>核心依据</strong>：业绩暴增（H1+78-90%）+重组催化（双受理）+估值偏低（动态PE 11-12倍），但券商强周期属性限制价值等级</li>
+<li><strong>最大风险</strong>：H2业绩断崖式回落（市场转熊）+重组整合不及预期→戴维斯双杀（高基数×业绩miss×板块退潮）</li>
+<li><strong>情景概率</strong>：乐观+基准概率合计80%</li>
+</ul>
+
+<h3>2. 投资价值等级</h3>
+<table>
+<tr><th>预期差等级</th><th>判断依据</th><th>价值等级</th></tr>
+<tr><td>中预期差</td><td>三情景加权收益约+6.9%，动态PE 11-12倍低于板块平均，但券商板块β高、α低，预期差被板块波动稀释</td><td>中价值</td></tr>
+</table>
+
+<h3>3. 跟踪周期判断</h3>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>故事能走多远</td><td>中期（重组落地+整合效果验证，1-2年）</td></tr>
+<tr><td>判断节点</td><td>2026-08-20（中报）、2026Q3-Q4（重组核准）、2026Q3-Q4（业绩持续性）</td></tr>
+<tr><td>中途退出条件</td><td>①中报实际净利&lt;77亿；②Q3净利环比&lt;25亿；③重组延迟6个月+；④日均成交&lt;1万亿持续2周；⑤板块退潮+日成交&lt;10亿持续3日</td></tr>
+</table>
+
+<p><strong>跟踪周期判断</strong>：<br>
+&gt; 中期跟踪——变化是业绩驱动（H1暴增+持续性）+重组驱动（审批+整合），需要1-2年验证。券商板块的特殊性：跟踪周期必须缩短至季度级别，因为券商业绩与市场活跃度高度同步，一旦市场转熊则逻辑迅速证伪。若中报确认业绩质量+重组进展顺利→可延长跟踪至2026年报；若中报miss或市场转熊→立即放弃。</p>
+
+<p class="highlight">🔍 一句话核心发现：业绩暴增（H1+78-90%）+三合一重组双受理+动态PE仅11-12倍——中价值偏上、中预期差，但券商强周期属性是达摩克利斯之剑，中报和重组核准是双生死线，板块退潮是最大外部风险。</p>
+</div>
+
+<div class="section">
+<h2>📎 附录：数据来源</h2>
+<table>
+<tr><th>数据</th><th>来源</th><th>时间</th></tr>
+<tr><td>股价/市值/PE</td><td>搜狐证券/同花顺数据</td><td>2026-07-15 11:30</td></tr>
+<tr><td>2025年年报</td><td>公司年报/搜狐证券</td><td>2026-03-31</td></tr>
+<tr><td>2026Q1季报</td><td>公司季报/搜狐证券</td><td>2026-04-30</td></tr>
+<tr><td>2026H1业绩预告</td><td>公司公告（临2026-038）</td><td>2026-07-08</td></tr>
+<tr><td>重组进展（上交所受理）</td><td>公司公告/上交所</td><td>2026-06-15</td></tr>
+<tr><td>重组进展（证监会受理）</td><td>信达证券公告/证监会</td><td>2026-07-14</td></tr>
+<tr><td>重组草案细节</td><td>新京报/观点网/新浪财经</td><td>2026-05-18/06-16</td></tr>
+<tr><td>业务结构数据</td><td>搜狐证券（年报分项）</td><td>2026-04-17</td></tr>
+<tr><td>股东户数</td><td>搜狐证券/每周复盘</td><td>2026-05-02</td></tr>
+</table>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-07-15 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>002068 黑猫股份 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>黑猫股份</h1>
+            <p class="code">002068 · 炭黑龙头 · 导电炭黑国产替代 · 固态电池概念 · 周期反转</p>
+            <p class="date">分析日期：2026-06-09 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-06-09</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- ===== 执行摘要 ===== -->
+<div class="section" id="summary">
+<h2>📋 执行摘要</h2>
+<div class="highlight-box">
+<p><strong>核心变化</strong>：传统炭黑周期底部+导电炭黑国产替代放量，公司从周期股向"周期+成长"双轮驱动转型</p>
+<p><strong>投资价值</strong>：<span class="tag tag-gold">中价值</span> <span class="tag tag-purple">中预期差（10-30%）</span></p>
+<p><strong>跟踪周期</strong>：中期（6-12个月，业绩验证驱动）</p>
+<p><strong>关键验证节点</strong>：2026-08-30中报（Q2是否扭亏+导电炭黑收入占比）</p>
+<p><strong>证伪信号</strong>：Q2继续亏损+导电炭黑收入占比<5%+资产负债率>75%</p>
+</div>
+</div>
+
+<!-- ===== 大白话三问 ===== -->
+<div class="dabaohua-section">
+<h2>🎯 大白话三问</h2>
+
+<div class="dabaohua-q">
+<div class="q-label">【这家公司是做什么的？（产业链位置）】</div>
+<div class="q-answer">
+国内炭黑龙头（市占率约10%），主要产品：橡胶用炭黑（轮胎）、导电炭黑（锂电池/固态电池）、焦油精制、白炭黑。实控人景德镇市国资委（通过黑猫集团控股约36%），老牌国企。<br><br>
+<strong>核心产品</strong>：
+<ul>
+<li>传统炭黑（占大头）：轮胎用的橡胶补强剂，国内龙头，9大基地</li>
+<li>导电炭黑（增速来源）：锂电池导电剂，2万吨产能，订单爬坡中</li>
+<li>新材料（远期）：碳纳米管、湿法母胶、L21特种炭黑</li>
+</ul>
+<strong>客户是谁</strong>：B2B，大客户是轮胎厂（固特异/米其林/国内轮胎）和电池厂（送样验证中）<br><br>
+<strong>技术门槛</strong>：导电炭黑长期被卡博特(美国)/欧励隆(德国)垄断，国产替代是核心逻辑<br><br>
+<strong>增长逻辑</strong>：导电炭黑国产替代（需求5.6万吨→14万吨）+ 传统炭黑周期反转（2025巨亏→2026扭亏）
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【第一：这价格贵不贵？】</div>
+<div class="q-answer">
+<strong>当前</strong>：股价10.64元，总市值~78亿，<strong>亏损中（PE为负）</strong><br><br>
+<strong>券商预测</strong>（方正证券 2026-05-17）：
+<ul>
+<li>2026年全年净利润：1.80亿（悲观0.8-1.2亿传统+1.5-2亿导电）</li>
+<li>2027年：3.00亿</li>
+<li>2028年：4.82亿</li>
+<li>对应2026年PE：~41倍（如果1.8亿兑现）</li>
+</ul>
+<strong>合理股价区间</strong>（按券商预测）：
+<ul>
+<li>如果全年0.8亿（悲观）→ 合理股价7-9元</li>
+<li>如果全年1.8亿（基准）← <strong>最可能</strong> → 合理股价10-13元</li>
+<li>如果全年3.0亿（乐观）→ 合理股价15-18元</li>
+</ul>
+<strong>当前10.64元</strong> → <strong>在基准区间的中间位置</strong>。<br><br>
+<strong>判断</strong>：不算贵，但也不算便宜——股价已经反映了"2026年扭亏"的预期，没有多大安全垫。如果Q2继续亏损，股价会往下走。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【第二：有没有故事？】</div>
+<div class="q-answer">
+<strong>行业景气周期</strong>：
+<ul>
+<li>传统炭黑：冬天（2025年全行业亏损，煤焦油成本高+需求弱）→ 可能正在转春（炭黑价格回升，出口增长）</li>
+<li>导电炭黑：春天（新能源渗透率提升，国产替代加速）</li>
+</ul>
+<strong>公司真故事</strong>：
+<ul>
+<li>导电炭黑2万吨产能投产，月度订单"百吨级并逐月攀升"（公司公告）</li>
+<li>下游核心客户加速验证导入（电池厂）</li>
+<li>传统炭黑出口增长（1-4月出口38万吨，均价1036美元/吨）</li>
+</ul>
+<strong>公司假故事</strong>：
+<ul>
+<li>"固态电池概念"（6010产品还在送样测试，没收入）→ 蹭热点</li>
+<li>"碳纳米管"（500吨产能，但没说订单）→ 远期故事，不兑现</li>
+<li>"碳中和"概念 → 无实质收入贡献</li>
+</ul>
+<strong>预期差</strong>：市场都知道导电炭黑是方向，但可能低估了<strong>国产替代的速度</strong>和<strong>传统炭黑反转的确定性</strong>。2025年-4.63亿巨亏已经把市场信心打到底了，任何边际改善都会放大反应。
+</div>
+</div>
+
+<div class="dabaohua-q">
+<div class="q-label">【第三：最坏会怎样？】</div>
+<div class="q-answer">
+<strong>证伪信号</strong>：
+<ul>
+<li>如果Q2继续亏损（传统炭黑没反转）+ 导电炭黑订单没放量 → 故事结束，股价回8元以下</li>
+<li>如果导电炭黑客户验证失败（没拿到电池厂订单）→ 导电故事证伪</li>
+</ul>
+<strong>验证节点</strong>：
+<ul>
+<li>2026-08-30 中报：看Q2是否扭亏为盈，导电炭黑收入占比</li>
+<li>2026-10 三季报：确认全年扭亏趋势</li>
+</ul>
+<strong>三情景</strong>：
+<ul>
+<li><strong>乐观（20%概率）</strong>：Q2扭亏+导电炭黑放量 → 全年1.8亿+利润 → 股价冲15+</li>
+<li><strong>基准（50%概率）← 最可能</strong>：Q2减亏但未完全扭亏，导电炭黑缓慢爬坡 → 全年0.5-1.0亿 → 股价10-12元横盘</li>
+<li><strong>悲观（30%概率）</strong>：Q2继续亏损，导电炭黑订单未放量 → 全年继续亏损 → 股价跌回7-8元</li>
+</ul>
+<strong>风险点</strong>：资产负债率70.52%很高，毛利率0.16%极低，现金流紧张。如果周期反转不来，公司财务压力会很大。
+</div>
+</div>
+
+<div class="dabaohua-summary">
+<h4>四句话总结</h4>
+<p><strong>核心变化</strong>：传统炭黑周期底部+导电炭黑国产替代放量，公司从周期股向"周期+成长"双轮驱动转型</p>
+<p><strong>估值位置</strong>：当前亏损中PE为负，按券商预测2026年PE约41倍，在合理区间中间位置，无安全垫</p>
+<p><strong>预期差</strong>：市场可能低估了导电炭黑国产替代的速度和传统炭黑周期反转的确定性，若纠正有15-25%空间</p>
+<p><strong>风险点</strong>：如果Q2继续亏损且导电炭黑订单没放量，故事证伪；负债率70%是最大隐患</p>
+</div>
+</div>
+
+<!-- ===== Step 1：变化识别 ===== -->
+<div class="section" id="step1">
+<h2>🔍 Step 1：变化识别</h2>
+
+<h3>基础画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
+<tr><td>股票名称</td><td>黑猫股份</td><td>—</td></tr>
+<tr><td>股票代码</td><td>002068.SZ</td><td>—</td></tr>
+<tr><td>当前股价</td><td>10.64元</td><td>iFinD（2026-06-04收盘）</td></tr>
+<tr><td>市值</td><td>~78.2亿</td><td>总股本7.35亿×10.64</td></tr>
+<tr><td>所属行业</td><td>化工新材料（炭黑）</td><td>iFinD</td></tr>
+<tr><td>市盈率</td><td>亏损（PE为负）</td><td>iFinD</td></tr>
+<tr><td>市净率</td><td>3.28倍</td><td>iFinD</td></tr>
+<tr><td>资产负债率</td><td>70.52%</td><td>2026Q1财报</td></tr>
+<tr><td>毛利率</td><td>0.16%</td><td>2026Q1财报</td></tr>
+</table>
+
+<h3>核心变化识别</h3>
+<table>
+<tr><th>变化类型</th><th>具体事件</th><th>发生时间</th><th>信息来源</th></tr>
+<tr><td>导电炭黑国产替代</td><td>2万吨导电炭黑产能投产，月度订单突破百吨级，下游电池厂加速验证导入</td><td>2026年持续</td><td>公司公告/投资者互动/方正研报</td></tr>
+<tr><td>传统炭黑周期反转</td><td>2025年巨亏-4.63亿后，炭黑价格回升，出口增长（1-4月出口38万吨），行业供需格局改善</td><td>2026Q1-Q2</td><td>海关数据/券商研报/公司公告</td></tr>
+</table>
+
+<h3>变化权重排序</h3>
+<table>
+<tr><th>排序</th><th>变化</th><th>权重</th><th>当前股价贡献</th><th>关键验证时点</th></tr>
+<tr><td>1</td><td>导电炭黑国产替代</td><td><span class="tag tag-purple">顶</span></td><td>概念溢价（待兑现）</td><td>2026-08-30中报</td></tr>
+<tr><td>2</td><td>传统炭黑周期反转</td><td><span class="tag tag-green">底</span></td><td>已部分兑现（股价从8元→10元）</td><td>2026-08-30中报</td></tr>
+<tr><td>3</td><td>固态电池/碳纳米管概念</td><td><span class="tag tag-red">雾</span></td><td>陪衬</td><td>2026年年报</td></tr>
+<tr><td>4</td><td>碳中和/ESG</td><td><span class="tag tag-red">雾</span></td><td>无贡献</td><td>无</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话核心发现</strong>：导电炭黑国产替代是<strong>顶</strong>（想象空间大但尚未兑现），传统炭黑周期反转是<strong>底</strong>（股价已有部分反映，但能否确认是底），固态电池/碳纳米管是<strong>雾</strong>（纯概念）。</p>
+</div>
+</div>
+
+<!-- ===== Step 2：变化价值 ===== -->
+<div class="section" id="step2">
+<h2>📊 Step 2：变化价值</h2>
+
+<h3>行业景气度×公司共振检查</h3>
+<table>
+<tr><th>检查项</th><th>判断</th></tr>
+<tr><td>①行业方向</td><td>导电炭黑<span class="tag tag-green">向上加速</span>，传统炭黑<span class="tag tag-gold">底部震荡</span></td></tr>
+<tr><td>②行业斜率</td><td>导电炭黑<span class="tag tag-green">陡峭（50%+）</span>，传统炭黑<span class="tag tag-gold">温和（10-20%）</span></td></tr>
+<tr><td>③公司卡位</td><td>国内炭黑龙头，导电炭黑2万吨产能（国内最大之一）</td></tr>
+<tr><td>④受益顺序</td><td>导电炭黑：传导中（订单爬坡）；传统炭黑：已传导（出口增长）</td></tr>
+<tr><td>⑤共振强度</td><td><span class="tag tag-gold">中</span>——导电炭黑强但占比小，传统炭黑弱但占比大</td></tr>
+</table>
+
+<h3>变化一：导电炭黑国产替代</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>周期位置</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期(6个月)</td><td>订单爬坡，收入从0→数千万</td><td>导入期（0→1）</td><td>中</td><td>月度订单"百吨级"，年化收入~1-2亿</td></tr>
+<tr><td>中期(1-2年)</td><td>放量至满产，贡献1.5-2亿利润</td><td>成长期（1→10）</td><td>中</td><td>2万吨×单价3-5万/吨=6-10亿收入</td></tr>
+<tr><td>长期(2年+)</td><td>国产替代完成，市占率提升</td><td>成长期→成熟期</td><td>低</td><td>2030年14万吨需求，黑猫占20%=2.8万吨</td></tr>
+</table>
+
+<h4>关键质疑点</h4>
+<table>
+<tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+<tr><td>导电炭黑占比太低</td><td>2万吨产能 vs 110万吨+传统产能，收入结构仍是传统炭黑为主</td><td>即使导电炭黑满产，对整体利润贡献有限</td></tr>
+<tr><td>验证周期长</td><td>电池厂验证周期6-12个月，当前"送样测试"阶段</td><td>2026年可能无法贡献实质利润</td></tr>
+<tr><td>卡博特不会坐以待毙</td><td>进口龙头可能降价阻击国产替代</td><td>导电炭黑毛利率可能低于预期</td></tr>
+</table>
+
+<h3>变化二：传统炭黑周期反转</h3>
+<table>
+<tr><th>时间维度</th><th>能带来什么</th><th>周期位置</th><th>可行性</th><th>量化空间</th></tr>
+<tr><td>短期(6个月)</td><td>炭黑价格回升，毛利率修复</td><td>衰退期→底部</td><td>中</td><td>毛利率从0.16%→5-10%（历史正常）</td></tr>
+<tr><td>中期(1-2年)</td><td>行业供需平衡，盈利稳定</td><td>成熟期</td><td>中</td><td>年利润0.8-1.2亿（券商预测）</td></tr>
+<tr><td>长期(2年+)</td><td>行业洗牌，龙头集中</td><td>成熟期</td><td>低</td><td>无增量，赚的是存量份额</td></tr>
+</table>
+
+<h4>关键质疑点</h4>
+<table>
+<tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+<tr><td>2026Q1亏损扩大</td><td>Q1营收-12.94%，净利润-9507万（同比-167%）</td><td>周期反转尚未发生，仍在恶化</td></tr>
+<tr><td>资产负债率70.52%</td><td>财务压力大，若继续亏损可能融资困难</td><td>制约反转后的修复速度</td></tr>
+<tr><td>行业竞争格局</td><td>炭黑行业产能过剩，价格战激烈</td><td>即使反转，利润空间有限</td></tr>
+</table>
+</div>
+
+<!-- ===== Step 2.5：即时错配识别 ===== -->
+<div class="section" id="step25">
+<h2>⚡ Step 2.5：即时错配识别</h2>
+
+<h3>估值锚验证</h3>
+<table>
+<tr><th>指标</th><th>数值</th><th>匹配判断</th></tr>
+<tr><td>净利润增速（TTM）</td><td>-1943%（亏损）</td><td><span class="tag tag-red">❌</span> 无法计算</td></tr>
+<tr><td>当前PE</td><td>亏损</td><td><span class="tag tag-red">❌</span> 无法计算</td></tr>
+<tr><td>营收增速</td><td>-12.94%（Q1）</td><td><span class="tag tag-red">❌</span> 负增长</td></tr>
+<tr><td>当前PB</td><td>3.28倍</td><td><span class="tag tag-gold">⚠️</span> 偏高</td></tr>
+<tr><td>券商预测2026年PE</td><td>~41倍（按1.8亿利润）</td><td><span class="tag tag-gold">⚠️</span> 偏高</td></tr>
+<tr><td>券商预测2027年PE</td><td>~24倍（按3.0亿利润）</td><td><span class="tag tag-green">✅</span> 合理</td></tr>
+</table>
+
+<h3>错配一：认知差——把"周期+成长"双轮驱动当成纯周期股</h3>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td><span class="tag tag-purple">B. 认知差</span></td></tr>
+<tr><td>市场当前共识</td><td>黑猫是"亏损的传统炭黑周期股"，估值按周期股给，当前PB 3.28倍偏高</td></tr>
+<tr><td>事实真相</td><td>导电炭黑国产替代的逻辑已经启动（2万吨产能+订单爬坡），公司正在从周期股向"周期+成长"双轮驱动转型</td></tr>
+<tr><td>价格隐含估值</td><td>当前价隐含"2026年继续亏损或微利"的假设，按纯周期股定价</td></tr>
+<tr><td>真相定价</td><td>如果导电炭黑故事兑现，估值逻辑应从"周期股PB"切换到"成长股PE"，合理估值区间应上移20-30%</td></tr>
+<tr><td>错配幅度</td><td>当前价→真相定价有<strong>15-25%</strong>空间（如果故事兑现）</td></tr>
+<tr><td>纠正催化剂</td><td>2026-08-30中报：若Q2扭亏+导电炭黑收入确认，市场会重新定价</td></tr>
+</table>
+
+<h3>错配二：反应差——订单爬坡未被市场充分反应</h3>
+<table>
+<tr><th>维度</th><th>内容</th></tr>
+<tr><td>错配类型</td><td><span class="tag tag-blue">C. 反应差</span></td></tr>
+<tr><td>市场当前共识</td><td>市场知道导电炭黑故事，但认为"还在概念阶段，没有业绩"</td></tr>
+<tr><td>事实真相</td><td>导电炭黑月度订单已"突破百吨级并逐月攀升"（公司4月公告），这不是概念，是已经开始放量的业务</td></tr>
+<tr><td>错配幅度</td><td><strong>10-15%</strong></td></tr>
+<tr><td>纠正催化剂</td><td>公司月度/季度经营数据披露，或中报导电炭黑收入占比超预期</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话错配判断</strong>：当前价格最大的错误是<strong>把黑猫当成纯周期股定价</strong>，忽略了导电炭黑国产替代已经启动（订单爬坡）。若纠正有15-25%空间，催化剂是2026-08-30中报（Q2扭亏+导电收入确认），预计中报前会被部分纠正（如果公司披露经营数据）。</p>
+</div>
+</div>
+
+<!-- ===== Step 3：可信度裁决 ===== -->
+<div class="section" id="step3">
+<h2>⚖️ Step 3：可信度裁决</h2>
+
+<h3>三情景推演</h3>
+<table>
+<tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+<tr><td><strong style="color:#4caf50;">乐观</strong></td><td>+30-50%（13-16元）</td><td>Q2扭亏+导电炭黑放量+全年1.8亿利润兑现</td><td>20%</td></tr>
+<tr><td><strong style="color:#ffd700;">基准</strong></td><td>±10%（9-12元）</td><td>Q2减亏但未完全扭亏，导电炭黑缓慢爬坡，全年0.5-1.0亿</td><td>50%</td></tr>
+<tr><td><strong style="color:#ff6b6b;">悲观</strong></td><td>-20-30%（7-8元）</td><td>Q2继续亏损，导电炭黑订单未放量，全年继续亏损</td><td>30%</td></tr>
+</table>
+
+<p><strong>加权预期</strong>：约-1.5% | <strong>风险收益比</strong>：0.7:1 | <strong>预期差等级</strong>：<span class="tag tag-gold">中偏小</span></p>
+
+<h3>证伪信号</h3>
+<table>
+<tr><th>信号</th><th>含义</th></tr>
+<tr><td>2026中报Q2继续亏损</td><td>传统炭黑周期反转未发生，底不是底</td></tr>
+<tr><td>导电炭黑收入占比<5%</td><td>导电炭黑放量不及预期，顶变雾</td></tr>
+<tr><td>资产负债率>75%</td><td>财务风险加剧，可能融资困难</td></tr>
+</table>
+
+<h3>关键验证节点</h3>
+<table>
+<tr><th>时间</th><th>事件</th><th>验证什么</th></tr>
+<tr><td>2026-08-30</td><td>中报</td><td>Q2是否扭亏，导电炭黑收入占比</td></tr>
+<tr><td>2026-10-XX</td><td>三季报</td><td>全年扭亏趋势确认</td></tr>
+<tr><td>2026-12-XX</td><td>年报预告</td><td>全年利润是否兑现1.8亿</td></tr>
+</table>
+</div>
+
+<!-- ===== Step 4：投资逻辑 ===== -->
+<div class="section" id="step4">
+<h2>🏁 Step 4：投资逻辑</h2>
+
+<div class="verdict-box neutral">
+<h4>⚠️ 中价值——预期差中等，能赚但得熬</h4>
+<p>当前亏损中无法计算PEG，按券商预测2026年PE~41倍。这个估值隐含了"2026年扭亏+2027年高增长"的强预期。如果兑现，2027年24倍PE合理；如果不兑现，当前估值是陷阱。</p>
+</div>
+
+<h3>流动性环境</h3>
+<p><strong>存量博弈</strong>——大盘偏弱震荡，只有硬逻辑+硬业绩才能涨。导电炭黑订单数据+传统炭黑扭亏是中报前唯一的上涨催化剂。</p>
+
+<h3>估值匹配度检查</h3>
+<table>
+<tr><th>检查项</th><th>判断</th></tr>
+<tr><td>PEG匹配度</td><td><span class="tag tag-red">❌</span> 无法计算</td></tr>
+<tr><td>增速质量</td><td><span class="tag tag-red">❌</span> 低</td></tr>
+<tr><td>估值安全边际</td><td><span class="tag tag-red">❌</span> 无</td></tr>
+<tr><td>2027年PE匹配度</td><td><span class="tag tag-green">✅</span> 合理</td></tr>
+</table>
+
+<h3>投资价值等级</h3>
+<table>
+<tr><th>预期差等级</th><th>判断依据</th><th>价值等级</th></tr>
+<tr><td>中预期差（10-30%）</td><td>基准情景收益0-10%</td><td><span class="tag tag-gold">☑ 中价值</span></td></tr>
+</table>
+
+<h3>跟踪周期判断</h3>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>故事能走多远</td><td>中期（6-12个月验证）</td></tr>
+<tr><td>判断节点</td><td>2026-08-30中报</td></tr>
+<tr><td>中途退出条件</td><td>Q2继续亏损/导电炭黑无订单/负债率>75%</td></tr>
+</table>
+
+<div class="highlight-box">
+<p><strong>一句话核心逻辑</strong>：分析目的是<strong>押注导电炭黑国产替代+传统炭黑周期反转的戴维斯双击</strong>，这个变化在<strong>6-12个月</strong>内有<strong>50%概率</strong>带来<strong>0-30%收益</strong>，核心验证节点是<strong>2026-08-30中报</strong>，如果<strong>Q2继续亏损且导电炭黑未放量</strong>则证伪放弃。</p>
+</div>
+</div>
+
+<!-- ===== 数据来源 ===== -->
+<div class="section">
+<h2>📚 数据来源清单</h2>
+<table>
+<tr><th>数据</th><th>来源</th><th>时间</th></tr>
+<tr><td>股价/技术指标</td><td>iFinD</td><td>2026-06-04</td></tr>
+<tr><td>2025年报</td><td>公司公告</td><td>2026-03-31</td></tr>
+<tr><td>2026Q1财报</td><td>每日经济新闻/公司公告</td><td>2026-04-29</td></tr>
+<tr><td>导电炭黑进展</td><td>互动易/公司公告</td><td>2025-2026年</td></tr>
+<tr><td>券商预测</td><td>方正证券研报</td><td>2026-05-17</td></tr>
+<tr><td>行业数据</td><td>海关出口数据</td><td>2026-05-17</td></tr>
+</table>
+</div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-06-09 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>

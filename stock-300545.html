@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300545 联得装备 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        /* ===== 大白话三问区块（置顶，最显眼） ===== */
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-source {
+            color: #5a6a7a;
+            font-size: 0.85em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* ===== 分析框架区块 ===== */
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .info-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(45, 58, 79, 0.5);
+        }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .insight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+        }
+        .insight h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .quote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+
+        .verdict-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .anchor-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: #c9a84c;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .anchor-tag:hover { background: rgba(201, 168, 76, 0.3); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Markdown content fallback (only for unwrapped direct children) */
+        .content > h2 { color: #ffd700; font-size: 1.3em; margin: 25px 0 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .content > h3 { color: #00d4ff; font-size: 1.1em; margin: 20px 0 10px; }
+        .content > h4 { color: #c9a84c; font-size: 1.05em; margin: 15px 0 8px; }
+        .content > p { color: #b0c4de; line-height: 1.8; margin-bottom: 12px; }
+        .content > ul { margin-left: 20px; color: #b0c4de; margin-bottom: 15px; }
+        .content > li { margin-bottom: 8px; }
+        .content strong { color: #e0e6ed; }
+        .content blockquote {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            color: #e0e6ed;
+            font-style: italic;
+        }
+        .content hr { border: none; border-top: 1px solid #2d3a4f; margin: 25px 0; }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>联得装备</h1>
+            <p class="code">300545 · .SZ · 半导体显示设备 · 折叠屏/半导体封测/新能源</p>
+            <p class="date">分析日期：2026-05-28 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-05-28</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="content">
+            # 联得装备（300545）投资分析报告
+**分析日期**: 2026-06-08
+**核心变化**: 京东方G8.6 AMOLED产线设备中标+折叠屏UTG批量出货（苹果供应链）
+**分析师**: 小羿
+
+---
+
+## 🔥 大白话三问（30秒读完）
+
+**【这家公司是做什么的？（产业链位置）】**
+> **行业归属**：半导体显示设备 + 智能装备
+> **产业链位置**：上游设备商（卖铲子的）——给面板厂和手机厂商提供生产设备
+> **核心产品/技术**：
+> - 主打产品：OLED/AMOLED贴合设备、绑定设备、UTG超薄柔性玻璃贴附设备
+> - 用在什么地方：京东方/维信诺等面板厂的OLED产线，苹果/三星等手机厂商的折叠屏生产线
+> - 技术门槛：全球少数掌握UTG全链路真空贴合技术（贴合精度±0.03mm，良率≥95%）
+> **客户是谁**：
+> - B2B企业客户：京东方（长期稳定合作）、维信诺、深天马、苹果、富士康、博世、大陆汽车电子
+> - 客户粘性：设备定制化程度高，切换供应商成本大，粘性强
+> **增长逻辑**：面板厂扩产（京东方G8.6）→ 设备订单增长；折叠屏放量（苹果折叠iPhone）→ UTG设备需求爆发
+
+**【贵不贵？】**
+> 当前股价36.27元，市值约67亿。
+> **合理股价区间**（基于2026年净利润预期）：
+> - 如果全年1.5亿（悲观，订单延迟）→ 合理股价25-30元
+> - 如果全年2.0亿（基准，京东方订单兑现）← **最可能** → 合理股价35-40元
+> - 如果全年2.5亿+（乐观，苹果折叠屏放量）→ 合理股价45-55元
+> 当前36.27元 → **在基准情景的合理区间偏下沿**。与乐观情景对比，有上行空间。
+> **PEG**：当前PE约45倍（基于2025年净利润），若2026年净利润恢复至2亿，PE降至33倍，PEG≈1.0（匹配）。
+> **增速质量**：2025年净利润下滑约50%（基数低），但2026年有望反转，增速质量待验证。
+
+**【有没有故事？】**
+> **行业景气周期**：显示设备行业处于OLED替代LCD+折叠屏渗透率提升的成长期，是春天（高增长阶段）。
+> **公司真故事**：
+> - 京东方G8.6 AMOLED产线设备中标（已确认2.01亿元），打破国外垄断
+> - 折叠屏UTG设备向苹果等头部客户批量出货（2026年5月确认）
+> - 苹果折叠iPhone预计2026年9月发布，出货800-1000万台（郭明錤预测）
+> **公司假故事**：
+> - 半导体先进封装设备（收入暴跌86%，2025年界面新闻报道），概念远大于实质
+> - 市场曾炒作钙钛矿设备，但无实质订单
+> **预期差**：市场当前把联得装备当作"业绩下滑的传统显示设备商"，但忽略了它是京东方G8.6+苹果折叠屏的核心设备供应商。若2026年订单放量被业绩验证，估值有望从"周期设备股"重估为"成长设备股"。
+
+**【最坏会怎样？】**
+> **证伪信号**：如果2026年Q2营收增速继续为负（低于-10%），或京东方订单交付延迟，故事结束。
+> **验证节点**：2026年8月底中报（看京东方订单收入确认+苹果折叠屏设备放量）。
+> **三情景**：
+> - 乐观冲55元（30%概率）：京东方订单+苹果折叠屏双放量，2026年净利润2.5亿+
+> - 基准横盘35-40元（50%概率）← **最可能**：京东方订单兑现，传统业务稳定，2026年净利润1.8-2亿
+> - 悲观跌回25元（20%概率）：订单交付延迟，业绩继续下滑
+
+---
+
+## 📌 四句话总结（说给别人听）
+
+| 维度 | 大白话 |
+|:-----|:-------|
+| **核心变化** | 这家公司中标了京东方630亿OLED产线设备，折叠屏设备还进了苹果供应链 |
+| **估值位置** | 当前PE约45倍，在合理区间偏下沿，若2026年业绩反转则不贵 |
+| **预期差** | 市场把它当业绩下滑的周期股，但它是国产替代核心设备商，若纠正有30-50%空间 |
+| **风险点** | 如果中报业绩继续下滑，或苹果折叠屏延期，逻辑失效 |
+
+---
+
+## 执行摘要（半页以内）
+- **分析日期**：2026-06-08
+- **核心变化**：京东方G8.6 AMOLED产线设备中标（2.01亿元）+ 折叠屏UTG设备批量出货（苹果供应链）
+- **投资价值**：中价值（短期事件驱动，中期业绩验证）
+- **预期差等级**：中预期差（10-30%空间）
+- **跟踪周期**：短期（6个月内验证京东方订单交付+苹果折叠屏催化）
+- **关键验证节点**：2026年8月底中报、苹果折叠iPhone发布时间（预计9月）
+- **证伪信号**：Q2营收增速继续为负或京东方订单交付延迟
+
+---
+
+## 一、变化识别（Step 1）
+
+### 基础画像（极简数据）
+
+| 项目 | 内容 | 数据来源 |
+|:-----|:-----|:---------|
+| 股票名称 | 联得装备 | |
+| 股票代码 | 300545 | |
+| 当前股价 | 36.27元 | iFinD（2026-06-08 09:34） |
+| 市值 | 约67亿 | 基于1.85亿股本×36.27元 |
+| 所属行业 | 半导体显示设备/智能装备 | 公司公告/同花顺 |
+
+### 核心变化识别（2个）
+
+| 变化类型 | 具体事件 | 发生时间 | 信息来源 |
+|:---------|:---------|:---------|:---------|
+| ☑新品/新业务 | 京东方第8.6代AMOLED产线设备中标，自动贴合机（D-lami）2.01亿元 | 2025-06-26预中标，2026-06-05确认 | 公司公告/必联网/东方财富 |
+| ☑新品/新业务 | 折叠屏UTG超薄柔性玻璃贴附设备向行业头部客户（含苹果）批量出货 | 2026-05-21确认 | 深交所互动易/公司业绩说明会 |
+
+**变化简述**：
+> 联得装备从传统显示设备商升级为国产OLED核心设备供应商，同时切入苹果折叠屏供应链，两个变化均指向2026年订单放量。
+
+**🔍 一句话核心发现（Step 1）**:
+> 联得装备同时命中了京东方630亿OLED产线国产替代和苹果折叠屏UTG设备两个核心催化。
+
+---
+
+## 二、变化价值——能带来什么？
+
+### 变化一：京东方G8.6 AMOLED产线设备中标
+
+#### 分层拆解
+
+| 时间维度 | 能带来什么 | **产业周期位置** | 可行性 | 量化空间 | 依据 |
+|:---------|:-----------|:-----------------|:-------|:---------|:-----|
+| **短期(已验证/6个月)** | 2.01亿元订单已中标，2026年交付确认收入 | 成长期（1→10） | 高 | 订单金额2.01亿元，占2025年营收约15% | 公司公告/必联网 |
+| **中期(1-2年)** | 京东方G8.6总投资630亿元，后续模组段设备仍有采购需求 | 成长期 | 中 | 若后续中标绑定/FOP/AOI设备，订单可扩至5-10亿 | 京东方B16项目规划 |
+| **长期(2年+)** | 国内OLED产线持续扩产（维信诺、深天马等），设备国产化率提升 | 成长期 | 中 | 国产替代率从当前约30%提升至50%+ | 行业研报 | **故事，不纳入定价** |
+
+#### 行业景气度×共振检查
+
+| 检查项 | 内容 |
+|:-------|:-----|
+| **①行业方向** | 向上加速——OLED替代LCD，国内面板厂持续扩产 |
+| **②行业斜率** | 陡峭——京东方B16投资630亿，全球唯一"高端"8.6代OLED产线（LTPO+Tandem OLED） |
+| **③公司卡位** | 卡位上游核心——自动贴合机（D-lami）是模组段核心设备，此前M-lami/FOP/偏光片贴片机也已中标，产品覆盖模组段主要工艺 |
+| **④受益顺序** | 已传导——订单已中标，2026年交付并确认收入 |
+| **⑤共振强度** | **强**——公司卡位核心设备+行业斜率陡峭+已确认受益 |
+| **修正说明** | 无需修正，已满足"强"条件 |
+
+#### 演变路径
+
+**乐观路径**: 如果京东方B16后续继续采购绑定/FOP/AOI设备，且公司持续中标，则2026年来自京东方订单可突破5亿元，带动营收增长30%+
+**基准路径**: 如果仅当前2.01亿元订单交付，无新增中标，则2026年贡献增量收入约1.5亿元（扣除2025年基数），营收增长约10%
+**悲观路径**: 如果京东方项目延期或设备验收不及预期，则订单收入确认延迟，2026年业绩承压
+
+#### 关键质疑点
+| 质疑 | 事实 | 影响 |
+|:-----|:-----|:-----|
+| 订单金额是否足够大？ | 2.01亿元仅占京东方B16总投资630亿的0.3%，后续仍有大量设备采购 | 单次订单金额有限，但客户粘性强，后续可跟进 |
+| 毛利率是否会被压缩？ | 国产设备竞标激烈，毛利率可能低于传统设备 | 需关注中报毛利率变化 |
+
+---
+
+### 变化二：折叠屏UTG设备批量出货（苹果供应链）
+
+#### 分层拆解
+
+| 时间维度 | 能带来什么 | **产业周期位置** | 可行性 | 量化空间 | 依据 |
+|:---------|:-----------|:-----------------|:-------|:---------|:-----|
+| **短期(已验证/6个月)** | UTG贴附设备已向头部客户（含苹果）批量出货，2026年Q2正常交付 | 导入期（0→1）→成长期 | 高 | 公司确认批量出货，但具体收入占比不便披露 | 深交所互动易/业绩说明会 |
+| **中期(1-2年)** | 苹果折叠iPhone 2026年出货800-1000万台，2027年2000-2500万台，对应设备需求爆发 | 导入期→成长期 | 中 | 若单条产线设备价值1000-2000万，25条产线对应2.5-5亿元 | 郭明錤预测/行业推算 |
+| **长期(2年+)** | 折叠屏渗透率持续提升，从手机扩展到平板/笔记本，UTG设备需求持续 | 成长期 | 中 | 全球折叠屏设备市场CAGR 30%+ | 行业预测 | **故事，不纳入定价** |
+
+#### 行业景气度×共振检查
+
+| 检查项 | 内容 |
+|:-------|:-----|
+| **①行业方向** | 向上加速——折叠屏手机渗透率从2025年约3%提升至2027年预计10%+ |
+| **②行业斜率** | 陡峭——苹果折叠iPhone 2026年首次发布，预计出货800-1000万台，催化行业爆发 |
+| **③公司卡位** | 卡位上游核心——全球少数掌握UTG全链路真空贴合技术，已向苹果批量出货 |
+| **④受益顺序** | 已传导——设备已批量出货，但终端量产节奏（苹果折叠屏发布时间）影响收入确认 |
+| **⑤共振强度** | **强**——公司卡位核心设备+苹果折叠屏催化+行业斜率陡峭 |
+| **修正说明** | 无需修正，但需注意终端量产节奏不确定性（公司已提示） |
+
+#### 演变路径
+
+**乐观路径**: 如果苹果折叠iPhone 2026年9月如期发布且销量超预期，则公司UTG设备订单持续放量，2026年下半年收入贡献显著
+**基准路径**: 如果苹果折叠屏量产节奏正常，则公司2026年Q2-Q4持续交付，贡献增量收入约1-2亿元
+**悲观路径**: 如果苹果折叠屏延期或销量不及预期，则设备需求回落，收入贡献低于预期
+
+#### 关键质疑点
+| 质疑 | 事实 | 影响 |
+|:-----|:-----|:-----|
+| 收入占比不确定？ | 公司明确表示"暂无法预估相关业务收入占比"，属于未公开经营信息 | 无法量化2026年贡献，存在不确定性 |
+| 是否苹果独家？ | 市场传闻公司为苹果UTG贴合设备核心供应商，但公司未确认具体客户 | 若苹果订单占比高，则客户集中风险 |
+
+---
+
+## 二点五、即时错配识别——为什么现在就能参与？
+
+### 估值锚验证（增速-估值匹配框架）
+
+| 指标 | 数值 | 质量检查 | 匹配判断 |
+|:-----|:-----|:---------|:---------|
+| 净利润增速（2025年） | 约-50% | 扣非增速同步下滑，非一次性因素 | 增速为负，PE无意义 |
+| 净利润增速（2026年预期） | +50-100%（反转） | 基于订单恢复预期 | 假设性增速 |
+| 当前PE（TTM） | 约45-70倍（不同来源差异大） | 基于2025年低净利润 | 偏高 |
+| 当前PE（2026年动态） | 约33倍（假设2亿净利润） | 若反转确认则合理 | ⚠️待验证 |
+| 营收增速（2025年） | 约-15%（全年预估） | 设备行业周期波动 | 下滑 |
+| 营收增速（2026年预期） | +15-30% | 基于订单恢复 | 假设性增速 |
+
+**增速质量检查**：
+- [x] 扣非增速 vs 归母增速：2025年同步下滑，无水分
+- [x] 营收增速 vs 利润增速：利润下滑幅度大于营收，毛利率承压
+- [x] 增速持续性：2026年基于订单恢复，但需中报验证
+- [x] 利润绝对值：2025年净利润约1.3亿（全年预估），绝对值不高，百分比增速波动大
+
+**估值锚结论**:
+> 当前PE基于2025年低净利润显得偏高，但若2026年业绩反转至2亿净利润，动态PE约33倍，PEG≈1.0，匹配度中等。关键在**中报验证**。
+
+---
+
+### 股价敏感性分析（动态估值匹配）
+
+**问题**：如果股价继续上涨，增速能否匹配？
+
+| 如果股价涨到 | 对应市值 | 需要全年净利润（按合理PE） | 当前Q1占全年比例 | 后续季度需达到 |
+|:------------|:---------|:---------------------------|:-----------------|:--------------|
+| **当前价36.27元** | 67亿 | 2.0亿（按33倍PE） | 13.6%（2718万） | 5728万/季度 |
+| **+10%（39.9元）** | 74亿 | 2.2亿 | 13.6% | 6438万/季度 |
+| **+20%（43.5元）** | 80亿 | 2.4亿 | 13.6% | 7094万/季度 |
+| **+30%（47.2元）** | 87亿 | 2.6亿 | 13.6% | 7760万/季度 |
+| **+50%（54.4元）** | 101亿 | 3.0亿 | 13.6% | 9094万/季度 |
+
+**历史季度利润参考**（2024年）：
+- 2024年Q1：4279万
+- 2024年Q2：约5000万（估算）
+- 2024年Q3：约4000万（估算）
+- 2024年Q4：约5000万（估算）
+- 2025年Q1：2718万（同比下滑36%）
+
+**判断**：
+> 当前Q1净利润2718万，如果全年需要2.0亿，后续季度平均需要5728万/季度（是Q1的2.1倍）。基于历史季节性规律，Q1通常是全年较低季度（设备行业一季度为淡季），后续季度回升概率较高。但2025年Q2-Q4持续下滑，若2026年Q2未恢复，则全年2亿目标难以达成。
+> **结论**：股价涨到43元以上（+20%），需要Q2营收增速转正+京东方订单开始确认收入才能匹配，概率约50%。股价涨到54元以上（+50%），需要全年净利润3亿+（即苹果折叠屏放量+京东方订单双超预期），概率约30%。
+
+---
+
+### 错配一：认知差
+
+| 维度 | 内容 |
+|:-----|:-----|
+| **错配类型** | B.认知差 |
+| **市场当前共识** | 联得装备是业绩下滑的传统显示设备商，2025年净利润-50%，属于周期下行股，应给予低估值 |
+| **事实真相** | 公司2025年业绩下滑是设备行业周期波动，但2026年已中标京东方2.01亿元订单+苹果折叠屏UTG设备批量出货，订单结构发生质变——从传统LCD设备转向高价值OLED/折叠屏设备 |
+| **价格隐含估值** | 当前PE约45倍（基于2025年低净利润），市场按"周期下行股"定价 |
+| **真相定价** | 若按"成长设备股"（国产替代核心供应商+苹果供应链）定价，合理PE 30-40倍，对应2026年2亿净利润，市值60-80亿，当前67亿在合理区间 |
+| **错配幅度** | 若2026年业绩反转确认，估值可从"周期股"重估为"成长股"，隐含20-30%重估空间 |
+| **纠正催化剂** | 2026年8月底中报披露（京东方订单收入确认+UTG设备收入占比）、苹果折叠屏发布（预计9月） |
+| **错配持续时间预估** | 中报前（约2个月），市场处于"等待验证"状态；若中报超预期，错配纠正 |
+
+### 错配二：信息差
+
+| 维度 | 内容 |
+|:-----|:-----|
+| **错配类型** | A.信息差 |
+| **市场当前共识** | 市场可能仅知道联得装备"中标京东方订单"，但不知道具体金额和后续潜力 |
+| **事实真相** | 公司不仅中标D-lami（2.01亿元），此前M-lami、FOP、偏光片贴片机也已中标京东方G8.6产线，总订单金额可能更大；同时UTG设备已向苹果批量出货 |
+| **价格隐含估值** | 按单一订单2亿元定价，一次性收入 |
+| **真相定价** | 京东方G8.6总投资630亿元，模组段设备采购持续2-3年，公司作为已中标核心供应商，后续订单有持续性；苹果折叠屏若放量，UTG设备需求可复制到多条产线 |
+| **错配幅度** | 若后续订单持续+苹果放量，2026-2027年订单规模可达5-8亿元，是当前市场预期的2-3倍 |
+| **纠正催化剂** | 公司后续公告新增中标（京东方或其他面板厂）、苹果折叠屏发布后市场确认供应链 |
+| **错配持续时间预估** | 中报前，市场逐步消化；若Q2有新订单公告，错配立即纠正 |
+
+### 即时错配综合判断
+
+| 错配类型 | 数量 | 错配幅度合计 | 纠正确定性 | 交易意义 |
+|:---------|:----:|:------------|:----------|:---------|
+| A. 信息差 | 1 | 后续订单可能超预期，幅度30-50% | 中（需中报验证） | 适合提前布局，等待验证 |
+| B. 认知差 | 1 | 估值重估20-30% | 中（需中报确认反转） | 中报若超预期，估值修复 |
+| C. 反应差 | 0 | — | — | 当前股价已部分反应预期 |
+
+**一句话错配判断**:
+> 当前价格最大的错误是"把联得装备当周期下行股定价"，若2026年中报确认业绩反转，估值可从45倍PE修复至30-35倍，有20-30%空间；催化剂是2026年8月底中报，预计中报前错配持续，中报后纠正。
+
+---
+
+## 三、可信度裁决——值不值得投？
+
+### 三情景推演
+
+| 情景 | 股价变化 | 触发条件 | 概率权重 |
+|:-----|:---------|:---------|:---------|
+| **乐观** | +50-80%（至55-65元） | 京东方订单+苹果折叠屏双放量，2026年净利润2.5亿+ | 25% |
+| **基准** | +20-30%（至43-47元） | 京东方订单兑现，传统业务稳定，2026年净利润1.8-2亿 | 50% |
+| **悲观** | -20-30%（至25-29元） | 订单交付延迟，业绩继续下滑，2026年净利润<1.5亿 | 25% |
+
+**概率合计**: 100%
+
+### 加权预期
+
+- **预期收益**: +22.5%（25%×65% + 50%×25% + 25%×(-25%)）
+- **风险收益比**: 1.0（上涨空间约25%，下跌空间约25%）
+- **预期差大小**: □中（10-30%）
+
+### 证伪信号（什么时候放弃）
+
+| 信号 | 含义 | 出现概率 |
+|:-----|:-----|:---------|
+| 2026年Q2营收增速继续为负（<-10%） | 京东方订单尚未确认收入，业绩拐点未现 | 中 |
+| 中报净利润同比下滑（未转正） | 订单交付延迟，2026年反转预期证伪 | 低 |
+| 苹果折叠屏发布时间延期至2027年 | UTG设备需求延迟，短期催化消失 | 中 |
+| 京东方G8.6项目延期或缩减投资 | 设备订单需求萎缩 | 低 |
+
+### 关键验证节点
+
+| 时间 | 事件 | 验证什么 | 距分析日 | 如果miss怎么办 |
+|:-----|:-----|:---------|:---------|:--------------|
+| 2026-06-30 | Q2结束 | 看订单交付进度和收入确认 | 22天 | 若Q2无收入确认，中报压力增大 |
+| 2026-08-31 | 中报披露 | 京东方订单收入确认+净利润增速是否转正 | 约84天 | 若中报未反转，降低预期至基准/悲观 |
+| 2026-09-XX | 苹果折叠屏发布（预计） | 确认UTG设备需求是否放量 | 约90-100天 | 若延期，短期催化消失，等待2027年 |
+| 2026-10-31 | 三季报 | 全年业绩趋势确认 | 约145天 | 若全年净利润<1.5亿，逻辑证伪 |
+
+### 模式演绎法评估
+
+| 推演维度 | 当前状态 | 乐观(6个月) | 基准(6个月) | 悲观(6个月) | 概率 |
+|:---------|:---------|:------------|:------------|:------------|:-----|
+| **催化落地** | 京东方订单已中标，UTG已批量出货 | 苹果折叠屏发布，双催化兑现 | 京东方订单正常交付，无新催化 | 订单交付延迟 | 50% |
+| **业绩验证** | 2025年下滑，2026Q1继续下滑 | 中报反转，净利润+50% | 中报持平或微增 | 中报继续下滑 | 50% |
+| **估值修复** | PE约45倍（基于低净利润） | PE降至30倍（成长定价） | PE维持35-40倍 | PE维持45倍+或压缩 | 50% |
+| **外部冲击** | 显示设备行业周期波动 | 行业复苏，OLED扩产加速 | 行业平稳 | 面板厂缩减投资 | 20% |
+
+---
+
+## 四、投资逻辑（综合研判）
+
+### 0. 流动性环境
+
+**当前判断**: 存量博弈（震荡市/量能萎缩）
+> 2026年6月市场处于震荡市，北向资金波动，量能未明显放大。存量博弈下，只有硬逻辑+硬业绩才能涨，纯概念容错率低。
+
+### 1. 投资价值评估
+
+#### 估值匹配度检查
+
+| 检查项 | 判断 | 依据 |
+|:-------|:-----|:-----|
+| PEG匹配度 | ⚠️偏高（基于2025年）/ ⚠️待验证（基于2026年） | 2025年PE约45倍，2026年动态PE约33倍（假设2亿净利润） |
+| 增速质量 | ⚠️中 | 2025年下滑，2026年反转预期基于订单，未验证 |
+| 估值安全边际 | 无 | 当前PE无安全边际，若反转失败则估值承压 |
+
+**估值匹配结论**:
+> 当前价格与2025年增速**偏高**，但若2026年反转确认则**匹配**。安全边际**不足**，京东方订单和苹果折叠屏是估值的最大支撑。
+
+- **评估结论**: □中价值（条件:2026年中报确认业绩反转）
+- **核心依据**: 京东方订单+苹果折叠屏双催化，国产替代核心设备商定位
+- **最大风险**: 中报业绩未反转，订单交付延迟
+- **情景概率**: 乐观+基准概率合计 75%
+
+### 2. 投资价值等级
+
+| 预期差等级 | 判断依据 | 价值等级 |
+|:-----------|:---------|:---------|
+| **中预期差** | 三情景加权收益约22.5%，市场部分认识（已反应部分预期），但中报反转尚未验证 | **中价值** |
+
+### 3. 跟踪周期判断
+
+| 维度 | 判断 |
+|:-----|:-----|
+| **故事能走多远** | 短期（事件驱动，6个月内验证）——京东方订单交付+苹果折叠屏发布 |
+| **判断节点** | 2026年8月底中报 |
+| **中途退出条件** | Q2营收增速未转正/中报净利润继续下滑/苹果折叠屏延期 |
+
+**跟踪周期判断**:
+- **短期跟踪**：变化是事件驱动（京东方订单交付+苹果折叠屏发布），事件兑现即验证
+- 若中报超预期，可升级为中期跟踪；若不及预期，立即退出
+
+### 一句话核心逻辑（强制输出）
+
+> 分析目的是验证联得装备2026年业绩反转的可能性，京东方G8.6订单+苹果折叠屏UTG设备在6个月内有75%概率带来20-30%收益，核心验证节点是2026年8月底中报，如果中报营收增速未转正或净利润继续下滑则证伪。
+
+---
+
+## 附录：数据来源清单
+
+| 数据 | 来源 | 时间 |
+|:-----|:-----|:-----|
+| 股价/市值 | iFinD | 2026-06-08 09:34 |
+| 京东方G8.6中标公告 | 公司公告/必联网/东方财富 | 2025-06-26/2026-06-05 |
+| UTG批量出货确认 | 深交所互动易/业绩说明会 | 2026-05-21/2026-05-12 |
+| 财务数据（2025年报/2026Q1） | 公司年报/季报 | 2026-04-22/2026-04-25 |
+| 苹果折叠屏预测 | 郭明錤/天风国际 | 2026-04-21 |
+| 行业数据（OLED产线投资） | 集邦Display/夸克显示 | 2025-06-27 |
+| 半导体收入下滑 | 界面新闻 | 2026-05-20 |
+| 客户名单 | 公司投资者关系活动记录 | 2026-04-24/2026-05-12 |
+
+---
+
+*报告版本：个股分析工作流 V4.3*
+*分析模式：完整版（大白话三问 + 执行摘要 + Step 1-4）*
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-05-28 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function init() {
+            const content = document.querySelector('.content');
+            if (!content) return;
+
+            // Phase 1: Wrap h2 sections
+            const children = Array.from(content.children);
+            const groups = [];
+            let currentGroup = [];
+            let foundFirstH2 = false;
+
+            children.forEach(child => {
+                if (child.tagName === 'H2') {
+                    foundFirstH2 = true;
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    currentGroup = [child];
+                } else if (foundFirstH2) {
+                    currentGroup.push(child);
+                }
+            });
+            if (currentGroup.length > 0) {
+                groups.push(currentGroup);
+            }
+
+            groups.forEach(group => {
+                const firstEl = group[0];
+                if (firstEl.tagName !== 'H2') return;
+
+                const text = firstEl.textContent;
+                let wrapperClass = 'section';
+                let wrapperId = '';
+
+                if (text.includes('大白话三问')) {
+                    wrapperClass = 'dabaohua-section';
+                } else if (text.includes('Step 1.5')) {
+                    wrapperId = 'step15';
+                } else if (text.includes('Step 1')) {
+                    wrapperId = 'step1';
+                } else if (text.includes('Step 2')) {
+                    wrapperId = 'step2';
+                } else if (text.includes('Step 3')) {
+                    wrapperId = 'step3';
+                } else if (text.includes('Step 4')) {
+                    wrapperId = 'step4';
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = wrapperClass;
+                if (wrapperId) wrapper.id = wrapperId;
+
+                firstEl.parentNode.insertBefore(wrapper, firstEl);
+                group.forEach(el => wrapper.appendChild(el));
+            });
+
+            // Phase 2: Wrap dabaohua-q paragraphs (【xxx】questions)
+            content.querySelectorAll('.dabaohua-section > p').forEach(p => {
+                const text = p.textContent.trim();
+                if (text.startsWith('【') && text.includes('】')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-q';
+
+                    const labelEnd = text.indexOf('】') + 1;
+                    const labelText = text.substring(0, labelEnd);
+                    const answerText = text.substring(labelEnd).trim();
+
+                    const label = document.createElement('div');
+                    label.className = 'q-label';
+                    label.textContent = labelText;
+
+                    const answer = document.createElement('div');
+                    answer.className = 'q-answer';
+                    answer.textContent = answerText;
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(answer);
+                    p.parentNode.replaceChild(wrapper, p);
+                }
+            });
+
+            // Phase 3: Wrap 四句话总结 h4 and its following p
+            content.querySelectorAll('.dabaohua-section h4').forEach(h4 => {
+                if (h4.textContent.includes('四句话总结')) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'dabaohua-summary';
+                    h4.parentNode.insertBefore(wrapper, h4);
+                    wrapper.appendChild(h4);
+                    const nextP = wrapper.nextElementSibling;
+                    if (nextP && nextP.tagName === 'P') {
+                        wrapper.appendChild(nextP);
+                    }
+                }
+            });
+
+            // Phase 4: Add anchor tags (← Step X)
+            content.querySelectorAll('.dabaohua-q .q-answer, .section p').forEach(el => {
+                const html = el.innerHTML;
+                const newHtml = html.replace(
+                    /←\s*Step\s*(\d+(?:\.\d+)?)/g,
+                    function(match, num) {
+                        const stepId = num.replace('.', '');
+                        return '<span class="anchor-tag" onclick="document.getElementById(\'step' + stepId + '\').scrollIntoView({behavior:\'smooth\'})"\>' + match + '</span>';
+                    }
+                );
+                if (newHtml !== html) {
+                    el.innerHTML = newHtml;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+
+    // busuanzi 兜底：如果 5 秒后仍显示 --，则隐藏统计行
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>
