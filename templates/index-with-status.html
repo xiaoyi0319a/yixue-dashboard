@@ -1,0 +1,165 @@
+<!--
+================================================================================
+系统可靠性仪表盘 - 网站模板规范
+版本: 1.0
+日期: 2026-08-04
+作者: 小羿
+================================================================================
+
+【变更记录】
+2026-08-04  创建模板，整合系统可靠性仪表盘完整实现
+
+【依赖】
+- 累积统计.json (memory/选股反馈/累积统计.json)
+- 复盘脚本已运行并生成累积统计
+- GitHub Pages 部署正常
+
+================================================================================
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>羿学天天看 | {{DATE}}</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>羿学天天看</h1>
+            <div class="date">{{DATE_FULL}}</div>
+            <div class="ganzhi">{{GANZHI}}</div>
+        </div>
+
+        <!-- 奇门预测 -->
+        <div class="qimen-section">
+            <h2>🔮 奇门君今日预测</h2>
+            <!-- 奇门内容由奇门预测工作流生成 -->
+            {{QIMEN_CONTENT}}
+        </div>
+
+        <!-- ================================================ -->
+        <!-- 系统可靠性仪表盘 (新增 2026-08-04)               -->
+        <!-- ================================================ -->
+        <div class="status-section" id="system-status-container">
+            <h2>📊 方向整理系统状态</h2>
+            <div id="system-status-content">
+                <p style="color:#5a6a7a;text-align:center;padding:20px;">加载中...</p>
+            </div>
+        </div>
+        <script>
+        (function() {
+            const container = document.getElementById('system-status-content');
+            if (!container) return;
+
+            // 内联默认数据（当 fetch 失败时显示）
+            // 注意：每次更新网站时，应同步更新此处的默认数据
+            const defaultData = {
+                "badge": { "text": "{{BADGE_TEXT}}", "class": "{{BADGE_CLASS}}", "label": "{{BADGE_LABEL}}" },
+                "overall": {
+                    "current_streak_type": "{{STREAK_TYPE}}",
+                    "current_streak_days": {{STREAK_DAYS}},
+                    "last_14_hot_days": {{HOT_DAYS}},
+                    "last_14_cold_days": {{COLD_DAYS}},
+                    "last_14_win_rate": {{WIN_RATE}},
+                    "max_win_streak": {{MAX_WIN}},
+                    "max_loss_streak": {{MAX_LOSS}}
+                },
+                "directions": {
+                    "limit_up": {
+                        "last_win_rate": {{LU_RATE}},
+                        "last_avg_return": {{LU_RETURN}},
+                        "streak_days": {{LU_STREAK}},
+                        "history": {{LU_HISTORY}}
+                    },
+                    "news": {
+                        "last_win_rate": {{NS_RATE}},
+                        "last_avg_return": {{NS_RETURN}},
+                        "streak_days": {{NS_STREAK}},
+                        "history": {{NS_HISTORY}}
+                    }
+                }
+            };
+
+            function render(data) {
+                const o = data.overall || {};
+                const b = data.badge || {};
+                const lu = (data.directions && data.directions.limit_up) || {};
+                const ns = (data.directions && data.directions.news) || {};
+
+                const winRateClass = (wr) => wr >= 0.7 ? 'hot' : (wr >= 0.5 ? 'neutral' : 'cold');
+                const dots = (hist) => {
+                    if (!hist || !hist.length) return '';
+                    return hist.map((h) => {
+                        const cls = (h.win_rate || 0) >= 0.5 ? 'hot' : 'cold';
+                        return '<div class="streak-dot ' + cls + '" title="' + (h.date || '') + '"></div>';
+                    }).join('');
+                };
+
+                const html = `
+            <div class="status-badge-wrap">
+                <span class="status-badge ${b.class || 'hot'}">${b.text || '加载中'}</span>
+                <span class="status-label">${b.label || ''} · 系统处于"${o.current_streak_type === 'win' ? '热' : '冷'}"状态</span>
+            </div>
+            <div class="status-summary">
+                近14天：高成功率 ${o.last_14_hot_days || 0} 天 / 低成功率 ${o.last_14_cold_days || 0} 天 (${((o.last_14_win_rate || 0)*100).toFixed(1)}%) · 历史最长连续 ${o.max_win_streak || 0} 天 · 历史最长连续中断 ${o.max_loss_streak || 0} 天
+            </div>
+            <div class="dir-compare">
+                <div class="dir-status-card">
+                    <h4>🔥 涨停方向 · 昨日验证</h4>
+                    <div class="win-rate ${winRateClass(lu.last_win_rate || 0)}">${((lu.last_win_rate || 0)*100).toFixed(1)}%</div>
+                    <div class="meta">平均涨幅 ${(lu.last_avg_return || 0) >= 0 ? '+' : ''}${(lu.last_avg_return || 0).toFixed(2)}% · 连续 ${lu.streak_days || 0} 天</div>
+                    <div class="streak-bar">${dots(lu.history)}</div>
+                    <div class="streak-note">绿=高成功率日 红=低成功率日 (左→右 近14天)</div>
+                </div>
+                <div class="dir-status-card">
+                    <h4>📰 新闻方向 · 昨日验证</h4>
+                    <div class="win-rate ${winRateClass(ns.last_win_rate || 0)}">${((ns.last_win_rate || 0)*100).toFixed(1)}%</div>
+                    <div class="meta">平均涨幅 ${(ns.last_avg_return || 0) >= 0 ? '+' : ''}${(ns.last_avg_return || 0).toFixed(2)}% · 连续 ${ns.streak_days || 0} 天</div>
+                    <div class="streak-bar">${dots(ns.history)}</div>
+                    <div class="streak-note">绿=高成功率日 红=低成功率日 (左→右 近14天)</div>
+                </div>
+            </div>
+                `;
+                container.innerHTML = html;
+            }
+
+            // 优先从 data/system-status.json 加载最新数据
+            fetch('data/system-status.json?' + Date.now())
+                .then(r => r.ok ? r.json() : Promise.reject('fetch failed'))
+                .then(data => render(data))
+                .catch(() => render(defaultData));
+        })();
+        </script>
+        <!-- ================================================ -->
+        <!-- /系统可靠性仪表盘                                -->
+        <!-- ================================================ -->
+
+        <!-- 涨停方向 -->
+        <div class="ztb-section">
+            <h2>📈 涨停板方向整理</h2>
+            {{LIMIT_UP_DIRECTIONS}}
+        </div>
+
+        <!-- 新闻方向 -->
+        <div class="news-section">
+            <h2>📰 新闻方向整理</h2>
+            {{NEWS_DIRECTIONS}}
+        </div>
+
+        <!-- 验证节点 -->
+        <div class="verification-section">
+            <h2>🔍 关键验证节点</h2>
+            {{VERIFICATION_NODES}}
+        </div>
+
+        <div class="footer">
+            <p>羿学天天看 · 数据截至 {{DATA_TIME}} · 仅供参考不构成投资意见</p>
+        </div>
+    </div>
+</body>
+</html>
