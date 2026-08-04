@@ -1,6 +1,6 @@
 {
   "date": "2026-08-04",
-  "computed_at": "2026-08-04T17:51:44.047730",
+  "computed_at": "2026-08-04T17:53:54.425080",
   "overall": {
     "current_streak_type": "win",
     "current_streak_days": 3,
@@ -87,7 +87,7 @@
   "badge": {
     "text": "🔥 连续 3 天",
     "class": "hot",
-    "label": "历史最长"
+    "label": "历史最长（样本天数14天）"
   },
   "directions": {
     "limit_up": {
