@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>603087 甘李药业 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-q .q-answer strong { color: #e0e6ed; }
+
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        .highlight-box {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+        }
+        .highlight-box p { color: #d0d8e8; margin-bottom: 6px; }
+        .highlight-box p:last-child { margin-bottom: 0; }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 5px;
+        }
+        .tag-gold { background: rgba(201, 168, 76, 0.2); color: #c9a84c; }
+        .tag-purple { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-green { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-red { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        th {
+            color: #c9a84c;
+            font-weight: 600;
+            background: rgba(201, 168, 76, 0.05);
+        }
+        td { color: #b0c4de; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>甘李药业</h1>
+            <p class="code">603087 · 胰岛素龙头 · 集采放量 · 海外拓展 · 业绩拐点</p>
+            <p class="date">分析日期：2026-08-04 | 分析师：小羿 | 版本：V4.4</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <!-- ===== 执行摘要 ===== -->
+        <div class="section" id="summary">
+            <h2>📋 执行摘要</h2>
+            <div class="highlight-box">
+                <p><strong>核心变化</strong>：胰岛素集采放量+海外拓展双轮驱动，2025年业绩拐点确认（净利+86%），但2026Q1大幅回落（-38%）</p>
+                <p><strong>投资价值</strong>：<span class="tag tag-gold">中价值</span> <span class="tag tag-purple">中预期差（有条件）</span></p>
+                <p><strong>跟踪周期</strong>：中期（1-2年，业绩驱动）</p>
+                <p><strong>关键验证节点</strong>：2026-08-28中报（Q2是否恢复增长）</p>
+                <p><strong>证伪信号</strong>：中报Q2净利环比无改善；应收账款占比继续攀升</p>
+            </div>
+        </div>
+
+        <!-- ===== 大白话三问 ===== -->
+        <div class="dabaohua-section">
+            <h2>🎯 大白话三问</h2>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【这家公司是做什么的？】</div>
+                <div class="q-answer">
+                    <strong>行业归属</strong>：医药制造业——糖尿病治疗领域的生物制药企业<br>
+                    <strong>产业链位置</strong>：中游（制剂生产商），上游为原料药自产<br>
+                    <strong>核心产品</strong>：胰岛素制剂（甘精胰岛素、赖脯胰岛素、门冬胰岛素等三代胰岛素）及配套注射笔<br>
+                    <strong>终端应用</strong>：糖尿病患者长期用药，刚需性强<br>
+                    <strong>技术门槛</strong>：高——三代胰岛素生物类似药研发壁垒高，国内仅少数企业能生产<br>
+                    <strong>客户</strong>：卖给医疗机构（B2B），覆盖4.8万家医疗机构，集采中标后渠道深度广<br>
+                    <strong>客户粘性</strong>：极强——糖尿病患者需终身用药，换品牌成本高<br>
+                    <strong>增长逻辑</strong>：集采"以价换量"扩大份额 + 海外市场拓展（欧洲获批+新兴市场）+ 减重管线（博凡格鲁肽）
+                </div>
+            </div>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【贵不贵？】</div>
+                <div class="q-answer">
+                    当前股价67.88元，市值约400亿，2025年EPS=1.93元，PE≈35倍（TTM）。<br>
+                    2025年净利增速+86%，PEG≈0.41，增速-估值匹配。但2026Q1净利同比-38%，增速质量骤降。<br><br>
+                    <strong>合理股价区间</strong>：<br>
+                    · 悲观（全年净利10亿，按30倍PE）→ 50-55元<br>
+                    · 基准（全年净利13亿，按30倍PE）← <strong>最可能</strong> → 65-70元<br>
+                    · 乐观（全年净利16亿，按35倍PE）→ 90-100元<br><br>
+                    当前67.88元 → <strong>在基准区间偏上沿</strong>。
+                </div>
+            </div>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【有没有故事？】</div>
+                <div class="q-answer">
+                    <strong>真故事</strong>：胰岛素集采接续中标后放量（2025年国内销量+31.71%），甘精胰岛素进入欧洲市场（首款国产三代胰岛素进欧洲），巴西10年30亿PDP项目。<br><br>
+                    <strong>假故事</strong>：减重药博凡格鲁肽（在研，商业化尚远）。<br><br>
+                    <strong>预期差</strong>：市场已充分定价2025年业绩高增，但对2026Q1下滑反应滞后。
+                </div>
+            </div>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【最坏会怎样？】</div>
+                <div class="q-answer">
+                    证伪信号：如果2026Q2营收继续下滑或净利增速转负，说明2025年高增不可持续。<br>
+                    验证节点：2026-08-28（2026年中报）。<br><br>
+                    三情景：<br>
+                    · 乐观（中报恢复增长，海外超预期）→ 冲80-90元（20%概率）<br>
+                    · 基准（中报平淡，全年维持13亿净利）← <strong>最可能</strong> → 横盘60-75元（50%概率）<br>
+                    · 悲观（中报继续下滑，集采红利消退）→ 跌回50-55元（30%概率）
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 四句话总结 ===== -->
+        <div class="section" id="four-sentence">
+            <h2>📌 四句话总结</h2>
+            <table>
+                <tr><th>维度</th><th>大白话</th></tr>
+                <tr><td><strong>核心变化</strong></td><td>胰岛素集采放量+海外拓展双轮驱动，2025年业绩+86%拐点确认，但2026Q1净利-38%拉响警报</td></tr>
+                <tr><td><strong>估值位置</strong></td><td>当前PEG≈0.41（按2025年增速），但Q1下滑后PEG失真；在基准区间偏上沿</td></tr>
+                <tr><td><strong>预期差</strong></td><td>市场对2025年高增已充分定价，对2026年持续性分歧大；若中报恢复则错配修复空间20-30%</td></tr>
+                <tr><td><strong>风险点</strong></td><td>集采"以价换量"利润弹性有限；2026Q1下滑是否持续；应收账款同比+177%</td></tr>
+            </table>
+        </div>
+
+        <!-- ===== 变化识别 ===== -->
+        <div class="section" id="changes">
+            <h2>🔍 变化识别（Step 1）</h2>
+            <h3>基础画像</h3>
+            <table>
+                <tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
+                <tr><td>股票名称</td><td>甘李药业</td><td>—</td></tr>
+                <tr><td>股票代码</td><td>603087.SH</td><td>—</td></tr>
+                <tr><td>当前股价</td><td>67.88元</td><td>iFinD（2026-08-04）</td></tr>
+                <tr><td>市值</td><td>~400亿</td><td>iFinD（2026-08-04）</td></tr>
+                <tr><td>所属行业</td><td>医药制造（生物制药）</td><td>iFinD</td></tr>
+                <tr><td>2025年营收</td><td>40.52亿（+33.06%）</td><td>2025年报</td></tr>
+                <tr><td>2025年归母净利</td><td>11.44亿（+86.05%）</td><td>2025年报</td></tr>
+                <tr><td>2026Q1营收</td><td>8.78亿（-10.84%）</td><td>2026一季报</td></tr>
+                <tr><td>2026Q1归母净利</td><td>1.92亿（-38.29%）</td><td>2026一季报</td></tr>
+                <tr><td>毛利率</td><td>75.84%</td><td>2025年报</td></tr>
+                <tr><td>ROE</td><td>10.08%</td><td>2025年报</td></tr>
+            </table>
+
+            <h3>核心变化识别</h3>
+            <table>
+                <tr><th>变化类型</th><th>具体事件</th><th>发生时间</th><th>状态</th></tr>
+                <tr><td>✅ 业绩拐点</td><td>2025年净利同比+86%，集采放量驱动</td><td>2025全年</td><td>已兑现</td></tr>
+                <tr><td>✅ 海外拓展</td><td>甘精胰岛素获批欧洲；巴西10年30亿PDP项目</td><td>2025-2026</td><td>传导中</td></tr>
+                <tr><td>⚠️ 业绩回落</td><td>2026Q1净利同比-38%，营收-10.84%</td><td>2026Q1</td><td>红灯</td></tr>
+                <tr><td>⬜ 减重管线</td><td>博凡格鲁肽在研，潜在第二曲线</td><td>在研阶段</td><td>太远</td></tr>
+            </table>
+        </div>
+
+        <!-- ===== 变化权重排序 ===== -->
+        <div class="section" id="weight">
+            <h2>⚖️ 变化权重排序（Step 1.5）</h2>
+            <table>
+                <tr><th>排序</th><th>变化</th><th>权重</th><th>股价贡献</th><th>验证时点</th></tr>
+                <tr><td>1</td><td>胰岛素集采放量</td><td><strong>底</strong></td><td>已兑现大部分</td><td>2026-08-28中报</td></tr>
+                <tr><td>2</td><td>海外拓展（欧洲+巴西）</td><td><strong>顶</strong></td><td>概念溢价（海外仅占13%）</td><td>2026-12-31年报</td></tr>
+                <tr><td>3</td><td>2025年业绩高增</td><td><strong>噪</strong></td><td>被高估（一次性集采红利）</td><td>已验证（2026Q1-38%）</td></tr>
+                <tr><td>4</td><td>减重管线（博凡格鲁肽）</td><td><strong>雾</strong></td><td>陪衬</td><td>2027年以后</td></tr>
+            </table>
+        </div>
+
+        <!-- ===== 即时错配识别 ===== -->
+        <div class="section" id="mismatch">
+            <h2>🎯 即时错配识别（Step 2.5）</h2>
+            <h3>估值锚验证</h3>
+            <table>
+                <tr><th>指标</th><th>数值</th><th>质量检查</th><th>匹配</th></tr>
+                <tr><td>净利润增速（2025年）</td><td>+86%</td><td>扣非+81%，与归母接近</td><td>✅</td></tr>
+                <tr><td>净利润增速（2026Q1）</td><td>-38%</td><td>断崖式下滑</td><td>❌</td></tr>
+                <tr><td>当前PE（TTM）</td><td>~35倍</td><td>医药制造业平均PE~30倍</td><td>⚠️ 略高</td></tr>
+                <tr><td>PEG（按2025年）</td><td>~0.41</td><td>&lt;0.5低估</td><td>✅</td></tr>
+                <tr><td>PEG（按2026Q1）</td><td>失真</td><td>增速转负</td><td>❌</td></tr>
+            </table>
+
+            <h3>错配识别</h3>
+            <div class="highlight-box">
+                <p><strong>错配类型</strong>：B. 认知差</p>
+                <p><strong>市场共识</strong>：甘李药业是胰岛素龙头，2025年业绩+86%，集采红利持续，估值合理</p>
+                <p><strong>事实真相</strong>：2026Q1净利-38%，集采"以价换量"的利润弹性可能已一次性释放完毕</p>
+                <p><strong>价格隐含估值</strong>：35倍PE隐含市场假设2026年净利恢复至13亿+（增速+15%）</p>
+                <p><strong>真相定价</strong>：若2026年净利仅10亿（增速-12%），按25倍PE合理市值250亿，对应股价42元</p>
+                <p><strong>错配幅度</strong>：当前价→真相定价空间约-38%（若Q2继续下滑）</p>
+                <p><strong>纠正催化剂</strong>：2026-08-28中报披露Q2数据</p>
+            </div>
+        </div>
+
+        <!-- ===== 可信度裁决 ===== -->
+        <div class="section" id="verdict">
+            <h2>⚖️ 可信度裁决（Step 3）</h2>
+            <h3>三情景推演</h3>
+            <table>
+                <tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率</th></tr>
+                <tr><td><strong>乐观</strong></td><td>+20-30%（至80-90元）</td><td>中报恢复增长，海外超预期</td><td>20%</td></tr>
+                <tr><td><strong>基准</strong></td><td>-5%至+10%（60-75元）</td><td>中报平淡，全年净利10-13亿</td><td>50%</td></tr>
+                <tr><td><strong>悲观</strong></td><td>-20-30%（至45-55元）</td><td>中报继续下滑，集采红利消退</td><td>30%</td></tr>
+            </table>
+
+            <h3>加权预期</h3>
+            <p>预期收益：20%×25% + 50%×2.5% + 30%×(-25%) = <strong>-1.25%</strong></p>
+            <p>风险收益比：1:1</p>
+            <p>预期差大小：<strong>当前无明确预期差</strong></p>
+
+            <h3>证伪信号</h3>
+            <ul>
+                <li>2026Q2净利继续同比下滑 → 集采红利彻底消退，逻辑失效（概率30%）</li>
+                <li>应收账款占比持续攀升 → 回款恶化，现金流质量差</li>
+                <li>海外拓展不及预期 → 欧洲商业化受阻，巴西PDP延期（概率40%）</li>
+            </ul>
+
+            <h3>关键验证节点</h3>
+            <table>
+                <tr><th>时间</th><th>事件</th><th>验证什么</th><th>距分析日</th></tr>
+                <tr><td>2026-08-28</td><td>2026年中报</td><td>Q2是否恢复增长</td><td>24天</td></tr>
+                <tr><td>2026-10-30</td><td>2026年三季报</td><td>全年业绩趋势确认</td><td>87天</td></tr>
+                <tr><td>2027-04</td><td>2026年报</td><td>全年最终业绩+海外收入占比</td><td>8个月</td></tr>
+            </table>
+        </div>
+
+        <!-- ===== 综合研判 ===== -->
+        <div class="section" id="conclusion">
+            <h2>📊 综合研判（Step 4）</h2>
+            <h3>流动性环境</h3>
+            <p>当前A股市场处于<strong>存量博弈</strong>环境（震荡市，量能一般）。存量博弈下，只有硬逻辑+硬业绩才能涨，容错率低。甘李药业2026Q1业绩下滑在存量环境下属于负面信号，需要中报恢复增长才能重获资金关注。</p>
+
+            <h3>投资价值等级</h3>
+            <p><span class="tag tag-gold">中价值（有条件）</span></p>
+            <p>当前价值取决于2026中报能否恢复增长。若中报Q2环比大幅改善，价值可上调至"中高"；若中报继续下滑，价值下调至"低"。</p>
+
+            <h3>跟踪周期</h3>
+            <p><strong>中期</strong>（业绩验证，1-2年）——集采红利+海外拓展的兑现周期</p>
+            <p><strong>判断节点</strong>：2026-08-28（中报）、2026-10-30（三季报）</p>
+            <p><strong>中途退出条件</strong>：中报Q2净利环比无改善；应收账款占比继续攀升</p>
+
+            <h3>一句话核心逻辑</h3>
+            <div class="highlight-box">
+                <p>分析目的是判断甘李药业2025年业绩拐点是否可持续，这个变化在6-12个月内有50%概率带来0-10%收益（基准情景），核心验证节点是2026-08-28中报，如果Q2继续下滑则逻辑失效。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看 | 个股分析报告库</p>
+            <p>数据来源：公开市场信息 | 仅供学习交流，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+</html>
