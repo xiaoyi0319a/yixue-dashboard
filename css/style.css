@@ -44,7 +44,53 @@
         .time-verdict.neutral { color: #ffd700; border-left: 3px solid #ffd700; }
         .time-verdict.up { color: #4caf50; border-left: 3px solid #4caf50; }
 
-        /* ========== 涨停板方向 ========== */
+        /* ========== 系统可靠性仪表盘 ========== */
+        .status-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+        }
+        .status-section h2 { color: #ffd700; font-size: 1.5em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .status-badge-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; flex-wrap: wrap; }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: 2px solid;
+        }
+        .status-badge.hot { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; border-color: rgba(255, 107, 107, 0.4); }
+        .status-badge.warm { background: rgba(255, 165, 0, 0.15); color: #ffa500; border-color: rgba(255, 165, 0, 0.4); }
+        .status-badge.cool { background: rgba(0, 212, 255, 0.15); color: #00d4ff; border-color: rgba(0, 212, 255, 0.4); }
+        .status-badge.cold { background: rgba(100, 100, 120, 0.2); color: #888; border-color: rgba(100, 100, 120, 0.4); }
+        .status-label { color: #8b9dc3; font-size: 0.9em; }
+        .status-summary { color: #c0c8d8; font-size: 0.95em; margin-bottom: 18px; padding-left: 4px; }
+        .dir-compare { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; }
+        @media (max-width: 768px) { .dir-compare { grid-template-columns: 1fr; } }
+        .dir-status-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .dir-status-card h4 { color: #f0f4f8; margin-bottom: 8px; font-size: 1.05em; }
+        .dir-status-card .win-rate { font-size: 1.6em; font-weight: bold; margin-bottom: 4px; }
+        .dir-status-card .win-rate.hot { color: #4caf50; }
+        .dir-status-card .win-rate.cold { color: #ff6b6b; }
+        .dir-status-card .win-rate.neutral { color: #ffd700; }
+        .dir-status-card .meta { color: #8b9dc3; font-size: 0.85em; }
+        .streak-bar { display: flex; gap: 2px; margin-top: 10px; flex-wrap: wrap; }
+        .streak-dot {
+            width: 8px; height: 8px; border-radius: 2px;
+        }
+        .streak-dot.hot { background: #4caf50; }
+        .streak-dot.cold { background: #ff6b6b; }
+        .streak-note { color: #5a6a7a; font-size: 0.8em; margin-top: 6px; }
+
         .ztb-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             border: 2px solid #00d4ff; border-radius: 15px; padding: 25px;

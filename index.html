@@ -62,6 +62,83 @@
                 </div>
             </div>
         </div>
+        <!-- 系统可靠性仪表盘 -->
+        <div class="status-section" id="system-status-container">
+            <h2>📊 方向整理系统状态</h2>
+            <div id="system-status-content">
+                <p style="color:#5a6a7a;text-align:center;padding:20px;">加载中...</p>
+            </div>
+        </div>
+        <script>
+        (function() {
+            const container = document.getElementById('system-status-content');
+            if (!container) return;
+
+            // 内联的默认数据（当 fetch 失败时显示）
+            const defaultData = {
+                "badge": { "text": "🔥 连胜 3 天", "class": "hot", "label": "历史最长" },
+                "overall": { "current_streak_days": 3, "last_14_hot_days": 8, "last_14_cold_days": 6, "last_14_win_rate": 0.5714, "max_win_streak": 3, "max_loss_streak": 2 },
+                "directions": {
+                    "limit_up": { "last_win_rate": 0.75, "last_avg_return": 1.33, "streak_days": 3, "history": [
+                        {"win_rate":0.3333},{"win_rate":0},{"win_rate":0.7188},{"win_rate":0.6667},{"win_rate":0.286},{"win_rate":0.8},{"win_rate":0.0833},{"win_rate":0.8571},{"win_rate":0.0833},{"win_rate":0.4444},{"win_rate":0.375},{"win_rate":0.857},{"win_rate":0.6},{"win_rate":0.75}
+                    ]},
+                    "news": { "last_win_rate": 1.0, "last_avg_return": 6.13, "streak_days": 3, "history": [
+                        {"win_rate":0.1562},{"win_rate":0.1},{"win_rate":0.4667},{"win_rate":0.5},{"win_rate":0.167},{"win_rate":0.667},{"win_rate":0.5833},{"win_rate":0.4},{"win_rate":0.6667},{"win_rate":0.333},{"win_rate":0.917},{"win_rate":0.5},{"win_rate":1.0}
+                    ]}
+                }
+            };
+
+            function render(data) {
+                const o = data.overall || {};
+                const b = data.badge || {};
+                const lu = (data.directions && data.directions.limit_up) || {};
+                const ns = (data.directions && data.directions.news) || {};
+
+                const winRateClass = (wr) => wr >= 0.7 ? 'hot' : (wr >= 0.5 ? 'neutral' : 'cold');
+                const dots = (hist) => {
+                    if (!hist || !hist.length) return '';
+                    return hist.map((h, i) => {
+                        const cls = (h.win_rate || 0) >= 0.5 ? 'hot' : 'cold';
+                        const title = h.date || '';
+                        return '<div class="streak-dot ' + cls + '" title="' + title + '"></div>';
+                    }).join('');
+                };
+
+                const html = `
+            <div class="status-badge-wrap">
+                <span class="status-badge ${b.class || 'hot'}">${b.text || '加载中'}</span>
+                <span class="status-label">${b.label || ''} · 系统处于"${o.current_streak_type === 'win' ? '热' : '冷'}"状态</span>
+            </div>
+            <div class="status-summary">
+                近14天：高胜率 ${o.last_14_hot_days || 0} 天 / 低胜率 ${o.last_14_cold_days || 0} 天 (${((o.last_14_win_rate || 0)*100).toFixed(1)}%) · 历史最长连胜 ${o.max_win_streak || 0} 天 · 历史最长连败 ${o.max_loss_streak || 0} 天
+            </div>
+            <div class="dir-compare">
+                <div class="dir-status-card">
+                    <h4>🔥 涨停方向 · 昨日验证</h4>
+                    <div class="win-rate ${winRateClass(lu.last_win_rate || 0)}">${((lu.last_win_rate || 0)*100).toFixed(1)}%</div>
+                    <div class="meta">平均收益 ${(lu.last_avg_return || 0) >= 0 ? '+' : ''}${(lu.last_avg_return || 0).toFixed(2)}% · 连胜 ${lu.streak_days || 0} 天</div>
+                    <div class="streak-bar">${dots(lu.history)}</div>
+                    <div class="streak-note">绿=高胜率日 红=低胜率日 (左→右 近14天)</div>
+                </div>
+                <div class="dir-status-card">
+                    <h4>📰 新闻方向 · 昨日验证</h4>
+                    <div class="win-rate ${winRateClass(ns.last_win_rate || 0)}">${((ns.last_win_rate || 0)*100).toFixed(1)}%</div>
+                    <div class="meta">平均收益 ${(ns.last_avg_return || 0) >= 0 ? '+' : ''}${(ns.last_avg_return || 0).toFixed(2)}% · 连胜 ${ns.streak_days || 0} 天</div>
+                    <div class="streak-bar">${dots(ns.history)}</div>
+                    <div class="streak-note">绿=高胜率日 红=低胜率日 (左→右 近14天)</div>
+                </div>
+            </div>
+                `;
+                container.innerHTML = html;
+            }
+
+            // 尝试从 data/system-status.json 加载最新数据
+            fetch('data/system-status.json?' + Date.now())
+                .then(r => r.ok ? r.json() : Promise.reject('fetch failed'))
+                .then(data => render(data))
+                .catch(() => render(defaultData));
+        })();
+        </script>
         <div class="ztb-section">
             <h2>📈 涨停板方向整理（6方向·83只涨停驱动）</h2>
             <div class="ztb-grid">
