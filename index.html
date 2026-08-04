@@ -76,7 +76,7 @@
 
             // 内联的默认数据（当 fetch 失败时显示）
             const defaultData = {
-                "badge": { "text": "🔥 连胜 3 天", "class": "hot", "label": "历史最长" },
+                "badge": { "text": "🔥 连续 3 天", "class": "hot", "label": "历史最长" },
                 "overall": { "current_streak_days": 3, "last_14_hot_days": 8, "last_14_cold_days": 6, "last_14_win_rate": 0.5714, "max_win_streak": 3, "max_loss_streak": 2 },
                 "directions": {
                     "limit_up": { "last_win_rate": 0.75, "last_avg_return": 1.33, "streak_days": 3, "history": [
@@ -110,22 +110,22 @@
                 <span class="status-label">${b.label || ''} · 系统处于"${o.current_streak_type === 'win' ? '热' : '冷'}"状态</span>
             </div>
             <div class="status-summary">
-                近14天：高胜率 ${o.last_14_hot_days || 0} 天 / 低胜率 ${o.last_14_cold_days || 0} 天 (${((o.last_14_win_rate || 0)*100).toFixed(1)}%) · 历史最长连胜 ${o.max_win_streak || 0} 天 · 历史最长连败 ${o.max_loss_streak || 0} 天
+                近14天：高成功率 ${o.last_14_hot_days || 0} 天 / 低成功率 ${o.last_14_cold_days || 0} 天 (${((o.last_14_win_rate || 0)*100).toFixed(1)}%) · 历史最长连续 ${o.max_win_streak || 0} 天 · 历史最长连续中断 ${o.max_loss_streak || 0} 天
             </div>
             <div class="dir-compare">
                 <div class="dir-status-card">
                     <h4>🔥 涨停方向 · 昨日验证</h4>
                     <div class="win-rate ${winRateClass(lu.last_win_rate || 0)}">${((lu.last_win_rate || 0)*100).toFixed(1)}%</div>
-                    <div class="meta">平均收益 ${(lu.last_avg_return || 0) >= 0 ? '+' : ''}${(lu.last_avg_return || 0).toFixed(2)}% · 连胜 ${lu.streak_days || 0} 天</div>
+                    <div class="meta">平均涨幅 ${(lu.last_avg_return || 0) >= 0 ? '+' : ''}${(lu.last_avg_return || 0).toFixed(2)}% · 连续 ${lu.streak_days || 0} 天</div>
                     <div class="streak-bar">${dots(lu.history)}</div>
-                    <div class="streak-note">绿=高胜率日 红=低胜率日 (左→右 近14天)</div>
+                    <div class="streak-note">绿=高成功率日 红=低成功率日 (左→右 近14天)</div>
                 </div>
                 <div class="dir-status-card">
                     <h4>📰 新闻方向 · 昨日验证</h4>
                     <div class="win-rate ${winRateClass(ns.last_win_rate || 0)}">${((ns.last_win_rate || 0)*100).toFixed(1)}%</div>
-                    <div class="meta">平均收益 ${(ns.last_avg_return || 0) >= 0 ? '+' : ''}${(ns.last_avg_return || 0).toFixed(2)}% · 连胜 ${ns.streak_days || 0} 天</div>
+                    <div class="meta">平均涨幅 ${(ns.last_avg_return || 0) >= 0 ? '+' : ''}${(ns.last_avg_return || 0).toFixed(2)}% · 连续 ${ns.streak_days || 0} 天</div>
                     <div class="streak-bar">${dots(ns.history)}</div>
-                    <div class="streak-note">绿=高胜率日 红=低胜率日 (左→右 近14天)</div>
+                    <div class="streak-note">绿=高成功率日 红=低成功率日 (左→右 近14天)</div>
                 </div>
             </div>
                 `;

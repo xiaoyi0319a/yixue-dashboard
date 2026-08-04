@@ -1,6 +1,6 @@
 {
   "date": "2026-08-04",
-  "computed_at": "2026-08-04T17:15:05.150120",
+  "computed_at": "2026-08-04T17:51:44.047730",
   "overall": {
     "current_streak_type": "win",
     "current_streak_days": 3,
@@ -85,7 +85,7 @@
     ]
   },
   "badge": {
-    "text": "🔥 连胜 3 天",
+    "text": "🔥 连续 3 天",
     "class": "hot",
     "label": "历史最长"
   },
