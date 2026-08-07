@@ -7,6 +7,7 @@
 ================================================================================
 
 【变更记录】
+2026-08-07  badge.label 简化，累计天数改由前端 `${o.total_days}` 显示
 2026-08-04  创建模板，整合系统可靠性仪表盘完整实现
 
 【依赖】
@@ -63,6 +64,7 @@
                 "overall": {
                     "current_streak_type": "{{STREAK_TYPE}}",
                     "current_streak_days": {{STREAK_DAYS}},
+                    "total_days": {{TOTAL_DAYS}},
                     "last_14_hot_days": {{HOT_DAYS}},
                     "last_14_cold_days": {{COLD_DAYS}},
                     "last_14_win_rate": {{WIN_RATE}},
@@ -103,7 +105,7 @@
                 const html = `
             <div class="status-badge-wrap">
                 <span class="status-badge ${b.class || 'hot'}">${b.text || '加载中'}</span>
-                <span class="status-label">${b.label || ''} · 系统处于"${o.current_streak_type === 'win' ? '热' : '冷'}"状态</span>
+                <span class="status-label">系统处于"${o.current_streak_type === 'win' ? '热' : '冷'}"状态（累计运行${o.total_days || 0}天）</span>
             </div>
             <div class="status-summary">
                 近14天：高成功率 ${o.last_14_hot_days || 0} 天 / 低成功率 ${o.last_14_cold_days || 0} 天 (${((o.last_14_win_rate || 0)*100).toFixed(1)}%) · 历史最长连续 ${o.max_win_streak || 0} 天 · 历史最长连续中断 ${o.max_loss_streak || 0} 天
