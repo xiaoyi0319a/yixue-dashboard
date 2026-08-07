@@ -1,6 +1,6 @@
 {
   "date": "2026-08-07",
-  "computed_at": "2026-08-07T08:53:01.907616",
+  "computed_at": "2026-08-07T08:59:44.724970",
   "overall": {
     "current_streak_type": "win",
     "current_streak_days": 4,
@@ -87,7 +87,7 @@
   "badge": {
     "text": "🔥 连续 4 天",
     "class": "hot",
-    "label": "历史最长（近14天统计）"
+    "label": "历史最长"
   },
   "directions": {
     "limit_up": {
