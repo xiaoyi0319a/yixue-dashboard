@@ -1,13 +1,13 @@
 {
   "date": "2026-08-13",
-  "computed_at": "2026-08-13T15:39:54.906103",
+  "computed_at": "2026-08-13T16:18:20.377069",
   "overall": {
     "current_streak_type": "loss",
-    "current_streak_days": 2,
+    "current_streak_days": 3,
     "current_streak_start": "2026-08-11",
-    "max_win_streak": 6,
-    "max_loss_streak": 2,
-    "total_days": 19,
+    "max_win_streak": 7,
+    "max_loss_streak": 3,
+    "total_days": 21,
     "last_14_hot_days": 9,
     "last_14_cold_days": 5,
     "last_14_win_rate": 0.6429,
@@ -77,47 +77,37 @@
       },
       {
         "type": "win",
-        "days": 6,
+        "days": 7,
         "start_date": "2026-07-31",
         "end_date": "2026-08-10",
-        "avg_win_rate": 0.7493
+        "avg_win_rate": 0.7411
       },
       {
         "type": "loss",
-        "days": 2,
+        "days": 3,
         "start_date": "2026-08-11",
-        "end_date": "2026-08-12",
-        "avg_win_rate": 0.3515
+        "end_date": "2026-08-13",
+        "avg_win_rate": 0.2677
       }
     ]
   },
   "badge": {
-    "text": "连续中断 2 天",
-    "class": "cool",
-    "label": "中断中"
+    "text": "💀 连续中断 3 天",
+    "class": "cold",
+    "label": "历史最长中断"
   },
   "directions": {
     "limit_up": {
-      "last_win_rate": 0.25,
-      "last_avg_return": -0.73,
+      "last_win_rate": 0.2,
+      "last_avg_return": -0.21,
       "streak_type": "loss",
-      "streak_days": 2,
-      "max_win_streak": 6,
+      "streak_days": 3,
+      "max_win_streak": 7,
       "max_loss_streak": 3,
       "total_days": 14,
       "hot_days": 8,
       "cold_days": 6,
       "history": [
-        {
-          "date": "2026-07-23",
-          "win_rate": 0.8,
-          "avg_return": 3.5
-        },
-        {
-          "date": "2026-07-24",
-          "win_rate": 0.0833,
-          "avg_return": -5.1032
-        },
         {
           "date": "2026-07-27",
           "win_rate": 0.8571,
@@ -159,6 +149,11 @@
           "avg_return": 3.55
         },
         {
+          "date": "2026-08-06",
+          "win_rate": 1.0,
+          "avg_return": 0
+        },
+        {
           "date": "2026-08-07",
           "win_rate": 0.583,
           "avg_return": 0.69
@@ -177,30 +172,25 @@
           "date": "2026-08-12",
           "win_rate": 0.25,
           "avg_return": -0.73
+        },
+        {
+          "date": "2026-08-13",
+          "win_rate": 0.2,
+          "avg_return": -0.21
         }
       ]
     },
     "news": {
-      "last_win_rate": 0.583,
-      "last_avg_return": 0.36,
-      "streak_type": "win",
+      "last_win_rate": 0.0,
+      "last_avg_return": -2.65,
+      "streak_type": "loss",
       "streak_days": 1,
-      "max_win_streak": 6,
+      "max_win_streak": 7,
       "max_loss_streak": 1,
       "total_days": 14,
       "hot_days": 10,
       "cold_days": 4,
       "history": [
-        {
-          "date": "2026-07-22",
-          "win_rate": 0.167,
-          "avg_return": -2.14
-        },
-        {
-          "date": "2026-07-23",
-          "win_rate": 0.667,
-          "avg_return": 1.62
-        },
         {
           "date": "2026-07-27",
           "win_rate": 0.5833,
@@ -242,6 +232,11 @@
           "avg_return": 2.02
         },
         {
+          "date": "2026-08-06",
+          "win_rate": 0.636,
+          "avg_return": 0
+        },
+        {
           "date": "2026-08-07",
           "win_rate": 0.778,
           "avg_return": 1.2
@@ -260,6 +255,11 @@
           "date": "2026-08-12",
           "win_rate": 0.583,
           "avg_return": 0.36
+        },
+        {
+          "date": "2026-08-13",
+          "win_rate": 0.0,
+          "avg_return": -2.65
         }
       ]
     }
