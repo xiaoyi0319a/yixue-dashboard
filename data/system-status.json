@@ -1,13 +1,13 @@
 {
   "date": "2026-08-14",
-  "computed_at": "2026-08-14T08:00:00.000000",
+  "computed_at": "2026-08-14T15:45:26.517661",
   "overall": {
-    "current_streak_type": "loss",
-    "current_streak_days": 3,
-    "current_streak_start": "2026-08-11",
+    "current_streak_type": "win",
+    "current_streak_days": 1,
+    "current_streak_start": "2026-08-14",
     "max_win_streak": 7,
     "max_loss_streak": 3,
-    "total_days": 21,
+    "total_days": 22,
     "last_14_hot_days": 9,
     "last_14_cold_days": 5,
     "last_14_win_rate": 0.6429,
@@ -88,31 +88,33 @@
         "start_date": "2026-08-11",
         "end_date": "2026-08-13",
         "avg_win_rate": 0.2677
+      },
+      {
+        "type": "win",
+        "days": 1,
+        "start_date": "2026-08-14",
+        "end_date": "2026-08-14",
+        "avg_win_rate": 0.765
       }
     ]
   },
   "badge": {
-    "text": "💀 连续中断 3 天",
-    "class": "cold",
-    "label": "历史最长中断"
+    "text": "连续 1 天",
+    "class": "warm",
+    "label": "连续中"
   },
   "directions": {
     "limit_up": {
-      "last_win_rate": 0.2,
-      "last_avg_return": -0.21,
-      "streak_type": "loss",
-      "streak_days": 3,
+      "last_win_rate": 0.625,
+      "last_avg_return": 0.96,
+      "streak_type": "win",
+      "streak_days": 1,
       "max_win_streak": 7,
       "max_loss_streak": 3,
       "total_days": 14,
       "hot_days": 8,
       "cold_days": 6,
       "history": [
-        {
-          "date": "2026-07-27",
-          "win_rate": 0.8571,
-          "avg_return": 3.2286
-        },
         {
           "date": "2026-07-28",
           "win_rate": 0.0833,
@@ -177,13 +179,18 @@
           "date": "2026-08-13",
           "win_rate": 0.2,
           "avg_return": -0.21
+        },
+        {
+          "date": "2026-08-14",
+          "win_rate": 0.625,
+          "avg_return": 0.959
         }
       ]
     },
     "news": {
-      "last_win_rate": 0.0,
-      "last_avg_return": -2.65,
-      "streak_type": "loss",
+      "last_win_rate": 0.889,
+      "last_avg_return": 4.51,
+      "streak_type": "win",
       "streak_days": 1,
       "max_win_streak": 7,
       "max_loss_streak": 1,
@@ -191,11 +198,6 @@
       "hot_days": 10,
       "cold_days": 4,
       "history": [
-        {
-          "date": "2026-07-27",
-          "win_rate": 0.5833,
-          "avg_return": 0.7867
-        },
         {
           "date": "2026-07-28",
           "win_rate": 0.4,
@@ -260,6 +262,11 @@
           "date": "2026-08-13",
           "win_rate": 0.0,
           "avg_return": -2.65
+        },
+        {
+          "date": "2026-08-14",
+          "win_rate": 0.889,
+          "avg_return": 4.512
         }
       ]
     }
