@@ -1,273 +1,62 @@
 {
-  "date": "2026-08-14",
-  "computed_at": "2026-08-14T15:45:26.517661",
+  "badge": {
+    "text": "🌱 恢复中 · 连续高成功 1 天",
+    "class": "neutral",
+    "label": "近14天高成功率 10 天 / 低成功率 4 天"
+  },
   "overall": {
-    "current_streak_type": "win",
     "current_streak_days": 1,
-    "current_streak_start": "2026-08-14",
+    "current_streak_type": "win",
+    "last_14_hot_days": 10,
+    "last_14_cold_days": 4,
+    "last_14_win_rate": 0.7143,
     "max_win_streak": 7,
     "max_loss_streak": 3,
-    "total_days": 22,
-    "last_14_hot_days": 9,
-    "last_14_cold_days": 5,
-    "last_14_win_rate": 0.6429,
-    "streaks": [
-      {
-        "type": "loss",
-        "days": 2,
-        "start_date": "2026-07-16",
-        "end_date": "2026-07-17",
-        "avg_win_rate": 0.1317
-      },
-      {
-        "type": "win",
-        "days": 2,
-        "start_date": "2026-07-20",
-        "end_date": "2026-07-21",
-        "avg_win_rate": 0.6048
-      },
-      {
-        "type": "loss",
-        "days": 1,
-        "start_date": "2026-07-22",
-        "end_date": "2026-07-22",
-        "avg_win_rate": 0.25
-      },
-      {
-        "type": "win",
-        "days": 1,
-        "start_date": "2026-07-23",
-        "end_date": "2026-07-23",
-        "avg_win_rate": 0.714
-      },
-      {
-        "type": "loss",
-        "days": 1,
-        "start_date": "2026-07-24",
-        "end_date": "2026-07-24",
-        "avg_win_rate": 0.0833
-      },
-      {
-        "type": "win",
-        "days": 1,
-        "start_date": "2026-07-27",
-        "end_date": "2026-07-27",
-        "avg_win_rate": 0.7059
-      },
-      {
-        "type": "loss",
-        "days": 1,
-        "start_date": "2026-07-28",
-        "end_date": "2026-07-28",
-        "avg_win_rate": 0.2273
-      },
-      {
-        "type": "win",
-        "days": 1,
-        "start_date": "2026-07-29",
-        "end_date": "2026-07-29",
-        "avg_win_rate": 0.6667
-      },
-      {
-        "type": "loss",
-        "days": 1,
-        "start_date": "2026-07-30",
-        "end_date": "2026-07-30",
-        "avg_win_rate": 0.3846
-      },
-      {
-        "type": "win",
-        "days": 7,
-        "start_date": "2026-07-31",
-        "end_date": "2026-08-10",
-        "avg_win_rate": 0.7411
-      },
-      {
-        "type": "loss",
-        "days": 3,
-        "start_date": "2026-08-11",
-        "end_date": "2026-08-13",
-        "avg_win_rate": 0.2677
-      },
-      {
-        "type": "win",
-        "days": 1,
-        "start_date": "2026-08-14",
-        "end_date": "2026-08-14",
-        "avg_win_rate": 0.765
-      }
-    ]
-  },
-  "badge": {
-    "text": "连续 1 天",
-    "class": "warm",
-    "label": "连续中"
+    "total_days": 14
   },
   "directions": {
     "limit_up": {
       "last_win_rate": 0.625,
-      "last_avg_return": 0.96,
-      "streak_type": "win",
+      "last_avg_return": 0.30,
       "streak_days": 1,
-      "max_win_streak": 7,
-      "max_loss_streak": 3,
-      "total_days": 14,
-      "hot_days": 8,
-      "cold_days": 6,
+      "streak_type": "win",
       "history": [
-        {
-          "date": "2026-07-28",
-          "win_rate": 0.0833,
-          "avg_return": -4.612
-        },
-        {
-          "date": "2026-07-29",
-          "win_rate": 0.4444,
-          "avg_return": -3.359
-        },
-        {
-          "date": "2026-07-30",
-          "win_rate": 0.375,
-          "avg_return": 0.21
-        },
-        {
-          "date": "2026-07-31",
-          "win_rate": 0.857,
-          "avg_return": 3.3
-        },
-        {
-          "date": "2026-08-03",
-          "win_rate": 0.6,
-          "avg_return": -0.82
-        },
-        {
-          "date": "2026-08-04",
-          "win_rate": 0.75,
-          "avg_return": 1.328
-        },
-        {
-          "date": "2026-08-05",
-          "win_rate": 0.833,
-          "avg_return": 3.55
-        },
-        {
-          "date": "2026-08-06",
-          "win_rate": 1.0,
-          "avg_return": 0
-        },
-        {
-          "date": "2026-08-07",
-          "win_rate": 0.583,
-          "avg_return": 0.69
-        },
-        {
-          "date": "2026-08-10",
-          "win_rate": 0.583,
-          "avg_return": 0.97
-        },
-        {
-          "date": "2026-08-11",
-          "win_rate": 0.444,
-          "avg_return": -0.54
-        },
-        {
-          "date": "2026-08-12",
-          "win_rate": 0.25,
-          "avg_return": -0.73
-        },
-        {
-          "date": "2026-08-13",
-          "win_rate": 0.2,
-          "avg_return": -0.21
-        },
-        {
-          "date": "2026-08-14",
-          "win_rate": 0.625,
-          "avg_return": 0.959
-        }
+        {"date":"08/14","win_rate":0.625},
+        {"date":"08/13","win_rate":0.200},
+        {"date":"08/12","win_rate":0.250},
+        {"date":"08/11","win_rate":0.444},
+        {"date":"08/10","win_rate":0.583},
+        {"date":"08/07","win_rate":0.583},
+        {"date":"08/05","win_rate":0.833},
+        {"date":"08/04","win_rate":0.750},
+        {"date":"08/03","win_rate":0.600},
+        {"date":"07/31","win_rate":0.857},
+        {"date":"07/30","win_rate":0.375},
+        {"date":"07/29","win_rate":0.444},
+        {"date":"07/28","win_rate":0.083},
+        {"date":"07/27","win_rate":0.857}
       ]
     },
     "news": {
       "last_win_rate": 0.889,
-      "last_avg_return": 4.51,
-      "streak_type": "win",
+      "last_avg_return": 1.12,
       "streak_days": 1,
-      "max_win_streak": 7,
-      "max_loss_streak": 1,
-      "total_days": 14,
-      "hot_days": 10,
-      "cold_days": 4,
+      "streak_type": "win",
       "history": [
-        {
-          "date": "2026-07-28",
-          "win_rate": 0.4,
-          "avg_return": -0.787
-        },
-        {
-          "date": "2026-07-29",
-          "win_rate": 0.6667,
-          "avg_return": -1.557
-        },
-        {
-          "date": "2026-07-30",
-          "win_rate": 0.333,
-          "avg_return": -2.07
-        },
-        {
-          "date": "2026-07-31",
-          "win_rate": 0.917,
-          "avg_return": 4.45
-        },
-        {
-          "date": "2026-08-03",
-          "win_rate": 0.5,
-          "avg_return": -0.17
-        },
-        {
-          "date": "2026-08-04",
-          "win_rate": 1.0,
-          "avg_return": 6.127
-        },
-        {
-          "date": "2026-08-05",
-          "win_rate": 0.833,
-          "avg_return": 2.02
-        },
-        {
-          "date": "2026-08-06",
-          "win_rate": 0.636,
-          "avg_return": 0
-        },
-        {
-          "date": "2026-08-07",
-          "win_rate": 0.778,
-          "avg_return": 1.2
-        },
-        {
-          "date": "2026-08-10",
-          "win_rate": 0.857,
-          "avg_return": 6.15
-        },
-        {
-          "date": "2026-08-11",
-          "win_rate": 0.167,
-          "avg_return": -2.64
-        },
-        {
-          "date": "2026-08-12",
-          "win_rate": 0.583,
-          "avg_return": 0.36
-        },
-        {
-          "date": "2026-08-13",
-          "win_rate": 0.0,
-          "avg_return": -2.65
-        },
-        {
-          "date": "2026-08-14",
-          "win_rate": 0.889,
-          "avg_return": 4.512
-        }
+        {"date":"08/14","win_rate":0.889},
+        {"date":"08/13","win_rate":0.000},
+        {"date":"08/12","win_rate":0.583},
+        {"date":"08/11","win_rate":0.167},
+        {"date":"08/10","win_rate":0.857},
+        {"date":"08/07","win_rate":0.778},
+        {"date":"08/05","win_rate":0.833},
+        {"date":"08/04","win_rate":1.000},
+        {"date":"08/03","win_rate":0.500},
+        {"date":"07/31","win_rate":0.917},
+        {"date":"07/30","win_rate":0.333},
+        {"date":"07/29","win_rate":0.667},
+        {"date":"07/28","win_rate":0.400},
+        {"date":"07/27","win_rate":0.583}
       ]
     }
   }
