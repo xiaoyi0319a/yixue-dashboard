@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>920009 丹娜生物 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%); color: #e0e6ed; min-height: 100vh; line-height: 1.6; }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 30px 0; border-bottom: 1px solid #2d3a4f; margin-bottom: 30px; }
+        .header h1 { font-size: 2em; background: linear-gradient(90deg, #00d4ff, #a371f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+        .section { background: #1a2332; border: 1px solid #2d3a4f; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .section h2 { color: #ffd700; font-size: 1.3em; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #2d3a4f; }
+        .section h3 { color: #00d4ff; font-size: 1.1em; margin: 15px 0 10px; }
+        .section h4 { color: #c9a84c; font-size: 1.05em; margin: 12px 0 8px; }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+        .info-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(45, 58, 79, 0.5); }
+        .info-item:last-child { border-bottom: none; }
+        .info-label { color: #8b9dc3; font-size: 0.9em; }
+        .info-value { color: #f0f4f8; font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+        .verdict-box { background: rgba(255, 107, 107, 0.1); border-left: 4px solid #ff6b6b; padding: 15px; border-radius: 0 10px 10px 0; margin: 15px 0; }
+        .verdict-box.positive { background: rgba(76, 175, 80, 0.1); border-left-color: #4caf50; }
+        .verdict-box.neutral { background: rgba(255, 215, 0, 0.1); border-left-color: #ffd700; }
+        .verdict-box h4 { color: #ff6b6b; margin-bottom: 8px; }
+        .verdict-box.positive h4 { color: #4caf50; }
+        .verdict-box.neutral h4 { color: #ffd700; }
+        .tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+        .footer { text-align: center; padding: 30px; color: #8b9dc3; border-top: 1px solid #2d3a4f; margin-top: 30px; font-size: 0.9em; }
+        .dabaohua-section { background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%); border: 2px solid #c9a84c; border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 0 30px rgba(201, 168, 76, 0.15); }
+        .dabaohua-section h2 { color: #c9a84c; font-size: 1.4em; margin-bottom: 18px; }
+        .dabaohua-q { background: rgba(255,255,255,0.03); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; border-left: 4px solid #c9a84c; }
+        .dabaohua-q .q-label { color: #c9a84c; font-weight: bold; font-size: 1.05em; margin-bottom: 6px; }
+        .dabaohua-q .q-answer { color: #d0d8e8; font-size: 1.05em; line-height: 1.7; }
+        .dabaohua-summary { background: rgba(201, 168, 76, 0.1); border-radius: 10px; padding: 15px 18px; margin-top: 15px; border-left: 4px solid #c9a84c; }
+        .dabaohua-summary h4 { color: #c9a84c; margin-bottom: 8px; }
+        .dabaohua-source { color: #5a6a7a; font-size: 0.85em; margin-top: 12px; text-align: right; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>丹娜生物</h1>
+            <div class="code">920009.BJ · 体外诊断/真菌病诊断</div>
+            <div class="date">分析日期：2026-08-20 | 分析师：小羿 | 版本：V4.4</div>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="dabaohua-section">
+            <h2>🔥 大白话三问（30秒读完）</h2>
+            <div class="dabaohua-q">
+                <div class="q-label">【这家公司是做什么的？】</div>
+                <div class="q-answer">侵袭性真菌病（IFD）体外诊断试剂盒生产商。帮助医院快速检测病人是否感染真菌，核心产品试剂盒占收入91.62%，毛利率85.53%。</div>
+            </div>
+            <div class="dabaohua-q">
+                <div class="q-label">【贵不贵？】</div>
+                <div class="q-answer">市值30.56亿，静态PE约31倍，匹配行业均值。不便宜也不贵。但营收增速仅1.1%，扣非净利还下滑了2.7%，成长性存疑。</div>
+            </div>
+            <div class="dabaohua-q">
+                <div class="q-label">【有没有故事？】</div>
+                <div class="q-answer">真故事：国家重点专精特新"小巨人"，国产替代逻辑真实。假故事：无。预期差：机构覆盖极少（仅1家基金），股东仅3707户，市场认知度低但流动性差。</div>
+            </div>
+            <div class="dabaohua-q">
+                <div class="q-label">【最坏会怎样？】</div>
+                <div class="q-answer">细分市场天花板低（年市场空间约20-30亿），公司2.4亿营收已占较大份额，增长空间有限。若扣非净利继续下滑，31倍PE就偏贵了。</div>
+            </div>
+            <div class="dabaohua-summary">
+                <h4>四句话总结</h4>
+                <p>核心变化：上市即巅峰，首日涨幅已充分定价 | 估值位置：PE约31倍匹配行业均值 | 预期差：机构极少但流动性差难以兑现 | 风险点：营收增速停滞、细分市场天花板低</p>
+            </div>
+            <div class="dabaohua-source">来源：个股分析工作流 V4.4 | 分析日期：2026-08-20</div>
+        </div>
+
+        <div class="section">
+            <h2>📊 基本情况</h2>
+            <div class="info-grid">
+                <div class="info-item"><div class="info-label">当前股价</div><div class="info-value">~42.90元</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">30.56亿</div></div>
+                <div class="info-item"><div class="info-label">所属行业</div><div class="info-value">医药生物-医疗器械-体外诊断</div></div>
+                <div class="info-item"><div class="info-label">2025年营收</div><div class="info-value">2.423亿 <span style="color:#4caf50">(+1.1%)</span></div></div>
+                <div class="info-item"><div class="info-label">2025年净利润</div><div class="info-value">9774万 <span style="color:#4caf50">(+12.1%)</span></div></div>
+                <div class="info-item"><div class="info-label">2025年扣非净利</div><div class="info-value">7844万 <span style="color:#ff6b6b">(-2.7%)</span></div></div>
+                <div class="info-item"><div class="info-label">毛利率</div><div class="info-value" style="color:#ffd700">85.53%</div></div>
+                <div class="info-item"><div class="info-label">ROE</div><div class="info-value">18.28%</div></div>
+                <div class="info-item"><div class="info-label">股东户数</div><div class="info-value">3707户</div></div>
+                <div class="info-item"><div class="info-label">机构持仓</div><div class="info-value">仅1家基金，5100股</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 核心看点</h2>
+            <h3>国产替代</h3>
+            <ul>
+                <li>"5G+"真菌病血清学联合检测方案，多项产品实现国产替代</li>
+                <li>打破进口垄断，国家重点专精特新"小巨人"</li>
+                <li>客户覆盖国内医疗机构（占95.48%），少量出口（4.52%）</li>
+            </ul>
+            <h3>财务特征</h3>
+            <ul>
+                <li>毛利率<strong style="color:#ffd700">85.53%</strong>，高毛利体现定价权</li>
+                <li>ROE 18.28%，盈利效率尚可</li>
+                <li>但营收增速仅1.1%，扣非净利下滑2.7%，成长性不足</li>
+            </ul>
+            <h3>上市表现</h3>
+            <ul>
+                <li>2025-11-03北交所上市，<strong style="color:#ffd700">首日涨448%</strong></li>
+                <li>发行价17.10元，首日最高价约93元</li>
+                <li>当前42.90元，较首日高点回落约54%</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ 风险提示</h2>
+            <div class="verdict-box">
+                <h4>主要风险点</h4>
+                <ul>
+                    <li><strong>细分市场天花板低</strong>：真菌病诊断年市场空间约20-30亿，公司2.4亿营收已占约10%，增长空间有限</li>
+                    <li><strong>营收增速停滞</strong>：2022-2025年营收基本持平（2.95→2.37→2.4亿）</li>
+                    <li><strong>机构覆盖极少</strong>：仅1家基金持仓5100股，股东户数3707户，流动性差</li>
+                    <li><strong>扣非净利下滑</strong>：2025年扣非-2.7%，盈利质量下降</li>
+                    <li><strong>PEG偏高</strong>：PEG约2.6，>1.5高估阈值</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 综合评估</h2>
+            <table>
+                <tr><th>维度</th><th>评估</th></tr>
+                <tr><td>最新股价</td><td style="color:#ffd700"><strong>~42.90元</strong></td></tr>
+                <tr><td>市值</td><td>30.56亿</td></tr>
+                <tr><td>PE(TTM)</td><td>~31倍</td></tr>
+                <tr><td>PEG</td><td style="color:#ff6b6b">~2.6（偏高）</td></tr>
+                <tr><td>营收增速</td><td style="color:#ff6b6b">+1.1%（停滞）</td></tr>
+                <tr><td>扣非增速</td><td style="color:#ff6b6b">-2.7%（下滑）</td></tr>
+                <tr><td>基本面</td><td>⭐⭐⭐ 高毛利/低增长</td></tr>
+                <tr><td>成长性</td><td>⭐⭐ 增速停滞</td></tr>
+                <tr><td>流动性</td><td>⭐ 极差（3707户股东）</td></tr>
+                <tr><td><strong>最新评级</strong></td><td style="color:#ffd700"><strong>⭐⭐⭐ 中价值 | 上市即巅峰</strong></td></tr>
+            </table>
+            <div class="verdict-box neutral" style="margin-top:15px">
+                <h4>一句话结论</h4>
+                <p>这是一只"上市即巅峰"的次新股，首日涨幅已透支未来2-3年增长预期。国产替代逻辑真实、毛利率85%+有护城河，但营收增速停滞、细分市场天花板低、流动性极差。当前31倍PE匹配行业均值，<strong>定价合理但缺乏惊喜</strong>，找不到"当下就能下注"的错配。验证节点：2026-08-30中报。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em">数据来源：公开市场信息 | 分析：2026-08-20 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em">仅供学习交流，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+</html>
