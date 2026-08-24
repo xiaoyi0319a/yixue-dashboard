@@ -1,16 +1,16 @@
 {
-  "date": "2026-07-16",
-  "computed_at": "2026-08-21T15:39:44.462665",
+  "date": "2026-08-24",
+  "computed_at": "2026-08-24T08:00:00.000000",
   "overall": {
     "current_streak_type": "loss",
-    "current_streak_days": 2,
-    "current_streak_start": "2026-07-17",
+    "current_streak_days": 4,
+    "current_streak_start": "2026-08-18",
     "max_win_streak": 6,
     "max_loss_streak": 4,
     "total_days": 26,
-    "last_14_hot_days": 8,
-    "last_14_cold_days": 6,
-    "last_14_win_rate": 0.5714,
+    "last_14_hot_days": 7,
+    "last_14_cold_days": 7,
+    "last_14_win_rate": 0.5039,
     "streaks": [
       {
         "type": "loss",
@@ -106,13 +106,13 @@
     ]
   },
   "badge": {
-    "text": "连续中断 2 天",
-    "class": "cool",
-    "label": "中断中"
+    "text": "⚠️ 中断",
+    "class": "cold",
+    "label": "连续中断 4 天"
   },
   "directions": {
     "limit_up": {
-      "last_win_rate": 0.3333,
+      "last_win_rate": 0.475,
       "last_avg_return": -0.3,
       "streak_type": "loss",
       "streak_days": 2,
@@ -122,159 +122,47 @@
       "hot_days": 7,
       "cold_days": 7,
       "history": [
-        {
-          "date": "2026-08-04",
-          "win_rate": 0.75,
-          "avg_return": 1.328
-        },
-        {
-          "date": "2026-08-03",
-          "win_rate": 0.6,
-          "avg_return": -0.82
-        },
-        {
-          "date": "2026-07-31",
-          "win_rate": 0.857,
-          "avg_return": 3.3
-        },
-        {
-          "date": "2026-07-30",
-          "win_rate": 0.375,
-          "avg_return": 0.21
-        },
-        {
-          "date": "2026-07-29",
-          "win_rate": 0.4444,
-          "avg_return": -3.359
-        },
-        {
-          "date": "2026-07-28",
-          "win_rate": 0.0833,
-          "avg_return": -4.612
-        },
-        {
-          "date": "2026-07-27",
-          "win_rate": 0.8571,
-          "avg_return": 3.2286
-        },
-        {
-          "date": "2026-07-24",
-          "win_rate": 0.0833,
-          "avg_return": -5.1032
-        },
-        {
-          "date": "2026-07-23",
-          "win_rate": 0.8,
-          "avg_return": 3.5
-        },
-        {
-          "date": "2026-07-22",
-          "win_rate": 0.286,
-          "avg_return": -2.9
-        },
-        {
-          "date": "2026-07-21",
-          "win_rate": 0.6667,
-          "avg_return": -0.4417
-        },
-        {
-          "date": "2026-07-20",
-          "win_rate": 0.7188,
-          "avg_return": 0.4023
-        },
-        {
-          "date": "2026-07-17",
-          "win_rate": 0.0,
-          "avg_return": -5.5436
-        },
-        {
-          "date": "2026-07-16",
-          "win_rate": 0.3333,
-          "avg_return": -0.2994
-        }
+        {"date": "08/21", "win_rate": 0.0},
+        {"date": "08/19", "win_rate": 0.0},
+        {"date": "08/17", "win_rate": 0.833},
+        {"date": "08/14", "win_rate": 0.625},
+        {"date": "08/13", "win_rate": 0.2},
+        {"date": "08/12", "win_rate": 0.25},
+        {"date": "08/11", "win_rate": 0.444},
+        {"date": "08/10", "win_rate": 0.583},
+        {"date": "08/07", "win_rate": 0.583},
+        {"date": "08/05", "win_rate": 0.833},
+        {"date": "08/04", "win_rate": 0.75},
+        {"date": "08/03", "win_rate": 0.6},
+        {"date": "07/31", "win_rate": 0.857},
+        {"date": "07/30", "win_rate": 0.375}
       ]
     },
     "news": {
-      "last_win_rate": 0.1562,
-      "last_avg_return": -3.6,
+      "last_win_rate": 0.555,
+      "last_avg_return": 0.766,
       "streak_type": "loss",
-      "streak_days": 3,
+      "streak_days": 4,
       "max_win_streak": 4,
-      "max_loss_streak": 3,
+      "max_loss_streak": 4,
       "total_days": 14,
       "hot_days": 8,
       "cold_days": 6,
       "history": [
-        {
-          "date": "2026-08-05",
-          "win_rate": 0.833,
-          "avg_return": 2.02
-        },
-        {
-          "date": "2026-08-04",
-          "win_rate": 1.0,
-          "avg_return": 6.127
-        },
-        {
-          "date": "2026-08-03",
-          "win_rate": 0.5,
-          "avg_return": -0.17
-        },
-        {
-          "date": "2026-07-31",
-          "win_rate": 0.917,
-          "avg_return": 4.45
-        },
-        {
-          "date": "2026-07-30",
-          "win_rate": 0.333,
-          "avg_return": -2.07
-        },
-        {
-          "date": "2026-07-29",
-          "win_rate": 0.6667,
-          "avg_return": -1.557
-        },
-        {
-          "date": "2026-07-28",
-          "win_rate": 0.4,
-          "avg_return": -0.787
-        },
-        {
-          "date": "2026-07-27",
-          "win_rate": 0.5833,
-          "avg_return": 0.7867
-        },
-        {
-          "date": "2026-07-23",
-          "win_rate": 0.667,
-          "avg_return": 1.62
-        },
-        {
-          "date": "2026-07-22",
-          "win_rate": 0.167,
-          "avg_return": -2.14
-        },
-        {
-          "date": "2026-07-21",
-          "win_rate": 0.5,
-          "avg_return": 2.4713
-        },
-        {
-          "date": "2026-07-20",
-          "win_rate": 0.4667,
-          "avg_return": -1.9192
-        },
-        {
-          "date": "2026-07-17",
-          "win_rate": 0.1,
-          "avg_return": -9.8504
-        },
-        {
-          "date": "2026-07-16",
-          "win_rate": 0.1562,
-          "avg_return": -3.5978
-        }
+        {"date": "08/21", "win_rate": 0.429},
+        {"date": "08/20", "win_rate": 0.4},
+        {"date": "08/19", "win_rate": 0.0},
+        {"date": "08/18", "win_rate": 0.333},
+        {"date": "08/17", "win_rate": 1.0},
+        {"date": "08/14", "win_rate": 0.889},
+        {"date": "08/13", "win_rate": 0.0},
+        {"date": "08/12", "win_rate": 0.583},
+        {"date": "08/11", "win_rate": 0.167},
+        {"date": "08/10", "win_rate": 0.857},
+        {"date": "08/07", "win_rate": 0.778},
+        {"date": "08/05", "win_rate": 0.833},
+        {"date": "08/04", "win_rate": 1.0},
+        {"date": "08/03", "win_rate": 0.5}
       ]
     }
   }
