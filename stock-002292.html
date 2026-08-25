@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>002292 奥飞娱乐 - 羿学天天看</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center; padding: 30px 0;
+            border-bottom: 1px solid #2d3a4f; margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d4ff, #a371f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .code { color: #8b9dc3; font-size: 1.2em; }
+        .header .date { color: #6b7b8f; font-size: 0.9em; margin-top: 5px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .nav a { color: #58a6ff; text-decoration: none; padding: 6px 14px; border: 1px solid #2d3a4f; border-radius: 8px; font-size: 0.9em; transition: all 0.3s; }
+        .nav a:hover { background: rgba(88, 166, 255, 0.1); border-color: #58a6ff; }
+
+        .dabaohua-section {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2a1810 100%);
+            border: 2px solid #c9a84c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+        }
+        .dabaohua-section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dabaohua-q {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-q .q-label {
+            color: #c9a84c;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 6px;
+        }
+        .dabaohua-q .q-answer {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        .dabaohua-summary {
+            background: rgba(201, 168, 76, 0.1);
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-top: 15px;
+            border-left: 4px solid #c9a84c;
+        }
+        .dabaohua-summary h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .dabaohua-summary p {
+            color: #d0d8e8;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .section {
+            background: #1a2332;
+            border: 1px solid #2d3a4f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2d3a4f;
+        }
+        .section h3 {
+            color: #00d4ff;
+            font-size: 1.1em;
+            margin: 15px 0 10px;
+        }
+        .section h4 {
+            color: #c9a84c;
+            font-size: 1.05em;
+            margin: 12px 0 8px;
+        }
+        .section p { color: #b0c4de; line-height: 1.8; margin-bottom: 10px; }
+        .section ul { margin-left: 20px; color: #b0c4de; }
+        .section ul li { margin-bottom: 8px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #2d3a4f; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; }
+        td { color: #b0c4de; }
+        .highlight { color: #ffd700; font-weight: 600; }
+        .warning { color: #ff6b6b; font-weight: 600; }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .tag-base { background: rgba(0, 255, 136, 0.15); color: #00ff88; }
+        .tag-top { background: rgba(163, 113, 247, 0.2); color: #a371f7; }
+        .tag-noise { background: rgba(255, 107, 107, 0.2); color: #ff6b6b; }
+        .tag-fog { background: rgba(139, 157, 195, 0.15); color: #8b9dc3; }
+
+        .verdict-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd700;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+        .verdict-box h4 { color: #ffd700; margin-bottom: 8px; }
+        .verdict-box p { color: #d0d8e8; }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #8b9dc3;
+            border-top: 1px solid #2d3a4f;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+    </style>
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>奥飞娱乐</h1>
+            <p class="code">002292 · 动漫IP运营 · 困境反转 · 毛利率提升 · IP年轻向转型</p>
+            <p class="date">分析日期：2026-08-25 | 分析师：小羿 | 版本：V4.4 | 数据截止：2026-08-25</p>
+            <div class="nav">
+                <a href="index.html">🏠 首页</a>
+                <a href="reports.html">📊 报告库</a>
+                <a href="qimen.html">🔮 奇门</a>
+            </div>
+        </div>
+
+        <div class="dabaohua-section">
+            <h2>🔥 大白话三问（30秒读完）</h2>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【这家公司是做什么的？】</div>
+                <div class="q-answer">
+                    <strong>行业归属</strong>：动漫文化/轻工制造-文娱用品。产业链位置：下游（IP运营+品牌玩具+婴童用品，直接卖给消费者）。<br>
+                    <strong>核心产品</strong>：喜羊羊与灰太狼（20年老IP）、超级飞侠、巴啦啦小魔仙、铠甲勇士。产品形态：婴童用品51%、玩具39%、动漫影视10%。新方向：潮玩/卡牌/AI玩具。<br>
+                    <strong>客户</strong>：B2C为主，境内43%+境外57%（海外占比过半）。<br>
+                    <strong>增长逻辑</strong>：IP内容→授权/玩具/衍生品变现，年轻向转型（谷子经济/潮玩/AI玩具）。
+                </div>
+            </div>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【贵不贵？】</div>
+                <div class="q-answer">
+                    当前股价~8.1元，PE(TTM) <strong>56.94倍</strong>，PB 3.93倍。<br>
+                    PEG角度：若全年净利1.4亿（机构预测中值），增速~95%，PEG≈0.6，看似匹配。<br>
+                    <strong>但增速质量差</strong>：归母+370% vs 扣非仅+55.8%，营收只+11%。利润爆发主要来自成本压缩，不是收入扩张。<br>
+                    对标光线传媒PE 30-40x，当前57x已偏高。<br>
+                    <strong>结论</strong>：不贵但也不便宜，估值已部分反映反转预期。
+                </div>
+            </div>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【有没有故事？】</div>
+                <div class="q-answer">
+                    <strong>真故事</strong>：业绩扭亏为盈，毛利率从43%→51%，成本管控见效。<br>
+                    <strong>假故事</strong>（市场在炒）：<br>
+                    · 谷子经济/潮玩：公司公告明确说"仍处于早期发展阶段"<br>
+                    · AI玩具：有产品（喜羊羊AI玩偶）但收入贡献极小<br>
+                    · 生肖羊IP：喜羊羊20周年+羊年有情绪溢价，但IP老化是事实<br>
+                    · 机器人/大模型参股：参股比例极低（5%左右），无实质影响<br>
+                    <strong>预期差</strong>：市场把"业绩反转"当成了"业绩爆发+新赛道突破"，实际营收增长仅11%
+                </div>
+            </div>
+
+            <div class="dabaohua-q">
+                <div class="q-label">【最坏会怎样？】</div>
+                <div class="q-answer">
+                    <strong>证伪信号</strong>：Q3营收增速<5% 或 毛利率<45%<br>
+                    <strong>验证节点</strong>：2026年8月底（中报全文）、2026年10月底（三季报）<br>
+                    <strong>三情景</strong>：<br>
+                    · 乐观：全年净利2亿+，股价冲12-15元（20%概率）<br>
+                    · 基准：全年净利1.3-1.5亿，股价横盘7-10元（<strong>60%概率 ← 最可能</strong>）<br>
+                    · 悲观：下半年业绩回落，股价跌回6-7元（20%概率）
+                </div>
+            </div>
+
+            <div class="dabaohua-summary">
+                <h4>📌 四句话总结</h4>
+                <table>
+                    <tr><th style="width:100px">维度</th><th>大白话</th></tr>
+                    <tr><td>核心变化</td><td>公司从亏损走到盈利，毛利率大幅提升，但营收增长有限</td></tr>
+                    <tr><td>估值位置</td><td>PE 57x已反映部分反转预期，PEG≈0.6但增速质量差</td></tr>
+                    <tr><td>预期差</td><td>市场把"成本压缩带来的利润反转"当成了"新赛道爆发"，存在认知偏差</td></tr>
+                    <tr><td>风险点</td><td>营收仅+11%支撑不了高估值；境外57%受汇率/贸易影响；IP老化</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 执行摘要</h2>
+            <p><strong>分析日期</strong>：2026-08-25</p>
+            <p><strong>核心变化</strong>：业绩从亏损到盈利反转，毛利率大幅提升（43%→51%），IP年轻向转型</p>
+            <p><strong>投资价值</strong>：<span class="highlight">中价值</span>（困境修复型，非爆发型）</p>
+            <p><strong>预期差等级</strong>：<span class="highlight">中预期差</span></p>
+            <p><strong>跟踪周期</strong>：中期（1-2年，需持续验证毛利率和营收增速）</p>
+            <p><strong>关键验证节点</strong>：2026年8月底中报全文、2026年10月底三季报</p>
+            <p><strong>证伪信号</strong>：Q3营收增速<5% 或 毛利率<45%</p>
+        </div>
+
+        <div class="section">
+            <h2>🔍 一、变化识别（Step 1）</h2>
+            <h3>基础画像</h3>
+            <table>
+                <tr><th>项目</th><th>内容</th><th>数据来源</th></tr>
+                <tr><td>股票名称</td><td>奥飞娱乐</td><td>-</td></tr>
+                <tr><td>股票代码</td><td>002292.SZ</td><td>-</td></tr>
+                <tr><td>当前股价</td><td>~8.1元</td><td>iFinD（2026-08-25）</td></tr>
+                <tr><td>市值</td><td>119亿</td><td>iFinD（2026-08-25）</td></tr>
+                <tr><td>所属行业</td><td>传媒-影视动漫 / 轻工制造-文娱用品</td><td>iFinD/同花顺</td></tr>
+            </table>
+
+            <h3>核心变化识别</h3>
+            <table>
+                <tr><th>变化类型</th><th>具体事件</th><th>发生时间</th><th>信息来源</th></tr>
+                <tr><td>☑业绩拐点</td><td>2024年亏损2.85亿→2025年盈利7187万→2026H1盈利1.74亿</td><td>2025年报/2026中报预告</td><td>公告</td></tr>
+                <tr><td>☑成本端优化</td><td>毛利率从43.55%提升至51.59%</td><td>2025年报/2026一季报</td><td>财报</td></tr>
+                <tr><td>□新业务</td><td>IP年轻向转型：潮玩/卡牌/谷子/AI玩具布局</td><td>2024-2025年持续</td><td>公告/投资者关系活动</td></tr>
+                <tr><td>□政策催化</td><td>谷子经济/潮玩行业受市场关注</td><td>2024年下半年起</td><td>行业新闻</td></tr>
+            </table>
+
+            <p class="highlight">🔍 一句话核心发现：公司从连续两年亏损走向盈利反转，毛利率大幅提升，同时布局年轻向新业务（潮玩/AI玩具）。</p>
+        </div>
+
+        <div class="section">
+            <h2>⚖️ 二、变化权重排序（Step 1.5）</h2>
+            <table>
+                <tr><th>排序</th><th>变化</th><th>权重等级</th><th>当前股价贡献</th><th>未来演变</th><th>关键验证时点</th></tr>
+                <tr><td>1</td><td>业绩扭亏+毛利率提升</td><td><span class="tag tag-base">底</span></td><td>已兑现大部分</td><td>H2考验持续性</td><td>2026-08-30中报</td></tr>
+                <tr><td>2</td><td>成本端优化</td><td><span class="tag tag-base">底</span></td><td>已兑现</td><td>降本有天花板，不可持续</td><td>2026-10月底三季报</td></tr>
+                <tr><td>3</td><td>IP年轻向/潮玩/AI玩具</td><td><span class="tag tag-top">顶</span></td><td>概念溢价（待兑现）</td><td>收入贡献极小，早期阶段</td><td>2026年年报</td></tr>
+                <tr><td>4</td><td>谷子经济/生肖羊情绪</td><td><span class="tag tag-noise">噪</span></td><td>被高估</td><td>情绪炒作，无业绩支撑</td><td>2026年春节后</td></tr>
+            </table>
+
+            <p><strong>一句话权重判断</strong>：<strong>业绩扭亏+毛利率提升</strong>是底，<strong>IP年轻向转型</strong>是顶，<strong>谷子经济/生肖羊情绪</strong>是噪，<strong>成本端优化</strong>也是底但已接近天花板。</p>
+        </div>
+
+        <div class="section">
+            <h2>📈 三、变化价值——能带来什么？（Step 2）</h2>
+
+            <h3>【变化一：业绩扭亏+毛利率提升】</h3>
+            <table>
+                <tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th><th>量化空间</th></tr>
+                <tr><td>短期（已验证/6个月）</td><td>利润转正，毛利率提升至51%</td><td>成熟期（IP运营多年）</td><td>高</td><td>2026H1净利1.74亿</td></tr>
+                <tr><td>中期（1-2年）</td><td>毛利率维持高位，利润稳定增长</td><td>成熟期</td><td>中</td><td>全年净利1.3-1.5亿</td></tr>
+                <tr><td>长期（2年+）</td><td>新IP孵化/新业务放量</td><td>导入期→成长期</td><td>低</td><td><strong>故事，不纳入定价</strong></td></tr>
+            </table>
+
+            <h4>行业景气度×公司共振检查</h4>
+            <ul>
+                <li><strong>行业方向</strong>：动漫/玩具行业整体平稳，谷子经济/潮玩子赛道向上</li>
+                <li><strong>行业斜率</strong>：温和（10-20%），非爆发</li>
+                <li><strong>公司卡位</strong>：IP运营龙头，但IP老化（喜羊羊20年）</li>
+                <li><strong>受益顺序</strong>：已传导（毛利率提升已体现在报表）</li>
+                <li><strong>共振强度</strong>：<span class="highlight">中</span>（公司受益但行业非爆发）</li>
+            </ul>
+
+            <h4>演变路径</h4>
+            <ul>
+                <li><strong>乐观路径</strong>：如果H2毛利率维持50%+，全年净利2亿+，估值修复至PE 40x→股价12元+</li>
+                <li><strong>基准路径</strong>：如果H2毛利率回落至45-48%，全年净利1.3-1.5亿，横盘震荡7-10元</li>
+                <li><strong>悲观路径</strong>：如果H2营收增速跌破5%，毛利率回落到43%以下，股价跌回6-7元</li>
+            </ul>
+
+            <h4>关键质疑点</h4>
+            <table>
+                <tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+                <tr><td>利润增长是否可持续？</td><td>2026H1扣非仅5126万（+55.8%），远低于归母1.74亿</td><td>非经常性收益占比高，主业利润质量一般</td></tr>
+                <tr><td>营收增长是否匹配？</td><td>2026H1营收+11%，但2025年-8.9%，基数低</td><td>收入增长乏力，利润增长主要靠压缩成本</td></tr>
+                <tr><td>毛利率提升原因？</td><td>2026H1毛利率51.59% vs 2025年43.55%</td><td>可能是产品结构变化或一次性因素，未必可持续</td></tr>
+            </table>
+
+            <h3>【变化二：IP年轻向转型（潮玩/卡牌/AI玩具）】</h3>
+            <table>
+                <tr><th>时间维度</th><th>能带来什么</th><th>产业周期位置</th><th>可行性</th><th>量化空间</th></tr>
+                <tr><td>短期</td><td>卡牌/潮玩产品推出，收入贡献极小</td><td>导入期</td><td>低</td><td>收入占比<5%</td></tr>
+                <tr><td>中期</td><td>若卡牌/潮玩放量，可能成为第二增长曲线</td><td>导入期→成长期</td><td>中</td><td>不可量化</td></tr>
+                <tr><td>长期</td><td>AI玩具/虚拟偶像等新业态</td><td>导入期</td><td>低</td><td><strong>故事</strong></td></tr>
+            </table>
+
+            <h4>关键质疑点</h4>
+            <table>
+                <tr><th>质疑</th><th>事实</th><th>影响</th></tr>
+                <tr><td>潮玩/卡牌收入有多少？</td><td>公司未单独披露，"玩点无限"品牌收入占比极小</td><td>无法验证放量情况</td></tr>
+                <tr><td>AI玩具收入？</td><td>"喜羊羊超能铃铛娃娃"等AI产品有推出，但收入贡献不明</td><td>概念>实质</td></tr>
+                <tr><td>与泡泡玛特差距？</td><td>泡泡玛特2026Q1营收+165%，奥飞营收+11%</td><td>差距极大，奥飞非潮玩龙头</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💡 四、即时错配识别（Step 2.5）</h2>
+
+            <h3>估值锚验证</h3>
+            <table>
+                <tr><th>指标</th><th>数值</th><th>质量检查</th><th>匹配判断</th></tr>
+                <tr><td>净利润增速(TTM)</td><td>+370%（H1）</td><td>扣非增速仅+55.8%，差距极大</td><td class="warning">⚠️</td></tr>
+                <tr><td>当前PE(TTM)</td><td>57倍</td><td>行业平均PE≈30-40x（传媒动漫）</td><td class="warning">❌ 偏高</td></tr>
+                <tr><td><strong>PEG</strong></td><td><strong>~0.6</strong>（按全年+95%）</td><td>但增速质量差</td><td class="warning">⚠️</td></tr>
+                <tr><td>营收增速</td><td>+11%</td><td>量增有限</td><td class="warning">⚠️</td></tr>
+                <tr><td>当前PB</td><td>3.93倍</td><td>-</td><td class="warning">⚠️</td></tr>
+            </table>
+
+            <h4>增速质量检查</h4>
+            <ul>
+                <li>扣非增速 vs 归母增速：+55.8% vs +370.7%，差距>50% → <strong>水分大</strong></li>
+                <li>营收增速 vs 利润增速：+11% vs +370%，利润增速>营收增速30倍 → <strong>警惕成本压缩一次性</strong></li>
+                <li>增速持续性：H2需验证毛利率能否维持</li>
+                <li>利润绝对值：2026H1扣非仅5126万，全年扣非可能仅1亿左右，基数仍低</li>
+            </ul>
+
+            <h3>股价敏感性分析</h3>
+            <table>
+                <tr><th>如果股价涨到</th><th>对应市值</th><th>需要全年净利润（按合理PE）</th><th>当前H1占全年比例</th><th>后续季度需达到</th></tr>
+                <tr><td>当前价8.1元</td><td>119亿</td><td>2.0亿（按60倍PE）</td><td>H1归母1.74亿</td><td>H2仅需0.26亿</td></tr>
+                <tr><td>+20%（9.7元）</td><td>143亿</td><td>2.9亿（按50倍PE）</td><td>60%</td><td>H2需1.16亿</td></tr>
+                <tr><td>+50%（12.2元）</td><td>179亿</td><td>3.6亿（按50倍PE）</td><td>48%</td><td>H2需1.86亿</td></tr>
+            </table>
+
+            <p><strong>历史季度利润参考</strong>：</p>
+            <ul>
+                <li>2025年Q1: 4910万 | 2025年Q2: -1209万（亏损） | 2025年Q3: 1354万 | 2025年Q4: 2133万</li>
+                <li>2026年Q1: 5472万 | 2026年Q2: 1.195亿（单季爆发）</li>
+            </ul>
+
+            <p>Q2单季1.195亿是历史最高季度利润，但同比基数极低（2025Q2亏损1209万）。<strong>如果Q2的高毛利是一次性的，Q3/Q4可能回落至3000-4000万/季度</strong>。当前股价已隐含全年2亿+的预期，若H2不及预期有回调风险。</p>
+
+            <h3>错配一：认知差（B类）</h3>
+            <table>
+                <tr><th>维度</th><th>内容</th></tr>
+                <tr><td>错配类型</td><td>B. 认知差</td></tr>
+                <tr><td>市场当前共识</td><td>奥飞娱乐是"谷子经济+AI玩具+生肖羊IP"多重概念叠加的反转标的，业绩爆发+新赛道突破</td></tr>
+                <tr><td>事实真相</td><td>2026H1营收仅+11%，利润爆发主要来自成本压缩+毛利率提升（非经常性收益占比高），潮玩/AI玩具收入贡献极小</td></tr>
+                <tr><td>价格隐含估值</td><td>PE 57x，隐含"高成长+新赛道溢价"</td></tr>
+                <tr><td>真相定价</td><td>若以扣非净利和营收增速看，合理PE 30-40x（传统IP运营公司）</td></tr>
+                <tr><td>错配幅度</td><td>当前价→真相定价有约20-30%高估</td></tr>
+                <tr><td>纠正催化剂</td><td>2026年8月底中报全文披露（看毛利率细分+扣非净利质量）、2026年10月底三季报</td></tr>
+                <tr><td>错配持续时间预估</td><td>概念炒作期（谷子经济/羊年）可能维持到2026年底，但若无业绩验证将回归</td></tr>
+            </table>
+
+            <p class="highlight">🔍 一句话错配判断：当前价格最大的错误是把"成本压缩带来的利润反转"当成了"新赛道爆发+IP重估"，若纠正则有20-30%回调空间，催化剂是中报全文披露毛利率细分和扣非质量。</p>
+        </div>
+
+        <div class="section">
+            <h2>🎯 五、可信度裁决（Step 3）</h2>
+
+            <h3>三情景推演</h3>
+            <table>
+                <tr><th>情景</th><th>股价变化</th><th>触发条件</th><th>概率权重</th></tr>
+                <tr><td>乐观</td><td>+30-50%（10-12元）</td><td>H2毛利率维持50%+，全年净利2亿+，潮玩/卡牌收入放量</td><td>20%</td></tr>
+                <tr><td>基准</td><td>横盘±10%（7-9元）</td><td>H2毛利率回落至45-48%，全年净利1.3-1.5亿，营收增速5-15%</td><td><strong>60%</strong></td></tr>
+                <tr><td>悲观</td><td>-20-30%（6-7元）</td><td>H2营收增速跌破5%，毛利率回落至43%以下，扣非净利下滑</td><td>20%</td></tr>
+            </table>
+
+            <p><strong>概率合计</strong>：100%</p>
+            <p><strong>加权预期收益</strong>：+5%（20%×+40% + 60%×0% + 20%×-25%）</p>
+            <p><strong>风险收益比</strong>：1:1.5（上涨空间30% vs 下跌空间25%）</p>
+            <p><strong>预期差大小</strong>：<span class="highlight">中（10-30%）</span></p>
+
+            <h3>证伪信号（什么时候放弃）</h3>
+            <table>
+                <tr><th>信号</th><th>含义</th></tr>
+                <tr><td>2026Q3营收增速<5%</td><td>收入增长乏力，反转逻辑证伪</td></tr>
+                <tr><td>2026Q3毛利率<45%</td><td>毛利率提升不可持续</td></tr>
+                <tr><td>扣非净利连续2季度下滑</td><td>主业利润质量差</td></tr>
+                <tr><td>潮玩/卡牌收入始终不单独披露</td><td>新业务无实质进展</td></tr>
+            </table>
+
+            <h3>关键验证节点</h3>
+            <table>
+                <tr><th>时间</th><th>事件</th><th>验证什么</th><th>距分析日</th><th>如果miss怎么办</th></tr>
+                <tr><td>2026-08-30</td><td>2026中报全文披露</td><td>毛利率细分、扣非净利质量、各业务收入</td><td>5天</td><td>若毛利率回落，下调全年预期</td></tr>
+                <tr><td>2026-10-31</td><td>2026三季报</td><td>H2业绩持续性、营收增速</td><td>2个月</td><td>若营收增速<5%，逻辑证伪</td></tr>
+                <tr><td>2027-01-31</td><td>2026年报预告</td><td>全年业绩总结、新业务进展</td><td>5个月</td><td>若全年扣非<1亿，放弃跟踪</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💡 六、综合研判（Step 4）</h2>
+
+            <h3>0. 流动性环境</h3>
+            <p><strong>当前判断</strong>：<span class="highlight">存量博弈</span>（震荡市/量能萎缩）</p>
+            <p>大盘处于震荡整理期，资金倾向抱团高确定性标的。奥飞娱乐属于"困境反转+概念炒作"型，在存量博弈下容错率低，必须有业绩持续验证才能维持估值。</p>
+
+            <h3>1. 投资价值评估</h3>
+            <table>
+                <tr><th>检查项</th><th>判断</th><th>依据</th></tr>
+                <tr><td>PEG匹配度</td><td class="warning">⚠️ 偏高</td><td>PEG≈0.6但增速质量差，扣非PEG更高</td></tr>
+                <tr><td>增速质量</td><td class="warning">⚠️ 中</td><td>归母+370%但扣非仅+55.8%，营收仅+11%</td></tr>
+                <tr><td>估值安全边际</td><td class="warning">❌ 无</td><td>PE 57x高于行业平均，无安全边际</td></tr>
+            </table>
+
+            <p><strong>估值匹配结论</strong>：当前价格与增速<strong>偏高</strong>，安全边际<strong>不足</strong>，<strong>毛利率能否维持</strong>是估值的最大支撑/风险。</p>
+
+            <ul>
+                <li><strong>评估结论</strong>：<span class="highlight">中价值</span>（困境修复型，非爆发型）</li>
+                <li><strong>核心依据</strong>：业绩反转有真实改善（毛利率提升），但增速质量一般，估值已部分反映</li>
+                <li><strong>最大风险</strong>：毛利率回落+营收增长乏力，概念炒作消退</li>
+                <li><strong>情景概率</strong>：乐观+基准概率合计 80%</li>
+            </ul>
+
+            <h3>2. 投资价值等级</h3>
+            <table>
+                <tr><th>预期差等级</th><th>判断依据</th><th>价值等级</th></tr>
+                <tr><td>中预期差</td><td>基准情景收益0-10%，乐观情景收益30-50%，市场部分认识反转逻辑</td><td><span class="highlight">中价值</span></td></tr>
+            </table>
+
+            <h3>3. 跟踪周期判断</h3>
+            <table>
+                <tr><th>维度</th><th>判断</th></tr>
+                <tr><td>故事能走多远</td><td>中期（业绩验证，1-2年）</td></tr>
+                <tr><td>判断节点</td><td>2026年三季报、2026年年报</td></tr>
+                <tr><td>中途退出条件</td><td>Q3营收增速<5%或毛利率<45%</td></tr>
+            </table>
+
+            <p class="highlight">🔍 一句话核心发现：分析目的是判断奥飞娱乐的困境反转是否可持续，这个变化在6-12个月内有60%概率带来0-10%收益（基准），核心验证节点是2026年三季报，如果Q3营收增速跌破5%或毛利率回落则放弃。</p>
+        </div>
+
+        <div class="section">
+            <h2>📎 附录：数据来源</h2>
+            <table>
+                <tr><th>数据</th><th>来源</th><th>时间</th></tr>
+                <tr><td>股价/市值/PE/PB</td><td>iFinD/mx_data</td><td>2026-08-25</td></tr>
+                <tr><td>财务数据（2025年报/2026一季报/中报预告）</td><td>iFinD/mx_data</td><td>2026-04/07/08</td></tr>
+                <tr><td>业绩预告</td><td>公司公告</td><td>2026-07-02</td></tr>
+                <tr><td>投资者关系活动</td><td>公司公告</td><td>2026-05-19</td></tr>
+                <tr><td>异动公告</td><td>公司公告</td><td>2024-11-26</td></tr>
+                <tr><td>行业数据/新闻</td><td>研报/行业新闻/搜索</td><td>2024-2026年</td></tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>🎯 羿学天天看</p>
+            <p style="margin-top:8px; font-size:0.85em;">数据来源：公开市场信息 | 分析：2026-08-25 V4.4</p>
+            <p style="margin-top:4px; font-size:0.85em;">仅供学习交流，不构成投资建议</p>
+            <p class="site-stats" id="busuanzi_container_page_pv" style="margin-top:8px; font-size:0.85em;">
+                <span style="color:#6b7b8f;">📖 本报告阅读 </span><span id="busuanzi_value_page_pv" style="color:#00d4ff;font-weight:600;">--</span><span style="color:#6b7b8f;"> 次</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+    setTimeout(function() {
+        var pv = document.getElementById('busuanzi_value_page_pv');
+        var container = document.getElementById('busuanzi_container_page_pv');
+        if (pv && pv.innerText === '--' && container) {
+            container.style.display = 'none';
+        }
+    }, 5000);
+    </script>
+</body>
+</html>
