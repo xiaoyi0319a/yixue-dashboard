@@ -1,0 +1,80 @@
+<!--
+================================================================================
+涨停板方向卡片 - HTML代码模板
+版本: 1.0
+日期: 2026-08-27
+用途: 网站更新时生成涨停板方向卡片，禁止凭记忆构造HTML
+================================================================================
+
+【使用说明】
+1. 复制本模板中的对应区块到 index.html
+2. 替换 {{变量}} 为实际内容
+3. 每个方向卡片独立一个 <div class="direction-card ..."> 块
+4. 所有方向卡片放入 <div class="ztb-grid"> 容器内
+
+【变量说明】
+{{DIRECTION_CLASS}}   → hot 或 watch（🔥方向=hot，👀方向=watch）
+{{DIRECTION_TAG}}     → 🔥 或 👀
+{{DIRECTION_NAME}}    → 方向名称（如：铜周期/有色金属）
+{{DIRECTION_DESC}}    → 方向核心逻辑（2-3行大白话）
+{{STOCK_ITEMS}}       → 一个或多个 <div class="buzhang-item">...</div>
+
+【重要】
+- 禁止修改 class 名称
+- 禁止省略 buzhang-left 包裹层
+- 禁止把 tag 嵌在 buzhang-name 里
+- 禁止修改 CSS 依赖的结构层级
+================================================================================
+-->
+
+<!-- ====== 方向卡片整体（每个方向一个） ====== -->
+<div class="direction-card {{DIRECTION_CLASS}}">
+    <div class="direction-header">
+        <span class="direction-tag">{{DIRECTION_TAG}}</span>
+        <span class="direction-name">{{DIRECTION_NAME}}</span>
+    </div>
+    <div class="direction-desc">{{DIRECTION_DESC}}</div>
+    <div class="buzhang-list">
+        {{STOCK_ITEMS}}
+    </div>
+</div>
+
+
+<!-- ====== 单个补涨标（★高匹配/S级） ====== -->
+<div class="buzhang-item">
+    <div class="buzhang-left">
+        <div class="buzhang-name">{{STOCK_NAME}}</div>
+        <div class="buzhang-code">{{STOCK_CODE}}</div>
+        <div class="buzhang-logic">{{STOCK_LOGIC}}</div>
+    </div>
+    <span class="buzhang-tag bz-s" title="高匹配">★</span>
+</div>
+
+<!-- ====== 单个补涨标（◆中匹配/A级） ====== -->
+<div class="buzhang-item">
+    <div class="buzhang-left">
+        <div class="buzhang-name">{{STOCK_NAME}}</div>
+        <div class="buzhang-code">{{STOCK_CODE}}</div>
+        <div class="buzhang-logic">{{STOCK_LOGIC}}</div>
+    </div>
+    <span class="buzhang-tag bz-a" title="中匹配">◆</span>
+</div>
+
+<!-- ====== 单个补涨标（黑马/H级） ====== -->
+<div class="buzhang-item">
+    <div class="buzhang-left">
+        <div class="buzhang-name">{{STOCK_NAME}}</div>
+        <div class="buzhang-code">{{STOCK_CODE}}</div>
+        <div class="buzhang-logic">{{STOCK_LOGIC}}</div>
+    </div>
+    <span class="buzhang-tag bz-h" title="黑马">H</span>
+</div>
+
+<!-- ====== 无有效候选（方向过热/候选池耗尽时） ====== -->
+<div class="buzhang-item">
+    <div class="buzhang-left">
+        <div class="buzhang-name">无有效候选</div>
+        <div class="buzhang-code">—</div>
+        <div class="buzhang-logic">{{NO_CANDIDATE_REASON}}</div>
+    </div>
+</div>
