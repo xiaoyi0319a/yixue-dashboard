@@ -137,6 +137,76 @@
                 .catch(() => render(defaultData));
         })();
         </script>
+
+        <!-- 昨日验证成功标的 -->
+        <div class="winners-box">
+            <div class="winners-header">
+                <span class="winners-icon">🏆</span>
+                <span class="winners-title">昨日验证成功标的（8月31日）</span>
+                <span class="winners-meta">胜率 80% · 平均 +1.62%</span>
+            </div>
+            <div class="winners-grid">
+                <div class="winner-item up"><span class="w-name">我爱我家</span><span class="w-code">000560</span><span class="w-pct">+9.85%</span></div>
+                <div class="winner-item up"><span class="w-name">铜牛信息</span><span class="w-code">300895</span><span class="w-pct">+3.21%</span></div>
+                <div class="winner-item up"><span class="w-name">德科立</span><span class="w-code">688205</span><span class="w-pct">+4.86%</span></div>
+                <div class="winner-item up"><span class="w-name">彩讯股份</span><span class="w-code">300634</span><span class="w-pct">+1.79%</span></div>
+                <div class="winner-item up"><span class="w-name">江丰电子</span><span class="w-code">300666</span><span class="w-pct">+1.78%</span></div>
+                <div class="winner-item up"><span class="w-name">迪普科技</span><span class="w-code">300768</span><span class="w-pct">+0.60%</span></div>
+                <div class="winner-item up"><span class="w-name">*ST三六五</span><span class="w-code">300295</span><span class="w-pct">+0.16%</span></div>
+                <div class="winner-item up"><span class="w-name">中欣氟材</span><span class="w-code">002915</span><span class="w-pct">+0.05%</span></div>
+            </div>
+        </div>
+
+        <style>
+        .winners-box {
+            background: linear-gradient(135deg, #1a2a1a 0%, #0f1f0f 100%);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0 24px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.08);
+        }
+        .winners-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+        }
+        .winners-icon { font-size: 1.3em; }
+        .winners-title {
+            color: #00ff88;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        .winners-meta {
+            color: #6b9f7f;
+            font-size: 0.85em;
+            margin-left: auto;
+        }
+        .winners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+        }
+        .winner-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.04);
+            font-size: 0.9em;
+        }
+        .winner-item.up { border-left: 3px solid #00ff88; }
+        .winner-item.down { border-left: 3px solid #ff6b6b; }
+        .w-name { color: #e0e6ed; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .w-code { color: #6b7b8f; font-size: 0.8em; }
+        .w-pct { color: #00ff88; font-weight: 600; margin-left: auto; font-size: 0.9em; }
+        .winner-item.down .w-pct { color: #ff6b6b; }
+        </style>
+
         <div class="ztb-section">
             <h2>📈 涨停板方向整理(5方向·89只涨停驱动)</h2>
         <div class="ztb-grid">
