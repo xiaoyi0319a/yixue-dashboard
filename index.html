@@ -74,7 +74,7 @@
             if (!container) return;
 
             const defaultData = {
-                "badge": { "text": "⚠️ 连续低成功率 1 天", "class": "cold", "label": "冷却中" },
+                "badge": { "text": "⚠️ 连续行情 1 天", "class": "cold", "label": "冷却中" },
                 "overall": { "current_streak_days": 1, "current_streak_type": "loss", "last_14_hot_days": 6, "last_14_cold_days": 8, "last_14_win_rate": 0.429, "max_win_streak": 4, "max_loss_streak": 6, "total_days": 34 },
                 "directions": {
                     "limit_up": { "last_win_rate": 0.444, "last_avg_return": -0.071, "streak_days": 4, "streak_type": "loss", "history": [
@@ -104,7 +104,7 @@
 
                 const html = `
             <div class="status-badge-wrap">
-                <span class="status-badge ${b.class || 'cold'}">${b.text || '加载中'}</span>
+                const badgeText = '⚠️ 连续行情 ' + (o.current_streak_days || 0) + ' 天';\n                <span class="status-badge ${b.class || 'cold'}">${badgeText}</span>
                 <span class="status-label">系统处于"${o.current_streak_type === 'win' ? '热' : '冷'}"状态（累计运行${o.total_days || 0}天）</span>
             </div>
             <div class="status-summary">
