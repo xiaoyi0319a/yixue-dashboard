@@ -7,6 +7,7 @@
 ================================================================================
 
 【变更记录】
+2026-09-02  新增"昨日系统表现"模块（灰白配色），移入方向整理系统状态面板内；hot/cold颜色互换（hot=红/cold=绿）
 2026-08-07  badge.label 简化，累计天数改由前端 `${o.total_days}` 显示
 2026-08-04  创建模板，整合系统可靠性仪表盘完整实现
 
@@ -116,14 +117,14 @@
                     <div class="win-rate ${winRateClass(lu.last_win_rate || 0)}">${((lu.last_win_rate || 0)*100).toFixed(1)}%</div>
                     <div class="meta">平均涨幅 ${(lu.last_avg_return || 0) >= 0 ? '+' : ''}${(lu.last_avg_return || 0).toFixed(2)}% · 连续 ${lu.streak_days || 0} 天</div>
                     <div class="streak-bar">${dots(lu.history)}</div>
-                    <div class="streak-note">绿=高成功率日 红=低成功率日 (左→右 近14天)</div>
+                    <div class="streak-note">红=高成功率日 绿=低成功率日 (左→右 近14天)</div>
                 </div>
                 <div class="dir-status-card">
                     <h4>📰 新闻方向 · 昨日验证</h4>
                     <div class="win-rate ${winRateClass(ns.last_win_rate || 0)}">${((ns.last_win_rate || 0)*100).toFixed(1)}%</div>
                     <div class="meta">平均涨幅 ${(ns.last_avg_return || 0) >= 0 ? '+' : ''}${(ns.last_avg_return || 0).toFixed(2)}% · 连续 ${ns.streak_days || 0} 天</div>
                     <div class="streak-bar">${dots(ns.history)}</div>
-                    <div class="streak-note">绿=高成功率日 红=低成功率日 (左→右 近14天)</div>
+                    <div class="streak-note">红=高成功率日 绿=低成功率日 (左→右 近14天)</div>
                 </div>
             </div>
                 `;
@@ -137,9 +138,19 @@
                 .catch(() => render(defaultData));
         })();
         </script>
-        <!-- ================================================ -->
-        <!-- /系统可靠性仪表盘                                -->
-        <!-- ================================================ -->
+
+        <!-- 昨日系统表现 -->
+        <div class="winners-box">
+            <div class="winners-header">
+                <span class="winners-icon">🏆</span>
+                <span class="winners-title">昨日系统表现（{{YESTERDAY_DATE}}）</span>
+                <span class="winners-meta">胜率 {{YESTERDAY_WIN_RATE}}% · 平均 {{YESTERDAY_AVG_RETURN}}%</span>
+            </div>
+            <div class="winners-grid">
+                {{WINNER_ITEMS}}
+            </div>
+        </div>
+        </div>
 
         <!-- 涨停方向 -->
         <div class="ztb-section">

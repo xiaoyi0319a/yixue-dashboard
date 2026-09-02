@@ -272,3 +272,52 @@
             border-top: 1px solid #2d3a4f; margin-top: 30px;
             color: #5a6a7a; font-size: 0.9em;
         }
+
+        /* 昨日系统表现 (新增 2026-09-02) */
+        .winners-box {
+            background: linear-gradient(135deg, #1e2330 0%, #1a1f2d 100%);
+            border: 1px solid rgba(200, 210, 230, 0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0 0;
+            box-shadow: 0 0 12px rgba(200, 210, 230, 0.04);
+        }
+        .winners-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(200, 210, 230, 0.12);
+        }
+        .winners-icon { font-size: 1.3em; }
+        .winners-title {
+            color: #e0e6ed;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        .winners-meta {
+            color: #8a95a8;
+            font-size: 0.85em;
+            margin-left: auto;
+        }
+        .winners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+        }
+        .winner-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.04);
+            font-size: 0.9em;
+        }
+        .winner-item.up { border-left: 3px solid #c8d2e6; }
+        .winner-item.down { border-left: 3px solid #ff6b6b; }
+        .w-name { color: #e0e6ed; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .w-code { color: #6b7b8f; font-size: 0.8em; }
+        .w-pct { color: #e0e6ed; font-weight: 600; margin-left: auto; font-size: 0.9em; }
+        .winner-item.down .w-pct { color: #ff6b6b; }
