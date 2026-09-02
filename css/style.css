@@ -66,7 +66,7 @@
         .status-badge.hot { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; border-color: rgba(255, 107, 107, 0.4); }
         .status-badge.warm { background: rgba(255, 165, 0, 0.15); color: #ffa500; border-color: rgba(255, 165, 0, 0.4); }
         .status-badge.cool { background: rgba(0, 212, 255, 0.15); color: #00d4ff; border-color: rgba(0, 212, 255, 0.4); }
-        .status-badge.cold { background: rgba(100, 100, 120, 0.2); color: #888; border-color: rgba(100, 100, 120, 0.4); }
+        .status-badge.cold { background: rgba(76, 175, 80, 0.15); color: #4caf50; border-color: rgba(76, 175, 80, 0.4); }
         .status-label { color: #8b9dc3; font-size: 0.9em; }
         .status-summary { color: #c0c8d8; font-size: 0.95em; margin-bottom: 18px; padding-left: 4px; }
         .dir-compare { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; }
@@ -79,16 +79,16 @@
         }
         .dir-status-card h4 { color: #f0f4f8; margin-bottom: 8px; font-size: 1.05em; }
         .dir-status-card .win-rate { font-size: 1.6em; font-weight: bold; margin-bottom: 4px; }
-        .dir-status-card .win-rate.hot { color: #4caf50; }
-        .dir-status-card .win-rate.cold { color: #ff6b6b; }
+        .dir-status-card .win-rate.hot { color: #ff6b6b; }
+        .dir-status-card .win-rate.cold { color: #4caf50; }
         .dir-status-card .win-rate.neutral { color: #ffd700; }
         .dir-status-card .meta { color: #8b9dc3; font-size: 0.85em; }
         .streak-bar { display: flex; gap: 2px; margin-top: 10px; flex-wrap: wrap; }
         .streak-dot {
             width: 8px; height: 8px; border-radius: 2px;
         }
-        .streak-dot.hot { background: #4caf50; }
-        .streak-dot.cold { background: #ff6b6b; }
+        .streak-dot.hot { background: #ff6b6b; }
+        .streak-dot.cold { background: #4caf50; }
         .streak-note { color: #5a6a7a; font-size: 0.8em; margin-top: 6px; }
 
         .ztb-section {
