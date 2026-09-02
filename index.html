@@ -68,7 +68,6 @@
             <div id="system-status-content">
                 <p style="color:#5a6a7a;text-align:center;padding:20px;">加载中...</p>
             </div>
-        </div>
         <script>
         (function() {
             const container = document.getElementById('system-status-content');
@@ -138,11 +137,11 @@
         })();
         </script>
 
-        <!-- 昨日验证成功标的 -->
+        <!-- 昨日系统表现 -->
         <div class="winners-box">
             <div class="winners-header">
                 <span class="winners-icon">🏆</span>
-                <span class="winners-title">昨日验证成功标的（9月1日）</span>
+                <span class="winners-title">昨日系统表现（9月1日）</span>
                 <span class="winners-meta">胜率 36.4% · 平均 -1.28%</span>
             </div>
             <div class="winners-grid">
@@ -152,15 +151,16 @@
                 <div class="winner-item up"><span class="w-name">新农股份</span><span class="w-code">002942</span><span class="w-pct">+0.41%</span></div>
             </div>
         </div>
+        </div>
 
         <style>
         .winners-box {
-            background: linear-gradient(135deg, #1a2a1a 0%, #0f1f0f 100%);
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            background: linear-gradient(135deg, #1e2330 0%, #1a1f2d 100%);
+            border: 1px solid rgba(200, 210, 230, 0.2);
             border-radius: 12px;
             padding: 16px 20px;
-            margin: 16px 0 24px;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.08);
+            margin: 16px 0 0;
+            box-shadow: 0 0 12px rgba(200, 210, 230, 0.04);
         }
         .winners-header {
             display: flex;
@@ -168,16 +168,16 @@
             gap: 10px;
             margin-bottom: 12px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+            border-bottom: 1px solid rgba(200, 210, 230, 0.12);
         }
         .winners-icon { font-size: 1.3em; }
         .winners-title {
-            color: #00ff88;
+            color: #e0e6ed;
             font-weight: 600;
             font-size: 1.05em;
         }
         .winners-meta {
-            color: #6b9f7f;
+            color: #8a95a8;
             font-size: 0.85em;
             margin-left: auto;
         }
@@ -195,11 +195,11 @@
             background: rgba(255,255,255,0.04);
             font-size: 0.9em;
         }
-        .winner-item.up { border-left: 3px solid #00ff88; }
+        .winner-item.up { border-left: 3px solid #c8d2e6; }
         .winner-item.down { border-left: 3px solid #ff6b6b; }
         .w-name { color: #e0e6ed; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .w-code { color: #6b7b8f; font-size: 0.8em; }
-        .w-pct { color: #00ff88; font-weight: 600; margin-left: auto; font-size: 0.9em; }
+        .w-pct { color: #e0e6ed; font-weight: 600; margin-left: auto; font-size: 0.9em; }
         .winner-item.down .w-pct { color: #ff6b6b; }
         </style>
 
