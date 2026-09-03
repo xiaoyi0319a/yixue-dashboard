@@ -1,26 +1,27 @@
 {
   "badge": {
-    "text": "⚠️ 连续行情 1 天",
+    "text": "⚠️ 连续行情 2 天",
     "class": "cold",
     "label": "冷却中"
   },
   "overall": {
-    "current_streak_days": 1,
+    "current_streak_days": 2,
     "current_streak_type": "loss",
-    "last_14_hot_days": 6,
-    "last_14_cold_days": 8,
-    "last_14_win_rate": 0.429,
+    "last_14_hot_days": 5,
+    "last_14_cold_days": 9,
+    "last_14_win_rate": 0.433,
     "max_win_streak": 4,
     "max_loss_streak": 6,
-    "total_days": 34
+    "total_days": 35
   },
   "directions": {
     "limit_up": {
-      "last_win_rate": 0.444,
-      "last_avg_return": -0.071,
-      "streak_days": 4,
+      "last_win_rate": 0.0,
+      "last_avg_return": -4.8,
+      "streak_days": 5,
       "streak_type": "loss",
       "history": [
+        {"date":"09/02","win_rate":0.0},
         {"date":"09/01","win_rate":null},
         {"date":"08/31","win_rate":null},
         {"date":"08/27","win_rate":null},
@@ -33,16 +34,16 @@
         {"date":"08/18","win_rate":null},
         {"date":"08/17","win_rate":0.833},
         {"date":"08/14","win_rate":0.625},
-        {"date":"08/13","win_rate":0.2},
-        {"date":"08/12","win_rate":0.25}
+        {"date":"08/13","win_rate":0.2}
       ]
     },
     "news": {
-      "last_win_rate": 0.364,
-      "last_avg_return": -1.28,
-      "streak_days": 1,
+      "last_win_rate": 0.143,
+      "last_avg_return": -1.68,
+      "streak_days": 2,
       "streak_type": "loss",
       "history": [
+        {"date":"09/02","win_rate":0.143},
         {"date":"09/01","win_rate":0.364},
         {"date":"08/31","win_rate":0.8},
         {"date":"08/28","win_rate":0.364},
@@ -55,8 +56,7 @@
         {"date":"08/19","win_rate":0.0},
         {"date":"08/18","win_rate":0.333},
         {"date":"08/17","win_rate":1.0},
-        {"date":"08/14","win_rate":0.889},
-        {"date":"08/13","win_rate":0.0}
+        {"date":"08/14","win_rate":0.889}
       ]
     }
   }
