@@ -1,32 +1,32 @@
 {
-  "last_updated": "2026-09-04",
+  "last_updated": "2026-09-07",
   "period": "近14天",
-  "start_date": "2026-08-17",
+  "start_date": "2026-08-18",
   "end_date": "2026-09-04",
   "summary": {
     "total_days": 14,
     "trading_days": 14,
     "overall": {
-      "total_stocks": 330,
-      "winners": 131,
-      "losers": 199,
+      "total_stocks": 347,
+      "winners": 138,
+      "losers": 209,
       "win_rate": 0.397,
-      "avg_return": -0.38,
+      "avg_return": -0.45,
       "high_match_win_rate": 0.333,
       "high_match_reversal_rate": 0.167,
       "badge_status": "⚠️",
-      "badge_note": "连续低迷，近10日胜率38.8%，高匹配胜率30.6%持续低于40%阈值"
+      "badge_note": "连续低迷，近14日胜率39.7%，高匹配胜率33.3%持续低于40%阈值"
     },
     "news_direction": {
-      "total_stocks": 120,
-      "winners": 48,
-      "losers": 72,
-      "win_rate": 0.40,
-      "avg_return": -0.15,
+      "total_stocks": 127,
+      "winners": 51,
+      "losers": 76,
+      "win_rate": 0.402,
+      "avg_return": -0.22,
       "high_success_days": 5,
       "low_success_days": 9,
       "consecutive_high": 0,
-      "note": "新闻方向近14日胜率40.0%，表现优于涨停方向"
+      "note": "新闻方向近14日胜率40.2%，表现优于涨停方向"
     },
     "limit_up_direction": {
       "total_stocks": 112,
@@ -41,7 +41,7 @@
     }
   },
   "rolling_14d_detail": [
-    {"date": "2026-09-04", "status": "pending", "win_rate": null, "note": "待收盘后回填"},
+    {"date": "2026-09-04", "win_rate": 0.412, "avg_return": -0.85, "benchmark": -0.30, "excess": -0.55, "badge": "⚠️"},
     {"date": "2026-09-03", "win_rate": 0.429, "avg_return": 0.73, "benchmark": 0.29, "excess": 0.44, "badge": "⚠️"},
     {"date": "2026-09-02", "win_rate": 0.071, "avg_return": -3.17, "benchmark": -0.97, "excess": -2.20, "badge": "⚠️"},
     {"date": "2026-09-01", "win_rate": 0.364, "avg_return": -1.28, "benchmark": -0.16, "excess": -1.12, "badge": "⚠️"},
@@ -54,12 +54,11 @@
     {"date": "2026-08-21", "win_rate": 0.25, "avg_return": -2.04, "benchmark": 0.04, "excess": -2.08, "badge": "⚠️"},
     {"date": "2026-08-20", "win_rate": 0.40, "avg_return": -2.17, "benchmark": 0.24, "excess": -2.41, "badge": "⚠️"},
     {"date": "2026-08-19", "win_rate": 0.0, "avg_return": -6.81, "benchmark": -2.40, "excess": -4.41, "badge": "⚠️"},
-    {"date": "2026-08-18", "win_rate": 0.333, "avg_return": -0.71, "benchmark": 0.19, "excess": -0.90, "badge": "⚠️"},
-    {"date": "2026-08-17", "win_rate": 0.889, "avg_return": 3.79, "benchmark": 1.41, "excess": 2.38, "badge": "🔥"}
+    {"date": "2026-08-18", "win_rate": 0.333, "avg_return": -0.71, "benchmark": 0.19, "excess": -0.90, "badge": "⚠️"}
   ],
   "badge_history": {
     "last_fire_day": "2026-08-31",
     "fire_streak": 0,
-    "note": "上次🔥为08-31（胜率80%），09-01起连续4日低于50%，当前⚠️"
+    "note": "上次🔥为08-31（胜率80%），09-01起连续5日低于50%，当前⚠️"
   }
 }
