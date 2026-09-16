@@ -5,22 +5,26 @@
     "label": "冷"
   },
   "overall": {
-    "current_streak_days": 3,
+    "current_streak_days": 4,
     "current_streak_type": "loss",
-    "last_14_hot_days": 6,
-    "last_14_cold_days": 8,
-    "last_14_win_rate": 0.438,
+    "last_14_hot_days": 5,
+    "last_14_cold_days": 9,
+    "last_14_win_rate": 0.426,
     "max_win_streak": 6,
     "max_loss_streak": 6,
-    "total_days": 42
+    "total_days": 43
   },
   "directions": {
     "limit_up": {
-      "last_win_rate": 0.375,
-      "last_avg_return": -0.12,
-      "streak_days": 3,
+      "last_win_rate": 0.4,
+      "last_avg_return": -0.6933,
+      "streak_days": 4,
       "streak_type": "loss",
       "history": [
+        {
+          "date": "09/15",
+          "win_rate": 0.4
+        },
         {
           "date": "09/14",
           "win_rate": 0.375
@@ -72,19 +76,19 @@
         {
           "date": "08/13",
           "win_rate": 0.2
-        },
-        {
-          "date": "08/12",
-          "win_rate": 0.25
         }
       ]
     },
     "news": {
-      "last_win_rate": 0.3,
-      "last_avg_return": -0.06,
-      "streak_days": 3,
-      "streak_type": "loss",
+      "last_win_rate": 0.5,
+      "last_avg_return": 0.4516,
+      "streak_days": 1,
+      "streak_type": "win",
       "history": [
+        {
+          "date": "09/15",
+          "win_rate": 0.5
+        },
         {
           "date": "09/14",
           "win_rate": 0.3
@@ -136,10 +140,6 @@
         {
           "date": "08/27",
           "win_rate": 0.7
-        },
-        {
-          "date": "08/26",
-          "win_rate": 0.833
         }
       ]
     }
