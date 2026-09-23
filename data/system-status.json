@@ -1,59 +1,134 @@
 {
   "badge": {
-    "text": "🔥 连续高成功率 2 天",
-    "class": "hot",
-    "label": "热"
+    "text": "⚠️ 连续低成功率 1 天",
+    "class": "cold",
+    "label": "冷"
   },
   "overall": {
-    "current_streak_days": 2,
-    "current_streak_type": "win",
+    "current_streak_days": 1,
+    "current_streak_type": "loss",
     "last_14_hot_days": 6,
     "last_14_cold_days": 8,
-    "last_14_win_rate": 0.4353,
+    "last_14_win_rate": 0.4463,
     "max_win_streak": 6,
     "max_loss_streak": 6,
-    "total_days": 47
+    "total_days": 48
   },
   "directions": {
     "limit_up": {
-      "last_win_rate": 0.4167,
-      "last_avg_return": -0.4499,
-      "streak_days": 1,
+      "last_win_rate": 0.4,
+      "last_avg_return": -1.5432,
+      "streak_days": 2,
       "streak_type": "loss",
       "history": [
-        {"date": "09/21", "win_rate": 0.4167},
-        {"date": "09/18", "win_rate": 0.7143},
-        {"date": "09/17", "win_rate": 0.0},
-        {"date": "09/16", "win_rate": 0.7273},
-        {"date": "09/15", "win_rate": 0.4},
-        {"date": "09/14", "win_rate": 0.375},
-        {"date": "09/11", "win_rate": 0.0},
-        {"date": "09/10", "win_rate": 0.167},
-        {"date": "09/07", "win_rate": 0.75},
-        {"date": "09/04", "win_rate": 0.5},
-        {"date": "09/02", "win_rate": 0.0}
+        {
+          "date": "09/22",
+          "win_rate": 0.4
+        },
+        {
+          "date": "09/21",
+          "win_rate": 0.4167
+        },
+        {
+          "date": "09/18",
+          "win_rate": 0.7143
+        },
+        {
+          "date": "09/17",
+          "win_rate": 0.0
+        },
+        {
+          "date": "09/16",
+          "win_rate": 0.7273
+        },
+        {
+          "date": "09/15",
+          "win_rate": 0.4
+        },
+        {
+          "date": "09/14",
+          "win_rate": 0.375
+        },
+        {
+          "date": "09/11",
+          "win_rate": 0.0
+        },
+        {
+          "date": "09/10",
+          "win_rate": 0.167
+        },
+        {
+          "date": "09/07",
+          "win_rate": 0.75
+        },
+        {
+          "date": "09/04",
+          "win_rate": 0.5
+        }
       ]
     },
     "news": {
-      "last_win_rate": 0.75,
-      "last_avg_return": 7.7471,
-      "streak_days": 2,
-      "streak_type": "win",
+      "last_win_rate": 0.4167,
+      "last_avg_return": 1.1315,
+      "streak_days": 1,
+      "streak_type": "loss",
       "history": [
-        {"date": "09/21", "win_rate": 0.75},
-        {"date": "09/18", "win_rate": 1.0},
-        {"date": "09/17", "win_rate": 0.1667},
-        {"date": "09/16", "win_rate": 1.0},
-        {"date": "09/15", "win_rate": 0.5},
-        {"date": "09/14", "win_rate": 0.3},
-        {"date": "09/11", "win_rate": 0.0},
-        {"date": "09/10", "win_rate": 0.167},
-        {"date": "09/09", "win_rate": 0.5},
-        {"date": "09/08", "win_rate": 0.5},
-        {"date": "09/07", "win_rate": 1.0},
-        {"date": "09/04", "win_rate": 0.2},
-        {"date": "09/03", "win_rate": 0.4286},
-        {"date": "09/02", "win_rate": 0.143}
+        {
+          "date": "09/22",
+          "win_rate": 0.4167
+        },
+        {
+          "date": "09/21",
+          "win_rate": 0.75
+        },
+        {
+          "date": "09/18",
+          "win_rate": 1.0
+        },
+        {
+          "date": "09/17",
+          "win_rate": 0.1667
+        },
+        {
+          "date": "09/16",
+          "win_rate": 1.0
+        },
+        {
+          "date": "09/15",
+          "win_rate": 0.5
+        },
+        {
+          "date": "09/14",
+          "win_rate": 0.3
+        },
+        {
+          "date": "09/11",
+          "win_rate": 0.0
+        },
+        {
+          "date": "09/10",
+          "win_rate": 0.167
+        },
+        {
+          "date": "09/09",
+          "win_rate": 0.5
+        },
+        {
+          "date": "09/08",
+          "win_rate": 0.5
+        },
+        {
+          "date": "09/07",
+          "win_rate": 1.0
+        },
+        {
+          "date": "09/04",
+          "win_rate": 0.2
+        },
+        {
+          "date": "09/03",
+          "win_rate": 0.4286
+        }
       ]
     }
   }
