@@ -1,26 +1,30 @@
 {
   "badge": {
-    "text": "⚠️ 连续低成功率 1 天",
+    "text": "⚠️ 连续低成功率 2 天",
     "class": "cold",
     "label": "冷"
   },
   "overall": {
-    "current_streak_days": 1,
+    "current_streak_days": 2,
     "current_streak_type": "loss",
     "last_14_hot_days": 6,
     "last_14_cold_days": 8,
-    "last_14_win_rate": 0.4463,
+    "last_14_win_rate": 0.4425,
     "max_win_streak": 6,
     "max_loss_streak": 6,
-    "total_days": 48
+    "total_days": 49
   },
   "directions": {
     "limit_up": {
-      "last_win_rate": 0.4,
-      "last_avg_return": -1.5432,
-      "streak_days": 2,
+      "last_win_rate": 0.3,
+      "last_avg_return": -1.14,
+      "streak_days": 3,
       "streak_type": "loss",
       "history": [
+        {
+          "date": "09/23",
+          "win_rate": 0.3
+        },
         {
           "date": "09/22",
           "win_rate": 0.4
@@ -60,19 +64,19 @@
         {
           "date": "09/07",
           "win_rate": 0.75
-        },
-        {
-          "date": "09/04",
-          "win_rate": 0.5
         }
       ]
     },
     "news": {
-      "last_win_rate": 0.4167,
-      "last_avg_return": 1.1315,
-      "streak_days": 1,
+      "last_win_rate": 0.3,
+      "last_avg_return": -1.15,
+      "streak_days": 2,
       "streak_type": "loss",
       "history": [
+        {
+          "date": "09/23",
+          "win_rate": 0.3
+        },
         {
           "date": "09/22",
           "win_rate": 0.4167
@@ -124,10 +128,6 @@
         {
           "date": "09/04",
           "win_rate": 0.2
-        },
-        {
-          "date": "09/03",
-          "win_rate": 0.4286
         }
       ]
     }
