@@ -1,1 +1,962 @@
-REPORTS_JSON_PLACEHOLDER
+[
+  {
+    "code": "603235",
+    "name": "天新药业",
+    "date": "2026-09-30",
+    "file": "/yixue-dashboard/stock-603235.html",
+    "tags": [
+      "全球B族维生素龙头",
+      "模式7周期反转50%+模式6涨价期权",
+      "Q2营收+33%归母+25%拐点确认",
+      "同业B6停工供给侧出清",
+      "净现金累计分红10.64亿",
+      "中价值"
+    ]
+  },
+  {
+    "code": "002745",
+    "name": "木林森",
+    "date": "2026-09-29",
+    "file": "/yixue-dashboard/stock-002745.html",
+    "tags": [
+      "全球LED封装龙头",
+      "模式1收购硬货型50-55%",
+      "H1扣非4.04亿+181%",
+      "9亿控股普瑞光电芯片闭环",
+      "Micro LED光互连期权",
+      "中价值"
+    ]
+  },
+  {
+    "code": "301487",
+    "name": "盟固利",
+    "date": "2026-09-29",
+    "file": "/yixue-dashboard/stock-301487.html",
+    "tags": [
+      "钴酸锂高电压龙头",
+      "NCA第一梯队出货+43%",
+      "30亿磷酸铁锂跨界2027投产",
+      "定增8.66亿获批",
+      "中报扣非+963%",
+      "中价值偏积极"
+    ]
+  },
+  {
+    "code": "920000",
+    "name": "安徽凤凰",
+    "date": "2026-09-23",
+    "file": "/yixue-dashboard/stock-920000.html",
+    "tags": [
+      "北交所滤清器第一股",
+      "15.13%股权溢价88%转让",
+      "新二股东王玉林入局",
+      "现金占市值30%",
+      "模式8弱化版40%",
+      "中价值"
+    ]
+  },
+  {
+    "code": "002129",
+    "name": "TCL中环",
+    "date": "2026-09-22",
+    "file": "/yixue-dashboard/stock-002129.html",
+    "tags": [
+      "光伏周期底部",
+      "全球硅片市占率第一",
+      "半导体暗线",
+      "模式7周期反转40%",
+      "中价值",
+      "中预期差"
+    ]
+  },
+  {
+    "code": "301551",
+    "name": "无线传媒",
+    "date": "2026-09-17",
+    "file": "/yixue-dashboard/stock-301551.html",
+    "tags": [
+      "河北IPTV独家牌照",
+      "股息率4.77%现金牛",
+      "AI短剧概念贴标",
+      "模式9反面教材",
+      "低价值"
+    ]
+  },
+  {
+    "code": "300877",
+    "name": "金春股份",
+    "date": "2026-09-10",
+    "file": "/yixue-dashboard/stock-300877.html",
+    "tags": [
+      "非织造布龙头",
+      "业绩拐点",
+      "汽车防护新材料",
+      "模式5景气共振型",
+      "中价值"
+    ]
+  },
+  {
+    "code": "300125",
+    "name": "聆达股份",
+    "date": "2026-09-10",
+    "file": "/yixue-dashboard/stock-300125.html",
+    "tags": [
+      "光伏EPC转型",
+      "实控人变更",
+      "FMM/EC膜注入预期",
+      "模式8控股股东变更型",
+      "中价值"
+    ]
+  },
+  {
+    "code": "600727",
+    "name": "鲁北化工",
+    "date": "2026-09-08",
+    "file": "/yixue-dashboard/stock-600727.html",
+    "tags": [
+      "钛白粉周期回升",
+      "氯化法扩产",
+      "循环经济",
+      "模式7周期反转型",
+      "中价值"
+    ]
+  },
+  {
+    "code": "300697",
+    "name": "电工合金",
+    "date": "2026-09-08",
+    "file": "/yixue-dashboard/stock-300697.html",
+    "tags": [
+      "铜母线龙头",
+      "AI数据中心",
+      "施耐德核心供应商",
+      "模式5景气共振型",
+      "中价值偏下"
+    ]
+  },
+  {
+    "code": "301288",
+    "name": "清研环境",
+    "date": "2026-09-07",
+    "file": "/yixue-dashboard/stock-301288.html",
+    "tags": [
+      "ST摘帽",
+      "危废并购",
+      "困境反转",
+      "模式4困境消息型",
+      "低价值"
+    ]
+  },
+  {
+    "code": "003033",
+    "name": "征和工业",
+    "date": "2026-09-07",
+    "file": "/yixue-dashboard/stock-003033.html",
+    "tags": [
+      "链传动龙头",
+      "灵巧手第二曲线",
+      "定增过会",
+      "模式3技术概念型",
+      "中价值"
+    ]
+  },
+  {
+    "code": "301509",
+    "name": "金凯生科",
+    "date": "2026-09-04",
+    "file": "/yixue-dashboard/stock-301509.html",
+    "tags": [
+      "小分子CDMO",
+      "氟化学特色",
+      "业绩承压",
+      "低价值"
+    ]
+  },
+  {
+    "code": "688488",
+    "name": "艾迪药业",
+    "date": "2026-09-01",
+    "file": "/yixue-dashboard/stock-688488.html",
+    "tags": [
+      "抗HIV创新药",
+      "Biotech商业化拐点",
+      "国产替代",
+      "7个一类新药",
+      "中价值"
+    ]
+  },
+  {
+    "code": "300454",
+    "name": "深信服",
+    "date": "2026-08-31",
+    "file": "/yixue-dashboard/stock-300454.html",
+    "tags": [
+      "AI基础设施",
+      "网络安全",
+      "云计算",
+      "业绩拐点",
+      "模式5大市值变体"
+    ]
+  },
+  {
+    "code": "002292",
+    "name": "奥飞娱乐",
+    "date": "2026-08-25",
+    "file": "/yixue-dashboard/stock-002292.html",
+    "tags": [
+      "动漫IP运营",
+      "困境反转",
+      "毛利率提升",
+      "IP年轻向转型",
+      "中价值"
+    ]
+  },
+  {
+    "code": "600619",
+    "name": "海立股份",
+    "date": "2026-08-24",
+    "file": "/yixue-dashboard/stock-600619.html",
+    "tags": [
+      "压缩机龙头",
+      "新能源热管理",
+      "困境反转",
+      "业绩拐点",
+      "低价值"
+    ]
+  },
+  {
+    "code": "002881",
+    "name": "美格智能",
+    "date": "2026-08-24",
+    "file": "/yixue-dashboard/stock-002881.html",
+    "tags": [
+      "AI算力模组",
+      "5G通信",
+      "边缘计算",
+      "业绩爆发",
+      "无价值"
+    ]
+  },
+  {
+    "code": "600262",
+    "name": "北方股份",
+    "date": "2026-08-24",
+    "file": "/yixue-dashboard/stock-600262.html",
+    "tags": [
+      "矿用车龙头",
+      "新能源矿用车",
+      "无人驾驶",
+      "政策驱动",
+      "中价值"
+    ]
+  },
+  {
+    "code": "920009",
+    "name": "丹娜生物",
+    "date": "2026-08-20",
+    "file": "/yixue-dashboard/stock-920009.html",
+    "tags": [
+      "北交所",
+      "次新股",
+      "国产替代",
+      "高毛利",
+      "体外诊断"
+    ]
+  },
+  {
+    "code": "603087",
+    "name": "甘李药业",
+    "date": "2026-08-04",
+    "file": "/yixue-dashboard/stock-603087.html",
+    "tags": [
+      "胰岛素龙头",
+      "集采放量",
+      "海外拓展",
+      "业绩拐点",
+      "创新药"
+    ]
+  },
+  {
+    "code": "600267",
+    "name": "海正药业",
+    "date": "2026-08-04",
+    "file": "/yixue-dashboard/stock-600267.html",
+    "tags": [
+      "原料药+制剂",
+      "高端抗生素中标",
+      "净利率跃升",
+      "低估值",
+      "股息"
+    ]
+  },
+  {
+    "code": "300453",
+    "name": "三鑫医疗",
+    "date": "2026-07-29",
+    "file": "/yixue-dashboard/stock-300453.html",
+    "tags": [
+      "湿膜透析器国产首款",
+      "血液净化龙头",
+      "海外高增34%",
+      "中价值",
+      "中预期差"
+    ]
+  },
+  {
+    "code": "002215",
+    "name": "诺普信",
+    "date": "2026-07-28",
+    "file": "/yixue-dashboard/stock-002215.html",
+    "tags": [
+      "农药制剂龙头",
+      "蓝莓产业链",
+      "单一特色作物战略",
+      "低估值",
+      "农业消费品"
+    ]
+  },
+  {
+    "code": "603893",
+    "name": "瑞芯微",
+    "date": "2026-07-28",
+    "file": "/yixue-dashboard/stock-603893.html",
+    "tags": [
+      "AIoT SoC龙头",
+      "端侧AI芯片",
+      "SoC+协处理器双轨驱动",
+      "业绩高增",
+      "汽车电子/机器人"
+    ]
+  },
+  {
+    "code": "002415",
+    "name": "海康威视",
+    "date": "2026-07-22",
+    "file": "/yixue-dashboard/stock-002415.html",
+    "tags": [
+      "AIoT平台",
+      "安防龙头",
+      "创新业务",
+      "业绩拐点",
+      "AI芯片"
+    ]
+  },
+  {
+    "code": "301613",
+    "name": "新铝时代",
+    "date": "2026-07-21",
+    "file": "/yixue-dashboard/stock-301613.html",
+    "tags": [
+      "新能源汽车",
+      "电池盒箱体",
+      "跨界转型",
+      "重组",
+      "消费电子精密件"
+    ]
+  },
+  {
+    "code": "301571",
+    "name": "国科天成",
+    "date": "2026-07-21",
+    "file": "/yixue-dashboard/stock-301571.html",
+    "tags": [
+      "红外热成像",
+      "中科院背景",
+      "军用红外",
+      "无人机",
+      "6.3亿大单"
+    ]
+  },
+  {
+    "code": "603296",
+    "name": "华勤技术",
+    "date": "2026-07-21",
+    "file": "/yixue-dashboard/stock-603296.html",
+    "tags": [
+      "AI服务器代工龙头",
+      "智能终端ODM",
+      "数据中心爆发",
+      "超节点突破"
+    ]
+  },
+  {
+    "code": "601995",
+    "name": "中金公司",
+    "date": "2026-07-15",
+    "file": "/yixue-dashboard/stock-601995.html",
+    "tags": [
+      "投行贵族",
+      "三合一券商重组",
+      "业绩暴增",
+      "汇金系整合"
+    ]
+  },
+  {
+    "code": "300590",
+    "name": "移为通信",
+    "date": "2026-07-14",
+    "file": "/yixue-dashboard/stock-300590.html",
+    "tags": [
+      "物联网终端设备",
+      "政策强制安装驱动",
+      "业绩拐点"
+    ]
+  },
+  {
+    "code": "688550",
+    "name": "瑞联新材",
+    "date": "2026-07-13",
+    "file": "/yixue-dashboard/stock-688550.html",
+    "tags": [
+      "OLED材料龙头",
+      "半导体光刻胶",
+      "PSPI封装材料",
+      "医药CDMO"
+    ]
+  },
+  {
+    "code": "688758",
+    "name": "赛分科技",
+    "date": "2026-07-13",
+    "file": "/yixue-dashboard/stock-688758.html",
+    "tags": [
+      "国产色谱填料龙头",
+      "生物制药上游",
+      "国产替代",
+      "抗体/GLP-1高景气"
+    ]
+  },
+  {
+    "code": "920111",
+    "name": "聚星科技",
+    "date": "2026-07-03",
+    "file": "/yixue-dashboard/stock-920111.html",
+    "tags": [
+      "电接触产品隐形冠军",
+      "2025增速断崖放缓",
+      "2026Q1强劲反弹待验证"
+    ]
+  },
+  {
+    "code": "002049",
+    "name": "紫光国微",
+    "date": "2026-06-30",
+    "file": "/yixue-dashboard/stock-002049.html",
+    "tags": [
+      "特种集成电路龙头",
+      "业绩拐点确认",
+      "收购瑞能半导体",
+      "国产替代"
+    ]
+  },
+  {
+    "code": "301161",
+    "name": "唯万密封",
+    "date": "2026-06-29",
+    "file": "/yixue-dashboard/stock-301161.html",
+    "tags": [
+      "液压密封件龙头",
+      "机器人密封件",
+      "半导体级密封",
+      "国产替代"
+    ]
+  },
+  {
+    "code": "920509",
+    "name": "同惠电子",
+    "date": "2026-06-24",
+    "file": "/yixue-dashboard/stock-920509.html",
+    "tags": [
+      "国产电子测量仪器龙头",
+      "专精特新小巨人",
+      "半导体检测设备放量",
+      "北交所"
+    ]
+  },
+  {
+    "code": "603903",
+    "name": "中持股份",
+    "date": "2026-06-24",
+    "file": "/yixue-dashboard/stock-603903.html",
+    "tags": [
+      "壳资源",
+      "半导体资产注入预期",
+      "芯长征入主",
+      "控制权变更"
+    ]
+  },
+  {
+    "code": "300037",
+    "name": "新宙邦",
+    "date": "2026-06-16",
+    "file": "/yixue-dashboard/stock-300037.html",
+    "tags": [
+      "新能源/半导体化学品",
+      "储能爆发+电解液修复+半导体冷却液放量"
+    ]
+  },
+  {
+    "code": "603662",
+    "name": "柯力传感",
+    "date": "2026-06-16",
+    "file": "/yixue-dashboard/stock-603662.html",
+    "tags": [
+      "传感器/人形机器人核心零部件",
+      "六维力传感器批量交付"
+    ]
+  },
+  {
+    "code": "300607",
+    "name": "拓斯达",
+    "date": "2026-06-16",
+    "file": "/yixue-dashboard/stock-300607.html",
+    "tags": [
+      "工业自动化/人形机器人",
+      "战略转型扭亏/机器人概念"
+    ]
+  },
+  {
+    "code": "300790",
+    "name": "宇瞳光学",
+    "date": "2026-06-11",
+    "file": "/yixue-dashboard/stock-300790.html",
+    "tags": [
+      "安防镜头龙头",
+      "车载光学",
+      "光通信硅透镜/MT插芯",
+      "机器视觉"
+    ]
+  },
+  {
+    "code": "002068",
+    "name": "黑猫股份",
+    "date": "2026-06-09",
+    "file": "/yixue-dashboard/stock-002068.html",
+    "tags": [
+      "炭黑龙头",
+      "导电炭黑国产替代",
+      "固态电池概念",
+      "周期反转"
+    ]
+  },
+  {
+    "code": "300821",
+    "name": "东岳硅材",
+    "date": "2026-06-09",
+    "file": "/yixue-dashboard/stock-300821.html",
+    "tags": [
+      "有机硅龙头",
+      "60万吨产能",
+      "行业减产挺价",
+      "周期反转"
+    ]
+  },
+  {
+    "code": "300925",
+    "name": "法本信息",
+    "date": "2026-06-08",
+    "file": "/yixue-dashboard/stock-300925.html",
+    "tags": [
+      "软件与信息技术服务",
+      "AI产品化/鸿蒙生态/金融IT"
+    ]
+  },
+  {
+    "code": "300199",
+    "name": "翰宇药业",
+    "date": "2026-06-04",
+    "file": "/yixue-dashboard/stock-300199.html",
+    "tags": [
+      "多肽原料药",
+      "GLP-1",
+      "业绩拐点",
+      "创新药"
+    ]
+  },
+  {
+    "code": "300913",
+    "name": "兆龙互连",
+    "date": "2026-06-03",
+    "file": "/yixue-dashboard/stock-300913.html",
+    "tags": [
+      "高速铜缆",
+      "AI数据中心",
+      "业务纯度低"
+    ]
+  },
+  {
+    "code": "600111",
+    "name": "北方稀土",
+    "date": "2026-06-03",
+    "file": "/yixue-dashboard/stock-600111.html",
+    "tags": [
+      "稀土龙头",
+      "涨价周期",
+      "人形机器人概念"
+    ]
+  },
+  {
+    "code": "300163",
+    "name": "先锋新材",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-300163.html",
+    "tags": []
+  },
+  {
+    "code": "300176",
+    "name": "鸿特科技",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-300176.html",
+    "tags": []
+  },
+  {
+    "code": "300204",
+    "name": "舒泰神",
+    "date": "2026-08-20",
+    "file": "/yixue-dashboard/stock-300204.html",
+    "tags": [
+      "创新药",
+      "预期差降级",
+      "关联交易",
+      "高风险博弈"
+    ]
+  },
+  {
+    "code": "300234",
+    "name": "开尔新材",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-300234.html",
+    "tags": []
+  },
+  {
+    "code": "300266",
+    "name": "兴源环境",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-300266.html",
+    "tags": []
+  },
+  {
+    "code": "300300",
+    "name": "海峡创新",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-300300.html",
+    "tags": []
+  },
+  {
+    "code": "300478",
+    "name": "杭州高新",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-300478.html",
+    "tags": []
+  },
+  {
+    "code": "300807",
+    "name": "天迈科技",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-300807.html",
+    "tags": []
+  },
+  {
+    "code": "301057",
+    "name": "汇隆新材",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-301057.html",
+    "tags": []
+  },
+  {
+    "code": "603990",
+    "name": "麦迪科技",
+    "date": "2026-05-31",
+    "file": "/yixue-dashboard/stock-603990.html",
+    "tags": [
+      "医疗信息化",
+      "AI医疗",
+      "机器人概念",
+      "华为合作",
+      "低空经济"
+    ]
+  },
+  {
+    "code": "000899",
+    "name": "赣能股份",
+    "date": "2026-05-29",
+    "file": "/yixue-dashboard/stock-000899.html",
+    "tags": []
+  },
+  {
+    "code": "730",
+    "name": "锡装股份",
+    "date": "2026-05-29",
+    "file": "/yixue-dashboard/stock-001332.html",
+    "tags": [
+      "金属压力容器",
+      "核电",
+      "高技术船舶"
+    ]
+  },
+  {
+    "code": "002823",
+    "name": "凯中精密",
+    "date": "2026-05-29",
+    "file": "/yixue-dashboard/stock-002823.html",
+    "tags": [
+      "精密零组件",
+      "新能源连接器",
+      "人形机器人",
+      "换向器龙头"
+    ]
+  },
+  {
+    "code": "001332",
+    "name": "锡装股份",
+    "date": "2026-05-29",
+    "file": "/yixue-dashboard/stock-001332.html",
+    "tags": [
+      "金属压力容器",
+      "核电",
+      "高技术船舶"
+    ]
+  },
+  {
+    "code": "300545",
+    "name": "联得装备",
+    "date": "2026-05-28",
+    "file": "/yixue-dashboard/stock-300545.html",
+    "tags": [
+      "半导体显示设备",
+      "折叠屏/半导体封测/新能源"
+    ]
+  },
+  {
+    "code": "301329",
+    "name": "信音电子",
+    "date": "2026-05-28",
+    "file": "/yixue-dashboard/stock-301329.html",
+    "tags": [
+      "个股深度分析"
+    ]
+  },
+  {
+    "code": "600956",
+    "name": "新天绿能",
+    "date": "2026-05-28",
+    "file": "/yixue-dashboard/stock-600956.html",
+    "tags": [
+      "风电/天然气",
+      "氢能/算电协同"
+    ]
+  },
+  {
+    "code": "605228",
+    "name": "神通科技",
+    "date": "2026-05-28",
+    "file": "/yixue-dashboard/stock-605228.html",
+    "tags": [
+      "汽车零部件",
+      "汽车智能化",
+      "光学镜片"
+    ]
+  },
+  {
+    "code": "688139",
+    "name": "海尔生物",
+    "date": "2026-05-28",
+    "file": "/yixue-dashboard/stock-688139.html",
+    "tags": [
+      "医疗器械",
+      "生命科学设备"
+    ]
+  },
+  {
+    "code": "600255",
+    "name": "鑫科材料",
+    "date": "2026-05-26",
+    "file": "/yixue-dashboard/stock-600255.html",
+    "tags": [
+      "铜合金材料",
+      "高速铜连接",
+      "AI算力上游",
+      "国资背景"
+    ]
+  },
+  {
+    "code": "688411",
+    "name": "海博思创",
+    "date": "2026-05-25",
+    "file": "/yixue-dashboard/stock-688411.html",
+    "tags": [
+      "储能系统集成",
+      "钠电池",
+      "海外高毛利",
+      "商业模式升级"
+    ]
+  },
+  {
+    "code": "002906",
+    "name": "华阳集团",
+    "date": "2026-05-21",
+    "file": "/yixue-dashboard/stock-002906.html",
+    "tags": [
+      "座舱平台型龙头",
+      "HUD国内第一",
+      "精密压铸+38%",
+      "AI/机器人"
+    ]
+  },
+  {
+    "code": "300698",
+    "name": "万马科技",
+    "date": "2026-05-21",
+    "file": "/yixue-dashboard/stock-300698.html",
+    "tags": [
+      "通信设备 → 车联网/智算数据中心跨界转型"
+    ]
+  },
+  {
+    "code": "603075",
+    "name": "热威股份",
+    "date": "2026-05-21",
+    "file": "/yixue-dashboard/stock-603075.html",
+    "tags": [
+      "电热元件隐形冠军",
+      "境外首超52%",
+      "新能源车电热+58%"
+    ]
+  },
+  {
+    "code": "688006",
+    "name": "杭可科技",
+    "date": "2026-05-18",
+    "file": "/yixue-dashboard/stock-688006.html",
+    "tags": [
+      "全球锂电后段设备龙头",
+      "海外爆发",
+      "固态电池后段化成技术卡位"
+    ]
+  },
+  {
+    "code": "688499",
+    "name": "利元亨",
+    "date": "2026-05-18",
+    "file": "/yixue-dashboard/stock-688499.html",
+    "tags": [
+      "智能制造装备",
+      "扭亏为盈",
+      "固态电池整线交付",
+      "订单翻倍"
+    ]
+  },
+  {
+    "code": "002983",
+    "name": "芯瑞达",
+    "date": "2026-05-14",
+    "file": "/yixue-dashboard/stock-002983.html",
+    "tags": [
+      "Mini LED模组龙头",
+      "业务结构优化",
+      "AI/AR微显示",
+      "车载显示"
+    ]
+  },
+  {
+    "code": "300142",
+    "name": "沃森生物",
+    "date": "2026-05-14",
+    "file": "/yixue-dashboard/stock-300142.html",
+    "tags": [
+      "疫苗龙头",
+      "业绩拐点",
+      "国际化突破"
+    ]
+  },
+  {
+    "code": "301349",
+    "name": "信德新材",
+    "date": "2026-05-14",
+    "file": "/yixue-dashboard/stock-301349.html",
+    "tags": [
+      "锂电负极包覆材料龙头",
+      "业绩拐点",
+      "产能扩张"
+    ]
+  },
+  {
+    "code": "603290",
+    "name": "斯达半导",
+    "date": "2026-05-14",
+    "file": "/yixue-dashboard/stock-603290.html",
+    "tags": [
+      "IGBT/SiC功率半导体龙头",
+      "增收不增利",
+      "毛利率下滑"
+    ]
+  },
+  {
+    "code": "688321",
+    "name": "微芯生物",
+    "date": "2026-05-14",
+    "file": "/yixue-dashboard/stock-688321.html",
+    "tags": [
+      "原创新药龙头",
+      "西格列他钠放量",
+      "扭亏为盈",
+      "专利风险"
+    ]
+  },
+  {
+    "code": "688400",
+    "name": "凌云光",
+    "date": "2026-05-14",
+    "file": "/yixue-dashboard/stock-688400.html",
+    "tags": [
+      "机器视觉+AI龙头",
+      "JAI并表",
+      "具身智能/CPO概念"
+    ]
+  },
+  {
+    "code": "300247",
+    "name": "融捷健康",
+    "date": "2026-05-01",
+    "file": "/yixue-dashboard/stock-300247.html",
+    "tags": [
+      "并购重组专题"
+    ]
+  },
+  {
+    "code": "300302",
+    "name": "同有科技",
+    "date": "2026-05-01",
+    "file": "/yixue-dashboard/stock-300302.html",
+    "tags": [
+      "并购重组专题"
+    ]
+  },
+  {
+    "code": "300341",
+    "name": "麦克奥迪",
+    "date": "2026-05-01",
+    "file": "/yixue-dashboard/stock-300341.html",
+    "tags": [
+      "并购重组专题"
+    ]
+  },
+  {
+    "code": "301109",
+    "name": "军信股份",
+    "date": "2026-05-01",
+    "file": "/yixue-dashboard/stock-301109.html",
+    "tags": [
+      "并购重组专题"
+    ]
+  },
+  {
+    "code": "301288",
+    "name": "清研环境",
+    "date": "2026-05-01",
+    "file": "/yixue-dashboard/stock-301288.html",
+    "tags": [
+      "并购重组专题"
+    ]
+  }
+]
