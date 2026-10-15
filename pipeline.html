@@ -255,7 +255,7 @@ b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: $
 verification: {
   title:"📋 验证对比（预测 vs 实际）",
   sub:"来源：收盘联合验证报告 ｜ 收盘验证工作流 Step 7.5 自动更新",
-  render:d=>renderVerification(d)
+  render:d=>renderVerification(d.verification)
 }
 };
 
