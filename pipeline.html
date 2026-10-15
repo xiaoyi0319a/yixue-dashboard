@@ -202,7 +202,9 @@ fusion: {
     const aCols=['+2','+1','0','-1','-2','R'];
     // 叉积表静态值
     const CROSS={'+4':[4,4,4,3,2,'—'],'+3':[4,4,3,2,1,-2],'+2':[4,3,2,1,0,-2],'+1':[3,2,1,0,-1,-2],'0':[1,0,0,0,-1,0],'-1':[1,0,-1,-2,-3,2],'-2':[0,-1,-2,-3,-4,2],'-3':[-1,-2,-3,-4,-4,2],'-4':[-2,-3,-4,-4,-4,'—']};
-    const aIdx=aCols.indexOf(f.a_total===0?'0':String(f.a_total));
+    const fmtA=v=>v>0?'+'+v:String(v);
+    const fmtV=v=>v>0?'+'+v:String(v);
+    const aIdx=aCols.indexOf(fmtA(f.a_total));
     return `
   <div class="detail-section"><h4>计算</h4>
   <div class="formula">v₀ = ${f.v0>0?'+':''}${f.v0} ｜ a总 = ${f.a_total>0?'+':''}${f.a_total}
@@ -214,7 +216,7 @@ v₀=0特例（表3-B）：${f.v0===0?'<span class="badge warn">适用</span>':'
   <table class="cross-table">
     <tr><th>v₀＼a</th>${aCols.map(c=>`<th>${c}</th>`).join('')}</tr>
     ${Object.keys(CROSS).map(v0=>{
-      const isRow=String(f.v0)===v0;
+      const isRow=fmtV(f.v0)===v0;
       return `<tr><td style="color:${v0>0?'#3fb950':v0<0?'#f85149':'#8b949e'}">${v0}</td>${CROSS[v0].map((val,i)=>{
         const isHit=isRow&&i===aIdx;
         return `<td class="${isHit?'hit':''}" style="${isHit?'':''}">${val>0?'+':''}${val}</td>`;
@@ -276,15 +278,14 @@ slots: {
   sub:"规则：奇门大盘预测工作流 Step 6 ｜ 巳/午/未/申四段独立定级",
   render:d=>{
     if(!d.four_slots) return '<p class="note">暂无四时段数据</p>';
-    return `<div class="detail-section"><h4>时段推演详情</h4>
-    <div class="four-slots" style="grid-template-columns:repeat(2,1fr);gap:10px">
-      ${d.four_slots.map(s=>`<div class="slot ${s.type}" style="padding:12px;cursor:default">
-        <div class="slot-bar"></div>
-        <div class="slot-name">${s.name}时 ${s.time}</div>
-        <div class="slot-grade" style="font-size:13px">${s.grade}</div>
-        <div class="slot-note" style="height:auto;margin-top:6px;font-size:11px">${s.note||''}</div>
-      </div>`).join('')}
-    </div></div>
+    return `<div class="detail-section"><h4>时段走势</h4>
+    ${slotsSVG(d.four_slots,520,160)}
+    </div>
+    <div class="detail-section"><h4>时段判语</h4>
+    <table>
+      <tr><th>时段</th><th>定级</th><th>判语</th></tr>
+      ${d.four_slots.map(s=>`<tr><td>${s.name} ${s.time}</td><td style="color:${GRADE_COLOR(GRADE_VAL[s.grade]||0)};font-weight:600">${s.grade}</td><td class="note">${s.note||'—'}</td></tr>`).join('')}
+    </table></div>
     ${d.four_slots_summary?`<div class="detail-section"><h4>全天特征</h4><p class="note">${d.four_slots_summary}</p></div>`:''}`;
   }
 },
@@ -327,14 +328,7 @@ function renderPipeline(d){
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
       <span class="path-label">路径：${d.path}</span>`},
-    ...(d.four_slots?[{key:'slots',active:true,html:`
-      <div class="four-slots">${d.four_slots.map(s=>`
-        <div class="slot ${s.type}" onclick="event.stopPropagation();showDetail('slots')">
-          <div class="slot-bar"></div>
-          <div class="slot-name">${s.name}</div>
-          <div class="slot-time">${s.time}</div>
-          <div class="slot-grade">${s.grade}</div>
-        </div>`).join('')}</div>`}]:[]),
+    ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105)}]:[]),
     ...(d.verification?[{key:'verification',active:d.verification.status!=='pending',html:d.verification.status==='pending'?`
       <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">（${d.verification.morning?d.verification.morning.path:'—'}）</span><br>
       <span class="k" style="font-size:10px;color:#d29922">⏳ 待15:30收盘验证</span>`:`
@@ -368,6 +362,41 @@ function showDetail(key){
   if(rule&&pipelineData){
     panel.innerHTML=`<div class="detail-title">${rule.title}</div><div class="detail-sub">${rule.sub}</div>${rule.render(pipelineData)}`;
   }
+}
+
+/* ==================== 四时段SVG折线图 ==================== */
+const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'无方向':0,'微偏强':1,'略偏多':1,'偏多':2,'偏强':3};
+const GRADE_COLOR=v=>v>0?'#3fb950':v<0?'#f85149':'#8b949e';
+function slotsSVG(slots,w,h){
+  if(!slots||!slots.length) return '';
+  const pad={l:30,r:12,t:24,b:20};
+  const iw=w-pad.l-pad.r, ih=h-pad.t-pad.b;
+  const zeroY=pad.t+ih/2, stepY=ih/4;
+  const n=slots.length;
+  const pts=slots.map((s,i)=>({
+    x:pad.l+iw*(n>1?i/(n-1):0.5),
+    y:zeroY-(GRADE_VAL[s.grade]||0)*stepY,
+    ...s
+  }));
+  let lines='';
+  for(let i=0;i<n-1;i++){
+    const a=pts[i],b=pts[i+1];
+    const midY=(a.y+b.y)/2;
+    const v=GRADE_VAL[a.grade]||0;
+    lines+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${GRADE_COLOR(v)}" stroke-width="2" opacity="0.8"/>`;
+  }
+  const dots=pts.map(p=>{
+    const v=GRADE_VAL[p.grade]||0, c=GRADE_COLOR(v);
+    const timeStart=p.time?p.time.split('-')[0]:'';
+    return `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${c}" stroke="#0d1117" stroke-width="2"/>
+    <text x="${p.x}" y="${p.y-9}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700">${p.grade}</text>
+    <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.name} ${timeStart}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
+    <line x1="${pad.l}" y1="${zeroY}" x2="${w-pad.r}" y2="${zeroY}" stroke="#30363d" stroke-dasharray="4,3"/>
+    <text x="${pad.l-4}" y="${zeroY+3}" text-anchor="end" fill="#484f58" font-size="8">0</text>
+    ${lines}${dots}
+  </svg>`;
 }
 
 /* ==================== 验证对比渲染 ==================== */
