@@ -291,7 +291,9 @@ function renderPipeline(d){
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
       <span class="path-label">路径：${d.path}</span>`},
-    ...(d.verification?[{key:'verification',active:true,html:`
+    ...(d.verification?[{key:'verification',active:d.verification.status!=='pending',html:d.verification.status==='pending'?`
+      <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">（${d.verification.morning?d.verification.morning.path:'—'}）</span><br>
+      <span class="k" style="font-size:10px;color:#d29922">⏳ 待15:30收盘验证</span>`:`
       <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">→ 实际：</span><span class="v ${d.verification.grade_match&&d.verification.grade_match.startsWith('✅')?'pos':d.verification.grade_match&&d.verification.grade_match.startsWith('⚠️')?'':'neg'}">${d.verification.actual?d.verification.actual.grade:'—'}</span><br>
       <span class="k">二元：</span><span class="v">${d.verification.binary?d.verification.binary.score:'—'}</span> <span class="k">｜ 四时段：</span><span class="v">${d.verification.four_slots?d.verification.four_slots.strict:'—'}</span><br>
       <span class="k" style="font-size:10px;color:#d29922">${d.verification.grade_match||''}</span>`}]:[])
@@ -327,6 +329,13 @@ function showDetail(key){
 /* ==================== 验证对比渲染 ==================== */
 function renderVerification(v){
   if(!v) return '<p class="note">暂无验证数据</p>';
+  if(v.status==='pending'){
+    return `<div style="text-align:center;padding:24px 0">
+      <div style="font-size:32px;margin-bottom:8px">⏳</div>
+      <div style="font-size:14px;color:#c9d1d9;margin-bottom:4px">待收盘验证</div>
+      <div style="font-size:12px;color:#8b949e">预测：${v.morning?v.morning.grade:'—'}（${v.morning?v.morning.path:'—'}）<br>15:30 收盘验证后自动更新对比</div>
+    </div>`;
+  }
   const gmColor=v.grade_match&&v.grade_match.startsWith('✅')?'#3fb950':v.grade_match&&v.grade_match.startsWith('⚠️')?'#d29922':'#f85149';
   return `<table>
     <tr><th></th><th>预测（08:00）</th><th>实际（收盘后）</th><th>判定</th></tr>
