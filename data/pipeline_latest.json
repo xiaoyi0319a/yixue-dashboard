@@ -5,6 +5,7 @@
   "dun": "阴遁3局",
   "rule_version": "V2.9",
   "path": "C跨零",
+  "macd_date": "2026-10-14",
   "macd": {
     "dif": -34.75,
     "dea": -22.79,

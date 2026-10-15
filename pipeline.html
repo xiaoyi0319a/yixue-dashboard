@@ -110,7 +110,7 @@ macd: {
   title:"① MACD 数据（数据源）",
   sub:"来源：昨日预检文件 / 收盘共享 JSON ｜ 规则：MACD融合规则 §1.5 降级路径",
   render:d=>`
-  <div class="detail-section"><h4>原始数据（${d.date} 收盘）</h4>
+  <div class="detail-section"><h4>原始数据（${d.macd_date||d.date} 收盘 · 预测T-1基准）</h4>
   <table>
     <tr><th>指标</th><th>值</th><th>说明</th></tr>
     <tr><td>DIF</td><td style="color:${d.macd.dif<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.dif}</td><td>DIF 值</td></tr>
