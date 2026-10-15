@@ -59,6 +59,25 @@ tr.hl td:first-child{border-left:3px solid #58a6ff}
 .cross-table td:first-child,.cross-table th:first-child{text-align:center;font-weight:600}
 .cross-table td.hit{background:rgba(88,166,255,.2)!important;font-weight:700;color:#58a6ff}
 
+/* 四时段 */
+.four-slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:2px}
+.slot{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:8px 6px;text-align:center;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.slot:hover{border-color:#58a6ff}
+.slot .slot-bar{height:3px;border-radius:2px;margin-bottom:6px}
+.slot.up{border-color:rgba(63,185,80,.35)}
+.slot.up .slot-bar{background:#3fb950}
+.slot.down{border-color:rgba(248,81,73,.35)}
+.slot.down .slot-bar{background:#f85149}
+.slot.neutral{border-color:rgba(139,148,158,.25)}
+.slot.neutral .slot-bar{background:#8b949e}
+.slot-name{font-size:13px;font-weight:700;color:#f0f6fc}
+.slot-time{font-size:9px;color:#484f58;margin-top:1px}
+.slot-grade{font-size:11px;font-weight:600;margin-top:4px}
+.slot.up .slot-grade{color:#3fb950}
+.slot.down .slot-grade{color:#f85149}
+.slot.neutral .slot-grade{color:#8b949e}
+.slot-note{font-size:9px;color:#8b949e;margin-top:3px;line-height:1.4;height:24px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+
 .footer{text-align:center;padding:16px;font-size:11px;color:#484f58;border-top:1px solid #21262d;margin-top:20px}
 .loading{text-align:center;padding:60px 20px;color:#8b949e;font-size:14px}
 .err-banner{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);color:#f85149;font-size:12px;padding:8px 12px;border-radius:6px;margin-bottom:12px}
@@ -252,6 +271,23 @@ b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: $
   </div>`:''}`
   }
 },
+slots: {
+  title:"⏰ 四时段推演",
+  sub:"规则：奇门大盘预测工作流 Step 6 ｜ 巳/午/未/申四段独立定级",
+  render:d=>{
+    if(!d.four_slots) return '<p class="note">暂无四时段数据</p>';
+    return `<div class="detail-section"><h4>时段推演详情</h4>
+    <div class="four-slots" style="grid-template-columns:repeat(2,1fr);gap:10px">
+      ${d.four_slots.map(s=>`<div class="slot ${s.type}" style="padding:12px;cursor:default">
+        <div class="slot-bar"></div>
+        <div class="slot-name">${s.name}时 ${s.time}</div>
+        <div class="slot-grade" style="font-size:13px">${s.grade}</div>
+        <div class="slot-note" style="height:auto;margin-top:6px;font-size:11px">${s.note||''}</div>
+      </div>`).join('')}
+    </div></div>
+    ${d.four_slots_summary?`<div class="detail-section"><h4>全天特征</h4><p class="note">${d.four_slots_summary}</p></div>`:''}`;
+  }
+},
 verification: {
   title:"📋 验证对比（预测 vs 实际）",
   sub:"来源：收盘联合验证报告 ｜ 收盘验证工作流 Step 7.5 自动更新",
@@ -291,6 +327,14 @@ function renderPipeline(d){
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
       <span class="path-label">路径：${d.path}</span>`},
+    ...(d.four_slots?[{key:'slots',active:true,html:`
+      <div class="four-slots">${d.four_slots.map(s=>`
+        <div class="slot ${s.type}" onclick="event.stopPropagation();showDetail('slots')">
+          <div class="slot-bar"></div>
+          <div class="slot-name">${s.name}</div>
+          <div class="slot-time">${s.time}</div>
+          <div class="slot-grade">${s.grade}</div>
+        </div>`).join('')}</div>`}]:[]),
     ...(d.verification?[{key:'verification',active:d.verification.status!=='pending',html:d.verification.status==='pending'?`
       <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">（${d.verification.morning?d.verification.morning.path:'—'}）</span><br>
       <span class="k" style="font-size:10px;color:#d29922">⏳ 待15:30收盘验证</span>`:`
@@ -299,8 +343,8 @@ function renderPipeline(d){
       <span class="k" style="font-size:10px;color:#d29922">${d.verification.grade_match||''}</span>`}]:[])
   ];
 
-  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',verification:'📋 收盘验证'};
-  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',verification:'Step 7.5'};
+  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段',verification:'📋 收盘验证'};
+  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6',verification:'Step 7.5'};
 
   const html=nodes.map((n,i)=>{
     const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
