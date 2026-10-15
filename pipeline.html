@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>预测管线看板 | 2026-10-14</title>
+<title>预测管线看板</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh}
@@ -55,275 +55,288 @@ tr.hl td:first-child{border-left:3px solid #58a6ff}
 .formula{font-family:"SF Mono",Monaco,monospace;font-size:12px;background:#0d1117;padding:10px 12px;border-radius:6px;border:1px solid #21262d;color:#a5d6ff;line-height:1.8;margin-bottom:8px;white-space:pre-wrap}
 .note{font-size:11px;color:#8b949e;line-height:1.6}
 .path-label{display:inline-block;font-size:12px;font-weight:700;padding:4px 12px;border-radius:6px;background:rgba(88,166,255,.12);color:#58a6ff;margin-top:8px}
-
-/* 叉积表高亮 */
 .cross-table td,.cross-table th{text-align:center;padding:4px 6px}
 .cross-table td:first-child,.cross-table th:first-child{text-align:center;font-weight:600}
 .cross-table td.hit{background:rgba(88,166,255,.2)!important;font-weight:700;color:#58a6ff}
 
 .footer{text-align:center;padding:16px;font-size:11px;color:#484f58;border-top:1px solid #21262d;margin-top:20px}
+.loading{text-align:center;padding:60px 20px;color:#8b949e;font-size:14px}
+.err-banner{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);color:#f85149;font-size:12px;padding:8px 12px;border-radius:6px;margin-bottom:12px}
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>⚡ 预测管线看板</h1>
-  <span class="date">2026年10月14日 周三 · 辛酉日癸巳时 · 阴遁3局</span>
-  <span class="grade">最终定级：<b>略偏空</b> · 路径 C维持</span>
+  <span class="date" id="hdrDate">加载中…</span>
+  <span class="grade" id="hdrGrade"></span>
 </div>
 
 <div class="main">
-<!-- ==================== 左侧七层 ==================== -->
-<div class="pipeline">
-
-  <div class="node active" id="n1" onclick="showDetail(1)">
-    <div class="node-title"><span class="node-num">1</span><span class="node-name">MACD 数据</span><span class="node-tag">数据源</span></div>
-    <div class="node-output">
-      <span class="k">DIF</span> <span class="v neg">-30.79</span> ｜ <span class="k">DEA</span> <span class="v neg">-19.80</span> ｜ <span class="k">柱</span> <span class="v neg">-21.98</span><br>
-      <span class="k">状态</span> <span class="v">死叉延续 第11日</span>
-    </div>
-  </div>
-  <div class="connector"></div><div class="arrow"></div>
-
-  <div class="node active" id="n2" onclick="showDetail(2)">
-    <div class="node-title"><span class="node-num">2</span><span class="node-name">v₀ 三维评分</span><span class="node-tag">表1-A~1-D</span></div>
-    <div class="node-output">
-      <span class="k">交叉</span> <span class="v zero">0</span> ＋ <span class="k">柱体</span> <span class="v neg">-3</span> ＋ <span class="k">DIF位置</span> <span class="v neg">-2</span> ＝ <span class="v neg">-5</span><br>
-      <span class="k">9档映射</span> <span class="v">总分-5 → 中空（-2）</span>
-    </div>
-  </div>
-  <div class="connector"></div><div class="arrow"></div>
-
-  <div class="node active" id="n3" onclick="showDetail(3)">
-    <div class="node-title"><span class="node-num">3</span><span class="node-name">校准链</span><span class="node-tag">表1-E / 1.4-C</span></div>
-    <div class="node-output">
-      <span class="k">校准A 深跌</span> <span class="badge on">触发</span> <span class="k">标准收缩50%：-2→-1</span><br>
-      <span class="k">校准B 惯性</span> <span class="badge on">触发</span> <span class="k">死叉≥2日 · R阈值+2</span><br>
-      <span class="k">校准C 背离</span> <span class="badge off">未触发</span><br>
-      <span class="k">输出 v₀ = </span><span class="v neg">-1</span>
-    </div>
-  </div>
-  <div class="connector"></div><div class="arrow"></div>
-
-  <div class="node active" id="n4" onclick="showDetail(4)">
-    <div class="node-title"><span class="node-num">4</span><span class="node-name">奇门层</span><span class="node-tag">表2-A~2-H</span></div>
-    <div class="node-output">
-      <span class="k">攻多</span> <span class="v pos">+1</span> － <span class="k">攻空</span> <span class="v zero">0</span> ＋ <span class="k">结构</span> <span class="v zero">0</span> ＝ <span class="v">a_raw +1</span><br>
-      <span class="k">离散映射</span> <span class="v">a = 0</span> ｜ <span class="k">R检查</span> <span class="badge off">未触发</span>（|a_raw|=1 &lt; 10）<br>
-      <span class="k">a_macd</span> <span class="v zero">0</span> → <span class="k">a总</span> <span class="v zero">0</span> ｜ <span class="k">b底盘</span> <span class="v zero">0</span>
-    </div>
-  </div>
-  <div class="connector"></div><div class="arrow"></div>
-
-  <div class="node active" id="n5" onclick="showDetail(5)">
-    <div class="node-title"><span class="node-num">5</span><span class="node-name">叉积融合</span><span class="node-tag">表3-A</span></div>
-    <div class="node-output">
-      <span class="k">v = v₀ + a总 = </span><span class="v neg">-1</span> <span class="k">+</span> <span class="v zero">0</span> <span class="k">=</span> <span class="v neg">-1</span><br>
-      <span class="k">查表3-A</span> <span class="v">v₀=-1 × a=0 → v=-1</span>
-    </div>
-  </div>
-  <div class="connector"></div><div class="arrow"></div>
-
-  <div class="node dimmed" id="n6" onclick="showDetail(6)">
-    <div class="node-title"><span class="node-num">6</span><span class="node-name">微调修正（b）</span><span class="node-tag">表3-D</span></div>
-    <div class="node-output">
-      <span class="k">b = 0 → 不生效</span><br>
-      <span class="k">v_final = -1 + 0 = </span><span class="v neg">-1</span>
-    </div>
-  </div>
-  <div class="connector"></div><div class="arrow"></div>
-
-  <div class="node active" id="n7" onclick="showDetail(7)">
-    <div class="node-title"><span class="node-num">7</span><span class="node-name">定级输出</span><span class="node-tag">表4-A / 3-E</span></div>
-    <div class="node-output">
-      <span class="k">v_final = </span><span class="v neg">-1</span> <span class="k">→ 表4-A →</span> <span class="v neg" style="font-size:14px">略偏空</span><br>
-      <span class="path-label">路径：C维持（同向延续）</span>
-    </div>
-  </div>
-
+<div class="pipeline" id="pipeline">
+  <div class="loading" id="loadingMsg">正在加载管线数据…</div>
 </div>
-
-<!-- ==================== 右侧详情 ==================== -->
 <div class="detail" id="detailPanel"></div>
 </div>
 
-<div class="footer">
-  预测管线看板 V0.1（静态原型）｜ 规则版本：MACD融合规则 V2.9 ｜ 数据源：memory/奇门预测/奇门预测_20261014.md<br>
+<div class="footer" id="footer">
+  预测管线看板 V0.2（动态数据版）｜ 规则版本：MACD融合规则 V2.9<br>
   ⚠️ 仅为内部规则可视化工具，不构成投资建议
 </div>
 
 <script>
-const details = {
-1: {
+/* ==================== 规则详情（静态部分，规则不随日期变化） ==================== */
+const RULE_DETAILS = {
+macd: {
   title:"① MACD 数据（数据源）",
   sub:"来源：昨日预检文件 / 收盘共享 JSON ｜ 规则：MACD融合规则 §1.5 降级路径",
-  body:`
-  <div class="detail-section"><h4>原始数据（10-13 收盘）</h4>
+  render:d=>`
+  <div class="detail-section"><h4>原始数据（${d.date} 收盘）</h4>
   <table>
     <tr><th>指标</th><th>值</th><th>说明</th></tr>
-    <tr><td>DIF</td><td class="neg" style="color:#f85149;font-weight:600">-30.79</td><td>远离零轴极端深度</td></tr>
-    <tr><td>DEA</td><td style="color:#f85149;font-weight:600">-19.80</td><td>DIF 在 DEA 下方</td></tr>
-    <tr><td>柱 (DIF-DEA)×2</td><td style="color:#f85149;font-weight:600">-21.98</td><td>&gt;20 极值档（|柱|&gt;20 → 柱体-3）</td></tr>
-    <tr class="hl"><td>交叉状态</td><td>死叉延续 第11日</td><td>非交叉首日 → 交叉分计 0</td></tr>
+    <tr><td>DIF</td><td style="color:${d.macd.dif<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.dif}</td><td>DIF 值</td></tr>
+    <tr><td>DEA</td><td style="color:${d.macd.dea<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.dea}</td><td>DEA 值</td></tr>
+    <tr><td>柱 (DIF−DEA)×2</td><td style="color:${d.macd.bar<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.bar}</td><td>${Math.abs(d.macd.bar)>20?'|柱|>20 极值档（柱体±3）':Math.abs(d.macd.bar)>10?'|柱|10~20（柱体±2）':Math.abs(d.macd.bar)>3?'|柱|3~10（柱体±1）':'|柱|<3（柱体0）'}</td></tr>
+    <tr class="hl"><td>交叉状态</td><td>${d.macd.cross_state}</td><td>${d.macd.cross_state.includes('延续')?'非交叉首日 → 交叉分计 0':'交叉首日 → 查表1-A评分'}</td></tr>
   </table></div>
   <div class="detail-section"><h4>预检警示</h4>
-  <p class="note">预检提示"25日内3次交叉 = 反复交叉噪声区——金叉/死叉信号可信度降档，趋势延续权重高于交叉信号"。本日底座交叉分计 0（死叉延续非交叉首日），已按噪声区处理，不采信任何交叉信号。趋势惯性期校准 B 已标记。</p></div>`
+  <p class="note">${d.macd.precheck_note||'无特殊警示'}</p></div>`
 },
-2: {
+v0: {
   title:"② v₀ 三维评分（MACD底座）",
-  sub:"规则：MACD融合规则 §1.1~1.2 ｜ 三维值域 +9~-9",
-  body:`
+  sub:"规则：MACD融合规则 §1.1~1.2 ｜ 三维值域 +9~−9",
+  render:d=>`
   <div class="detail-section"><h4>三维评分</h4>
   <table>
     <tr><th>维度</th><th>判定</th><th>分值</th><th>依据</th></tr>
-    <tr><td>交叉分级</td><td>死叉延续（非首日）</td><td class="zero">0</td><td>表1-A：延续日一律0</td></tr>
-    <tr><td>柱体强度</td><td>柱-21.98，|柱|&gt;20</td><td style="color:#f85149;font-weight:600">-3</td><td>表1-B：≤-20 → -3</td></tr>
-    <tr><td>DIF位置</td><td>DIF≤0 且 ≤DEA</td><td style="color:#f85149;font-weight:600">-2</td><td>表1-C：-2档</td></tr>
-    <tr class="hl"><td>三维总分</td><td>—</td><td style="color:#f85149;font-weight:700">-5</td><td>0 + (-3) + (-2)</td></tr>
+    <tr><td>交叉分级</td><td>${d.v0.cross_desc}</td><td class="${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</td><td>表1-A</td></tr>
+    <tr><td>柱体强度</td><td>${d.v0.bar_desc}</td><td class="${d.v0.bar_score>0?'pos':d.v0.bar_score<0?'neg':'zero'}">${d.v0.bar_score>0?'+':''}${d.v0.bar_score}</td><td>表1-B</td></tr>
+    <tr><td>DIF位置</td><td>${d.v0.dif_desc}</td><td class="${d.v0.dif_pos>0?'pos':d.v0.dif_pos<0?'neg':'zero'}">${d.v0.dif_pos>0?'+':''}${d.v0.dif_pos}</td><td>表1-C</td></tr>
+    <tr class="hl"><td>三维总分</td><td>—</td><td class="${d.v0.total>0?'pos':d.v0.total<0?'neg':'zero'}" style="font-weight:700">${d.v0.total>0?'+':''}${d.v0.total}</td><td>${d.v0.cross}+(${d.v0.bar_score})+(${d.v0.dif_pos})</td></tr>
   </table></div>
   <div class="detail-section"><h4>9档映射（表1-D）</h4>
-  <div class="formula">总分 -5 → 区间[-3,-5] → 档位：中空（-2）</div>
-  <p class="note">交叉0因"死叉延续非首日"；柱体-3因|柱|>20极值档；DIF位置-2因零轴下+DEA下双条件同时满足。</p></div>`
+  <div class="formula">总分 ${d.v0.total>0?'+':''}${d.v0.total} → ${d.v0.mapped_label}（${d.v0.mapped>0?'+':''}${d.v0.mapped}）</div>
+  <p class="note">${d.v0.note||''}</p></div>`
 },
-3: {
+calibration: {
   title:"③ 校准链（A / B / C）",
   sub:"规则：MACD融合规则 §1.4 + §1.4-C ｜ 三道校准独立判定、可叠加",
-  body:`
+  render:d=>`
   <div class="detail-section"><h4>校准A · 深跌超跌区（表1-E）</h4>
   <table>
     <tr><th>条件</th><th>判定</th></tr>
-    <tr><td>DIF ≤ -5</td><td><span class="badge on">满足</span>（-30.79）</td></tr>
-    <tr><td>强化收缩条件：DIF≤-8 且 柱Δ&gt;+4</td><td><span class="badge off">不满足</span>（柱Δ=+1.35）</td></tr>
-    <tr class="hl"><td>动作</td><td>标准收缩50%：-2 → <b>-1</b></td></tr>
+    <tr><td>DIF ≤ −5</td><td>${d.calibration.cal_a.triggered?`<span class="badge on">满足</span>（${d.calibration.cal_a.condition_val}）`:'<span class="badge off">不满足</span>'}</td></tr>
+    <tr><td>强化收缩：DIF≤−8 且 柱Δ&gt;+4</td><td>${d.calibration.cal_a.strong?`<span class="badge on">满足</span>`:'<span class="badge off">不满足</span>'}</td></tr>
+    <tr class="hl"><td>动作</td><td>${d.calibration.cal_a.action}</td></tr>
   </table></div>
   <div class="detail-section"><h4>校准B · 趋势惯性期</h4>
   <table>
     <tr><th>条件</th><th>判定</th></tr>
-    <tr><td>死叉延续 ≥2日</td><td><span class="badge on">满足</span>（第11日）</td></tr>
-    <tr class="hl"><td>动作</td><td>标记趋势惯性期 → R反转阈值+2（|a_raw|≥10）</td></tr>
+    <tr><td>金叉/死叉延续 ≥2日</td><td>${d.calibration.cal_b.triggered?`<span class="badge on">满足</span>（${d.calibration.cal_b.detail}）`:'<span class="badge off">不满足</span>'}</td></tr>
+    <tr class="hl"><td>动作</td><td>${d.calibration.cal_b.action}</td></tr>
   </table></div>
-  <div class="detail-section"><h4>校准C · K线-MACD背离（V2.9新增）</h4>
+  <div class="detail-section"><h4>校准C · K线-MACD背离（V2.9）</h4>
   <table>
     <tr><th>条件</th><th>判定</th></tr>
-    <tr><td>T-1 K线阴阳 vs MACD柱方向</td><td>10-13阴线×绿柱放大=同步空（非背离）</td></tr>
-    <tr class="hl"><td>动作</td><td><span class="badge off">不触发</span></td></tr>
+    <tr><td>T-1 K线 vs MACD柱方向相反</td><td>${d.calibration.cal_c.triggered?`<span class="badge on">触发</span>（${d.calibration.cal_c.detail}）`:`<span class="badge off">未触发</span>（${d.calibration.cal_c.detail}）`}</td></tr>
   </table></div>
-  <div class="formula">输出：v₀ = -1（校准A收缩后）＋ 校准B标记（趋势惯性期）</div>`
+  <div class="formula">输出：v₀ = ${d.calibration.output_v0>0?'+':''}${d.calibration.output_v0}${d.calibration.cal_b.triggered?' ＋ 校准B标记（趋势惯性期）':''}</div>`
 },
-4: {
+qimen: {
   title:"④ 奇门层（a + b 合成）",
-  sub:"规则：MACD融合规则 §2.1~2.7 ｜ 2026Q4系数快照",
-  body:`
+  sub:"规则：MACD融合规则 §2.1~2.7 ｜ 当季系数快照",
+  render:d=>{
+    const q=d.qimen;
+    return `
   <div class="detail-section"><h4>攻多信号（表2-A）</h4>
   <table>
-    <tr><th>信号</th><th>条件</th><th>基础分</th><th>Q4系数</th><th>有效分</th></tr>
-    <tr><td>生门旺相</td><td>生门当令旺</td><td>+2</td><td>0.69</td><td style="color:#3fb950;font-weight:600">+1</td></tr>
-    <tr><td>时干生日干</td><td>不满足</td><td>+2</td><td>0.75</td><td class="zero">0</td></tr>
-    <tr><td>卖盘受制</td><td>庚无四害</td><td>+4</td><td>0.62</td><td class="zero">0</td></tr>
+    <tr><th>信号</th><th>条件</th><th>基础分</th><th>系数</th><th>有效分</th></tr>
+    ${q.attack_plus_signals.map(s=>`<tr><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td><td>${s.coef}</td><td class="${s.effective>0?'pos':'zero'}" style="font-weight:600">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
   </table></div>
   <div class="detail-section"><h4>攻空信号（表2-B）＋ 结构信号（表2-C）</h4>
   <table>
     <tr><th>类别</th><th>信号</th><th>判定</th><th>有效分</th></tr>
-    <tr><td>攻空</td><td>时干克日干</td><td>不克</td><td class="zero">0</td></tr>
-    <tr><td>攻空</td><td>凶格临关键宫</td><td>无凶格</td><td class="zero">0</td></tr>
-    <tr><td>结构</td><td>空方核心受制≥2处</td><td>时干空亡仅1处</td><td class="zero">0</td></tr>
-    <tr><td>结构</td><td>值符空亡</td><td>未空亡</td><td class="zero">0</td></tr>
-    <tr><td>结构</td><td>四害双向≥5处</td><td>全局仅2处</td><td class="zero">0</td></tr>
+    ${q.attack_minus_signals.map(s=>`<tr><td>攻空</td><td>${s.name}</td><td>${s.condition}</td><td class="${s.effective<0?'neg':s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
+    ${q.structure_signals.map(s=>`<tr><td>结构</td><td>${s.name}</td><td>${s.condition}</td><td class="${s.effective<0?'neg':s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
   </table></div>
   <div class="detail-section"><h4>合成</h4>
-  <div class="formula">a_raw = 攻多(+1) − 攻空(0) + 结构(0) = +1
-离散映射（表2-D）：+1 → 区间[-2,+2] → a = 0
-a_macd（表2-F）：柱-21.98 vs 前柱-23.33 = 非连续同号递增 → 0
-a总 = a_macd(0) + 奇门a(0) = 0 ｜ 限幅±2 ✓
+  <div class="formula">a_raw = 攻多(${q.attack_plus>0?'+':''}${q.attack_plus}) − 攻空(${q.attack_minus}) + 结构(${q.structure}) = ${q.a_raw>0?'+':''}${q.a_raw}
+离散映射（表2-D）：${q.a_raw>0?'+':''}${q.a_raw} → ${q.a_discrete>0?'+':''}${q.a_discrete}
+a_macd（表2-F）：${q.a_macd>0?'+':''}${q.a_macd}
+a总 = a_macd(${q.a_macd>0?'+':''}${q.a_macd}) + 奇门a(${q.a_discrete>0?'+':''}${q.a_discrete}) = ${q.a_total>0?'+':''}${q.a_total} ｜ 限幅±2 ✓
 
-R反转检查（表2-E）：|a_raw|=1 &lt; 阈值10（校准B+2后）→ 不触发</div></div>
+R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span class="badge warn">触发R</span>`:`<span class="badge off">&lt; 阈值${q.r_threshold} → 不触发</span>`}</div></div>
   <div class="detail-section"><h4>b 底盘系数（表2-G/H）</h4>
   <table>
     <tr><th>信号</th><th>判定</th><th>分值</th></tr>
-    <tr><td>资金旺相无四害</td><td>满足</td><td>+1</td></tr>
-    <tr><td>日干衰弱</td><td>满足</td><td>-1</td></tr>
-    <tr><td>其余4项</td><td>不满足</td><td>0</td></tr>
-    <tr class="hl"><td>b_raw = 0 → 映射</td><td>不满足≥2或≤-2</td><td><b>b = 0</b></td></tr>
+    ${q.b_signals.map(s=>`<tr><td>${s.name}</td><td>${s.condition}</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join('')}
+    <tr class="hl"><td>b_raw = ${q.b_raw>0?'+':''}${q.b_raw} → 映射</td><td></td><td><b>b = ${q.b>0?'+':''}${q.b}</b></td></tr>
   </table></div>`
+  }
 },
-5: {
+fusion: {
   title:"⑤ 叉积融合（v = v₀ + a总）",
   sub:"规则：MACD融合规则 §3.1 表3-A ｜ 纯加法限幅±4",
-  body:`
+  render:d=>{
+    const f=d.fusion;
+    const v0Labels={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
+    const aCols=['+2','+1','0','-1','-2','R'];
+    // 叉积表静态值
+    const CROSS={'+4':[4,4,4,3,2,'—'],'+3':[4,4,3,2,1,-2],'+2':[4,3,2,1,0,-2],'+1':[3,2,1,0,-1,-2],'0':[1,0,0,0,-1,0],'-1':[1,0,-1,-2,-3,2],'-2':[0,-1,-2,-3,-4,2],'-3':[-1,-2,-3,-4,-4,2],'-4':[-2,-3,-4,-4,-4,'—']};
+    const aIdx=aCols.indexOf(f.a_total===0?'0':String(f.a_total));
+    return `
   <div class="detail-section"><h4>计算</h4>
-  <div class="formula">v₀ = -1 ｜ a总 = 0
-v = -1 + 0 = -1 ｜ |v| ≤ 4 ✓ 无需限幅
+  <div class="formula">v₀ = ${f.v0>0?'+':''}${f.v0} ｜ a总 = ${f.a_total>0?'+':''}${f.a_total}
+v = ${f.v0>0?'+':''}${f.v0} + ${f.a_total>0?'+':''}${f.a_total} = ${f.v>0?'+':''}${f.v} ｜ |v| ≤ 4 ✓
 
-v₀=0特例（表3-B）：不适用（v₀=-1≠0）
-|v₀|=4回退（表3-C）：不适用（|v₀|=1≤3）</div></div>
+v₀=0特例（表3-B）：${f.v0===0?'<span class="badge warn">适用</span>':'不适用（v₀≠0）'}
+|v₀|=4回退（表3-C）：${Math.abs(f.v0)===4?'<span class="badge warn">适用</span>':'不适用（|v₀|≤3）'}</div></div>
   <div class="detail-section"><h4>叉积表定位（表3-A）</h4>
   <table class="cross-table">
-    <tr><th>v₀＼a</th><th>+2</th><th>+1</th><th>0</th><th>-1</th><th>-2</th><th>R</th></tr>
-    <tr><td>+4</td><td>+4</td><td>+4</td><td>+4</td><td>+3</td><td>+2</td><td>—</td></tr>
-    <tr><td>+3</td><td>+4</td><td>+4</td><td>+3</td><td>+2</td><td>+1</td><td>-2</td></tr>
-    <tr><td>+2</td><td>+4</td><td>+3</td><td>+2</td><td>+1</td><td>0</td><td>-2</td></tr>
-    <tr><td>+1</td><td>+3</td><td>+2</td><td>+1</td><td>0</td><td>-1</td><td>-2</td></tr>
-    <tr><td>0</td><td>+1</td><td>0</td><td>0</td><td>0</td><td>-1</td><td>0</td></tr>
-    <tr><td class="neg" style="color:#f85149">-1</td><td>+1</td><td>0</td><td class="hit">-1</td><td>-2</td><td>-3</td><td>+2</td></tr>
-    <tr><td>-2</td><td>0</td><td>-1</td><td>-2</td><td>-3</td><td>-4</td><td>+2</td></tr>
-    <tr><td>-3</td><td>-1</td><td>-2</td><td>-3</td><td>-4</td><td>-4</td><td>+2</td></tr>
-    <tr><td>-4</td><td>-2</td><td>-3</td><td>-4</td><td>-4</td><td>-4</td><td>—</td></tr>
+    <tr><th>v₀＼a</th>${aCols.map(c=>`<th>${c}</th>`).join('')}</tr>
+    ${Object.keys(CROSS).map(v0=>{
+      const isRow=String(f.v0)===v0;
+      return `<tr><td style="color:${v0>0?'#3fb950':v0<0?'#f85149':'#8b949e'}">${v0}</td>${CROSS[v0].map((val,i)=>{
+        const isHit=isRow&&i===aIdx;
+        return `<td class="${isHit?'hit':''}" style="${isHit?'':''}">${val>0?'+':''}${val}</td>`;
+      }).join('')}</tr>`;
+    }).join('')}
   </table>
-  <p class="note" style="margin-top:8px">蓝框高亮 = 今日实际落点（v₀=-1, a=0 → v=-1）</p></div>
+  <p class="note" style="margin-top:8px">蓝框高亮 = 今日实际落点（v₀=${f.v0>0?'+':''}${f.v0}, a=${f.a_total>0?'+':''}${f.a_total} → v=${f.v>0?'+':''}${f.v}）</p></div>
   <div class="detail-section"><h4>路径判定（表3-E）</h4>
-  <div class="formula">v₀=-1 ≠ 0 ｜ v=-1 ≠ 0 ｜ sign(v)=sign(v₀)=负 → C维持（同向延续）
-非R（a≠R）→ 非B反转 ｜ v≠0 → 非D急停 ｜ 同号 → 非C跨零</div></div>`
+  <div class="formula">v₀=${f.v0} ${f.v0!==0?'≠ 0':'= 0'} ｜ v=${f.v>0?'+':''}${f.v} ${f.v!==0?'≠ 0':'= 0'} ｜ path = ${d.path}</div>
+  <p class="note">${f.path_explain||''}</p></div>`
+  }
 },
-6: {
+adjust: {
   title:"⑥ 微调修正（b 底盘微调）",
   sub:"规则：MACD融合规则 §3.2b 表3-D ｜ b只调|v|强弱，不改方向",
-  body:`
+  render:d=>{
+    const a=d.adjust;
+    const active=a.b!==0;
+    return `
   <div class="detail-section"><h4>判定</h4>
   <table>
     <tr><th>条件</th><th>规则</th><th>今日</th></tr>
-    <tr><td>b = 0</td><td>不生效</td><td><span class="badge off">b=0 → 跳过</span></td></tr>
-    <tr><td>v = 0</td><td>b不生效</td><td>v=-1 ≠ 0</td></tr>
-    <tr><td>跨零检查</td><td>v>0且v+b≤0 → 放弃；v<0且v+b≥0 → 放弃</td><td>-1+0=-1，不跨零</td></tr>
-    <tr><td>限幅</td><td>|v+b|≤4</td><td>|-1|≤4 ✓</td></tr>
+    <tr><td>b 值</td><td>b=0 → 不生效</td><td>${active?`<span class="badge on">b=${a.b>0?'+':''}${a.b} → 生效</span>`:'<span class="badge off">b=0 → 跳过</span>'}</td></tr>
+    <tr><td>v = 0</td><td>b不生效</td><td>v=${a.v} ${a.v===0?'= 0 → b跳过':'≠ 0'}</td></tr>
+    <tr><td>跨零检查</td><td>v>0且v+b≤0 → 放弃；v<0且v+b≥0 → 放弃</td><td>${a.cross_zero?'跨零 → 放弃调整':'不跨零'}</td></tr>
+    <tr><td>限幅</td><td>|v+b|≤4</td><td>|${a.v_final}|≤4 ✓</td></tr>
   </table></div>
-  <div class="formula">v_final = v + b = -1 + 0 = -1</div>
-  <p class="note">今日底盘信号多空对冲（资金旺+1 vs 日干衰-1），b_raw=0 → b=0 → 微调层无操作。此节点灰色显示。</p>`
+  <div class="formula">v_final = v + b = ${a.v>0?'+':''}${a.v} + ${a.b>0?'+':''}${a.b} = ${a.v_final>0?'+':''}${a.v_final}</div>
+  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}</p>`
+  }
 },
-7: {
+output: {
   title:"⑦ 定级输出（7档映射）",
   sub:"规则：MACD融合规则 §3.4 表4-A ｜ 9档内部值 → 7档输出",
-  body:`
+  render:d=>{
+    const o=d.output;
+    const grades=[['+4','偏强'],['+3','偏多'],['+2','略偏多'],['+1','略偏多（并入）'],['0','无方向'],['-1','略偏空（并入）'],['-2','略偏空'],['-3','偏空'],['-4','偏弱']];
+    const vMap={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
+    return `
   <div class="detail-section"><h4>最终映射（表4-A）</h4>
   <table>
-    <tr><th>v_final</th><th>7档定级</th><th>今日</th></tr>
-    <tr><td>+4</td><td>偏强</td><td></td></tr>
-    <tr><td>+3</td><td>偏多</td><td></td></tr>
-    <tr><td>+2</td><td>略偏多</td><td></td></tr>
-    <tr><td>+1</td><td>略偏多（并入）</td><td></td></tr>
-    <tr><td>0</td><td>无方向</td><td></td></tr>
-    <tr class="hl"><td style="color:#58a6ff;font-weight:700">-1</td><td style="color:#58a6ff;font-weight:700">略偏空（并入）</td><td><b>◀ 今日</b></td></tr>
-    <tr><td>-2</td><td>略偏空</td><td></td></tr>
-    <tr><td>-3</td><td>偏空</td><td></td></tr>
-    <tr><td>-4</td><td>偏弱</td><td></td></tr>
+    <tr><th>v_final</th><th>7档定级</th><th></th></tr>
+    ${grades.map(([v,g])=>{
+      const isHit=vMap[String(o.v_final)]===v;
+      return `<tr class="${isHit?'hl':''}"><td>${v}</td><td>${g}</td><td>${isHit?'<b>◀ 今日</b>':''}</td></tr>`;
+    }).join('')}
   </table></div>
   <div class="detail-section"><h4>九字段输出（报告必含）</h4>
-  <div class="formula">v0_grade: -1     cal_A: 有     cal_B: 有
-a_macd: 0        qimen_a: 0    a_raw: +1
-b_value: 0       path: C维持   final_grade: -1 → 略偏空</div></div>
-  <div class="detail-section"><h4>验证口径</h4>
-  <p class="note">二元判定：开盘❌（预测平开实际低开-0.269%）｜ K线✅ ｜ 收盘✅ → 2/3<br>最终定级：预测略偏空 vs 实际偏空 → ⚠️半对（方向✅幅度偏轻）<br>四时段：严格1/4（仅巳✅）｜ 宽松1.5/4</p></div>`
+  <div class="formula">v0_grade: ${d.nine_fields.v0_grade>0?'+':''}${d.nine_fields.v0_grade}     cal_A: ${d.nine_fields.cal_A}     cal_B: ${d.nine_fields.cal_B}
+a_macd: ${d.nine_fields.a_macd>0?'+':''}${d.nine_fields.a_macd}        qimen_a: ${d.nine_fields.qimen_a}       a_raw: ${d.nine_fields.a_raw}
+b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: ${d.nine_fields.path}   final_grade: ${d.nine_fields.final_grade>0?'+':''}${d.nine_fields.final_grade} → ${o.grade}</div></div>
+  ${d.verification?`<div class="detail-section"><h4>验证口径</h4>
+  <p class="note">${d.verification}</p></div>`:''}`
+  }
 }
 };
 
-function showDetail(n) {
-  document.querySelectorAll('.node').forEach(el => el.classList.remove('selected'));
-  document.getElementById('n'+n).classList.add('selected');
-  const d = details[n];
-  document.getElementById('detailPanel').innerHTML =
-    `<div class="detail-title">${d.title}</div><div class="detail-sub">${d.sub}</div>${d.body}`;
+/* ==================== 渲染函数 ==================== */
+function renderPipeline(d){
+  // header
+  document.getElementById('hdrDate').textContent = `${d.date_display||d.date} · ${d.ganzhi||''} · ${d.dun||''}`;
+  const gEl=document.getElementById('hdrGrade');
+  gEl.innerHTML = `最终定级：<b>${d.output.grade}</b> · 路径 ${d.path}`;
+
+  const nodes=[
+    {key:'macd',active:true,html:`
+      <span class="k">DIF</span> <span class="v ${d.macd.dif<0?'neg':'pos'}">${d.macd.dif}</span> ｜ <span class="k">DEA</span> <span class="v ${d.macd.dea<0?'neg':'pos'}">${d.macd.dea}</span> ｜ <span class="k">柱</span> <span class="v ${d.macd.bar<0?'neg':'pos'}">${d.macd.bar}</span><br>
+      <span class="k">状态</span> <span class="v">${d.macd.cross_state}</span>`},
+    {key:'v0',active:true,html:`
+      <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_score>0?'pos':d.v0.bar_score<0?'neg':'zero'}">${d.v0.bar_score>0?'+':''}${d.v0.bar_score}</span> ＋ <span class="k">DIF位置</span> <span class="v ${d.v0.dif_pos>0?'pos':d.v0.dif_pos<0?'neg':'zero'}">${d.v0.dif_pos>0?'+':''}${d.v0.dif_pos}</span> ＝ <span class="v ${d.v0.total>0?'pos':d.v0.total<0?'neg':'zero'}">${d.v0.total>0?'+':''}${d.v0.total}</span><br>
+      <span class="k">9档映射</span> <span class="v">总分${d.v0.total} → ${d.v0.mapped_label}（${d.v0.mapped>0?'+':''}${d.v0.mapped}）</span>`},
+    {key:'calibration',active:true,html:`
+      <span class="k">校准A 深跌</span> ${d.calibration.cal_a.triggered?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.calibration.cal_a.action_short||''}</span><br>
+      <span class="k">校准B 惯性</span> ${d.calibration.cal_b.triggered?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.calibration.cal_b.action_short||''}</span><br>
+      <span class="k">校准C 背离</span> ${d.calibration.cal_c.triggered?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'}<br>
+      <span class="k">输出 v₀ = </span><span class="v ${d.calibration.output_v0>0?'pos':d.calibration.output_v0<0?'neg':'zero'}">${d.calibration.output_v0>0?'+':''}${d.calibration.output_v0}</span>`},
+    {key:'qimen',active:true,html:`
+      <span class="k">攻多</span> <span class="v ${d.qimen.attack_plus>0?'pos':'zero'}">${d.qimen.attack_plus>0?'+':''}${d.qimen.attack_plus}</span> － <span class="k">攻空</span> <span class="v ${d.qimen.attack_minus<0?'neg':'zero'}">${d.qimen.attack_minus}</span> ＋ <span class="k">结构</span> <span class="v ${d.qimen.structure>0?'pos':d.qimen.structure<0?'neg':'zero'}">${d.qimen.structure>0?'+':''}${d.qimen.structure}</span> ＝ <span class="v">a_raw ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}</span><br>
+      <span class="k">离散映射</span> <span class="v">a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> ｜ <span class="k">R检查</span> ${d.qimen.r_triggered?'<span class="badge warn">触发</span>':`<span class="badge off">未触发</span>（|a_raw|=${Math.abs(d.qimen.a_raw)} &lt; ${d.qimen.r_threshold}）`}<br>
+      <span class="k">a_macd</span> <span class="v zero">${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}</span> → <span class="k">a总</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> ｜ <span class="k">b底盘</span> <span class="v ${d.qimen.b>0?'pos':d.qimen.b<0?'neg':'zero'}">${d.qimen.b>0?'+':''}${d.qimen.b}</span>`},
+    {key:'fusion',active:true,html:`
+      <span class="k">v = v₀ + a总 = </span><span class="v ${d.fusion.v0>0?'pos':d.fusion.v0<0?'neg':'zero'}">${d.fusion.v0>0?'+':''}${d.fusion.v0}</span> <span class="k">+</span> <span class="v ${d.fusion.a_total>0?'pos':d.fusion.a_total<0?'neg':'zero'}">${d.fusion.a_total>0?'+':''}${d.fusion.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v>0?'pos':d.fusion.v<0?'neg':'zero'}">${d.fusion.v>0?'+':''}${d.fusion.v}</span><br>
+      <span class="k">查表3-A</span> <span class="v">v₀=${d.fusion.v0>0?'+':''}${d.fusion.v0} × a=${d.fusion.a_total>0?'+':''}${d.fusion.a_total} → v=${d.fusion.v>0?'+':''}${d.fusion.v}</span>`},
+    {key:'adjust',active:d.adjust.b!==0,html:`
+      <span class="k">b = ${d.adjust.b>0?'+':''}${d.adjust.b} ${d.adjust.b===0?'→ 不生效':'→ 生效'}</span><br>
+      <span class="k">v_final = ${d.adjust.v>0?'+':''}${d.adjust.v} + ${d.adjust.b>0?'+':''}${d.adjust.b} = </span><span class="v ${d.adjust.v_final>0?'pos':d.adjust.v_final<0?'neg':'zero'}">${d.adjust.v_final>0?'+':''}${d.adjust.v_final}</span>`},
+    {key:'output',active:true,html:`
+      <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
+      <span class="path-label">路径：${d.path}</span>`}
+  ];
+
+  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出'};
+  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E'};
+
+  const html=nodes.map((n,i)=>{
+    const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
+    return `<div class="node ${n.active?'active':'dimmed'}" id="n${n.key}" onclick="showDetail('${n.key}')">
+      <div class="node-title"><span class="node-num">${i+1}</span><span class="node-name">${names[n.key]}</span><span class="node-tag">${tags[n.key]}</span></div>
+      <div class="node-output">${n.html}</div></div>${conn}`;
+  }).join('');
+  document.getElementById('pipeline').innerHTML=html;
+  document.getElementById('loadingMsg')?.remove();
+  showDetail('fusion');
 }
-// 默认显示第5层（叉积融合——最核心）
-showDetail(5);
+
+/* ==================== 数据加载 ==================== */
+let pipelineData=null;
+function showDetail(key){
+  document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
+  const el=document.getElementById('n'+key);
+  if(el) el.classList.add('selected');
+  const rule=RULE_DETAILS[key];
+  const panel=document.getElementById('detailPanel');
+  if(rule&&pipelineData){
+    panel.innerHTML=`<div class="detail-title">${rule.title}</div><div class="detail-sub">${rule.sub}</div>${rule.render(pipelineData)}`;
+  }
+}
+
+async function loadData(){
+  try{
+    const r=await fetch('data/pipeline_latest.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    pipelineData=await r.json();
+  }catch(e){
+    // fallback：尝试日期文件
+    const today=new Date().toISOString().slice(0,10).replace(/-/g,'');
+    try{
+      const r2=await fetch(`data/pipeline_${today}.json`,{cache:'no-store'});
+      if(!r2.ok) throw new Error('HTTP '+r2.status);
+      pipelineData=await r2.json();
+    }catch(e2){
+      document.getElementById('loadingMsg').innerHTML=`
+        <div class="err-banner">⚠️ 未能加载当日管线数据（${e.message} / ${e2.message}）</div>
+        <p>请确认 data/pipeline_latest.json 已推送，或联系管理员。</p>`;
+      return;
+    }
+  }
+  document.getElementById('footer').innerHTML=`预测管线看板 V0.2 ｜ 数据日期：${pipelineData.date||'未知'} ｜ 规则版本：MACD融合规则 ${pipelineData.rule_version||'V2.9'}<br>⚠️ 仅为内部规则可视化工具，不构成投资建议`;
+  renderPipeline(pipelineData);
+}
+loadData();
 </script>
 </body>
 </html>

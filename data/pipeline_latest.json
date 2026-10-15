@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-14",
+  "date_display": "2026年10月14日 周三",
+  "ganzhi": "辛酉日癸巳时",
+  "dun": "阴遁3局",
+  "rule_version": "V2.9",
+  "path": "C维持",
+  "macd": {
+    "dif": -30.79,
+    "dea": -19.80,
+    "bar": -21.98,
+    "cross_state": "死叉延续 第11日",
+    "precheck_note": "预检提示\"25日内3次交叉 = 反复交叉噪声区——金叉/死叉信号可信度降档，趋势延续权重高于交叉信号\"。本日底座交叉分计 0（死叉延续非交叉首日），已按噪声区处理，不采信任何交叉信号。趋势惯性期校准 B 已标记。"
+  },
+  "v0": {
+    "cross": 0,
+    "cross_desc": "死叉延续（非首日）",
+    "bar_score": -3,
+    "bar_desc": "柱-21.98，|柱|>20 极值档",
+    "dif_pos": -2,
+    "dif_desc": "DIF≤0 且 ≤DEA",
+    "total": -5,
+    "mapped": -2,
+    "mapped_label": "中空",
+    "note": "交叉0因\"死叉延续非首日\"；柱体-3因|柱|>20极值档；DIF位置-2因零轴下+DEA下双条件同时满足。"
+  },
+  "calibration": {
+    "cal_a": {
+      "triggered": true,
+      "strong": false,
+      "condition_val": "-30.79",
+      "action": "标准收缩50%：-2 → -1",
+      "action_short": "标准收缩50%：-2→-1"
+    },
+    "cal_b": {
+      "triggered": true,
+      "detail": "死叉延续 第11日",
+      "action": "标记趋势惯性期 → R反转阈值+2（|a_raw|≥10）",
+      "action_short": "死叉≥2日 · R阈值+2"
+    },
+    "cal_c": {
+      "triggered": false,
+      "detail": "10-13阴线×绿柱放大=同步空（非背离）"
+    },
+    "output_v0": -1
+  },
+  "qimen": {
+    "attack_plus": 1,
+    "attack_minus": 0,
+    "structure": 0,
+    "a_raw": 1,
+    "a_discrete": 0,
+    "a_macd": 0,
+    "a_total": 0,
+    "r_triggered": false,
+    "r_threshold": 10,
+    "attack_plus_signals": [
+      {"name": "生门旺相", "condition": "生门当令旺", "base": 2, "coef": 0.69, "effective": 1},
+      {"name": "时干生日干", "condition": "不满足", "base": 2, "coef": 0.75, "effective": 0},
+      {"name": "卖盘受制", "condition": "庚无四害", "base": 4, "coef": 0.62, "effective": 0}
+    ],
+    "attack_minus_signals": [
+      {"name": "时干克日干", "condition": "不克", "effective": 0},
+      {"name": "凶格临关键宫", "condition": "无凶格", "effective": 0}
+    ],
+    "structure_signals": [
+      {"name": "空方核心受制≥2处", "condition": "时干空亡仅1处", "effective": 0},
+      {"name": "值符空亡", "condition": "未空亡", "effective": 0},
+      {"name": "四害双向≥5处", "condition": "全局仅2处", "effective": 0}
+    ],
+    "b_signals": [
+      {"name": "资金旺相无四害", "condition": "满足", "score": 1},
+      {"name": "日干衰弱", "condition": "满足", "score": -1},
+      {"name": "吉格临宫", "condition": "不满足", "score": 0},
+      {"name": "乙奇旺相无四害", "condition": "不满足", "score": 0}
+    ],
+    "b_raw": 0,
+    "b": 0
+  },
+  "fusion": {
+    "v0": -1,
+    "a_total": 0,
+    "v": -1,
+    "path_explain": "v₀=-1 ≠ 0，v=-1 ≠ 0，sign(v)=sign(v₀)=负 → C维持（同向延续）。非R → 非B反转；v≠0 → 非D急停；同号 → 非C跨零。"
+  },
+  "adjust": {
+    "v": -1,
+    "b": 0,
+    "v_final": -1,
+    "cross_zero": false
+  },
+  "output": {
+    "v_final": -1,
+    "grade": "略偏空"
+  },
+  "nine_fields": {
+    "v0_grade": -1,
+    "cal_A": "有",
+    "cal_B": "有",
+    "a_macd": 0,
+    "qimen_a": 0,
+    "a_raw": "+1",
+    "b_value": 0,
+    "path": "C维持",
+    "final_grade": -1
+  },
+  "verification": "二元：开盘❌（预测平开实际低开-0.269%）｜ K线✅ ｜ 收盘✅ → 2/3<br>最终定级：预测略偏空 vs 实际偏空 → ⚠️半对（方向✅幅度偏轻）<br>四时段：严格1/4（仅巳✅）｜ 宽松1.5/4"
+}
