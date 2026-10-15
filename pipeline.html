@@ -373,13 +373,8 @@ function slotsSVG(slots,w,h,actualCurve){
   const iw=w-pad.l-pad.r, ih=h-pad.t-pad.b;
   const zeroY=pad.t+ih/2, stepY=ih/4;
   const n=slots.length;
-  const pts=slots.map((s,i)=>({
-    x:pad.l+iw*(n>1?i/(n-1):0.5),
-    y:zeroY-(GRADE_VAL[s.grade]||0)*stepY,
-    ...s
-  }));
 
-  /* Catmull-Rom → cubic Bezier 平滑曲线 */
+  /* Catmull-Rom → cubic Bezier 平滑 */
   function smoothPath(points){
     if(points.length<2) return '';
     if(points.length===2) return `M${points[0].x},${points[0].y} L${points[1].x},${points[1].y}`;
@@ -393,8 +388,30 @@ function slotsSVG(slots,w,h,actualCurve){
     return d;
   }
 
-  const predPath=smoothPath(pts);
-  const predColor=pts.length>0?GRADE_COLOR(GRADE_VAL[pts[0].grade]||0):'#8b949e';
+  /* 段内插值：每段按 start→end 生成密集点（有走势形态），拼接后整体平滑 */
+  const rawPts=[];
+  const SEG_PTS=8;
+  slots.forEach((s,i)=>{
+    const x0=pad.l+iw*(n>1?i/(n-1):0.5);
+    const x1=pad.l+iw*(n>1?(i+1)/(n-1):0.5);
+    const v0=s.start!==undefined?s.start:(GRADE_VAL[s.grade]||0);
+    const v1=s.end!==undefined?s.end:(GRADE_VAL[s.grade]||0);
+    for(let j=0;j<SEG_PTS;j++){
+      const t=j/SEG_PTS;
+      const ease=t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+      rawPts.push({x:x0+(x1-x0)*ease, y:zeroY-(v0+(v1-v0)*t)*stepY});
+    }
+  });
+  const lastV=slots[n-1].end!==undefined?slots[n-1].end:(GRADE_VAL[slots[n-1].grade]||0);
+  rawPts.push({x:pad.l+iw, y:zeroY-lastV*stepY});
+
+  const predPath=smoothPath(rawPts);
+  const anchorPts=slots.map((s,i)=>({
+    x:pad.l+iw*(n>1?i/(n-1):0.5),
+    y:zeroY-(GRADE_VAL[s.grade]||0)*stepY,
+    ...s
+  }));
+  const predColor=anchorPts.length>0?GRADE_COLOR(GRADE_VAL[anchorPts[0].grade]||0):'#8b949e';
 
   /* 实际分时曲线（收盘后传入） */
   let actualSVG='';
@@ -409,7 +426,7 @@ function slotsSVG(slots,w,h,actualCurve){
     actualSVG=`<path d="${smoothPath(actPts)}" fill="none" stroke="#d29922" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.9"/>`;
   }
 
-  const dots=pts.map(p=>{
+  const dots=anchorPts.map(p=>{
     const v=GRADE_VAL[p.grade]||0, c=GRADE_COLOR(v);
     const timeStart=p.time?p.time.split('-')[0]:'';
     return `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${c}" stroke="#0d1117" stroke-width="2"/>
