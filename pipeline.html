@@ -417,7 +417,8 @@ function slotsSVG(slots,w,h,actualCurve){
     <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.name} ${timeStart}</text>`;
   }).join('');
 
-  const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-50}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际</text>`:'';
+  const curveDate=actualCurve&&actualCurve.date?actualCurve.date:'';
+  const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-52}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际${curveDate?' '+curveDate:''}</text>`:'';
 
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
     <line x1="${pad.l}" y1="${zeroY}" x2="${w-pad.r}" y2="${zeroY}" stroke="#30363d" stroke-dasharray="4,3"/>
