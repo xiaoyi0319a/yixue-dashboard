@@ -279,7 +279,7 @@ slots: {
   render:d=>{
     if(!d.four_slots) return '<p class="note">暂无四时段数据</p>';
     return `<div class="detail-section"><h4>时段走势</h4>
-    ${slotsSVG(d.four_slots,520,160)}
+    ${slotsSVG(d.four_slots,520,160,d.actual_curve)}
     </div>
     <div class="detail-section"><h4>时段判语</h4>
     <table>
@@ -328,7 +328,7 @@ function renderPipeline(d){
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
       <span class="path-label">路径：${d.path}</span>`},
-    ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105)}]:[]),
+    ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[]),
     ...(d.verification?[{key:'verification',active:d.verification.status!=='pending',html:d.verification.status==='pending'?`
       <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">（${d.verification.morning?d.verification.morning.path:'—'}）</span><br>
       <span class="k" style="font-size:10px;color:#d29922">⏳ 待15:30收盘验证</span>`:`
@@ -367,7 +367,7 @@ function showDetail(key){
 /* ==================== 四时段SVG折线图 ==================== */
 const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'无方向':0,'微偏强':1,'略偏多':1,'偏多':2,'偏强':3};
 const GRADE_COLOR=v=>v>0?'#3fb950':v<0?'#f85149':'#8b949e';
-function slotsSVG(slots,w,h){
+function slotsSVG(slots,w,h,actualCurve){
   if(!slots||!slots.length) return '';
   const pad={l:30,r:12,t:24,b:20};
   const iw=w-pad.l-pad.r, ih=h-pad.t-pad.b;
@@ -378,13 +378,37 @@ function slotsSVG(slots,w,h){
     y:zeroY-(GRADE_VAL[s.grade]||0)*stepY,
     ...s
   }));
-  let lines='';
-  for(let i=0;i<n-1;i++){
-    const a=pts[i],b=pts[i+1];
-    const midY=(a.y+b.y)/2;
-    const v=GRADE_VAL[a.grade]||0;
-    lines+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${GRADE_COLOR(v)}" stroke-width="2" opacity="0.8"/>`;
+
+  /* Catmull-Rom → cubic Bezier 平滑曲线 */
+  function smoothPath(points){
+    if(points.length<2) return '';
+    if(points.length===2) return `M${points[0].x},${points[0].y} L${points[1].x},${points[1].y}`;
+    let d=`M${points[0].x},${points[0].y}`;
+    for(let i=0;i<points.length-1;i++){
+      const p0=points[Math.max(0,i-1)], p1=points[i], p2=points[i+1], p3=points[Math.min(points.length-1,i+2)];
+      const c1x=p1.x+(p2.x-p0.x)/6, c1y=p1.y+(p2.y-p0.y)/6;
+      const c2x=p2.x-(p3.x-p1.x)/6, c2y=p2.y-(p3.y-p1.y)/6;
+      d+=` C${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2.x},${p2.y}`;
+    }
+    return d;
   }
+
+  const predPath=smoothPath(pts);
+  const predColor=pts.length>0?GRADE_COLOR(GRADE_VAL[pts[0].grade]||0):'#8b949e';
+
+  /* 实际分时曲线（收盘后传入） */
+  let actualSVG='';
+  if(actualCurve&&actualCurve.points&&actualCurve.points.length>1){
+    const vals=actualCurve.points.map(p=>p.v);
+    const vMax=Math.max(...vals,0.5), vMin=Math.min(...vals,-0.5);
+    const vRange=Math.max(Math.abs(vMax),Math.abs(vMin));
+    const actPts=actualCurve.points.map(p=>({
+      x:pad.l+iw*p.t,
+      y:zeroY-(p.v/vRange)*stepY*0.9
+    }));
+    actualSVG=`<path d="${smoothPath(actPts)}" fill="none" stroke="#d29922" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.9"/>`;
+  }
+
   const dots=pts.map(p=>{
     const v=GRADE_VAL[p.grade]||0, c=GRADE_COLOR(v);
     const timeStart=p.time?p.time.split('-')[0]:'';
@@ -392,10 +416,16 @@ function slotsSVG(slots,w,h){
     <text x="${p.x}" y="${p.y-9}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700">${p.grade}</text>
     <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.name} ${timeStart}</text>`;
   }).join('');
+
+  const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-50}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际</text>`:'';
+
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
     <line x1="${pad.l}" y1="${zeroY}" x2="${w-pad.r}" y2="${zeroY}" stroke="#30363d" stroke-dasharray="4,3"/>
     <text x="${pad.l-4}" y="${zeroY+3}" text-anchor="end" fill="#484f58" font-size="8">0</text>
-    ${lines}${dots}
+    ${legend}
+    <path d="${predPath}" fill="none" stroke="${predColor}" stroke-width="2" opacity="0.9"/>
+    ${actualSVG}
+    ${dots}
   </svg>`;
 }
 
