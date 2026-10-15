@@ -104,5 +104,12 @@
     "path": "C维持",
     "final_grade": -1
   },
-  "verification": "二元：开盘❌（预测平开实际低开-0.269%）｜ K线✅ ｜ 收盘✅ → 2/3<br>最终定级：预测略偏空 vs 实际偏空 → ⚠️半对（方向✅幅度偏轻）<br>四时段：严格1/4（仅巳✅）｜ 宽松1.5/4"
+  "verification": {
+    "morning": {"grade": "略偏空", "path": "C维持"},
+    "actual": {"grade": "偏空", "open": "低开 -0.269%", "close": "-0.885%", "kline": "阴线"},
+    "binary": {"open": "❌", "kline": "✅", "close": "✅", "score": "2/3"},
+    "four_slots": {"strict": "1/4", "lenient": "1.5/4"},
+    "grade_match": "⚠️半对（方向✅幅度偏轻）",
+    "changes": "开盘情景误判（预测平开实际低开）+ 深跌区空方释放低估（\"压而不决\"判错）"
+  }
 }

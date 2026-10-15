@@ -247,9 +247,15 @@ output: {
   <div class="formula">v0_grade: ${d.nine_fields.v0_grade>0?'+':''}${d.nine_fields.v0_grade}     cal_A: ${d.nine_fields.cal_A}     cal_B: ${d.nine_fields.cal_B}
 a_macd: ${d.nine_fields.a_macd>0?'+':''}${d.nine_fields.a_macd}        qimen_a: ${d.nine_fields.qimen_a}       a_raw: ${d.nine_fields.a_raw}
 b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: ${d.nine_fields.path}   final_grade: ${d.nine_fields.final_grade>0?'+':''}${d.nine_fields.final_grade} → ${o.grade}</div></div>
-  ${d.verification?`<div class="detail-section"><h4>验证口径</h4>
-  <p class="note">${d.verification}</p></div>`:''}`
+  ${d.verification?`<div class="detail-section"><h4>验证对比（收盘后更新）</h4>
+  ${renderVerification(d.verification)}
+  </div>`:''}`
   }
+},
+verification: {
+  title:"📋 验证对比（预测 vs 实际）",
+  sub:"来源：收盘联合验证报告 ｜ 收盘验证工作流 Step 7.5 自动更新",
+  render:d=>renderVerification(d)
 }
 };
 
@@ -284,11 +290,15 @@ function renderPipeline(d){
       <span class="k">v_final = ${d.adjust.v>0?'+':''}${d.adjust.v} + ${d.adjust.b>0?'+':''}${d.adjust.b} = </span><span class="v ${d.adjust.v_final>0?'pos':d.adjust.v_final<0?'neg':'zero'}">${d.adjust.v_final>0?'+':''}${d.adjust.v_final}</span>`},
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
-      <span class="path-label">路径：${d.path}</span>`}
+      <span class="path-label">路径：${d.path}</span>`},
+    ...(d.verification?[{key:'verification',active:true,html:`
+      <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">→ 实际：</span><span class="v ${d.verification.grade_match&&d.verification.grade_match.startsWith('✅')?'pos':d.verification.grade_match&&d.verification.grade_match.startsWith('⚠️')?'':'neg'}">${d.verification.actual?d.verification.actual.grade:'—'}</span><br>
+      <span class="k">二元：</span><span class="v">${d.verification.binary?d.verification.binary.score:'—'}</span> <span class="k">｜ 四时段：</span><span class="v">${d.verification.four_slots?d.verification.four_slots.strict:'—'}</span><br>
+      <span class="k" style="font-size:10px;color:#d29922">${d.verification.grade_match||''}</span>`}]:[])
   ];
 
-  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出'};
-  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E'};
+  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',verification:'📋 收盘验证'};
+  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',verification:'Step 7.5'};
 
   const html=nodes.map((n,i)=>{
     const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
@@ -312,6 +322,22 @@ function showDetail(key){
   if(rule&&pipelineData){
     panel.innerHTML=`<div class="detail-title">${rule.title}</div><div class="detail-sub">${rule.sub}</div>${rule.render(pipelineData)}`;
   }
+}
+
+/* ==================== 验证对比渲染 ==================== */
+function renderVerification(v){
+  if(!v) return '<p class="note">暂无验证数据</p>';
+  const gmColor=v.grade_match&&v.grade_match.startsWith('✅')?'#3fb950':v.grade_match&&v.grade_match.startsWith('⚠️')?'#d29922':'#f85149';
+  return `<table>
+    <tr><th></th><th>预测（08:00）</th><th>实际（收盘后）</th><th>判定</th></tr>
+    <tr><td>定级</td><td>${v.morning?v.morning.grade:'—'}</td><td>${v.actual?v.actual.grade:'—'}</td><td style="color:${gmColor};font-weight:600">${v.grade_match||'—'}</td></tr>
+    <tr><td>开盘</td><td colspan="2">${v.actual?v.actual.open:'—'}</td><td>${v.binary?v.binary.open:'—'}</td></tr>
+    <tr><td>K线</td><td colspan="2">${v.actual?v.actual.kline:'—'}</td><td>${v.binary?v.binary.kline:'—'}</td></tr>
+    <tr><td>收盘</td><td colspan="2">${v.actual?v.actual.close:'—'}</td><td>${v.binary?v.binary.close:'—'}</td></tr>
+    <tr class="hl"><td colspan="3">二元合计</td><td><b>${v.binary?v.binary.score:'—'}</b></td></tr>
+    <tr><td colspan="2">四时段</td><td colspan="2">严格 ${v.four_slots?v.four_slots.strict:'—'} ｜ 宽松 ${v.four_slots?v.four_slots.lenient:'—'}</td></tr>
+  </table>
+  ${v.changes?`<p class="note" style="margin-top:8px"><b>偏差主因：</b>${v.changes}</p>`:''}`;
 }
 
 async function loadData(){
