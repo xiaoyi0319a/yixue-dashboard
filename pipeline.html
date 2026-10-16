@@ -461,9 +461,9 @@ function renderVerification(v){
   return `<table>
     <tr><th></th><th>预测（08:00）</th><th>实际（收盘后）</th><th>判定</th></tr>
     <tr><td>定级</td><td>${v.morning?v.morning.grade:'—'}</td><td>${v.actual?v.actual.grade:'—'}</td><td style="color:${gmColor};font-weight:600">${v.grade_match||'—'}</td></tr>
-    <tr><td>开盘</td><td colspan="2">${v.actual?v.actual.open:'—'}</td><td>${v.binary?v.binary.open:'—'}</td></tr>
-    <tr><td>K线</td><td colspan="2">${v.actual?v.actual.kline:'—'}</td><td>${v.binary?v.binary.kline:'—'}</td></tr>
-    <tr><td>收盘</td><td colspan="2">${v.actual?v.actual.close:'—'}</td><td>${v.binary?v.binary.close:'—'}</td></tr>
+    <tr><td>开盘</td><td>${v.morning?v.morning.open:'—'}</td><td>${v.actual?v.actual.open:'—'}</td><td>${v.binary?v.binary.open:'—'}</td></tr>
+    <tr><td>K线</td><td>${v.morning?v.morning.kline:'—'}</td><td>${v.actual?v.actual.kline:'—'}</td><td>${v.binary?v.binary.kline:'—'}</td></tr>
+    <tr><td>收盘</td><td>${v.morning?v.morning.close:'—'}</td><td>${v.actual?v.actual.close:'—'}</td><td>${v.binary?v.binary.close:'—'}</td></tr>
     <tr class="hl"><td colspan="3">二元合计</td><td><b>${v.binary?v.binary.score:'—'}</b></td></tr>
     <tr><td colspan="2">四时段</td><td colspan="2">严格 ${v.four_slots?v.four_slots.strict:'—'} ｜ 宽松 ${v.four_slots?v.four_slots.lenient:'—'}</td></tr>
   </table>
