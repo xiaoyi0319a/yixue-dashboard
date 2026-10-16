@@ -480,7 +480,7 @@ function renderVerification(v){
   const gmColor=v.grade_match&&v.grade_match.startsWith('✅')?'#3fb950':v.grade_match&&v.grade_match.startsWith('⚠️')?'#d29922':'#f85149';
   return `<table>
     <tr><th></th><th>预测（08:00）</th><th>实际（收盘后）</th><th>判定</th></tr>
-    <tr><td>定级</td><td>${v.morning?v.morning.grade:'—'}</td><td>${v.actual?v.actual.grade:'—'}</td><td style="color:${gmColor};font-weight:600">${v.grade_match||'—'}</td></tr>
+    <tr><td>定级<span style="color:#484f58;font-size:10px">·全天尺·融合v_final</span></td><td>${v.morning?v.morning.grade:'—'}</td><td>${v.actual?v.actual.grade:'—'}</td><td style="color:${gmColor};font-weight:600">${v.grade_match||'—'}</td></tr>
     <tr><td>开盘<span style="color:#484f58;font-size:10px">·隔夜尺</span></td><td>${v.morning?v.morning.open:'—'}</td><td>${v.actual?v.actual.open:'—'}</td><td>${v.binary?v.binary.open:'—'}</td></tr>
     <tr><td>K线<span style="color:#484f58;font-size:10px">·日内尺</span></td><td>${v.morning?v.morning.kline:'—'}</td><td>${v.actual?v.actual.kline:'—'}</td><td>${v.binary?v.binary.kline:'—'}</td></tr>
     <tr><td>收盘<span style="color:#484f58;font-size:10px">·全天尺</span></td><td>${v.morning?v.morning.close:'—'}</td><td>${v.actual?v.actual.close:'—'}</td><td>${v.binary?v.binary.close:'—'}</td></tr>
