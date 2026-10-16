@@ -196,7 +196,12 @@ R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span 
     <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令状态</th><th>四害</th><th>解读</th></tr>
     ${q.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms}</td><td class="note">${p.note}</td></tr>`).join('')}
   </table>
-  <p class="note">此表=奇门盘局的原始多维矩阵（用神 × 宫位 × 星/门/神 × 天地盘干 × 月令旺衰 × 四害/格局）；上层信号打分（表2-A~2-H）由此表提取，本节点上半部是评分层、本表是盘局层</p></div>`:''}`
+  <p class="note">此表=奇门盘局的原始多维矩阵（用神 × 宫位 × 星/门/神 × 天地盘干 × 月令旺衰 × 四害/格局）；上层信号打分（表2-A~2-H）由此表提取，本节点上半部是评分层、本表是盘局层</p></div>` :''}
+  ${q.trial_signals?`<div class="detail-section"><h4>试用信号触发（表2-T，转正评估中）</h4>
+  <table>
+    <tr><th>试用ID</th><th>判定</th><th>补丁分量</th><th>今日状态</th></tr>
+    ${q.trial_signals.map(t=>`<tr><td>${t.id}</td><td>${t.condition}</td><td>${t.effect}</td><td style="color:${t.fired?'#d29922':'#484f58'};font-weight:${t.fired?'600':'400'}">${t.fired?'⚡ 触发':'未触发'}</td></tr>`).join('')}
+  </table></div>`:''}`
   }
 },
 fusion: {
