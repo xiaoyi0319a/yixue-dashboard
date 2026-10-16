@@ -289,23 +289,6 @@ slots: {
     ${d.four_slots_summary?`<div class="detail-section"><h4>全天特征</h4><p class="note">${d.four_slots_summary}</p></div>`:''}`;
   }
 },
-threedims: {
-  title:"📐 三维输出（三行三尺）",
-  sub:"规则：奇门大盘预测工作流 模块9 ｜ 一表三查·日内方向=残差（全天趋势⊖隔夜动能，20:11转正）",
-  render:d=>{
-    if(!d.three_dims) return '<p class="note">三维数据待接入（明早08:00任务按新schema写入）</p>';
-    const t=d.three_dims;
-    const row=(label,ruler,grade,note)=>`<tr><td>${label}</td><td style="color:${GRADE_COLOR(GRADE_VAL[grade]||0)};font-weight:600">${grade||'—'}</td><td class="note">${ruler}</td><td class="note">${note||'—'}</td></tr>`;
-    return `<div class="detail-section"><h4>三行三尺（一表三查）</h4>
-    <table>
-      <tr><th>维度</th><th>定级</th><th>尺（口径）</th><th>来源/推导</th></tr>
-      ${row('隔夜动能','开盘 vs 前收',t.overnight&&t.overnight.grade,t.overnight&&t.overnight.note)}
-      ${row('日内方向','收盘 vs 开盘',t.intraday&&t.intraday.grade,t.intraday&&t.intraday.note)}
-      ${row('全天趋势','收盘 vs 前收',t.allday&&t.allday.grade,t.allday&&t.allday.note)}
-    </table>
-    <p class="note">日内方向=全天趋势⊖隔夜动能（残差）；二元映射：开盘行←隔夜尺(表0-B) ｜ K线行←日内尺(残差) ｜ 收盘行←全天尺(v_final)</p></div>`;
-  }
-},
 verification: {
   title:"📋 验证对比（预测 vs 实际）",
   sub:"来源：收盘联合验证报告 ｜ 收盘验证工作流 Step 7.5 自动更新",
@@ -354,8 +337,8 @@ function renderPipeline(d){
       <span class="k" style="font-size:10px;color:#d29922">${d.verification.grade_match||''}</span>`}]:[])
   ];
 
-  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段',threedims:'📐 三维输出',verification:'📋 收盘验证'};
-  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6',threedims:'模块9·一表三查',verification:'Step 7.5'};
+  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段',verification:'📋 收盘验证'};
+  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6',verification:'Step 7.5'};
 
   const html=nodes.map((n,i)=>{
     const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
