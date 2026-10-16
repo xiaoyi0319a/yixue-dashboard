@@ -274,6 +274,26 @@
         "harms": "—",
         "note": "收敛低沉临卖方"
       }
+    ],
+    "trial_signals": [
+      {
+        "id": "G3 利润通道受损",
+        "condition": "生门四害≥1或受宫克",
+        "effect": "攻空2",
+        "fired": true
+      },
+      {
+        "id": "G7 资金虚化",
+        "condition": "戊落空亡",
+        "effect": "b−1",
+        "fired": false
+      },
+      {
+        "id": "G20 大势失托(观察)",
+        "condition": "值符休囚死+受克",
+        "effect": "只标注",
+        "fired": true
+      }
     ]
   },
   "fusion": {
