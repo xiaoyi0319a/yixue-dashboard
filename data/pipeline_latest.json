@@ -140,7 +140,141 @@
       }
     ],
     "b_raw": -2,
-    "b": -1
+    "b": -1,
+    "palace_table": [
+      {
+        "yongshen": "值符（大势）",
+        "palace": "乾六",
+        "star": "天柱（金）",
+        "god": "值符",
+        "door": "伤门",
+        "sky_ground": "癸+丁",
+        "month_state": "戌月金相，落宫比和",
+        "harms": "无",
+        "note": "天柱大凶星临值符；带马星；螣蛇夭矫格"
+      },
+      {
+        "yongshen": "日干癸（价格）",
+        "palace": "乾六",
+        "star": "天柱",
+        "god": "值符",
+        "door": "伤门",
+        "sky_ground": "癸+丁",
+        "month_state": "戌月水死·落宫金生水·长生衰",
+        "harms": "无",
+        "note": "极弱得生，外弱有托；临值符马星"
+      },
+      {
+        "yongshen": "时干丁（空方帅）",
+        "palace": "坎一",
+        "star": "天心（金）",
+        "god": "九天",
+        "door": "杜门",
+        "sky_ground": "丁+庚",
+        "month_state": "戌月火休·落宫水克火·绝",
+        "harms": "空亡",
+        "note": "空方帅落空亡=帅位缺位"
+      },
+      {
+        "yongshen": "乙奇（买盘）",
+        "palace": "离九",
+        "star": "天辅（木）",
+        "god": "六合",
+        "door": "开门",
+        "sky_ground": "乙+辛",
+        "month_state": "戌月木囚·落宫午为长生·火泄木",
+        "harms": "无",
+        "note": "青龙逃走凶格临宫"
+      },
+      {
+        "yongshen": "庚金（卖盘）",
+        "palace": "艮八",
+        "star": "天蓬（水）",
+        "god": "九地",
+        "door": "景门",
+        "sky_ground": "庚+壬",
+        "month_state": "戌月金相·落宫土生金",
+        "harms": "入墓(丑)+击刑(寅)+空亡",
+        "note": "三害齐=抛压被困"
+      },
+      {
+        "yongshen": "甲子戊（资金）",
+        "palace": "巽四",
+        "star": "天冲（木）",
+        "god": "白虎",
+        "door": "惊门",
+        "sky_ground": "戊+乙",
+        "month_state": "戌月土当令旺·落宫木克土",
+        "harms": "门迫",
+        "note": "资金旺而受迫=有而难举"
+      },
+      {
+        "yongshen": "生门（利润）",
+        "palace": "兑七",
+        "star": "芮禽（土）",
+        "god": "螣蛇",
+        "door": "生门",
+        "sky_ground": "丙己+癸",
+        "month_state": "戌月土当令旺·门生宫",
+        "harms": "无",
+        "note": "旺相+门生宫四喜；螣蛇假利好"
+      },
+      {
+        "yongshen": "景门（情绪）",
+        "palace": "艮八",
+        "star": "天蓬",
+        "god": "九地",
+        "door": "景门",
+        "sky_ground": "庚+壬",
+        "month_state": "火休",
+        "harms": "空亡",
+        "note": "情绪低迷虚化"
+      },
+      {
+        "yongshen": "天蓬（资金流向）",
+        "palace": "艮八",
+        "star": "天蓬",
+        "god": "九地",
+        "door": "景门",
+        "sky_ground": "庚+壬",
+        "month_state": "水死·落宫受克",
+        "harms": "空亡",
+        "note": "资金流入受阻"
+      },
+      {
+        "yongshen": "开门（突破）",
+        "palace": "离九",
+        "star": "天辅",
+        "god": "六合",
+        "door": "开门",
+        "sky_ground": "乙+辛",
+        "month_state": "金相·落宫火克金",
+        "harms": "无",
+        "note": "开门受落宫克"
+      },
+      {
+        "yongshen": "九天（涨停）",
+        "palace": "坎一",
+        "star": "天心",
+        "god": "九天",
+        "door": "杜门",
+        "sky_ground": "丁+庚",
+        "month_state": "—",
+        "harms": "空亡",
+        "note": "高位乏力"
+      },
+      {
+        "yongshen": "九地（跌停）",
+        "palace": "艮八",
+        "star": "天蓬",
+        "god": "九地",
+        "door": "景门",
+        "sky_ground": "庚+壬",
+        "month_state": "—",
+        "harms": "—",
+        "note": "收敛低沉临卖方"
+      }
+    ]
   },
   "fusion": {
     "v0": -1,

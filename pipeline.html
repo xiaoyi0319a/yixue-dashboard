@@ -190,7 +190,13 @@ R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span 
     <tr><th>信号</th><th>判定</th><th>分值</th></tr>
     ${q.b_signals.map(s=>`<tr><td>${s.name}</td><td>${s.condition}</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join('')}
     <tr class="hl"><td>b_raw = ${q.b_raw>0?'+':''}${q.b_raw} → 映射</td><td></td><td><b>b = ${q.b>0?'+':''}${q.b}</b></td></tr>
-  </table></div>`
+  </table></div>
+  ${q.palace_table?`<div class="detail-section"><h4>盘局明细 · 用神落宫表（奇门内部多维矩阵）</h4>
+  <table>
+    <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令状态</th><th>四害</th><th>解读</th></tr>
+    ${q.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms}</td><td class="note">${p.note}</td></tr>`).join('')}
+  </table>
+  <p class="note">此表=奇门盘局的原始多维矩阵（用神 × 宫位 × 星/门/神 × 天地盘干 × 月令旺衰 × 四害/格局）；上层信号打分（表2-A~2-H）由此表提取，本节点上半部是评分层、本表是盘局层</p></div>`:''}`
   }
 },
 fusion: {
