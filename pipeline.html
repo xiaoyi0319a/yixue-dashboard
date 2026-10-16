@@ -288,11 +288,6 @@ slots: {
     </table></div>
     ${d.four_slots_summary?`<div class="detail-section"><h4>全天特征</h4><p class="note">${d.four_slots_summary}</p></div>`:''}`;
   }
-},
-verification: {
-  title:"📋 验证对比（预测 vs 实际）",
-  sub:"来源：收盘联合验证报告 ｜ 收盘验证工作流 Step 7.5 自动更新",
-  render:d=>renderVerification(d.verification)
 }
 };
 
@@ -328,17 +323,11 @@ function renderPipeline(d){
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
       <span class="path-label">路径：${d.path}</span>`},
-    ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[]),
-    ...(d.verification?[{key:'verification',active:d.verification.status!=='pending',html:d.verification.status==='pending'?`
-      <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">（${d.verification.morning?d.verification.morning.path:'—'}）</span><br>
-      <span class="k" style="font-size:10px;color:#d29922">⏳ 待15:30收盘验证</span>`:`
-      <span class="k">预测：</span><span class="v">${d.verification.morning?d.verification.morning.grade:'—'}</span> <span class="k">→ 实际：</span><span class="v ${d.verification.grade_match&&d.verification.grade_match.startsWith('✅')?'pos':d.verification.grade_match&&d.verification.grade_match.startsWith('⚠️')?'':'neg'}">${d.verification.actual?d.verification.actual.grade:'—'}</span><br>
-      <span class="k">二元：</span><span class="v">${d.verification.binary?d.verification.binary.score:'—'}</span> <span class="k">｜ 四时段：</span><span class="v">${d.verification.four_slots?d.verification.four_slots.strict:'—'}</span><br>
-      <span class="k" style="font-size:10px;color:#d29922">${d.verification.grade_match||''}</span>`}]:[])
+    ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[])
   ];
 
-  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段',verification:'📋 收盘验证'};
-  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6',verification:'Step 7.5'};
+  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段'};
+  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6'};
 
   const html=nodes.map((n,i)=>{
     const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
