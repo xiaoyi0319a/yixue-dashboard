@@ -258,7 +258,7 @@ output: {
     return `
   <div class="detail-section"><h4>最终映射（表4-A）</h4>
   <table>
-    <tr><th>v_final</th><th>7档定级</th><th>语义锚（实际净涨跌·正式）</th><th></th></tr>
+    <tr><th>v_final</th><th>7档定级</th><th>语义锚：收盘涨跌幅（较前收·正式）</th><th></th></tr>
     ${grades.map(([v,g,anchor])=>{
       const isHit=vMap[String(o.v_final)]===v;
       return `<tr class="${isHit?'hl':''}"><td>${v}</td><td>${g}</td><td style="color:#8b949e;font-size:11px">${anchor}</td><td>${isHit?'<b>◀ 今日</b>':''}</td></tr>`;
