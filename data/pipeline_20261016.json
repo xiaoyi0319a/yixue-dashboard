@@ -1,0 +1,204 @@
+{
+  "date": "2026-10-16",
+  "date_display": "2026年10月16日 周五",
+  "ganzhi": "癸亥日丁巳时",
+  "dun": "阴遁3局",
+  "rule_version": "V2.9",
+  "path": "C维持",
+  "macd_date": "2026-10-15",
+  "macd": {
+    "dif": -42.22,
+    "dea": -26.68,
+    "bar": -31.08,
+    "cross_state": "死叉延续 第12日",
+    "precheck_note": "柱Δ-7.17激增（前日-1.93），绿柱连续放大空方动能回升；DIF加速下行-7.47/日；深跌极值区（≤-30极深）；死叉延续稳定非噪声"
+  },
+  "v0": {
+    "cross": 0,
+    "cross_desc": "死叉延续（非首日）",
+    "bar_score": -3,
+    "bar_desc": "柱-31.08，|柱|>20 极值档",
+    "dif_pos": -2,
+    "dif_desc": "DIF≤0 且 ≤DEA",
+    "total": -5,
+    "mapped": -2,
+    "mapped_label": "中空",
+    "note": "交叉0（死叉延续第12日）；柱体-3（|柱|31.08>20）；DIF位置-2（-42.22≤0且≤DEA）"
+  },
+  "calibration": {
+    "cal_a": {
+      "triggered": true,
+      "strong": false,
+      "condition_val": "-42.22",
+      "action": "标准收缩50%：-2 → -1（DIF≤-30极深但柱Δ-7.17非>+4，不走强化70%）",
+      "action_short": "标准收缩50%：-2→-1"
+    },
+    "cal_b": {
+      "triggered": true,
+      "detail": "死叉延续 第12日",
+      "action": "标记趋势惯性期 → R反转阈值+2（|a_raw|≥10）",
+      "action_short": "死叉≥2日 · R阈值+2"
+    },
+    "cal_c": {
+      "triggered": false,
+      "detail": "10-15十字K线（收-开=-0.09%<0.2%阈值），无阴阳方向，不构成背离"
+    },
+    "output_v0": -1
+  },
+  "qimen": {
+    "attack_plus": 3,
+    "attack_minus": 4,
+    "structure": 6,
+    "a_raw": 5,
+    "a_discrete": 1,
+    "a_macd": -1,
+    "a_total": 0,
+    "r_triggered": false,
+    "r_threshold": 10,
+    "attack_plus_signals": [
+      {
+        "name": "生门旺相",
+        "condition": "戌月当令旺+门生宫四喜（动态+1.37）",
+        "base": 2,
+        "coef": 0.69,
+        "effective": 1
+      },
+      {
+        "name": "卖盘受制",
+        "condition": "庚入墓+击刑+空亡三害齐（动态+2.50）",
+        "base": 4,
+        "coef": 0.63,
+        "effective": 2
+      },
+      {
+        "name": "时干生日干",
+        "condition": "坎水不生乾金，反为日干生时干泄气",
+        "base": 2,
+        "coef": 0.75,
+        "effective": 0
+      }
+    ],
+    "attack_minus_signals": [
+      {
+        "name": "凶格临关键宫",
+        "condition": "青龙逃走临乙奇买盘宫+螣蛇夭矫临日干/值符宫（2处均关键宫）",
+        "effective": 4
+      },
+      {
+        "name": "时干克日干",
+        "condition": "水不克金",
+        "effective": 0
+      }
+    ],
+    "structure_signals": [
+      {
+        "name": "空方核心受制≥2处",
+        "condition": "庚三害≥2处（入墓+击刑+空亡）",
+        "effective": 2
+      },
+      {
+        "name": "四害双向≥5处",
+        "condition": "全局7处≥5且空方核心同沾",
+        "effective": 4
+      },
+      {
+        "name": "值符空亡",
+        "condition": "值符落乾六不空",
+        "effective": 0
+      }
+    ],
+    "b_signals": [
+      {
+        "name": "日干衰弱",
+        "condition": "癸水死于戌月+长生衰",
+        "score": -1
+      },
+      {
+        "name": "资金受制",
+        "condition": "戊当令旺但惊门迫+白虎临身",
+        "score": -1
+      },
+      {
+        "name": "日干旺相",
+        "condition": "仅落宫得生1项，不满足",
+        "score": 0
+      },
+      {
+        "name": "资金旺相",
+        "condition": "月令旺但有门迫，不满足",
+        "score": 0
+      },
+      {
+        "name": "吉格临宫",
+        "condition": "无标准吉格",
+        "score": 0
+      },
+      {
+        "name": "乙奇旺相",
+        "condition": "月令囚+落宫泄，不满足",
+        "score": 0
+      }
+    ],
+    "b_raw": -2,
+    "b": -1
+  },
+  "fusion": {
+    "v0": -1,
+    "a_total": 0,
+    "v": -1,
+    "path_explain": "v₀=-1≠0，无R，v=-1≠0，sign(v)=sign(v₀) → C维持。统计表无（v₀=-1,a总=0,C维持）记录→新组合待验证；在册相近C维持75%（2次样本极小）；弱底座±1档区a测量信噪比不足，判语保守"
+  },
+  "adjust": {
+    "v": -1,
+    "b": -1,
+    "v_final": -2,
+    "cross_zero": false
+  },
+  "output": {
+    "v_final": -2,
+    "grade": "略偏空"
+  },
+  "nine_fields": {
+    "v0_grade": -1,
+    "cal_A": "有",
+    "cal_B": "有",
+    "a_macd": -1,
+    "qimen_a": 1,
+    "a_raw": "+5",
+    "b_value": -1,
+    "path": "C维持",
+    "final_grade": -2
+  },
+  "four_slots": [
+    {
+      "name": "巳",
+      "time": "09:30-10:30",
+      "grade": "无方向",
+      "type": "neutral",
+      "note": "高开变量×盘局偏弱，高开后承接存疑或冲高回落开局；卖盘被困抛压释放受限，多空皆虚"
+    },
+    {
+      "name": "午",
+      "time": "10:30-11:30",
+      "grade": "无方向",
+      "type": "neutral",
+      "note": "空方主帅出空回位，早盘若有冲高此段为压制回落观察点；全天方向信号弱，弱势拉锯"
+    },
+    {
+      "name": "未",
+      "time": "13:00-14:00",
+      "grade": "无方向",
+      "type": "neutral",
+      "note": "卖方出墓全天最大变量防探底；三害根基深释放不畅，下探深度受限，底盘修复窗口看午后"
+    },
+    {
+      "name": "申",
+      "time": "14:00-15:00",
+      "grade": "无方向",
+      "type": "neutral",
+      "note": "空方得禄无的（三检全败反转候选），卖压临禄无力，承接回升之力尾段聚集，收敛定型"
+    }
+  ],
+  "four_slots_summary": "熔断态四段全压无方向（10-14/10-15连续2日严格≤1/4+戌月卖方当令）：前两段高开承压多空皆虚，午后变量集中（未时卖方出墓防探底、申时承接可期），运行偏弱但有回稳变量，与全天略偏空底色无完全相反。",
+  "verification": null
+}
