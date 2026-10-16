@@ -389,11 +389,24 @@ function slotsSVG(slots,w,h,actualCurve){
   }
 
   /* 段内插值：每段按 start→end 生成密集点（有走势形态），拼接后整体平滑 */
+  /* ⭐交易时间归一化（2026-10-16修复）：09:30→0, 11:30→0.5, 13:00→0.5, 15:00→1（午休压缩为零宽度，与actual_curve的t同口径） */
+  function timeX(timeStr){
+    if(!timeStr) return null;
+    const parts=timeStr.split(':');
+    if(parts.length<2) return null;
+    const t=parseInt(parts[0])*60+parseInt(parts[1]);
+    const AM_START=570, AM_END=690, PM_START=780, PM_END=900;
+    if(t<=AM_END) return Math.max(0,(t-AM_START)/(AM_END-AM_START))*0.5;
+    return 0.5+Math.min(1,(t-PM_START)/(PM_END-PM_START))*0.5;
+  }
   const rawPts=[];
   const SEG_PTS=8;
   slots.forEach((s,i)=>{
-    const x0=pad.l+iw*(n>1?i/(n-1):0.5);
-    const x1=pad.l+iw*(n>1?(i+1)/(n-1):0.5);
+    const ts=s.time?s.time.split('-'):null;
+    const fx0=(ts&&timeX(ts[0])!==null)?timeX(ts[0]):(n>1?i/n:0.5);
+    const fx1=(ts&&ts.length>1&&timeX(ts[1])!==null)?timeX(ts[1]):(n>1?(i+1)/n:0.5);
+    const x0=pad.l+iw*fx0;
+    const x1=pad.l+iw*fx1;
     const v0=s.start!==undefined?s.start:(GRADE_VAL[s.grade]||0);
     const v1=s.end!==undefined?s.end:(GRADE_VAL[s.grade]||0);
     for(let j=0;j<SEG_PTS;j++){
@@ -406,11 +419,15 @@ function slotsSVG(slots,w,h,actualCurve){
   rawPts.push({x:pad.l+iw, y:zeroY-lastV*stepY});
 
   const predPath=smoothPath(rawPts);
-  const anchorPts=slots.map((s,i)=>({
-    x:pad.l+iw*(n>1?i/(n-1):0.5),
-    y:zeroY-(GRADE_VAL[s.grade]||0)*stepY,
-    ...s
-  }));
+  const anchorPts=slots.map((s,i)=>{
+    const ts=s.time?s.time.split('-'):null;
+    const fx=(ts&&timeX(ts[0])!==null)?timeX(ts[0]):(n>1?i/n:0.5);
+    return{
+      x:pad.l+iw*fx,
+      y:zeroY-(GRADE_VAL[s.grade]||0)*stepY,
+      ...s
+    };
+  });
   const predColor=anchorPts.length>0?GRADE_COLOR(GRADE_VAL[anchorPts[0].grade]||0):'#8b949e';
 
   /* 实际分时曲线（收盘后传入） */
@@ -434,6 +451,8 @@ function slotsSVG(slots,w,h,actualCurve){
     <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.name} ${timeStart}</text>`;
   }).join('');
 
+  /* 收盘终点刻度 15:00（修复：原末点标注为申段起点14:00且右侧裁切，误读为曲线只到2点） */
+  const endTick=`<text x="${w-pad.r}" y="${h-4}" text-anchor="end" fill="#8b949e" font-size="9">15:00</text>`;
   const curveDate=actualCurve&&actualCurve.date?actualCurve.date:'';
   const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-52}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际${curveDate?' '+curveDate:''}</text>`:'';
 
@@ -444,6 +463,7 @@ function slotsSVG(slots,w,h,actualCurve){
     <path d="${predPath}" fill="none" stroke="${predColor}" stroke-width="2" opacity="0.9"/>
     ${actualSVG}
     ${dots}
+    ${endTick}
   </svg>`;
 }
 
