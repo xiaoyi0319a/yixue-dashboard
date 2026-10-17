@@ -201,7 +201,17 @@ R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span 
   <table>
     <tr><th>试用ID</th><th>判定</th><th>补丁分量</th><th>今日状态</th></tr>
     ${q.trial_signals.map(t=>`<tr><td>${t.id}</td><td>${t.condition}</td><td>${t.effect}</td><td style="color:${t.fired?'#d29922':'#484f58'};font-weight:${t.fired?'600':'400'}">${t.fired?'⚡ 触发':'未触发'}</td></tr>`).join('')}
-  </table></div>`:''}`
+  </table></div>`:''}
+  ${q.matrix_drop?`<div class="detail-section"><h4>清单 → 矩阵落点（立体矩阵v2查表哨兵，22:53指令）</h4>
+  <table>
+    <tr><th>信号</th><th>渠道</th><th>矩阵格（用神×状态）</th><th>格状态</th><th>读法</th><th>落点去向</th></tr>
+    ${q.matrix_drop.map(m=>{
+      const stColor={'●':'#3fb950','⊙':'#d29922','◌':'#8b949e','⚠️':'#f85149'}[m.cell_state]||'#8b949e';
+      const stDesc={'●':'正式·计分','⊙':'候选·试用轨','◌':'观察·不计分','⚠️':'缺格'}[m.cell_state]||m.cell_state;
+      return `<tr><td>${m.signal}</td><td>${m.channel}</td><td>${m.cell}${m.cell_id?` <span style="color:#8b949e;font-size:10px">${m.cell_id}</span>`:''}</td><td style="color:${stColor};font-weight:700" title="${stDesc}">${m.cell_state}</td><td>${m.read}</td><td>${m.dest}</td></tr>`}).join('')}
+  </table>
+  ${q.matrix_missing&&q.matrix_missing.length?`<p style="color:#f85149;font-size:12px">⚠️ 缺格${q.matrix_missing.length}处（已登记矩阵缺格日志）：${q.matrix_missing.map(g=>g.yongshen+'×'+g.state).join('；')}</p>`:''}
+  <p class="note">图例：●=正式信号（a/b通道计分）｜⊙=候选（走试用补丁机制，未转正不入a_raw）｜◌=观察（有读法不计分）｜⚠️=矩阵缺格（当日登记缺格日志，周日补格）｜格状态与计分通道不一致的行=矩阵补格backlog。矩阵源：memory/奇门预测/信号穷举/立体矩阵v2.md</p></div>`:''}`
   }
 },
 fusion: {
