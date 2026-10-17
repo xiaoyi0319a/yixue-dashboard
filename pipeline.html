@@ -228,7 +228,11 @@ R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span 
   <table style="font-size:11px">
     <tr><th>试用ID</th><th>判定</th><th>补丁分量</th><th>今日状态</th></tr>
     ${q.trial_signals.map(t=>`<tr><td>${t.id}</td><td>${t.condition}</td><td>${t.effect}</td><td style="color:${t.fired?'#d29922':'#484f58'};font-weight:${t.fired?'600':'400'}">${t.fired?'⚡ 触发':'未触发'}</td></tr>`).join('')}
-  </table></div>`:''}`
+  </table></div>`:''}
+  ${d.accel?`<div class="detail-section"><h4>⑥ 动能加速度（试点，第三正交维度）</h4>
+  <div class="formula">语境：${d.accel.context}｜预测：${d.accel.pred}
+MACD侧：${d.accel.macd_side}｜盘局侧：${d.accel.qimen_side}（命中${d.accel.qimen_hits}项）${d.accel.conflict?'｜<span style="color:#d29922">'+d.accel.conflict+'</span>':''}
+${d.accel.divergence?'背离观察：'+d.accel.divergence:''}</div></div>`:''}`
   }
 },
 fusion: {
