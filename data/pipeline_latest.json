@@ -297,115 +297,124 @@
   ],
   "matrix_drop": [
    {
+    "yongshen": "生门",
+    "col": "旺/当令",
     "signal": "生门旺相",
     "channel": "攻多",
-    "cell": "生门×旺/当令",
     "cell_state": "●",
     "cell_id": "A3",
     "read": "多",
-    "dest": "a攻多 +1（基础2×当季系数0.69）"
+    "dest": "a攻多 +1"
    },
    {
-    "signal": "卖盘受制",
-    "channel": "攻多",
-    "cell": "庚×四害≥2",
+    "yongshen": "庚",
+    "col": "四害≥2",
+    "signal": "卖盘受制+空方核心受制",
+    "channel": "攻多+结构",
     "cell_state": "●",
     "cell_id": "A5+C1",
     "read": "多",
-    "dest": "a攻多 +2（基础4×系数0.625；三害：入墓+击刑+空亡）"
+    "dest": "a攻多 +2 ｜ a结构 +2（三害：入墓+击刑+空亡）"
    },
    {
-    "signal": "凶格临关键宫·青龙逃走",
+    "yongshen": "庚",
+    "col": "凶格临宫",
+    "signal": "螣蛇夭矫自坐庚宫",
     "channel": "攻空",
-    "cell": "乙奇×凶格",
+    "cell_state": "⊙",
+    "cell_id": "G9a",
+    "read": "多(敌自乱)",
+    "dest": "未计分（试用未启用，按A7临多方宫读空）"
+   },
+   {
+    "yongshen": "乙奇",
+    "col": "凶格临宫",
+    "signal": "青龙逃走临乙奇宫",
+    "channel": "攻空",
     "cell_state": "⊙",
     "cell_id": "G10",
     "read": "空",
-    "dest": "a攻空 −4（谋士逃亡格G10试用未启用，按A7泛化计入）"
+    "dest": "a攻空 −4（G10试用未启用，按A7泛化计入）"
    },
    {
-    "signal": "凶格临关键宫·螣蛇夭矫",
+    "yongshen": "日干",
+    "col": "凶格临宫",
+    "signal": "螣蛇夭矫临日干宫",
     "channel": "攻空",
-    "cell": "日干/值符×凶格",
     "cell_state": "●",
     "cell_id": "A7",
     "read": "空",
-    "dest": "a攻空 −4（2处关键宫合并计分）"
+    "dest": "a攻空 −4（与乙奇合并计分）"
    },
    {
-    "signal": "凶格自坐·空方自损",
+    "yongshen": "值符",
+    "col": "凶格临宫",
+    "signal": "螣蛇夭矫临值符宫",
     "channel": "攻空",
-    "cell": "庚×凶格",
     "cell_state": "⊙",
-    "cell_id": "G9a",
-    "read": "多",
-    "dest": "未计分（G9a试用未启用，当日盘面按A7'临多方宫→空'读）"
+    "cell_id": "G6反向",
+    "read": "空警(虚惊)",
+    "dest": "判语层提示（G6反向参照，未计分）"
    },
    {
-    "signal": "空方核心受制",
-    "channel": "结构",
-    "cell": "庚×四害≥2",
-    "cell_state": "●",
-    "cell_id": "C1",
-    "read": "结构",
-    "dest": "a结构 +2"
-   },
-   {
-    "signal": "四害双向≥5处",
-    "channel": "结构",
-    "cell": "全局×四害分布",
-    "cell_state": "◌",
-    "cell_id": "—",
-    "read": "结构",
-    "dest": "a结构 +4（7处≥5且空方核心同沾；矩阵无独立格，全局分布项）"
-   },
-   {
-    "signal": "资金受制",
+    "yongshen": "戊",
+    "col": "四害≥2",
+    "signal": "资金受制·惊门迫",
     "channel": "b底盘",
-    "cell": "戊×门迫",
     "cell_state": "●",
     "cell_id": "b半信号",
     "read": "空",
-    "dest": "b −1（惊门迫巽四；动态权重无门迫条目→固定回退−3→b_raw≤−2）"
+    "dest": "b −1（动态回退固定−3）"
    },
    {
-    "signal": "日干衰弱",
+    "yongshen": "日干",
+    "col": "休囚死/衰",
+    "signal": "日干衰弱·月令死",
     "channel": "b底盘",
-    "cell": "日干×衰",
     "cell_state": "◌",
     "cell_id": "—",
     "read": "空",
-    "dest": "b −1（月令死+长生衰；格◌但通道计分→矩阵补格backlog）"
+    "dest": "b −1 ⚠格◌但通道计分→补格backlog"
    },
    {
-    "signal": "开门旺相",
+    "yongshen": "开门",
+    "col": "旺/当令",
+    "signal": "开门旺相·金相",
     "channel": "攻多(D系)",
-    "cell": "开门×旺",
     "cell_state": "◌",
     "cell_id": "—",
     "read": "多",
-    "dest": "清单 +0.52（格◌但通道计分→backlog）"
+    "dest": "清单 +0.52 ⚠格◌但通道计分→backlog"
    },
    {
+    "yongshen": "生门",
+    "col": "得生/受克",
     "signal": "四喜临宫·门生宫",
     "channel": "攻多(D系)",
-    "cell": "生门→兑七（网1宫间生克）",
     "cell_state": "◌",
     "cell_id": "网1",
     "read": "多",
-    "dest": "清单 +1（生门生兑100%+景门生艮落空亡50%）"
+    "dest": "清单 +1 ⚠格◌但通道计分→backlog"
    },
    {
-    "signal": "值符休囚",
+    "yongshen": "值符",
+    "col": "休囚死/衰",
+    "signal": "值符休囚·天柱临身",
     "channel": "纯分路径",
-    "cell": "值符×衰（天柱凶星临身）",
     "cell_state": "◌",
     "cell_id": "轴9",
     "read": "空",
-    "dest": "纯分权重差 −2.09（V2.0后不进a/b叉积，轴9角色得力轴v2新增）"
+    "dest": "纯分权重差 −2.09（V2.0后不进a/b叉积）"
    }
   ],
-  "matrix_missing": []
+  "matrix_missing": [],
+  "matrix_global": [
+   {
+    "signal": "四害双向≥5处",
+    "cell_state": "◌",
+    "dest": "a结构 +4（全局7处≥5且空方核心同沾；矩阵无独立格）"
+   }
+  ]
  },
  "fusion": {
   "v0": -1,

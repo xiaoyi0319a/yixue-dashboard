@@ -166,52 +166,69 @@ qimen: {
   sub:"规则：MACD融合规则 §2.1~2.7 ｜ 当季系数快照",
   render:d=>{
     const q=d.qimen;
+    const STC={'●':['#3fb950','正式·计分'],'⊙':['#d29922','候选·试用轨'],'◌':['#8b949e','观察·不计分'],'⚠️':['#f85149','缺格']};
+    const MV1={c:["旺/当令","休囚死/衰","四害≥2","凶格临宫","吉格临宫","空亡","得生/受克"],r:[
+      ["庚","空↑|◌|","多|⊙|G16","多|●|A5·C1","空方自损多/临多方宫空|●·⊙|A7·G9a","—|◌|","抛压虚化多|⊙|G14","得生→空/受克→多|◌·⊙|G15"],
+      ["乙奇","多↑|◌|","乏力空|⊙|G11","买盘受制空|⊙|G1","谋士逃亡空|⊙|G10","多|⊙|G5","助力虚化空|◌|","得生→多/受克→空|◌·⊙|G12"],
+      ["日干","多|◌|","身弱空|◌|","核心受制空|⊙|G2","压身空|●|A7","多|⊙|G5","自身虚化空|◌|","得生→多/受克→空|◌·⊙|G13"],
+      ["时干","克日干→空/生日干→多|●|A2·A1","敌弱多|◌|","帅残弱空|◌|","敌带煞空|⊙|G9b","—|◌|","帅位缺位多|⊙|G8","对日干生克|●|A1/A2"],
+      ["生门","多|●|A3","利润萎缩空|⊙|G17","通道受损空|⊙|G3","假利好空|⊙|G4","多|⊙|G5","利润虚化空|◌|","门生宫→多/宫克→空|●·⊙|A3·G3"],
+      ["戊","多|●|b","空|⊙|G18","资金受制空|●|b","白虎临身空|⊙|G19","—|◌|","资金虚化空|⊙|G7","门迫→有而难举|●|b"],
+      ["值符","多(托)|◌|","空|⊙|G20","—|◌|","虚惊空警|⊙|G6","吉气压凶多|⊙|G6","大势虚化空|●|C3","比和→托/受克→空|◌·⊙|G21"],
+      ["景门","情绪高多|◌|","低迷空|◌|","—|◌|","—|◌|","—|◌|","情绪虚化空|⊙|G22","—|◌|"],
+      ["开门","通道开多|◌|","空|⊙|G23","门迫受阻空|⊙|G4","—|◌|","多|⊙|G5","通道虚化空|◌|","受宫克→空|⊙|G4"],
+      ["九天","涨能多|◌|","—|◌|","—|◌|","—|◌|","—|◌|","高位乏力空|⊙|G24","—|◌|"],
+      ["九地","势沉空|◌|","—|◌|","跌势收敛多|⊙|G25","—|◌|","—|◌|","—|◌|","—|◌|"],
+      ["天蓬","流入多|◌|","流出空|◌|","流入受阻空|⊙|G26","—|◌|","—|◌|","空|⊙|G26","—|◌|"]
+    ]};
+    const litMap={};
+    (q.matrix_drop||[]).forEach(m=>{litMap[m.yongshen+'|'+m.col]=m});
+    const matrixGrid=`<div class="detail-section"><h4>③ 矩阵点亮 · 立体矩阵v1格网（今日${(q.matrix_drop||[]).length}/84格点亮）</h4>
+    <div style="overflow-x:auto"><table style="font-size:11px;border-collapse:collapse;table-layout:fixed;min-width:900px;width:100%">
+    <tr><th style="padding:4px;background:#1f2937;color:#8b949e;text-align:left;font-weight:400">用神\状态</th>${MV1.c.map(c=>`<th style="padding:4px;background:#1f2937;color:#8b949e;font-weight:400;font-size:10px">${c}</th>`).join('')}</tr>
+    ${MV1.r.map(row=>{
+      const cells=row.slice(1).map((cell,ci)=>{
+        const parts=cell.split('|');
+        const read=parts[0],id=parts[2]||'';
+        const lit=litMap[row[0]+'|'+MV1.c[ci]];
+        if(lit){
+          const color=(STC[lit.cell_state]||['#8b949e'])[0];
+          return `<td style="border:1px solid ${color};background:${color}18;padding:4px;vertical-align:top"><div style="color:${color};font-weight:700;font-size:10px">${lit.cell_state} ${lit.cell_id||''}</div><div style="color:#f0f6fc;font-weight:600;font-size:11px">${lit.signal}</div><div style="color:#8b949e;font-size:10px">${lit.dest}</div></td>`;
+        }
+        return `<td style="border:1px solid #21262d;padding:4px;color:#484f58;vertical-align:top"><div style="font-size:10px">${read}</div><div style="color:#30363d;font-size:9px">${id}</div></td>`;
+      }).join('');
+      return `<tr><td style="padding:4px;background:#161b22;color:#c9d1d9;font-weight:600;white-space:nowrap;font-size:11px">${row[0]}</td>${cells}</tr>`;
+    }).join('')}
+    </table></div>
+    ${q.matrix_global&&q.matrix_global.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${q.matrix_global.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:''}
+    <p class="note">图例：<span style="color:#3fb950">●正式·计分</span>｜<span style="color:#d29922">⊙候选·试用轨未转正</span>｜<span style="color:#8b949e">◌观察·不计分</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）｜dest带⚠=格◌但通道实际计分→补格backlog（周复盘处理）。矩阵源：立体矩阵v2.md</p></div>`;
     return `
-  <div class="detail-section"><h4>攻多信号（表2-A）</h4>
-  <table>
-    <tr><th>信号</th><th>条件</th><th>基础分</th><th>系数</th><th>有效分</th></tr>
-    ${q.attack_plus_signals.map(s=>`<tr><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td><td>${s.coef}</td><td class="${s.effective>0?'pos':'zero'}" style="font-weight:600">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
+  <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
+  ${q.palace_table?`<table style="font-size:11px">
+    <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
+    ${q.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms}</td><td class="note">${p.note}</td></tr>`).join('')}
+  </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/格局/生克）对应矩阵的一个格子</p>`:'<p class="note">无落宫表数据</p>'}</div>
+  <div class="detail-section"><h4>② 信号判定 · 今日清单（由盘局提取，去向=点亮矩阵格）</h4>
+  <table style="font-size:11px">
+    <tr><th>渠道</th><th>信号</th><th>判定</th><th>基础分</th><th>系数</th><th>有效分</th></tr>
+    ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td><td>${s.coef}</td><td class="${s.effective>0?'pos':'zero'}" style="font-weight:600">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
+    ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>—</td><td>—</td><td class="${s.effective<0?'neg':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
+    ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>—</td><td>—</td><td class="${s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
+    ${q.b_signals.map(s=>`<tr><td style="color:#d29922">b底盘</td><td>${s.name}</td><td>${s.condition}</td><td>—</td><td>—</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join('')}
   </table></div>
-  <div class="detail-section"><h4>攻空信号（表2-B）＋ 结构信号（表2-C）</h4>
-  <table>
-    <tr><th>类别</th><th>信号</th><th>判定</th><th>有效分</th></tr>
-    ${q.attack_minus_signals.map(s=>`<tr><td>攻空</td><td>${s.name}</td><td>${s.condition}</td><td class="${s.effective<0?'neg':s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-    ${q.structure_signals.map(s=>`<tr><td>结构</td><td>${s.name}</td><td>${s.condition}</td><td class="${s.effective<0?'neg':s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-  </table></div>
-  <div class="detail-section"><h4>合成</h4>
+  ${matrixGrid}
+  <div class="detail-section"><h4>④ 合成计算</h4>
   <div class="formula">a_raw = 攻多(${q.attack_plus>0?'+':''}${q.attack_plus}) − 攻空(${q.attack_minus}) + 结构(${q.structure}) = ${q.a_raw>0?'+':''}${q.a_raw}
 离散映射（表2-D）：${q.a_raw>0?'+':''}${q.a_raw} → ${q.a_discrete>0?'+':''}${q.a_discrete}
 a_macd（表2-F）：${q.a_macd>0?'+':''}${q.a_macd}
 a总 = a_macd(${q.a_macd>0?'+':''}${q.a_macd}) + 奇门a(${q.a_discrete>0?'+':''}${q.a_discrete}) = ${q.a_total>0?'+':''}${q.a_total} ｜ 限幅±2 ✓
-
+b_raw = ${q.b_raw>0?'+':''}${q.b_raw} → b = ${q.b>0?'+':''}${q.b}（只调强弱不改方向）
 R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span class="badge warn">触发R</span>`:`<span class="badge off">&lt; 阈值${q.r_threshold} → 不触发</span>`}</div></div>
-  <div class="detail-section"><h4>b 底盘系数（表2-G/H）</h4>
-  <table>
-    <tr><th>信号</th><th>判定</th><th>分值</th></tr>
-    ${q.b_signals.map(s=>`<tr><td>${s.name}</td><td>${s.condition}</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join('')}
-    <tr class="hl"><td>b_raw = ${q.b_raw>0?'+':''}${q.b_raw} → 映射</td><td></td><td><b>b = ${q.b>0?'+':''}${q.b}</b></td></tr>
-  </table></div>
-  ${q.palace_table?`<div class="detail-section"><h4>盘局明细 · 用神落宫表（奇门内部多维矩阵）</h4>
-  <table>
-    <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令状态</th><th>四害</th><th>解读</th></tr>
-    ${q.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms}</td><td class="note">${p.note}</td></tr>`).join('')}
-  </table>
-  <p class="note">此表=奇门盘局的原始多维矩阵（用神 × 宫位 × 星/门/神 × 天地盘干 × 月令旺衰 × 四害/格局）；上层信号打分（表2-A~2-H）由此表提取，本节点上半部是评分层、本表是盘局层</p></div>` :''}
-  ${q.trial_signals?`<div class="detail-section"><h4>试用信号触发（表2-T，转正评估中）</h4>
-  <table>
+  ${q.trial_signals?`<div class="detail-section"><h4>⑤ 试用触发 · 表2-T（转正评估中，不进现行轨）</h4>
+  <table style="font-size:11px">
     <tr><th>试用ID</th><th>判定</th><th>补丁分量</th><th>今日状态</th></tr>
     ${q.trial_signals.map(t=>`<tr><td>${t.id}</td><td>${t.condition}</td><td>${t.effect}</td><td style="color:${t.fired?'#d29922':'#484f58'};font-weight:${t.fired?'600':'400'}">${t.fired?'⚡ 触发':'未触发'}</td></tr>`).join('')}
-  </table></div>`:''}
-  ${q.matrix_drop?`<div class="detail-section"><h4>清单 → 矩阵落点（立体矩阵v2查表哨兵，22:53指令）</h4>
-  <table>
-    <tr><th>信号</th><th>渠道</th><th>矩阵格（用神×状态）</th><th>格状态</th><th>读法</th><th>落点去向</th></tr>
-    ${q.matrix_drop.map(m=>{
-      const stColor={'●':'#3fb950','⊙':'#d29922','◌':'#8b949e','⚠️':'#f85149'}[m.cell_state]||'#8b949e';
-      const stDesc={'●':'正式·计分','⊙':'候选·试用轨','◌':'观察·不计分','⚠️':'缺格'}[m.cell_state]||m.cell_state;
-      return `<tr><td>${m.signal}</td><td>${m.channel}</td><td>${m.cell}${m.cell_id?` <span style="color:#8b949e;font-size:10px">${m.cell_id}</span>`:''}</td><td style="color:${stColor};font-weight:700" title="${stDesc}">${m.cell_state}</td><td>${m.read}</td><td>${m.dest}</td></tr>`}).join('')}
-  </table>
-  ${q.matrix_missing&&q.matrix_missing.length?`<p style="color:#f85149;font-size:12px">⚠️ 缺格${q.matrix_missing.length}处（已登记矩阵缺格日志）：${q.matrix_missing.map(g=>g.yongshen+'×'+g.state).join('；')}</p>`:''}
-  <p class="note">图例：●=正式信号（a/b通道计分）｜⊙=候选（走试用补丁机制，未转正不入a_raw）｜◌=观察（有读法不计分）｜⚠️=矩阵缺格（当日登记缺格日志，周日补格）｜格状态与计分通道不一致的行=矩阵补格backlog。矩阵源：memory/奇门预测/信号穷举/立体矩阵v2.md</p></div>`:''}`
+  </table></div>`:''}`
   }
 },
 fusion: {
