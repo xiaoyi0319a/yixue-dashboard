@@ -14,34 +14,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .header .date{font-size:13px;color:#8b949e}
 .header .version{font-size:11px;color:#d29922;background:rgba(210,153,34,.12);padding:3px 10px;border-radius:10px}
 
-/* Tab导航 */
 .tabs{display:flex;gap:2px;background:#161b22;border-bottom:1px solid #30363d;padding:0 24px;overflow-x:auto}
-.tab{padding:10px 18px;font-size:13px;font-weight:600;color:#8b949e;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.tab{padding:10px 18px;font-size:13px;font-weight:600;color:#8b949e;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
 .tab:hover{color:#c9d1d9}
 .tab.active{color:#58a6ff;border-bottom-color:#58a6ff}
 .tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
 .tab .dot.g{background:#3fb950}.tab .dot.b{background:#58a6ff}.tab .dot.o{background:#d29922}.tab .dot.p{background:#bc8cff}.tab .dot.r{background:#f85149}
-
 .view{display:none;max-width:1280px;margin:0 auto;padding:20px}
 .view.active{display:block}
 
-/* 通用卡片 */
 .card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;margin-bottom:12px}
 .card-title{font-size:13px;font-weight:700;color:#f0f6fc;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.card-title .tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px}
+.tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px}
 .tag.b{background:rgba(88,166,255,.15);color:#58a6ff}
 .tag.g{background:rgba(63,185,80,.15);color:#3fb950}
 .tag.o{background:rgba(210,153,34,.15);color:#d29922}
 .tag.r{background:rgba(248,81,73,.15);color:#f85149}
 .tag.p{background:rgba(188,140,255,.15);color:#bc8cff}
 .tag.gray{background:rgba(139,148,158,.12);color:#8b949e}
-
 table{width:100%;border-collapse:collapse;font-size:12px}
 th,td{padding:6px 8px;text-align:left;border-bottom:1px solid #21262d}
 th{color:#8b949e;font-weight:500;font-size:11px}
 td{color:#c9d1d9}
-tr.hl td{background:#1f2937;font-weight:600}
-tr.hl td:first-child{border-left:3px solid #58a6ff}
 .k{color:#8b949e}.v{color:#f0f6fc;font-weight:600}
 .pos{color:#3fb950;font-weight:600}.neg{color:#f85149;font-weight:600}.warn{color:#d29922;font-weight:600}
 .note{font-size:11px;color:#8b949e;line-height:1.7;margin-top:8px}
@@ -53,13 +47,61 @@ tr.hl td:first-child{border-left:3px solid #58a6ff}
 .badge.risk{background:rgba(248,81,73,.15);color:#f85149}
 .section-label{font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 6px;font-weight:600}
 
-/* ==== 视图1: 基因 ==== */
-.gene-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:14px}
+/* ===== 立体矩阵核心：格网图 ===== */
+.matrix-explain{font-size:12px;color:#8b949e;line-height:1.8;margin-bottom:14px;background:rgba(88,166,255,.05);border-left:3px solid #58a6ff;padding:10px 12px;border-radius:0 6px 6px 0}
+.matrix-grid-wrap{overflow-x:auto;margin-bottom:14px}
+.matrix-grid{display:grid;gap:3px;min-width:720px}
+.mg-cell{background:#161b22;border:1px solid #21262d;border-radius:4px;padding:6px 4px;text-align:center;font-size:10px;position:relative;min-height:44px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.mg-cell .mg-num{font-size:12px;font-weight:700}
+.mg-cell .mg-sub{font-size:9px;color:#8b949e;margin-top:1px}
+.mg-cell.empty .mg-num{color:#484f58}
+.mg-cell.poor .mg-num{color:#f85149}
+.mg-cell.mid .mg-num{color:#d29922}
+.mg-cell.good .mg-num{color:#3fb950}
+.mg-cell.current{border-color:#58a6ff;box-shadow:0 0 0 2px #58a6ff;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 2px #58a6ff}50%{box-shadow:0 0 8px 2px rgba(88,166,255,.6)}}
+.mg-head{background:#0d1117;font-weight:700;color:#8b949e;font-size:10px;border:none}
+.mg-head.current-col{color:#58a6ff}
+.mg-yhead{background:#0d1117;font-weight:600;color:#c9d1d9;font-size:10px;border:none;justify-content:flex-end;padding-right:6px}
+.mg-legend{display:flex;gap:14px;font-size:10px;color:#8b949e;margin:8px 0 14px;flex-wrap:wrap}
+.mg-legend span{display:inline-flex;align-items:center;gap:4px}
+.mg-dot{width:8px;height:8px;border-radius:2px;display:inline-block}
+
+/* 三层侧栏 */
+.layers-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+@media(max-width:900px){.layers-row{grid-template-columns:1fr}}
+.layer-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px;cursor:pointer;font-size:11px;line-height:1.7}
+.layer-card:hover{border-color:#58a6ff}
+.layer-card.selected{border-color:#58a6ff;box-shadow:0 0 0 1px #58a6ff}
+.lc-head{display:flex;gap:6px;align-items:center;margin-bottom:4px}
+.lc-tag{font-size:9px;padding:1px 6px;border-radius:6px;font-weight:700}
+.lc-tag.daily{background:rgba(88,166,255,.15);color:#58a6ff}
+.lc-tag.weekly{background:rgba(63,185,80,.15);color:#3fb950}
+.lc-tag.event{background:rgba(210,153,34,.15);color:#d29922}
+.lc-name{font-size:12px;font-weight:600;color:#f0f6fc}
+.flow{text-align:center;color:#484f58;font-size:14px;margin:2px 0}
+
+.fusion-out{background:#161b22;border:1px solid #3fb950;border-radius:8px;padding:14px;margin-top:4px}
+.fusion-out-title{font-size:14px;font-weight:700;color:#3fb950;margin-bottom:10px}
+.fusion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.fusion-item{background:#0d1117;border:1px solid #21262d;border-radius:6px;padding:10px}
+.fusion-item .k{font-size:11px;color:#8b949e;margin-bottom:4px}
+.fusion-item .v{font-size:14px;font-weight:700}
+.fusion-verdict{margin-top:10px;font-size:12px;line-height:1.7;color:#c9d1d9;background:#0d1117;border-radius:6px;padding:10px;border:1px solid #21262d}
+
+.detail{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-top:14px}
+.detail-title{font-size:14px;font-weight:700;color:#f0f6fc;margin-bottom:4px}
+.detail-sub{font-size:12px;color:#8b949e;margin-bottom:12px}
+.detail-section{margin-bottom:12px}
+.detail-section h4{font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;border-bottom:1px solid #21262d;padding-bottom:4px}
+
+/* 基因视图 */
+.gene-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
 .gene-stat{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px;text-align:center}
-.gene-stat .num{font-size:26px;font-weight:800}
+.gene-stat .num{font-size:24px;font-weight:800}
 .gene-stat .num.lit{color:#3fb950}.gene-stat .num.part{color:#d29922}.gene-stat .num.none{color:#484f58}
 .gene-stat .lbl{font-size:11px;color:#8b949e;margin-top:2px}
-.pattern-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px}
+.pattern-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
 .pattern-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px}
 .pattern-card.top{border-color:rgba(188,140,255,.4)}
 .pattern-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
@@ -72,82 +114,43 @@ tr.hl td:first-child{border-left:3px solid #58a6ff}
 .var-dot.lit{background:#3fb950}.var-dot.part{background:#d29922}.var-dot.none{background:#484f58}
 .var-name{color:#c9d1d9;flex:1}
 .var-evi{color:#8b949e;font-size:10px;max-width:180px;text-align:right}
-.completion{margin-top:8px;padding:6px 8px;background:rgba(88,166,255,.06);border-left:2px solid #58a6ff;border-radius:0 4px 4px 0;font-size:11px;color:#8b949e;line-height:1.6}
+.completion{margin-top:8px;padding:6px 8px;background:rgba(88,166,255,.06);border-left:2px solid #58a6ff;font-size:11px;color:#8b949e;line-height:1.6}
 .completion b{color:#58a6ff}
 
-/* ==== 视图2: 状态区间 ==== */
-.zone-track{display:flex;align-items:center;gap:0;margin:20px 0 8px;position:relative}
-.zone{flex:1;text-align:center;padding:10px 4px;font-size:12px;font-weight:600;color:#484f58;background:#161b22;border:1px solid #21262d;position:relative;transition:all .2s}
-.zone:first-child{border-radius:8px 0 0 8px}
-.zone:last-child{border-radius:0 8px 8px 0}
-.zone .zone-name{font-size:12px}
+/* 状态视图 */
+.zone-track{display:flex;align-items:center;gap:0;margin:20px 0 4px}
+.zone{flex:1;text-align:center;padding:10px 4px;font-size:12px;font-weight:600;color:#484f58;background:#161b22;border:1px solid #21262d}
+.zone:first-child{border-radius:8px 0 0 8px}.zone:last-child{border-radius:0 8px 8px 0}
 .zone .zone-range{font-size:9px;margin-top:2px;opacity:.7}
-.zone.current{color:#f0f6fc;border-color:#58a6ff;background:rgba(88,166,255,.1);box-shadow:0 0 12px rgba(88,166,255,.2)}
+.zone.current{color:#f0f6fc;border-color:#58a6ff;background:rgba(88,166,255,.1)}
 .zone.passed{color:#3fb950;border-color:rgba(63,185,80,.3)}
-.zone-arrow{position:absolute;top:-14px;font-size:14px;transform:translateX(-50%);transition:left .3s}
-.zone-detail{margin-top:14px}
+.zone-arrow-wrap{text-align:center;margin-bottom:12px}
+#zone-arrow{display:inline-block;color:#58a6ff;font-size:16px;transition:margin-left .3s}
 .transition-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #21262d;font-size:12px}
 .transition-row:last-child{border-bottom:none}
 .transition-arrow{color:#58a6ff;font-weight:700;flex-shrink:0}
-.transition-conds{color:#c9d1d9;line-height:1.7}
-.transition-conds .cond{display:inline-block;background:#1f2937;padding:1px 8px;border-radius:8px;margin:2px 2px;font-size:11px}
+.transition-conds .cond{display:inline-block;padding:1px 8px;border-radius:8px;margin:2px;font-size:11px}
 .transition-conds .cond.met{background:rgba(63,185,80,.12);color:#3fb950}
 .transition-conds .cond.unmet{background:rgba(139,148,158,.1);color:#8b949e}
 
-/* ==== 视图3: 次日预判(大盘式管线) ==== */
+/* 管线视图 */
 .pipeline{display:flex;flex-direction:column}
-.node{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 14px;cursor:pointer;transition:all .15s;position:relative}
+.node{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 14px;cursor:pointer}
 .node:hover{border-color:#58a6ff}
 .node.selected{border-color:#58a6ff;box-shadow:0 0 0 2px #58a6ff}
 .node-title{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.node-num{width:22px;height:22px;border-radius:50%;background:#1f2937;color:#8b949e;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.node-num{width:22px;height:22px;border-radius:50%;background:#1f2937;color:#8b949e;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
 .node-name{font-size:13px;font-weight:600;color:#f0f6fc}
 .node-tag{font-size:10px;color:#8b949e;margin-left:auto;background:#1f2937;padding:2px 6px;border-radius:8px}
 .node-output{font-size:12px;color:#c9d1d9;line-height:1.7}
 .connector{width:2px;height:16px;background:#30363d;margin:0 auto}
-.detail{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-top:14px}
-.detail-title{font-size:14px;font-weight:700;color:#f0f6fc;margin-bottom:4px}
-.detail-sub{font-size:12px;color:#8b949e;margin-bottom:12px}
-.detail-section{margin-bottom:12px}
-.detail-section h4{font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;border-bottom:1px solid #21262d;padding-bottom:4px}
 
-/* ==== 视图4: 立体矩阵 ==== */
-.cube-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
-@media(max-width:900px){.cube-wrap{grid-template-columns:1fr}}
-.cube-layer{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px;cursor:pointer;transition:all .15s;min-height:130px}
-.cube-layer:hover{border-color:#58a6ff}
-.cube-layer.selected{border-color:#58a6ff;box-shadow:0 0 0 2px #58a6ff}
-.cl-head{display:flex;align-items:center;gap:6px;margin-bottom:6px}
-.cl-tag{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
-.cl-tag.daily{background:rgba(88,166,255,.15);color:#58a6ff}
-.cl-tag.weekly{background:rgba(63,185,80,.15);color:#3fb950}
-.cl-tag.event{background:rgba(210,153,34,.15);color:#d29922}
-.cl-name{font-size:13px;font-weight:600;color:#f0f6fc}
-.cl-freq{font-size:9px;color:#484f58;margin-left:auto}
-.cl-body{font-size:12px;line-height:1.8}
-.flow{text-align:center;color:#484f58;font-size:16px;margin:2px 0}
-.cell-status{display:inline-flex;align-items:center;gap:6px}
-.cell-dot{width:8px;height:8px;border-radius:50%}
-.cell-dot.empty{background:#484f58}.cell-dot.growing{background:#d29922}.cell-dot.lit{background:#3fb950}
-
-/* 融合输出 */
-.fusion-out{background:#161b22;border:1px solid #3fb950;border-radius:8px;padding:16px;margin-top:4px}
-.fusion-out-title{font-size:14px;font-weight:700;color:#3fb950;margin-bottom:10px}
-.fusion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
-.fusion-item{background:#0d1117;border:1px solid #21262d;border-radius:6px;padding:10px}
-.fusion-item .k{font-size:11px;color:#8b949e;margin-bottom:4px}
-.fusion-item .v{font-size:14px;font-weight:700}
-.fusion-verdict{margin-top:10px;font-size:12px;line-height:1.7;color:#c9d1d9;background:#0d1117;border-radius:6px;padding:10px;border:1px solid #21262d}
-
-/* 历史 */
-.hit-yes{color:#3fb950;font-weight:700}.hit-no{color:#f85149;font-weight:700}
-.hit-half{color:#d29922;font-weight:600}.hit-na{color:#484f58}
-
-/* 诚实清单 */
 .todo{background:rgba(210,153,34,.05);border:1px solid rgba(210,153,34,.2);border-radius:8px;padding:12px;margin-top:14px}
 .todo-title{font-size:12px;font-weight:700;color:#d29922;margin-bottom:6px}
 .todo-list{font-size:11px;color:#8b949e;line-height:2}
 .todo-list li{margin-left:16px}
+.hit-yes{color:#3fb950;font-weight:700}.hit-no{color:#f85149;font-weight:700}
+.hit-half{color:#d29922;font-weight:600}.hit-na{color:#484f58}
 </style>
 </head>
 <body>
@@ -160,37 +163,47 @@ tr.hl td:first-child{border-left:3px solid #58a6ff}
 </div>
 
 <div class="tabs">
-  <div class="tab active" data-view="fusion" onclick="showView('fusion')"><span class="dot r"></span>立体矩阵 <span style="font-size:9px;color:#484f58">L0+L1+L2</span></div>
-  <div class="tab" data-view="gene" onclick="showView('gene')"><span class="dot p"></span>翻倍基因 <span style="font-size:9px;color:#484f58">L1基因+L2</span></div>
-  <div class="tab" data-view="state" onclick="showView('state')"><span class="dot g"></span>启动特征 <span style="font-size:9px;color:#484f58">L1原型</span></div>
+  <div class="tab active" data-view="fusion" onclick="showView('fusion')"><span class="dot r"></span>立体矩阵</div>
+  <div class="tab" data-view="gene" onclick="showView('gene')"><span class="dot p"></span>翻倍基因 <span style="font-size:9px;color:#484f58">L1+L2</span></div>
+  <div class="tab" data-view="state" onclick="showView('state')"><span class="dot g"></span>启动特征 <span style="font-size:9px;color:#484f58">L1</span></div>
   <div class="tab" data-view="daily" onclick="showView('daily')"><span class="dot b"></span>次日预判 <span style="font-size:9px;color:#484f58">L0</span></div>
 </div>
 
-<!-- ============ 视图0: 立体矩阵融合 ============ -->
+<!-- ============ 视图0: 立体矩阵（核心格网图） ============ -->
 <div class="view active" id="view-fusion">
-  <div class="cube-wrap">
-    <div class="cube-layer" data-layer="L2" onclick="selLayer('L2')">
-      <div class="cl-head"><span class="cl-tag event">L2 修正层</span><span class="cl-freq">事件级</span></div>
-      <div class="cl-body"><span class="k">风险:</span> <span id="fu-L2-risks">--</span><br><span class="k">否决:</span> <span id="fu-L2-vetoes">--</span></div>
+  <div class="matrix-explain">
+    <b style="color:#58a6ff">立体矩阵 = 同一张日级信号表，在不同股票状态下含义完全不同。</b><br>
+    横轴 = 股票处在哪个区间（L1状态层）· 纵轴 = 明天信号多强（L0矩阵层）· 格子 = 这个组合历史上验证过几次/命中几次。<br>
+    沃森当前位置 = <b style="color:#58a6ff">横盘整理区 × 中性偏弱</b>（蓝框闪烁）。绿色=命中率高，红色=低，灰色=还没验证过。
+  </div>
+
+  <div class="mg-legend">
+    <span><span class="mg-dot" style="background:#3fb950"></span>命中≥60%</span>
+    <span><span class="mg-dot" style="background:#d29922"></span>命中40-60%</span>
+    <span><span class="mg-dot" style="background:#f85149"></span>命中&lt;40%</span>
+    <span><span class="mg-dot" style="background:#21262d"></span>待点亮(0样本)</span>
+    <span><span class="mg-dot" style="border:2px solid #58a6ff;background:transparent"></span>当前位置</span>
+  </div>
+
+  <div class="matrix-grid-wrap"><div class="matrix-grid" id="mg-grid" style="grid-template-columns:80px repeat(5,1fr)"></div></div>
+
+  <div class="layers-row">
+    <div class="layer-card" data-layer="L2" onclick="selLayer('L2')">
+      <div class="lc-head"><span class="lc-tag event">L2</span><span class="lc-name">修正层·风险</span></div>
+      <div id="lc-L2">--</div>
     </div>
-    <div class="cube-layer" data-layer="L1" onclick="selLayer('L1')">
-      <div class="cl-head"><span class="cl-tag weekly">L1 状态层</span><span class="cl-freq">周级</span></div>
-      <div class="cl-body"><span class="k">原型:</span> <span class="v" id="fu-L1-proto">--</span><br><span class="k">基因:</span> <span class="v" id="fu-L1-gene">--</span></div>
+    <div class="layer-card" data-layer="L1" onclick="selLayer('L1')">
+      <div class="lc-head"><span class="lc-tag weekly">L1</span><span class="lc-name">状态层·区间</span></div>
+      <div id="lc-L1">--</div>
     </div>
-    <div class="cube-layer" data-layer="L0" onclick="selLayer('L0')">
-      <div class="cl-head"><span class="cl-tag daily">L0 矩阵层</span><span class="cl-freq">日级</span></div>
-      <div class="cl-body">
-        <span class="k">v₀:</span> <span class="v" id="fu-L0-v0">--</span>
-        <span class="k">a:</span> <span class="v" id="fu-L0-a">--</span>
-        <span class="k">q:</span> <span class="v" id="fu-L0-q">--</span><br>
-        <span class="k">格:</span> <span id="fu-L0-cell">--</span>
-        <span class="cell-status" id="fu-L0-cellst">--</span>
-      </div>
+    <div class="layer-card" data-layer="L0" onclick="selLayer('L0')">
+      <div class="lc-head"><span class="lc-tag daily">L0</span><span class="lc-name">矩阵层·信号</span></div>
+      <div id="lc-L0">--</div>
     </div>
   </div>
-  <div class="flow">▼ 合成 ▼</div>
+
   <div class="fusion-out">
-    <div class="fusion-out-title">合成输出</div>
+    <div class="fusion-out-title">合成输出 → 次日预判</div>
     <div class="fusion-grid">
       <div class="fusion-item"><div class="k">方向定级</div><div class="v" id="fu-dir">--</div></div>
       <div class="fusion-item"><div class="k">置信度</div><div class="v warn" id="fu-conf">--</div></div>
@@ -199,29 +212,32 @@ tr.hl td:first-child{border-left:3px solid #58a6ff}
     </div>
     <div class="fusion-verdict" id="fu-verdict">--</div>
   </div>
-  <div id="fu-detail" class="detail" style="display:none"></div>
-  <div class="todo"><div class="todo-title">⚠ V0.1 已知不完整处</div><ul class="todo-list" id="fu-todo"></ul></div>
-  <div style="margin-top:16px">
-    <div class="section-label">历史对账（格子点亮记录）</div>
-    <table><thead><tr><th>日期</th><th>v₀</th><th>a</th><th>q</th><th>预测</th><th>实际</th><th>判定</th><th>格子</th></tr></thead><tbody id="fu-history"></tbody></table>
+
+  <div class="detail" id="fu-detail" style="display:none"></div>
+
+  <div style="margin-top:14px">
+    <div class="section-label">历史对账（每次验证点亮一格）</div>
+    <table><thead><tr><th>日期</th><th>信号(v₀×a×q)</th><th>预测</th><th>实际</th><th>判定</th><th>所在格</th></tr></thead><tbody id="fu-history"></tbody></table>
   </div>
+
+  <div class="todo"><div class="todo-title">⚠ V0.1 已知不完整处</div><ul class="todo-list" id="fu-todo"></ul></div>
 </div>
 
 <!-- ============ 视图1: 翻倍基因 ============ -->
 <div class="view" id="view-gene">
   <div class="gene-summary" id="gene-summary"></div>
-  <div class="section-label">9大模式逐项匹配（点亮=关键变量已具备 · 半亮=部分具备 · 灭=不具备）</div>
+  <div class="section-label">9大模式逐项匹配（点亮=已具备 · 半亮=部分 · 灭=不具备）</div>
   <div class="pattern-grid" id="gene-patterns"></div>
   <div class="note" id="gene-note"></div>
 </div>
 
 <!-- ============ 视图2: 启动特征 ============ -->
 <div class="view" id="view-state">
-  <div class="section-label">中长期区间定位（样本库三原型框架）</div>
+  <div class="section-label">中长期区间定位（决定矩阵用哪一列查表）</div>
   <div class="zone-track" id="zone-track"></div>
-  <div class="zone-arrow" id="zone-arrow">▼</div>
-  <div class="card zone-detail">
-    <div class="card-title">当前区间判定依据 <span class="tag b" id="zone-name-tag">--</span></div>
+  <div class="zone-arrow-wrap"><span id="zone-arrow">▼</span></div>
+  <div class="card">
+    <div class="card-title">当前区间判定依据</div>
     <div id="zone-judgment"></div>
   </div>
   <div class="card">
@@ -246,95 +262,126 @@ tr.hl td:first-child{border-left:3px solid #58a6ff}
 const DATA_URL='data/stock_pipeline_latest.json';
 let D=null;
 function load(){fetch(DATA_URL+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;renderAll()}).catch(()=>{document.getElementById('h-date').textContent='暂无数据'})}
-
-function showView(v){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
-  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));
-}
+function showView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v))}
 
 function renderAll(){
-  document.getElementById('h-stock').textContent=D.stock||'300142 沃森生物';
+  document.getElementById('h-stock').textContent=D.stock||'300142';
   document.getElementById('h-date').textContent=D.date||'--';
   document.getElementById('h-ver').textContent=D.version||'';
-  renderFusion();renderGene();renderState();renderDaily();
+  renderMatrix();renderLayers();renderGene();renderState();renderDaily();
 }
 
-/* ---- 融合视图 ---- */
-function renderFusion(){
+/* ===== 核心：立体矩阵格网图 ===== */
+function renderMatrix(){
+  const g=D.matrix_grid;if(!g){document.getElementById('mg-grid').innerHTML='无数据';return}
+  const zones=g.zones, grades=g.grades, cur=g.current, cells=g.cells||{};
+  let h='<div class="mg-cell mg-head"></div>';
+  zones.forEach((z,zi)=>{h+=`<div class="mg-cell mg-head ${zi===cur.z?'current-col':''}">${z}</div>`});
+  grades.forEach((gr,gi)=>{
+    h+=`<div class="mg-cell mg-yhead">${gr}</div>`;
+    zones.forEach((z,zi)=>{
+      const key=zi+'_'+gi;
+      const c=cells[key]||{n:0,hits:0};
+      const isCur=(zi===cur.z&&gi===cur.g);
+      let cls='empty',num='·',sub='0样本';
+      if(c.n>0){
+        const rate=c.hits/c.n;
+        cls=rate>=0.6?'good':rate>=0.4?'mid':'poor';
+        num=`${c.hits}/${c.n}`;
+        sub=(rate*100).toFixed(0)+'%';
+      }
+      h+=`<div class="mg-cell ${cls} ${isCur?'current':''}" ${c.n>0?`onclick="showCell(${zi},${gi})" style="cursor:pointer"`:''}>
+        <div class="mg-num">${num}</div><div class="mg-sub">${sub}</div>
+        ${c.risk?'<span style="position:absolute;top:2px;right:3px;color:#f85149;font-size:8px">⚠</span>':''}
+      </div>`;
+    });
+  });
+  document.getElementById('mg-grid').innerHTML=h;
+  const za=document.getElementById('zone-arrow');
+  if(za&&D.view_state)za.style.marginLeft=(100*(D.view_state.current_idx+0.5)/zones.length)+'%';
+}
+function showCell(zi,gi){
+  const g=D.matrix_grid, key=zi+'_'+gi, c=(g.cells||{})[key];
+  if(!c)return;
+  const el=document.getElementById('fu-detail');el.style.display='block';
+  el.innerHTML=`<div class="detail-title">${g.zones[zi]} × ${g.grades[gi]}</div>
+    <div class="detail-sub">格子历史统计</div>
+    <div class="detail-section"><table><tr><th>验证次数</th><th>命中</th><th>命中率</th><th>平均次日涨跌</th></tr>
+    <tr><td>${c.n}</td><td>${c.hits}</td><td>${c.n?(c.hits/c.n*100).toFixed(0)+'%':'--'}</td><td>${c.avg?c.avg.toFixed(2)+'%':'--'}</td></tr></table></div>
+    ${c.days?`<div class="detail-section"><h4>明细</h4>${c.days.map(d=>`<div class="var-row"><span class="var-name">${d.date}</span><span>${d.pred} vs ${d.actual}</span><span class="var-evi">${d.hit}</span></div>`).join('')}</div>`:''}`;
+  el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ===== 三层侧栏 ===== */
+function renderLayers(){
   const m=D.matrix_L0||{};
-  document.getElementById('fu-L0-v0').textContent=m.v0?`${m.v0.value}(${m.v0.grade})`:'--';
-  document.getElementById('fu-L0-a').textContent=m.a_macd?m.a_macd.value:'--';
-  document.getElementById('fu-L0-q').textContent=m.q_bias??'--';
-  document.getElementById('fu-L0-cell').textContent=m.cell?.key||'--';
-  if(m.cell){const s=m.cell.samples||0;
-    document.getElementById('fu-L0-cellst').innerHTML=`<span class="cell-dot ${s===0?'empty':s<5?'growing':'lit'}"></span>${s===0?'待点亮':s+'样本'}`;}
+  document.getElementById('lc-L0').innerHTML=
+    `<span class=k>v₀:</span> <span class=v>${m.v0?.value??'--'}(${m.v0?.grade||''})</span><br>
+     <span class=k>a_macd:</span> <span class=v>${m.a_macd?.value??'--'}</span>
+     <span class=k>q_bias:</span> <span class=v>${m.q_bias??'--'}</span><br>
+     <span class=k>所在格:</span> ${m.cell?.key||'--'}`;
   const l1=D.matrix_L1||{};
-  document.getElementById('fu-L1-proto').textContent=l1.prototype?.match||'--';
-  document.getElementById('fu-L1-gene').textContent=l1.gene?.pattern||'--';
+  document.getElementById('lc-L1').innerHTML=
+    `<span class=k>原型:</span> <span class=v>${l1.prototype?.match||'--'}</span><br>
+     <span class=k>基因:</span> <span class=v>${l1.gene?.pattern||'--'}</span><br>
+     <span class=k>说明:</span> 首诊后填入`;
   const l2=D.matrix_L2||{};
   const rs=l2.active_risks||[];
-  document.getElementById('fu-L2-risks').innerHTML=rs.length?rs.map(r=>`<span class="badge risk">${r}</span>`).join(' '):'<span class="badge on">无</span>';
-  document.getElementById('fu-L2-vetoes').textContent=(l2.vetoes||[]).join('、')||'无';
-  const f=D.fusion||{};
+  document.getElementById('lc-L2').innerHTML=
+    `<span class=k>风险:</span> ${rs.length?rs.map(r=>`<span class="badge risk">${r}</span>`).join(' '):'<span class="badge on">无</span>'}<br>
+     <span class=k>否决:</span> ${(l2.vetoes||[]).join('、')||'无'}`;
+  const f=D.fusion||{}, v=D.verification;
   const de=document.getElementById('fu-dir');de.textContent=f.direction||'--';
   de.className='v '+(f.direction?.includes('偏强')||f.direction?.includes('偏多')?'pos':f.direction?.includes('偏弱')||f.direction?.includes('偏空')?'neg':'');
   document.getElementById('fu-conf').textContent=f.confidence||'--';
   document.getElementById('fu-form').textContent=f.form||'--';
-  const v=D.verification;
   document.getElementById('fu-hit').innerHTML=v?`<span class="${v.hit==='✅'?'pos':v.hit==='❌'?'neg':''}">${v.hit}</span>`:'--';
   document.getElementById('fu-verdict').textContent=f.verdict||'--';
   if(D.todo_list)document.getElementById('fu-todo').innerHTML=D.todo_list.map(t=>`<li>${t}</li>`).join('');
   if(D.history)document.getElementById('fu-history').innerHTML=D.history.map(h=>{
     const c=h.hit==='✅'?'hit-yes':h.hit==='❌'?'hit-no':h.hit==='半对'?'hit-half':'hit-na';
-    return `<tr><td>${h.date}</td><td>${h.v0}</td><td>${h.a_macd}</td><td>${h.q_bias}</td><td>${h.pred}</td><td>${h.actual}</td><td class="${c}">${h.hit}</td><td>${h.cell||'--'}</td></tr>`}).join('');
+    return `<tr><td>${h.date}</td><td>${h.v0}×${h.a_macd}×${h.q_bias}</td><td>${h.pred}</td><td>${h.actual}</td><td class="${c}">${h.hit}</td><td>${h.cell||'--'}</td></tr>`}).join('');
 }
 function selLayer(L){
-  document.querySelectorAll('.cube-layer').forEach(x=>x.classList.toggle('selected',x.dataset.layer===L));
+  document.querySelectorAll('.layer-card').forEach(x=>x.classList.toggle('selected',x.dataset.layer===L));
   const el=document.getElementById('fu-detail');el.style.display='block';
-  const M={'L0':['L0 矩阵层详情',D.matrix_L0],'L1':['L1 状态层详情',D.matrix_L1],'L2':['L2 修正层详情',D.matrix_L2]};
+  const M={'L0':['L0 矩阵层——信号怎么算',D.matrix_L0],'L1':['L1 状态层——区间怎么定',D.matrix_L1],'L2':['L2 修正层——风险怎么标',D.matrix_L2]};
   let h=`<div class="detail-title">${M[L][0]}</div><div class="detail-sub"></div>`;
   const d=M[L][1]||{};
   if(L==='L0'&&d.v0)h+=`<div class="detail-section"><h4>v₀ 评分</h4><div class="formula">${d.v0.detail||''}</div></div>`;
   if(L==='L0'&&d.a_macd)h+=`<div class="detail-section"><h4>a_macd</h4><div class="formula">${d.a_macd.detail||''}</div></div>`;
   if(L==='L0'&&d.q_detail)h+=`<div class="detail-section"><h4>q_bias 攻多攻空</h4><div class="formula">${d.q_detail}</div></div>`;
   if(L==='L0'&&d.no_signal_zone)h+=`<div class="detail-section"><h4>无信号区检查</h4><div class="formula">${d.no_signal_zone}</div></div>`;
-  if(L==='L0'&&d.cell)h+=`<div class="detail-section"><h4>格子统计</h4><table><tr><th>样本</th><th>命中率</th><th>次日均值</th><th>状态</th></tr><tr><td>${d.cell.samples||0}</td><td>${d.cell.hit_rate?(d.cell.hit_rate*100).toFixed(0)+'%':'--'}</td><td>${d.cell.avg_next_pct?d.cell.avg_next_pct.toFixed(2)+'%':'--'}</td><td>${d.cell.status||'--'}</td></tr></table></div>`;
   if(L==='L1'&&d.prototype?.full_detail)h+=`<div class="detail-section"><h4>原型匹配</h4><div class="formula">${d.prototype.full_detail}</div></div>`;
   if(L==='L1'&&d.gene?.full_detail)h+=`<div class="detail-section"><h4>基因模式</h4><div class="formula">${d.gene.full_detail}</div></div>`;
   if(L==='L2')h+=`<div class="detail-section"><h4>风险标签</h4><div class="formula">${(d.active_risks||[]).join('\n')||'无'}</div></div><div class="detail-section"><h4>否决项</h4><div class="formula">${(d.vetoes||[]).join('\n')||'无'}</div></div>`;
   el.innerHTML=h;el.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-/* ---- 基因视图 ---- */
+/* ===== 基因视图 ===== */
 function renderGene(){
-  const g=D.view_gene;if(!g){document.getElementById('gene-patterns').innerHTML='<div class="note">基因数据待首次诊断后生成</div>';return}
+  const g=D.view_gene;if(!g){document.getElementById('gene-patterns').innerHTML='<div class="note">待首次诊断</div>';return}
   document.getElementById('gene-summary').innerHTML=`
-    <div class="gene-stat"><div class="num lit">${g.total_lit}</div><div class="lbl">已点亮变量</div></div>
-    <div class="gene-stat"><div class="num part">${g.total_partial}</div><div class="lbl">半亮变量</div></div>
+    <div class="gene-stat"><div class="num lit">${g.total_lit}</div><div class="lbl">已点亮</div></div>
+    <div class="gene-stat"><div class="num part">${g.total_partial}</div><div class="lbl">半亮</div></div>
     <div class="gene-stat"><div class="num none">${g.total_vars-g.total_lit-g.total_partial}</div><div class="lbl">未点亮</div></div>
-    <div class="gene-stat"><div class="num" style="color:#bc8cff">${g.top_pattern||'--'}</div><div class="lbl">最接近模式</div></div>`;
+    <div class="gene-stat"><div class="num" style="color:#bc8cff;font-size:16px">${g.top_pattern||'--'}</div><div class="lbl">最接近模式</div></div>`;
   document.getElementById('gene-patterns').innerHTML=(g.patterns||[]).map(p=>{
     const pct=Math.round(p.lit_vars/p.total_vars*100);
     const pc=pct>=60?'high':pct>=30?'mid':'low';
     return `<div class="pattern-card ${p.top?'top':''}">
       <div class="pattern-head"><span class="pattern-name">${p.id} ${p.name}</span><span class="pattern-pct ${pc}">${p.lit_vars}/${p.total_vars}</span></div>
       ${(p.vars||[]).map(v=>`<div class="var-row"><span class="var-dot ${v.status}"></span><span class="var-name">${v.name}</span><span class="var-evi">${v.evidence||''}</span></div>`).join('')}
-      ${p.completion?`<div class="completion"><b>完整度提升路径:</b>${p.completion}</div>`:''}
+      ${p.completion?`<div class="completion"><b>完整度提升:</b>${p.completion}</div>`:''}
     </div>`}).join('');
   document.getElementById('gene-note').textContent=g.note||'';
 }
 
-/* ---- 状态区间视图 ---- */
+/* ===== 状态视图 ===== */
 function renderState(){
-  const s=D.view_state;if(!s){document.getElementById('zone-track').innerHTML='<div class="note">状态数据待首次诊断后生成</div>';return}
-  const zones=s.zones||[];
-  document.getElementById('zone-track').innerHTML=zones.map((z,i)=>
-    `<div class="zone ${i===s.current_idx?'current':i<s.current_idx?'passed':''}"><div class="zone-name">${z.name}</div><div class="zone-range">${z.range||''}</div></div>`).join('');
-  const cur=zones[s.current_idx];
-  if(cur){const track=document.getElementById('zone-track');
-    document.getElementById('zone-arrow').style.left=(100*(s.current_idx+0.5)/zones.length)+'%';
-    document.getElementById('zone-arrow').style.color='#58a6ff';}
-  document.getElementById('zone-name-tag').textContent=cur?cur.name:'--';
+  const s=D.view_state;if(!s){document.getElementById('zone-track').innerHTML='<div class="note">待首次诊断</div>';return}
+  document.getElementById('zone-track').innerHTML=(s.zones||[]).map((z,i)=>
+    `<div class="zone ${i===s.current_idx?'current':i<s.current_idx?'passed':''}"><div>${z.name}</div><div class="zone-range">${z.range||''}</div></div>`).join('');
   document.getElementById('zone-judgment').innerHTML=(s.judgment||[]).map(j=>
     `<div class="var-row"><span class="var-dot ${j.status}"></span><span class="var-name">${j.dim}</span><span style="flex:2">${j.value}</span><span class="var-evi">${j.evidence||''}</span></div>`).join('');
   document.getElementById('zone-transitions').innerHTML=(s.transitions||[]).map(t=>
@@ -342,13 +389,11 @@ function renderState(){
   document.getElementById('state-note').textContent=s.note||'';
 }
 
-/* ---- 次日预判视图 ---- */
+/* ===== 管线视图 ===== */
 function renderDaily(){
-  const chain=D.daily_chain||[];
-  const el=document.getElementById('daily-pipeline');el.innerHTML='';
+  const chain=D.daily_chain||[];const el=document.getElementById('daily-pipeline');el.innerHTML='';
   chain.forEach((n,i)=>{
-    const div=document.createElement('div');div.className='node';
-    div.onclick=()=>selNode(n,i);
+    const div=document.createElement('div');div.className='node';div.onclick=()=>selNode(n,i);
     div.innerHTML=`<div class="node-title"><span class="node-num">${i+1}</span><span class="node-name">${n.name}</span><span class="node-tag">${n.tag||''}</span></div><div class="node-output">${n.output||''}</div>`;
     el.appendChild(div);
     if(i<chain.length-1){const c=document.createElement('div');c.className='connector';el.appendChild(c)}
