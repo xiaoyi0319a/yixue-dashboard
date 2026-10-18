@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>个股诊断看板 · 沃森生物</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh}
+.header{background:#161b22;border-bottom:1px solid #30363d;padding:16px 24px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.header h1{font-size:20px;font-weight:700;color:#f0f6fc}
+.header .stock{font-size:14px;color:#8b949e}
+.header .date{font-size:14px;color:#8b949e}
+.header .version{font-size:12px;color:#d29922;background:rgba(210,153,34,.12);padding:3px 10px;border-radius:10px;border:1px solid rgba(210,153,34,.3)}
+.main{max-width:1280px;margin:0 auto;padding:20px}
+
+/* 三层立方体 */
+.cube{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:900px){.cube{grid-template-columns:1fr}}
+.layer{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;cursor:pointer;transition:all .15s;position:relative}
+.layer:hover{border-color:#58a6ff}
+.layer.selected{border-color:#58a6ff;box-shadow:0 0 0 2px #58a6ff}
+.layer-title{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.layer-tag{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
+.layer-tag.daily{background:rgba(88,166,255,.15);color:#58a6ff}
+.layer-tag.weekly{background:rgba(63,185,80,.15);color:#3fb950}
+.layer-tag.event{background:rgba(210,153,34,.15);color:#d29922}
+.layer-name{font-size:13px;font-weight:600;color:#f0f6fc}
+.layer-freq{font-size:10px;color:#484f58;margin-left:auto}
+.layer-body{font-size:12px;color:#c9d1d9;line-height:1.8}
+.layer-body .k{color:#8b949e}
+.layer-body .v{color:#f0d6fc;font-weight:600}
+.layer-body .pos{color:#3fb950;font-weight:600}
+.layer-body .neg{color:#f85149;font-weight:600}
+.layer-body .warn{color:#d29922;font-weight:600}
+
+/* 连接箭头 */
+.flow-arrow{text-align:center;color:#484f58;font-size:18px;margin:4px 0}
+
+/* 合成输出 */
+.fusion{background:#161b22;border:1px solid #3fb950;border-radius:8px;padding:16px;margin-bottom:16px}
+.fusion-title{font-size:14px;font-weight:700;color:#3fb950;margin-bottom:10px}
+.fusion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.fusion-item{background:#0d1117;border:1px solid #21262d;border-radius:6px;padding:10px}
+.fusion-item .k{font-size:11px;color:#8b949e;margin-bottom:4px}
+.fusion-item .v{font-size:14px;font-weight:700;color:#f0f6fc}
+.fusion-item .v.pos{color:#3fb950}
+.fusion-item .v.neg{color:#f85149}
+.fusion-item .v.warn{color:#d29922}
+.fusion-verdict{margin-top:10px;font-size:13px;line-height:1.7;color:#c9d1d9;background:#0d1117;border-radius:6px;padding:10px;border:1px solid #21262d}
+
+/* 节点列 */
+.section-title{font-size:13px;font-weight:700;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px}
+.pipeline{display:flex;flex-direction:column}
+.node{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 14px;cursor:pointer;transition:all .15s;position:relative}
+.node:hover{border-color:#58a6ff}
+.node.selected{border-color:#58a6ff;box-shadow:0 0 0 2px #58a6ff}
+.node-title{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.node-num{width:22px;height:22px;border-radius:50%;background:#1f2937;color:#8b949e;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.node-name{font-size:13px;font-weight:600;color:#f0f6fc}
+.node-tag{font-size:10px;color:#8b949e;margin-left:auto;background:#1f2937;padding:2px 6px;border-radius:8px}
+.node-output{font-size:12px;color:#c9d1d9;line-height:1.7}
+.node-output .k{color:#8b949e}
+.node-output .v{color:#f0f6fc;font-weight:600}
+.connector{width:2px;height:16px;background:#30363d;margin:0 auto}
+
+/* 详情面板 */
+.detail{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-top:16px}
+.detail-title{font-size:14px;font-weight:700;color:#f0f6fc;margin-bottom:4px}
+.detail-sub{font-size:12px;color:#8b949e;margin-bottom:12px}
+.detail-section{margin-bottom:12px}
+.detail-section h4{font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;border-bottom:1px solid #21262d;padding-bottom:4px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:5px 8px;text-align:left;border-bottom:1px solid #21262d}
+th{color:#8b949e;font-weight:500;font-size:11px}
+td{color:#c9d1d9}
+tr.hl td{background:#1f2937;font-weight:600}
+tr.hl td:first-child{border-left:3px solid #58a6ff}
+.badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:8px;font-weight:600}
+.badge.on{background:rgba(63,185,80,.15);color:#3fb950}
+.badge.off{background:rgba(139,148,158,.12);color:#8b949e}
+.badge.warn{background:rgba(210,153,34,.15);color:#d29922}
+.badge.risk{background:rgba(248,81,73,.15);color:#f85149}
+.formula{font-family:"SF Mono",Monaco,monospace;font-size:12px;background:#0d1117;padding:8px 10px;border-radius:6px;border:1px solid #21262d;color:#a5d6ff;line-height:1.8;margin-bottom:6px;white-space:pre-wrap}
+.note{font-size:11px;color:#8b949e;line-height:1.6}
+
+/* 矩阵格状态 */
+.cell-status{display:inline-flex;align-items:center;gap:6px}
+.cell-dot{width:8px;height:8px;border-radius:50%}
+.cell-dot.empty{background:#484f58}
+.cell-dot.growing{background:#d29922}
+.cell-dot.lit{background:#3fb950}
+.cell-dot.rich{background:#58a6ff}
+
+/* 诚实清单 */
+.todo{background:rgba(210,153,34,.05);border:1px solid rgba(210,153,34,.2);border-radius:8px;padding:12px;margin-top:16px}
+.todo-title{font-size:12px;font-weight:700;color:#d29922;margin-bottom:8px}
+.todo-list{font-size:11px;color:#8b949e;line-height:2}
+.todo-list li{margin-left:16px}
+
+/* 历史记录 */
+.history{margin-top:16px}
+.history-table{font-size:11px}
+.history-table th,.history-table td{padding:4px 6px}
+.hit-yes{color:#3fb950;font-weight:700}
+.hit-no{color:#f85149;font-weight:700}
+.hit-half{color:#d29922;font-weight:600}
+.hit-na{color:#484f58}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>个股诊断看板</h1>
+  <span class="stock" id="stock-name">300142 沃森生物</span>
+  <span class="date" id="date">--</span>
+  <span class="version" id="version">立体矩阵V0.1</span>
+</div>
+
+<div class="main">
+
+<!-- 三层立方体 -->
+<div class="section-title">立体矩阵 · 三层结构</div>
+<div class="cube" id="cube">
+  <div class="layer" data-layer="L2" onclick="selectLayer('L2')">
+    <div class="layer-title">
+      <span class="layer-tag event">L2 修正层</span>
+      <span class="layer-freq">事件级</span>
+    </div>
+    <div class="layer-body" id="L2-body">
+      <span class="k">风险标签:</span> <span id="L2-risks">加载中…</span><br>
+      <span class="k">否决项:</span> <span id="L2-vetoes">--</span><br>
+      <span class="k">极端日:</span> <span id="L2-extreme">--</span>
+    </div>
+  </div>
+  <div class="layer" data-layer="L1" onclick="selectLayer('L1')">
+    <div class="layer-title">
+      <span class="layer-tag weekly">L1 状态层</span>
+      <span class="layer-freq">周级</span>
+    </div>
+    <div class="layer-body" id="L1-body">
+      <span class="k">原型:</span> <span class="v" id="L1-proto">加载中…</span><br>
+      <span class="k">基因模式:</span> <span class="v" id="L1-gene">--</span><br>
+      <span class="k">匹配详情:</span> <span id="L1-detail">--</span>
+    </div>
+  </div>
+  <div class="layer" data-layer="L0" onclick="selectLayer('L0')">
+    <div class="layer-title">
+      <span class="layer-tag daily">L0 矩阵层</span>
+      <span class="layer-freq">日级</span>
+    </div>
+    <div class="layer-body" id="L0-body">
+      <span class="k">v₀:</span> <span class="v" id="L0-v0">--</span>
+      <span class="k">a_macd:</span> <span class="v" id="L0-a">--</span>
+      <span class="k">q_bias:</span> <span class="v" id="L0-q">--</span><br>
+      <span class="k">所在格子:</span> <span id="L0-cell">--</span><br>
+      <span class="k">点亮状态:</span> <span class="cell-status" id="L0-cell-status">--</span>
+    </div>
+  </div>
+</div>
+
+<div class="flow-arrow">▼ 合成引擎 ▼</div>
+
+<!-- 合成输出 -->
+<div class="fusion" id="fusion">
+  <div class="fusion-title">合成输出</div>
+  <div class="fusion-grid">
+    <div class="fusion-item"><div class="k">方向定级</div><div class="v" id="f-dir">--</div></div>
+    <div class="fusion-item"><div class="k">置信度</div><div class="v warn" id="f-conf">--</div></div>
+    <div class="fusion-item"><div class="k">形态</div><div class="v" id="f-form">--</div></div>
+    <div class="fusion-item"><div class="k">次日预判</div><div class="v" id="f-next">--</div></div>
+  </div>
+  <div class="fusion-verdict" id="f-verdict">--</div>
+</div>
+
+<!-- 日链节点 -->
+<div class="section-title">日链判断过程（点击节点展开依据）</div>
+<div class="pipeline" id="pipeline"></div>
+
+<!-- 详情面板 -->
+<div class="detail" id="detail" style="display:none">
+  <div class="detail-title" id="d-title">--</div>
+  <div class="detail-sub" id="d-sub">--</div>
+  <div id="d-body"></div>
+</div>
+
+<!-- 诚实清单 -->
+<div class="todo" id="todo">
+  <div class="todo-title">⚠ V0.1 已知不完整处（迭代修正中）</div>
+  <ul class="todo-list" id="todo-list"></ul>
+</div>
+
+<!-- 历史对账 -->
+<div class="history" id="history-section" style="display:none">
+  <div class="section-title">历史对账（格子点亮记录）</div>
+  <table class="history-table">
+    <thead><tr><th>日期</th><th>v₀</th><th>a_macd</th><th>q_bias</th><th>预测</th><th>实际</th><th>判定</th><th>所在格</th></tr></thead>
+    <tbody id="history-body"></tbody>
+  </table>
+</div>
+
+</div>
+
+<script>
+const DATA_URL = 'data/stock_pipeline_latest.json';
+let DATA = null;
+
+function loadData() {
+  fetch(DATA_URL + '?t=' + Date.now())
+    .then(r => { if(!r.ok) throw new Error('no data'); return r.json(); })
+    .then(d => { DATA = d; renderAll(); })
+    .catch(() => { renderEmpty(); });
+}
+
+function renderEmpty() {
+  document.getElementById('date').textContent = '暂无数据';
+  document.getElementById('f-verdict').textContent = '等待首次预测运行后生成数据（stock_pipeline_latest.json）';
+  document.getElementById('L0-cell-status').innerHTML = '<span class="cell-dot empty"></span>未点亮';
+}
+
+function renderAll() {
+  const d = DATA;
+  document.getElementById('stock-name').textContent = d.stock || '300142 沃森生物';
+  document.getElementById('date').textContent = d.date || '--';
+  document.getElementById('version').textContent = d.version || '立体矩阵V0.1';
+
+  // L0 矩阵层
+  if(d.matrix_L0) {
+    const m = d.matrix_L0;
+    document.getElementById('L0-v0').textContent = m.v0 ? `${m.v0.value}(${m.v0.grade})` : '--';
+    document.getElementById('L0-a').textContent = m.a_macd ? (m.a_macd.value>0?'+'+m.a_macd.value:m.a_macd.value) : '--';
+    document.getElementById('L0-q').textContent = m.q_bias ? (m.q_bias>0?'+'+m.q_bias:m.q_bias) : '--';
+    document.getElementById('L0-cell').textContent = m.cell ? m.cell.key : '--';
+    if(m.cell) {
+      const s = m.cell.samples||0;
+      let dot,label;
+      if(s===0){dot='empty';label='待点亮'}
+      else if(s<5){dot='growing';label=`${s}样本`}
+      else if(s<20){dot='lit';label=`${s}样本 · 命中率${(m.cell.hit_rate*100).toFixed(0)}%`}
+      else{dot='rich';label=`${s}样本 · 命中率${(m.cell.hit_rate*100).toFixed(0)}%`}
+      document.getElementById('L0-cell-status').innerHTML = `<span class="cell-dot ${dot}"></span>${label}`;
+    }
+  }
+
+  // L1 状态层
+  if(d.matrix_L1) {
+    const l1 = d.matrix_L1;
+    document.getElementById('L1-proto').textContent = l1.prototype?.match || '待诊断';
+    document.getElementById('L1-gene').textContent = l1.gene?.pattern || '待匹配';
+    document.getElementById('L1-detail').textContent = l1.prototype?.score_detail || '--';
+  }
+
+  // L2 修正层
+  if(d.matrix_L2) {
+    const l2 = d.matrix_L2;
+    const risks = l2.active_risks||[];
+    document.getElementById('L2-risks').innerHTML = risks.length
+      ? risks.map(r=>`<span class="badge risk">${r}</span>`).join(' ')
+      : '<span class="badge on">无</span>';
+    document.getElementById('L2-vetoes').textContent = (l2.vetoes||[]).join('、')||'无';
+    document.getElementById('L2-extreme').textContent = l2.extreme_day ? '⚠️ 是' : '否';
+  }
+
+  // 合成输出
+  if(d.fusion) {
+    const f = d.fusion;
+    const dirEl = document.getElementById('f-dir');
+    dirEl.textContent = f.direction||'--';
+    dirEl.className = 'v ' + (f.direction?.includes('涨')||f.direction?.includes('强')?'pos':f.direction?.includes('跌')||f.direction?.includes('弱')?'neg':'');
+    document.getElementById('f-conf').textContent = f.confidence||'--';
+    document.getElementById('f-form').textContent = f.form||'--';
+    document.getElementById('f-next').textContent = f.next_preview||'--';
+    document.getElementById('f-verdict').textContent = f.verdict||'--';
+  }
+
+  // 日链节点
+  if(d.daily_chain) renderPipeline(d.daily_chain);
+
+  // 诚实清单
+  if(d.todo_list) {
+    document.getElementById('todo-list').innerHTML = d.todo_list.map(t=>`<li>${t}</li>`).join('');
+  }
+
+  // 历史
+  if(d.history && d.history.length) {
+    document.getElementById('history-section').style.display='block';
+    document.getElementById('history-body').innerHTML = d.history.map(h=>{
+      const cls = h.hit==='✅'?'hit-yes':h.hit==='❌'?'hit-no':h.hit==='半对'?'hit-half':'hit-na';
+      return `<tr><td>${h.date}</td><td>${h.v0}</td><td>${h.a_macd}</td><td>${h.q_bias}</td><td>${h.pred}</td><td>${h.actual}</td><td class="${cls}">${h.hit}</td><td>${h.cell||'--'}</td></tr>`;
+    }).join('');
+  }
+}
+
+function renderPipeline(chain) {
+  const el = document.getElementById('pipeline');
+  el.innerHTML = '';
+  chain.forEach((n,i)=>{
+    const div = document.createElement('div');
+    div.className = 'node';
+    div.onclick = ()=>selectNode(n,i);
+    div.innerHTML = `
+      <div class="node-title">
+        <span class="node-num">${i+1}</span>
+        <span class="node-name">${n.name}</span>
+        <span class="node-tag">${n.tag||''}</span>
+      </div>
+      <div class="node-output">${n.output||''}</div>`;
+    el.appendChild(div);
+    if(i<chain.length-1){
+      const c=document.createElement('div');c.className='connector';el.appendChild(c);
+    }
+  });
+}
+
+function selectNode(node,idx) {
+  document.querySelectorAll('.node').forEach((n,i)=>n.classList.toggle('selected',i===idx*2));
+  const d = document.getElementById('detail');
+  d.style.display='block';
+  document.getElementById('d-title').textContent = node.name;
+  document.getElementById('d-sub').textContent = node.tag||'';
+  let body = '';
+  if(node.formula) body += `<div class="formula">${node.formula}</div>`;
+  if(node.table) {
+    body += `<div class="detail-section"><h4>判定表</h4><table>`;
+    body += `<tr>${node.table.header.map(h=>`<th>${h}</th>`).join('')}</tr>`;
+    node.table.rows.forEach(r=>{
+      const hl = r.hl?' class="hl"':'';
+      body += `<tr${hl}>${r.cells.map(c=>`<td>${c}</td>`).join('')}</tr>`;
+    });
+    body += `</table></div>`;
+  }
+  if(node.note) body += `<div class="note">${node.note}</div>`;
+  document.getElementById('d-body').innerHTML = body;
+  d.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function selectLayer(layer) {
+  document.querySelectorAll('.layer').forEach(l=>l.classList.toggle('selected',l.dataset.layer===layer));
+  if(!DATA) return;
+  const d = document.getElementById('detail');
+  d.style.display='block';
+  const titles = {L0:'L0 矩阵层详情',L1:'L1 状态层详情',L2:'L2 修正层详情'};
+  document.getElementById('d-title').textContent = titles[layer];
+  document.getElementById('d-sub').textContent = '';
+  let body = '';
+  if(layer==='L0' && DATA.matrix_L0) {
+    const m = DATA.matrix_L0;
+    if(m.v0?.detail) body += `<div class="detail-section"><h4>v₀ 评分过程</h4><div class="formula">${m.v0.detail}</div></div>`;
+    if(m.a_macd?.detail) body += `<div class="detail-section"><h4>加速度判定</h4><div class="formula">${m.a_macd.detail}</div></div>`;
+    if(m.cell) body += `<div class="detail-section"><h4>格子统计</h4><table><tr><th>样本数</th><th>命中率</th><th>次日均值</th><th>上涨率</th></tr><tr><td>${m.cell.samples||0}</td><td>${m.cell.hit_rate?(m.cell.hit_rate*100).toFixed(1)+'%':'--'}</td><td>${m.cell.avg_next_pct?m.cell.avg_next_pct.toFixed(2)+'%':'--'}</td><td>${m.cell.up_rate?(m.cell.up_rate*100).toFixed(1)+'%':'--'}</td></tr></table></div>`;
+  }
+  if(layer==='L1' && DATA.matrix_L1) {
+    const l1 = DATA.matrix_L1;
+    if(l1.prototype?.full_detail) body += `<div class="detail-section"><h4>原型匹配</h4><div class="formula">${l1.prototype.full_detail}</div></div>`;
+    if(l1.gene?.full_detail) body += `<div class="detail-section"><h4>基因模式匹配</h4><div class="formula">${l1.gene.full_detail}</div></div>`;
+  }
+  if(layer==='L2' && DATA.matrix_L2) {
+    const l2 = DATA.matrix_L2;
+    body += `<div class="detail-section"><h4>激活的风险标签</h4><div class="formula">${(l2.active_risks||[]).join('\n')||'无'}</div></div>`;
+    body += `<div class="detail-section"><h4>否决项</h4><div class="formula">${(l2.vetoes||[]).join('\n')||'无'}</div></div>`;
+  }
+  document.getElementById('d-body').innerHTML = body||'<div class="note">暂无详情</div>';
+  d.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+loadData();
+</script>
+</body>
+</html>
