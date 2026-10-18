@@ -1,108 +1,121 @@
 {
   "stock": "300142 沃森生物",
   "date": "2026-10-16",
-  "version": "立体矩阵V0.1",
-  "note": "种子数据——L0用10-16实盘值，L1/L2待首诊后填入",
+  "generated": "2026-10-18 10:15 周五数据重演演练（预测+验证链路全跑）",
+  "version": "立体矩阵V0.1 · 规则V2.2",
   "matrix_L0": {
     "v0": {
       "value": -2,
       "grade": "中性偏弱",
-      "detail": "交叉项: 死叉延续 -1\n柱体项: 绿柱 -0.1315, |柱|>p50(0.09) → 2档, 负号 → -2\nDIF位置项: DIF<0且在DEA下 → -1\n交叉项+DIF项合计-2, 柱体-2, 总分-4→校准后-2(两点闭环诚实中性压档)"
+      "detail": "交叉项: -1 (DIF 0.06934 < DEA 0.1087, 死叉延续)\n柱体项: -1 (|柱|0.07881 < p50=0.09, 1档, 符号负)\nDIF位置项: 0 (DIF>0但在DEA下, 两条规则均不满足)\n合计: -2 → 原始定级偏弱"
     },
     "a_macd": {
-      "value": 1,
-      "detail": "柱Δ: -0.05269(绿柱放大但|Δ|收敛48.2%)\n语境: 柱<0=下跌语境\n|Δ|收敛48.2% < 50%减速阈值 → 未触发减速 → 加速延续(下跌语境惯性)\n→ a_macd=+1(加速)"
+      "value": 0,
+      "detail": "近3日柱: 0.1493 / 0.0229 / -0.07881 → 三根不同号\n第六章规则: 三根柱不同号 = 口径失效\n→ a_macd = 0 (无信号)\n⚠ 修正记录: 种子阶段误记+1(|Δ|收敛48.2%推理路径), 重算按规则原文口径失效优先"
     },
     "q_bias": -2,
+    "q_detail": "攻多0项: 日干生门/旺相✗(伤门+戌月衰,仅落宫生水1项) / 乙奇旺相✗(同口径仅1项) / 吉格✗(螣蛇夭矫+伤门+天柱) / 值符旺相✗(天柱凶星)\n攻空2项: 庚金双旺(戌月金相+艮土生金) -1 / 值符休囚(天柱) -1\nq_bias = 0-2 = -2 → |q|≥2触发调档下调1档",
     "cell": {
-      "key": "中性偏弱×+1×偏空",
+      "key": "中性偏弱×0×偏空",
       "samples": 0,
       "hit_rate": null,
       "avg_next_pct": null,
       "up_rate": null,
       "status": "待点亮"
-    }
+    },
+    "no_signal_zone": "v₀=-2∈[-2,+2] 但 q_bias=-2∉[-1,+1] → 不满足无信号区触发条件 → 允许方向 ✓(第五章边界: q_bias=±2仍允许方向)"
   },
   "matrix_L1": {
     "prototype": {
       "match": "待诊断",
-      "score_detail": "首次七维状态扫描未执行（周日非交易日）",
-      "full_detail": "七维状态扫描项:\n[价量] 距低点/量比/振幅/均线粘合/平台时长\n[资金] 主力流向/融资余额/换手\n[基本面] 业绩拐点/估值分位/市值\n[题材] 核心驱动/催化事件/题材级别\n[环境] 大盘阶段/市场情绪/风格\n\n首次诊断执行后填入"
+      "score_detail": "首次七维状态扫描计划10-19收盘后执行",
+      "full_detail": "七维状态扫描项:\n[价量] 距低点/量比/振幅/均线粘合/平台时长\n[资金] 主力流向/融资余额/换手\n[基本面] 业绩拐点/估值分位/市值\n[题材] 核心驱动/催化事件/题材级别\n[环境] 大盘阶段/市场情绪/风格\n\n待首诊后填入"
     },
     "gene": {
       "pattern": "待匹配",
       "match_detail": "沃森生物不在翻倍基因库70只已入库名单中",
-      "full_detail": "模式匹配候选: 待首次诊断后确定\n如确认无模式可归 → 判语降置信度处理"
+      "full_detail": "模式匹配候选: 待首次诊断后确定"
     }
   },
   "matrix_L2": {
     "active_risks": [],
     "vetoes": [],
     "extreme_day": false,
-    "note": "10-14(-5.185%)为急变速日(|涨跌|>2σ≈7%未达, 但柱Δ急放大), a_macd当日已降权"
+    "note": "10-14(-5.185%)为急变速日(柱Δ急放大), 当日a_macd信号已降权"
   },
   "fusion": {
     "direction": "中性偏弱",
-    "confidence": "低（所在格子0样本 + L1未诊断）",
-    "form": "惯性下跌（未触发减速）",
+    "confidence": "低（格子0样本 + L1未诊断——V0.1最大缺口）",
+    "form": "惯性下跌（口径失效，绿柱首日放大初期）",
     "next_preview": "小跌 -0.35%~-1.75%",
-    "verdict": "矩阵层: v₀=-2偏空档+下跌加速 → 惯性下跌判断\n状态层: 未诊断, 无法确认房间 → 矩阵统计缺失\n修正层: 无风险标签\n合成: 仅凭MACD+奇门, 方向偏空。10-16实际+0.53%反向 → 负向维度失效样本+1, 已记入W42周报归因"
+    "verdict": "矩阵层: v₀-2偏空 + a_macd口径失效 → 惯性下跌判断\n状态层: 未诊断, 无房间修正\n修正层: 无风险标签, 无veto\n两点闭环: W1未触发(v₀<4) / W5未触发(q_bias<+2)\n合成: 中性偏弱。实际+0.53%反向❌——负向维度失效实盘样本+1",
+    "verdict_hit": "❌ 实际+0.5303% > +0.35%反向线（V2.2新口径: 方向反不管跌多少...此处方向反=预测跌实际涨）"
   },
   "daily_chain": [
     {
       "name": "数据采集",
-      "tag": "东财妙想",
-      "output": "<span class=k>收盘</span> <span class=v>13.20</span> <span class=k>涨跌</span> <span class=v>-1.12%</span> <span class=k>量能</span> <span class=v>7344万</span>",
-      "note": "10-15收盘数据, 供10-16预测使用"
+      "tag": "东财妙想 · 共享数据/2026-10-15.json",
+      "output": "<span class=k>T日(10-15)收盘</span> <span class=v>13.20</span> <span class=k>涨跌</span> <span class=neg>-1.124%</span> <span class=k>形态</span> <span class=v>光脚阴线收最低</span>",
+      "note": "iFinD备源交叉验证一致"
     },
     {
       "name": "MACD计算",
-      "tag": "12/26/9",
-      "output": "<span class=k>DIF</span> <span class=neg>-0.42</span> <span class=k>DEA</span> <span class=neg>-0.38</span> <span class=k>柱</span> <span class=neg>-0.0788→-0.1315</span>",
-      "formula": "DIF = EMA12 - EMA26\nDEA = EMA9(DIF)\n柱 = 2×(DIF-DEA)\n死叉延续第13日, 绿柱第2日放大",
-      "note": "前60日预热, 沃森σ=3.49%(100日标定)"
+      "tag": "12/26/9 · σ=3.49%",
+      "output": "<span class=k>DIF</span> <span class=v>0.06934</span> <span class=k>DEA</span> <span class=v>0.1087</span> <span class=k>柱</span> <span class=neg>-0.07881(翻绿首日)</span>",
+      "formula": "近3日柱: 0.1493 / 0.0229 / -0.07881\n柱Δ: -0.0357 → -0.1264 → -0.10173\n|Δ|收敛19.5% (<50%减速阈值)\n死叉: DIF 0.1301→0.06934 下穿 DEA 0.1186→0.1087",
+      "note": "三根柱不同号 → a_macd口径失效"
     },
     {
       "name": "v₀评分",
-      "tag": "MACD融合规则V2.2",
-      "output": "<span class=k>v₀</span> <span class=v>-2</span> → <span class=v>中性偏弱</span>",
-      "formula": "交叉项: -1 (死叉)\n柱体项: -2 (|柱|>p50)\nDIF位置: +1→-1 (零轴下DEA下)\n合计: -4 → 两点闭环压档 → -2",
+      "tag": "规则V2.2 第一章",
+      "output": "<span class=k>v₀</span> <span class=v>-2</span> → <span class=v>偏弱</span>",
       "table": {
         "header": ["维度", "分值", "依据"],
         "rows": [
-          {"cells": ["交叉项", "-1", "DIF/DEA死叉延续"], "hl": false},
-          {"cells": ["柱体项", "-2", "绿柱|0.1315|>p50(0.09)"], "hl": true},
-          {"cells": ["DIF位置", "-1", "DIF<0且在DEA下方"], "hl": false}
+          {"cells": ["交叉项", "-1", "死叉延续"], "hl": false},
+          {"cells": ["柱体项", "-1", "|柱|0.07881<p50(0.09), 1档"], "hl": true},
+          {"cells": ["DIF位置", "0", "DIF>0但在DEA下, 两规则均不满足"], "hl": false}
         ]
-      }
+      },
+      "note": "原始定级: 偏弱(-2~-3档)"
     },
     {
       "name": "奇门起盘",
-      "tag": "问事局",
-      "output": "<span class=k>q_bias</span> <span class=v>-2</span> <span class=k>日干</span> <span class=v>沃森生物</span>",
-      "note": "09:30起盘, 14大用神, 值符宫已验证"
+      "tag": "09:30 癸亥日丁巳时 阴遁3局",
+      "output": "<span class=k>q_bias</span> <span class=neg>-2</span> <span class=k>值符</span> <span class=v>天柱落乾六(与日干同宫)</span> <span class=k>马星</span> <span class=v>亥临身宫</span>",
+      "formula": "攻多: 0项满足\n攻空: 庚金双旺(-1) + 值符休囚/天柱(-1)\nq_bias = 0-2 = -2",
+      "note": "值符宫+随机一宫已按铁律验证"
     },
     {
       "name": "M2矩阵查表",
       "tag": "立体矩阵L0",
-      "output": "<span class=k>格子</span> <span class=v>中性偏弱×+1×偏空</span> <span class=k>样本</span> <span class=warn>0(待点亮)</span>",
-      "formula": "查表: 偏空中性档 × 加速 × 奇门偏空\n历史样本: 0\n统计: 无",
-      "note": "新矩阵首格, 10-19开市后逐日累积"
+      "output": "<span class=k>格子</span> <span class=v>中性偏弱×0×偏空</span> <span class=k>样本</span> <span class=warn>0(待点亮)</span>",
+      "formula": "三维定位: v₀档(中性偏弱) × a_macd(0) × q_bias(偏空)\n历史同格样本: 0\n格子统计: 无 → 不注入修正",
+      "note": "格子随10-19起逐日累积点亮"
     },
     {
-      "name": "两点闭环",
-      "tag": "校准链",
-      "output": "<span class=k>W1过热</span> <span class=v>否</span>(v₀<4) <span class=k>W5偏多</span> <span class=v>否</span>(q_bias<+2) <span class=k>→</span> <span class=v>诚实中性</span>",
-      "note": "170日验证: 仅W1(v₀≥4过热反向)+W5(q_bias≥+2偏多)两信号有效, 其余诚实中性"
+      "name": "两点闭环+无信号区",
+      "tag": "规则V2.2 第二/五章",
+      "output": "<span class=k>W1</span> <span class=v>否</span>(v₀<4) <span class=k>W5</span> <span class=v>否</span>(q_bias<+2) <span class=k>无信号区</span> <span class=v>否</span>(q_bias-2超出±1区间)",
+      "note": "无信号区边界: q_bias=±2仍允许方向 → 正常出方向"
     },
     {
       "name": "合成输出",
-      "tag": "L0+L1+L2",
-      "output": "<span class=k>方向</span> <span class=neg>中性偏弱</span> <span class=k>形态</span> <span class=v>惯性下跌</span>",
-      "formula": "L0矩阵: 偏空+加速 → 惯性下跌\nL1状态: 未诊断 → 无房间修正\nL2修正: 无风险标签 → 无veto\n合成: 中性偏弱, 小跌预判",
-      "note": "⚠ L1未诊断是V0.1最大缺口——状态层首诊后合成置信度才完整"
+      "tag": "L0+L1+L2合成",
+      "output": "<span class=k>方向</span> <span class=neg>中性偏弱</span> <span class=k>形态</span> <span class=v>惯性下跌</span> <span class=k>q_bias调档</span> <span class=neg>下调1档</span>",
+      "formula": "v₀-2(偏弱) + q_bias-2调档 → 中性偏弱(小跌)\na_macd口径失效 → 形态按结构描述(绿柱首日放大初期)\nL1未诊断/L2无风险 → 无附加修正",
+      "note": "⚠ L1状态层未诊断——合成置信度打折(V0.1最大缺口, 10-19首诊)"
     }
   ],
+  "verification": {
+    "date": "2026-10-16",
+    "close": 13.27,
+    "pct": "+0.5303%",
+    "grade_actual": "小涨(反向)",
+    "hit": "❌",
+    "口径": "V2.2: 中性偏弱预测跌<-0.35%为兑现, 实际+0.53%越+0.35%反向线 → ❌",
+    "note": "负向维度失效实盘样本: 死叉+绿柱放大+下跌语境全套下收涨。判语5核验点3/5兑现(结构对方向错延续)"
+  },
   "todo_list": [
     "L1状态层首次七维诊断未执行（计划10-19收盘后）",
     "题材维度采集口径未定——V0.1人工输入",
@@ -146,12 +159,12 @@
     {
       "date": "10-16",
       "v0": "-2",
-      "a_macd": "+1",
+      "a_macd": "0",
       "q_bias": "-2",
       "pred": "中性偏弱",
       "actual": "+0.5303%(小涨反向)",
       "hit": "❌",
-      "cell": "中性偏弱×+1×偏空"
+      "cell": "中性偏弱×0×偏空"
     }
   ]
 }
