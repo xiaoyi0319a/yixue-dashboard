@@ -201,6 +201,7 @@ qimen: {
     }).join('')}
     </table></div>
     ${q.matrix_global&&q.matrix_global.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${q.matrix_global.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:''}
+    ${q.matrix_missing&&q.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${q.matrix_missing.map(m=>`${m.yongshen}·${m.state}`).join('；')}</p>`:''}
     <p class="note">图例：<span style="color:#3fb950">●正式·计分</span>｜<span style="color:#d29922">⊙候选·试用轨未转正</span>｜<span style="color:#8b949e">◌观察·不计分</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）｜dest带⚠=格◌但通道实际计分→补格backlog（周复盘处理）。矩阵源：立体矩阵v2.md</p></div>`;
     return `
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>

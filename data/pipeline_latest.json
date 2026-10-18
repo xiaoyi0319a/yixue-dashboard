@@ -1,305 +1,304 @@
 {
- "date": "2026-10-16",
- "date_display": "2026年10月16日 周五",
- "ganzhi": "癸亥日丁巳时",
- "dun": "阴遁3局",
- "rule_version": "V2.9",
+ "date": "2026-10-19",
+ "date_display": "2026年10月19日 周一",
+ "ganzhi": "丙寅日癸巳时",
+ "dun": "阴遁6局",
+ "rule_version": "V3.0-patch1",
  "path": "C维持",
- "macd_date": "2026-10-15",
+ "macd_date": "2026-10-16",
  "macd": {
-  "dif": -42.22,
-  "dea": -26.68,
-  "bar": -31.08,
-  "cross_state": "死叉延续 第12日",
-  "precheck_note": "柱Δ-7.17激增（前日-1.93），绿柱连续放大空方动能回升；DIF加速下行-7.47/日；深跌极值区（≤-30极深）；死叉延续稳定非噪声"
+  "dif": -46.88,
+  "dea": -30.72,
+  "bar": -32.33,
+  "cross_state": "死叉延续 第11日",
+  "precheck_note": "长假跨期数据（基准10-16收盘）；死叉延续非噪声；柱Δ-7.17→-1.25收敛83%空方动能衰竭边缘；DIF-46.88深跌极值区；柱-32.33极值档"
  },
  "v0": {
   "cross": 0,
   "cross_desc": "死叉延续（非首日）",
   "bar_score": -3,
-  "bar_desc": "柱-31.08，|柱|>20 极值档",
+  "bar_desc": "柱-32.33，|柱|>20 极值档",
   "dif_pos": -2,
   "dif_desc": "DIF≤0 且 ≤DEA",
   "total": -5,
   "mapped": -2,
   "mapped_label": "中空",
-  "note": "交叉0（死叉延续第12日）；柱体-3（|柱|31.08>20）；DIF位置-2（-42.22≤0且≤DEA）"
+  "note": "交叉0（死叉延续第11日）；柱体-3（|柱|32.33>20极值档）；DIF位置-2（-46.88≤0且≤DEA）"
  },
  "calibration": {
   "cal_a": {
    "triggered": true,
    "strong": false,
-   "condition_val": "-42.22",
-   "action": "标准收缩50%：-2 → -1（DIF≤-30极深但柱Δ-7.17非>+4，不走强化70%）",
+   "condition_val": "-46.88",
+   "action": "标准收缩50%：-2 → -1（DIF≤-30极深但柱Δ-1.25非>+4，不走强化70%）",
    "action_short": "标准收缩50%：-2→-1"
   },
   "cal_b": {
    "triggered": true,
-   "detail": "死叉延续 第12日",
-   "action": "标记趋势惯性期 → R反转阈值+2（|a_raw|≥10）",
-   "action_short": "死叉≥2日 · R阈值+2"
+   "detail": "死叉延续 第11日",
+   "action": "标记趋势惯性期 → R反转阈值|a_raw|≥10",
+   "action_short": "死叉≥2日 · R阈值10"
   },
   "cal_c": {
    "triggered": false,
-   "detail": "10-15十字K线（收-开=-0.09%<0.2%阈值），无阴阳方向，不构成背离"
+   "detail": "10-16阴线×绿柱放大=同步空，无背离"
   },
   "output_v0": -1
  },
  "qimen": {
-  "attack_plus": 3,
-  "attack_minus": 4,
-  "structure": 6,
-  "a_raw": 5,
-  "a_discrete": 1,
+  "attack_plus": 1,
+  "attack_minus": 2,
+  "structure": 1,
+  "a_raw": 0,
+  "a_discrete": 0,
   "a_macd": -1,
-  "a_total": 0,
+  "a_total": -1,
   "r_triggered": false,
   "r_threshold": 10,
   "attack_plus_signals": [
    {
     "name": "生门旺相",
-    "condition": "戌月当令旺+门生宫四喜（动态+1.37）",
+    "condition": "戌月旺+艮八比和+非门迫（Q4系数0.69）",
     "base": 2,
     "coef": 0.69,
     "effective": 1
    },
    {
-    "name": "卖盘受制",
-    "condition": "庚入墓+击刑+空亡三害齐（动态+2.50）",
-    "base": 4,
-    "coef": 0.63,
-    "effective": 2
+    "name": "时干克日干（天时助多·M4互换读法）",
+    "condition": "实际坤二土生兑七金=生日干→克方不成立",
+    "base": 2,
+    "coef": 1.0,
+    "effective": 0
    },
    {
-    "name": "时干生日干",
-    "condition": "坎水不生乾金，反为日干生时干泄气",
+    "name": "卖盘受制",
+    "condition": "庚落坎一干净无四害（Q4系数0.63）",
     "base": 2,
-    "coef": 0.75,
+    "coef": 0.63,
     "effective": 0
    }
   ],
   "attack_minus_signals": [
    {
-    "name": "凶格临关键宫",
-    "condition": "青龙逃走临乙奇买盘宫+螣蛇夭矫临日干/值符宫（2处均关键宫）",
-    "effective": 4
+    "name": "时干生日干（M4互换读法）",
+    "condition": "坤二土生兑七金（M4口径=攻空）",
+    "base": 2,
+    "coef": 1.0,
+    "effective": 2
    },
    {
-    "name": "时干克日干",
-    "condition": "水不克金",
+    "name": "凶格临关键宫",
+    "condition": "标准五凶格0处（Q4系数0.98）",
+    "base": 4,
+    "coef": 0.98,
     "effective": 0
    }
   ],
   "structure_signals": [
    {
-    "name": "空方核心受制≥2处",
-    "condition": "庚三害≥2处（入墓+击刑+空亡）",
-    "effective": 2
-   },
-   {
-    "name": "四害双向≥5处",
-    "condition": "全局7处≥5且空方核心同沾",
-    "effective": 4
+    "name": "空方核心受制",
+    "condition": "时干癸空亡+入墓2处（Q4系数0.80）",
+    "base": 1,
+    "coef": 0.8,
+    "effective": 1
    },
    {
     "name": "值符空亡",
-    "condition": "值符落乾六不空",
+    "condition": "值符落坎一不空",
+    "base": -1,
+    "coef": 0.4,
+    "effective": 0
+   },
+   {
+    "name": "四害双向",
+    "condition": "全局4处<5（Q4系数2.0）",
+    "base": 2,
+    "coef": 2.0,
     "effective": 0
    }
   ],
   "b_signals": [
    {
+    "name": "乙奇旺相",
+    "condition": "落宫比和旺地，无四害",
+    "score": 1
+   },
+   {
     "name": "日干衰弱",
-    "condition": "癸水死于戌月+长生衰",
+    "condition": "休/死/死三全弱极弱档",
     "score": -1
    },
    {
     "name": "资金受制",
-    "condition": "戊当令旺但惊门迫+白虎临身",
+    "condition": "戊空亡（旺而空）",
     "score": -1
    },
    {
     "name": "日干旺相",
-    "condition": "仅落宫得生1项，不满足",
+    "condition": "三全弱不满足",
     "score": 0
    },
    {
     "name": "资金旺相",
-    "condition": "月令旺但有门迫，不满足",
+    "condition": "空亡不满足",
     "score": 0
    },
    {
     "name": "吉格临宫",
     "condition": "无标准吉格",
     "score": 0
-   },
-   {
-    "name": "乙奇旺相",
-    "condition": "月令囚+落宫泄，不满足",
-    "score": 0
    }
   ],
-  "b_raw": -2,
-  "b": -1,
+  "b_raw": -1,
+  "b": 0,
   "palace_table": [
    {
     "yongshen": "值符（大势）",
-    "palace": "乾六",
-    "star": "天柱（金）",
-    "god": "值符",
-    "door": "伤门",
-    "sky_ground": "癸+丁",
-    "month_state": "戌月金相，落宫比和",
-    "harms": "无",
-    "note": "天柱大凶星临值符；带马星；螣蛇夭矫格"
-   },
-   {
-    "yongshen": "日干癸（价格）",
-    "palace": "乾六",
-    "star": "天柱",
-    "god": "值符",
-    "door": "伤门",
-    "sky_ground": "癸+丁",
-    "month_state": "戌月水死·落宫金生水·长生衰",
-    "harms": "无",
-    "note": "极弱得生，外弱有托；临值符马星"
-   },
-   {
-    "yongshen": "时干丁（空方帅）",
     "palace": "坎一",
-    "star": "天心（金）",
-    "god": "九天",
+    "star": "天辅（木）",
+    "door": "休门",
+    "god": "值符",
+    "sky_ground": "庚+癸",
+    "month_state": "囚/得生（相）/休",
+    "harms": null,
+    "note": null
+   },
+   {
+    "yongshen": "值使（振幅）",
+    "palace": "巽四",
+    "star": "天柱",
     "door": "杜门",
-    "sky_ground": "丁+庚",
-    "month_state": "戌月火休·落宫水克火·绝",
-    "harms": "空亡",
-    "note": "空方帅落空亡=帅位缺位"
+    "god": "玄武",
+    "sky_ground": "乙+庚",
+    "month_state": null,
+    "harms": null,
+    "note": null
+   },
+   {
+    "yongshen": "日干丙（价格）",
+    "palace": "兑七",
+    "star": "天任",
+    "door": "惊门",
+    "god": "太阴",
+    "sky_ground": "丙+乙",
+    "month_state": "休/死/死——三全弱极弱档",
+    "harms": null,
+    "note": null
+   },
+   {
+    "yongshen": "时干癸（时机/空方帅）",
+    "palace": "坤二",
+    "star": "天蓬",
+    "door": "死门",
+    "god": "六合",
+    "sky_ground": "癸+己(壬)",
+    "month_state": "死/囚/墓",
+    "harms": "空亡+入墓（被困）",
+    "note": null
    },
    {
     "yongshen": "乙奇（买盘）",
-    "palace": "离九",
-    "star": "天辅（木）",
-    "god": "六合",
-    "door": "开门",
-    "sky_ground": "乙+辛",
-    "month_state": "戌月木囚·落宫午为长生·火泄木",
-    "harms": "无",
-    "note": "青龙逃走凶格临宫"
-   },
-   {
-    "yongshen": "庚金（卖盘）",
-    "palace": "艮八",
-    "star": "天蓬（水）",
-    "god": "九地",
-    "door": "景门",
-    "sky_ground": "庚+壬",
-    "month_state": "戌月金相·落宫土生金",
-    "harms": "入墓(丑)+击刑(寅)+空亡",
-    "note": "三害齐=抛压被困"
-   },
-   {
-    "yongshen": "甲子戊（资金）",
     "palace": "巽四",
-    "star": "天冲（木）",
+    "star": "天柱",
+    "door": "杜门",
+    "god": "玄武",
+    "sky_ground": "乙+庚",
+    "month_state": "囚/比和（旺地）/—",
+    "harms": null,
+    "note": "乙+庚日奇被刑-凶格"
+   },
+   {
+    "yongshen": "庚（卖盘）",
+    "palace": "坎一",
+    "star": "天辅",
+    "door": "休门",
+    "god": "值符",
+    "sky_ground": "庚+癸",
+    "month_state": "相/休（泄）/—",
+    "harms": null,
+    "note": null
+   },
+   {
+    "yongshen": "戊（资金）",
+    "palace": "离九",
+    "star": "天心",
+    "door": "景门",
     "god": "白虎",
-    "door": "惊门",
-    "sky_ground": "戊+乙",
-    "month_state": "戌月土当令旺·落宫木克土",
-    "harms": "门迫",
-    "note": "资金旺而受迫=有而难举"
+    "sky_ground": "戊+丁",
+    "month_state": "旺/得生/—",
+    "harms": "空亡（旺而空）",
+    "note": null
    },
    {
     "yongshen": "生门（利润）",
-    "palace": "兑七",
-    "star": "芮禽（土）",
-    "god": "螣蛇",
+    "palace": "艮八",
+    "star": "天英",
     "door": "生门",
-    "sky_ground": "丙己+癸",
-    "month_state": "戌月土当令旺·门生宫",
-    "harms": "无",
-    "note": "旺相+门生宫四喜；螣蛇假利好"
+    "god": "九天",
+    "sky_ground": "丁+丙",
+    "month_state": "旺/比和/—",
+    "harms": null,
+    "note": "丁入墓同宫"
    },
    {
     "yongshen": "景门（情绪）",
-    "palace": "艮八",
-    "star": "天蓬",
-    "god": "九地",
+    "palace": "离九",
+    "star": "天心",
     "door": "景门",
-    "sky_ground": "庚+壬",
-    "month_state": "火休",
+    "god": "白虎",
+    "sky_ground": "戊+丁",
+    "month_state": "休/比和/—",
     "harms": "空亡",
-    "note": "情绪低迷虚化"
+    "note": null
    },
    {
     "yongshen": "天蓬（资金流向）",
-    "palace": "艮八",
+    "palace": "坤二",
     "star": "天蓬",
-    "god": "九地",
-    "door": "景门",
-    "sky_ground": "庚+壬",
-    "month_state": "水死·落宫受克",
-    "harms": "空亡",
-    "note": "资金流入受阻"
+    "door": "死门",
+    "god": "六合",
+    "sky_ground": "癸+己",
+    "month_state": "死/受克/—",
+    "harms": "空亡+入墓",
+    "note": "同宫癸"
    },
    {
     "yongshen": "开门（突破）",
-    "palace": "离九",
-    "star": "天辅",
-    "god": "六合",
+    "palace": "乾六",
+    "star": "天冲",
     "door": "开门",
-    "sky_ground": "乙+辛",
-    "month_state": "金相·落宫火克金",
-    "harms": "无",
-    "note": "开门受落宫克"
-   },
-   {
-    "yongshen": "九天（涨停）",
-    "palace": "坎一",
-    "star": "天心",
-    "god": "九天",
-    "door": "杜门",
-    "sky_ground": "丁+庚",
-    "month_state": "—",
-    "harms": "空亡",
-    "note": "高位乏力"
-   },
-   {
-    "yongshen": "九地（跌停）",
-    "palace": "艮八",
-    "star": "天蓬",
-    "god": "九地",
-    "door": "景门",
-    "sky_ground": "庚+壬",
-    "month_state": "—",
-    "harms": "—",
-    "note": "收敛低沉临卖方"
+    "god": "螣蛇",
+    "sky_ground": "辛+戊",
+    "month_state": "相/比和/—",
+    "harms": null,
+    "note": null
    }
   ],
   "trial_signals": [
    {
-    "id": "G3 利润通道受损",
-    "condition": "生门四害≥1或受宫克",
-    "effect": "攻空2",
-    "fired": true
-   },
-   {
-    "id": "G7 资金虚化",
-    "condition": "戊落空亡",
-    "effect": "b−1",
+    "id": "G3",
+    "condition": "生门受克（四害/受克）",
+    "effect": "b修正",
     "fired": false
    },
    {
-    "id": "G20 大势失托(观察)",
-    "condition": "值符休囚死+受克",
-    "effect": "只标注",
+    "id": "G7",
+    "condition": "戊落空亡",
+    "effect": "b−1",
     "fired": true
+   },
+   {
+    "id": "G20",
+    "condition": "值符受克",
+    "effect": "纯分修正",
+    "fired": false
    }
   ],
   "matrix_drop": [
    {
     "yongshen": "生门",
     "col": "旺/当令",
-    "signal": "生门旺相",
+    "signal": "生门旺相（进攻面，有效+1）",
     "channel": "攻多",
     "cell_state": "●",
     "cell_id": "A3",
@@ -307,124 +306,128 @@
     "dest": "a攻多 +1"
    },
    {
-    "yongshen": "庚",
-    "col": "四害≥2",
-    "signal": "卖盘受制+空方核心受制",
-    "channel": "攻多+结构",
+    "yongshen": "时干",
+    "col": "生克对日干",
+    "signal": "时干生日干（M4互换读法，有效+2）",
+    "channel": "攻空",
     "cell_state": "●",
-    "cell_id": "A5+C1",
-    "read": "多",
-    "dest": "a攻多 +2 ｜ a结构 +2（三害：入墓+击刑+空亡）"
+    "cell_id": "A2",
+    "read": "空",
+    "dest": "a攻空 −2"
    },
    {
-    "yongshen": "庚",
-    "col": "凶格临宫",
-    "signal": "螣蛇夭矫自坐庚宫",
-    "channel": "攻空",
-    "cell_state": "⊙",
-    "cell_id": "G9a",
-    "read": "多(敌自乱)",
-    "dest": "未计分（试用未启用，按A7临多方宫读空）"
+    "yongshen": "时干",
+    "col": "四害≥2",
+    "signal": "空方核心受制（时干癸空亡+入墓2处，有效+1）",
+    "channel": "结构",
+    "cell_state": "◌",
+    "cell_id": "—",
+    "read": "多（帅残则弱空）",
+    "dest": "结构+1 ⚠格◌→计分通道（矩阵补格backlog：时干四害≥2应升⊙）"
    },
    {
     "yongshen": "乙奇",
-    "col": "凶格临宫",
-    "signal": "青龙逃走临乙奇宫",
-    "channel": "攻空",
-    "cell_state": "⊙",
-    "cell_id": "G10",
-    "read": "空",
-    "dest": "a攻空 −4（G10试用未启用，按A7泛化计入）"
-   },
-   {
-    "yongshen": "日干",
-    "col": "凶格临宫",
-    "signal": "螣蛇夭矫临日干宫",
-    "channel": "攻空",
-    "cell_state": "●",
-    "cell_id": "A7",
-    "read": "空",
-    "dest": "a攻空 −4（与乙奇合并计分）"
-   },
-   {
-    "yongshen": "值符",
-    "col": "凶格临宫",
-    "signal": "螣蛇夭矫临值符宫",
-    "channel": "攻空",
-    "cell_state": "⊙",
-    "cell_id": "G6反向",
-    "read": "空警(虚惊)",
-    "dest": "判语层提示（G6反向参照，未计分）"
-   },
-   {
-    "yongshen": "戊",
-    "col": "四害≥2",
-    "signal": "资金受制·惊门迫",
+    "col": "旺/当令",
+    "signal": "乙奇旺相（b通道候选+1）",
     "channel": "b底盘",
-    "cell_state": "●",
-    "cell_id": "b半信号",
-    "read": "空",
-    "dest": "b −1（动态回退固定−3）"
+    "cell_state": "◌",
+    "cell_id": "—",
+    "read": "多↑",
+    "dest": "b_raw+1 ⚠格◌→b通道backlog"
    },
    {
     "yongshen": "日干",
     "col": "休囚死/衰",
-    "signal": "日干衰弱·月令死",
+    "signal": "日干衰弱（b通道−1）",
     "channel": "b底盘",
     "cell_state": "◌",
     "cell_id": "—",
+    "read": "空（身弱）",
+    "dest": "b_raw−1 ⚠格◌→b通道backlog"
+   },
+   {
+    "yongshen": "戊",
+    "col": "空亡/虚",
+    "signal": "资金受制（b通道−1）",
+    "channel": "b底盘",
+    "cell_state": "⊙",
+    "cell_id": "G7",
+    "read": "空（资金虚化）",
+    "dest": "b_raw−1（与试用轨G7并算）"
+   },
+   {
+    "yongshen": "值符",
+    "col": "旺/当令",
+    "signal": "值符半旺（D2，落宫得生）",
+    "channel": "纯分路径",
+    "cell_state": "◌",
+    "cell_id": "—",
+    "read": "多（托）",
+    "dest": "纯分（未计a/b）"
+   },
+   {
+    "yongshen": "庚",
+    "col": "旺/当令",
+    "signal": "卖盘当令（K5中性化0分）",
+    "channel": "纯分路径",
+    "cell_state": "◌",
+    "cell_id": "—",
+    "read": "空↑",
+    "dest": "纯分0（卖盘旺相中性化）"
+   },
+   {
+    "yongshen": "值符",
+    "col": "休囚死/衰",
+    "signal": "值符休囚（K2，月令囚）",
+    "channel": "纯分路径",
+    "cell_state": "⊙",
+    "cell_id": "G20",
     "read": "空",
-    "dest": "b −1 ⚠格◌但通道计分→补格backlog"
+    "dest": "纯分（G20试用观察，n=4不计分）"
+   },
+   {
+    "yongshen": "天蓬",
+    "col": "休囚死/衰",
+    "signal": "天蓬死（资金流向，未计分）",
+    "channel": "未计分",
+    "cell_state": "◌",
+    "cell_id": "—",
+    "read": "空（流出/水死）",
+    "dest": "未计分（叙事引用）"
    },
    {
     "yongshen": "开门",
     "col": "旺/当令",
-    "signal": "开门旺相·金相",
-    "channel": "攻多(D系)",
-    "cell_state": "◌",
-    "cell_id": "—",
-    "read": "多",
-    "dest": "清单 +0.52 ⚠格◌但通道计分→backlog"
-   },
-   {
-    "yongshen": "生门",
-    "col": "得生/受克",
-    "signal": "四喜临宫·门生宫",
-    "channel": "攻多(D系)",
-    "cell_state": "◌",
-    "cell_id": "网1",
-    "read": "多",
-    "dest": "清单 +1 ⚠格◌但通道计分→backlog"
-   },
-   {
-    "yongshen": "值符",
-    "col": "休囚死/衰",
-    "signal": "值符休囚·天柱临身",
+    "signal": "开门旺（D9，纯分）",
     "channel": "纯分路径",
     "cell_state": "◌",
-    "cell_id": "轴9",
-    "read": "空",
-    "dest": "纯分权重差 −2.09（V2.0后不进a/b叉积）"
+    "cell_id": "—",
+    "read": "多（通道开）",
+    "dest": "纯分（未计a/b）"
+   },
+   {
+    "yongshen": "值符×日干",
+    "col": "网1生克对",
+    "signal": "日干宫生值符宫（网1：坎一水←兑七金）",
+    "channel": "未计分",
+    "cell_state": "◌",
+    "cell_id": "网1",
+    "read": "价格生大势=泄（空）",
+    "dest": "未计分（叙事引用）"
    }
   ],
   "matrix_missing": [],
-  "matrix_global": [
-   {
-    "signal": "四害双向≥5处",
-    "cell_state": "◌",
-    "dest": "a结构 +4（全局7处≥5且空方核心同沾；矩阵无独立格）"
-   }
-  ]
+  "matrix_global": []
  },
  "fusion": {
   "v0": -1,
-  "a_total": 0,
-  "v": -1,
-  "path_explain": "v₀=-1≠0，无R，v=-1≠0，sign(v)=sign(v₀) → C维持。统计表无（v₀=-1,a总=0,C维持）记录→新组合待验证；在册相近C维持75%（2次样本极小）；弱底座±1档区a测量信噪比不足，判语保守"
+  "a_total": -1,
+  "v": -2,
+  "path_explain": "v₀=-1≠0，无R，v=-2≠0，sign不变 → C维持。组合查表(4.8)：同组合n=1（10-08 final-2 实际-0.79%✅）待积累"
  },
  "adjust": {
-  "v": -1,
-  "b": -1,
+  "v": -2,
+  "b": 0,
   "v_final": -2,
   "cross_zero": false
  },
@@ -432,284 +435,60 @@
   "v_final": -2,
   "grade": "略偏空"
  },
- "nine_fields": {
-  "v0_grade": -1,
-  "cal_A": "有",
-  "cal_B": "有",
-  "a_macd": -1,
-  "qimen_a": 1,
-  "a_raw": "+5",
-  "b_value": -1,
-  "path": "C维持",
-  "final_grade": -2
- },
  "four_slots": [
   {
    "name": "巳",
    "time": "09:30-10:30",
    "grade": "无方向",
    "type": "neutral",
-   "note": "高开变量×盘局偏弱，高开后承接存疑或冲高回落开局；卖盘被困抛压释放受限，多空皆虚"
+   "note": "平开开局，承接力与开局形态看前30分钟；多空皆虚——资金虚禄、买盘临格、卖盘居值符之下，上下皆难发力"
   },
   {
    "name": "午",
    "time": "10:30-11:30",
    "grade": "无方向",
    "type": "neutral",
-   "note": "空方主帅出空回位，早盘若有冲高此段为压制回落观察点；全天方向信号弱，弱势拉锯"
+   "note": "资金信号空亡逢值，情绪面虚而不实；若早盘有冲高，此段为压制回落观察点；五不遇时阻碍或在此段显形"
   },
   {
    "name": "未",
    "time": "13:00-14:00",
    "grade": "无方向",
    "type": "neutral",
-   "note": "卖方出墓全天最大变量防探底；三害根基深释放不畅，下探深度受限，底盘修复窗口看午后"
+   "note": "午后空方主帅信号归零（本已空墓），市场失锚；丁出墓或扰动利润通道；空方动向与探底深度为本段观察点，深度受生门旺底盘约束"
   },
   {
    "name": "申",
    "time": "14:00-15:00",
    "grade": "无方向",
    "type": "neutral",
-   "note": "空方得禄无的（三检全败反转候选），卖压临禄无力，承接回升之力尾段聚集，收敛定型"
+   "note": "尾盘空方得禄但帅困身净、对宫无根——卖压临禄而打折；承接之力与收敛定型为本段特征，拉锯运行"
   }
  ],
- "four_slots_summary": "熔断态四段全压无方向（10-14/10-15连续2日严格≤1/4+戌月卖方当令）：前两段高开承压多空皆虚，午后变量集中（未时卖方出墓防探底、申时承接可期），运行偏弱但有回稳变量，与全天略偏空底色无完全相反。",
- "verification": {
-  "morning": {
-   "grade": "略偏空",
-   "path": "C维持",
-   "open": "高开（新源16:25重判：情景标签\"高开变量（分歧）\"取主导方向）",
-   "kline": "阴线（日内略偏空·20:05换源标注）",
-   "close": "收跌（全天略偏空）"
-  },
-  "actual": {
-   "grade": "略偏多",
-   "open": "高开+0.44%",
-   "close": "平收+0.24%",
-   "kline": "阴线(-0.20%边际)"
-  },
-  "binary": {
-   "open": "✅",
-   "kline": "✅",
-   "close": "❌",
-   "score": "2/3"
-  },
-  "four_slots": {
-   "strict": "1/4",
-   "lenient": "2.5/4"
-  },
-  "grade_match": "❌错",
-  "changes": "v₀弱空底座在+0.24%噪音带上沿失守；修正层a_macd(-1)×qimen_a(+1)内耗归零未挽回；b=-1底盘薄判断与尾盘35点V型承接反向加码。熔断延续第3日，判语形态四段全兑现 ｜ ⭐16:25换源重判：开盘行按新源（表0-B情景标签）=高开✅（旧源动能映射=低开❌，历史口径见验证报告）"
+ "four_slots_summary": "熔断延续第4日四段全压无方向：上午多空皆虚、信号虚化（资金虚禄→情绪虚值）；午后变量集中（未时市场失锚+丁出墓、申时空方禄地打折）；运行偏弱但有承接变量，与全天略偏空底色无完全相反",
+ "nine_fields": {
+  "v0_grade": -1,
+  "cal_A": "有",
+  "cal_B": "有",
+  "cal_C": "无",
+  "a_macd": -1,
+  "qimen_a": 0,
+  "a_raw": "0",
+  "b_value": 0,
+  "path": "C维持",
+  "final_grade": -2
  },
- "actual_curve": {
-  "points": [
-   {
-    "t": 0.0208,
-    "v": 0.37
-   },
-   {
-    "t": 0.0417,
-    "v": 0.51
-   },
-   {
-    "t": 0.0625,
-    "v": 0.54
-   },
-   {
-    "t": 0.0833,
-    "v": 0.69
-   },
-   {
-    "t": 0.1042,
-    "v": 0.71
-   },
-   {
-    "t": 0.125,
-    "v": 0.56
-   },
-   {
-    "t": 0.1458,
-    "v": 0.43
-   },
-   {
-    "t": 0.1667,
-    "v": 0.47
-   },
-   {
-    "t": 0.1875,
-    "v": 0.4
-   },
-   {
-    "t": 0.2083,
-    "v": 0.5
-   },
-   {
-    "t": 0.2292,
-    "v": 0.6
-   },
-   {
-    "t": 0.25,
-    "v": 0.79
-   },
-   {
-    "t": 0.2708,
-    "v": 0.68
-   },
-   {
-    "t": 0.2917,
-    "v": 0.73
-   },
-   {
-    "t": 0.3125,
-    "v": 0.8
-   },
-   {
-    "t": 0.3333,
-    "v": 0.69
-   },
-   {
-    "t": 0.3542,
-    "v": 0.76
-   },
-   {
-    "t": 0.375,
-    "v": 0.76
-   },
-   {
-    "t": 0.3958,
-    "v": 0.92
-   },
-   {
-    "t": 0.4167,
-    "v": 1.05
-   },
-   {
-    "t": 0.4375,
-    "v": 1.17
-   },
-   {
-    "t": 0.4583,
-    "v": 1.03
-   },
-   {
-    "t": 0.4792,
-    "v": 1.09
-   },
-   {
-    "t": 0.5,
-    "v": 0.95
-   },
-   {
-    "t": 0.5208,
-    "v": 0.69
-   },
-   {
-    "t": 0.5417,
-    "v": 0.55
-   },
-   {
-    "t": 0.5625,
-    "v": 0.51
-   },
-   {
-    "t": 0.5833,
-    "v": 0.4
-   },
-   {
-    "t": 0.6042,
-    "v": 0.37
-   },
-   {
-    "t": 0.625,
-    "v": 0.24
-   },
-   {
-    "t": 0.6458,
-    "v": 0.21
-   },
-   {
-    "t": 0.6667,
-    "v": 0.15
-   },
-   {
-    "t": 0.6875,
-    "v": 0.23
-   },
-   {
-    "t": 0.7083,
-    "v": 0.25
-   },
-   {
-    "t": 0.7292,
-    "v": 0.27
-   },
-   {
-    "t": 0.75,
-    "v": 0.09
-   },
-   {
-    "t": 0.7708,
-    "v": 0.03
-   },
-   {
-    "t": 0.7917,
-    "v": -0.1
-   },
-   {
-    "t": 0.8125,
-    "v": -0.22
-   },
-   {
-    "t": 0.8333,
-    "v": -0.31
-   },
-   {
-    "t": 0.8542,
-    "v": -0.37
-   },
-   {
-    "t": 0.875,
-    "v": -0.36
-   },
-   {
-    "t": 0.8958,
-    "v": -0.35
-   },
-   {
-    "t": 0.9167,
-    "v": -0.61
-   },
-   {
-    "t": 0.9375,
-    "v": -0.35
-   },
-   {
-    "t": 0.9583,
-    "v": -0.1
-   },
-   {
-    "t": 0.9792,
-    "v": 0.24
-   },
-   {
-    "t": 1.0,
-    "v": 0.24
-   }
-  ],
-  "note": "t=交易时间归一化(0=09:30,0.5=11:30/13:00,1=15:00，午休跳段)，v=相对昨收涨跌幅%",
-  "date": "2026-10-16",
-  "source": "ifind 5分钟线48根重采集(16:45修复)"
- },
+ "verification": null,
  "strong_bottom": false,
- "strong_bottom_note": "昨日无强势底分型（10-16阴线）；G30试用轨——确认后次日标注反转观察窗",
+ "strong_bottom_note": "T-1（10-16）阴线，首条件阳线不满足→不成立；无【反转观察窗】标注",
  "accel": {
   "context": "下跌",
-  "pred": "加速",
-  "macd_side": "加速",
-  "qimen_side": "减速",
-  "qimen_hits": 4,
-  "conflict": "盘局有异",
-  "divergence": "背离观察第4候选",
-  "note": "10-16实际：盘局减速兑现——试点累计对账见加速度追踪表"
+  "pred": "减速",
+  "macd_side": "减速",
+  "qimen_side": "无方向",
+  "qimen_hits": 1,
+  "conflict": "无冲突（MACD侧优先，盘局未判加速）",
+  "divergence": "抵抗性背离候选第4样本",
+  "note": "|柱Δ|7.17→1.25收敛83%；空方被困判据命中1项<2；语境按同语境处理（若换号收盘验证端标语境切换）"
  }
 }
