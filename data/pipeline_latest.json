@@ -121,32 +121,44 @@
    {
     "name": "乙奇旺相",
     "condition": "落宫比和旺地，无四害",
-    "score": 1
+    "score": 1,
+    "base": 2,
+    "dyn": 1.22
    },
    {
     "name": "日干衰弱",
     "condition": "休/死/死三全弱极弱档",
-    "score": -1
+    "score": -1,
+    "base": -3,
+    "dyn": -2.28
    },
    {
     "name": "资金受制",
     "condition": "戊空亡（旺而空）",
-    "score": -1
+    "score": -1,
+    "base": -3,
+    "dyn": -2.22
    },
    {
     "name": "日干旺相",
     "condition": "三全弱不满足",
-    "score": 0
+    "score": 0,
+    "base": 3,
+    "dyn": 0
    },
    {
     "name": "资金旺相",
     "condition": "空亡不满足",
-    "score": 0
+    "score": 0,
+    "base": 3,
+    "dyn": 0
    },
    {
     "name": "吉格临宫",
     "condition": "无标准吉格",
-    "score": 0
+    "score": 0,
+    "base": 2,
+    "dyn": 0
    }
   ],
   "b_raw": -1,
