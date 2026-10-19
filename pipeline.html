@@ -388,6 +388,91 @@ function renderPipeline(d){
 
 /* ==================== 数据加载 ==================== */
 let pipelineData=null;
+
+/* ⭐schema 归一化（2026-10-20修复）：预测端V4.0-patch29直写格式与Step3.5旧schema并存，
+   统一映射为旧schema渲染；新字段(three_d/open_scenario/overnight_precheck)附加到output节点展示 */
+const SLOT_TIME_MAP={'巳':'09:30-10:30','午':'10:30-11:30','未':'13:00-14:00','申':'14:00-15:00'};
+function normalizeSchema(d){
+  if(!d||typeof d!=='object') return d;
+  const has=(o,k)=>o&&Object.prototype.hasOwnProperty.call(o,k);
+  /* 检测新schema：v0.bar_strength 存在而 v0.bar_score 不存在 */
+  const isNew=has(d.v0,'bar_strength')&&!has(d.v0,'bar_score');
+  if(!isNew) return d;
+
+  /* macd */
+  if(d.macd){
+    if(!has(d.macd,'cross_state')&&has(d.macd,'dead_cross_day'))
+      d.macd.cross_state='死叉延续 第'+d.macd.dead_cross_day+'日';
+    if(!has(d.macd,'precheck_note')&&has(d.macd,'bar_delta'))
+      d.macd.precheck_note='柱Δ'+(d.macd.bar_delta>0?'+':'')+d.macd.bar_delta+(d.macd.bar_delta>0?'（空方动能收敛）':'（空方动能扩大）');
+  }
+  /* v0 */
+  if(d.v0){
+    d.v0.bar_score=d.v0.bar_strength;
+    d.v0.cross_desc=d.v0.cross_desc||('死叉延续（非首日）');
+    d.v0.bar_desc=d.v0.bar_desc||('柱'+d.macd?.bar+'，|柱|>20 极值档');
+    d.v0.dif_desc=d.v0.dif_desc||'DIF≤0 且 ≤DEA';
+    d.v0.total=d.v0.raw_score;
+    d.v0.mapped=d.v0.precal;
+    const ML={'-3':'强空','-2':'中空','-1':'略偏空','0':'无方向','1':'略偏多','2':'中多','3':'强多'};
+    d.v0.mapped_label=ML[d.v0.precal]!==undefined?ML[d.v0.precal]:String(d.v0.precal);
+    d.v0.note=d.v0.note||('交叉'+d.v0.cross+'；柱体'+d.v0.bar_score+'；DIF位置'+d.v0.dif_pos);
+  }
+  /* calibration：cal_A/cal_B/cal_C 布尔 → cal_a/cal_b/cal_c 对象 */
+  if(d.calibration){
+    const c=d.calibration;
+    if(!has(c,'cal_a')){
+      c.cal_a={triggered:!!c.cal_A,strong:false,condition_val:d.macd?String(d.macd.dif):'',action:(d.v0&&d.v0.cal_A)||'',action_short:(d.v0&&d.v0.cal_A)||''};
+      c.cal_b={triggered:!!c.cal_B,detail:(d.macd&&d.macd.cross_state)||'',action:'标记趋势惯性期',action_short:(d.v0&&d.v0.cal_B)||''};
+      c.cal_c={triggered:!!c.cal_C,detail:(d.v0&&d.v0.cal_C)||''};
+      c.output_v0=(d.v0&&d.v0.grade!==undefined)?d.v0.grade:(d.v0?d.v0.precal:0);
+    }
+  }
+  /* qimen：b 迁移到 fusion */
+  if(d.qimen&&!has(d.qimen,'b')){
+    d.qimen.b_raw=d.fusion&&d.fusion.b_raw!==undefined?d.fusion.b_raw:0;
+    d.qimen.b=d.fusion&&d.fusion.b_value!==undefined?d.fusion.b_value:0;
+  }
+  /* fusion：v_cross/v_final/final_grade → v0/a_total/v */
+  if(d.fusion){
+    const f=d.fusion;
+    f.v0=d.calibration&&d.calibration.output_v0!==undefined?d.calibration.output_v0:0;
+    f.a_total=d.qimen&&d.qimen.a_total!==undefined?d.qimen.a_total:0;
+    f.v=f.v_cross!==undefined?f.v_cross:(f.v0+f.a_total);
+    f.path_explain=f.combo_lookup||f.path_explain||'';
+  }
+  /* adjust：新schema只有patch_track/strong_bottom_window */
+  if(d.adjust&&!has(d.adjust,'v_final')){
+    d.adjust={
+      v:d.fusion?d.fusion.v:0,
+      b:d.fusion&&d.fusion.b_value!==undefined?d.fusion.b_value:0,
+      v_final:d.fusion&&d.fusion.v_final!==undefined?d.fusion.v_final:0,
+      cross_zero:false,
+      patch_track:d.adjust.patch_track,
+      strong_bottom_window:d.adjust.strong_bottom_window
+    };
+  }
+  /* output：three_d/open_scenario → v_final/grade + 新字段保留 */
+  if(d.output){
+    d.output.v_final=d.fusion&&d.fusion.v_final!==undefined?d.fusion.v_final:0;
+    d.output.grade=d.fusion&&d.fusion.final_grade?d.fusion.final_grade:'—';
+  }
+  /* four_slots：slot/dim → name/time/type */
+  if(Array.isArray(d.four_slots)){
+    d.four_slots=d.four_slots.map(s=>{
+      if(s.name) return s; /* 旧格式 */
+      const name=s.slot||'—';
+      return{
+        name,
+        time:s.time||SLOT_TIME_MAP[name]||'',
+        grade:s.grade||'无方向',
+        type:s.type||(s.grade==='无方向'?'neutral':(String(s.grade).indexOf('多')>=0||String(s.grade).indexOf('强')>=0?'up':'down')),
+        note:s.note||''
+      };
+    });
+  }
+  return d;
+}
 function showDetail(key){
   document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
   const el=document.getElementById('n'+key);
@@ -529,14 +614,14 @@ async function loadData(){
   try{
     const r=await fetch('data/pipeline_latest.json',{cache:'no-store'});
     if(!r.ok) throw new Error('HTTP '+r.status);
-    pipelineData=await r.json();
+    pipelineData=normalizeSchema(await r.json());
   }catch(e){
     // fallback：尝试日期文件
     const today=new Date().toISOString().slice(0,10).replace(/-/g,'');
     try{
       const r2=await fetch(`data/pipeline_${today}.json`,{cache:'no-store'});
       if(!r2.ok) throw new Error('HTTP '+r2.status);
-      pipelineData=await r2.json();
+      pipelineData=normalizeSchema(await r2.json());
     }catch(e2){
       document.getElementById('loadingMsg').innerHTML=`
         <div class="err-banner">⚠️ 未能加载当日管线数据（${e.message} / ${e2.message}）</div>
