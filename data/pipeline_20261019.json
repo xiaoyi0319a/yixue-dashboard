@@ -144,21 +144,21 @@
     "condition": "三全弱不满足",
     "score": 0,
     "base": 3,
-    "dyn": 0
+    "dyn": null
    },
    {
     "name": "资金旺相",
     "condition": "空亡不满足",
     "score": 0,
     "base": 3,
-    "dyn": 0
+    "dyn": null
    },
    {
     "name": "吉格临宫",
     "condition": "无标准吉格",
     "score": 0,
     "base": 2,
-    "dyn": 0
+    "dyn": null
    }
   ],
   "b_raw": -1,
