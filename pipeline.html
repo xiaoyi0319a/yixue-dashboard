@@ -207,14 +207,14 @@ qimen: {
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
   ${q.palace_table?`<table style="font-size:11px">
     <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
-    ${q.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms}</td><td class="note">${p.note}</td></tr>`).join('')}
+    ${q.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
   </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/格局/生克）对应矩阵的一个格子</p>`:'<p class="note">无落宫表数据</p>'}</div>
   <div class="detail-section"><h4>② 信号判定 · 今日清单（由盘局提取，去向=点亮矩阵格）</h4>
   <table style="font-size:11px">
     <tr><th>渠道</th><th>信号</th><th>判定</th><th>基础分</th><th>系数</th><th>有效分</th></tr>
     ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td><td>${s.coef}</td><td class="${s.effective>0?'pos':'zero'}" style="font-weight:600">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-    ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>—</td><td>—</td><td class="${s.effective<0?'neg':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-    ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>—</td><td>—</td><td class="${s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
+    ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.coef!==undefined?s.coef:'—'}</td><td class="${s.effective<0?'neg':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
+    ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.coef!==undefined?s.coef:'—'}</td><td class="${s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
     ${q.b_signals.map(s=>`<tr><td style="color:#d29922">b底盘</td><td>${s.name}</td><td>${s.condition}</td><td>—</td><td>—</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join('')}
   </table></div>
   ${matrixGrid}

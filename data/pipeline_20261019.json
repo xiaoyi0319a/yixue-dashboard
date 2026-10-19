@@ -161,7 +161,7 @@
     "sky_ground": "庚+癸",
     "month_state": "囚/得生（相）/休",
     "harms": null,
-    "note": null
+    "note": "托而不健——落坎一得宫生有托，月令囚星休，弱托无压"
    },
    {
     "yongshen": "值使（振幅）",
@@ -172,7 +172,7 @@
     "sky_ground": "乙+庚",
     "month_state": null,
     "harms": null,
-    "note": null
+    "note": "杜门主闭塞，振幅受限；玄武临之，波动隐晦"
    },
    {
     "yongshen": "日干丙（价格）",
@@ -183,7 +183,7 @@
     "sky_ground": "丙+乙",
     "month_state": "休/死/死——三全弱极弱档",
     "harms": null,
-    "note": null
+    "note": "三全弱根基极薄；幸日月并行吉格+太阴天任微护，外弱有护"
    },
    {
     "yongshen": "时干癸（时机/空方帅）",
@@ -194,7 +194,7 @@
     "sky_ground": "癸+己(壬)",
     "month_state": "死/囚/墓",
     "harms": "空亡+入墓（被困）",
-    "note": null
+    "note": "空亡+入墓+死门+天蓬——空方主帅完全被困，帅困兵无令；五不遇时加身"
    },
    {
     "yongshen": "乙奇（买盘）",
@@ -205,7 +205,7 @@
     "sky_ground": "乙+庚",
     "month_state": "囚/比和（旺地）/—",
     "harms": null,
-    "note": "乙+庚日奇被刑-凶格"
+    "note": "囚月得地；日奇被刑+玄武——承接有心力打折，投机气味偏重"
    },
    {
     "yongshen": "庚（卖盘）",
@@ -216,7 +216,7 @@
     "sky_ground": "庚+癸",
     "month_state": "相/休（泄）/—",
     "harms": null,
-    "note": null
+    "note": "戌月相有底盘，居值符下受官压+庚癸大格自困——压而不决"
    },
    {
     "yongshen": "戊（资金）",
@@ -227,7 +227,7 @@
     "sky_ground": "戊+丁",
     "month_state": "旺/得生/—",
     "harms": "空亡（旺而空）",
-    "note": null
+    "note": "旺而空亡+白虎——财力虚禄，纸面充裕实则虚化"
    },
    {
     "yongshen": "生门（利润）",
@@ -238,7 +238,7 @@
     "sky_ground": "丁+丙",
     "month_state": "旺/比和/—",
     "harms": null,
-    "note": "丁入墓同宫"
+    "note": "旺相比和+星随月转+九天——今日底盘最厚处；丁入墓同宫吉力打折"
    },
    {
     "yongshen": "景门（情绪）",
@@ -249,7 +249,7 @@
     "sky_ground": "戊+丁",
     "month_state": "休/比和/—",
     "harms": "空亡",
-    "note": null
+    "note": "空亡+白虎——情绪面虚而不实"
    },
    {
     "yongshen": "天蓬（资金流向）",
@@ -260,7 +260,7 @@
     "sky_ground": "癸+己",
     "month_state": "死/受克/—",
     "harms": "空亡+入墓",
-    "note": "同宫癸"
+    "note": "死/受克+空墓同宫——资金流出呆滞"
    },
    {
     "yongshen": "开门（突破）",
@@ -271,7 +271,7 @@
     "sky_ground": "辛+戊",
     "month_state": "相/比和/—",
     "harms": null,
-    "note": null
+    "note": "相比和有气但困龙被伤——突破通道带伤，虚掩之门；马星临此，盘中或有急动"
    }
   ],
   "trial_signals": [
