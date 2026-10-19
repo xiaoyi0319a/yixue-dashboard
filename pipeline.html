@@ -234,6 +234,9 @@ R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span 
   <div class="formula">语境：${d.accel.context}｜预测：${d.accel.pred}
 MACD侧：${d.accel.macd_side}｜盘局侧：${d.accel.qimen_side}（命中${d.accel.qimen_hits}项）${d.accel.conflict?'｜<span style="color:#d29922">'+d.accel.conflict+'</span>':''}
 ${d.accel.divergence?'背离观察：'+d.accel.divergence:''}</div></div>`:''}`
+  ${d.volatility?`<div class="detail-section"><h4>⑦ 日内波动率（试点，净位移外第二维度）</h4>
+  <div class="formula">预判：<b>${d.volatility.pred}波动</b>（低<0.8%｜中0.8-1.6%｜高>1.6%）｜依据：${d.volatility.basis}
+${d.volatility.low_vol?'<span style="color:#8b949e">·低波动修饰（|净位移|≤0.3%，多空无所谓）</span>':''}${d.volatility.low_vol&&d.volatility.boost?' ｜ ':''}${d.volatility.boost?'<span style="color:#d29922">·方向助推（|净位移|≥1.2%，对方向有助推）</span>':''}${d.volatility.note?'<br>'+d.volatility.note:''}</div></div>`:''}`
   }
 },
 fusion: {
