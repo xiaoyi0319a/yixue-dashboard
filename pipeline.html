@@ -212,6 +212,13 @@ qimen: {
     const litMap={};
     const MV1ROWS=MV1.r.map(r=>r[0]);
     const unmapped=[];
+    // 四害单沾◌群：matrix_drop里state=◌且cell为"某神×四害≥2"→灰亮（0分观察群）
+    (d.matrix_drop||[]).forEach(m=>{
+      if((m.state||'').charAt(0)==='◌'&&(m.cell||'').indexOf('四害')>=0){
+        const parts=m.cell.split('×');
+        if(parts.length>=2)litMap[parts[0].trim()+'|四害≥2']=Object.assign({},m,{__observe:1});
+      }
+    });
     (d.matrix_drop||[]).forEach(m=>{
       const parts=(m.cell||'').split('×');
       if(parts.length<2){unmapped.push(m);return;}
@@ -229,7 +236,7 @@ qimen: {
         const lit=litMap[row[0]+'|'+MV1.c[ci]];
         if(lit){
           const st=lit.state||lit.cell_state||'◌';
-          const color=(STC[st.charAt(0)]||['#8b949e'])[0];
+          const color=lit.__observe?'#8b949e':(STC[st.charAt(0)]||['#8b949e'])[0];
           return `<td style="border:1px solid ${color};background:${color}18;padding:4px;vertical-align:top"><div style="color:${color};font-weight:700;font-size:10px">${st}</div><div style="color:#f0f6fc;font-weight:600;font-size:11px">${lit.signal||''}</div><div style="color:#8b949e;font-size:10px">${lit.dest||''}</div></td>`;
         }
         return `<td style="border:1px solid #21262d;padding:4px;color:#484f58;vertical-align:top"><div style="font-size:10px">${read}</div><div style="color:#30363d;font-size:9px">${id}</div></td>`;
@@ -239,7 +246,13 @@ qimen: {
     </table></div>
     ${d.matrix_global&&d.matrix_global.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${d.matrix_global.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:''}
     ${d.matrix_missing&&d.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${d.matrix_missing.map(m=>`${m.yongshen}·${m.state}`).join('；')}</p>`:''}
-    ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">◌观察行闭环：◌格日沉观察追踪表→验证端5.5.G日对账（actual_dir/hit/cum滚动）→n≥10+hit≥0.5标PROMOTE→周复盘离线回测定分→M4转正写表2-A/B/C
+    ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">${(()=>{
+      const harms=(d.palace_table||[]).map(r=>(r.harms||'无')).filter(h=>h&&h!=='无');
+      const cnt=harms.length;
+      const obsLit=(d.matrix_drop||[]).filter(m=>(m.state||'').charAt(0)==='◌'&&(m.cell||'').indexOf('四害')>=0).length;
+      return cnt>=5?`<p style="color:#d29922;font-size:12px;margin-top:6px;font-weight:700">⚠️ 四害聚集模式：全局${cnt}处（${harms.slice(0,6).join('/')}${cnt>6?'…':''}）·单沾${obsLit}格◌观察（0分）·空方内耗拉锯——计分仍看≥2格</p>`:'';
+    })()}
+    ◌观察行闭环：◌格日沉观察追踪表→验证端5.5.G日对账（actual_dir/hit/cum滚动）→n≥10+hit≥0.5标PROMOTE→周复盘离线回测定分→M4转正写表2-A/B/C
     <br>🔸格网外信号（跨宫/全局模式，84格网内无单格可点，直接计分）：${unmapped.map(m=>`${m.signal}（${m.cell}）→ ${m.dest}`).join('；')}</p>`:''}
     <p style="color:#8b949e;font-size:11px;margin-top:4px">口径统一：格内去向与下表清单均为**基础分**（系数前）；有效分=基础×当季系数的换算只在差异融合节点①（系数应用表：如生门 2×0.69→+1）</p>
     <p class="note">图例：<span style="color:#3fb950">●正式·计分</span>｜<span style="color:#d29922">⊙候选·试用轨未转正</span>｜<span style="color:#8b949e">◌观察·不计分</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）｜dest带⚠=格◌但通道实际计分→补格backlog（周复盘处理）。矩阵源：立体矩阵v2.md</p></div>`;
