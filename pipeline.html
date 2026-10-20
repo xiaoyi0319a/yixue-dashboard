@@ -119,7 +119,11 @@ macd: {
     <tr class="hl"><td>交叉状态</td><td>${d.macd.dead_cross_day?('死叉延续 第'+d.macd.dead_cross_day+'日'):'非延续期'}</td><td>${d.macd.dead_cross_day?'非交叉首日 → 交叉分计 0':'交叉首日 → 查表1-A评分'}</td></tr>
   </table></div>
   <div class="detail-section"><h4>动能变化</h4>
-  <p class="note">${d.macd.bar_delta!==null&&d.macd.bar_delta!==undefined?('柱Δ '+(d.macd.bar_delta>0?'+':'')+d.macd.bar_delta+'（'+(d.macd.bar_delta>0?'空方动能收敛':'空方动能扩大')+'）｜前柱 '+d.macd.prev_bar+'｜前前柱 '+d.macd.prev2_bar):(d.macd.precheck_note||'无特殊警示')}</p></div>`
+  <p class="note">${d.macd.bar_delta!==null&&d.macd.bar_delta!==undefined?('柱Δ '+(d.macd.bar_delta>0?'+':'')+d.macd.bar_delta+'（'+(d.macd.bar_delta>0?'空方动能收敛':'空方动能扩大')+'）｜前柱 '+d.macd.prev_bar+'｜前前柱 '+d.macd.prev2_bar):(d.macd.precheck_note||'无特殊警示')}</p></div>
+  ${d.matrix?`<div class="detail-section"><h4>🧭 MACD矩阵坐标（波段底座·试用轨只展示不计分）</h4>
+  <div class="formula">L1=${d.matrix.l1_cell} ｜ L2=${d.matrix.l2_state} ｜ L3=${d.matrix.l3.rate}×${d.matrix.l3.pos}（ratio ${d.matrix.ratio}）
+节点分 = <b>${d.matrix.score>0?'+':''}${d.matrix.score}</b>${d.matrix.signal&&d.matrix.signal!=='无'?' ｜ <span style="color:#d29922;font-weight:700">'+d.matrix.signal+'</span>':''}</div>
+  <p class="note">${d.matrix.note||''}</p></div>`:''}`
 },
 v0: {
   title:"② v₀ 三维评分（MACD底座）",
