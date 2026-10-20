@@ -252,11 +252,11 @@ qimen: {
   ${matrixGrid}
   <div class="detail-section"><h4>③ 信号判定 · 今日清单（盘局提取·只出基础分·系数归融合层）</h4>
   <table style="font-size:11px">
-    <tr><th>渠道</th><th>信号</th><th>判定</th><th>基础分</th></tr>
-    ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
-    ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
-    ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
-  </table><p class="note">只出信号+基础分（原始强度）——当季系数×基础分=有效分 的计算全部在差异融合节点①；格网外信号（网1/全局四害）见上表🔸行</p></div>
+    <tr><th>渠道</th><th>信号</th><th>格坐标（84格落点）</th><th>判定</th><th>基础分</th></tr>
+    ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td style="color:#8b949e;font-size:10px">${s.cell||'—'}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
+    ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td style="color:#8b949e;font-size:10px">${s.cell||'—'}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
+    ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td style="color:#8b949e;font-size:10px">${s.cell||'—'}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
+  </table><p class="note">只出信号+基础分（原始强度）——当季系数×基础分=有效分 的计算全部在差异融合节点①；每信号挂格坐标（84格落点，M4已回迁时干×得生/受克格）；格网外仅存全局四害（祖父条款）见🔸行</p></div>
   <div class="detail-section"><h4>④ 奇门层输出 · 用途=判底座上的加减速/反转</h4>
   <div class="formula">✅ 输出 = 今日触发信号清单（步骤②）＋ a_raw原始（步骤④基础分加总）
 → 全部送差异融合节点①：当季系数应用 → 有效分 → 调整后a_raw → 表2-D离散 → 奇门a → a总合成
