@@ -461,6 +461,20 @@ output: {
   ${o.open_scenario?`<div class="detail-section"><h4>开盘情景</h4>
   <div class="formula">${o.open_scenario}</div>
   ${o.overnight_precheck?`<p class="note" style="margin-top:4px">A50 ${o.overnight_precheck.a50}% ｜ 美股 ${o.overnight_precheck.us}<br>${o.overnight_precheck.news}</p>`:''}</div>`:''}
+  ${(()=>{
+    const g=f.final_grade||'';
+    const dir=g.indexOf('偏强')>=0||g.indexOf('偏多')>=0?'多':(g.indexOf('偏弱')>=0||g.indexOf('偏空')>=0?'空':'无');
+    const rows=[
+      ['高开',dir==='多'?'收涨方向不变；但若高开≥0.5%且后续不续攻，可能收在开盘下方——<b>假阴线</b>（情绪高开兑现）':dir==='空'?'高开是反弹窗口：冲高后回落收阴概率大':'形态随高开回落，方向中性'],
+      ['平开',dir==='多'?'阳线与定级同向（收>开）':dir==='空'?'阴线与定级同向（收<开）':'十字星/小实体概率大'],
+      ['低开',dir==='多'?'低开高走——<b>假阳线</b>场景：收>开且大概率收>昨收':dir==='空'?'低开加速下探：阴线且跌幅扩大':'低开修复观察，形态中性偏弱']];
+    return `<div class="detail-section"><h4>📎 K线形态推演注（一注·不计分·条件式）</h4>
+  <p class="note" style="margin-bottom:6px">盘前只发条件推演——今开以实测为准，10:30后按实测缺口更新日内路径叙事。此注不产生分数、不进验证端。</p>
+  <table style="font-size:12px">
+    <tr><th>今开情景</th><th>推演（定级=${g}）</th></tr>
+    ${rows.map(([a,b])=>`<tr><td style="white-space:nowrap"><b>${a}</b></td><td>${b}</td></tr>`).join('')}
+  </table></div>`;
+  })()}
   <div class="detail-section"><h4>最终映射（表4-A）</h4>
   <table>
     <tr><th>v_final</th><th>7档定级</th><th>语义锚：净涨跌幅%（口径分维度·正式）</th><th></th></tr>
