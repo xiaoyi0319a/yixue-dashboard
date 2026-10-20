@@ -4,7 +4,7 @@
  "ganzhi": "丙午年 戊戌月 丁卯日 乙巳时",
  "dun": "阴遁6局",
  "rule_version": "奇门大盘预测V4.0-patch29 / MACD融合规则V3.0-patch1 / 权重规则V2.0-patch15",
- "path": "D急停",
+ "path": "C维持",
  "macd_date": "2026-10-19",
  "macd": {
   "dif": -48.84,
@@ -78,11 +78,14 @@
  "fusion": {
   "b_raw": -1,
   "b_value": 0,
-  "v_cross": 0,
-  "v_final": 0,
-  "final_grade": "无方向",
-  "path": "D急停",
-  "combo_lookup": "新组合待验证（v₀=-1,a总=+1,D急停——统计表无记录）"
+  "v_cross": 4,
+  "v_final": 4,
+  "final_grade": "偏强",
+  "path": "C维持",
+  "combo_lookup": "V4.1当日重推（老师11:04指令）：矩阵底座v₀=+2.5（四舍五入入表3）×a总+1→v=4→b=0→v_final=4；旧口径同日=无方向·D急停(v₀-1)——分歧日已记追踪表",
+  "v0": 2.5,
+  "v0_src": "matrix",
+  "v0_int": 3
  },
  "adjust": {
   "patch_track": "现行=补丁（优化55无方向维持/优化56不触发/优化61 G3G7未触发）",
@@ -92,7 +95,7 @@
   "three_d": {
    "overnight": "微偏弱",
    "intraday": "微偏强",
-   "daily": "无方向"
+   "daily": "偏强"
   },
   "open_scenario": "平开（A50-0.04%+美股三指数齐跌+金融街论坛政策预期偏暖变量）",
   "overnight_precheck": {
@@ -129,7 +132,7 @@
  ],
  "four_slots_summary": "熔断态第6日（10-12触发未恢复）：定级全压无方向，运行特征=开局看承接→上午看压制回落→午后看底盘深度→尾盘看承接聚集",
  "nine_fields": {
-  "v0_grade": -1,
+  "v0_grade": 3,
   "cal_A": "有",
   "cal_B": "有",
   "cal_C": "无",
@@ -137,7 +140,8 @@
   "qimen_a": 1,
   "a_raw": 3,
   "b_value": 0,
-  "path": "D"
+  "path": "C",
+  "final_grade": "偏强"
  },
  "verification": {
   "status": "pending",
@@ -356,7 +360,7 @@
   "base": 2,
   "score": 2.5,
   "signal": "无",
-  "note": "矩阵+2.5偏多 vs 旧口径已删无对照；距衰竭转向触发线一步（今日|bar|再缩~10%即触发）；本波max|DIF|48.8超上段碎段10.3，后续即使转金叉大概率弱上升",
+  "note": "V4.1当日重推：矩阵v₀+2.5×a总+1=v4→偏强·C维持；深水修复级定性vs分值偏强的张力已注（系数保守初值，首日运行观察）",
   "l1_abc": [
    "up",
    "shrink",
