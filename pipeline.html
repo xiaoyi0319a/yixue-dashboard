@@ -240,6 +240,35 @@ qimen: {
     <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
     ${d.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
   </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/格局/生克）对应矩阵的一个格子</p>`:'<p class="note">无落宫表数据</p>'}</div>
+  ${(()=>{
+    const HLS='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
+    // 2026Q4当季系数快照有效分（表2-A/B/C花名册）
+    const SIGS=[
+      ['时干克日干','攻多',+2],['生门旺相','攻多',+1],
+      ['时干生日干','攻空',-2],['卖盘受制','攻空',-2],['空方受制','攻空',-2],
+      ['凶格关键宫','结构',+4],['四害双向','结构',+4],['值符空亡','结构',0]];
+    const fired=[...(q.attack_plus_signals||[]).map(x=>({...x,ch:'攻多'})),
+                 ...(q.attack_minus_signals||[]).map(x=>({...x,ch:'攻空'})),
+                 ...(q.structure_signals||[]).map(x=>({...x,ch:'结构'}))];
+    const isFired=(nm,ch)=>fired.some(f=>f.ch===ch&&(f.name||'').indexOf(nm)>=0||(f.name||'').indexOf(nm)>=0);
+    const chColor={'攻多':'#3fb950','攻空':'#f85149','结构':'#58a6ff'};
+    let sumPlus=0,sumMinus=0,sumStruct=0;
+    SIGS.forEach(g=>{if(g[1]==='攻多')sumPlus+=isFired(g[0],g[1])?g[2]:0;
+                     else if(g[1]==='攻空')sumMinus+=isFired(g[0],g[1])?-g[2]:0;
+                     else sumStruct+=isFired(g[0],g[1])?g[2]:0;});
+    const raw=sumPlus-sumMinus+sumStruct;
+    return `<div class="detail-section"><h4>⚡ 信号得分矩阵（表2-A攻多 / 2-B攻空 / 2-C结构 · 当季系数快照 · 今日触发点亮◀）</h4>
+    <table style="font-size:12px"><tr><th>信号（8信号穷举花名册）</th><th>渠道</th><th>有效分</th><th>今日</th></tr>
+    ${SIGS.map(g=>{
+      const on=isFired(g[0],g[1]);
+      const eff=g[1]==='攻空'?(on?g[2]:0)*-1:(on?g[2]:0);
+      return `<tr style="${on?'':'opacity:.45'}"><td style="${on?HLS:''}">${g[0]}${on?' ◀':''}</td>
+      <td style="color:${chColor[g[1]]}">${g[1]}</td>
+      <td style="text-align:center;${on?HLS:''}" class="${eff>0?'pos':eff<0?'neg':'zero'}">${on?(eff>0?'+':'')+eff:'—'}</td>
+      <td style="text-align:center">${on?'<span style="color:#3fb950">●触发</span>':'<span style="color:#484f58">○未触发</span>'}</td></tr>`;
+    }).join('')}</table>
+    <div class="formula" style="margin-top:6px">a_raw = 攻多Σ(+${sumPlus}) − 攻空Σ(${sumMinus}) + 结构Σ(+${sumStruct}) = <b>${raw>0?'+':''}${raw}</b> → 送表2-D压缩</div></div>`;
+  })()}
   <div class="detail-section"><h4>② 信号判定 · 今日清单（由盘局提取，去向=点亮矩阵格）</h4>
   <table style="font-size:11px">
     <tr><th>渠道</th><th>信号</th><th>判定</th><th>基础分</th><th>系数/动态</th><th>有效分</th></tr>
