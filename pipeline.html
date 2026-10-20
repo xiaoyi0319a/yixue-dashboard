@@ -124,10 +124,62 @@ v0: {
   title:"② MACD矩阵底座（V4.1正式·旧v₀三维转阴影）",
   sub:"规则：MACD融合规则 §1.1~1.2 ｜ 三维值域 +9~−9",
   render:d=>`
-  ${d.matrix?`<div class="detail-section"><h4>🧭 矩阵坐标（正式底座·v₀=节点分）</h4>
-  <div class="formula">L1=${d.matrix.l1_cell} ｜ L2=${d.matrix.l2_state} ｜ L3=${d.matrix.l3.rate}×${d.matrix.l3.pos}（ratio ${d.matrix.ratio}）
-节点分 = <b>${d.matrix.score>0?'+':''}${d.matrix.score}</b>${d.matrix.signal&&d.matrix.signal!=='无'?' ｜ <span style="color:#d29922;font-weight:700">'+d.matrix.signal+'</span>':''}</div>
-  <p class="note">${d.matrix.note||''}</p></div>`:''}
+  ${d.matrix?(()=>{
+    const m=d.matrix;
+    const HL='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
+    const segZh=m.side==='bear'?'空头':'多头';
+    const segSign=m.side==='bear'?-1:1;
+    const L1ROWS=[
+      ['收高·阳',{'expand':+1,'shrink':+2},'up','yang'],
+      ['收高·阴',{'expand':+1,'shrink':+1},'up','yin'],
+      ['收低·阳',{'expand':-1,'shrink':-1},'down','yang'],
+      ['收低·阴',{'expand':-3,'shrink':-2},'down','yin']];
+    const L3T={accel:{deep:+1.5,mid:+1.5,shallow:+1.0},decel:{deep:-0.5,mid:0,shallow:+1.0},fading:{deep:-1.0,mid:-1.5,shallow:-2.0}};
+    const rateZh={accel:'加速',decel:'减速',fading:'衰竭转向'};
+    const posZh={deep:'deep(超上段)',mid:'mid',shallow:'shallow(未及)'};
+    const l2zh={early:'初段',mid:'中段',late:'末段'};
+    const l2pos={early:1,mid:2,late:3};
+    const curL2=l2pos[m.l2_state.split('_')[1]]||2;
+    return `<div class="detail-section"><h4>🧭 今日坐标</h4>
+    <div class="formula">L1=<b>${m.l1_cell}</b> ｜ L2=${segZh}·${l2zh[m.l2_state.split('_')[1]]} ｜ L3=${rateZh[m.l3.rate]}×${m.l3.pos}（ratio ${m.ratio}）
+节点分 = <b style="font-size:15px">${m.score>0?'+':''}${m.score}</b>${m.signal&&m.signal!=='无'?' ｜ <span style="color:#d29922;font-weight:700">'+m.signal+'</span>':''}</div>
+    <p class="note">${m.note||''}</p></div>
+    <div class="detail-section"><h4>L1 单K线穷举表（次日方向基分）</h4>
+    <table style="font-size:12px"><tr><th></th><th>柱放大</th><th>柱缩小</th></tr>
+    ${L1ROWS.map(([label,vals,a,c])=>{
+      const cells=['expand','shrink'].map(b=>{
+        const on=m.l1_abc&&m.l1_abc[0]===a&&m.l1_abc[1]===b&&m.l1_abc[2]===c;
+        return `<td style="${on?HL:''};text-align:center" class="${vals[b]>0?'pos':vals[b]<0?'neg':'zero'}">${vals[b]>0?'+':''}${vals[b]}${on?' ◀':''}</td>`;
+      }).join('');
+      return `<tr><td style="white-space:nowrap">${label}</td>${cells}</tr>`;
+    }).join('')}</table></div>
+    <div class="detail-section"><h4>L2 时段坐标（金叉↔死叉周期位置）</h4>
+    <div style="display:flex;align-items:center;gap:0;margin:8px 0;font-size:11px">
+      <span style="color:#8b949e;margin-right:8px">${segZh}段${m.seg_day?('·第'+m.seg_day+'日'):''}</span>
+      ${['初段N≤3','中段','末段|bar|≤10'].map((z,i)=>{
+        const on=curL2===i+1;
+        return `<div style="flex:1;padding:6px 4px;text-align:center;border:1px solid ${on?'#1f6feb':'#30363d'};${on?HL.replace('font-weight:700','')+';':''}background:${on?'rgba(31,111,235,.25)':'#161b22'}">${z}${on?' ◀':''}</div>`;
+      }).join('')}
+      <span style="color:#8b949e;margin-left:8px">${m.side==='bear'?'→金叉':'→死叉'}=翻转</span>
+    </div></div>
+    <div class="detail-section"><h4>L3 波态穷举表（速率×相对上段极值·顺段+）</h4>
+    <table style="font-size:12px"><tr><th></th><th>deep</th><th>mid</th><th>shallow</th></tr>
+    ${Object.keys(L3T).map(r=>{
+      const cells=['deep','mid','shallow'].map(pp=>{
+        const on=m.l3.rate===r&&m.l3.pos===pp;
+        const v=L3T[r][pp];
+        return `<td style="${on?HL:''};text-align:center" class="${v>0?'pos':v<0?'neg':'zero'}">${v>0?'+':''}${v}${on?' ◀':''}</td>`;
+      }).join('');
+      return `<tr><td>${rateZh[r]}${r==='fading'?'<br><span style="color:#8b949e;font-size:10px">连缩≥2日+幅度≥20%</span>':''}</td>${cells}</tr>`;
+    }).join('')}</table>
+    <p class="note">当前段max|DIF| / 上一同向段极值 = ${m.ratio}（${m.l3.pos==='deep'?'本波已超上波·深水':m.l3.pos==='shallow'?'未及上波':'过渡'}）</p></div>
+    <div class="detail-section"><h4>底座分合成（节点分直入叉积v₀位）</h4>
+    <div class="formula">L1基分（${m.l1_cell.split('（')[0]}）　${m.base>0?'+':''}${m.base.toFixed(1)}
+＋ L2修正（${l2zh[m.l2_state.split('_')[1]]}×${segZh}=${m.l2_adj>0?'+':''}${m.l2_adj.toFixed(1)}）
+＋ L3修正（${rateZh[m.l3.rate]}×${m.l3.pos}×${segZh}=${m.l3_adj>0?'+':''}${m.l3_adj.toFixed(1)}）
+─────────────
+＝ 节点分　<b>${m.score>0?'+':''}${m.score}</b>（限幅±3）</div></div>`;
+  })():''}
   ${d.v0?`<div class="detail-section"><h4>三维评分（旧口径·≤10-24历史归档）</h4>
   <table>
     <tr><th>维度</th><th>判定</th><th>分值</th><th>依据</th></tr>
