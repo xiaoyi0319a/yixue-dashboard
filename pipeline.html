@@ -212,9 +212,24 @@ qimen: {
       ["九地","势沉空|◌|","—|◌|","跌势收敛多|⊙|G25","—|◌|","—|◌|","—|◌|","—|◌|"],
       ["天蓬","流入多|◌|","流出空|◌|","流入受阻空|⊙|G26","—|◌|","—|◌|","空|⊙|G26","—|◌|"]
     ]};
+    const colMap=st=>{
+      if(/旺|当令/.test(st))return '旺/当令';
+      if(/四害/.test(st))return '四害≥2';
+      if(/凶格/.test(st))return '凶格临宫';
+      if(/吉格/.test(st))return '吉格临宫';
+      if(/空亡/.test(st))return '空亡';
+      if(/休囚|衰/.test(st))return '休囚死/衰';
+      if(/受克|得生/.test(st))return '得生/受克';
+      return null;
+    };
     const litMap={};
-    (q.matrix_drop||[]).forEach(m=>{litMap[m.yongshen+'|'+m.col]=m});
-    const matrixGrid=`<div class="detail-section"><h4>③ 矩阵点亮 · 立体矩阵v1格网（今日${(d.matrix_drop||[]).length}/84格点亮）</h4>
+    (d.matrix_drop||[]).forEach(m=>{
+      const parts=(m.cell||'').split('×');
+      if(parts.length<2)return;
+      const ys=parts[0].trim(), col=colMap(parts[1]||'');
+      if(ys&&col)litMap[ys+'|'+col]=m;
+    });
+    const matrixGrid=`<div class="detail-section"><h4>② 矩阵点亮 · 立体矩阵v1格网（今日${(d.matrix_drop||[]).length}/84格点亮）</h4>
     <div style="overflow-x:auto"><table style="font-size:11px;border-collapse:collapse;table-layout:fixed;min-width:900px;width:100%">
     <tr><th style="padding:4px;background:#1f2937;color:#8b949e;text-align:left;font-weight:400">用神\状态</th>${MV1.c.map(c=>`<th style="padding:4px;background:#1f2937;color:#8b949e;font-weight:400;font-size:10px">${c}</th>`).join('')}</tr>
     ${MV1.r.map(row=>{
@@ -240,49 +255,21 @@ qimen: {
     <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
     ${d.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
   </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/格局/生克）对应矩阵的一个格子</p>`:'<p class="note">无落宫表数据</p>'}</div>
-  <div class="detail-section"><h4>② 信号判定 · 今日清单（盘局提取·只出基础分·系数归融合层）</h4>
+  ${matrixGrid}
+  <div class="detail-section"><h4>③ 信号判定 · 今日清单（盘局提取·只出基础分·系数归融合层）</h4>
   <table style="font-size:11px">
     <tr><th>渠道</th><th>信号</th><th>判定</th><th>基础分</th></tr>
     ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
     ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
     ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
   </table><p class="note">只出信号+基础分（原始强度）——当季系数×基础分=有效分 的计算全部在差异融合节点①（微调系数归口层）</p></div>
-  ${matrixGrid}
-  ${(()=>{
-    const HLS='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
-    // 表2-A/B/C花名册·基础分（统一基础分2·原始强度未乘系数）
-    const SIGS=[
-      ['时干克日干','攻多',+2],['生门旺相','攻多',+2],
-      ['时干生日干','攻空',+2],['卖盘受制','攻空',+2],['空方受制','攻空',+2],
-      ['凶格关键宫','结构',+2],['四害双向','结构',+2],['值符空亡','结构',+2]];
-    const fired=[...(q.attack_plus_signals||[]).map(x=>({...x,ch:'攻多'})),
-                 ...(q.attack_minus_signals||[]).map(x=>({...x,ch:'攻空'})),
-                 ...(q.structure_signals||[]).map(x=>({...x,ch:'结构'}))];
-    const isFired=(nm,ch)=>fired.some(f=>f.ch===ch&&(f.name||'').indexOf(nm)>=0||(f.name||'').indexOf(nm)>=0);
-    const chColor={'攻多':'#3fb950','攻空':'#f85149','结构':'#58a6ff'};
-    let sumPlus=0,sumMinus=0,sumStruct=0;
-    SIGS.forEach(g=>{if(g[1]==='攻多')sumPlus+=isFired(g[0],g[1])?g[2]:0;
-                     else if(g[1]==='攻空')sumMinus+=isFired(g[0],g[1])?-g[2]:0;
-                     else sumStruct+=isFired(g[0],g[1])?g[2]:0;});
-    const raw=sumPlus-sumMinus+sumStruct;
-    return `<div class="detail-section"><h4>④ 信号得分矩阵（表2-A/B/C穷举花名册·基础分点亮◀·原始强度）</h4>
-    <table style="font-size:12px"><tr><th>信号（8信号穷举）</th><th>渠道</th><th>基础分</th><th>今日</th></tr>
-    ${SIGS.map(g=>{
-      const on=isFired(g[0],g[1]);
-      const eff=g[1]==='攻空'?(on?g[2]:0)*-1:(on?g[2]:0);
-      return `<tr style="${on?'':'opacity:.45'}"><td style="${on?HLS:''}">${g[0]}${on?' ◀':''}</td>
-      <td style="color:${chColor[g[1]]}">${g[1]}</td>
-      <td style="text-align:center;${on?HLS:''}" class="${eff>0?'pos':eff<0?'neg':'zero'}">${on?(eff>0?'+':'')+eff:'—'}</td>
-      <td style="text-align:center">${on?'<span style="color:#3fb950">●触发</span>':'<span style="color:#484f58">○未触发</span>'}</td></tr>`;
-    }).join('')}</table>
-    <div class="formula" style="margin-top:6px">a_raw（原始·基础分口径）= 攻多Σ(+${sumPlus}) − 攻空Σ(${sumMinus}) + 结构Σ(+${sumStruct}) = <b>${raw>0?'+':''}${raw}</b>
-→ 送差异融合节点①：当季系数应用 → 有效分 → 调整后a_raw → 表2-D → 奇门a</div></div>`;
-  })()}
-  <div class="detail-section"><h4>⑤ 奇门层输出（原始读数·零系数计算）</h4>
+  <div class="detail-section"><h4>④ 奇门层输出 · 用途=判底座上的加减速/反转</h4>
   <div class="formula">✅ 输出 = 今日触发信号清单（步骤②）＋ a_raw原始（步骤④基础分加总）
 → 全部送差异融合节点①：当季系数应用 → 有效分 → 调整后a_raw → 表2-D离散 → 奇门a → a总合成
-（R反转检查·离散映射·a总 全部在融合层执行——微调系数归口，改系数只动融合层）</div></div>
-  ${q.trial_signals?`<div class="detail-section"><h4>⑥ 试用触发 · 表2-T（转正评估中，不进现行轨）</h4>
+（R反转检查·离散映射·a总 全部在融合层执行——微调系数归口）
+
+【用途】奇门a与a_macd在融合层合成a总 → 叉积表与底座v₀相加（v=v₀+a总）= 判底座上的加减速；R触发（|a_raw|≥阈值）时直接反转底座方向（v=-sign(v₀)×2）</div></div>
+  ${q.trial_signals?`<div class="detail-section"><h4>⑤ 试用触发 · 表2-T（G3利润通道受损/G7资金虚化/G20大势失托——转正评估双轨旁路，不进现行定级）</h4>
   <table style="font-size:11px">
     <tr><th>试用ID</th><th>今日判定</th></tr>
     ${Object.entries(q.trial_signals).map(([id,txt])=>`<tr><td>${id}</td><td style="color:${String(txt).indexOf('触发')===0||String(txt).indexOf('⚡')===0?'#d29922':'#484f58'};font-weight:${String(txt).indexOf('未触发')===0?'400':'600'}">${txt}</td></tr>`).join('')}
