@@ -335,12 +335,12 @@ a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇�
   <p class="note">明细清单在JSON matrix_drop（28条·格坐标+编号+判定全量）｜基础分按严重度档锁死（大凶大吉3｜普通2｜四害/四喜1.5）｜周复盘只调层系数与严重度基数，单格只走错题本</p>`;
   })()}
   </div>
-  <div class="detail-section"><h4>④ 奇门层输出 · 用途=判底座上的加减速/反转</h4>
+  <div class="detail-section"><h4>④ 奇门层输出 · 用途=判底座上的加减速</h4>
   <div class="formula">✅ 输出 = 今日触发信号清单 ＋ a_raw（③层内加总×层系数·三合一=攻多−攻空+结构）
 → 送差异融合节点①：表2-D离散 → 奇门a → a总合成
-（R反转检查·离散映射·a总 在融合层执行）
+（离散映射·a总 在融合层执行；⭐反转已移至定级输出层求解——本层不做反向，只输出正常信号）
 
-【用途】奇门a与a_macd合成a总 → v=v₀+a总 = 判底座上的加减速；R触发（|a_raw|≥阈值）时直接反转底座方向（v=-sign(v₀)×2）</div></div>`
+【用途】奇门a与a_macd合成a总 → v=v₀+a总 = 判底座上的加减速</div></div>`
 
   }
 },
@@ -407,7 +407,7 @@ v = ${v0v>0?'+':''}${v0v} + ${aT>0?'+':''}${aT} = ${vX>0?'+':''}${vX} ｜ |v| �
 
 v₀=0特例（表3-B）：${v0v===0?'<span class="badge warn">适用</span>':'不适用（v₀≠0）'}
 |v₀|=4回退（表3-C）：${Math.abs(v0v)===4?'<span class="badge warn">适用</span>':'不适用（|v₀|≤3）'}
-R反转检查（表2-E）：|a_raw|=${Math.abs(d.qimen.a_raw)} ${d.qimen.r_triggered?'<span class="badge warn">触发R → v=-sign(v₀)×2</span>':'<span class="badge off">&lt; 阈值'+d.qimen.r_threshold+' 未触发</span>'}</div></div>
+⭐R反转已退役（20-41老师指令）：反转移至定级输出层，本层只输出正常信号</div></div>
   <div class="detail-section"><h4>③ 叉积表定位（表3-A·v=v₀+a总）</h4>
   <table class="cross-table">
     <tr><th>v₀＼a</th>${aCols.map(c=>`<th>${c}</th>`).join('')}</tr>
