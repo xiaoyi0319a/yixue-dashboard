@@ -386,6 +386,7 @@ a总 = ${am>0?'+':''}${am} + ${qa>0?'+':''}${qa} = <b>${aT>0?'+':''}${aT}</b> �
     <p class="note">今日柱：${b}｜前柱：${pb}｜前前柱：${p2}（${b<0?'绿柱':'红柱'}，${fIdx===2?'连续放大':fIdx===3?'连续缩小':'变化不连续→0'}）</p>`;
   })()}</div>
   <div class="detail-section"><h4>Step 2 叉积——查表3-A（v = v₀ + a总）</h4>
+  <p class="note" style="margin:2px 0 4px">⭐底座分 v₀ 从②MACD矩阵底座<strong>直入本步</strong>（不参与Step1会师——MACD家族拆两半：矩阵分=位置走v₀位，柱线惯性=油门走会师）</p>
   <div class="formula">v₀ = ${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0+'→入表'+fmtV(v0v)):fmtV(v0v)}（矩阵底座分） ｜ a总 = ${aT>0?'+':''}${aT}
 v = ${fmtV(v0v)} + ${aT>0?'+':''}${aT} = <b>${vX>0?'+':''}${vX}</b> ｜ |v| ≤ 4 ✓</div>
   <table class="cross-table" style="margin-top:6px">
