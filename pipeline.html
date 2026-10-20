@@ -241,7 +241,7 @@ qimen: {
     ${d.matrix_missing&&d.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${d.matrix_missing.map(m=>`${m.yongshen}·${m.state}`).join('；')}</p>`:''}
     ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">◌观察行闭环：◌格日沉观察追踪表→验证端5.5.G日对账（actual_dir/hit/cum滚动）→n≥10+hit≥0.5标PROMOTE→周复盘离线回测定分→M4转正写表2-A/B/C
     <br>🔸格网外信号（跨宫/全局模式，84格网内无单格可点，直接计分）：${unmapped.map(m=>`${m.signal}（${m.cell}）→ ${m.dest}`).join('；')}</p>`:''}
-    <p style="color:#8b949e;font-size:11px;margin-top:4px">口径：格内"→a攻多+1"=有效分（基础×当季系数后）；清单"基础分+2"=系数前——统一换算在差异融合节点①（例：生门旺相 2×0.69→+1）</p>
+    <p style="color:#8b949e;font-size:11px;margin-top:4px">口径统一：格内去向与下表清单均为**基础分**（系数前）；有效分=基础×当季系数的换算只在差异融合节点①（系数应用表：如生门 2×0.69→+1）</p>
     <p class="note">图例：<span style="color:#3fb950">●正式·计分</span>｜<span style="color:#d29922">⊙候选·试用轨未转正</span>｜<span style="color:#8b949e">◌观察·不计分</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）｜dest带⚠=格◌但通道实际计分→补格backlog（周复盘处理）。矩阵源：立体矩阵v2.md</p></div>`;
     return `
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
