@@ -252,7 +252,8 @@ qimen: {
     </table></div>
     ${d.matrix_global&&d.matrix_global.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${d.matrix_global.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:''}
     ${d.matrix_missing&&d.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${d.matrix_missing.map(m=>`${m.yongshen}·${m.state}`).join('；')}</p>`:''}
-    ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">🔸格网外信号（跨宫/全局模式，84格网内无单格可点，直接计分）：${unmapped.map(m=>`${m.signal}（${m.cell}）→ ${m.dest}`).join('；')}</p>`:''}
+    ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">◌观察行闭环：◌格日沉观察追踪表→验证端5.5.G日对账（actual_dir/hit/cum滚动）→n≥10+hit≥0.5标PROMOTE→周复盘离线回测定分→M4转正写表2-A/B/C
+    <br>🔸格网外信号（跨宫/全局模式，84格网内无单格可点，直接计分）：${unmapped.map(m=>`${m.signal}（${m.cell}）→ ${m.dest}`).join('；')}</p>`:''}
     <p style="color:#8b949e;font-size:11px;margin-top:4px">口径：格内"→a攻多+1"=有效分（基础×当季系数后）；清单"基础分+2"=系数前——统一换算在差异融合节点①（例：生门旺相 2×0.69→+1）</p>
     <p class="note">图例：<span style="color:#3fb950">●正式·计分</span>｜<span style="color:#d29922">⊙候选·试用轨未转正</span>｜<span style="color:#8b949e">◌观察·不计分</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）｜dest带⚠=格◌但通道实际计分→补格backlog（周复盘处理）。矩阵源：立体矩阵v2.md</p></div>`;
     return `
@@ -274,12 +275,8 @@ qimen: {
 → 全部送差异融合节点①：当季系数应用 → 有效分 → 调整后a_raw → 表2-D离散 → 奇门a → a总合成
 （R反转检查·离散映射·a总 全部在融合层执行——微调系数归口）
 
-【用途】奇门a与a_macd在融合层合成a总 → 叉积表与底座v₀相加（v=v₀+a总）= 判底座上的加减速；R触发（|a_raw|≥阈值）时直接反转底座方向（v=-sign(v₀)×2）</div></div>
-  ${q.trial_signals?`<div class="detail-section"><h4>⑤ 试用触发 · 表2-T（G3利润通道受损/G7资金虚化/G20大势失托——转正评估双轨旁路，不进现行定级）</h4>
-  <table style="font-size:11px">
-    <tr><th>试用ID</th><th>今日判定</th></tr>
-    ${Object.entries(q.trial_signals).map(([id,txt])=>`<tr><td>${id}</td><td style="color:${String(txt).indexOf('触发')===0||String(txt).indexOf('⚡')===0?'#d29922':'#484f58'};font-weight:${String(txt).indexOf('未触发')===0?'400':'600'}">${txt}</td></tr>`).join('')}
-  </table></div>`:''}`
+【用途】奇门a与a_macd在融合层合成a总 → 叉积表与底座v₀相加（v=v₀+a总）= 判底座上的加减速；R触发（|a_raw|≥阈值）时直接反转底座方向（v=-sign(v₀)×2）</div></div>`
+
   }
 },
 fusion: {
