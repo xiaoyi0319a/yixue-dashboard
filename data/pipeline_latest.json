@@ -44,29 +44,32 @@
   "r_threshold": 10,
   "attack_plus_signals": [
    {
-    "name": "生门旺相",
+    "name": "生门旺相（A3）",
     "condition": "戌月土旺当令+落离九得火生+无门迫（Q4系数0.69）",
     "base": 2,
     "coef": 0.69,
-    "effective": 1
+    "effective": 1,
+    "cell": "生门×旺/当令"
    }
   ],
   "attack_minus_signals": [
    {
-    "name": "时干生日干（M4互换读法）",
+    "name": "时干生日干（A2·M4互换读法）",
     "condition": "时干乙木落乾六生日干丁火（M4口径=攻空，272天实证日均-0.32%）",
     "base": 2,
     "coef": 1.0,
-    "effective": 2
+    "effective": 2,
+    "cell": "时干×得生/受克"
    }
   ],
   "structure_signals": [
    {
-    "name": "四害双向损伤",
+    "name": "四害双向（全局·祖父条款）",
     "condition": "全局四害7处（门迫4+入墓1+空亡2）≥5且空方核心时干沾景门迫",
     "base": 2,
     "coef": 2.0,
-    "effective": 4
+    "effective": 4,
+    "cell": "格网外·全局四害（祖父条款）"
    }
   ],
   "trial_signals": {
@@ -169,8 +172,8 @@
  },
  "matrix_drop": [
   {
-   "signal": "时干生日干（M4）",
-   "cell": "网1时干宫×日干宫·生",
+   "signal": "时干生日干（A2·M4互换）",
+   "cell": "时干×得生/受克",
    "state": "●",
    "read": "空",
    "dest": "a攻空+2"
