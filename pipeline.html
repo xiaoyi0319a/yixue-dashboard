@@ -299,7 +299,7 @@ adjust: {
     <tr><td>限幅</td><td>|v+b|≤4</td><td>|${vF}|≤4 ✓</td></tr>
   </table></div>
   <div class="formula">v_final = v + b = ${vX>0?'+':''}${vX} + ${b>0?'+':''}${b} = ${vF>0?'+':''}${vF}</div>
-  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}${d.adjust.patch_track?'<br>'+d.adjust.patch_track:''}${d.adjust.strong_bottom_window?'<br><span style="color:#d29922">🔻 强势底分型反转观察窗生效中</span>':''}</p>`
+  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}${d.adjust.patch_track?'<br>'+d.adjust.patch_track:''}</p>`
   }
 },
 output: {
@@ -358,7 +358,7 @@ function renderPipeline(d){
   // header
   document.getElementById('hdrDate').textContent = `${d.date_display||d.date} · ${d.ganzhi||''} · ${d.dun||''}`;
   const gEl=document.getElementById('hdrGrade');
-  gEl.innerHTML = `最终定级：<b>${d.fusion.final_grade}</b> · 路径 ${d.path}${d.strong_bottom?' · <span style="background:#d29922;color:#0d1117;padding:2px 10px;border-radius:10px;font-weight:700">🔻 昨日强势底分型·反转观察窗</span>':''}`;
+  gEl.innerHTML = `最终定级：<b>${d.fusion.final_grade}</b> · 路径 ${d.path}`;
 
   const nodes=[
     {key:'macd',active:true,html:`
@@ -474,8 +474,7 @@ function normalizeSchema(d){
   if(f.combo_lookup===undefined) f.combo_lookup=f.path_explain||'';
   /* adjust：新语义=补丁追踪 */
   d.adjust={
-    patch_track:'（旧格式归档数据，无补丁追踪）',
-    strong_bottom_window:(d.strong_bottom===1||d.strong_bottom===true)
+    patch_track:'（旧格式归档数据，无补丁追踪）'
   };
   /* output：新语义=三维+开盘情景+隔夜预检（旧数据无，置空由渲染层兜底） */
   d.output={
