@@ -180,7 +180,7 @@ v0: {
 ─────────────
 ＝ 节点分　<b>${m.score>0?'+':''}${m.score}</b>（限幅±3）</div></div>`;
   })():''}
-  ${d.v0?`<div class="detail-section"><h4>三维评分（旧口径·≤10-24历史归档）</h4>
+  ${d.v0&&!d.matrix?`<div class="detail-section"><h4>三维评分（旧口径·≤10-24历史归档）</h4>
   <table>
     <tr><th>维度</th><th>判定</th><th>分值</th><th>依据</th></tr>
     <tr><td>交叉分级</td><td>${d.v0.cross===0?'死叉延续（非首日）':d.v0.cross>0?'金叉':'死叉'}</td><td class="${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</td><td>表1-A</td></tr>
@@ -276,7 +276,7 @@ fusion: {
   sub:"规则：MACD融合规则 §3.1 表3-A ｜ 纯加法限幅±4",
   render:d=>{
     const f=d.fusion;
-    const v0v=d.v0.grade;
+    const v0v=d.fusion.v0_int!==undefined?d.fusion.v0_int:(d.fusion.v0!==undefined?d.fusion.v0:d.v0.grade);
     const aT=d.qimen.a_total;
     const vX=f.v_cross;
     const v0Labels={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
@@ -288,7 +288,7 @@ fusion: {
     const aIdx=aCols.indexOf(fmtA(aT));
     return `
   <div class="detail-section"><h4>计算</h4>
-  <div class="formula">v₀ = ${v0v>0?'+':''}${v0v} ｜ a总 = ${aT>0?'+':''}${aT}
+  <div class="formula">v₀ = ${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0+'→入表'+v0v):((v0v>0?'+':'')+v0v)} ｜ a总 = ${aT>0?'+':''}${aT}
 v = ${v0v>0?'+':''}${v0v} + ${aT>0?'+':''}${aT} = ${vX>0?'+':''}${vX} ｜ |v| ≤ 4 ✓
 
 v₀=0特例（表3-B）：${v0v===0?'<span class="badge warn">适用</span>':'不适用（v₀≠0）'}
@@ -405,7 +405,7 @@ function renderPipeline(d){
       <span class="k">离散映射</span> <span class="v">a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> ｜ <span class="k">R检查</span> ${d.qimen.r_triggered?'<span class="badge warn">触发</span>':`<span class="badge off">未触发</span>（|a_raw|=${Math.abs(d.qimen.a_raw)} &lt; ${d.qimen.r_threshold}）`}<br>
       <span class="k">a_macd</span> <span class="v zero">${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}</span> → <span class="k">a总</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> ｜ <span class="k">b底盘</span> <span class="v ${d.fusion.b_value>0?'pos':d.fusion.b_value<0?'neg':'zero'}">${d.fusion.b_value>0?'+':''}${d.fusion.b_value}</span>`},
     {key:'fusion',active:true,html:`
-      <span class="k">v = 底座 + a总 = </span><span class="v ${(d.matrix?d.matrix.score:d.v0.grade)>0?'pos':(d.matrix?d.matrix.score:d.v0.grade)<0?'neg':'zero'}">${(d.matrix?d.matrix.score:d.v0.grade)>0?'+':''}${d.matrix?d.matrix.score:d.v0.grade}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span><br>
+      <span class="k">v = v₀ + a总 = </span><span class="v ${d.fusion.v0_src==='matrix'?'':'zero'}">${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0):'?'}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>${d.fusion.v0_src==='matrix'?'<br><span class="k" style="color:#3fb950">v₀=矩阵底座分</span>':''}<br>
       <span class="k">查表3-A</span> <span class="v">v₀=${d.v0.grade>0?'+':''}${d.v0.grade} × a=${d.qimen.a_total>0?'+':''}${d.qimen.a_total} → v=${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>`},
     {key:'adjust',active:d.fusion.b_value!==0,html:`
       <span class="k">b = ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} ${d.fusion.b_value===0?'→ 不生效':'→ 生效'}</span><br>
