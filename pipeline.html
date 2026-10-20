@@ -251,7 +251,8 @@ qimen: {
     });
     const litCnt=Object.keys(litMap).length;
     const scoreCnt=Object.values(litMap).filter(v=>!v.__observe&&(v.state||'').charAt(0)==='●').length;
-    const matrixGrid=`<div class="detail-section"><h4>② 矩阵点亮 · 立体矩阵格网（今日${litCnt}/108格点亮·13用神×8状态104格+全局行4格·亮即计分）</h4>
+    const mm=(d.qimen&&d.qimen.matrix_meta)||{穷举口径:108,说明:'13用神×8状态104格+全局行4格'};
+    const matrixGrid=`<div class="detail-section"><h4>② 矩阵点亮 · 立体矩阵格网（今日${litCnt}/${mm.穷举口径}格点亮·${mm.说明}·亮即计分）</h4>
     <div style="overflow-x:auto"><table style="font-size:11px;border-collapse:collapse;table-layout:fixed;min-width:900px;width:100%">
     <tr><th style="padding:4px;background:#1f2937;color:#8b949e;text-align:left;font-weight:400">用神\状态</th>${MV1.c.map(c=>`<th style="padding:4px;background:#1f2937;color:#8b949e;font-weight:400;font-size:10px">${c}</th>`).join('')}</tr>
     ${MV1.r.map(row=>{
@@ -276,16 +277,9 @@ qimen: {
     <p style="color:#8b949e;font-size:11px;line-height:1.7;margin-bottom:6px">九宫格是<b>地图</b>（9个位置），用神是<b>角色</b>（13个人）——13个角色走进9个宫位，同宫就各读各的：<b>宫位本身无吉凶，吉凶长在"角色×宫位"的关系里</b>（同一场雨，对炮兵是阻碍，对工兵是掩护）。每行从该角色视角独立判定，8列=旺衰/四害/四喜/凶格/吉格/空亡/生克。</p>
     <table style="font-size:11px;margin-bottom:6px">
       <tr><th style="text-align:left;color:#8b949e;padding:2px 8px 2px 0">要回答的问题</th><th style="text-align:left;color:#8b949e;padding:2px 0">角色（行首名）</th></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">主客双方</td><td style="padding:2px 0;color:#c9d1d9">日干（价格/我方）、时干（时机·空方帅/对方）</td></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">多空力量</td><td style="padding:2px 0;color:#c9d1d9">庚（卖盘/抛压）、乙奇（买盘/承接）</td></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">弹药</td><td style="padding:2px 0;color:#c9d1d9">戊（资金/本金）</td></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">盈亏与情绪</td><td style="padding:2px 0;color:#c9d1d9">生门（利润）、景门（情绪/成交）</td></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">形态通道</td><td style="padding:2px 0;color:#c9d1d9">开门（突破通道）</td></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">空间势能</td><td style="padding:2px 0;color:#c9d1d9">九天（攻势/涨能）、九地（守势/托底）</td></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">资金面</td><td style="padding:2px 0;color:#c9d1d9">天蓬（流入/流出）</td></tr>
-      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">指挥系统</td><td style="padding:2px 0;color:#c9d1d9">值符（大势/元帅）、值使门（执行/振幅）</td></tr>
+      ${((d.qimen&&d.qimen.roles_legend)||[]).map(r=>`<tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">${r.问题}</td><td style="padding:2px 0;color:#c9d1d9">${r.角色}</td></tr>`).join('')}
     </table>
-    <p style="color:#8b949e;font-size:11px;line-height:1.7">三张表分工：<b>九宫格</b>=盘面地图 → <b>落宫表</b>（①节）=各就各位 → <b>立体矩阵</b>=状态评估。<br>格网共14行：13角色行 + 第14行「全局」=G89伏吟/G90反吟/G91马星动/G92空亡集中（盘面节奏与波动能量，归结构渠道·G92为首个负分格）。<br>图例：●计分｜⊙候选｜◌观察｜格内灰字=格定义读法（未点亮）。矩阵源：立体矩阵v2.4（13×8+全局4格）</p>
+    <p style="color:#8b949e;font-size:11px;line-height:1.7">三张表分工：<b>九宫格</b>=盘面地图 → <b>落宫表</b>（①节）=各就各位 → <b>立体矩阵</b>=状态评估。<br>格网共${(d.qimen&&d.qimen.matrix_meta&&d.qimen.matrix_meta.行数)||14}行：13角色行 + 第14行「全局」=G89伏吟/G90反吟/G91马星动/G92空亡集中（盘面节奏与波动能量，归结构渠道·G92为首个负分格）。<br>图例：●计分｜⊙候选｜◌观察｜格内灰字=格定义读法（未点亮）。矩阵源：立体矩阵v2.4（${mm?mm.说明:'13×8+全局4格'}）</p>
     </div></div>`;
     return `
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
@@ -312,7 +306,7 @@ qimen: {
   <div class="detail-section"><h4>③ 信号判定 · 今日清单（⭐层内加总×层系数·三渠道合成）</h4>
   ${(()=>{
     const YL={'日干':'核心','时干':'核心','值符':'核心','值使门':'核心','值使':'核心','庚':'力量','乙奇':'力量','戊':'力量','生门':'力量','开门':'力量','景门':'衍生','九天':'衍生','九地':'衍生','天蓬':'衍生','玄武':'衍生'};
-    const LC={'核心':1.5,'力量':1.0,'衍生':0.5};
+    const LC=(d.qimen&&d.qimen.layer_coef)||{'核心':1.5,'力量':1.0,'衍生':0.5};
     const layerOf=s=>{const c=(s.cell||'').split('×')[0].trim();return YL[c]||null;};
     const num=v=>{const n=parseFloat(v);return isNaN(n)?0:n;};
     const all=[...(q.attack_plus_signals||[]).map(s=>({...s,ch:'攻多',color:'#3fb950'})),
@@ -326,13 +320,15 @@ qimen: {
     const aRaw=+(ap.v-am.v+st.v).toFixed(2);
     const term=(ly,v)=>v?`${LC[ly]}×${ly}(${v})`:'';
     const formula=(o)=>[term('核心',o.c),term('力量',o.f),term('衍生',o.d)].filter(Boolean).join(' + ')||'0';
-    return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：
+    const cl=(d.qimen&&d.qimen.channel_legend)||{攻多:'—',攻空:'—',结构:'—'};
+  const fn=(d.qimen&&d.qimen.formula_note)||'';
+  return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：
 攻多a_raw = ${formula(ap)} = ${ap.v>0?'+':''}${ap.v}
 攻空a_raw = ${formula(am)} = ${am.v>0?'+':''}${am.v}
 结构a_raw = ${formula(st)} = ${st.v>0?'+':''}${st.v}
 ─────────────────
 a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇门a（映射压缩在融合节点①）</div>
-  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=多方得势信号——值符托举/敌方（时干）衰弱受创/生门利润当令/资金充沛/通道开/吉格临资金/价格通气有根<br><span style="color:#f85149">攻空</span>=空方压制信号——庚旺/乙奇乏力受制/日干身弱受制/时干生日干（M4口径）/门迫系列/情绪低迷受创/资金流出/空亡虚化受克<br><span style="color:#58a6ff">结构</span>=振幅能量信号——值使门行G68~G75（幅度）+全局行G89~G92（节奏与波动·G92空亡集中−1.5为负分格）<br>每层内=点亮格基础分相加×层系数（核心1.5/力量1.0/衍生0.5）；明细清单在JSON matrix_drop（28条全量）</p>`;
+  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=${cl.攻多}<br><span style="color:#f85149">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`;
   })()}
   </div>`
 
