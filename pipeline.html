@@ -118,18 +118,17 @@ macd: {
     <tr><td>柱 (DIF−DEA)×2</td><td style="color:${d.macd.bar<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.bar}</td><td>${Math.abs(d.macd.bar)>20?'|柱|>20 极值档（柱体±3）':Math.abs(d.macd.bar)>10?'|柱|10~20（柱体±2）':Math.abs(d.macd.bar)>3?'|柱|3~10（柱体±1）':'|柱|<3（柱体0）'}</td></tr>
     <tr class="hl"><td>交叉状态</td><td>${d.macd.dead_cross_day?('死叉延续 第'+d.macd.dead_cross_day+'日'):'非延续期'}</td><td>${d.macd.dead_cross_day?'非交叉首日 → 交叉分计 0':'交叉首日 → 查表1-A评分'}</td></tr>
   </table></div>
-  <div class="detail-section"><h4>动能变化</h4>
-  <p class="note">${d.macd.bar_delta!==null&&d.macd.bar_delta!==undefined?('柱Δ '+(d.macd.bar_delta>0?'+':'')+d.macd.bar_delta+'（'+(d.macd.bar_delta>0?'空方动能收敛':'空方动能扩大')+'）｜前柱 '+d.macd.prev_bar+'｜前前柱 '+d.macd.prev2_bar):(d.macd.precheck_note||'无特殊警示')}</p></div>
-  ${d.matrix?`<div class="detail-section"><h4>🧭 MACD矩阵坐标（波段底座·试用轨只展示不计分）</h4>
-  <div class="formula">L1=${d.matrix.l1_cell} ｜ L2=${d.matrix.l2_state} ｜ L3=${d.matrix.l3.rate}×${d.matrix.l3.pos}（ratio ${d.matrix.ratio}）
-节点分 = <b>${d.matrix.score>0?'+':''}${d.matrix.score}</b>${d.matrix.signal&&d.matrix.signal!=='无'?' ｜ <span style="color:#d29922;font-weight:700">'+d.matrix.signal+'</span>':''}</div>
-  <p class="note">${d.matrix.note||''}</p></div>`:''}`
+  <p class="note" style="margin-top:8px">${d.macd.precheck_note||''}</p>`
 },
 v0: {
   title:"② MACD矩阵底座（V4.1正式·旧v₀三维转阴影）",
   sub:"规则：MACD融合规则 §1.1~1.2 ｜ 三维值域 +9~−9",
   render:d=>`
-  <div class="detail-section"><h4>三维评分</h4>
+  ${d.matrix?`<div class="detail-section"><h4>🧭 矩阵坐标（正式底座·v₀=节点分）</h4>
+  <div class="formula">L1=${d.matrix.l1_cell} ｜ L2=${d.matrix.l2_state} ｜ L3=${d.matrix.l3.rate}×${d.matrix.l3.pos}（ratio ${d.matrix.ratio}）
+节点分 = <b>${d.matrix.score>0?'+':''}${d.matrix.score}</b>${d.matrix.signal&&d.matrix.signal!=='无'?' ｜ <span style="color:#d29922;font-weight:700">'+d.matrix.signal+'</span>':''}</div>
+  <p class="note">${d.matrix.note||''}</p></div>`:''}
+  <div class="detail-section"><h4>三维评分（旧口径·阴影存档）</h4>
   <table>
     <tr><th>维度</th><th>判定</th><th>分值</th><th>依据</th></tr>
     <tr><td>交叉分级</td><td>${d.v0.cross===0?'死叉延续（非首日）':d.v0.cross>0?'金叉':'死叉'}</td><td class="${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</td><td>表1-A</td></tr>
