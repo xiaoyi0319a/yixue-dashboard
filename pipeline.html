@@ -238,8 +238,9 @@ qimen: {
         const read=parts[0],id=parts[2]||'';
         const lit=litMap[row[0]+'|'+MV1.c[ci]];
         if(lit){
-          const color=(STC[lit.cell_state]||['#8b949e'])[0];
-          return `<td style="border:1px solid ${color};background:${color}18;padding:4px;vertical-align:top"><div style="color:${color};font-weight:700;font-size:10px">${lit.cell_state} ${lit.cell_id||''}</div><div style="color:#f0f6fc;font-weight:600;font-size:11px">${lit.signal}</div><div style="color:#8b949e;font-size:10px">${lit.dest}</div></td>`;
+          const st=lit.state||lit.cell_state||'◌';
+          const color=(STC[st.charAt(0)]||['#8b949e'])[0];
+          return `<td style="border:1px solid ${color};background:${color}18;padding:4px;vertical-align:top"><div style="color:${color};font-weight:700;font-size:10px">${st}</div><div style="color:#f0f6fc;font-weight:600;font-size:11px">${lit.signal||''}</div><div style="color:#8b949e;font-size:10px">${lit.dest||''}</div></td>`;
         }
         return `<td style="border:1px solid #21262d;padding:4px;color:#484f58;vertical-align:top"><div style="font-size:10px">${read}</div><div style="color:#30363d;font-size:9px">${id}</div></td>`;
       }).join('');
