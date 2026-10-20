@@ -326,17 +326,13 @@ qimen: {
     const aRaw=+(ap.v-am.v+st.v).toFixed(2);
     const term=(ly,v)=>v?`${LC[ly]}×${ly}(${v})`:'';
     const formula=(o)=>[term('核心',o.c),term('力量',o.f),term('衍生',o.d)].filter(Boolean).join(' + ')||'0';
-    return `<table style="font-size:11px">
-    <tr><th>渠道</th><th>信号</th><th>格坐标（104格落点）</th><th>判定</th><th>基础分</th><th>层</th></tr>
-    ${all.map(x=>`<tr><td style="color:${x.color}">${x.ch}</td><td>${x.name}</td><td style="color:#8b949e;font-size:10px">${x.cell||'—'}</td><td>${x.condition}</td><td>${num(x.base)>0?'+':''}${x.base}</td><td style="color:#8b949e">${x.layer||'—'}</td></tr>`).join('')}
-  </table>
-  <div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：
+    return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：
 攻多a_raw = ${formula(ap)} = ${ap.v>0?'+':''}${ap.v}
 攻空a_raw = ${formula(am)} = ${am.v>0?'+':''}${am.v}
 结构a_raw = ${formula(st)} = ${st.v>0?'+':''}${st.v}
 ─────────────────
 a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇门a（映射压缩在融合节点①）</div>
-  <p class="note">盘即事实·格亮即计分——基础分按严重度档锁死（大凶大吉3｜普通2｜四害1.5｜四喜1.5）；周复盘只调层系数（核心1.5/力量1.0/衍生0.5，±10~20%步进·限幅[0.5,2.0]·保序核心≥力量≥衍生）与严重度基数，单格只走错题本对因施策（修规则/M4除名，不调分值）；无格坐标存量信号不参与层合成</p>`;
+  <p class="note">明细清单在JSON matrix_drop（28条·格坐标+编号+判定全量）｜基础分按严重度档锁死（大凶大吉3｜普通2｜四害/四喜1.5）｜周复盘只调层系数与严重度基数，单格只走错题本</p>`;
   })()}
   </div>
   <div class="detail-section"><h4>④ 奇门层输出 · 用途=判底座上的加减速/反转</h4>
