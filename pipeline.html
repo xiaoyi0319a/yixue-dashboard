@@ -605,7 +605,7 @@ function slotsSVG(slots,w,h,actualCurve){
     const timeStart=p.time?p.time.split('-')[0]:'';
     return `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${c}" stroke="#0d1117" stroke-width="2"/>
     <text x="${p.x}" y="${p.y-9}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700">${p.grade}</text>
-    <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.name} ${timeStart}</text>`;
+    <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.slot||p.name} ${timeStart}</text>`;
   }).join('');
 
   /* 收盘终点刻度 15:00（修复：原末点标注为申段起点14:00且右侧裁切，误读为曲线只到2点） */
