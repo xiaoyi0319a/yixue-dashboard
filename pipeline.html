@@ -126,7 +126,7 @@ macd: {
   <p class="note">${d.matrix.note||''}</p></div>`:''}`
 },
 v0: {
-  title:"② v₀ 三维评分（MACD底座）",
+  title:"② MACD矩阵底座（V4.1正式·旧v₀三维转阴影）",
   sub:"规则：MACD融合规则 §1.1~1.2 ｜ 三维值域 +9~−9",
   render:d=>`
   <div class="detail-section"><h4>三维评分</h4>
@@ -142,7 +142,7 @@ v0: {
   <p class="note">${'交叉'+d.v0.cross+'；柱体'+d.v0.bar_strength+'；DIF位置'+d.v0.dif_pos}</p></div>`
 },
 calibration: {
-  title:"③ 校准链（A / B / C）",
+  title:"③ 旧v₀校准链（已退役·阴影对账30交易日）",
   sub:"规则：MACD融合规则 §1.4 + §1.4-C ｜ 三道校准独立判定、可叠加",
   render:d=>`
   <div class="detail-section"><h4>校准A · 深跌超跌区（表1-E）</h4>
@@ -368,10 +368,15 @@ function renderPipeline(d){
     {key:'macd',active:true,html:`
       <span class="k">DIF</span> <span class="v ${d.macd.dif<0?'neg':'pos'}">${d.macd.dif}</span> ｜ <span class="k">DEA</span> <span class="v ${d.macd.dea<0?'neg':'pos'}">${d.macd.dea}</span> ｜ <span class="k">柱</span> <span class="v ${d.macd.bar<0?'neg':'pos'}">${d.macd.bar}</span><br>
       <span class="k">状态</span> <span class="v">${d.macd.dead_cross_day?('死叉延续 第'+d.macd.dead_cross_day+'日'):'非延续期'}</span>`},
-    {key:'v0',active:true,html:`
-      <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</span> ＋ <span class="k">DIF位置</span> <span class="v ${d.v0.dif_pos>0?'pos':d.v0.dif_pos<0?'neg':'zero'}">${d.v0.dif_pos>0?'+':''}${d.v0.dif_pos}</span> ＝ <span class="v ${d.v0.raw_score>0?'pos':d.v0.raw_score<0?'neg':'zero'}">${d.v0.raw_score>0?'+':''}${d.v0.raw_score}</span><br>
-      <span class="k">9档映射</span> <span class="v">总分${d.v0.raw_score} → ${GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal>0?'+':''}${d.v0.precal}）</span>`},
-    {key:'calibration',active:true,html:`
+    {key:'v0',active:true,html: d.matrix ? `
+      <span class="k">L1</span> <span class="v">${d.matrix.l1_cell.split('（')[0]}</span> ｜ <span class="k">L2</span> <span class="v">${d.matrix.l2_state.replace('bear_','空·').replace('bull_','多·').replace('early','初段').replace('mid','中段').replace('late','末段')}</span> ｜ <span class="k">L3</span> <span class="v">${d.matrix.l3.rate==='accel'?'加速':d.matrix.l3.rate==='decel'?'减速':'<b style="color:#d29922">衰竭转向</b>'}×${d.matrix.l3.pos}</span><br>
+      <span class="k">底座分</span> <span class="v ${d.matrix.score>0?'pos':d.matrix.score<0?'neg':'zero'}" style="font-size:14px">${d.matrix.score>0?'+':''}${d.matrix.score}</span>${d.matrix.signal&&d.matrix.signal!=='无'?` <span class="badge warn">${d.matrix.signal}</span>`:''}` : `
+      <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</span> ＋ <span class="k">DIF位置</span> <span class="v">${d.v0.dif_pos}</span> ＝ <span class="v">${d.v0.raw_score}</span><br>
+      <span class="k">9档映射</span> <span class="v">${GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal}）</span>`},
+    {key:'calibration',active:true,html: d.matrix ? `
+      <span class="k" style="color:#8b949e">旧v₀口径（阴影对账）</span><br>
+      <span class="k">交叉${d.v0.cross}＋柱体${d.v0.bar_strength}＋DIF位${d.v0.dif_pos}</span> ＝ <span class="v">${d.v0.raw_score}</span> → <span class="v">${d.v0.precal}</span><br>
+      <span class="k">校准</span> A${d.calibration.cal_A?'✓':'✗'} B${d.calibration.cal_B?'✓':'✗'} C${d.calibration.cal_C?'✓':'✗'} → 旧v₀=<span class="v">${d.v0.grade>0?'+':''}${d.v0.grade}</span>${d.v0.grade!==(d.matrix.score!==undefined?d.matrix.score:null)&&((d.v0.grade>0)!==(d.matrix.score>0))?` <span class="badge warn">分歧</span>`:''}` : `
       <span class="k">校准A 深跌</span> ${d.calibration.cal_A?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.v0.cal_A||''}</span><br>
       <span class="k">校准B 惯性</span> ${d.calibration.cal_B?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.v0.cal_B||''}</span><br>
       <span class="k">校准C 背离</span> ${d.calibration.cal_C?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'}<br>
@@ -381,7 +386,7 @@ function renderPipeline(d){
       <span class="k">离散映射</span> <span class="v">a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> ｜ <span class="k">R检查</span> ${d.qimen.r_triggered?'<span class="badge warn">触发</span>':`<span class="badge off">未触发</span>（|a_raw|=${Math.abs(d.qimen.a_raw)} &lt; ${d.qimen.r_threshold}）`}<br>
       <span class="k">a_macd</span> <span class="v zero">${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}</span> → <span class="k">a总</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> ｜ <span class="k">b底盘</span> <span class="v ${d.fusion.b_value>0?'pos':d.fusion.b_value<0?'neg':'zero'}">${d.fusion.b_value>0?'+':''}${d.fusion.b_value}</span>`},
     {key:'fusion',active:true,html:`
-      <span class="k">v = v₀ + a总 = </span><span class="v ${d.v0.grade>0?'pos':d.v0.grade<0?'neg':'zero'}">${d.v0.grade>0?'+':''}${d.v0.grade}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span><br>
+      <span class="k">v = 底座 + a总 = </span><span class="v ${(d.matrix?d.matrix.score:d.v0.grade)>0?'pos':(d.matrix?d.matrix.score:d.v0.grade)<0?'neg':'zero'}">${(d.matrix?d.matrix.score:d.v0.grade)>0?'+':''}${d.matrix?d.matrix.score:d.v0.grade}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span><br>
       <span class="k">查表3-A</span> <span class="v">v₀=${d.v0.grade>0?'+':''}${d.v0.grade} × a=${d.qimen.a_total>0?'+':''}${d.qimen.a_total} → v=${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>`},
     {key:'adjust',active:d.fusion.b_value!==0,html:`
       <span class="k">b = ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} ${d.fusion.b_value===0?'→ 不生效':'→ 生效'}</span><br>
@@ -392,8 +397,8 @@ function renderPipeline(d){
     ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[])
   ];
 
-  const names={macd:'MACD 数据',v0:'v₀ 三维评分',calibration:'校准链',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段'};
-  const tags={macd:'数据源',v0:'表1-A~1-D',calibration:'表1-E/1.4-C',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6'};
+  const names={macd:'MACD 数据',v0:'MACD矩阵底座',calibration:'旧v₀·阴影',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段'};
+  const tags={macd:'数据源',v0:'三层矩阵·正式',calibration:'退役对账',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6'};
 
   const html=nodes.map((n,i)=>{
     const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
