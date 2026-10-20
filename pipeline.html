@@ -337,47 +337,40 @@ a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇�
   }
 },
 fusion: {
-  title:"⑤ 叉积融合（v = v₀ + a总）",
-  sub:"规则：MACD融合规则 §3.1 表3-A ｜ 纯加法限幅±4",
+  title:"⑤ 差积融合（Step1会师→Step2叉积→Step3特例）",
+  sub:"规则：MACD融合规则 §3.1 表2-D/2-F/3-A/3-B/3-C ｜ Step4-6见⑥⑦节点",
   render:d=>{
     const f=d.fusion;
     const v0v=d.fusion.v0_int!==undefined?d.fusion.v0_int:(d.fusion.v0!==undefined?d.fusion.v0:d.v0.grade);
     const aT=d.qimen.a_total;
     const vX=f.v_cross;
-    const v0Labels={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
-    const aCols=['+2','+1','0','-1','-2','R'];
-    // 叉积表静态值
-    const CROSS={'+4':[4,4,4,3,2,'—'],'+3':[4,4,3,2,1,-2],'+2':[4,3,2,1,0,-2],'+1':[3,2,1,0,-1,-2],'0':[1,0,0,0,-1,0],'-1':[1,0,-1,-2,-3,2],'-2':[0,-1,-2,-3,-4,2],'-3':[-1,-2,-3,-4,-4,2],'-4':[-2,-3,-4,-4,-4,'—']};
+    const ar=d.qimen.a_raw, qa=d.qimen.a_discrete, am=d.qimen.a_macd;
     const fmtA=v=>v>0?'+'+v:String(v);
     const fmtV=v=>v>0?'+'+v:String(v);
+    const aCols=['+2','+1','0','-1','-2'];
+    const CROSS={'+4':[4,4,4,3,2],'+3':[4,4,3,2,1],'+2':[4,3,2,1,0],'+1':[3,2,1,0,-1],'0':[1,0,0,0,-1],'-1':[1,0,-1,-2,-3],'-2':[0,-1,-2,-3,-4],'-3':[-1,-2,-3,-4,-4],'-4':[-2,-3,-4,-4,-4]};
     const aIdx=aCols.indexOf(fmtA(aT));
-    return `
-  <div class="detail-section"><h4>① 微调系数归口层：③层合成a_raw会师（MACD×奇门）</h4>
-  <table style="font-size:11px"><tr><th>渠道</th><th>信号</th><th>格坐标</th><th>基础分</th></tr>
-  ${[...(d.qimen.attack_plus_signals||[]).map(x=>({...x,ch:'攻多',color:'#3fb950'})),
-     ...(d.qimen.attack_minus_signals||[]).map(x=>({...x,ch:'攻空',color:'#f85149'})),
-     ...(d.qimen.structure_signals||[]).map(x=>({...x,ch:'结构',color:'#58a6ff'}))]
-    .map(x=>`<tr><td style="color:${x.color}">${x.ch}</td><td>${x.name}</td><td style="color:#8b949e;font-size:10px">${x.cell||'—'}</td><td>${x.base>0?'+':''}${x.base}</td></tr>`).join('')}</table>
-  <div class="formula">a_raw = 攻多 − 攻空 + 结构（③已层加权·层内加总×层系数）= ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}
-表2-D离散映射（下表点亮）→ 奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}
-a_macd（表2-F再下表点亮）= ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}
-─────────────
-a总 = ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd} + ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete} = <b>${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</b> ｜ 限幅±2 ✓ → 送②计算</div></div>
-  ${(()=>{
     const HL2='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
-    const ar=d.qimen.a_raw;
+    const HLF='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
+    const ROWHL='background:rgba(31,111,235,.12)';
+    const COLHL='background:rgba(31,111,235,.07)';
+    return `
+  <div class="detail-section"><h4>Step 1 会师——两侧加速度汇合</h4>
+  <div class="formula">┌ 奇门侧：a_raw ${ar>0?'+':''}${ar} → 表2-D（点亮行）→ 奇门a = ${qa>0?'+':''}${qa}
+└ MACD侧：柱线惯性 → 表2-F（点亮行）→ a_macd = ${am>0?'+':''}${am}
+─────────────────
+a总 = ${am>0?'+':''}${am} + ${qa>0?'+':''}${qa} = <b>${aT>0?'+':''}${aT}</b> ｜ 限幅±2 ✓</div>
+  ${(()=>{
     const d2Rows=[
       ['≥ +6',+2,'加速（强烈同向推动）',ar>=6],
       ['+3 ~ +5',+1,'缓速（弱同向推动）',ar>=3&&ar<=5],
       ['-2 ~ +2',0,'维持（无方向性增量）',ar>=-2&&ar<=2],
       ['-5 ~ -3',-1,'减速（弱反向对冲）',ar>=-5&&ar<=-3],
       ['≤ -6',-2,'急刹（强反向对冲）',ar<=-6]];
-    return `<div class="detail-section"><h4>表2-D 离散映射（层合成a_raw → 奇门a · 五档变速箱防权重堆叠）</h4>
-    <table style="font-size:12px"><tr><th>a_raw区间（③层加权口径）</th><th>奇门a</th><th>含义</th></tr>
-    ${d2Rows.map(r=>`<tr><td style="${r[3]?HL2:''};text-align:center">${r[0]}${r[3]?' ◀':''}</td><td style="${r[3]?HL2:''};text-align:center" class="${r[1]>0?'pos':r[1]<0?'neg':'zero'}">${r[1]>0?'+':''}${r[1]}</td><td style="${r[3]?'font-weight:700':''}">${r[2]}</td></tr>`).join('')}</table></div>`;
+    return `<table style="font-size:12px;margin-top:6px"><tr><th>a_raw区间（③层加权）</th><th>奇门a</th><th>含义</th></tr>
+    ${d2Rows.map(r=>`<tr><td style="${r[3]?HL2:''};text-align:center">${r[0]}${r[3]?' ◀':''}</td><td style="${r[3]?HL2:''};text-align:center" class="${r[1]>0?'pos':r[1]<0?'neg':'zero'}">${r[1]>0?'+':''}${r[1]}</td><td style="${r[3]?'font-weight:700':''}">${r[2]}</td></tr>`).join('')}</table>`;
   })()}
   ${(()=>{
-    const HLF='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
     const b=d.macd.bar, pb=d.macd.prev_bar, p2=d.macd.prev2_bar;
     let fIdx=4;
     if(b>0&&pb>0&&p2>0){ if(b>pb&&pb>p2)fIdx=0; else if(b<pb&&pb<p2)fIdx=1; }
@@ -388,37 +381,38 @@ a总 = ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd} + ${d.qimen.a_discrete>0?'+':
       ['绿柱连续放大≥2日',-1,'空头能量增强',2],
       ['绿柱连续缩小≥2日',+1,'空头能量减弱（刹车）',3],
       ['无明显变化',0,'—',4]];
-    return `<div class="detail-section"><h4>表2-F a_macd（MACD自身油门/刹车·连续≥2日=3根同号柱）</h4>
-    <table style="font-size:12px"><tr><th>状态</th><th>a_macd</th><th>含义</th></tr>
+    return `<table style="font-size:12px;margin-top:6px"><tr><th>柱线状态</th><th>a_macd</th><th>含义</th></tr>
     ${fRows.map(r=>{const on=r[3]===fIdx;return `<tr><td style="${on?HLF:''}">${r[0]}${on?' ◀':''}</td><td style="${on?HLF:''};text-align:center" class="${r[1]>0?'pos':r[1]<0?'neg':'zero'}">${r[1]>0?'+':''}${r[1]}</td><td>${r[2]}</td></tr>`;}).join('')}</table>
-    <p class="note">今日柱：${b}｜前柱：${pb}｜前前柱：${p2}（${b<0?'绿柱':'红柱'}，${fIdx===2?'连续放大':fIdx===3?'连续缩小':'变化不连续→0'}）</p></div>`;
-  })()}
-  <div class="detail-section"><h4>② 计算</h4>
-  <div class="formula">v₀ = ${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0+'→入表'+v0v):((v0v>0?'+':'')+v0v)} ｜ a总 = ${aT>0?'+':''}${aT}
-v = ${v0v>0?'+':''}${v0v} + ${aT>0?'+':''}${aT} = ${vX>0?'+':''}${vX} ｜ |v| ≤ 4 ✓
-
-v₀=0特例（表3-B）：${v0v===0?'<span class="badge warn">适用</span>':'不适用（v₀≠0）'}
-|v₀|=4回退（表3-C）：${Math.abs(v0v)===4?'<span class="badge warn">适用</span>':'不适用（|v₀|≤3）'}
-⭐R反转已退役（20-41老师指令）：反转移至定级输出层，本层只输出正常信号</div></div>
-  <div class="detail-section"><h4>③ 叉积表定位（表3-A·v=v₀+a总）</h4>
-  <table class="cross-table">
-    <tr><th>v₀＼a</th>${aCols.map(c=>`<th>${c}</th>`).join('')}</tr>
+    <p class="note">今日柱：${b}｜前柱：${pb}｜前前柱：${p2}（${b<0?'绿柱':'红柱'}，${fIdx===2?'连续放大':fIdx===3?'连续缩小':'变化不连续→0'}）</p>`;
+  })()}</div>
+  <div class="detail-section"><h4>Step 2 叉积——查表3-A（v = v₀ + a总）</h4>
+  <div class="formula">v₀ = ${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0+'→入表'+fmtV(v0v)):fmtV(v0v)}（矩阵底座分） ｜ a总 = ${aT>0?'+':''}${aT}
+v = ${fmtV(v0v)} + ${aT>0?'+':''}${aT} = <b>${vX>0?'+':''}${vX}</b> ｜ |v| ≤ 4 ✓</div>
+  <table class="cross-table" style="margin-top:6px">
+    <tr><th>v₀＼a</th>${aCols.map((c,i)=>`<th style="${i===aIdx?ROWHL:''}">${c}</th>`).join('')}</tr>
     ${Object.keys(CROSS).map(v0=>{
       const isRow=fmtV(v0v)===v0;
-      return `<tr><td style="color:${v0>0?'#3fb950':v0<0?'#f85149':'#8b949e'}">${v0}</td>${CROSS[v0].map((val,i)=>{
+      return `<tr><td style="color:${v0>0?'#3fb950':v0<0?'#f85149':'#8b949e'};${isRow?ROWHL+';font-weight:700':''}">${v0}${isRow?' ◀':''}</td>${CROSS[v0].map((val,i)=>{
         const isHit=isRow&&i===aIdx;
-        return `<td class="${isHit?'hit':''}" style="${isHit?'':''}">${val>0?'+':''}${val}</td>`;
+        const isCol=i===aIdx;
+        return `<td class="${isHit?'hit':''}" style="${isHit?'':isRow?ROWHL:isCol?COLHL:''}">${val>0?'+':''}${val}</td>`;
       }).join('')}</tr>`;
     }).join('')}
   </table>
-  <p class="note" style="margin-top:8px">蓝框高亮 = 今日实际落点（v₀=${v0v>0?'+':''}${v0v}, a=${aT>0?'+':''}${aT} → v=${vX>0?'+':''}${vX}）</p></div>
-  <div class="detail-section"><h4>④ 路径判定（表3-E）</h4>
-  <div class="formula">v₀=${v0v} ${v0v!==0?'≠ 0':'= 0'} ｜ v=${vX>0?'+':''}${vX} ${vX!==0?'≠ 0':'= 0'} ｜ path = ${d.path}</div>
-  <p class="note">${f.combo_lookup||''}</p></div>  ${d.accel?`<div class="detail-section"><h4>⑥ 动能加速度（试点，第三正交维度）</h4>
+  <p class="note" style="margin-top:8px">行亮=${fmtV(v0v)}（v₀入表）｜列亮=${fmtA(aT)}（a总）｜蓝框 = 交叉落点 v=${vX>0?'+':''}${vX}</p></div>
+  <div class="detail-section"><h4>Step 3 特例——两条岔路检查</h4>
+  <table style="font-size:12px">
+    <tr><th>岔路</th><th>规则</th><th>今日判定</th></tr>
+    <tr><td>表3-B v₀=0特例</td><td>v₀=0 → a总±2 打折为±1</td><td>${v0v===0?'<span class="badge on">走过 → a总打折±1</span>':'<span class="badge off">未走（v₀≠0）</span>'}</td></tr>
+    <tr><td>表3-C |v₀|=4回退</td><td>极强档 → 回退±2起步</td><td>${Math.abs(v0v)===4?'<span class="badge on">走过 → 回退</span>':'<span class="badge off">未走（|v₀|=3&lt;4）</span>'}</td></tr>
+  </table>
+  <div class="formula" style="margin-top:6px">→ 两条岔路均未走，本日直通过：v = ${vX>0?'+':''}${vX}
+送 Step 4 微调（见⑥节点）${f.combo_lookup?'｜'+f.combo_lookup:''}</div></div>
+  ${d.accel?`<div class="detail-section"><h4>动能加速度（试点·第三正交维度）</h4>
   <div class="formula">语境：${d.accel.context}｜预测：${d.accel.grade}
 MACD侧：${d.accel.macd_side}｜盘局侧：${d.accel.qimen_side}${d.accel.conflict&&d.accel.conflict!=='无'?'｜<span style="color:#d29922">'+d.accel.conflict+'</span>':''}
 ${d.accel.divergence_note?'背离观察：'+d.accel.divergence_note:''}</div></div>`:''}
-  ${d.volatility?`<div class="detail-section"><h4>⑦ 日内波动率（试点，净位移外第二维度）</h4>
+  ${d.volatility?`<div class="detail-section"><h4>日内波动率（试点·净位移外第二维度）</h4>
   <div class="formula">预判：<b>${d.volatility.grade}</b>（低<0.8%｜中0.8-1.6%｜高>1.6%）
 ${d.volatility.evidence?Object.entries(d.volatility.evidence).map(([k,v])=>`${k==='zhishi'?'值使门':k==='maxing'?'马星':k==='kongwang'?'空亡':k==='volume'?'量能':k}：${v}`).join('｜'):''}
 ${d.volatility.net_displacement_marker?'<span style="color:#8b949e">'+d.volatility.net_displacement_marker+'</span>':''}</div></div>`:''}`
