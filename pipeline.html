@@ -318,15 +318,16 @@ qimen: {
       return{c:c,f:f,d:d,v:+(LC['核心']*c+LC['力量']*f+LC['衍生']*d).toFixed(2)};};
     const ap=chan('攻多'),am=chan('攻空'),st=chan('结构');
     const aRaw=+(ap.v-am.v+st.v).toFixed(2);
-    const term=(ly,v)=>v?`${LC[ly]}×${ly}(${v})`:'';
-    const detail=ch=>all.filter(x=>x.ch===ch).map(x=>`${x.g||x.cell}${num(x.base)>0?'+':''}${num(x.base)}`).join('·');
-    const formula=(o)=>[term('核心',o.c),term('力量',o.f),term('衍生',o.d)].filter(Boolean).join(' + ')||'0';
+    const expand=(ch,ly)=>all.filter(x=>x.ch===ch&&x.layer===ly).map(x=>`${x.g}·${num(x.base)>0?'+':''}${num(x.base)}`).join('+');
+    const term=(ch,ly,v)=>v?`${LC[ly]}×${ly}(${expand(ch,ly)}=${v})`:'';
+    const formula=ch=>{const o=ch==='攻多'?ap:ch==='攻空'?am:st;
+      return [term(ch,'核心',o.c),term(ch,'力量',o.f),term(ch,'衍生',o.d)].filter(Boolean).join(' + ')||'0';};
     const cl=(d.qimen&&d.qimen.channel_legend)||{攻多:'—',攻空:'—',结构:'—'};
   const fn=(d.qimen&&d.qimen.formula_note)||'';
   return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：
-攻多a_raw = ${formula(ap)} = ${ap.v>0?'+':''}${ap.v}
-攻空a_raw = ${formula(am)} = ${am.v>0?'+':''}${am.v}
-结构a_raw = ${formula(st)} = ${st.v>0?'+':''}${st.v} ｜ 构成[${detail('结构')}]
+攻多a_raw = ${formula('攻多')} = ${ap.v>0?'+':''}${ap.v}
+攻空a_raw = ${formula('攻空')} = ${am.v>0?'+':''}${am.v}
+结构a_raw = ${formula('结构')} = ${st.v>0?'+':''}${st.v}
 ─────────────────
 a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇门a（映射压缩在融合节点①）</div>
   <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=${cl.攻多}<br><span style="color:#f85149">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`;
