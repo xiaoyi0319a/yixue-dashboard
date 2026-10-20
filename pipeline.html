@@ -223,7 +223,8 @@ qimen: {
     const ROWMAP={'庚':'庚','乙奇':'乙奇','日干':'日干','时干':'时干','生门':'生门','戊':'戊','值符':'值符','景门':'景门','开门':'开门','九天':'九天','九地':'九地','天蓬':'天蓬'};
     (d.palace_table||[]).forEach(r=>{
       const ysRaw=(r.yongshen||'').split('（')[0].trim();
-      const ys=ROWMAP[ysRaw];
+      let ys=null;
+      for(const k in ROWMAP){ if(ysRaw.indexOf(k)===0){ ys=ROWMAP[k]; break; } }
       if(!ys)return;
       const h=r.harms||'';
       if(!h||h==='无'||h==='None')return;
@@ -262,7 +263,7 @@ qimen: {
     ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">${(()=>{
       const harms=(d.palace_table||[]).map(r=>(r.harms||'无')).filter(h=>h&&h!=='无');
       const cnt=harms.length;
-      const obsLit=(d.matrix_drop||[]).filter(m=>(m.state||'').charAt(0)==='◌'&&(m.cell||'').indexOf('四害')>=0).length;
+      const obsLit=Object.keys(litMap).filter(k=>k.indexOf('四害')>=0&&litMap[k].__observe).length;
       return cnt>=5?`<p style="color:#d29922;font-size:12px;margin-top:6px;font-weight:700">⚠️ 四害聚集模式：全局${cnt}处（${harms.slice(0,6).join('/')}${cnt>6?'…':''}）·单沾${obsLit}格◌观察（0分）·空方内耗拉锯——计分仍看≥2格</p>`:'';
     })()}
     ◌观察行闭环：◌格日沉观察追踪表→验证端5.5.G日对账（actual_dir/hit/cum滚动）→n≥10+hit≥0.5标PROMOTE→周复盘离线回测定分→M4转正写表2-A/B/C
