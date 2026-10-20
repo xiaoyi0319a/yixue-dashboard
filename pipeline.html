@@ -240,22 +240,21 @@ qimen: {
     <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
     ${d.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
   </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/格局/生克）对应矩阵的一个格子</p>`:'<p class="note">无落宫表数据</p>'}</div>
-  <div class="detail-section"><h4>② 信号判定 · 今日清单（由盘局提取，去向=点亮矩阵格）</h4>
+  <div class="detail-section"><h4>② 信号判定 · 今日清单（盘局提取·只出基础分·系数归融合层）</h4>
   <table style="font-size:11px">
-    <tr><th>渠道</th><th>信号</th><th>判定</th><th>基础分</th><th>系数/动态</th><th>有效分</th></tr>
-    ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td><td>${s.coef}</td><td class="${s.effective>0?'pos':'zero'}" style="font-weight:600">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-    ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.coef!==undefined?s.coef:'—'}</td><td class="${s.effective<0?'neg':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-    ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.coef!==undefined?s.coef:'—'}</td><td class="${s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-    ${(q.b_signals&&q.b_signals.length)?q.b_signals.map(s=>`<tr><td style="color:#d29922">b底盘</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.dyn!==undefined?s.dyn:'—'}</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join(''):''}
-  </table>${(!q.b_signals||!q.b_signals.length)?'<p class="note">底盘信号明细见报告（直写格式合并至fusion.b_raw/b_value）</p>':''}</div>
+    <tr><th>渠道</th><th>信号</th><th>判定</th><th>基础分</th></tr>
+    ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
+    ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
+    ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
+  </table><p class="note">只出信号+基础分（原始强度）——当季系数×基础分=有效分 的计算全部在差异融合节点①（微调系数归口层）</p></div>
   ${matrixGrid}
   ${(()=>{
     const HLS='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
-    // 2026Q4当季系数快照有效分（表2-A/B/C花名册）
+    // 表2-A/B/C花名册·基础分（统一基础分2·原始强度未乘系数）
     const SIGS=[
-      ['时干克日干','攻多',+2],['生门旺相','攻多',+1],
-      ['时干生日干','攻空',-2],['卖盘受制','攻空',-2],['空方受制','攻空',-2],
-      ['凶格关键宫','结构',+4],['四害双向','结构',+4],['值符空亡','结构',0]];
+      ['时干克日干','攻多',+2],['生门旺相','攻多',+2],
+      ['时干生日干','攻空',+2],['卖盘受制','攻空',+2],['空方受制','攻空',+2],
+      ['凶格关键宫','结构',+2],['四害双向','结构',+2],['值符空亡','结构',+2]];
     const fired=[...(q.attack_plus_signals||[]).map(x=>({...x,ch:'攻多'})),
                  ...(q.attack_minus_signals||[]).map(x=>({...x,ch:'攻空'})),
                  ...(q.structure_signals||[]).map(x=>({...x,ch:'结构'}))];
@@ -266,8 +265,8 @@ qimen: {
                      else if(g[1]==='攻空')sumMinus+=isFired(g[0],g[1])?-g[2]:0;
                      else sumStruct+=isFired(g[0],g[1])?g[2]:0;});
     const raw=sumPlus-sumMinus+sumStruct;
-    return `<div class="detail-section"><h4>④ 信号得分矩阵（表2-A攻多 / 2-B攻空 / 2-C结构 · 穷举花名册 · 今日触发点亮◀）</h4>
-    <table style="font-size:12px"><tr><th>信号（8信号穷举花名册）</th><th>渠道</th><th>有效分</th><th>今日</th></tr>
+    return `<div class="detail-section"><h4>④ 信号得分矩阵（表2-A/B/C穷举花名册·基础分点亮◀·原始强度）</h4>
+    <table style="font-size:12px"><tr><th>信号（8信号穷举）</th><th>渠道</th><th>基础分</th><th>今日</th></tr>
     ${SIGS.map(g=>{
       const on=isFired(g[0],g[1]);
       const eff=g[1]==='攻空'?(on?g[2]:0)*-1:(on?g[2]:0);
@@ -276,29 +275,14 @@ qimen: {
       <td style="text-align:center;${on?HLS:''}" class="${eff>0?'pos':eff<0?'neg':'zero'}">${on?(eff>0?'+':'')+eff:'—'}</td>
       <td style="text-align:center">${on?'<span style="color:#3fb950">●触发</span>':'<span style="color:#484f58">○未触发</span>'}</td></tr>`;
     }).join('')}</table>
-    <div class="formula" style="margin-top:6px">a_raw = 攻多Σ(+${sumPlus}) − 攻空Σ(${sumMinus}) + 结构Σ(+${sumStruct}) = <b>${raw>0?'+':''}${raw}</b> → 送表2-D压缩</div></div>`;
+    <div class="formula" style="margin-top:6px">a_raw（原始·基础分口径）= 攻多Σ(+${sumPlus}) − 攻空Σ(${sumMinus}) + 结构Σ(+${sumStruct}) = <b>${raw>0?'+':''}${raw}</b>
+→ 送差异融合节点①：当季系数应用 → 有效分 → 调整后a_raw → 表2-D → 奇门a</div></div>`;
   })()}
-  <div class="detail-section"><h4>⑥ 合成收敛 · 奇门层输出（纯奇门，无MACD成分）</h4>
-  <div class="formula">a_raw（步骤④穷举加总）= ${q.a_raw>0?'+':''}${q.a_raw}
-离散映射（表2-D·步骤⑤）→ 奇门a = <b>${q.a_discrete>0?'+':''}${q.a_discrete}</b>
-R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span class="badge warn">触发R（v直接反号±2）</span>`:`<span class="badge off">&lt; 阈值${q.r_threshold} → 不触发</span>`}
-─────────────
-✅ 奇门层输出：奇门a = ${q.a_discrete>0?'+':''}${q.a_discrete} → 送差异融合节点
-（a_macd/b微调属融合层，见差异融合节点①）</div></div>
-  ${(()=>{
-    const HL2='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
-    const ar=q.a_raw;
-    const d2Rows=[
-      ['≥ +6',+2,'加速（强烈同向推动）',ar>=6],
-      ['+3 ~ +5',+1,'缓速（弱同向推动）',ar>=3&&ar<=5],
-      ['-2 ~ +2',0,'维持（无方向性增量）',ar>=-2&&ar<=2],
-      ['-5 ~ -3',-1,'减速（弱反向对冲）',ar>=-5&&ar<=-3],
-      ['≤ -6',-2,'急刹（强反向对冲）',ar<=-6]];
-    return `<div class="detail-section"><h4>⑤ 表2-D 离散映射（a_raw → 奇门a · 五档变速箱防权重堆叠）</h4>
-    <table style="font-size:12px"><tr><th>a_raw区间</th><th>奇门a</th><th>含义</th></tr>
-    ${d2Rows.map(r=>`<tr><td style="${r[3]?HL2:''};text-align:center">${r[0]}${r[3]?' ◀':''}</td><td style="${r[3]?HL2:''};text-align:center" class="${r[1]>0?'pos':r[1]<0?'neg':'zero'}">${r[1]>0?'+':''}${r[1]}</td><td style="${r[3]?'font-weight:700':''}">${r[2]}</td></tr>`).join('')}</table></div>`;
-  })()}
-  ${q.trial_signals?`<div class="detail-section"><h4>⑦ 试用触发 · 表2-T（转正评估中，不进现行轨）</h4>
+  <div class="detail-section"><h4>⑤ 奇门层输出（原始读数·零系数计算）</h4>
+  <div class="formula">✅ 输出 = 今日触发信号清单（步骤②）＋ a_raw原始（步骤④基础分加总）
+→ 全部送差异融合节点①：当季系数应用 → 有效分 → 调整后a_raw → 表2-D离散 → 奇门a → a总合成
+（R反转检查·离散映射·a总 全部在融合层执行——微调系数归口，改系数只动融合层）</div></div>
+  ${q.trial_signals?`<div class="detail-section"><h4>⑥ 试用触发 · 表2-T（转正评估中，不进现行轨）</h4>
   <table style="font-size:11px">
     <tr><th>试用ID</th><th>今日判定</th></tr>
     ${Object.entries(q.trial_signals).map(([id,txt])=>`<tr><td>${id}</td><td style="color:${String(txt).indexOf('触发')===0||String(txt).indexOf('⚡')===0?'#d29922':'#484f58'};font-weight:${String(txt).indexOf('未触发')===0?'400':'600'}">${txt}</td></tr>`).join('')}
@@ -321,12 +305,30 @@ fusion: {
     const fmtV=v=>v>0?'+'+v:String(v);
     const aIdx=aCols.indexOf(fmtA(aT));
     return `
-  <div class="detail-section"><h4>① 输入与a总合成（MACD×奇门会师点）</h4>
-  <div class="formula">v₀ = ${d.matrix?('矩阵底座 '+(d.matrix.score>0?'+':'')+d.matrix.score+' → 入表'+d.fusion.v0_int):('旧口径 '+(d.fusion.v0>0?'+':'')+d.fusion.v0)}（节点②产出）
-奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}（节点④纯奇门产出·经表2-D压缩）
-a_macd = ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}（表2-F下表点亮·MACD自身油门刹车）
+  <div class="detail-section"><h4>① 微调系数归口层：信号×系数→有效分→a总（MACD×奇门会师）</h4>
+  <table style="font-size:11px"><tr><th>渠道</th><th>信号</th><th>基础分</th><th>当季系数</th><th>有效分(=基础×系数)</th></tr>
+  ${[...(d.qimen.attack_plus_signals||[]).map(x=>({...x,ch:'攻多',color:'#3fb950'})),
+     ...(d.qimen.attack_minus_signals||[]).map(x=>({...x,ch:'攻空',color:'#f85149'})),
+     ...(d.qimen.structure_signals||[]).map(x=>({...x,ch:'结构',color:'#58a6ff'}))]
+    .map(x=>`<tr><td style="color:${x.color}">${x.ch}</td><td>${x.name}</td><td>${x.base>0?'+':''}${x.base}</td><td>${x.coef!==undefined?x.coef:'—'}</td><td class="${x.effective>0?'pos':x.effective<0?'neg':'zero'}" style="font-weight:600">${x.effective>0?'+':''}${x.effective}</td></tr>`).join('')}</table>
+  <div class="formula">a_raw（调整后·有效分口径）= ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}（攻多Σ' − 攻空Σ' + 结构Σ'）
+表2-D离散映射（下表点亮）→ 奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}
+a_macd（表2-F再下表点亮）= ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}
 ─────────────
-a总 = ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd} + ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete} = <b>${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</b> ｜ 限幅±2 ✓</div></div>
+a总 = ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd} + ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete} = <b>${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</b> ｜ 限幅±2 ✓ → 送②计算</div></div>
+  ${(()=>{
+    const HL2='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
+    const ar=d.qimen.a_raw;
+    const d2Rows=[
+      ['≥ +6',+2,'加速（强烈同向推动）',ar>=6],
+      ['+3 ~ +5',+1,'缓速（弱同向推动）',ar>=3&&ar<=5],
+      ['-2 ~ +2',0,'维持（无方向性增量）',ar>=-2&&ar<=2],
+      ['-5 ~ -3',-1,'减速（弱反向对冲）',ar>=-5&&ar<=-3],
+      ['≤ -6',-2,'急刹（强反向对冲）',ar<=-6]];
+    return `<div class="detail-section"><h4>表2-D 离散映射（调整后a_raw → 奇门a · 五档变速箱防权重堆叠）</h4>
+    <table style="font-size:12px"><tr><th>a_raw区间（有效分口径）</th><th>奇门a</th><th>含义</th></tr>
+    ${d2Rows.map(r=>`<tr><td style="${r[3]?HL2:''};text-align:center">${r[0]}${r[3]?' ◀':''}</td><td style="${r[3]?HL2:''};text-align:center" class="${r[1]>0?'pos':r[1]<0?'neg':'zero'}">${r[1]>0?'+':''}${r[1]}</td><td style="${r[3]?'font-weight:700':''}">${r[2]}</td></tr>`).join('')}</table></div>`;
+  })()}
   ${(()=>{
     const HLF='background:rgba(31,111,235,.25);border:1px solid #1f6feb;border-radius:3px;font-weight:700';
     const b=d.macd.bar, pb=d.macd.prev_bar, p2=d.macd.prev2_bar;
@@ -349,7 +351,8 @@ a总 = ${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd} + ${d.qimen.a_discrete>0?'+':
 v = ${v0v>0?'+':''}${v0v} + ${aT>0?'+':''}${aT} = ${vX>0?'+':''}${vX} ｜ |v| ≤ 4 ✓
 
 v₀=0特例（表3-B）：${v0v===0?'<span class="badge warn">适用</span>':'不适用（v₀≠0）'}
-|v₀|=4回退（表3-C）：${Math.abs(v0v)===4?'<span class="badge warn">适用</span>':'不适用（|v₀|≤3）'}</div></div>
+|v₀|=4回退（表3-C）：${Math.abs(v0v)===4?'<span class="badge warn">适用</span>':'不适用（|v₀|≤3）'}
+R反转检查（表2-E）：|a_raw|=${Math.abs(d.qimen.a_raw)} ${d.qimen.r_triggered?'<span class="badge warn">触发R → v=-sign(v₀)×2</span>':'<span class="badge off">&lt; 阈值'+d.qimen.r_threshold+' 未触发</span>'}</div></div>
   <div class="detail-section"><h4>③ 叉积表定位（表3-A·v=v₀+a总）</h4>
   <table class="cross-table">
     <tr><th>v₀＼a</th>${aCols.map(c=>`<th>${c}</th>`).join('')}</tr>
@@ -394,7 +397,10 @@ adjust: {
     <tr><td>限幅</td><td>|v+b|≤4</td><td>|${vF}|≤4 ✓</td></tr>
   </table></div>
   <div class="formula">v_final = v + b = ${vX>0?'+':''}${vX} + ${b>0?'+':''}${b} = ${vF>0?'+':''}${vF}</div>
-  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}${d.adjust.patch_track?'<br>'+d.adjust.patch_track:''}</p>`
+  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}${d.adjust.patch_track?'<br>'+d.adjust.patch_track:''}</p>
+  ${(d.qimen.b_signals&&d.qimen.b_signals.length)?`<div class="detail-section"><h4>b信号明细（base=基础分 / dyn=动态权重系数 / score=生效分——b微调系数归本节点）</h4>
+  <table style="font-size:11px"><tr><th>信号</th><th>条件</th><th>base</th><th>dyn</th><th>score</th></tr>
+  ${d.qimen.b_signals.map(x=>`<tr><td>${x.name}</td><td>${x.condition}</td><td>${x.base!==undefined?x.base:'—'}</td><td>${x.dyn!==undefined?x.dyn:'—'}</td><td class="${x.score>0?'pos':x.score<0?'neg':'zero'}">${x.score>0?'+':''}${x.score}</td></tr>`).join('')}</table></div>`:''}`
   }
 },
 output: {
