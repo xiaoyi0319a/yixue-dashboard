@@ -475,6 +475,23 @@ output: {
     ${rows.map(([a,b])=>`<tr><td style="white-space:nowrap"><b>${a}</b></td><td>${b}</td></tr>`).join('')}
   </table></div>`;
   })()}
+  ${(()=>{
+    const rp=f.r_prime;
+    if(rp===undefined||rp===null) return '';
+    const trig=f.r_trigger||{};
+    const items=[
+      ['①MACD减速强度（L3衰竭转向）',trig.decel,'连缩≥2日+累计幅度≥20%'],
+      ['②对面攻方能量≥10',trig.energy,'反转方向攻方渠道a_raw'],
+      ['③深跌位置 DIF≤−5',trig.deep,'场景E深水口径']];
+    const active=rp>0;
+    return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（4.13定级输出层）</h4>
+  <table style="font-size:12px">
+    <tr><th>三件套</th><th>判定</th><th>口径</th></tr>
+    ${items.map(([n,ok,c])=>`<tr><td>${n}</td><td style="text-align:center;color:${ok?'#3fb950':'#484f58'};font-weight:700">${ok?'✓':'✗'}</td><td style="color:#8b949e;font-size:11px">${c}</td></tr>`).join('')}
+  </table>
+  <div class="formula" style="margin-top:6px">R′ = ${rp>0?'+':''}${rp}${active?` → v_final ${f.v_final}>0?'+':''}${f.v_final} → <b>反转锁档 v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}</b>（path加-R）`:' → 不触发·v_final原样'}</div>
+  ${active?'<p class="note">反转触发：三件套成立·方向取反锁档（表2-E形态）</p>':'<p class="note">三件套未齐·R′=0·定级链不受反转影响</p>'}</div>`;
+  })()}
   <div class="detail-section"><h4>最终映射（表4-A）</h4>
   <table>
     <tr><th>v_final</th><th>7档定级</th><th>语义锚：净涨跌幅%（口径分维度·正式）</th><th></th></tr>
