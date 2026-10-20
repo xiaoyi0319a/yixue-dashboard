@@ -198,7 +198,7 @@ qimen: {
   render:d=>{
     const q=d.qimen;
     const STC={'●':['#3fb950','正式·计分'],'⊙':['#d29922','候选·试用轨'],'◌':['#8b949e','旧归档存量'],'⚠️':['#f85149','缺格']};
-    const MV1={c:["旺/相","休囚/死·废","四害","四喜","凶格临宫","吉格临宫","空亡","得生/受克"],r:[["庚","空↑|●|G27","多|⊙|G16","多|●|A5·C1","临禄·空方得禄|●|G76","空方自损多/临多方宫空|●·⊙|A7·G9a","凶将得制空|●|G47","抛压虚化多|⊙|G14","得生→空/受克→多|◌·⊙|G15"],["乙奇","多↑|●|G28","乏力空|⊙|G11","买盘受制空|⊙|G1","临禄卯·买盘发力|●|G77","谋士逃亡空|⊙|G10","多|⊙|G5","助力虚化空|●|G29","得生→多/受克→空|◌·⊙|G12"],["日干","多|●|G30","身弱空|●|G31","核心受制空|⊙|G2","实支通气·价格有根|●|G78","压身空|●|A7","多|⊙|G5","自身虚化空|●|G32","得生→多/受克→空|◌·⊙|G13"],["时干","克日干→空/生日干→多|●|A2·A1","敌弱多|●|G33","帅残弱空|●|G34","得禄有根·帅有令|●|G79","敌带煞空|⊙|G9b","帅带吉助空|●|G48","帅位缺位多|⊙|G8","对日干生克|●|A1/A2"],["生门","多|●|A3","利润萎缩空|⊙|G17","通道受损空|⊙|G3","门生宫·利润顺势|●|G80","假利好空|⊙|G4","多|⊙|G5","利润虚化空|●|G35","门生宫→多/宫克→空|●·⊙|A3·G3"],["戊","多|●|G36","空|⊙|G18","资金受制空|●|G37","临禄巳·资金充沛|●|G81","白虎临身空|⊙|G19","青龙华盖·资金得吉|●|G88","资金虚化空|⊙|G7","门迫→有而难举|●|b"],["值符","多(托)|●|G38","空|⊙|G20","大势受创空|●|G49","得助有根·大势稳|●|G82","虚惊空警|⊙|G6","吉气压凶多|⊙|G6","大势虚化空|●|C3","比和→托/受克→空|◌·⊙|G21"],["值使门","振幅放大·方向随门性|●|G68","振幅收窄|●|G69","振幅扭曲·假动作|●|G70","顺势放量·真突破|●|G71","剧震带煞|●|G72","顺势大振|●|G73","振幅虚化|●|G74","受克→受限/得生→放大|●|G75"],["景门","情绪高多|●|G39","低迷空|●|G40","情绪受创|●|G50","门生·情绪顺势|●|G83","恐慌情绪|●|G51","情绪亢奋|●|G52","情绪虚化空|⊙|G22","情绪得助/受抑|●|G53"],["开门","通道开多|●|G41","空|⊙|G23","门迫受阻空|⊙|G4","门生坎·通道顺|●|G84","通道带煞空|●|G54","多|⊙|G5","通道虚化空|●|G42","受宫克→空|⊙|G4"],["九天","涨能多|●|G43","涨能乏力空|●|G55","涨能受创空|●|G56","得势·涨能真实|●|G85","急涨带煞|●|G57","涨势得助多|●|G58","高位乏力空|⊙|G24","得生→多/受克→空|●|G59"],["九地","势沉空|●|G44","势沉延续|●|G60","跌势收敛多|⊙|G25","实支·托底有效|●|G86","跌势带煞空|●|G61","跌势得缓多|●|G62","底部虚化|●|G63","得生→托底多/受克→空|●|G64"],["天蓬","流入多|●|G45","流出空|●|G46","流入受阻空|⊙|G26","通气·资金流畅|●|G87","流入带煞|●|G65","流入得助多|●|G66","空|⊙|G26","得生→多/受克→空|●|G67"],["全局（伏反吟）","双向剧烈·日内逆转|●|G90","收窄迟滞·单边运行|●|G89","空亡集中·虚化拉锯−1.5|●|G92","马星动·急动放大+1.5|●|G91","—|—|","—|—|","—|—|","—|—|"]]};
+    const MV1=(d.qimen&&d.qimen.matrix_def)||{c:[],r:[]};
     const colMap=st=>{
       if(/四害|门迫|击刑|入墓/.test(st))return '四害';
       if(/四喜|门生|临禄|通气|实支/.test(st))return '四喜';
@@ -519,7 +519,7 @@ function renderPipeline(d){
       <span class="k">9档映射</span> <span class="v">${GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal}）</span>`},
     {key:'qimen',active:true,html:`
       <span class="k">结算</span> <span class="v">攻多${d.qimen.attack_plus} − 攻空${d.qimen.attack_minus} + 结构${d.qimen.structure>0?'+':''}${d.qimen.structure} = a_raw ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}</span><br>
-      <span class="k">得分</span> <span class="v ${d.qimen.a_discrete>0?'pos':d.qimen.a_discrete<0?'neg':'zero'}" style="font-size:14px">奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> → <span class="k">状态</span> <span class="v">${({2:'多方加速·强烈同向推动',1:'多方缓速·弱同向推动',0:'多空平衡·无方向性增量','-1':'空方减速·弱反向对冲','-2':'空方急刹·强反向对冲'})[d.qimen.a_discrete]||'—'}</span>`},
+      <span class="k">得分</span> <span class="v ${d.qimen.a_discrete>0?'pos':d.qimen.a_discrete<0?'neg':'zero'}" style="font-size:14px">奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> → <span class="k">状态</span> <span class="v">${(d.qimen&&d.qimen.a_meaning&&d.qimen.a_meaning[String(d.qimen.a_discrete)])||'—'}</span>`},
     {key:'fusion',active:true,html:`
       <span class="k">v = v₀ + a总 = </span><span class="v ${d.fusion.v0_src==='matrix'?'':'zero'}">${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0):'?'}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>${d.fusion.v0_src==='matrix'?'<br><span class="k" style="color:#3fb950">v₀=矩阵底座分</span>':''}<br>
       <span class="k">查表3-A</span> <span class="v">v₀=${d.v0.grade>0?'+':''}${d.v0.grade} × a=${d.qimen.a_total>0?'+':''}${d.qimen.a_total} → v=${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>`},
@@ -552,7 +552,7 @@ let pipelineData=null;
 /* ⭐schema 归一化（V3.0-patch16，2026-10-20权威切换配套）——**旧schema→新schema**单向转换：
    权威=预测端V4.0-patch29直写格式（老师裁定"按新的"）；新数据直通，旧归档（≤10-19）转换后渲染 */
 const SLOT_TIME_MAP={'巳':'09:30-10:30','午':'10:30-11:30','未':'13:00-14:00','申':'14:00-15:00'};
-const GRADE_LABEL_MAP={'-3':'强空','-2':'中空','-1':'略偏空','0':'无方向','1':'略偏多','2':'中多','3':'强多'};
+const GRADE_LABEL_MAP=(d.macd&&d.macd.grade_label_map)||{'0':'无方向'};
 function normalizeSchema(d){
   if(!d||typeof d!=='object') return d;
   const has=(o,k)=>o&&Object.prototype.hasOwnProperty.call(o,k);
