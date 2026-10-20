@@ -116,10 +116,10 @@ macd: {
     <tr><td>DIF</td><td style="color:${d.macd.dif<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.dif}</td><td>DIF 值</td></tr>
     <tr><td>DEA</td><td style="color:${d.macd.dea<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.dea}</td><td>DEA 值</td></tr>
     <tr><td>柱 (DIF−DEA)×2</td><td style="color:${d.macd.bar<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.bar}</td><td>${Math.abs(d.macd.bar)>20?'|柱|>20 极值档（柱体±3）':Math.abs(d.macd.bar)>10?'|柱|10~20（柱体±2）':Math.abs(d.macd.bar)>3?'|柱|3~10（柱体±1）':'|柱|<3（柱体0）'}</td></tr>
-    <tr class="hl"><td>交叉状态</td><td>${d.macd.cross_state}</td><td>${d.macd.cross_state.includes('延续')?'非交叉首日 → 交叉分计 0':'交叉首日 → 查表1-A评分'}</td></tr>
+    <tr class="hl"><td>交叉状态</td><td>${d.macd.dead_cross_day?('死叉延续 第'+d.macd.dead_cross_day+'日'):'非延续期'}</td><td>${d.macd.dead_cross_day?'非交叉首日 → 交叉分计 0':'交叉首日 → 查表1-A评分'}</td></tr>
   </table></div>
-  <div class="detail-section"><h4>预检警示</h4>
-  <p class="note">${d.macd.precheck_note||'无特殊警示'}</p></div>`
+  <div class="detail-section"><h4>动能变化</h4>
+  <p class="note">${d.macd.bar_delta!==null&&d.macd.bar_delta!==undefined?('柱Δ '+(d.macd.bar_delta>0?'+':'')+d.macd.bar_delta+'（'+(d.macd.bar_delta>0?'空方动能收敛':'空方动能扩大')+'）｜前柱 '+d.macd.prev_bar+'｜前前柱 '+d.macd.prev2_bar):(d.macd.precheck_note||'无特殊警示')}</p></div>`
 },
 v0: {
   title:"② v₀ 三维评分（MACD底座）",
@@ -128,14 +128,14 @@ v0: {
   <div class="detail-section"><h4>三维评分</h4>
   <table>
     <tr><th>维度</th><th>判定</th><th>分值</th><th>依据</th></tr>
-    <tr><td>交叉分级</td><td>${d.v0.cross_desc}</td><td class="${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</td><td>表1-A</td></tr>
-    <tr><td>柱体强度</td><td>${d.v0.bar_desc}</td><td class="${d.v0.bar_score>0?'pos':d.v0.bar_score<0?'neg':'zero'}">${d.v0.bar_score>0?'+':''}${d.v0.bar_score}</td><td>表1-B</td></tr>
-    <tr><td>DIF位置</td><td>${d.v0.dif_desc}</td><td class="${d.v0.dif_pos>0?'pos':d.v0.dif_pos<0?'neg':'zero'}">${d.v0.dif_pos>0?'+':''}${d.v0.dif_pos}</td><td>表1-C</td></tr>
-    <tr class="hl"><td>三维总分</td><td>—</td><td class="${d.v0.total>0?'pos':d.v0.total<0?'neg':'zero'}" style="font-weight:700">${d.v0.total>0?'+':''}${d.v0.total}</td><td>${d.v0.cross}+(${d.v0.bar_score})+(${d.v0.dif_pos})</td></tr>
+    <tr><td>交叉分级</td><td>${d.v0.cross===0?'死叉延续（非首日）':d.v0.cross>0?'金叉':'死叉'}</td><td class="${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</td><td>表1-A</td></tr>
+    <tr><td>柱体强度</td><td>柱${d.macd.bar}，|柱|${Math.abs(d.macd.bar)>20?'＞20 极值档':Math.abs(d.macd.bar)>10?'10~20':'3~10'}</td><td class="${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</td><td>表1-B</td></tr>
+    <tr><td>DIF位置</td><td>${d.macd.dif<=0?(d.macd.dif<=d.macd.dea?'DIF≤0 且 ≤DEA':'DIF≤0 但 >DEA'):'DIF>0'}</td><td class="${d.v0.dif_pos>0?'pos':d.v0.dif_pos<0?'neg':'zero'}">${d.v0.dif_pos>0?'+':''}${d.v0.dif_pos}</td><td>表1-C</td></tr>
+    <tr class="hl"><td>三维总分</td><td>—</td><td class="${d.v0.raw_score>0?'pos':d.v0.raw_score<0?'neg':'zero'}" style="font-weight:700">${d.v0.raw_score>0?'+':''}${d.v0.raw_score}</td><td>${d.v0.cross}+(${d.v0.bar_strength})+(${d.v0.dif_pos})</td></tr>
   </table></div>
   <div class="detail-section"><h4>9档映射（表1-D）</h4>
-  <div class="formula">总分 ${d.v0.total>0?'+':''}${d.v0.total} → ${d.v0.mapped_label}（${d.v0.mapped>0?'+':''}${d.v0.mapped}）</div>
-  <p class="note">${d.v0.note||''}</p></div>`
+  <div class="formula">总分 ${d.v0.raw_score>0?'+':''}${d.v0.raw_score} → ${GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal>0?'+':''}${d.v0.precal}）</div>
+  <p class="note">${'交叉'+d.v0.cross+'；柱体'+d.v0.bar_strength+'；DIF位置'+d.v0.dif_pos}</p></div>`
 },
 calibration: {
   title:"③ 校准链（A / B / C）",
@@ -144,22 +144,22 @@ calibration: {
   <div class="detail-section"><h4>校准A · 深跌超跌区（表1-E）</h4>
   <table>
     <tr><th>条件</th><th>判定</th></tr>
-    <tr><td>DIF ≤ −5</td><td>${d.calibration.cal_a.triggered?`<span class="badge on">满足</span>（${d.calibration.cal_a.condition_val}）`:'<span class="badge off">不满足</span>'}</td></tr>
-    <tr><td>强化收缩：DIF≤−8 且 柱Δ&gt;+4</td><td>${d.calibration.cal_a.strong?`<span class="badge on">满足</span>`:'<span class="badge off">不满足</span>'}</td></tr>
-    <tr class="hl"><td>动作</td><td>${d.calibration.cal_a.action}</td></tr>
+    <tr><td>DIF ≤ −5</td><td>${d.calibration.cal_A?`<span class="badge on">满足</span>（${d.macd.dif}）`:'<span class="badge off">不满足</span>'}</td></tr>
+    <tr><td>强化收缩：DIF≤−8 且 柱Δ&gt;+4</td><td>${d.macd.dif<=-8&&d.macd.bar_delta>4?`<span class="badge on">满足</span>`:'<span class="badge off">不满足</span>'}</td></tr>
+    <tr class="hl"><td>动作</td><td>${d.v0.cal_A||'未触发'}</td></tr>
   </table></div>
   <div class="detail-section"><h4>校准B · 趋势惯性期</h4>
   <table>
     <tr><th>条件</th><th>判定</th></tr>
-    <tr><td>金叉/死叉延续 ≥2日</td><td>${d.calibration.cal_b.triggered?`<span class="badge on">满足</span>（${d.calibration.cal_b.detail}）`:'<span class="badge off">不满足</span>'}</td></tr>
-    <tr class="hl"><td>动作</td><td>${d.calibration.cal_b.action}</td></tr>
+    <tr><td>金叉/死叉延续 ≥2日</td><td>${d.calibration.cal_B?`<span class="badge on">满足</span>（死叉延续 第${d.macd.dead_cross_day}日）`:'<span class="badge off">不满足</span>'}</td></tr>
+    <tr class="hl"><td>动作</td><td>${d.v0.cal_B||'标记趋势惯性期 → R反转阈值|a_raw|≥'+d.calibration.r_threshold}</td></tr>
   </table></div>
   <div class="detail-section"><h4>校准C · K线-MACD背离（V2.9）</h4>
   <table>
     <tr><th>条件</th><th>判定</th></tr>
-    <tr><td>T-1 K线 vs MACD柱方向相反</td><td>${d.calibration.cal_c.triggered?`<span class="badge on">触发</span>（${d.calibration.cal_c.detail}）`:`<span class="badge off">未触发</span>（${d.calibration.cal_c.detail}）`}</td></tr>
+    <tr><td>T-1 K线 vs MACD柱方向相反</td><td>${d.calibration.cal_C?`<span class="badge on">触发</span>（${d.v0.cal_C}）`:`<span class="badge off">未触发</span>`}</td></tr>
   </table></div>
-  <div class="formula">输出：v₀ = ${d.calibration.output_v0>0?'+':''}${d.calibration.output_v0}${d.calibration.cal_b.triggered?' ＋ 校准B标记（趋势惯性期）':''}</div>`
+  <div class="formula">输出：v₀ = ${d.v0.grade>0?'+':''}${d.v0.grade}${d.calibration.cal_B?' ＋ 校准B标记（趋势惯性期）':''}</div>`
 },
 qimen: {
   title:"④ 奇门层（a + b 合成）",
@@ -183,7 +183,7 @@ qimen: {
     ]};
     const litMap={};
     (q.matrix_drop||[]).forEach(m=>{litMap[m.yongshen+'|'+m.col]=m});
-    const matrixGrid=`<div class="detail-section"><h4>③ 矩阵点亮 · 立体矩阵v1格网（今日${(q.matrix_drop||[]).length}/84格点亮）</h4>
+    const matrixGrid=`<div class="detail-section"><h4>③ 矩阵点亮 · 立体矩阵v1格网（今日${(d.matrix_drop||[]).length}/84格点亮）</h4>
     <div style="overflow-x:auto"><table style="font-size:11px;border-collapse:collapse;table-layout:fixed;min-width:900px;width:100%">
     <tr><th style="padding:4px;background:#1f2937;color:#8b949e;text-align:left;font-weight:400">用神\状态</th>${MV1.c.map(c=>`<th style="padding:4px;background:#1f2937;color:#8b949e;font-weight:400;font-size:10px">${c}</th>`).join('')}</tr>
     ${MV1.r.map(row=>{
@@ -200,14 +200,14 @@ qimen: {
       return `<tr><td style="padding:4px;background:#161b22;color:#c9d1d9;font-weight:600;white-space:nowrap;font-size:11px">${row[0]}</td>${cells}</tr>`;
     }).join('')}
     </table></div>
-    ${q.matrix_global&&q.matrix_global.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${q.matrix_global.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:''}
-    ${q.matrix_missing&&q.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${q.matrix_missing.map(m=>`${m.yongshen}·${m.state}`).join('；')}</p>`:''}
+    ${d.matrix_global&&d.matrix_global.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${d.matrix_global.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:''}
+    ${d.matrix_missing&&d.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${d.matrix_missing.map(m=>`${m.yongshen}·${m.state}`).join('；')}</p>`:''}
     <p class="note">图例：<span style="color:#3fb950">●正式·计分</span>｜<span style="color:#d29922">⊙候选·试用轨未转正</span>｜<span style="color:#8b949e">◌观察·不计分</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）｜dest带⚠=格◌但通道实际计分→补格backlog（周复盘处理）。矩阵源：立体矩阵v2.md</p></div>`;
     return `
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
-  ${q.palace_table?`<table style="font-size:11px">
+  ${d.palace_table?`<table style="font-size:11px">
     <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
-    ${q.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
+    ${d.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
   </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/格局/生克）对应矩阵的一个格子</p>`:'<p class="note">无落宫表数据</p>'}</div>
   <div class="detail-section"><h4>② 信号判定 · 今日清单（由盘局提取，去向=点亮矩阵格）</h4>
   <table style="font-size:11px">
@@ -215,28 +215,29 @@ qimen: {
     ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td><td>${s.coef}</td><td class="${s.effective>0?'pos':'zero'}" style="font-weight:600">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
     ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.coef!==undefined?s.coef:'—'}</td><td class="${s.effective<0?'neg':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
     ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.coef!==undefined?s.coef:'—'}</td><td class="${s.effective>0?'pos':'zero'}">${s.effective>0?'+':''}${s.effective}</td></tr>`).join('')}
-    ${q.b_signals.map(s=>`<tr><td style="color:#d29922">b底盘</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.dyn!==undefined?s.dyn:'—'}</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join('')}
-  </table></div>
+    ${(q.b_signals&&q.b_signals.length)?q.b_signals.map(s=>`<tr><td style="color:#d29922">b底盘</td><td>${s.name}</td><td>${s.condition}</td><td>${s.base!==undefined?(s.base>0?'+':'')+s.base:'—'}</td><td>${s.dyn!==undefined?s.dyn:'—'}</td><td class="${s.score>0?'pos':s.score<0?'neg':'zero'}">${s.score>0?'+':''}${s.score}</td></tr>`).join(''):''}
+  </table>${(!q.b_signals||!q.b_signals.length)?'<p class="note">底盘信号明细见报告（直写格式合并至fusion.b_raw/b_value）</p>':''}</div>
   ${matrixGrid}
   <div class="detail-section"><h4>④ 合成计算</h4>
   <div class="formula">a_raw = 攻多(${q.attack_plus>0?'+':''}${q.attack_plus}) − 攻空(${q.attack_minus}) + 结构(${q.structure}) = ${q.a_raw>0?'+':''}${q.a_raw}
 离散映射（表2-D）：${q.a_raw>0?'+':''}${q.a_raw} → ${q.a_discrete>0?'+':''}${q.a_discrete}
 a_macd（表2-F）：${q.a_macd>0?'+':''}${q.a_macd}
 a总 = a_macd(${q.a_macd>0?'+':''}${q.a_macd}) + 奇门a(${q.a_discrete>0?'+':''}${q.a_discrete}) = ${q.a_total>0?'+':''}${q.a_total} ｜ 限幅±2 ✓
-b_raw = ${q.b_raw>0?'+':''}${q.b_raw} → b = ${q.b>0?'+':''}${q.b}（只调强弱不改方向）
+b_raw = ${d.fusion.b_raw>0?'+':''}${d.fusion.b_raw} → b = ${d.fusion.b_value>0?'+':''}${d.fusion.b_value}（只调强弱不改方向）
 R反转检查（表2-E）：|a_raw|=${Math.abs(q.a_raw)} ${q.r_triggered?`<span class="badge warn">触发R</span>`:`<span class="badge off">&lt; 阈值${q.r_threshold} → 不触发</span>`}</div></div>
   ${q.trial_signals?`<div class="detail-section"><h4>⑤ 试用触发 · 表2-T（转正评估中，不进现行轨）</h4>
   <table style="font-size:11px">
-    <tr><th>试用ID</th><th>判定</th><th>补丁分量</th><th>今日状态</th></tr>
-    ${q.trial_signals.map(t=>`<tr><td>${t.id}</td><td>${t.condition}</td><td>${t.effect}</td><td style="color:${t.fired?'#d29922':'#484f58'};font-weight:${t.fired?'600':'400'}">${t.fired?'⚡ 触发':'未触发'}</td></tr>`).join('')}
+    <tr><th>试用ID</th><th>今日判定</th></tr>
+    ${Object.entries(q.trial_signals).map(([id,txt])=>`<tr><td>${id}</td><td style="color:${String(txt).indexOf('触发')===0||String(txt).indexOf('⚡')===0?'#d29922':'#484f58'};font-weight:${String(txt).indexOf('未触发')===0?'400':'600'}">${txt}</td></tr>`).join('')}
   </table></div>`:''}
   ${d.accel?`<div class="detail-section"><h4>⑥ 动能加速度（试点，第三正交维度）</h4>
-  <div class="formula">语境：${d.accel.context}｜预测：${d.accel.pred}
-MACD侧：${d.accel.macd_side}｜盘局侧：${d.accel.qimen_side}（命中${d.accel.qimen_hits}项）${d.accel.conflict?'｜<span style="color:#d29922">'+d.accel.conflict+'</span>':''}
-${d.accel.divergence?'背离观察：'+d.accel.divergence:''}</div></div>`:''}
+  <div class="formula">语境：${d.accel.context}｜预测：${d.accel.grade}
+MACD侧：${d.accel.macd_side}｜盘局侧：${d.accel.qimen_side}${d.accel.conflict&&d.accel.conflict!=='无'?'｜<span style="color:#d29922">'+d.accel.conflict+'</span>':''}
+${d.accel.divergence_note?'背离观察：'+d.accel.divergence_note:''}</div></div>`:''}
   ${d.volatility?`<div class="detail-section"><h4>⑦ 日内波动率（试点，净位移外第二维度）</h4>
-  <div class="formula">预判：<b>${d.volatility.pred}波动</b>（低<0.8%｜中0.8-1.6%｜高>1.6%）｜依据：${d.volatility.basis}
-${d.volatility.low_vol?'<span style="color:#8b949e">·低波动修饰（|净位移|≤0.3%，多空无所谓）</span>':''}${d.volatility.low_vol&&d.volatility.boost?' ｜ ':''}${d.volatility.boost?'<span style="color:#d29922">·方向助推（|净位移|≥1.2%，对方向有助推）</span>':''}${d.volatility.note?'<br>'+d.volatility.note:''}</div></div>`:''}`
+  <div class="formula">预判：<b>${d.volatility.grade}</b>（低<0.8%｜中0.8-1.6%｜高>1.6%）
+${d.volatility.evidence?Object.entries(d.volatility.evidence).map(([k,v])=>`${k==='zhishi'?'值使门':k==='maxing'?'马星':k==='kongwang'?'空亡':k==='volume'?'量能':k}：${v}`).join('｜'):''}
+${d.volatility.net_displacement_marker?'<span style="color:#8b949e">'+d.volatility.net_displacement_marker+'</span>':''}</div></div>`:''}`
   }
 },
 fusion: {
@@ -244,76 +245,91 @@ fusion: {
   sub:"规则：MACD融合规则 §3.1 表3-A ｜ 纯加法限幅±4",
   render:d=>{
     const f=d.fusion;
+    const v0v=d.v0.grade;
+    const aT=d.qimen.a_total;
+    const vX=f.v_cross;
     const v0Labels={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
     const aCols=['+2','+1','0','-1','-2','R'];
     // 叉积表静态值
     const CROSS={'+4':[4,4,4,3,2,'—'],'+3':[4,4,3,2,1,-2],'+2':[4,3,2,1,0,-2],'+1':[3,2,1,0,-1,-2],'0':[1,0,0,0,-1,0],'-1':[1,0,-1,-2,-3,2],'-2':[0,-1,-2,-3,-4,2],'-3':[-1,-2,-3,-4,-4,2],'-4':[-2,-3,-4,-4,-4,'—']};
     const fmtA=v=>v>0?'+'+v:String(v);
     const fmtV=v=>v>0?'+'+v:String(v);
-    const aIdx=aCols.indexOf(fmtA(f.a_total));
+    const aIdx=aCols.indexOf(fmtA(aT));
     return `
   <div class="detail-section"><h4>计算</h4>
-  <div class="formula">v₀ = ${f.v0>0?'+':''}${f.v0} ｜ a总 = ${f.a_total>0?'+':''}${f.a_total}
-v = ${f.v0>0?'+':''}${f.v0} + ${f.a_total>0?'+':''}${f.a_total} = ${f.v>0?'+':''}${f.v} ｜ |v| ≤ 4 ✓
+  <div class="formula">v₀ = ${v0v>0?'+':''}${v0v} ｜ a总 = ${aT>0?'+':''}${aT}
+v = ${v0v>0?'+':''}${v0v} + ${aT>0?'+':''}${aT} = ${vX>0?'+':''}${vX} ｜ |v| ≤ 4 ✓
 
-v₀=0特例（表3-B）：${f.v0===0?'<span class="badge warn">适用</span>':'不适用（v₀≠0）'}
-|v₀|=4回退（表3-C）：${Math.abs(f.v0)===4?'<span class="badge warn">适用</span>':'不适用（|v₀|≤3）'}</div></div>
+v₀=0特例（表3-B）：${v0v===0?'<span class="badge warn">适用</span>':'不适用（v₀≠0）'}
+|v₀|=4回退（表3-C）：${Math.abs(v0v)===4?'<span class="badge warn">适用</span>':'不适用（|v₀|≤3）'}</div></div>
   <div class="detail-section"><h4>叉积表定位（表3-A）</h4>
   <table class="cross-table">
     <tr><th>v₀＼a</th>${aCols.map(c=>`<th>${c}</th>`).join('')}</tr>
     ${Object.keys(CROSS).map(v0=>{
-      const isRow=fmtV(f.v0)===v0;
+      const isRow=fmtV(v0v)===v0;
       return `<tr><td style="color:${v0>0?'#3fb950':v0<0?'#f85149':'#8b949e'}">${v0}</td>${CROSS[v0].map((val,i)=>{
         const isHit=isRow&&i===aIdx;
         return `<td class="${isHit?'hit':''}" style="${isHit?'':''}">${val>0?'+':''}${val}</td>`;
       }).join('')}</tr>`;
     }).join('')}
   </table>
-  <p class="note" style="margin-top:8px">蓝框高亮 = 今日实际落点（v₀=${f.v0>0?'+':''}${f.v0}, a=${f.a_total>0?'+':''}${f.a_total} → v=${f.v>0?'+':''}${f.v}）</p></div>
+  <p class="note" style="margin-top:8px">蓝框高亮 = 今日实际落点（v₀=${v0v>0?'+':''}${v0v}, a=${aT>0?'+':''}${aT} → v=${vX>0?'+':''}${vX}）</p></div>
   <div class="detail-section"><h4>路径判定（表3-E）</h4>
-  <div class="formula">v₀=${f.v0} ${f.v0!==0?'≠ 0':'= 0'} ｜ v=${f.v>0?'+':''}${f.v} ${f.v!==0?'≠ 0':'= 0'} ｜ path = ${d.path}</div>
-  <p class="note">${f.path_explain||''}</p></div>`
+  <div class="formula">v₀=${v0v} ${v0v!==0?'≠ 0':'= 0'} ｜ v=${vX>0?'+':''}${vX} ${vX!==0?'≠ 0':'= 0'} ｜ path = ${d.path}</div>
+  <p class="note">${f.combo_lookup||''}</p></div>`
   }
 },
 adjust: {
   title:"⑥ 微调修正（b 底盘微调）",
   sub:"规则：MACD融合规则 §3.2b 表3-D ｜ b只调|v|强弱，不改方向",
   render:d=>{
-    const a=d.adjust;
-    const active=a.b!==0;
+    const f=d.fusion;
+    const b=f.b_value;
+    const vX=f.v_cross;
+    const vF=f.v_final;
+    const crossZero=(vX>0&&vF<=0)||(vX<0&&vF>=0);
+    const active=b!==0;
     return `
   <div class="detail-section"><h4>判定</h4>
   <table>
     <tr><th>条件</th><th>规则</th><th>今日</th></tr>
-    <tr><td>b 值</td><td>b=0 → 不生效</td><td>${active?`<span class="badge on">b=${a.b>0?'+':''}${a.b} → 生效</span>`:'<span class="badge off">b=0 → 跳过</span>'}</td></tr>
-    <tr><td>v = 0</td><td>b不生效</td><td>v=${a.v} ${a.v===0?'= 0 → b跳过':'≠ 0'}</td></tr>
-    <tr><td>跨零检查</td><td>v>0且v+b≤0 → 放弃；v<0且v+b≥0 → 放弃</td><td>${a.cross_zero?'跨零 → 放弃调整':'不跨零'}</td></tr>
-    <tr><td>限幅</td><td>|v+b|≤4</td><td>|${a.v_final}|≤4 ✓</td></tr>
+    <tr><td>b 值</td><td>b=0 → 不生效</td><td>${active?`<span class="badge on">b=${b>0?'+':''}${b} → 生效</span>`:'<span class="badge off">b=0 → 跳过</span>'}</td></tr>
+    <tr><td>v = 0</td><td>b不生效</td><td>v=${vX} ${vX===0?'= 0 → b跳过':'≠ 0'}</td></tr>
+    <tr><td>跨零检查</td><td>v>0且v+b≤0 → 放弃；v<0且v+b≥0 → 放弃</td><td>${crossZero?'跨零 → 放弃调整':'不跨零'}</td></tr>
+    <tr><td>限幅</td><td>|v+b|≤4</td><td>|${vF}|≤4 ✓</td></tr>
   </table></div>
-  <div class="formula">v_final = v + b = ${a.v>0?'+':''}${a.v} + ${a.b>0?'+':''}${a.b} = ${a.v_final>0?'+':''}${a.v_final}</div>
-  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}</p>`
+  <div class="formula">v_final = v + b = ${vX>0?'+':''}${vX} + ${b>0?'+':''}${b} = ${vF>0?'+':''}${vF}</div>
+  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}${d.adjust.patch_track?'<br>'+d.adjust.patch_track:''}${d.adjust.strong_bottom_window?'<br><span style="color:#d29922">🔻 强势底分型反转观察窗生效中</span>':''}</p>`
   }
 },
 output: {
   title:"⑦ 定级输出（7档映射）",
   sub:"规则：MACD融合规则 §3.4 表4-A（V3.0）｜ 9档内部值 → 7档输出，无方向区v∈[-1,+1]整块，语义锚=四时段验证标准第六章（正式）",
   render:d=>{
+    const f=d.fusion;
     const o=d.output;
+    const vF=f.v_final;
+    const grade=f.final_grade;
     const grades=[['+4','偏强','≥ +1.0%'],['+3','偏多','+0.5% ~ +1.0%'],['+2','略偏多','+0.2% ~ +0.5%'],['+1','无方向（V3.0区·上沿）','-0.2% ~ +0.2%'],['0','无方向（区·中枢）','-0.2% ~ +0.2%'],['-1','无方向（V3.0区·下沿）','-0.2% ~ +0.2%'],['-2','略偏空','-0.5% ~ -0.2%'],['-3','偏空','-1.0% ~ -0.5%'],['-4','偏弱','≤ -1.0%']];
     const vMap={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
     return `
+  ${o.three_d?`<div class="detail-section"><h4>三维输出</h4>
+  <div class="formula">隔夜尺度：${o.three_d.overnight} ｜ 日内尺度：${o.three_d.intraday} ｜ 全天尺度：${o.three_d.daily}</div></div>`:''}
+  ${o.open_scenario?`<div class="detail-section"><h4>开盘情景</h4>
+  <div class="formula">${o.open_scenario}</div>
+  ${o.overnight_precheck?`<p class="note" style="margin-top:4px">A50 ${o.overnight_precheck.a50}% ｜ 美股 ${o.overnight_precheck.us}<br>${o.overnight_precheck.news}</p>`:''}</div>`:''}
   <div class="detail-section"><h4>最终映射（表4-A）</h4>
   <table>
     <tr><th>v_final</th><th>7档定级</th><th>语义锚：净涨跌幅%（口径分维度·正式）</th><th></th></tr>
     ${grades.map(([v,g,anchor])=>{
-      const isHit=vMap[String(o.v_final)]===v;
+      const isHit=vMap[String(vF)]===v;
       return `<tr class="${isHit?'hl':''}"><td>${v}</td><td>${g}</td><td style="color:#8b949e;font-size:11px">${anchor}</td><td>${isHit?'<b>◀ 今日预测</b>':''}</td></tr>`;
     }).join('')}
   </table></div>
   <div class="detail-section"><h4>九字段输出（报告必含）</h4>
-  <div class="formula">v0_grade: ${d.nine_fields.v0_grade>0?'+':''}${d.nine_fields.v0_grade}     cal_A: ${d.nine_fields.cal_A}     cal_B: ${d.nine_fields.cal_B}
+  <div class="formula">v0_grade: ${d.nine_fields.v0_grade>0?'+':''}${d.nine_fields.v0_grade}     cal_A: ${d.nine_fields.cal_A}     cal_B: ${d.nine_fields.cal_B}${d.nine_fields.cal_C?'     cal_C: '+d.nine_fields.cal_C:''}
 a_macd: ${d.nine_fields.a_macd>0?'+':''}${d.nine_fields.a_macd}        qimen_a: ${d.nine_fields.qimen_a}       a_raw: ${d.nine_fields.a_raw}
-b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: ${d.nine_fields.path}   final_grade: ${d.nine_fields.final_grade>0?'+':''}${d.nine_fields.final_grade} → ${o.grade}</div></div>
+b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: ${d.nine_fields.path}   final_grade: ${grade}</div></div>
   ${d.verification?`<div class="detail-section"><h4>验证对比（收盘后更新）</h4>
   ${renderVerification(d.verification)}
   </div>`:''}`
@@ -330,7 +346,7 @@ slots: {
     <div class="detail-section"><h4>时段判语</h4>
     <table>
       <tr><th>时段</th><th>定级</th><th>判语</th></tr>
-      ${d.four_slots.map(s=>`<tr><td>${s.name} ${s.time}</td><td style="color:${GRADE_COLOR(GRADE_VAL[s.grade]||0)};font-weight:600">${s.grade}</td><td class="note">${s.note||'—'}</td></tr>`).join('')}
+      ${d.four_slots.map(s=>`<tr><td>${s.slot} ${s.time}</td><td style="color:${GRADE_COLOR(GRADE_VAL[s.grade]||0)};font-weight:600">${s.grade}</td><td class="note">${s.dim?'<span style="color:#58a6ff">['+s.dim+']</span> ':''}${s.note||'—'}</td></tr>`).join('')}
     </table></div>
     ${d.four_slots_summary?`<div class="detail-section"><h4>全天特征</h4><p class="note">${d.four_slots_summary}</p></div>`:''}`;
   }
@@ -342,32 +358,32 @@ function renderPipeline(d){
   // header
   document.getElementById('hdrDate').textContent = `${d.date_display||d.date} · ${d.ganzhi||''} · ${d.dun||''}`;
   const gEl=document.getElementById('hdrGrade');
-  gEl.innerHTML = `最终定级：<b>${d.output.grade}</b> · 路径 ${d.path}${d.strong_bottom?' · <span style="background:#d29922;color:#0d1117;padding:2px 10px;border-radius:10px;font-weight:700">🔻 昨日强势底分型·反转观察窗</span>':''}`;
+  gEl.innerHTML = `最终定级：<b>${d.fusion.final_grade}</b> · 路径 ${d.path}${d.strong_bottom?' · <span style="background:#d29922;color:#0d1117;padding:2px 10px;border-radius:10px;font-weight:700">🔻 昨日强势底分型·反转观察窗</span>':''}`;
 
   const nodes=[
     {key:'macd',active:true,html:`
       <span class="k">DIF</span> <span class="v ${d.macd.dif<0?'neg':'pos'}">${d.macd.dif}</span> ｜ <span class="k">DEA</span> <span class="v ${d.macd.dea<0?'neg':'pos'}">${d.macd.dea}</span> ｜ <span class="k">柱</span> <span class="v ${d.macd.bar<0?'neg':'pos'}">${d.macd.bar}</span><br>
-      <span class="k">状态</span> <span class="v">${d.macd.cross_state}</span>`},
+      <span class="k">状态</span> <span class="v">${d.macd.dead_cross_day?('死叉延续 第'+d.macd.dead_cross_day+'日'):'非延续期'}</span>`},
     {key:'v0',active:true,html:`
-      <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_score>0?'pos':d.v0.bar_score<0?'neg':'zero'}">${d.v0.bar_score>0?'+':''}${d.v0.bar_score}</span> ＋ <span class="k">DIF位置</span> <span class="v ${d.v0.dif_pos>0?'pos':d.v0.dif_pos<0?'neg':'zero'}">${d.v0.dif_pos>0?'+':''}${d.v0.dif_pos}</span> ＝ <span class="v ${d.v0.total>0?'pos':d.v0.total<0?'neg':'zero'}">${d.v0.total>0?'+':''}${d.v0.total}</span><br>
-      <span class="k">9档映射</span> <span class="v">总分${d.v0.total} → ${d.v0.mapped_label}（${d.v0.mapped>0?'+':''}${d.v0.mapped}）</span>`},
+      <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</span> ＋ <span class="k">DIF位置</span> <span class="v ${d.v0.dif_pos>0?'pos':d.v0.dif_pos<0?'neg':'zero'}">${d.v0.dif_pos>0?'+':''}${d.v0.dif_pos}</span> ＝ <span class="v ${d.v0.raw_score>0?'pos':d.v0.raw_score<0?'neg':'zero'}">${d.v0.raw_score>0?'+':''}${d.v0.raw_score}</span><br>
+      <span class="k">9档映射</span> <span class="v">总分${d.v0.raw_score} → ${GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal>0?'+':''}${d.v0.precal}）</span>`},
     {key:'calibration',active:true,html:`
-      <span class="k">校准A 深跌</span> ${d.calibration.cal_a.triggered?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.calibration.cal_a.action_short||''}</span><br>
-      <span class="k">校准B 惯性</span> ${d.calibration.cal_b.triggered?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.calibration.cal_b.action_short||''}</span><br>
-      <span class="k">校准C 背离</span> ${d.calibration.cal_c.triggered?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'}<br>
-      <span class="k">输出 v₀ = </span><span class="v ${d.calibration.output_v0>0?'pos':d.calibration.output_v0<0?'neg':'zero'}">${d.calibration.output_v0>0?'+':''}${d.calibration.output_v0}</span>`},
+      <span class="k">校准A 深跌</span> ${d.calibration.cal_A?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.v0.cal_A||''}</span><br>
+      <span class="k">校准B 惯性</span> ${d.calibration.cal_B?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'} <span class="k">${d.v0.cal_B||''}</span><br>
+      <span class="k">校准C 背离</span> ${d.calibration.cal_C?'<span class="badge on">触发</span>':'<span class="badge off">未触发</span>'}<br>
+      <span class="k">输出 v₀ = </span><span class="v ${d.v0.grade>0?'pos':d.v0.grade<0?'neg':'zero'}">${d.v0.grade>0?'+':''}${d.v0.grade}</span>`},
     {key:'qimen',active:true,html:`
       <span class="k">攻多</span> <span class="v ${d.qimen.attack_plus>0?'pos':'zero'}">${d.qimen.attack_plus>0?'+':''}${d.qimen.attack_plus}</span> － <span class="k">攻空</span> <span class="v ${d.qimen.attack_minus<0?'neg':'zero'}">${d.qimen.attack_minus}</span> ＋ <span class="k">结构</span> <span class="v ${d.qimen.structure>0?'pos':d.qimen.structure<0?'neg':'zero'}">${d.qimen.structure>0?'+':''}${d.qimen.structure}</span> ＝ <span class="v">a_raw ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}</span><br>
       <span class="k">离散映射</span> <span class="v">a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> ｜ <span class="k">R检查</span> ${d.qimen.r_triggered?'<span class="badge warn">触发</span>':`<span class="badge off">未触发</span>（|a_raw|=${Math.abs(d.qimen.a_raw)} &lt; ${d.qimen.r_threshold}）`}<br>
-      <span class="k">a_macd</span> <span class="v zero">${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}</span> → <span class="k">a总</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> ｜ <span class="k">b底盘</span> <span class="v ${d.qimen.b>0?'pos':d.qimen.b<0?'neg':'zero'}">${d.qimen.b>0?'+':''}${d.qimen.b}</span>`},
+      <span class="k">a_macd</span> <span class="v zero">${d.qimen.a_macd>0?'+':''}${d.qimen.a_macd}</span> → <span class="k">a总</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> ｜ <span class="k">b底盘</span> <span class="v ${d.fusion.b_value>0?'pos':d.fusion.b_value<0?'neg':'zero'}">${d.fusion.b_value>0?'+':''}${d.fusion.b_value}</span>`},
     {key:'fusion',active:true,html:`
-      <span class="k">v = v₀ + a总 = </span><span class="v ${d.fusion.v0>0?'pos':d.fusion.v0<0?'neg':'zero'}">${d.fusion.v0>0?'+':''}${d.fusion.v0}</span> <span class="k">+</span> <span class="v ${d.fusion.a_total>0?'pos':d.fusion.a_total<0?'neg':'zero'}">${d.fusion.a_total>0?'+':''}${d.fusion.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v>0?'pos':d.fusion.v<0?'neg':'zero'}">${d.fusion.v>0?'+':''}${d.fusion.v}</span><br>
-      <span class="k">查表3-A</span> <span class="v">v₀=${d.fusion.v0>0?'+':''}${d.fusion.v0} × a=${d.fusion.a_total>0?'+':''}${d.fusion.a_total} → v=${d.fusion.v>0?'+':''}${d.fusion.v}</span>`},
-    {key:'adjust',active:d.adjust.b!==0,html:`
-      <span class="k">b = ${d.adjust.b>0?'+':''}${d.adjust.b} ${d.adjust.b===0?'→ 不生效':'→ 生效'}</span><br>
-      <span class="k">v_final = ${d.adjust.v>0?'+':''}${d.adjust.v} + ${d.adjust.b>0?'+':''}${d.adjust.b} = </span><span class="v ${d.adjust.v_final>0?'pos':d.adjust.v_final<0?'neg':'zero'}">${d.adjust.v_final>0?'+':''}${d.adjust.v_final}</span>`},
+      <span class="k">v = v₀ + a总 = </span><span class="v ${d.v0.grade>0?'pos':d.v0.grade<0?'neg':'zero'}">${d.v0.grade>0?'+':''}${d.v0.grade}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span><br>
+      <span class="k">查表3-A</span> <span class="v">v₀=${d.v0.grade>0?'+':''}${d.v0.grade} × a=${d.qimen.a_total>0?'+':''}${d.qimen.a_total} → v=${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>`},
+    {key:'adjust',active:d.fusion.b_value!==0,html:`
+      <span class="k">b = ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} ${d.fusion.b_value===0?'→ 不生效':'→ 生效'}</span><br>
+      <span class="k">v_final = ${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross} + ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>`},
     {key:'output',active:true,html:`
-      <span class="k">v_final = </span><span class="v ${d.output.v_final>0?'pos':d.output.v_final<0?'neg':'zero'}">${d.output.v_final>0?'+':''}${d.output.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.output.v_final<0?'neg':'pos'}" style="font-size:14px">${d.output.grade}</span><br>
+      <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span><br>
       <span class="path-label">路径：${d.path}</span>`},
     ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[])
   ];
@@ -389,87 +405,108 @@ function renderPipeline(d){
 /* ==================== 数据加载 ==================== */
 let pipelineData=null;
 
-/* ⭐schema 归一化（2026-10-20修复）：预测端V4.0-patch29直写格式与Step3.5旧schema并存，
-   统一映射为旧schema渲染；新字段(three_d/open_scenario/overnight_precheck)附加到output节点展示 */
+/* ⭐schema 归一化（V3.0-patch16，2026-10-20权威切换配套）——**旧schema→新schema**单向转换：
+   权威=预测端V4.0-patch29直写格式（老师裁定"按新的"）；新数据直通，旧归档（≤10-19）转换后渲染 */
 const SLOT_TIME_MAP={'巳':'09:30-10:30','午':'10:30-11:30','未':'13:00-14:00','申':'14:00-15:00'};
+const GRADE_LABEL_MAP={'-3':'强空','-2':'中空','-1':'略偏空','0':'无方向','1':'略偏多','2':'中多','3':'强多'};
 function normalizeSchema(d){
   if(!d||typeof d!=='object') return d;
   const has=(o,k)=>o&&Object.prototype.hasOwnProperty.call(o,k);
-  /* 检测新schema：v0.bar_strength 存在而 v0.bar_score 不存在 */
-  const isNew=has(d.v0,'bar_strength')&&!has(d.v0,'bar_score');
-  if(!isNew) return d;
+  const isOld=has(d.v0,'bar_score');
+  if(!isOld){
+    /* 新格式：four_slots 补 time（SVG横轴需要），其余直通 */
+    if(Array.isArray(d.four_slots)){
+      d.four_slots.forEach(s=>{ if(!s.time&&SLOT_TIME_MAP[s.slot]) s.time=SLOT_TIME_MAP[s.slot]; });
+    }
+    return d;
+  }
 
-  /* macd */
+  /* ===== 旧schema → 新schema ===== */
+  /* macd：cross_state 解析出 dead_cross_day；bar_delta 缺失（旧格式无 prev_bar） */
   if(d.macd){
-    if(!has(d.macd,'cross_state')&&has(d.macd,'dead_cross_day'))
-      d.macd.cross_state='死叉延续 第'+d.macd.dead_cross_day+'日';
-    if(!has(d.macd,'precheck_note')&&has(d.macd,'bar_delta'))
-      d.macd.precheck_note='柱Δ'+(d.macd.bar_delta>0?'+':'')+d.macd.bar_delta+(d.macd.bar_delta>0?'（空方动能收敛）':'（空方动能扩大）');
+    if(d.macd.dead_cross_day===undefined&&typeof d.macd.cross_state==='string'){
+      const m=d.macd.cross_state.match(/第(\d+)日/);
+      d.macd.dead_cross_day=m?parseInt(m[1],10):0;
+    }
+    if(d.macd.bar_delta===undefined) d.macd.bar_delta=null;
   }
   /* v0 */
   if(d.v0){
-    d.v0.bar_score=d.v0.bar_strength;
-    d.v0.cross_desc=d.v0.cross_desc||('死叉延续（非首日）');
-    d.v0.bar_desc=d.v0.bar_desc||('柱'+d.macd?.bar+'，|柱|>20 极值档');
-    d.v0.dif_desc=d.v0.dif_desc||'DIF≤0 且 ≤DEA';
-    d.v0.total=d.v0.raw_score;
-    d.v0.mapped=d.v0.precal;
-    const ML={'-3':'强空','-2':'中空','-1':'略偏空','0':'无方向','1':'略偏多','2':'中多','3':'强多'};
-    d.v0.mapped_label=ML[d.v0.precal]!==undefined?ML[d.v0.precal]:String(d.v0.precal);
-    d.v0.note=d.v0.note||('交叉'+d.v0.cross+'；柱体'+d.v0.bar_score+'；DIF位置'+d.v0.dif_pos);
+    const cal=d.calibration||{};
+    d.v0.bar_strength=d.v0.bar_score;
+    d.v0.raw_score=d.v0.total;
+    d.v0.precal=d.v0.mapped;
+    d.v0.grade=(cal.output_v0!==undefined)?cal.output_v0:d.v0.mapped;
+    d.v0.cal_A=(cal.cal_a&&cal.cal_a.action_short)||'';
+    d.v0.cal_B=(cal.cal_b&&cal.cal_b.action_short)||'';
+    d.v0.cal_C=(cal.cal_c&&cal.cal_c.triggered)?'有（K线-MACD背离）':'无';
   }
-  /* calibration：cal_A/cal_B/cal_C 布尔 → cal_a/cal_b/cal_c 对象 */
+  /* calibration：嵌套对象 → 平铺布尔 */
   if(d.calibration){
     const c=d.calibration;
-    if(!has(c,'cal_a')){
-      c.cal_a={triggered:!!c.cal_A,strong:false,condition_val:d.macd?String(d.macd.dif):'',action:(d.v0&&d.v0.cal_A)||'',action_short:(d.v0&&d.v0.cal_A)||''};
-      c.cal_b={triggered:!!c.cal_B,detail:(d.macd&&d.macd.cross_state)||'',action:'标记趋势惯性期',action_short:(d.v0&&d.v0.cal_B)||''};
-      c.cal_c={triggered:!!c.cal_C,detail:(d.v0&&d.v0.cal_C)||''};
-      c.output_v0=(d.v0&&d.v0.grade!==undefined)?d.v0.grade:(d.v0?d.v0.precal:0);
+    c.cal_A=!!(c.cal_a&&c.cal_a.triggered);
+    c.cal_B=!!(c.cal_b&&c.cal_b.triggered);
+    c.cal_C=!!(c.cal_c&&c.cal_c.triggered);
+    if(c.r_threshold===undefined) c.r_threshold=(d.qimen&&d.qimen.r_threshold!==undefined)?d.qimen.r_threshold:10;
+  }
+  /* qimen：b迁去fusion；palace_table/matrix_* 提为顶层；trial_signals 数组→对象 */
+  const q=d.qimen;
+  if(q){
+    if(d.palace_table===undefined&&q.palace_table!==undefined) d.palace_table=q.palace_table;
+    if(d.matrix_drop===undefined&&q.matrix_drop!==undefined) d.matrix_drop=q.matrix_drop;
+    if(d.matrix_missing===undefined&&q.matrix_missing!==undefined) d.matrix_missing=q.matrix_missing;
+    if(d.matrix_global===undefined&&q.matrix_global!==undefined) d.matrix_global=q.matrix_global;
+    if(Array.isArray(q.trial_signals)){
+      const ts={};
+      q.trial_signals.forEach(t=>{ ts[t.id]=(t.fired?'⚡触发':'未触发')+'（'+((t.condition||'')+(t.effect?'｜'+t.effect:''))+'）'; });
+      q.trial_signals=ts;
     }
   }
-  /* qimen：b 迁移到 fusion */
-  if(d.qimen&&!has(d.qimen,'b')){
-    d.qimen.b_raw=d.fusion&&d.fusion.b_raw!==undefined?d.fusion.b_raw:0;
-    d.qimen.b=d.fusion&&d.fusion.b_value!==undefined?d.fusion.b_value:0;
-  }
-  /* fusion：v_cross/v_final/final_grade → v0/a_total/v */
-  if(d.fusion){
-    const f=d.fusion;
-    f.v0=d.calibration&&d.calibration.output_v0!==undefined?d.calibration.output_v0:0;
-    f.a_total=d.qimen&&d.qimen.a_total!==undefined?d.qimen.a_total:0;
-    f.v=f.v_cross!==undefined?f.v_cross:(f.v0+f.a_total);
-    f.path_explain=f.combo_lookup||f.path_explain||'';
-  }
-  /* adjust：新schema只有patch_track/strong_bottom_window */
-  if(d.adjust&&!has(d.adjust,'v_final')){
-    d.adjust={
-      v:d.fusion?d.fusion.v:0,
-      b:d.fusion&&d.fusion.b_value!==undefined?d.fusion.b_value:0,
-      v_final:d.fusion&&d.fusion.v_final!==undefined?d.fusion.v_final:0,
-      cross_zero:false,
-      patch_track:d.adjust.patch_track,
-      strong_bottom_window:d.adjust.strong_bottom_window
-    };
-  }
-  /* output：three_d/open_scenario → v_final/grade + 新字段保留 */
-  if(d.output){
-    d.output.v_final=d.fusion&&d.fusion.v_final!==undefined?d.fusion.v_final:0;
-    d.output.grade=d.fusion&&d.fusion.final_grade?d.fusion.final_grade:'—';
-  }
-  /* four_slots：slot/dim → name/time/type */
+  /* fusion */
+  if(!d.fusion) d.fusion={};
+  const f=d.fusion;
+  if(f.b_raw===undefined) f.b_raw=(q&&q.b_raw!==undefined)?q.b_raw:0;
+  if(f.b_value===undefined) f.b_value=(q&&q.b!==undefined)?q.b:0;
+  if(f.v_cross===undefined) f.v_cross=(f.v!==undefined)?f.v:((d.v0?d.v0.grade:0)+((q&&q.a_total)||0));
+  if(f.v_final===undefined) f.v_final=(d.adjust&&d.adjust.v_final!==undefined)?d.adjust.v_final:f.v_cross;
+  if(f.final_grade===undefined) f.final_grade=(d.output&&d.output.grade)?d.output.grade:'—';
+  if(f.path===undefined) f.path=d.path;
+  if(f.combo_lookup===undefined) f.combo_lookup=f.path_explain||'';
+  /* adjust：新语义=补丁追踪 */
+  d.adjust={
+    patch_track:'（旧格式归档数据，无补丁追踪）',
+    strong_bottom_window:(d.strong_bottom===1||d.strong_bottom===true)
+  };
+  /* output：新语义=三维+开盘情景+隔夜预检（旧数据无，置空由渲染层兜底） */
+  d.output={
+    three_d:null,
+    open_scenario:'',
+    overnight_precheck:null
+  };
+  /* four_slots：name→slot，补 dim */
   if(Array.isArray(d.four_slots)){
-    d.four_slots=d.four_slots.map(s=>{
-      if(s.name) return s; /* 旧格式 */
-      const name=s.slot||'—';
-      return{
-        name,
-        time:s.time||SLOT_TIME_MAP[name]||'',
-        grade:s.grade||'无方向',
-        type:s.type||(s.grade==='无方向'?'neutral':(String(s.grade).indexOf('多')>=0||String(s.grade).indexOf('强')>=0?'up':'down')),
-        note:s.note||''
-      };
-    });
+    d.four_slots=d.four_slots.map(s=>({
+      slot:s.slot||s.name,
+      time:s.time||SLOT_TIME_MAP[s.slot||s.name]||'',
+      grade:s.grade||'无方向',
+      dim:s.dim||'',
+      note:s.note||''
+    }));
+  }
+  /* accel：pred→grade，divergence→divergence_note */
+  if(d.accel){
+    if(d.accel.grade===undefined) d.accel.grade=d.accel.pred||'—';
+    if(d.accel.divergence_note===undefined) d.accel.divergence_note=d.accel.divergence||'';
+  }
+  /* volatility：pred→grade，note→net_displacement_marker，basis→evidence.zhishi */
+  if(d.volatility){
+    if(d.volatility.grade===undefined) d.volatility.grade=d.volatility.pred||'—';
+    if(d.volatility.net_displacement_marker===undefined) d.volatility.net_displacement_marker=d.volatility.note||'';
+    if(d.volatility.evidence===undefined) d.volatility.evidence={zhishi:d.volatility.basis||''};
+  }
+  /* nine_fields：补 cal_C */
+  if(d.nine_fields&&d.nine_fields.cal_C===undefined){
+    d.nine_fields.cal_C=(d.calibration&&d.calibration.cal_C)?'有':'无';
   }
   return d;
 }
