@@ -189,7 +189,7 @@ v0: {
     <tr class="hl"><td>三维总分</td><td>—</td><td class="${d.v0.raw_score>0?'pos':d.v0.raw_score<0?'neg':'zero'}" style="font-weight:700">${d.v0.raw_score>0?'+':''}${d.v0.raw_score}</td><td>${d.v0.cross}+(${d.v0.bar_strength})+(${d.v0.dif_pos})</td></tr>
   </table></div>
   <div class="detail-section"><h4>9档映射（表1-D）</h4>
-  <div class="formula">总分 ${d.v0.raw_score>0?'+':''}${d.v0.raw_score} → ${GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal>0?'+':''}${d.v0.precal}）</div>
+  <div class="formula">总分 ${d.v0.raw_score>0?'+':''}${d.v0.raw_score} → ${(d.macd&&d.macd.grade_label_map&&d.macd.grade_label_map[String(d.v0.precal)])||GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal>0?'+':''}${d.v0.precal}）</div>
   <p class="note">${'交叉'+d.v0.cross+'；柱体'+d.v0.bar_strength+'；DIF位置'+d.v0.dif_pos}</p></div>`:''}`
 },
 qimen: {
@@ -516,7 +516,7 @@ function renderPipeline(d){
       <span class="k">L1</span> <span class="v">${d.matrix.l1_cell.split('（')[0]}</span> ｜ <span class="k">L2</span> <span class="v">${d.matrix.l2_state.replace('bear_','空·').replace('bull_','多·').replace('early','初段').replace('mid','中段').replace('late','末段')}</span> ｜ <span class="k">L3</span> <span class="v">${d.matrix.l3.rate==='accel'?'加速':d.matrix.l3.rate==='decel'?'减速':'<b style="color:#d29922">衰竭转向</b>'}×${d.matrix.l3.pos}</span><br>
       <span class="k">底座分</span> <span class="v ${d.matrix.score>0?'pos':d.matrix.score<0?'neg':'zero'}" style="font-size:14px">${d.matrix.score>0?'+':''}${d.matrix.score}</span>${d.matrix.signal&&d.matrix.signal!=='无'?` <span class="badge warn">${d.matrix.signal}</span>`:''}` : `
       <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</span> ＋ <span class="k">DIF位置</span> <span class="v">${d.v0.dif_pos}</span> ＝ <span class="v">${d.v0.raw_score}</span><br>
-      <span class="k">9档映射</span> <span class="v">${GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal}）</span>`},
+      <span class="k">9档映射</span> <span class="v">${(d.macd&&d.macd.grade_label_map&&d.macd.grade_label_map[String(d.v0.precal)])||GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal}）</span>`},
     {key:'qimen',active:true,html:`
       <span class="k">结算</span> <span class="v">攻多${d.qimen.attack_plus} − 攻空${d.qimen.attack_minus} + 结构${d.qimen.structure>0?'+':''}${d.qimen.structure} = a_raw ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}</span><br>
       <span class="k">得分</span> <span class="v ${d.qimen.a_discrete>0?'pos':d.qimen.a_discrete<0?'neg':'zero'}" style="font-size:14px">奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> → <span class="k">状态</span> <span class="v">${(d.qimen&&d.qimen.a_meaning&&d.qimen.a_meaning[String(d.qimen.a_discrete)])||'—'}</span>`},
@@ -552,7 +552,7 @@ let pipelineData=null;
 /* ⭐schema 归一化（V3.0-patch16，2026-10-20权威切换配套）——**旧schema→新schema**单向转换：
    权威=预测端V4.0-patch29直写格式（老师裁定"按新的"）；新数据直通，旧归档（≤10-19）转换后渲染 */
 const SLOT_TIME_MAP={'巳':'09:30-10:30','午':'10:30-11:30','未':'13:00-14:00','申':'14:00-15:00'};
-const GRADE_LABEL_MAP=(d.macd&&d.macd.grade_label_map)||{'0':'无方向'};
+const GRADE_LABEL_MAP={'-3':'强空','-2':'中空','-1':'略偏空','0':'无方向','1':'略偏多','2':'中多','3':'强多'};
 function normalizeSchema(d){
   if(!d||typeof d!=='object') return d;
   const has=(o,k)=>o&&Object.prototype.hasOwnProperty.call(o,k);
