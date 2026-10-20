@@ -290,15 +290,20 @@ qimen: {
     return `
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
   ${d.palace_table?`<table style="font-size:11px">
-    <tr><th>用神</th><th>宫</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
-    ${d.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
-  </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/四喜/格局/生克）对应矩阵的一个格子</p>
+    <tr><th>宫（同宫叠加）</th><th>星</th><th>神</th><th>门</th><th>天+地盘</th><th>月令</th><th>四害</th><th>解读</th></tr>
+    ${d.palace_table.map(p=>`<tr><td style="white-space:nowrap"><b>${p.palace}</b>${p.gods&&p.gods.length?`<br><span style="font-size:10px;color:#58a6ff">${p.gods.map(g=>g.split('（')[0]).join('·')}</span>`:''}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'&&p.harms!=='—'?'neg':''}" style="${p.harms&&p.harms!=='无'&&p.harms!=='—'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
+  </table><p class="note">按九宫读图——同宫信息叠加（蓝字=本宫落的角色），矩阵的每一格从对应宫的这些要素判定</p>
   ${(()=>{
     const FIVE=['值符','日干','庚','生门','戊'];
-    const rows=(d.palace_table||[]).filter(p=>FIVE.some(f=>(p.yongshen||'').indexOf(f)===0));
-    const decl=rows.map(p=>(p.yongshen||'').split('（')[0]+':'+(p.month_state||'—')).join('｜');
-    const gs=((d.palace_table||[]).find(p=>(p.yongshen||'').indexOf('庚')===0)||{}).month_state||'';
-    const dr=((d.palace_table||[]).find(p=>(p.yongshen||'').indexOf('日干')===0)||{}).month_state||'';
+    const pairs=[];
+    (d.palace_table||[]).forEach(p=>{
+      (p.gods||[]).forEach(g=>{
+        if(FIVE.some(f=>g.indexOf(f)===0)) pairs.push(g.split('（')[0]+':'+(p.month_state||'—'));
+      });
+    });
+    const decl=pairs.join('｜');
+    const gs=(pairs.find(x=>x.indexOf('庚')===0)||'').split(':')[1]||'';
+    const dr=(pairs.find(x=>x.indexOf('日干')===0)||'').split(':')[1]||'';
     const gengOn=/当令|旺|相/.test(gs);
     const yueKeRi=/囚|死|废/.test(dr)&&!/旺|相/.test(dr);
     return `<p style="color:#8b949e;font-size:11px;margin-top:6px;border-top:1px dashed #30363d;padding-top:6px">📜 <b>月令底盘声明（手册9.4.2·Step 3.0强制）</b>：${decl||'—'}${gengOn?' ｜ <b style="color:#d29922">庚金当令→四时段上限「中性偏强」（9.4.2②）</b>':''}${yueKeRi?' ｜ <b style="color:#f85149">月令克日干·系统性压制（已入格G31不重复计分）</b>':''}</p>`;
@@ -306,7 +311,7 @@ qimen: {
   ${matrixGrid}
   <div class="detail-section"><h4>③ 信号判定 · 今日清单（⭐层内加总×层系数·三渠道合成）</h4>
   ${(()=>{
-    const YL={'日干':'核心','时干':'核心','值符':'核心','值使门':'核心','庚':'力量','乙奇':'力量','戊':'力量','生门':'力量','开门':'力量','景门':'衍生','九天':'衍生','九地':'衍生','天蓬':'衍生','玄武':'衍生'};
+    const YL={'日干':'核心','时干':'核心','值符':'核心','值使门':'核心','值使':'核心','庚':'力量','乙奇':'力量','戊':'力量','生门':'力量','开门':'力量','景门':'衍生','九天':'衍生','九地':'衍生','天蓬':'衍生','玄武':'衍生'};
     const LC={'核心':1.5,'力量':1.0,'衍生':0.5};
     const layerOf=s=>{const c=(s.cell||'').split('×')[0].trim();return YL[c]||null;};
     const num=v=>{const n=parseFloat(v);return isNaN(n)?0:n;};
