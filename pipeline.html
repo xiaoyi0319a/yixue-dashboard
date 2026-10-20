@@ -193,8 +193,8 @@ v0: {
   <p class="note">${'交叉'+d.v0.cross+'；柱体'+d.v0.bar_strength+'；DIF位置'+d.v0.dif_pos}</p></div>`:''}`
 },
 qimen: {
-  title:"④ 奇门层（a + b 合成）",
-  sub:"规则：MACD融合规则 §2.1~2.7 ｜ 当季系数快照",
+  title:"④ 奇门层（盘局 → 信号 → 原始a_raw）",
+  sub:"规则：MACD融合规则 §2.1~2.3（表2-A/B/C信号表）｜只出原始读数·当季系数归差异融合节点①",
   render:d=>{
     const q=d.qimen;
     const STC={'●':['#3fb950','正式·计分'],'⊙':['#d29922','候选·试用轨'],'◌':['#8b949e','观察·不计分'],'⚠️':['#f85149','缺格']};
@@ -487,7 +487,7 @@ function renderPipeline(d){
   ];
 
   const names={macd:'MACD 数据',v0:'MACD矩阵底座',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段'};
-  const tags={macd:'数据源',v0:'三层矩阵·正式',qimen:'表2-A~2-H',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6'};
+  const tags={macd:'数据源',v0:'三层矩阵·正式',qimen:'表2-A~2-C·原始',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6'};
 
   const html=nodes.map((n,i)=>{
     const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
