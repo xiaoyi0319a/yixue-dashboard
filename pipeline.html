@@ -271,17 +271,22 @@ qimen: {
     </table></div>
     ${d.matrix_global&&d.matrix_global.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${d.matrix_global.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:''}
     ${d.matrix_missing&&d.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${d.matrix_missing.map(m=>`${m.yongshen}·${m.state}`).join('；')}</p>`:''}
-    ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">${(()=>{
-      const harms=(d.palace_table||[]).map(r=>(r.harms||'无')).filter(h=>h&&h!=='无');
-      const cnt=harms.length;
-      const harmLit=Object.keys(litMap).filter(k=>k.indexOf('四害')>=0).length;
-      return cnt>=5?`<p style="color:#d29922;font-size:12px;margin-top:6px;font-weight:700">⚠️ 四害聚集模式：全局${cnt}处（${harms.slice(0,6).join('/')}${cnt>6?'…':''}）·四害列点亮${harmLit}格·四害档基础分1.5入层合成·空方内耗拉锯</p>`:'';
-    })()}
-    📒错题本闭环（10-20层合成版）：每格信号日沉格信号错题本（5.5.G机械记账+收盘验证补归因）→周复盘Step 2.12两阶段（先按格对因施策[修规则/M4除名]→再按层调层系数[±10~20%·限幅[0.5,2.0]·保序核心≥力量≥衍生]＋按列调严重度基数）
-    <br>🔸格网外存量信号（旧规则历史数据，机制已消亡）：${unmapped.map(m=>`${m.signal}（${m.cell}）→ ${m.dest}`).join('；')}</p>`:''}
-    <p style="color:#8b949e;font-size:11px;margin-top:4px">口径（10-20层合成版）：格内只存<b>基础分</b>（按严重度档锁死：大凶大吉3｜普通2｜四害1.5｜四喜1.5），层间加权在③信号判定执行（核心×1.5｜力量×1.0｜衍生×0.5）；周复盘只调层系数/严重度基数，单格只走修规则/M4除名；映射压缩只在融合节点①（表2-D）</p>
-    <p class="note">图例：<span style="color:#3fb950">●计分（基础分·严重度定档）</span>｜<span style="color:#8b949e">◌=旧归档数据存量（新数据全●）</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）。矩阵源：立体矩阵v2分值表v2.2（G1~G87）</p>
-    <p style="color:#8b949e;font-size:11px;margin-top:6px;border-top:1px dashed #30363d;padding-top:6px;line-height:1.7">📋 知识库符合性审计（10-20·交易版手册对照）：✅未越界——格吉凶仍按KB判定（旺衰/四害/四喜/格局/生克）·分层加权符合"分清主次"（手册严格买入以日干/时干/乙为核心·值符值使同为核心层）·亮即计分=盘即事实·表2-D离散仅汇总不判吉凶<br>✅四缺口已补（17:56老师指令·v2.2）：①<span style="color:#3fb950">四喜列（门生/临禄/通气/实支）G76~G82·G83~G87（值使门行四喜并入其振幅段G71）</span>基础分1.5与四害对称·门生宫看板直驱点亮 ②<span style="color:#3fb950">值使门行（14大第2·振幅）G68~G75</span>入核心层×1.5·振幅进结构渠道 ③旺衰列改"旺/相+休囚/死·废"双口径（相入格·九星行废≠死） ④<span style="color:#3fb950">月令底盘声明</span>=①节横幅+Step 3.0前置（庚金当令→四时段上限中性偏强）<br>⚠️残留边界：八神未独立成行（轴9覆盖"临用神"读法）·值使门 palace_table 无行时靠matrix_drop点亮·十干克应杂格随用随查</p></div>`;
+    <div style="margin-top:8px;border-top:1px solid #30363d;padding-top:8px">
+    <p style="color:#c9d1d9;font-size:12px;font-weight:700;margin-bottom:4px">📖 矩阵13行=13个角色——交易断局的最小完备角色集</p>
+    <p style="color:#8b949e;font-size:11px;line-height:1.7;margin-bottom:6px">九宫格是<b>地图</b>（9个位置），用神是<b>角色</b>（13个人）——13个角色走进9个宫位，同宫就各读各的：<b>宫位本身无吉凶，吉凶长在"角色×宫位"的关系里</b>（同一场雨，对炮兵是阻碍，对工兵是掩护）。每行从该角色视角独立判定，8列=旺衰/四害/四喜/凶格/吉格/空亡/生克。</p>
+    <table style="font-size:11px;margin-bottom:6px">
+      <tr><th style="text-align:left;color:#8b949e;padding:2px 8px 2px 0">要回答的问题</th><th style="text-align:left;color:#8b949e;padding:2px 0">角色（行首名）</th></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">主客双方</td><td style="padding:2px 0;color:#c9d1d9">日干（价格/我方）、时干（时机·空方帅/对方）</td></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">多空力量</td><td style="padding:2px 0;color:#c9d1d9">庚（卖盘/抛压）、乙奇（买盘/承接）</td></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">弹药</td><td style="padding:2px 0;color:#c9d1d9">戊（资金/本金）</td></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">盈亏与情绪</td><td style="padding:2px 0;color:#c9d1d9">生门（利润）、景门（情绪/成交）</td></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">形态通道</td><td style="padding:2px 0;color:#c9d1d9">开门（突破通道）</td></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">空间势能</td><td style="padding:2px 0;color:#c9d1d9">九天（攻势/涨能）、九地（守势/托底）</td></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">资金面</td><td style="padding:2px 0;color:#c9d1d9">天蓬（流入/流出）</td></tr>
+      <tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">指挥系统</td><td style="padding:2px 0;color:#c9d1d9">值符（大势/元帅）、值使门（执行/振幅）</td></tr>
+    </table>
+    <p style="color:#8b949e;font-size:11px;line-height:1.7">三张表分工：<b>九宫格</b>=盘面地图 → <b>落宫表</b>（①节）=各就各位 → <b>立体矩阵</b>=状态评估。<br>图例：●计分｜⊙候选｜◌观察｜格内灰字=格定义读法（未点亮）。矩阵源：立体矩阵v2.2（104格）</p>
+    </div></div>`;
     return `
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
   ${d.palace_table?`<table style="font-size:11px">
