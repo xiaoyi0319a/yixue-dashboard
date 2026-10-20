@@ -194,10 +194,10 @@ v0: {
 },
 qimen: {
   title:"④ 奇门层（盘局 → 信号 → 原始a_raw）",
-  sub:"规则：MACD融合规则 §2.1~2.3（表2-A/B/C信号表）｜只出原始读数·当季系数归差异融合节点①",
+  sub:"规则：立体矩阵v2分值表V1+MACD融合规则§2.9｜三层结构合成·亮即计分（分值=2×用神层级×格局严重度）",
   render:d=>{
     const q=d.qimen;
-    const STC={'●':['#3fb950','正式·计分'],'⊙':['#d29922','候选·试用轨'],'◌':['#8b949e','观察·不计分'],'⚠️':['#f85149','缺格']};
+    const STC={'●':['#3fb950','正式·计分'],'⊙':['#d29922','候选·试用轨'],'◌':['#8b949e','旧规则存量'],'⚠️':['#f85149','缺格']};
     const MV1={c:["旺/当令","休囚死/衰","四害≥2","凶格临宫","吉格临宫","空亡","得生/受克"],r:[["庚","空↑|●|G27","多|⊙|G16","多|●|A5·C1","空方自损多/临多方宫空|●·⊙|A7·G9a","凶将得制空|●|G47","抛压虚化多|⊙|G14","得生→空/受克→多|◌·⊙|G15"],["乙奇","多↑|●|G28","乏力空|⊙|G11","买盘受制空|⊙|G1","谋士逃亡空|⊙|G10","多|⊙|G5","助力虚化空|●|G29","得生→多/受克→空|◌·⊙|G12"],["日干","多|●|G30","身弱空|●|G31","核心受制空|⊙|G2","压身空|●|A7","多|⊙|G5","自身虚化空|●|G32","得生→多/受克→空|◌·⊙|G13"],["时干","克日干→空/生日干→多|●|A2·A1","敌弱多|●|G33","帅残弱空|●|G34","敌带煞空|⊙|G9b","帅带吉助空|●|G48","帅位缺位多|⊙|G8","对日干生克|●|A1/A2"],["生门","多|●|A3","利润萎缩空|⊙|G17","通道受损空|⊙|G3","假利好空|⊙|G4","多|⊙|G5","利润虚化空|●|G35","门生宫→多/宫克→空|●·⊙|A3·G3"],["戊","多|●|G36","空|⊙|G18","资金受制空|●|G37","白虎临身空|⊙|G19","—|◌|","资金虚化空|⊙|G7","门迫→有而难举|●|b"],["值符","多(托)|●|G38","空|⊙|G20","大势受创空|●|G49","虚惊空警|⊙|G6","吉气压凶多|⊙|G6","大势虚化空|●|C3","比和→托/受克→空|◌·⊙|G21"],["景门","情绪高多|●|G39","低迷空|●|G40","情绪受创|●|G50","恐慌情绪|●|G51","情绪亢奋|●|G52","情绪虚化空|⊙|G22","情绪得助/受抑|●|G53"],["开门","通道开多|●|G41","空|⊙|G23","门迫受阻空|⊙|G4","通道带煞空|●|G54","多|⊙|G5","通道虚化空|●|G42","受宫克→空|⊙|G4"],["九天","涨能多|●|G43","涨能乏力空|●|G55","涨能受创空|●|G56","急涨带煞|●|G57","涨势得助多|●|G58","高位乏力空|⊙|G24","得生→多/受克→空|●|G59"],["九地","势沉空|●|G44","势沉延续|●|G60","跌势收敛多|⊙|G25","跌势带煞空|●|G61","跌势得缓多|●|G62","底部虚化|●|G63","得生→托底多/受克→空|●|G64"],["天蓬","流入多|●|G45","流出空|●|G46","流入受阻空|⊙|G26","流入带煞|●|G65","流入得助多|●|G66","空|⊙|G26","得生→多/受克→空|●|G67"]]};
     const colMap=st=>{
       if(/旺|当令/.test(st))return '旺/当令';
@@ -212,14 +212,8 @@ qimen: {
     const litMap={};
     const MV1ROWS=MV1.r.map(r=>r[0]);
     const unmapped=[];
-    // 四害单沾◌群：matrix_drop里state=◌且cell为"某神×四害≥2"→灰亮（0分观察群）
-    (d.matrix_drop||[]).forEach(m=>{
-      if((m.state||'').charAt(0)==='◌'&&(m.cell||'').indexOf('四害')>=0){
-        const parts=m.cell.split('×');
-        if(parts.length>=2)litMap[parts[0].trim()+'|四害≥2']=Object.assign({},m,{__observe:1});
-      }
-    });
-    // ⭐四害列直驱点亮（10-20）：palace_table harms字段解析——门迫/门制/击刑/入墓计四害列；空亡走专列；宫克(受克)不算四害
+    // ⭐四害列直驱点亮+直计分（10-20终版·盘即事实）：palace_table harms解析——门迫/门制/击刑/入墓计四害列按层级分计；空亡走专列；宫克不算四害
+    const TIER={'庚':1,'乙奇':1,'日干':1.5,'时干':1.5,'生门':1,'戊':1,'值符':1.5,'景门':0.5,'开门':1,'九天':0.5,'九地':0.5,'天蓬':0.5};
     const ROWMAP={'庚':'庚','乙奇':'乙奇','日干':'日干','时干':'时干','生门':'生门','戊':'戊','值符':'值符','景门':'景门','开门':'开门','九天':'九天','九地':'九地','天蓬':'天蓬'};
     (d.palace_table||[]).forEach(r=>{
       const ysRaw=(r.yongshen||'').split('（')[0].trim();
@@ -230,7 +224,8 @@ qimen: {
       if(!h||h==='无'||h==='None')return;
       const menpo=(h.match(/门迫|门制|击刑|入墓/g)||[]).length;
       if(menpo>=1&&!litMap[ys+'|四害≥2']){
-        litMap[ys+'|四害≥2']={state:'◌单沾',signal:h.length>14?h.slice(0,14)+'…':h,dest:'观察0分',__observe:1,__cnt:menpo};
+        const sc=+(2*TIER[ys]*0.75).toFixed(2);
+        litMap[ys+'|四害≥2']={state:'●',signal:h.length>14?h.slice(0,14)+'…':h,dest:'+'+sc+'（层级分·四害档）',__cnt:menpo};
       }
     });
     (d.matrix_drop||[]).forEach(m=>{
@@ -242,7 +237,7 @@ qimen: {
     });
     const litCnt=Object.keys(litMap).length;
     const scoreCnt=Object.values(litMap).filter(v=>!v.__observe&&(v.state||'').charAt(0)==='●').length;
-    const matrixGrid=`<div class="detail-section"><h4>② 矩阵点亮 · 立体矩阵v1格网（今日${litCnt}/84格点亮 = ●${scoreCnt}计分 + ◌${litCnt-scoreCnt}观察）</h4>
+    const matrixGrid=`<div class="detail-section"><h4>② 矩阵点亮 · 立体矩阵v1格网（今日${litCnt}/84格点亮 = ●${scoreCnt}计分[格定义分值] + ◌${litCnt-scoreCnt}旧规则存量）</h4>
     <div style="overflow-x:auto"><table style="font-size:11px;border-collapse:collapse;table-layout:fixed;min-width:900px;width:100%">
     <tr><th style="padding:4px;background:#1f2937;color:#8b949e;text-align:left;font-weight:400">用神\状态</th>${MV1.c.map(c=>`<th style="padding:4px;background:#1f2937;color:#8b949e;font-weight:400;font-size:10px">${c}</th>`).join('')}</tr>
     ${MV1.r.map(row=>{
@@ -265,13 +260,13 @@ qimen: {
     ${unmapped.length?`<p style="color:#d29922;font-size:12px;margin-top:6px">${(()=>{
       const harms=(d.palace_table||[]).map(r=>(r.harms||'无')).filter(h=>h&&h!=='无');
       const cnt=harms.length;
-      const obsLit=Object.keys(litMap).filter(k=>k.indexOf('四害')>=0&&litMap[k].__observe).length;
-      return cnt>=5?`<p style="color:#d29922;font-size:12px;margin-top:6px;font-weight:700">⚠️ 四害聚集模式：全局${cnt}处（${harms.slice(0,6).join('/')}${cnt>6?'…':''}）·单沾${obsLit}格◌观察（0分）·空方内耗拉锯——计分仍看≥2格</p>`:'';
+      const harmLit=Object.keys(litMap).filter(k=>k.indexOf('四害')>=0).length;
+      return cnt>=5?`<p style="color:#d29922;font-size:12px;margin-top:6px;font-weight:700">⚠️ 四害聚集模式：全局${cnt}处（${harms.slice(0,6).join('/')}${cnt>6?'…':''}）·四害列点亮${harmLit}格·均按层级分计（四害档×0.75）·空方内耗拉锯</p>`:'';
     })()}
-    ◌观察行闭环：◌格日沉观察追踪表→验证端5.5.G日对账（actual_dir/hit/cum滚动）→n≥10+hit≥0.5标PROMOTE→周复盘离线回测定分→M4转正写表2-A/B/C
-    <br>🔸格网外信号（跨宫/全局模式，84格网内无单格可点，直接计分）：${unmapped.map(m=>`${m.signal}（${m.cell}）→ ${m.dest}`).join('；')}</p>`:''}
-    <p style="color:#8b949e;font-size:11px;margin-top:4px">口径统一：格内去向与下表清单均为**基础分**（系数前）；有效分=基础×当季系数的换算只在差异融合节点①（系数应用表：如生门 2×0.69→+1）</p>
-    <p class="note">图例：<span style="color:#3fb950">●正式·计分</span>｜<span style="color:#d29922">⊙候选·试用轨未转正</span>｜<span style="color:#8b949e">◌观察·不计分</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）｜dest带⚠=格◌但通道实际计分→补格backlog（周复盘处理）。矩阵源：立体矩阵v2.md</p></div>`;
+    📒错题本闭环（10-20终版）：每格信号日沉格信号错题本（5.5.G机械记账+收盘验证补归因）→周复盘Step 2.12读错题本对因施策→修正84格分值表V1（周频）
+    <br>🔸格网外存量信号（旧规则历史数据，机制已消亡）：${unmapped.map(m=>`${m.signal}（${m.cell}）→ ${m.dest}`).join('；')}</p>`:''}
+    <p style="color:#8b949e;font-size:11px;margin-top:4px">口径统一（10-20终版）：格内去向与下表清单均为<b>格定义分值</b>（=2×用神层级×格局严重度·KB定层级·周复盘错题本校准修正）；亮即计分无◌观察；映射压缩只在融合节点①（表2-D）</p>
+    <p class="note">图例：<span style="color:#3fb950">●计分（分值=格定义层级分）</span>｜<span style="color:#8b949e">◌=旧规则存量观察行（10-21起亮即计分）</span>｜<span style="color:#f85149">⚠️缺格·当日登记</span>｜格内灰字=矩阵原始读法（未点亮）。矩阵源：立体矩阵v2分值表V1（G1~G67）</p></div>`;
     return `
   <div class="detail-section"><h4>① 盘局输入 · 用神落宫表</h4>
   ${d.palace_table?`<table style="font-size:11px">
@@ -279,19 +274,19 @@ qimen: {
     ${d.palace_table.map(p=>`<tr><td>${p.yongshen}</td><td>${p.palace}</td><td>${p.star}</td><td>${p.god}</td><td>${p.door}</td><td>${p.sky_ground}</td><td>${p.month_state}</td><td class="${p.harms&&p.harms!=='无'?'neg':''}" style="${p.harms&&p.harms!=='无'?'font-weight:600':''}">${p.harms||'—'}</td><td class="note">${p.note||'—'}</td></tr>`).join('')}
   </table><p class="note">信号由本表提取——每个用神的状态（旺衰/四害/格局/生克）对应矩阵的一个格子</p>`:'<p class="note">无落宫表数据</p>'}</div>
   ${matrixGrid}
-  <div class="detail-section"><h4>③ 信号判定 · 今日清单（盘局提取·只出基础分·系数归融合层）</h4>
+  <div class="detail-section"><h4>③ 信号判定 · 今日清单（⭐奇门三层结构合成·亮即计分）</h4>
   <table style="font-size:11px">
-    <tr><th>渠道</th><th>信号</th><th>格坐标（84格落点）</th><th>判定</th><th>基础分</th></tr>
+    <tr><th>渠道</th><th>信号</th><th>格坐标（84格落点）</th><th>判定</th><th>分值（层级）</th></tr>
     ${q.attack_plus_signals.map(s=>`<tr><td style="color:#3fb950">攻多</td><td>${s.name}</td><td style="color:#8b949e;font-size:10px">${s.cell||'—'}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
     ${q.attack_minus_signals.map(s=>`<tr><td style="color:#f85149">攻空</td><td>${s.name}</td><td style="color:#8b949e;font-size:10px">${s.cell||'—'}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
     ${q.structure_signals.map(s=>`<tr><td style="color:#58a6ff">结构</td><td>${s.name}</td><td style="color:#8b949e;font-size:10px">${s.cell||'—'}</td><td>${s.condition}</td><td>${s.base>0?'+':''}${s.base}</td></tr>`).join('')}
-  </table><p class="note">只出信号+基础分（原始强度）——当季系数×基础分=有效分 的计算全部在差异融合节点①；每信号挂格坐标（84格落点，M4已回迁时干×得生/受克格）；格网外仅存全局四害（祖父条款）见🔸行</p></div>
+  </table><p class="note">盘即事实·格亮即计分——每信号分值=格定义层级分（2×用神层级×格局严重度·查立体矩阵v2分值表V1）；三层结构（用神层→格局层→分值合成）合成a_raw一个结论；a_raw=Σ攻多−Σ攻空+Σ结构直送融合节点①（表2-D压缩）；格网外信号已整体消亡（祖父条款退休）</p></div>
   <div class="detail-section"><h4>④ 奇门层输出 · 用途=判底座上的加减速/反转</h4>
-  <div class="formula">✅ 输出 = 今日触发信号清单（步骤②）＋ a_raw原始（步骤④基础分加总）
-→ 全部送差异融合节点①：当季系数应用 → 有效分 → 调整后a_raw → 表2-D离散 → 奇门a → a总合成
-（R反转检查·离散映射·a总 全部在融合层执行——微调系数归口）
+  <div class="formula">✅ 输出 = 今日触发信号清单 ＋ a_raw（三层结构合成·格定义分值加总=Σ攻多−Σ攻空+Σ结构）
+→ 送差异融合节点①：表2-D离散 → 奇门a → a总合成
+（R反转检查·离散映射·a总 在融合层执行）
 
-【用途】奇门a与a_macd在融合层合成a总 → 叉积表与底座v₀相加（v=v₀+a总）= 判底座上的加减速；R触发（|a_raw|≥阈值）时直接反转底座方向（v=-sign(v₀)×2）</div></div>`
+【用途】奇门a与a_macd合成a总 → v=v₀+a总 = 判底座上的加减速；R触发（|a_raw|≥阈值）时直接反转底座方向（v=-sign(v₀)×2）</div></div>`
 
   }
 },
@@ -312,7 +307,7 @@ fusion: {
     const aIdx=aCols.indexOf(fmtA(aT));
     return `
   <div class="detail-section"><h4>① 微调系数归口层：信号×系数→有效分→a总（MACD×奇门会师）</h4>
-  <table style="font-size:11px"><tr><th>渠道</th><th>信号</th><th>基础分</th><th>当季系数</th><th>有效分(=基础×系数)</th></tr>
+  <table style="font-size:11px"><tr><th>渠道</th><th>信号</th><th>格分值</th><th>系数(旧)</th><th>有效分</th></tr>
   ${[...(d.qimen.attack_plus_signals||[]).map(x=>({...x,ch:'攻多',color:'#3fb950'})),
      ...(d.qimen.attack_minus_signals||[]).map(x=>({...x,ch:'攻空',color:'#f85149'})),
      ...(d.qimen.structure_signals||[]).map(x=>({...x,ch:'结构',color:'#58a6ff'}))]
@@ -493,7 +488,7 @@ function renderPipeline(d){
   ];
 
   const names={macd:'MACD 数据',v0:'MACD矩阵底座',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段'};
-  const tags={macd:'数据源',v0:'三层矩阵·正式',qimen:'表2-A~2-C·原始',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6'};
+  const tags={macd:'数据源',v0:'三层矩阵·正式',qimen:'三层合成·亮即计分',fusion:'表3-A',adjust:'表3-D',output:'表4-A/3-E',slots:'Step 6'};
 
   const html=nodes.map((n,i)=>{
     const conn=i<nodes.length-1?'<div class="connector"></div><div class="arrow"></div>':'';
