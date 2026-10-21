@@ -179,7 +179,9 @@ v0: {
 ＋ L3修正（${rateZh[m.l3.rate]}×${m.l3.pos}×${segZh}=${m.l3_adj>0?'+':''}${m.l3_adj.toFixed(1)}）
 ─────────────
 ＝ 节点分　<b>${m.score>0?'+':''}${m.score}</b>（限幅±3）</div>
-    <p class="note" style="margin-top:6px">状态：${segZh}${l2zh[m.l2_state.split('_')[1]]}·${rateZh[m.l3.rate]}·${m.l3.pos==='deep'?'深水修复级':m.l3.pos==='mid'?'中位区':'浅水区'}${m.score>0?'偏多':m.score<0?'偏空':'中性'}</p></div>`;
+    <p class="note" style="margin-top:6px">状态：${segZh}${l2zh[m.l2_state.split('_')[1]]}·${rateZh[m.l3.rate]}·${m.l3.pos==='deep'?'深水修复级':m.l3.pos==='mid'?'中位区':'浅水区'}${m.score>0?'偏多':m.score<0?'偏空':'中性'}</p>
+    ${d.flip?`<div class="detail-section" style="margin-top:10px"><h4>波段翻段预警（Step 4.15·骨架V1.0）</h4>
+    <div class="formula">方向：<b>${d.flip.direction}</b> ｜ 阶段：${d.flip.stage}（第${d.flip.seg_day}日）<br>下一触发：${d.flip.next_trigger}<br>翻段率：${d.flip.hit_rate}</div></div>`:''}</div>`;
   })():''}
   ${d.v0&&!d.matrix?`<div class="detail-section"><h4>三维评分（旧口径·≤10-24历史归档）</h4>
   <table>
@@ -577,7 +579,7 @@ function renderPipeline(d){
       <span class="k">v_final = ${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross} + ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>`},
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span><br>
-      <span class="path-label">路径：${d.path}</span>`},
+      <span class="path-label">路径：${d.path}</span>${d.shape?`<br><span class="k">${d.shape.close_label}</span> ｜ <span class="k">形态</span> <span class="v">${d.shape.pattern}</span> ｜ <span class="k">实体</span> <span class="v">${d.shape.body_grade}</span> ｜ <span class="k">振幅</span> <span class="v">${d.shape.amplitude_grade}</span>`:''}`},
     ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[])
   ];
 
@@ -861,7 +863,7 @@ async function loadData(){
       return;
     }
   }
-  document.getElementById('footer').innerHTML=`预测管线看板 V0.3 ｜ 数据日期：${pipelineData.date||'未知'} ｜ 规则版本：MACD融合规则 ${pipelineData.rule_version||'V3.0'}<br>⚠️ 仅为内部规则可视化工具，不构成投资建议`;
+  document.getElementById('footer').innerHTML=`预测管线看板 V0.3+patch19（形态合成+翻段预警骨架）｜ 数据日期：${pipelineData.date||'未知'} ｜ 规则版本：MACD融合规则 ${pipelineData.rule_version||'V3.0'}<br>⚠️ 仅为内部规则可视化工具，不构成投资建议`;
   renderPipeline(pipelineData);
 }
 loadData();
