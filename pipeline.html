@@ -518,6 +518,27 @@ output: {
       return `<tr class="${isHit?'hl':''}"><td>${v}</td><td>${g}</td><td style="color:#8b949e;font-size:11px">${anchor}</td><td>${isHit?'<b>◀ 今日预测</b>':''}</td></tr>`;
     }).join('')}
   </table></div>
+  ${(()=>{
+    const v0v=typeof f.v0_int==='number'?f.v0_int:(f.v0!==undefined?f.v0:0);
+    const aT2=d.qimen.a_total;
+    const vF2=f.v_final;
+    const rp=f.r_prime||0;
+    const sameS=(a,b)=>(a>0&&b>0)||(a<0&&b<0);
+    const P=d.path||'';
+    const rows=[
+      ['A中性主导','v₀=0 → 奇门油门单独接管方向','v₀='+(v0v>0?'+':'')+v0v+(v0v===0?' ✓':' ✗')],
+      ['B反转','反转层三件套触发 → R′锁档取反','R′='+(rp>0?'+':'')+rp+(rp>0?' ✓':' ✗')],
+      ['C维持','v₀≠0 且 v与v₀同向 且 R′=0（底座方向被维持）','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+(v0v!==0&&sameS(v0v,vF2)&&rp===0?' ✓':' ✗')],
+      ['C跨零','v₀≠0 且 v与v₀异号（油门推过零轴翻向）','v₀与v '+(v0v!==0&&vF2!==0&&!sameS(v0v,vF2)?'异号 ✓':'同号/零 ✗')],
+      ['D急停','v₀≠0 且 v=0 且 R′=0（油门完全抵消底座）','v='+(vF2>0?'+':'')+vF2+(v0v!==0&&vF2===0&&rp===0?' ✓':' ✗')]
+    ];
+    return `<div class="detail-section"><h4>路径分类（表3-E·五选一·今日值代入判定）</h4>
+    <table style="font-size:12px">
+      <tr><th>路径</th><th>判定条件</th><th>今日代入</th><th></th></tr>
+      ${rows.map(r=>{const on=P.indexOf(r[0])===0;return `<tr class="${on?'hl':''}"><td style="white-space:nowrap"><b>${r[0]}</b></td><td style="color:#8b949e;font-size:11px">${r[1]}</td><td>${r[2]}</td><td>${on?'◀ 命中':''}</td></tr>`;}).join('')}
+    </table>
+    ${f.combo_lookup?`<p class="note" style="margin-top:4px">组合查表4.8：${f.combo_lookup}</p>`:''}</div>`;
+  })()}
   <div class="detail-section"><h4>九字段输出（报告必含）</h4>
   <div class="formula">v0_grade: ${d.nine_fields.v0_grade>0?'+':''}${d.nine_fields.v0_grade}     cal_A: ${d.nine_fields.cal_A}     cal_B: ${d.nine_fields.cal_B}${d.nine_fields.cal_C?'     cal_C: '+d.nine_fields.cal_C:''}
 a_macd: ${d.nine_fields.a_macd>0?'+':''}${d.nine_fields.a_macd}        qimen_a: ${d.nine_fields.qimen_a}       a_raw: ${d.nine_fields.a_raw}
