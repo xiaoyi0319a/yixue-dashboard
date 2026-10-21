@@ -534,17 +534,18 @@ ${rp0>0?`→ R′=${rp0} 反转锁档：v′ = ${f.v_reversed>0?'+':''}${f.v_rev
     const sameS=(a,b)=>(a>0&&b>0)||(a<0&&b<0);
     const P=d.path||'';
     const rows=[
-      ['A中性主导','v₀=0 → 奇门油门单独接管方向','v₀='+(v0v>0?'+':'')+v0v+(v0v===0?' ✓':' ✗')],
-      ['B反转','反转层三件套触发 → R′锁档取反','R′='+(rp>0?'+':'')+rp+(rp>0?' ✓':' ✗')],
-      ['C维持','v₀≠0 且 v与v₀同向 且 R′=0（底座方向被维持）','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+(v0v!==0&&sameS(v0v,vF2)&&rp===0?' ✓':' ✗')],
-      ['C跨零','v₀≠0 且 v与v₀异号（油门推过零轴翻向）','v₀与v '+(v0v!==0&&vF2!==0&&!sameS(v0v,vF2)?'异号 ✓':'同号/零 ✗')],
-      ['D急停','v₀≠0 且 v=0 且 R′=0（油门完全抵消底座）','v='+(vF2>0?'+':'')+vF2+(v0v!==0&&vF2===0&&rp===0?' ✓':' ✗')]
+      ['A中性主导','v₀=0 → 奇门油门单独接管方向','MACD没方向，今天由盘局单独说了算','v₀='+(v0v>0?'+':'')+v0v+(v0v===0?' ✓':' ✗')],
+      ['B反转','R′>0 三件套触发 → 锁档取反','原有方向被证据证伪，要翻','R′='+(rp>0?'+':'')+rp+(rp>0?' ✓':' ✗')],
+      ['C维持','v₀≠0 且 v与v₀同向 且 R′=0（底座方向被维持）','底座方向今天继续有效，油门只加减速','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+(v0v!==0&&sameS(v0v,vF2)&&rp===0?' ✓':' ✗')],
+      ['C跨零','v₀≠0 且 v与v₀异号（油门推过零轴翻向）','油门大力把分数推过中线翻了向——翻了但无证据','v₀与v '+(v0v!==0&&vF2!==0&&!sameS(v0v,vF2)?'异号 ✓':'同号/零 ✗')],
+      ['D急停','v₀≠0 且 v=0 且 R′=0（油门完全抵消底座）','油门恰好抵消底座，今天没方向','v='+(vF2>0?'+':'')+vF2+(v0v!==0&&vF2===0&&rp===0?' ✓':' ✗')]
     ];
-    return `<div class="detail-section"><h4>路径分类（表3-E·五选一·今日值代入判定）</h4>
+    return `<div class="detail-section"><h4>路径分类（表3-E·五选一·权威=融合规则表3-E）</h4>
     <table style="font-size:12px">
-      <tr><th>路径</th><th>判定条件</th><th>今日代入</th><th></th></tr>
-      ${rows.map(r=>{const on=P.indexOf(r[0])===0;return `<tr class="${on?'hl':''}"><td style="white-space:nowrap"><b>${r[0]}</b></td><td style="color:#8b949e;font-size:11px">${r[1]}</td><td>${r[2]}</td><td>${on?'◀ 命中':''}</td></tr>`;}).join('')}
+      <tr><th>路径</th><th>数值阈值</th><th>它说什么</th><th>今日代入</th><th></th></tr>
+      ${rows.map(r=>{const on=P.indexOf(r[0])===0;return `<tr class="${on?'hl':''}"><td style="white-space:nowrap"><b>${r[0]}</b></td><td style="color:#8b949e;font-size:11px">${r[1]}</td><td style="color:#c9d1d9;font-size:11px">${r[2]}</td><td>${r[3]}</td><td>${on?'◀ 命中':''}</td></tr>`;}).join('')}
     </table>
+    <p class="note" style="margin-top:4px">路径=这单预测的形成方式。验证块的"路径·断言判定"判的是它暗含的方向断言（C维持判底座v₀方向），不是标签本身——标签永远是机械正确的。</p>
     ${f.combo_lookup?`<p class="note" style="margin-top:4px">组合查表4.8：${f.combo_lookup}</p>`:''}</div>`;
   })()}
   <div class="detail-section"><h4>九字段输出（报告必含）</h4>
@@ -865,7 +866,7 @@ function renderVerification(v){
   return `<table>
     <tr><th></th><th>预测（08:00）</th><th>实际（收盘后）</th><th>判定</th></tr>
     <tr><td>定级<span style="color:#484f58;font-size:10px">·全天尺·融合v_final</span></td><td>${v.morning?v.morning.grade:'—'}</td><td>${v.actual?v.actual.grade:'—'}</td><td style="color:${gmColor};font-weight:600">${v.grade_match||'—'}</td></tr>
-    <${''}tr><td>路径<span style="color:#484f58;font-size:10px">·断言判定⭐patch</span></td><td>${v.morning?v.morning.path:'—'}${(()=>{const p=(v.morning&&v.morning.path)||'';const v0=pipelineData.nine_fields&&pipelineData.nine_fields.v0_grade;const at=pipelineData.qimen&&pipelineData.qimen.a_total;if(p.indexOf('C维持')===0)return `（断言：底座v₀=${v0>0?'+':''}${v0}方向=当日）`;if(p.indexOf('A中性')===0)return `（断言：奇门a总=${at>0?'+':''}${at}方向=当日）`;if(p.indexOf('D急停')===0)return '（断言：当日无方向）';return '（断言：反底座方向=当日）';})()}</td><td>实际${v.actual?(v.actual.close_pct!==undefined?((v.actual.close_pct>0?'+':'')+v.actual.close_pct+'%'):v.actual.close):'—'}</td><td>${(()=>{const p=(v.morning&&v.morning.path)||'';const v0=pipelineData.nine_fields&&pipelineData.nine_fields.v0_grade;const at=pipelineData.qimen&&pipelineData.qimen.a_total;const cp=v.actual&&v.actual.close_pct;if(cp===undefined)return '—';let ok=null;if(p.indexOf('C维持')===0)ok=(v0>0)===(cp>0)||(v0<0)===(cp<0);else if(p.indexOf('A中性')===0)ok=(at>0)===(cp>0)||(at<0)===(cp<0);else if(p.indexOf('D急停')===0)ok=Math.abs(cp)<=0.2;else{const vf=pipelineData.fusion&&pipelineData.fusion.v_final;ok=(vf>0)===(cp>0)||(vf<0)===(cp<0);}return ok?'<span style="color:#3fb950;font-weight:600">✓</span>':'<span style="color:#f85149;font-weight:600">❌</span>';})()}</td></tr>
+    <${''}tr><td>路径<span style="color:#484f58;font-size:10px">·断言判定⭐patch</span></td><td>${v.morning?v.morning.path:'—'}${(()=>{const p=(v.morning&&v.morning.path)||'';const v0=pipelineData.nine_fields&&pipelineData.nine_fields.v0_grade;const at=pipelineData.qimen&&pipelineData.qimen.a_total;if(p.indexOf('C维持')===0)return `（断言：底座v₀=${v0>0?'+':''}${v0}方向=当日）`;if(p.indexOf('A中性')===0)return `（断言：奇门a总=${at>0?'+':''}${at}方向=当日）`;if(p.indexOf('D急停')===0)return '（断言：当日无方向）';return '（断言：反底座方向=当日）';})()}</td><td>实际${v.actual?(v.actual.close_pct!==undefined?((v.actual.close_pct>0?'+':'')+v.actual.close_pct+'%'):v.actual.close):'—'}</td><td>${(()=>{const p=(v.morning&&v.morning.path)||'';const v0=pipelineData.nine_fields&&pipelineData.nine_fields.v0_grade;const at=pipelineData.qimen&&pipelineData.qimen.a_total;const cp=v.actual&&v.actual.close_pct;if(cp===undefined)return '—';let ok=null;let obj='';if(p.indexOf('C维持')===0){ok=(v0>0)===(cp>0)||(v0<0)===(cp<0);obj='底座方向';}else if(p.indexOf('A中性')===0){ok=(at>0)===(cp>0)||(at<0)===(cp<0);obj='奇门方向';}else if(p.indexOf('D急停')===0){ok=Math.abs(cp)<=0.2;obj='无方向';}else{const vf=pipelineData.fusion&&pipelineData.fusion.v_final;ok=(vf>0)===(cp>0)||(vf<0)===(cp<0);obj='反底座方向';}const mark=ok?'<span style="color:#3fb950;font-weight:600">✓</span>':'<span style="color:#f85149;font-weight:600">❌</span>';return mark+' '+obj+ (ok?'对':'错');})()}</td></tr>
     <tr><td>开盘<span style="color:#484f58;font-size:10px">·隔夜尺</span></td><td>${v.morning?v.morning.open:'—'}</td><td>${v.actual?v.actual.open:'—'}</td><td>${v.binary?v.binary.open:'—'}</td></tr>
     <tr><td>K线<span style="color:#484f58;font-size:10px">·日内尺</span></td><td>${v.morning?v.morning.kline:'—'}</td><td>${v.actual?v.actual.kline:'—'}</td><td>${v.binary?v.binary.kline:'—'}</td></tr>
     <tr><td>收盘<span style="color:#484f58;font-size:10px">·全天尺</span></td><td>${v.morning?v.morning.close:'—'}</td><td>${v.actual?v.actual.close:'—'}</td><td>${v.binary?v.binary.close:'—'}</td></tr>
