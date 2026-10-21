@@ -473,7 +473,14 @@ output: {
     const grades=[['+4','偏强','≥ +1.0%'],['+3','偏多','+0.5% ~ +1.0%'],['+2','略偏多','+0.2% ~ +0.5%'],['+1','无方向（V3.0区·上沿）','-0.2% ~ +0.2%'],['0','无方向（区·中枢）','-0.2% ~ +0.2%'],['-1','无方向（V3.0区·下沿）','-0.2% ~ +0.2%'],['-2','略偏空','-0.5% ~ -0.2%'],['-3','偏空','-1.0% ~ -0.5%'],['-4','偏弱','≤ -1.0%']];
     const vMap={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
     const vKey=(vF>0?'+':'')+String(vF);
+    const rp0=f.r_prime||0;
     return `
+  <div class="detail-section"><h4>v_final 合成链（怎么来的）</h4>
+  <div class="formula">v（④叉积=v₀+a总）= ${f.v_cross>0?'+':''}${f.v_cross}
+${rp0>0?`→ R′=${rp0} 反转锁档：v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}（path加-R）`:'→ 反转层 R′=0 不触发·v 原样'}
+→ b 微调（⑥表3-D）= ${f.b_value>0?'+':''}${f.b_value} ${f.b_value===0?'→ 不生效':'→ 生效'}
+─────────────
+＝ v_final = <b>${vF>0?'+':''}${vF}</b> → 查表4-A → <b>${grade}</b></div></div>
   ${o.three_d?`<div class="detail-section"><h4>三维输出</h4>
   <div class="formula">隔夜尺度：${o.three_d.overnight} ｜ 日内尺度：${o.three_d.intraday} ｜ 全天尺度：${o.three_d.daily}</div></div>`:''}
   ${o.open_scenario?`<div class="detail-section"><h4>开盘情景</h4>
