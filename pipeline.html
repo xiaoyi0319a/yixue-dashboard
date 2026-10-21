@@ -140,7 +140,7 @@ v0: {
     const l2zh={early:'初段',mid:'中段',late:'末段'};
     const l2pos={early:1,mid:2,late:3};
     const curL2=l2pos[m.l2_state.split('_')[1]]||2;
-    return `<div class="detail-section"><h4>🧭 今日坐标</h4>
+    return `<div class="detail-section"><h4>🧭 ${(d.macd_date||d.date||'').slice(5)} 坐标（MACD数据日）</h4>
     <div class="formula">L1=<b>${m.l1_cell}</b> ｜ L2=${segZh}·${l2zh[m.l2_state.split('_')[1]]} ｜ L3=${rateZh[m.l3.rate]}×${m.l3.pos}（ratio ${m.ratio}）
 节点分 = <b style="font-size:15px">${m.score>0?'+':''}${m.score}</b>${m.signal&&m.signal!=='无'?' ｜ <span style="color:#d29922;font-weight:700">'+m.signal+'</span>':''}</div>
     <p class="note">${m.note||''}</p></div>
