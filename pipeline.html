@@ -472,6 +472,7 @@ output: {
     const grade=f.final_grade;
     const grades=[['+4','偏强','≥ +1.0%'],['+3','偏多','+0.5% ~ +1.0%'],['+2','略偏多','+0.2% ~ +0.5%'],['+1','无方向（V3.0区·上沿）','-0.2% ~ +0.2%'],['0','无方向（区·中枢）','-0.2% ~ +0.2%'],['-1','无方向（V3.0区·下沿）','-0.2% ~ +0.2%'],['-2','略偏空','-0.5% ~ -0.2%'],['-3','偏空','-1.0% ~ -0.5%'],['-4','偏弱','≤ -1.0%']];
     const vMap={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
+    const vKey=(vF>0?'+':'')+String(vF);
     return `
   ${o.three_d?`<div class="detail-section"><h4>三维输出</h4>
   <div class="formula">隔夜尺度：${o.three_d.overnight} ｜ 日内尺度：${o.three_d.intraday} ｜ 全天尺度：${o.three_d.daily}</div></div>`:''}
@@ -513,7 +514,7 @@ output: {
   <table>
     <tr><th>v_final</th><th>7档定级</th><th>语义锚：净涨跌幅%（口径分维度·正式）</th><th></th></tr>
     ${grades.map(([v,g,anchor])=>{
-      const isHit=vMap[String(vF)]===v;
+      const isHit=vKey===v;
       return `<tr class="${isHit?'hl':''}"><td>${v}</td><td>${g}</td><td style="color:#8b949e;font-size:11px">${anchor}</td><td>${isHit?'<b>◀ 今日预测</b>':''}</td></tr>`;
     }).join('')}
   </table></div>
