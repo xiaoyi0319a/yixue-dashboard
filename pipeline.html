@@ -524,7 +524,8 @@ ${rp0>0?`→ R′=${rp0} 反转锁档：v′ = ${f.v_reversed>0?'+':''}${f.v_rev
       const isHit=vKey===v;
       return `<tr class="${isHit?'hl':''}"><td>${v}</td><td>${g}</td><td style="color:#8b949e;font-size:11px">${anchor}</td><td>${isHit?'<b>◀ 今日预测</b>':''}</td></tr>`;
     }).join('')}
-  </table></div>
+  </table>
+  <p class="note" style="margin-top:6px;line-height:1.8">💬 <b>这张表是什么</b>：翻译器。机器算出来的只是一个 −4~+4 的分数（分数怎么来的，见本页顶部「v_final 合成链」）；这张表负责把分数翻译成两句人话——<b>①今天是什么天</b>（偏强/偏多/无方向/偏空/偏弱）<b>②预期涨跌多少</b>。表本身不做计算，只做对照。今天 v_final=+4 → 查这一行 → "偏强，预期涨 1% 以上"。<br><b>怎么验证它准不准</b>：收盘后看实际涨跌幅落在哪一行——落在点亮行=对，落在别的行=偏差，天天记账，周复盘算命中率。</p></div>
   ${(()=>{
     const v0v=typeof f.v0_int==='number'?f.v0_int:(f.v0!==undefined?f.v0:0);
     const aT2=d.qimen.a_total;
