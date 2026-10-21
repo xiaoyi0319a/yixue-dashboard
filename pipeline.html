@@ -178,7 +178,8 @@ v0: {
 ＋ L2修正（${l2zh[m.l2_state.split('_')[1]]}×${segZh}=${m.l2_adj>0?'+':''}${m.l2_adj.toFixed(1)}）
 ＋ L3修正（${rateZh[m.l3.rate]}×${m.l3.pos}×${segZh}=${m.l3_adj>0?'+':''}${m.l3_adj.toFixed(1)}）
 ─────────────
-＝ 节点分　<b>${m.score>0?'+':''}${m.score}</b>（限幅±3）</div></div>`;
+＝ 节点分　<b>${m.score>0?'+':''}${m.score}</b>（限幅±3）</div>
+    <p class="note" style="margin-top:6px">状态：${segZh}${l2zh[m.l2_state.split('_')[1]]}·${rateZh[m.l3.rate]}·${m.l3.pos==='deep'?'深水修复级':m.l3.pos==='mid'?'中位区':'浅水区'}${m.score>0?'偏多':m.score<0?'偏空':'中性'}</p></div>`;
   })():''}
   ${d.v0&&!d.matrix?`<div class="detail-section"><h4>三维评分（旧口径·≤10-24历史归档）</h4>
   <table>
@@ -550,9 +551,17 @@ function renderPipeline(d){
     {key:'macd',active:true,html:`
       <span class="k">DIF</span> <span class="v ${d.macd.dif<0?'neg':'pos'}">${d.macd.dif}</span> ｜ <span class="k">DEA</span> <span class="v ${d.macd.dea<0?'neg':'pos'}">${d.macd.dea}</span> ｜ <span class="k">柱</span> <span class="v ${d.macd.bar<0?'neg':'pos'}">${d.macd.bar}</span><br>
       <span class="k">状态</span> <span class="v">${d.macd.dead_cross_day?('死叉延续 第'+d.macd.dead_cross_day+'日'):'非延续期'}</span>`},
-    {key:'v0',active:true,html: d.matrix ? `
-      <span class="k">L1</span> <span class="v">${d.matrix.l1_cell.split('（')[0]}</span> ｜ <span class="k">L2</span> <span class="v">${d.matrix.l2_state.replace('bear_','空·').replace('bull_','多·').replace('early','初段').replace('mid','中段').replace('late','末段')}</span> ｜ <span class="k">L3</span> <span class="v">${d.matrix.l3.rate==='accel'?'加速':d.matrix.l3.rate==='decel'?'减速':'<b style="color:#d29922">衰竭转向</b>'}×${d.matrix.l3.pos}</span><br>
-      <span class="k">底座分</span> <span class="v ${d.matrix.score>0?'pos':d.matrix.score<0?'neg':'zero'}" style="font-size:14px">${d.matrix.score>0?'+':''}${d.matrix.score}</span>${d.matrix.signal&&d.matrix.signal!=='无'?` <span class="badge warn">${d.matrix.signal}</span>`:''}` : `
+    {key:'v0',active:true,html: d.matrix ? (()=>{
+      const m=d.matrix;
+      const segZh=m.side==='bear'?'空头':'多头';
+      const stgZh={early:'初段',mid:'中段',late:'末段'}[String(m.l2_state).split('_')[1]]||'中段';
+      const rateZh2=m.l3.rate==='accel'?'柱体加速':m.l3.rate==='decel'?'柱体减速':'<b style="color:#d29922">衰竭转向</b>';
+      const posZh2=m.l3.pos==='deep'?'深水修复级':m.l3.pos==='mid'?'中位区':'浅水区';
+      const dirZh=m.score>0?'偏多':m.score<0?'偏空':'中性';
+      return `
+      <span class="k">L1</span> <span class="v">${m.l1_cell.split('（')[0]}</span> ｜ <span class="k">L2</span> <span class="v">${m.l2_state.replace('bear_','空·').replace('bull_','多·').replace('early','初段').replace('mid','中段').replace('late','末段')}</span> ｜ <span class="k">L3</span> <span class="v">${m.l3.rate==='accel'?'加速':m.l3.rate==='decel'?'减速':'<b style="color:#d29922">衰竭转向</b>'}×${m.l3.pos}</span><br>
+      <span class="k">底座分</span> <span class="v ${m.score>0?'pos':m.score<0?'neg':'zero'}" style="font-size:14px">${m.score>0?'+':''}${m.score}</span> → <span class="k">状态</span> <span class="v">${segZh}${stgZh}·${rateZh2}·${posZh2}${dirZh}</span>${m.signal&&m.signal!=='无'?` <span class="badge warn">${m.signal}</span>`:''}`;
+    })() : `
       <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</span> ＋ <span class="k">DIF位置</span> <span class="v">${d.v0.dif_pos}</span> ＝ <span class="v">${d.v0.raw_score}</span><br>
       <span class="k">9档映射</span> <span class="v">${(d.macd&&d.macd.grade_label_map&&d.macd.grade_label_map[String(d.v0.precal)])||GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal}）</span>`},
     {key:'qimen',active:true,html:`
