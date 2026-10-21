@@ -1,7 +1,7 @@
 {
  "stock": "300142 沃森生物",
- "date": "2026-10-20",
- "generated": "2026-10-20 08:30 个股预测直写 · 15:43 验证半回填(watson-verify-daily-1543pm): verification更新为10-20已验证数据+矩阵格1_5点亮+history追加 · protect=view_gene/view_state/todo_list不动",
+ "date": "2026-10-21",
+ "generated": "2026-10-21 08:30 个股预测直写(watson-predict-daily-830am) · 源=本任务计算产物 · protect=view_gene/view_state/todo_list不动 · verification保留10-20已验证数据",
  "version": "立体矩阵V0.1 · 规则V2.2 · 看板V2",
  "matrix_grid": {
   "zones": [
@@ -85,7 +85,7 @@
     ]
    },
    "1_5": {
-    "n": 1,
+    "n": 2,
     "hits": 0,
     "avg": 0.5447,
     "days": [
@@ -94,26 +94,32 @@
       "pred": "偏弱",
       "actual": "+0.5447%",
       "hit": "❌"
+     },
+     {
+      "date": "10-21",
+      "pred": "偏弱",
+      "actual": "待验证",
+      "hit": "待对账"
      }
     ]
    }
   },
-  "note": "历史5天全部落在'横盘整理'列(状态首诊前按当前区间归列); 10-20定级偏弱(v₀-4×q_bias-2)落1_5格待点亮; 10-19无方向落1_3格(已验证不记分); 其余格待点亮"
+  "note": "历史全部落在'横盘整理'列(状态首诊前按当前区间归列); 10-21定级偏弱(v₀-4×a_macd-1减速×q_bias-3)续落1_5格(格内2日: 10-20已验证❌, 10-21待验证); 其余格待点亮"
  },
  "matrix_L0": {
   "v0": {
    "value": -4,
    "grade": "偏空",
-   "detail": "交叉项: 0 (死叉延续第3日非交叉日, 交叉项已兑现完毕)\n柱体项: -3 (|柱|0.2129>p80=0.21=3档, 符号负)\nDIF位置项: -1 (DIF -0.04075<0已破零轴且在DEA 0.0657下)\n合计-4 → 原始定级偏空(100日回填以来最深负值)"
+   "detail": "交叉项: 0 (死叉延续第4日非交叉日, 交叉项已兑现完毕)\n柱体项: -3 (|柱|0.24502>p80=0.21=3档, 符号负)\nDIF位置项: -1 (DIF -0.08744<0零轴下三连降且在DEA 0.03507下)\n合计-4 → 原始定级偏空(连续第2日-4)"
   },
   "a_macd": {
-   "value": 1,
-   "detail": "近3日柱: -0.07881/-0.1315/-0.2129 → 三根全负同号, 延续口径可判\n柱Δ-0.05269→-0.0814同号放大54.5% → 加速确认\n10-19预测的\"收敛>50%减速确认\"路径证伪, 反向再加速"
+   "value": -1,
+   "detail": "近3日柱: -0.1315/-0.2129/-0.24502 → 三根全负同号, 延续口径可判\n柱Δ-0.0814→-0.0321, |Δ|收敛60.6%≥50% → 减速确认(10-16预检路径延迟2日首次兑现, 10-20收涨+0.54%V型反向印证)\n盘局侧1/4不确认(四害全无✓余✗), MACD侧优先"
   },
-  "q_bias": -2,
-  "q_detail": "攻多0项(日干三选二全空: 伤门非生门+戌月火墓休囚+落坤泄气 / 乙奇双衰: 戌月木死+乾金克木 / 无吉格临身 / 值符天芮在排除清单) / 攻空2项(伤门门迫临日干宫 / 值符天芮病星星凶即休囚)\nq_bias=0-2=-2 → |q_bias|≥2下调1档",
+  "q_bias": -3,
+  "q_detail": "攻多0项(日干戊落巽四: 死门非生门+戌月土旺+落宫巽木克土受制=三选二仅1项 / 乙奇震三: 戌月木死囚+落宫比和禄地=单条件不足 / 戊+庚值符飞宫非吉格 / 值符天蓬在排除清单) / 攻空3项(时干丁坎一朱雀投江大凶格 / 庚乾六月令+落宫双旺 / 天蓬大盗凶星星凶即休囚)\nq_bias=0-3=-3 → |q_bias|≥2下调1档",
   "cell": {
-   "key": "偏空×+1×偏空",
+   "key": "偏空×-1×偏空",
    "samples": 0,
    "hit_rate": null,
    "status": "待点亮"
@@ -139,9 +145,9 @@
  },
  "fusion": {
   "direction": "偏弱",
-  "confidence": "低(矩阵格0样本待点亮; v₀-4深负+q_bias-2空方双确认但庚仅单旺非崩盘结构)",
-  "form": "惯性下跌(绿柱第3日放大54.5%, 下跌动能未现衰竭)",
-  "verdict": "v₀-4原始偏空×q_bias-2下调1档 → 偏弱。结构层: 伤门门迫+螣蛇缠绕(带伤运行) vs 时干乙生日干(时机有利但景门门迫带伤); 庚单旺+生门+太阴(抛压真实温和); 乙奇双衰(承接乏力); 戊临死门(资金死塞); 天芮病星+杜门(主帅带病市场阻塞); 马星亥在乾(盘中急动)——空方主导但非崩盘结构, 结构上等价于观望偏空"
+  "confidence": "低(矩阵格0样本待点亮; v₀-4×q_bias-3空方三连击, 但a_macd-1减速确认+10-20收涨V型=下杀动能衰竭, 非崩盘结构)",
+  "form": "触底反弹观察窗(绿柱第4日柱Δ收敛60.6%, 空方动能衰竭, 续跌有底)",
+  "verdict": "v₀-4原始偏空×q_bias-3下调1档 → 偏弱。结构层: 死门临身+螣蛇缠绕(运行死寂传闻暧昧) / 时干朱雀投江+白虎伤门(时机凶险) / 庚双旺+生门+玄武(抛压真实暗盘暧昧) / 乙+辛青龙逃走(承接资金溃逃) / 戊临死门(资金死塞) / 天蓬+惊门(市场惊恐) / 马星亥在乾与庚同宫(盘中抛压急动)——空方主导但动能衰竭, 结构上等价于观望偏空"
  },
  "verification": {
   "date": "2026-10-20",
@@ -557,21 +563,21 @@
  "daily_chain": [
   {
    "name": "数据采集",
-   "tag": "东财妙想 · 共享数据/2026-10-16.json",
-   "output": "<span class=k>T日(10-16)收盘</span> <span class=v>13.27</span> <span class=k>涨跌</span> <span class=pos>+0.5303%</span> <span class=k>形态</span> <span class=v>阴线收涨(开13.40/收13.27, 冲高13.79双重压力回落)</span>",
+   "tag": "东财妙想 · 共享数据/2026-10-20.json",
+   "output": "<span class=k>T日(10-20)收盘</span> <span class=v>12.92</span> <span class=k>涨跌</span> <span class=pos>+0.5447%</span> <span class=k>形态</span> <span class=v>缩量阳线V型(开12.75/低12.60/收12.92, 量4506万-33.1%)</span>",
    "note": "iFinD备源交叉验证一致; 自洽校验通过"
   },
   {
    "name": "MACD计算",
-   "tag": "12/26/9 · σ=7.0%",
-   "output": "<span class=k>DIF</span> <span class=v>0.02657</span> <span class=k>DEA</span> <span class=v>0.09231</span> <span class=k>柱</span> <span class=neg>-0.1315(绿柱第2日)</span>",
-   "formula": "近3日柱: 0.0229 / -0.07881 / -0.1315\n柱Δ: -0.0357→-0.10173→-0.05269 (收敛48.2%<50%)\n死叉延续(10-15交叉后次日); DIF距零轴仅0.0266\n→ 三根柱不同号 = a_macd口径失效",
+   "tag": "12/26/9 · σ=3.49%",
+   "output": "<span class=k>DIF</span> <span class=neg>-0.08744</span> <span class=k>DEA</span> <span class=v>0.03507</span> <span class=k>柱</span> <span class=neg>-0.24502(绿柱第4日)</span>",
+   "formula": "近3日柱: -0.1315 / -0.2129 / -0.24502\n柱Δ: -0.05269→-0.0814→-0.0321 (|Δ|收敛60.6%≥50%)\n死叉延续第4日(10-15交叉后); DIF零轴下三连降\n→ 减速确认(下跌语境)",
    "note": "p50=0.09, p80=0.21"
   },
   {
    "name": "v₀评分",
    "tag": "规则V2.2 第一章",
-   "output": "<span class=k>v₀</span> <span class=neg>-2</span> → <span class=neg>偏弱</span>",
+   "output": "<span class=k>v₀</span> <span class=neg>-4</span> → <span class=neg>偏空</span>",
    "table": {
     "header": [
      "维度",
@@ -583,56 +589,56 @@
       "cells": [
        "交叉项",
        "0",
-       "死叉延续非交叉日"
+       "死叉延续第4日非交叉日"
       ],
       "hl": false
      },
      {
       "cells": [
        "柱体项",
-       "-2",
-       "|柱|0.1315>p50(0.09)=2档"
+       "-3",
+       "|柱|0.24502>p80(0.21)=3档"
       ],
       "hl": true
      },
      {
       "cells": [
        "DIF位置",
-       "0",
-       "DIF>0但在DEA下, 距零轴0.0266"
+       "-1",
+       "DIF<0零轴下且在DEA下"
       ],
       "hl": false
      }
     ]
    },
-   "note": "原始定级: 偏弱(-2~-3档); 校准链无触发(W1需≥4✗/W5需q_bias≥+2✗)"
+   "note": "原始定级: 偏空(≤-4档); 校准链无触发(W1需≥4✗/W5需q_bias≥+2✗)"
   },
   {
    "name": "奇门起盘",
-   "tag": "09:30 丙寅日癸巳时 阴遁6局",
-   "output": "<span class=k>q_bias</span> <span class=v>0</span> <span class=k>值符</span> <span class=v>天辅落坎一(庚+癸大格)</span> <span class=k>马星</span> <span class=v>亥临乾六开门(急动)</span>",
-   "formula": "攻多: 吉格临日干宫+1(丙+乙日月并行临身)\n攻空: 时干克日干-1(癸水克丙火+死门+空亡)\nq_bias = +1-1 = 0 → 无调档",
-   "note": "起盘数据qimen_data_20261019.json(06:33)"
+   "tag": "09:30 戊辰日丁巳时 阴遁6局",
+   "output": "<span class=k>q_bias</span> <span class=neg>-3</span> <span class=k>值符</span> <span class=v>天蓬落离九(惊门)</span> <span class=k>马星</span> <span class=neg>亥临乾六与庚同宫(抛压急动)</span>",
+   "formula": "攻多0项(日干戊巽四三选二仅1项/乙奇单条件不足/值符飞宫非吉/天蓬排除清单)\n攻空3项(时干丁坎一朱雀投江凶格 / 庚乾六双旺 / 天蓬凶星休囚)\nq_bias = 0-3 = -3 → 下调1档",
+   "note": "起盘数据qimen_data_20261021.json(08:30); 日干戊=个股与本金同宫巽四(死门+螣蛇)"
   },
   {
    "name": "M2矩阵查表",
    "tag": "立体矩阵L0",
-   "output": "<span class=k>格子</span> <span class=v>偏弱×0×中性</span> <span class=k>样本</span> <span class=warn>0(待点亮)</span>",
-   "formula": "三维定位: v₀(偏弱) × a_macd(0失效) × q_bias(中性)\n同格历史样本: 0 → 无统计可注入",
+   "output": "<span class=k>格子</span> <span class=v>偏空×-1×偏空</span> <span class=k>样本</span> <span class=warn>0(待点亮)</span>",
+   "formula": "三维定位: v₀(偏空) × a_macd(-1减速) × q_bias(偏空)\n同格历史样本: 0 → 无统计可注入",
    "note": "格子逐日点亮中"
   },
   {
    "name": "两点闭环+无信号区",
    "tag": "规则V2.2 第二/五章",
-   "output": "<span class=k>W1</span> <span class=v>否</span>(v₀<4) <span class=k>W5</span> <span class=v>否</span>(q_bias<+2) <span class=k>无信号区</span> <span class=pos>⭐强制触发</span>(三条件全满足)",
-   "note": "⭐实盘首触发: 强行给方向=噪音输出(无信号日占75%), 10-26周复盘回看方向噪音率"
+   "output": "<span class=k>W1</span> <span class=v>否</span>(v₀<4) <span class=k>W5</span> <span class=v>否</span>(q_bias<+2) <span class=k>无信号区</span> <span class=v>不满足</span>(v₀-4)",
+   "note": "W2降级观察样本+1(v₀-4深负实际若反向收涨则证据+1, 10-26周复盘对账)"
   },
   {
    "name": "合成输出",
    "tag": "L0+L1+L2",
-   "output": "<span class=k>方向</span> <span class=v>无方向</span> <span class=k>形态</span> <span class=v>多空拉锯</span> <span class=k>调档</span> <span class=v>无</span>",
-   "formula": "v₀-2(偏弱) × q_bias=0 → 方向互相抵消\n无信号区三条件全满足 → 强制无方向\n结构层判语: 小阴小阳僵持(马星开门=或有急动变盘)",
-   "note": "无方向不设方向翻转(flip不标注); 验证端观察±0.35%僵持带兑现"
+   "output": "<span class=k>方向</span> <span class=neg>偏弱</span> <span class=k>形态</span> <span class=v>触底反弹观察窗</span> <span class=k>调档</span> <span class=neg>下调1档</span>",
+   "formula": "v₀-4(偏空) × q_bias-3 → 下调1档 = 偏弱\na_macd-1减速确认 → 形态=触底反弹观察窗(续跌有底, 加速衰竭, 反弹观察窗)\nflip起算: 跌转涨基准10-20收12.92(跌侧第2日)",
+   "note": "结构层判语: 空方主导但下杀动能衰竭(死门临身+朱雀投江+庚双旺+青龙逃走+资金死塞), 结构上等价于观望偏空"
   }
  ],
  "todo_list": [
@@ -704,6 +710,16 @@
    "actual": "+0.5447%(小涨反向)",
    "hit": "❌",
    "cell": "偏空×+1×偏空"
+  },
+  {
+   "date": "10-21",
+   "v0": "-4",
+   "a_macd": "-1",
+   "q_bias": "-3",
+   "pred": "偏弱",
+   "actual": "待验证",
+   "hit": "待对账",
+   "cell": "偏空×-1×偏空"
   }
  ]
 }
