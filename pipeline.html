@@ -358,6 +358,8 @@ fusion: {
     const aT=d.qimen.a_total;
     const vX=f.v_cross;
     const ar=d.qimen.a_raw, qa=d.qimen.a_discrete, am=d.qimen.a_macd;
+    const en=(d.qimen.attack_plus||0)+(d.qimen.attack_minus||0)+(d.qimen.structure||0);
+    const rr=en?(ar/en).toFixed(3):'0.000';
     const fmtA=v=>v>0?'+'+v:String(v);
     const fmtV=v=>v>0?'+'+v:String(v);
     const aCols=['+2','+1','0','-1','-2'];
@@ -369,18 +371,18 @@ fusion: {
     const COLHL='background:rgba(31,111,235,.07)';
     return `
   <div class="detail-section"><h4>Step 1 会师——两侧加速度汇合</h4>
-  <div class="formula">┌ 奇门侧：a_raw ${ar>0?'+':''}${ar} → 表2-D（点亮行）→ 奇门a = ${qa>0?'+':''}${qa}
+  <div class="formula">┌ 奇门侧：a_raw ${ar>0?'+':''}${ar} ÷总能量 → r=${rr} → 表2-D（点亮行）→ 奇门a = ${qa>0?'+':''}${qa}
 └ MACD侧：柱线惯性 → 表2-F（点亮行）→ a_macd = ${am>0?'+':''}${am}
 ─────────────────
 a总 = ${am>0?'+':''}${am} + ${qa>0?'+':''}${qa} = <b>${aT>0?'+':''}${aT}</b> ｜ 限幅±2 ✓</div>
   ${(()=>{
     const d2Rows=[
-      ['≥ +6',+2,'加速（强烈同向推动）',ar>=6],
-      ['+3 ~ +5',+1,'缓速（弱同向推动）',ar>=3&&ar<=5],
-      ['-2 ~ +2',0,'维持（无方向性增量）',ar>=-2&&ar<=2],
-      ['-5 ~ -3',-1,'减速（弱反向对冲）',ar>=-5&&ar<=-3],
-      ['≤ -6',-2,'急刹（强反向对冲）',ar<=-6]];
-    return `<table style="font-size:12px;margin-top:6px"><tr><th>a_raw区间（③层加权）</th><th>奇门a</th><th>含义</th></tr>
+      ['r ≥ 0.45',+2,'加速（强烈同向推动）',rr>=0.45],
+      ['0.20 ≤ r < 0.45',+1,'缓速（弱同向推动）',rr>=0.2&&rr<0.45],
+      ['-0.20 < r < 0.20',0,'维持（多空均衡）',rr>-0.2&&rr<0.2],
+      ['-0.45 < r ≤ -0.20',-1,'减速（弱反向对冲）',rr>-0.45&&rr<=-0.2],
+      ['r ≤ -0.45',-2,'急刹（强反向对冲）',rr<=-0.45]];
+    return `<table style="font-size:12px;margin-top:6px"><tr><th>r=净推力占比<br><span style="font-weight:400;font-size:10px">a_raw÷总能量</span></th><th>奇门a</th><th>含义</th></tr>
     ${d2Rows.map(r=>`<tr><td style="${r[3]?HL2:''};text-align:center">${r[0]}${r[3]?' ◀':''}</td><td style="${r[3]?HL2:''};text-align:center" class="${r[1]>0?'pos':r[1]<0?'neg':'zero'}">${r[1]>0?'+':''}${r[1]}</td><td style="${r[3]?'font-weight:700':''}">${r[2]}</td></tr>`).join('')}</table>`;
   })()}
   ${(()=>{
