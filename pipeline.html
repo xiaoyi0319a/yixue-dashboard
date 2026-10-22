@@ -569,7 +569,7 @@ ${rp0>0?`→ R′=${rp0} 反转锁档：v′ = ${f.v_reversed>0?'+':''}${f.v_rev
   <div class="formula">v0_grade: ${d.nine_fields.v0_grade>0?'+':''}${d.nine_fields.v0_grade}     cal_A: ${d.nine_fields.cal_A}     cal_B: ${d.nine_fields.cal_B}${d.nine_fields.cal_C?'     cal_C: '+d.nine_fields.cal_C:''}
 a_macd: ${d.nine_fields.a_macd>0?'+':''}${d.nine_fields.a_macd}        qimen_a: ${d.nine_fields.qimen_a}       a_raw: ${d.nine_fields.a_raw}
 b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: ${d.nine_fields.path}   final_grade: ${grade}</div></div>
-  ${d.verification?`<div class="detail-section"><h4>验证对比（收盘后更新）</h4>
+  ${d.verification?`<div class="detail-section"><h4>验证对比（${d.verification.date||'昨日'}收盘验证·今日${d.date||''}待验证）</h4>
   ${renderVerification(d.verification)}
   </div>`:''}`
   }
