@@ -227,7 +227,15 @@ qimen: {
     // ⭐四害列直驱点亮（10-20层合成版·盘即事实）：门迫/门制/击刑/入墓→四害列·基础分1.5（四害档锁死）；空亡走专列；宫克不算四害
     const ROWMAP={'庚':'庚','乙奇':'乙奇','日干':'日干','时干':'时干','生门':'生门','戊':'戊','值符':'值符','景门':'景门','开门':'开门','九天':'九天','九地':'九地','天蓬':'天蓬'};
     (d.palace_table||[]).forEach(r=>{
-      const ysRaw=(r.yongshen||'').split('（')[0].trim();
+      /* 用神提取：yongshen 字段（旧schema部分日期）→ gods 数组（V4.1格式如 ["庚(卖盘)","值使景门(振幅)"]） */
+      let ysRaw=(r.yongshen||'').split('（')[0].trim();
+      if(!ysRaw&&Array.isArray(r.gods)){
+        for(const g of r.gods){
+          const gn=g.split('（')[0].trim();
+          for(const k in ROWMAP){ if(gn.indexOf(k)===0){ ysRaw=gn; break; } }
+          if(ysRaw) break;
+        }
+      }
       let ys=null;
       for(const k in ROWMAP){ if(ysRaw.indexOf(k)===0){ ys=ROWMAP[k]; break; } }
       if(!ys)return;
@@ -243,7 +251,15 @@ qimen: {
     const PE={'坎':'水','坤':'土','震':'木','巽':'木','中':'土','乾':'金','兑':'金','艮':'土','离':'火'};
     const SHENG={'木':'火','火':'土','土':'金','金':'水','水':'木'};
     (d.palace_table||[]).forEach(r=>{
-      const ysRaw=(r.yongshen||'').split('（')[0].trim();
+      /* 同上：从 gods 数组提取用神 */
+      let ysRaw=(r.yongshen||'').split('（')[0].trim();
+      if(!ysRaw&&Array.isArray(r.gods)){
+        for(const g of r.gods){
+          const gn=g.split('（')[0].trim();
+          for(const k in ROWMAP){ if(gn.indexOf(k)===0){ ysRaw=gn; break; } }
+          if(ysRaw) break;
+        }
+      }
       let ys=null;
       for(const k in ROWMAP){ if(ysRaw.indexOf(k)===0){ ys=ROWMAP[k]; break; } }
       if(!ys)return;
@@ -646,6 +662,30 @@ function normalizeSchema(d){
         if(!s.slot&&s.time) s.slot=s.time.charAt(0);
         if((!s.time||s.time.indexOf('-')<0)&&SLOT_TIME_MAP[s.slot]) s.time=SLOT_TIME_MAP[s.slot];
       });
+    }
+    /* matrix_drop：预测端V4.1-patch10（10-22起）cell="攻多"（纯渠道名），格信息在 read（"G30日干旺+2"）
+       → 归一化为旧格式 cell="G30 日干×旺/相"，前端 split('×') 正常解析 */
+    if(Array.isArray(d.matrix_drop)){
+      const YS_ALIASES={'乙':'乙奇','值使':'值使门'};
+      const ST_MAP={'旺':'旺/相','相':'旺/相','囚':'休囚/死·废','休':'休囚/死·废','衰':'休囚/死·废','废':'休囚/死·废','四喜':'四喜','四害':'四害','凶格':'凶格临宫','吉格':'吉格临宫','空亡':'空亡','得生':'得生/受克','受克':'得生/受克'};
+      d.matrix_drop.forEach(m=>{
+        if(!m.cell||m.cell.indexOf('×')>=0) return; /* 已是旧格式，跳过 */
+        const rd=String(m.read||'');
+        const rm=rd.match(/^(G\d+)(\S+?)(旺|相|囚|休|衰|废|四喜|四害|凶格|吉格|空亡|得生|受克|入墓|门迫)/);
+        if(!rm) return;
+        const gNum=rm[1], ysRaw=rm[2], stRaw=rm[3];
+        const ys=YS_ALIASES[ysRaw]||ysRaw;
+        let st=ST_MAP[stRaw]||'四害';
+        /* 入墓/门迫 → 四害列 */
+        if(stRaw==='入墓'||stRaw==='门迫') st='四害';
+        m.cell=gNum+' '+ys+'×'+st;
+        /* read 保留原值（前端 litMap 显示用 signal||read），dest 保留 */
+      });
+    }
+    /* actual_curve：从 note 提取日期（"10-21高开…"→date="10-21"），slotsSVG 图例标注用 */
+    if(d.actual_curve&&d.actual_curve.note&&!d.actual_curve.date){
+      const dm=String(d.actual_curve.note).match(/^(\d{2}-\d{2})/);
+      if(dm) d.actual_curve.date=dm[1];
     }
     /* matrix：预测端V4.1-patch10（10-22起）拍平格式 → 渲染层期望字段（l1_cell/side/l2_state/l3{rate,pos}）
        新：l1="格6（…）基分-2" l2="bear_mid（死叉第15日）" l3="fading×deep（…）" signal="【转向预警】"
