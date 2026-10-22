@@ -647,6 +647,19 @@ function normalizeSchema(d){
         if((!s.time||s.time.indexOf('-')<0)&&SLOT_TIME_MAP[s.slot]) s.time=SLOT_TIME_MAP[s.slot];
       });
     }
+    /* matrix：预测端V4.1-patch10（10-22起）拍平格式 → 渲染层期望字段（l1_cell/side/l2_state/l3{rate,pos}）
+       新：l1="格6（…）基分-2" l2="bear_mid（死叉第15日）" l3="fading×deep（…）" signal="【转向预警】"
+       渲染层用 l1_cell.split('（')[0]、side、l2_state.split('_')、l3.rate、l3.pos → 缺字段时 TypeError 卡加载 */
+    if(d.matrix&&d.matrix.l1_cell===undefined){
+      const m=d.matrix;
+      if(m.l1!==undefined) m.l1_cell=String(m.l1).split('基分')[0];
+      const l2m=String(m.l2||'').match(/^(bear|bull)_([a-z]+)/);
+      m.side=l2m?l2m[1]:(m.score>0?'bull':m.score<0?'bear':'bull');
+      m.l2_state=l2m?(l2m[1]+'_'+l2m[2]):'bull_mid';
+      const l3m=String(m.l3||'').match(/^([a-z]+)×([a-z]+)/);
+      m.l3={rate:l3m?l3m[1]:'flat',pos:l3m?l3m[2]:'mid'};
+      if(typeof m.signal==='string') m.signal=m.signal.replace(/【|】/g,'');
+    }
     return d;
   }
 
