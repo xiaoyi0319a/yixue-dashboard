@@ -683,10 +683,15 @@ function normalizeSchema(d){
         /* read 保留原值（前端 litMap 显示用 signal||read），dest 保留 */
       });
     }
-    /* actual_curve：从 note 提取日期（"10-21高开…"→date="10-21"），slotsSVG 图例标注用 */
+    /* actual_curve：从 note 提取日期（"10-21高开…"→date="10-21"），slotsSVG 图例标注用
+       ⭐日期不匹配=昨日数据（今日未收盘）→ 置null不画实际线，避免误导 */
     if(d.actual_curve&&d.actual_curve.note&&!d.actual_curve.date){
       const dm=String(d.actual_curve.note).match(/^(\d{2}-\d{2})/);
       if(dm) d.actual_curve.date=dm[1];
+    }
+    if(d.actual_curve&&d.actual_curve.date&&d.date){
+      const dataMMDD=String(d.date).slice(5); /* "2026-10-22"→"10-22" */
+      if(d.actual_curve.date!==dataMMDD) d.actual_curve=null;
     }
     /* matrix：预测端V4.1-patch10（10-22起）拍平格式 → 渲染层期望字段（l1_cell/side/l2_state/l3{rate,pos}）
        新：l1="格6（…）基分-2" l2="bear_mid（死叉第15日）" l3="fading×deep（…）" signal="【转向预警】"
