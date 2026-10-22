@@ -931,6 +931,7 @@ function renderVerification(v){
     <tr><td>收盘<span style="color:#484f58;font-size:10px">·全天尺</span></td><td>${v.morning?v.morning.close:'—'}</td><td>${v.actual?v.actual.close:'—'}</td><td>${v.binary?v.binary.close:'—'}</td></tr>
     <tr class="hl"><td colspan="3">二元合计</td><td><b>${v.binary?v.binary.score:'—'}</b></td></tr>
     <tr><td colspan="2">四时段</td><td colspan="2">严格 ${v.four_slots?v.four_slots.strict:'—'} ｜ 宽松 ${v.four_slots?v.four_slots.lenient:'—'}</td></tr>
+    ${v.volatility_pred!==undefined?`<tr><td>波动率<span style="color:#484f58;font-size:10px">·振幅档</span></td><td>${v.volatility_pred}</td><td>${v.volatility_actual||'—'}</td><td>${v.volatility_hit||'—'}</td></tr>`:''}
   </table>
   ${v.changes?`<p class="note" style="margin-top:8px"><b>偏差主因：</b>${v.changes}</p>`:''}`;
 }
