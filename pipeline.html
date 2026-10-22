@@ -303,6 +303,7 @@ qimen: {
     </table></div>
     ${(()=>{const gs=[...(d.matrix_global||[]),...globalFromDrop.map(m=>({signal:(m.g?m.g+' ':'')+(m.read||(m.cell||'').split('×')[1]||''),dest:m.dest||''}))];return gs.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${gs.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:'';})()}
     ${d.matrix_missing&&d.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${d.matrix_missing.map(m=>`${m.yongshen||m.用神||'—'}·${m.state||m.组合||''}`).join('；')}</p>`:''}
+    ${d.matrix_missing_note?`<p style="color:#d29922;font-size:11px;margin-top:2px">📋 ${d.matrix_missing_note}</p>`:''}
     <div style="margin-top:8px;border-top:1px solid #30363d;padding-top:8px">
     <p style="color:#c9d1d9;font-size:12px;font-weight:700;margin-bottom:4px">📖 矩阵13行=13个角色——交易断局的最小完备角色集</p>
     <p style="color:#8b949e;font-size:11px;line-height:1.7;margin-bottom:6px">九宫格是<b>地图</b>（9个位置），用神是<b>角色</b>（13个人）——13个角色走进9个宫位，同宫就各读各的：<b>宫位本身无吉凶，吉凶长在"角色×宫位"的关系里</b>（同一场雨，对炮兵是阻碍，对工兵是掩护）。每行从该角色视角独立判定，8列=旺衰/四害/四喜/凶格/吉格/空亡/生克。</p>
@@ -361,7 +362,7 @@ qimen: {
 结构a_raw = ${formula('结构')} = ${st.v>0?'+':''}${st.v}
 ─────────────────
 a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇门a（映射压缩在融合节点①）</div>
-  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=${cl.攻多}<br><span style="color:#f85149">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`;
+  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=${cl.攻多}<br><span style="color:#f85149">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）${q.reread_note?`<br><span style="color:#d29922">📋 重读备注：${q.reread_note}</span>`:''}</p>`;
   })()}
   </div>`
 
@@ -472,7 +473,7 @@ adjust: {
     <tr><td>限幅</td><td>|v+b|≤4</td><td>|${vF}|≤4 ✓</td></tr>
   </table></div>
   <div class="formula">v_final = v + b = ${vX>0?'+':''}${vX} + ${b>0?'+':''}${b} = ${vF>0?'+':''}${vF}</div>
-  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}${d.adjust.patch_track?'<br>'+d.adjust.patch_track:''}</p>
+  <p class="note">${active?'b≠0，底盘微调生效。':'b=0，微调层无操作。'}${d.adjust.patch_track?'<br>'+d.adjust.patch_track:''}${d.adjust.circuit_breaker?'<br><span style="color:#d29922">⛔ '+d.adjust.circuit_breaker+'</span>':''}</p>
   ${(d.qimen.b_signals&&d.qimen.b_signals.length)?`<div class="detail-section"><h4>b信号明细（base=基础分 / dyn=动态权重系数 / score=生效分——b微调系数归本节点）</h4>
   <table style="font-size:11px"><tr><th>信号</th><th>条件</th><th>base</th><th>dyn</th><th>score</th></tr>
   ${d.qimen.b_signals.map(x=>`<tr><td>${x.name}</td><td>${x.condition}</td><td>${x.base!==undefined?x.base:'—'}</td><td>${x.dyn!==undefined?x.dyn:'—'}</td><td class="${x.score>0?'pos':x.score<0?'neg':'zero'}">${x.score>0?'+':''}${x.score}</td></tr>`).join('')}</table></div>`:''}`
@@ -611,7 +612,7 @@ function renderPipeline(d){
       const dirZh=m.score>0?'偏多':m.score<0?'偏空':'中性';
       return `
       <span class="k">L1</span> <span class="v">${m.l1_cell.split('（')[0]}</span> ｜ <span class="k">L2</span> <span class="v">${m.l2_state.replace('bear_','空·').replace('bull_','多·').replace('early','初段').replace('mid','中段').replace('late','末段')}</span> ｜ <span class="k">L3</span> <span class="v">${m.l3.rate==='accel'?'加速':m.l3.rate==='decel'?'减速':'<b style="color:#d29922">衰竭转向</b>'}×${m.l3.pos}</span><br>
-      <span class="k">底座分</span> <span class="v ${m.score>0?'pos':m.score<0?'neg':'zero'}" style="font-size:14px">${m.score>0?'+':''}${m.score}</span> → <span class="k">状态</span> <span class="v">${segZh}${stgZh}·${rateZh2}·${posZh2}${dirZh}</span>${m.signal&&m.signal!=='无'?` <span class="badge warn">${m.signal}</span>`:''}`;
+      <span class="k">底座分</span> <span class="v ${m.score>0?'pos':m.score<0?'neg':'zero'}" style="font-size:14px">${m.score>0?'+':''}${m.score}</span> → <span class="k">状态</span> <span class="v">${segZh}${stgZh}·${rateZh2}·${posZh2}${dirZh}</span>${m.signal&&m.signal!=='无'?` <span class="badge warn">${m.signal}</span>`:''}${d.v0&&d.v0.weak_base_guard?`<br><span class="badge warn" style="margin-top:2px">${d.v0.weak_base_guard}</span>`:''}`;
     })() : `
       <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</span> ＋ <span class="k">DIF位置</span> <span class="v">${d.v0.dif_pos}</span> ＝ <span class="v">${d.v0.raw_score}</span><br>
       <span class="k">9档映射</span> <span class="v">${(d.macd&&d.macd.grade_label_map&&d.macd.grade_label_map[String(d.v0.precal)])||GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal}）</span>`},
@@ -620,7 +621,7 @@ function renderPipeline(d){
       <span class="k">得分</span> <span class="v ${d.qimen.a_discrete>0?'pos':d.qimen.a_discrete<0?'neg':'zero'}" style="font-size:14px">奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> → <span class="k">状态</span> <span class="v">${(d.qimen&&d.qimen.a_meaning&&d.qimen.a_meaning[String(d.qimen.a_discrete)])||'—'}</span>`},
     {key:'fusion',active:true,html:`
       <span class="k">v = v₀ + a总 = </span><span class="v ${d.fusion.v0_src==='matrix'?'':'zero'}">${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0):'?'}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>${d.fusion.v0_src==='matrix'?'<br><span class="k" style="color:#3fb950">v₀=矩阵底座分</span>':''}<br>
-      <span class="k">查表3-A</span> <span class="v">v₀=${d.fusion.v0_int!==undefined?((d.fusion.v0_int>0?'+':'')+d.fusion.v0_int):'?'} × a=${d.qimen.a_total>0?'+':''}${d.qimen.a_total} → v=${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>`},
+      <span class="k">查表3-A</span> <span class="v">v₀=${d.fusion.v0_int!==undefined?((d.fusion.v0_int>0?'+':'')+d.fusion.v0_int):'?'} × a=${d.qimen.a_total>0?'+':''}${d.qimen.a_total} → v=${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>${d.fusion.weak_base_clamp?`<br><span class="k" style="color:#d29922">弱底座限幅：${d.fusion.weak_base_clamp}</span>`:''}`},
     {key:'adjust',active:d.fusion.b_value!==0,html:`
       <span class="k">b = ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} ${d.fusion.b_value===0?'→ 不生效':'→ 生效'}</span><br>
       <span class="k">v_final = ${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross} + ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>`},
