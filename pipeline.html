@@ -626,7 +626,7 @@ function renderPipeline(d){
       <span class="k">b = ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} ${d.fusion.b_value===0?'→ 不生效':'→ 生效'}</span><br>
       <span class="k">v_final = ${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross} + ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>`},
     {key:'output',active:true,html:`
-      <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span><br>
+      <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span>${d.nine_fields&&d.nine_fields.weak_base_dir?`<br><span class="k" style="color:#d29922">-W底座方向记账</span> <span class="v">${d.nine_fields.weak_base_dir<0?'偏空':d.nine_fields.weak_base_dir>0?'偏多':'中性'}（弱底座·低置信·修正层剥离）</span>`:''}<br>
       <span class="path-label">路径：${d.path}</span>${d.shape?`<br><span class="k">${d.shape.close_label}</span> ｜ <span class="k">形态</span> <span class="v">${d.shape.pattern}</span> ｜ <span class="k">实体</span> <span class="v">${d.shape.body_grade}</span> ｜ <span class="k">振幅</span> <span class="v">${d.shape.amplitude_grade}</span>`:''}`},
     ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[])
   ];
