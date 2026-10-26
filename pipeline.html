@@ -579,11 +579,12 @@ slots: {
   sub:"规则：奇门大盘预测工作流 Step 6.9 ｜ 有/无方向由v_final仲裁 ｜ 有效方向日才验证准确率",
   render:d=>{
     if(!d.four_slots) return '<p class="note">暂无四时段数据</p>';
-    const intradayRaw=(d.output&&d.output.three_d&&d.output.three_d.intraday)||'';
-    const isNoDir=intradayRaw.indexOf('无方向')>=0;
-    const modeTag=intradayRaw?(isNoDir
-      ?`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #d29922;background:#d2992215"><b style="color:#d29922">▶ 无方向 · 全天波动小</b> ｜ 触发阈值：<b>日内方向=无方向，|日内方向|≤1</b> → 四时段全部输出无方向，不验证准确率<br><span style="color:#8b949e;font-size:11px">日内方向（残差=全天趋势⊖隔夜动能）：${intradayRaw}</span></p>`
-      :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>|日内方向|≥2</b> → 四时段正常方向解释，收盘后验证准确率<br><span style="color:#8b949e;font-size:11px">日内方向（残差=全天趋势⊖隔夜动能）：${intradayRaw}</span></p>`):'';
+    const volGrade=(d.volatility&&d.volatility.grade)||'';
+    const isLowVol=volGrade.indexOf('低波动')>=0;
+    const isNoDir=volGrade===''||isLowVol;
+    const modeTag=volGrade?(isNoDir
+      ?`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #d29922;background:#d2992215"><b style="color:#d29922">▶ 无方向 · 全天波动小</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，<0.8%低波动</b> → 四时段全部输出无方向，不验证准确率</p>`
+      :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，≥0.8%中波动起步</b> → 四时段正常方向解释，收盘后验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
     ${modeTag}
     ${slotsSVG(d.four_slots,520,160,d.actual_curve)}
