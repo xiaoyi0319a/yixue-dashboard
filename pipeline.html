@@ -576,10 +576,15 @@ b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: $
 },
 slots: {
   title:"⏰ 四时段推演",
-  sub:"规则：奇门大盘预测工作流 Step 6 ｜ 巳/午/未/申四段独立定级",
+  sub:"规则：奇门大盘预测工作流 Step 6.9 ｜ 有/无方向由v_final仲裁 ｜ 有效方向日才验证准确率",
   render:d=>{
     if(!d.four_slots) return '<p class="note">暂无四时段数据</p>';
+    const vf=d.fusion&&d.fusion.v_final;
+    const modeTag=vf!==undefined?(Math.abs(vf)>=2
+      ?`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>v_final=${vf>0?'+':''}${vf}，|v_final|≥2</b> → 四时段正常方向解释，收盘后验证准确率</p>`
+      :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #d29922;background:#d2992215"><b style="color:#d29922">▶ 无方向 · 全天波动小</b> ｜ 触发阈值：<b>v_final=${vf>0?'+':''}${vf}，|v_final|≤1</b> → 四时段全部输出无方向，不验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
+    ${modeTag}
     ${slotsSVG(d.four_slots,520,160,d.actual_curve)}
     </div>
     <div class="detail-section"><h4>时段判语</h4>
