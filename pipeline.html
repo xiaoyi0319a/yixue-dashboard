@@ -174,9 +174,9 @@ v0: {
     }).join('')}</table>
     <p class="note">当前段max|DIF| / 上一同向段极值 = ${m.ratio}（${m.l3.pos==='deep'?'本波已超上波·深水':m.l3.pos==='shallow'?'未及上波':'过渡'}）</p></div>
     <div class="detail-section"><h4>底座分合成（节点分直入叉积v₀位）</h4>
-    <div class="formula">L1基分（${m.l1_cell.split('（')[0]}）　${m.base>0?'+':''}${m.base.toFixed(1)}
-＋ L2修正（${l2zh[m.l2_state.split('_')[1]]}×${segZh}=${m.l2_adj>0?'+':''}${m.l2_adj.toFixed(1)}）
-＋ L3修正（${rateZh[m.l3.rate]}×${m.l3.pos}×${segZh}=${m.l3_adj>0?'+':''}${m.l3_adj.toFixed(1)}）
+    <div class="formula">L1基分（${m.l1_cell.split('（')[0]}）　${m.base>0?'+':''}${(m.base||0).toFixed(1)}
+＋ L2修正（${l2zh[m.l2_state.split('_')[1]]}×${segZh}=${m.l2_adj>0?'+':''}${(m.l2_adj||0).toFixed(1)}）
+＋ L3修正（${rateZh[m.l3.rate]}×${m.l3.pos}×${segZh}=${m.l3_adj>0?'+':''}${(m.l3_adj||0).toFixed(1)}）
 ─────────────
 ＝ 节点分　<b>${m.score>0?'+':''}${m.score}</b>（限幅±3）</div>
     <p class="note" style="margin-top:6px">状态：${segZh}${l2zh[m.l2_state.split('_')[1]]}·${rateZh[m.l3.rate]}·${m.l3.pos==='deep'?'深水修复级':m.l3.pos==='mid'?'中位区':'浅水区'}${m.score>0?'偏多':m.score<0?'偏空':'中性'}</p>
@@ -309,7 +309,7 @@ qimen: {
     <p style="color:#8b949e;font-size:11px;line-height:1.7;margin-bottom:6px">九宫格是<b>地图</b>（9个位置），用神是<b>角色</b>（13个人）——13个角色走进9个宫位，同宫就各读各的：<b>宫位本身无吉凶，吉凶长在"角色×宫位"的关系里</b>（同一场雨，对炮兵是阻碍，对工兵是掩护）。每行从该角色视角独立判定，8列=旺衰/四害/四喜/凶格/吉格/空亡/生克。</p>
     <table style="font-size:11px;margin-bottom:6px">
       <tr><th style="text-align:left;color:#8b949e;padding:2px 8px 2px 0">要回答的问题</th><th style="text-align:left;color:#8b949e;padding:2px 0">角色（行首名）</th></tr>
-      ${((d.qimen&&d.qimen.roles_legend)||[]).map(r=>`<tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">${r.问题}</td><td style="padding:2px 0;color:#c9d1d9">${r.角色}</td></tr>`).join('')}
+      ${(()=>{const rl=(d.qimen&&d.qimen.roles_legend);if(!rl)return '';if(typeof rl==='string')return `<p style="color:#c9d1d9;font-size:11px;line-height:1.7">${rl}</p>`;if(Array.isArray(rl))return rl.map(r=>`<tr><td style="padding:2px 8px 2px 0;color:#c9d1d9">${r.问题||r.q||''}</td><td style="padding:2px 0;color:#c9d1d9">${r.角色||r.a||''}</td></tr>`).join('');return '';})()}
     </table>
     <p style="color:#8b949e;font-size:11px;line-height:1.7">三张表分工：<b>九宫格</b>=盘面地图 → <b>落宫表</b>（①节）=各就各位 → <b>立体矩阵</b>=状态评估。<br>格网共${(d.qimen&&d.qimen.matrix_meta&&d.qimen.matrix_meta.行数)||14}行：13角色行 + 第14行「全局」=G89伏吟/G90反吟/G91马星动/G92空亡集中（盘面节奏与波动能量，归结构渠道·G92为首个负分格）。<br>图例：●计分｜⊙候选｜◌观察｜格内灰字=格定义读法（未点亮）。矩阵源：立体矩阵v2.4（${mm?mm.说明:'13×8+全局4格'}）</p>
     </div></div>`;
