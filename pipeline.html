@@ -347,6 +347,16 @@ qimen: {
   ${matrixGrid}
   <div class="detail-section"><h4>③ 信号判定 · 今日清单（⭐层内加总×层系数·三渠道合成）</h4>
   ${(()=>{
+    const ls=(d.qimen&&d.qimen.layer_synthesis)||'';
+    if(typeof ls==='string'&&ls.length>10){
+      /* patch12后：预测端直接写入计算好的合成公式——原样展示，不再前端重算（避免层归属映射不一致） */
+      const clRaw=(d.qimen&&d.qimen.channel_legend);
+      const clStr=(typeof clRaw==='string')?clRaw:'';
+      const fn=(d.qimen&&d.qimen.formula_note)||'';
+      return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：\n${ls}\n─────────────────\n→ 表2-D → 奇门a（映射压缩在融合节点①）</div>
+      ${clStr?`<p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道说明：</b>${clStr}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`:<p class="note">明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>}`;
+    }
+    /* fallback：旧版对象数组格式时前端计算 */
     const YL={'日干':'核心','时干':'核心','值符':'核心','值使门':'核心','值使':'核心','庚':'力量','乙奇':'力量','戊':'力量','生门':'力量','开门':'力量','景门':'衍生','九天':'衍生','九地':'衍生','天蓬':'衍生','玄武':'衍生'};
     const LC=(d.qimen&&d.qimen.layer_coef)||{'核心':1.5,'力量':1.0,'衍生':0.5};
     const layerOf=s=>{const c=(s.cell||'').split('×')[0].trim();return YL[c]||null;};
@@ -635,7 +645,7 @@ function renderPipeline(d){
       <span class="k">交叉</span> <span class="v ${d.v0.cross>0?'pos':d.v0.cross<0?'neg':'zero'}">${d.v0.cross>0?'+':''}${d.v0.cross}</span> ＋ <span class="k">柱体</span> <span class="v ${d.v0.bar_strength>0?'pos':d.v0.bar_strength<0?'neg':'zero'}">${d.v0.bar_strength>0?'+':''}${d.v0.bar_strength}</span> ＋ <span class="k">DIF位置</span> <span class="v">${d.v0.dif_pos}</span> ＝ <span class="v">${d.v0.raw_score}</span><br>
       <span class="k">9档映射</span> <span class="v">${(d.macd&&d.macd.grade_label_map&&d.macd.grade_label_map[String(d.v0.precal)])||GRADE_LABEL_MAP[String(d.v0.precal)]||d.v0.precal}（${d.v0.precal}）</span>`},
     {key:'qimen',active:true,html:`
-      <span class="k">结算</span> <span class="v">攻多${d.qimen.attack_plus} − 攻空${d.qimen.attack_minus} + 结构${d.qimen.structure>0?'+':''}${d.qimen.structure} = a_raw ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}</span><br>
+      <span class="k">结算</span> <span class="v">攻多${d.qimen.attack_plus}条·攻空${d.qimen.attack_minus}条·结构${d.qimen.structure}条 ｜ a_raw ${d.qimen.a_raw>0?'+':''}${d.qimen.a_raw}</span><br>
       <span class="k">得分</span> <span class="v ${d.qimen.a_discrete>0?'pos':d.qimen.a_discrete<0?'neg':'zero'}" style="font-size:14px">奇门a = ${d.qimen.a_discrete>0?'+':''}${d.qimen.a_discrete}</span> → <span class="k">状态</span> <span class="v">${(d.qimen&&d.qimen.a_meaning&&(d.qimen.a_meaning[String(d.qimen.a_discrete)]||d.qimen.a_meaning[(d.qimen.a_discrete>0?'+':'')+d.qimen.a_discrete]))||'—'}</span>`},
     {key:'fusion',active:true,html:`
       <span class="k">v = v₀ + a总 = </span><span class="v ${d.fusion.v0_src==='matrix'?'':'zero'}">${d.fusion.v0!==undefined?((d.fusion.v0>0?'+':'')+d.fusion.v0):'?'}</span> <span class="k">+</span> <span class="v ${d.qimen.a_total>0?'pos':d.qimen.a_total<0?'neg':'zero'}">${d.qimen.a_total>0?'+':''}${d.qimen.a_total}</span> <span class="k">=</span> <span class="v ${d.fusion.v_cross>0?'pos':d.fusion.v_cross<0?'neg':'zero'}">${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross}</span>${d.fusion.v0_src==='matrix'?'<br><span class="k" style="color:#3fb950">v₀=矩阵底座分</span>':''}<br>
