@@ -270,7 +270,16 @@ qimen: {
       }
     });
     (d.matrix_drop||[]).forEach(m=>{
-      /* V4.1新schema cell="G30 日干×旺/相"（带格号前缀）；旧schema cell="值符×旺/当令" */
+      /* V4.1新schema cell="G30 日干×旺/相"（带格号前缀）；旧schema cell="值符×旺/当令"；patch12后 cell=渠道名+state=● */
+      if(m.g&&typeof m.g==='string'&&m.g.match(/^[GA]\d+/)){
+        const rawCell=m.g.replace(/^(G|A)\d+\s*/,'');
+        const parts=rawCell.split('×');
+        if(parts.length>=2){
+          const ys=parts[0].trim(),col=colMap(parts[1]||'');
+          if(ys==='全局'){globalFromDrop.push(m);return;}
+          if(ys&&col&&MV1ROWS.indexOf(ys)>=0){litMap[ys+'|'+col]={...m,state:m.state||'●'};return;}
+        }
+      }
       const rawCell=(m.cell||'').replace(/^(G|A)\d+\s*/,'');
       const parts=rawCell.split('×');
       if(parts.length<2){unmapped.push(m);return;}
