@@ -397,7 +397,7 @@ fusion: {
     const v0v=d.fusion.v0_int!==undefined?d.fusion.v0_int:(d.fusion.v0!==undefined?d.fusion.v0:d.v0.grade);
     const aT=d.qimen.a_total;
     const vX=f.v_cross;
-    const ar=d.qimen.a_raw, qa=d.qimen.a_discrete, am=d.qimen.a_macd;
+    const ar=d.qimen.a_raw, qa=d.qimen.a_discrete, am=(d.qimen.a_macd!==undefined?d.qimen.a_macd:d.fusion.a_macd);
     const en=(d.qimen.attack_plus||0)+(d.qimen.attack_minus||0)+(d.qimen.structure||0);
     const rr=en?(ar/en).toFixed(3):'0.000';
     const fmtA=v=>v>0?'+'+v:String(v);
