@@ -608,7 +608,7 @@ slots: {
       :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，≥0.8%中波动起步</b> → 四时段正常方向解释，收盘后验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
     ${modeTag}
-    ${slotsSVG(d.four_slots,520,160,d.actual_curve)}
+    ${slotsSVG(d.four_slots,520,190,d.actual_curve)}
     </div>
     <div class="detail-section"><h4>时段判语</h4>
     <table>
@@ -837,13 +837,16 @@ function showDetail(key){
 }
 
 /* ==================== 四时段SVG折线图 ==================== */
-const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'无方向':0,'微偏强':1,'略偏多':1,'偏多':2,'偏强':3};
+const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'中性偏弱':-1,'无方向':0,'中性偏强':1,'微偏强':1,'略偏多':1,'偏多':2,'偏强':3};
 const GRADE_COLOR=v=>v>0?'#3fb950':v<0?'#f85149':'#8b949e';
 function slotsSVG(slots,w,h,actualCurve){
   if(!slots||!slots.length) return '';
-  const pad={l:30,r:12,t:24,b:20};
+  /* ⭐防裁切布局（2026-10-28修复）：顶部容纳点位标签文字（y-9）+呼吸空间，底部容纳时间轴文字
+     stepY取三者最小：满量程ih/4 vs 顶部余量/3 vs 底部余量/3——±3档+文字永远在viewBox内 */
+  const pad={l:30,r:12,t:Math.max(22,Math.round(h*0.17)),b:Math.max(20,Math.round(h*0.12))};
   const iw=w-pad.l-pad.r, ih=h-pad.t-pad.b;
-  const zeroY=pad.t+ih/2, stepY=ih/4;
+  const zeroY=pad.t+ih/2;
+  const stepY=Math.min(ih/4,(zeroY-13)/3,(h-16-zeroY)/3);
   const n=slots.length;
 
   /* Catmull-Rom → cubic Bezier 平滑 */
