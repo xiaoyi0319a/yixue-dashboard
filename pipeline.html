@@ -687,7 +687,10 @@ function normalizeSchema(d){
   if(!isOld){
     /* 新格式：four_slots 补 slot/time——新schema time="巳 09:30"单时点，slot缺省；渲染与SVG需要旧式范围（巳 09:30-10:30），用SLOT_TIME_MAP补齐 */
     if(Array.isArray(d.four_slots)){
+      /* ⭐旧术语归一化（2026-10-28）：预测端沿用'中性偏强/中性偏弱'旧档名（优化53已改名微偏强/微偏弱）→ 统一替换，显示与验证口径一致 */
+      const GRADE_RENAME={'中性偏强':'微偏强','中性偏弱':'微偏弱','中性偏空':'微偏空','中性偏多':'微偏多'};
       d.four_slots.forEach(s=>{
+        if(GRADE_RENAME[s.grade]) s.grade=GRADE_RENAME[s.grade];
         if(!s.slot&&s.time) s.slot=s.time.charAt(0);
         if((!s.time||s.time.indexOf('-')<0)&&SLOT_TIME_MAP[s.slot]) s.time=SLOT_TIME_MAP[s.slot];
       });
