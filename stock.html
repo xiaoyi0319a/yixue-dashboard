@@ -318,7 +318,7 @@ function renderLayers(){
   document.getElementById('lc-L0').innerHTML=
     `<span class=k>v₀:</span> <span class=v>${m.v0?.value??'--'}(${m.v0?.grade||''})</span><br>
      <span class=k>a_macd:</span> <span class=v>${m.a_macd?.value??'--'}</span>
-     <span class=k>q_bias:</span> <span class=v>${m.q_bias??'--'}</span><br>
+     <span class=k>q_bias:</span> <span class=v>${(m.q_bias&&typeof m.q_bias==='object')?m.q_bias.value??'--':m.q_bias??'--'}</span><br>
      <span class=k>所在格:</span> ${m.cell?.key||'--'}`;
   const l1=D.matrix_L1||{};
   document.getElementById('lc-L1').innerHTML=
