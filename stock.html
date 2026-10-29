@@ -267,18 +267,7 @@ td{color:#c9d1d9}
 <script>
 const DATA_URL='data/stock_pipeline_latest.json';
 let D=null;
-const GW='https://albany-restore-vatican-rachel.trycloudflare.com',GW_TOKEN='2c9db1f7a3e84f5db6a017c3e8d2541c';
-function diagnose(){
- const c=document.getElementById('codeInput').value.trim();
- if(!/^\d{6}$/.test(c)){diagStatus('⚠️ 请输入6位数字代码');return}
- diagStatus('提交中…');
- fetch(GW+'/diagnose',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:c,token:GW_TOKEN})})
- .then(r=>r.json()).then(j=>{
-  if(j.ok){diagStatus('✅ 诊断任务已注入——结果将推送至kimi-claw对话（约5-15分钟），完成后此页自动刷新');setTimeout(()=>{loadFor(c)},300000)}
-  else diagStatus('❌ '+({429:'太频繁，请稍后再试',503:'已有诊断进行中',403:'鉴权失败',400:'代码格式错误'}[j.error]||j.error||'提交失败'))
- }).catch(()=>diagStatus('❌ 网关不可达——请确认网络或联系管理员'));
-}
-function diagStatus(t){document.getElementById('diagStatus').textContent=t}
+function diagStatus(t){const e=document.getElementById('diagStatus');if(e)e.textContent=t}
 function loadSwitcher(){
  fetch('data/diagnoses_index.json?t='+Date.now()).then(r=>r.json()).then(idx=>{
   IDX=idx;
