@@ -326,6 +326,7 @@ function renderAll(){
   document.getElementById('h-date').textContent=D.date||'--';
   document.getElementById('h-ver').textContent=D.version||'';
   renderMatrix();renderLayers();renderGene();renderState();renderDaily();renderCompare();
+  getScripts().then(s=>{SCRIPT_CACHE=s;renderMatrix();});
 }
 function renderCompare(){
   const bar=document.getElementById('compareBar');
@@ -373,9 +374,8 @@ function renderMatrix(){
   document.getElementById('mg-grid').innerHTML=h;
   const za=document.getElementById('zone-arrow');
   if(za&&D.view_state)za.style.marginLeft=(100*(D.view_state.current_idx+0.5)/zones.length)+'%';
-  getScripts().then(s=>{SCRIPT_CACHE=s;renderMatrix();});
+  showCell(cur.z,cur.g);
 }
-function showCell(zi,gi){
   const g=D.matrix_grid, key=zi+'_'+gi, c=(g.cells||{})[key];
   const el=document.getElementById('fu-detail');el.style.display='block';
   const cur=g.current;
