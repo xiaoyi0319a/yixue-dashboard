@@ -180,17 +180,15 @@ td{color:#c9d1d9}
 <!-- ============ 视图0: 立体矩阵（核心格网图） ============ -->
 <div class="view active" id="view-fusion">
   <div class="matrix-explain">
-    <b style="color:#58a6ff">立体矩阵 = 同一张日级信号表，在不同股票状态下含义完全不同。</b><br>
-    横轴 = 股票处在哪个区间（L1状态层）· 纵轴 = 明天信号多强（L0矩阵层）· 格子 = 这个组合历史上验证过几次/命中几次。<br>
-    沃森当前位置 = <b style="color:#58a6ff">横盘整理区 × 中性偏弱</b>（蓝框闪烁）。绿色=命中率高，红色=低，灰色=还没验证过。
+    <b style="color:#58a6ff">立体矩阵 = 状态地图：横轴定位股票在牛熊循环的位置，纵轴读取当下多空力量，格子是这个组合的剧本。</b><br>
+    横轴 = 区间定位（底部区→退潮，L1状态层）· 纵轴 = 力量定级（偏多→偏空）· <b>点击任意格子看组合剧本</b>（这个位置+这个力量通常讲什么故事、盯什么变量）。<br>
+    蓝框 = 当前位置 · 黄虚线 = 上次诊断位置（仅最近两次足迹）· 格内小字 = 本票在此格的历史足迹。命中率统计已退役（点播制下样本不再积累）。
   </div>
 
   <div class="mg-legend">
-    <span><span class="mg-dot" style="background:#3fb950"></span>命中≥60%</span>
-    <span><span class="mg-dot" style="background:#d29922"></span>命中40-60%</span>
-    <span><span class="mg-dot" style="background:#f85149"></span>命中&lt;40%</span>
-    <span><span class="mg-dot" style="background:#21262d"></span>待点亮(0样本)</span>
-    <span><span class="mg-dot" style="border:2px solid #58a6ff;background:transparent"></span>当前位置</span>
+    <span><span class="mg-dot" style="border:2px solid #58a6ff;background:#1f6feb22"></span>当前位置</span>
+    <span><span class="mg-dot" style="border:1.5px dashed #d29922;background:#d2992215"></span>上次位置</span>
+    <span><span class="mg-dot" style="background:#161b22"></span>其他组合（点击看剧本）</span>
   </div>
 
   <div class="matrix-grid-wrap"><div class="matrix-grid" id="mg-grid" style="grid-template-columns:80px repeat(5,1fr)"></div></div>
@@ -355,9 +353,15 @@ function renderCompare(){
 }
 
 /* ===== 核心：立体矩阵格网图 ===== */
+let SCRIPT_CACHE=null;
+function getScripts(){return SCRIPT_CACHE?Promise.resolve(SCRIPT_CACHE):fetch('data/matrix_scripts.json?t='+Date.now()).then(r=>r.json()).then(j=>{SCRIPT_CACHE=j;return j})}
 function renderMatrix(){
   const g=D.matrix_grid;if(!g){document.getElementById('mg-grid').innerHTML='无数据';return}
   const zones=g.zones, grades=g.grades, cur=g.current, cells=g.cells||{};
+  const prev=D.prev_diagnose;
+  const pz=prev&&typeof prev.prev_z==='number'?prev.prev_z:null;
+  const pg=prev&&typeof prev.prev_g==='number'?prev.prev_g:null;
+  const hasPrev=pz!==null&&!(pz===cur.z&&pg===cur.g);
   let h='<div class="mg-cell mg-head"></div>';
   zones.forEach((z,zi)=>{h+=`<div class="mg-cell mg-head ${zi===cur.z?'current-col':''}">${z}</div>`});
   grades.forEach((gr,gi)=>{
@@ -366,32 +370,34 @@ function renderMatrix(){
       const key=zi+'_'+gi;
       const c=cells[key]||{n:0,hits:0};
       const isCur=(zi===cur.z&&gi===cur.g);
-      let cls='empty',num='·',sub='0样本';
-      if(c.n>0){
-        const rate=c.hits/c.n;
-        cls=rate>=0.6?'good':rate>=0.4?'mid':'poor';
-        num=`${c.hits}/${c.n}`;
-        sub=(rate*100).toFixed(0)+'%';
-      }
-      h+=`<div class="mg-cell ${cls} ${isCur?'current':''}" ${c.n>0?`onclick="showCell(${zi},${gi})" style="cursor:pointer"`:''}>
-        <div class="mg-num">${num}</div><div class="mg-sub">${sub}</div>
-        ${c.risk?'<span style="position:absolute;top:2px;right:3px;color:#f85149;font-size:8px">⚠</span>':''}
+      const isPrev=(hasPrev&&zi===pz&&gi===pg);
+      let style='background:#161b22;';
+      if(isCur)style='background:#1f6feb22;border:2px solid #58a6ff;';
+      else if(isPrev)style='background:#d2992215;border:1.5px dashed #d29922;';
+      h+=`<div class="mg-cell" style="${style}cursor:pointer;position:relative" onclick="showCell(${zi},${gi})">
+        ${isPrev?'<span style="position:absolute;top:2px;left:3px;color:#d29922;font-size:9px">◐上次</span>':''}
+        <div class="mg-sub" style="color:#484f58">${c.n>0?'本票'+c.n+'次':''}</div>
       </div>`;
     });
   });
   document.getElementById('mg-grid').innerHTML=h;
   const za=document.getElementById('zone-arrow');
   if(za&&D.view_state)za.style.marginLeft=(100*(D.view_state.current_idx+0.5)/zones.length)+'%';
+  getScripts().then(s=>showCell(cur.z,cur.g));
 }
 function showCell(zi,gi){
   const g=D.matrix_grid, key=zi+'_'+gi, c=(g.cells||{})[key];
-  if(!c)return;
   const el=document.getElementById('fu-detail');el.style.display='block';
-  el.innerHTML=`<div class="detail-title">${g.zones[zi]} × ${g.grades[gi]}</div>
-    <div class="detail-sub">格子历史统计</div>
-    <div class="detail-section"><table><tr><th>验证次数</th><th>命中</th><th>命中率</th><th>平均次日涨跌</th></tr>
-    <tr><td>${c.n}</td><td>${c.hits}</td><td>${c.n?(c.hits/c.n*100).toFixed(0)+'%':'--'}</td><td>${c.avg?c.avg.toFixed(2)+'%':'--'}</td></tr></table></div>
-    ${c.days?`<div class="detail-section"><h4>明细</h4>${c.days.map(d=>`<div class="var-row"><span class="var-name">${d.date}</span><span>${d.pred} vs ${d.actual}</span><span class="var-evi">${d.hit}</span></div>`).join('')}</div>`:''}`;
+  const cur=g.current;
+  const isCur=(zi===cur.z&&gi===cur.g);
+  const prev=D.prev_diagnose;
+  const isPrev=prev&&typeof prev.prev_z==='number'&&zi===prev.prev_z&&gi===prev.prev_g;
+  getScripts().then(s=>{
+    const script=(s.scripts||{})[key]||'';
+    el.innerHTML=`<div class="detail-title">${g.zones[zi]} × ${g.grades[gi]}${isCur?' <span style="color:#58a6ff">★ 当前位置</span>':''}${isPrev?' <span style="color:#d29922">◐ 上次位置</span>':''}</div>
+      ${script?`<div class="detail-section"><h4>组合剧本</h4><div class="formula" style="font-size:13px;line-height:1.7">${script}</div></div>`:''}
+      ${c&&c.n>0?`<div class="detail-section"><h4>本票在此格足迹</h4>${c.days.filter(d=>typeof d==='object').map(d=>`<div class="var-row"><span class="var-name">${d.date}</span><span>${d.pred} vs ${d.actual}</span><span class="var-evi">${d.hit}</span></div>`).join('')}</div>`:''}`;
+  });
   el.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
