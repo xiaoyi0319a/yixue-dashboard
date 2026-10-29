@@ -374,16 +374,17 @@ function renderMatrix(){
       let style='background:#161b22;';
       if(isCur)style='background:#1f6feb22;border:2px solid #58a6ff;';
       else if(isPrev)style='background:#d2992215;border:1.5px dashed #d29922;';
-      h+=`<div class="mg-cell" style="${style}cursor:pointer;position:relative" onclick="showCell(${zi},${gi})">
+      h+=`<div class="mg-cell" style="${style}cursor:pointer;position:relative;overflow:hidden" onclick="showCell(${zi},${gi})">
         ${isPrev?'<span style="position:absolute;top:2px;left:3px;color:#d29922;font-size:9px">◐上次</span>':''}
-        <div class="mg-sub" style="color:#484f58">${c.n>0?'本票'+c.n+'次':''}</div>
+        <div class="mg-script" style="font-size:11px;line-height:1.35;color:${isCur?'#58a6ff':'#8b949e'};padding:4px 5px;word-break:break-all">${(SCRIPT_CACHE&&SCRIPT_CACHE.shorts||{})[key]||''}</div>
+        ${c.n>0?`<div class="mg-sub" style="position:absolute;bottom:2px;right:4px;color:#484f58;font-size:9px">本票${c.n}次</div>`:''}
       </div>`;
     });
   });
   document.getElementById('mg-grid').innerHTML=h;
   const za=document.getElementById('zone-arrow');
   if(za&&D.view_state)za.style.marginLeft=(100*(D.view_state.current_idx+0.5)/zones.length)+'%';
-  getScripts().then(s=>showCell(cur.z,cur.g));
+  getScripts().then(s=>{SCRIPT_CACHE=s;renderMatrix();});
 }
 function showCell(zi,gi){
   const g=D.matrix_grid, key=zi+'_'+gi, c=(g.cells||{})[key];
