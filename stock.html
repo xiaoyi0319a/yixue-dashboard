@@ -157,11 +157,13 @@ td{color:#c9d1d9}
 
 <div class="header">
   <h1>个股诊断看板</h1>
-  <div id="archiveBar" style="display:flex;gap:8px;align-items:center;font-size:13px;flex-wrap:wrap">
-    <span style="color:#8b949e;font-size:12px">诊断档案：</span>
-    <span id="stockTabs" style="display:flex;gap:4px;flex-wrap:wrap"></span>
-    <select id="dateSel" onchange="onDateChange()" style="background:#0d1117;border:1px solid #30363d;border-radius:6px;color:#c9d1d9;font-size:12px;padding:4px 8px;font-family:inherit"></select>
-    <span style="color:#58a6ff;font-size:11px">📱 新诊断：在kimi-claw对话发送「诊断 300142」</span>
+  <div id="archiveBar" style="position:relative;display:flex;gap:8px;align-items:center;font-size:13px;flex-wrap:wrap">
+    <input id="searchBox" placeholder="输入代码/名称定位…" oninput="onSearchInput()" onkeydown="if(event.key==='Enter')jumpSearch()" style="background:#0d1117;border:1px solid #30363d;border-radius:6px;color:#f0f6fc;font-size:13px;padding:5px 10px;width:150px;font-family:inherit">
+    <button onclick="toggleList()" style="background:#21262d;border:1px solid #30363d;border-radius:6px;color:#c9d1d9;font-size:12px;padding:5px 12px;cursor:pointer;font-family:inherit">▼ 档案 <span id="stockCount">0</span></button>
+    <span id="curStock" style="color:#58a6ff;font-weight:600"></span>
+    <span style="color:#8b949e;font-size:11px">📱 新诊断：kimi-claw对话发送「诊断 300142」</span>
+    <div id="searchDrop" style="display:none;position:absolute;top:34px;left:60px;background:#161b22;border:1px solid #30363d;border-radius:6px;z-index:99;min-width:240px;max-height:300px;overflow-y:auto"></div>
+    <div id="stockListPanel" style="display:none;position:absolute;top:34px;left:210px;background:#161b22;border:1px solid #30363d;border-radius:6px;z-index:99;min-width:320px;max-height:400px;overflow-y:auto"></div>
   </div>
   <span class="stock" id="h-stock">300142 沃森生物</span>
   <span class="date" id="h-date">--</span>
@@ -282,27 +284,54 @@ function diagStatus(t){document.getElementById('diagStatus').textContent=t}
 function loadSwitcher(){
  fetch('data/diagnoses_index.json?t='+Date.now()).then(r=>r.json()).then(idx=>{
   IDX=idx;
-  const tabs=document.getElementById('stockTabs');
-  tabs.innerHTML=idx.stocks.map(s=>`<button onclick="selectStock('${s.code}')" style="background:${s.code===CUR.code?'#238636':'#21262d'};border:1px solid #30363d;border-radius:12px;color:#c9d1d9;font-size:12px;padding:3px 10px;cursor:pointer;font-family:inherit" title="${s.name}">${s.name}</button>`).join('');
-  fillDates();
+  document.getElementById('stockCount').textContent=idx.stocks.length;
+  fillListPanel();
  }).catch(()=>{});
 }
-function fillDates(){
- const s=IDX.stocks.find(x=>x.code===CUR.code); if(!s)return;
- const sel=document.getElementById('dateSel');
- sel.innerHTML='<option value="latest">最新（'+s.last_date+'）</option>'+s.dates.slice().reverse().map(d=>`<option value="${d}">${d.slice(0,4)}-${d.slice(4,6)}-${d.slice(6,8)}</option>`).join('');
- sel.value=CUR.dateSel||'latest';
+function stockRow(s){
+ const z=s.last_zone||'';
+ return `<div onclick="selectStock('${s.code}')" style="padding:8px 12px;cursor:pointer;border-bottom:1px solid #21262d;display:flex;justify-content:space-between;gap:10px" onmouseover="this.style.background='#1c2129'" onmouseout="this.style.background=''"><span><b style="color:#58a6ff">${s.code}</b> ${s.name}</span><span style="color:#8b949e;font-size:11px">${s.last_date||''}${z?' · '+z:''}</span></div>`;
 }
-function onDateChange(){CUR.dateSel=document.getElementById('dateSel').value;loadFor(CUR.code)}
-function selectStock(code){CUR.code=code;CUR.dateSel='latest';loadFor(code)}
+function fillListPanel(){
+ const p=document.getElementById('stockListPanel');
+ const sorted=IDX.stocks.slice().sort((a,b)=>(b.last_date||'').localeCompare(a.last_date||''));
+ p.innerHTML=sorted.map(stockRow).join('')||'<div style="padding:12px;color:#8b949e">暂无档案</div>';
+}
+function toggleList(){
+ const p=document.getElementById('stockListPanel');
+ const d=document.getElementById('searchDrop');
+ d.style.display='none';
+ p.style.display=p.style.display==='none'?'block':'none';
+}
+function onSearchInput(){
+ const q=document.getElementById('searchBox').value.trim();
+ const d=document.getElementById('searchDrop');
+ const p=document.getElementById('stockListPanel');
+ if(!q){d.style.display='none';return}
+ p.style.display='none';
+ const hits=IDX.stocks.filter(s=>s.code.includes(q)||(s.name||'').includes(q));
+ if(!hits.length){d.innerHTML='<div style="padding:10px 12px;color:#8b949e">无档案——对话发送「诊断 '+q+'」</div>';d.style.display='block';return}
+ d.innerHTML=hits.slice(0,8).map(stockRow).join('');
+ d.style.display='block';
+}
+function jumpSearch(){
+ const q=document.getElementById('searchBox').value.trim();
+ if(!q)return;
+ const s=IDX.stocks.find(s=>s.code===q||s.name===q);
+ document.getElementById('searchDrop').style.display='none';
+ if(s){selectStock(s.code)}
+ else diagStatus('无「'+q+'」档案——对话发送「诊断 '+q+'」');
+}
+document.addEventListener('click',e=>{
+ if(!e.target.closest('#archiveBar')){document.getElementById('searchDrop').style.display='none';document.getElementById('stockListPanel').style.display='none'}
+});
+function selectStock(code){CUR.code=code;document.getElementById('stockListPanel').style.display='none';document.getElementById('searchDrop').style.display='none';loadFor(code)}
 function loadFor(code){
- const s=IDX.stocks.find(x=>x.code===code);
- const isArchive=CUR.dateSel&&CUR.dateSel!=='latest'&&CUR.dateSel;
- const u='data/diagnose_'+code+(isArchive?('_'+CUR.dateSel):'')+'.json';
- fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;renderAll();if(isArchive)diagStatus('📋 历史版本 '+CUR.dateSel)}).catch(()=>{document.getElementById('h-date').textContent='暂无数据'});
+ const u='data/diagnose_'+code+'.json';
+ fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;renderAll();const s=IDX.stocks.find(x=>x.code===code);document.getElementById('curStock').textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{document.getElementById('h-date').textContent='暂无数据'});
 }
-function load(){IDX={stocks:[]};CUR={code:'300142',dateSel:'latest'};loadSwitcher();loadFor(CUR.code);setInterval(loadSwitcher,300000)}
-let IDX={stocks:[]},CUR={code:'300142',dateSel:'latest'};
+function load(){IDX={stocks:[]};CUR={code:'300142'};loadSwitcher();loadFor(CUR.code);setInterval(loadSwitcher,300000)}
+let IDX={stocks:[]},CUR={code:'300142'};
 function showView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v))}
 
 function renderAll(){
