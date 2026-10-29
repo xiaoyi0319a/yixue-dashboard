@@ -376,6 +376,7 @@ function renderMatrix(){
   if(za&&D.view_state)za.style.marginLeft=(100*(D.view_state.current_idx+0.5)/zones.length)+'%';
   showCell(cur.z,cur.g);
 }
+function showCell(zi,gi){
   const g=D.matrix_grid, key=zi+'_'+gi, c=(g.cells||{})[key];
   const el=document.getElementById('fu-detail');el.style.display='block';
   const cur=g.current;
