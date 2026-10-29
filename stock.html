@@ -157,6 +157,9 @@ td{color:#c9d1d9}
 
 <div class="header">
   <h1>个股诊断看板</h1>
+  <input id="codeInput" maxlength="6" inputmode="numeric" placeholder="输入6位代码" style="background:#0d1117;border:1px solid #30363d;border-radius:6px;color:#f0f6fc;font-size:13px;padding:5px 10px;width:110px;font-family:inherit">
+  <button onclick="diagnose()" style="background:#238636;border:none;border-radius:6px;color:#fff;font-size:13px;padding:6px 14px;cursor:pointer;font-family:inherit">点播诊断</button>
+  <span id="diagStatus" style="font-size:12px;color:#8b949e"></span>
   <span class="stock" id="h-stock">300142 沃森生物</span>
   <span class="date" id="h-date">--</span>
   <span class="version" id="h-ver">--</span>
@@ -261,14 +264,43 @@ td{color:#c9d1d9}
 <script>
 const DATA_URL='data/stock_pipeline_latest.json';
 let D=null;
-function load(){fetch(DATA_URL+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;renderAll()}).catch(()=>{document.getElementById('h-date').textContent='暂无数据'})}
+const GW='http://82.157.160.25:8321',GW_TOKEN='2c9db1f7a3e84f5db6a017c3e8d2541c';
+function diagnose(){
+ const c=document.getElementById('codeInput').value.trim();
+ if(!/^\d{6}$/.test(c)){diagStatus('⚠️ 请输入6位数字代码');return}
+ diagStatus('提交中…');
+ fetch(GW+'/diagnose',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:c,token:GW_TOKEN})})
+ .then(r=>r.json()).then(j=>{
+  if(j.ok){diagStatus('✅ 诊断任务已注入——结果将推送至kimi-claw对话（约5-15分钟），完成后此页自动刷新');setTimeout(()=>{loadFor(c)},300000)}
+  else diagStatus('❌ '+({429:'太频繁，请稍后再试',503:'已有诊断进行中',403:'鉴权失败',400:'代码格式错误'}[j.error]||j.error||'提交失败'))
+ }).catch(()=>diagStatus('❌ 网关不可达——请确认网络或联系管理员'));
+}
+function diagStatus(t){document.getElementById('diagStatus').textContent=t}
+function loadFor(code){
+ const u=code?('data/diagnose_'+code+'.json'):DATA_URL;
+ fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;renderAll();if(code&&d.generated)diagStatus('✅ 已加载 '+code+' 诊断数据 '+d.generated)}).catch(()=>{document.getElementById('h-date').textContent='暂无数据'})
+}
+function load(){loadFor(null)}
 function showView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v))}
 
 function renderAll(){
   document.getElementById('h-stock').textContent=D.stock||'300142';
   document.getElementById('h-date').textContent=D.date||'--';
   document.getElementById('h-ver').textContent=D.version||'';
-  renderMatrix();renderLayers();renderGene();renderState();renderDaily();
+  renderMatrix();renderLayers();renderGene();renderState();renderDaily();renderCompare();
+}
+function renderCompare(){
+  const bar=document.getElementById('compareBar');
+  const p=D.prev_diagnose;
+  if(!p){bar.style.display='none';return}
+  bar.style.display='block';
+  const item=(label,o)=>{
+    if(!o)return'';
+    const c=o.changed;
+    return `<span style="margin-right:18px">${label}：<b style="color:${c?'#d29922':'#8b949e'}">${o.prev} → ${o.current}${c?' 🆕':''}</b></span>`;
+  };
+  const inds=(p.indicators||[]).filter(i=>i.changed).map(i=>`<span style="margin-right:12px;color:#d29922">${i.name} ${i.prev}→${i.current}（${i.delta}）</span>`).join('');
+  bar.innerHTML=`<span style="color:#58a6ff;font-weight:700;margin-right:14px">对比上次诊断（${p.days_ago}天前 @${p.date}）</span>${item('区间定位',p.zone)}${item('翻倍基因',p.gene)}${item('力量定级',p.grade)}${inds}${p.summary?`<div style="margin-top:6px;color:#8b949e">${p.summary}</div>`:''}`;
 }
 
 /* ===== 核心：立体矩阵格网图 ===== */
