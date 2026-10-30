@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>交易心电图 · 3个月审计</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#0d1117;color:#c9d1d9;padding:16px;max-width:860px;margin:0 auto}
+h1{font-size:19px;color:#f0f6fc;margin-bottom:2px}
+.sub{font-size:12px;color:#8b949e;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.stat{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px;text-align:center}
+.stat .n{font-size:22px;font-weight:800}
+.stat .l{font-size:11px;color:#8b949e;margin-top:2px}
+.neg{color:#f85149}.pos{color:#3fb950}.warn{color:#d29922}
+.chart-box{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;margin-bottom:14px}
+.chart-box h3{font-size:13px;color:#f0f6fc;margin-bottom:10px}
+.chart-box .note{font-size:11px;color:#8b949e;margin-top:8px;line-height:1.7}
+canvas{max-height:260px}
+.rule{background:rgba(210,153,34,.07);border:1px solid rgba(210,153,34,.25);border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:12px;line-height:2}
+.rule b{color:#d29922}
+</style>
+</head>
+<body>
+<h1>交易心电图</h1>
+<div class="sub">2026-07-23 ~ 10-30 ｜ 129笔已平仓 ｜ 每月底更新</div>
+
+<div class="cards">
+  <div class="stat"><div class="n neg" id="c-total">--</div><div class="l">已实现盈亏</div></div>
+  <div class="stat"><div class="n" id="c-wr">--</div><div class="l">胜率</div></div>
+  <div class="stat"><div class="n neg">9月</div><div class="l warn">深渊月 -48,525</div></div>
+  <div class="stat"><div class="n pos" id="c-win30">--</div><div class="l">>30天长持均盈</div></div>
+  <div class="stat"><div class="n neg" id="c-loss30">--</div><div class="l">16-30天死扛均亏</div></div>
+</div>
+
+<div class="rule"><b>三条铁律（审计产物）</b><br>① 一口回到5万（盲目加的40%退回去）<br>② 月交易≤15笔（9月55笔=每天2.5笔，失控）<br>③ DIF&lt;-50深水区，底分型信号不执行（接飞刀信号）</div>
+
+<div class="chart-box"><h3>① 净值曲线 —— 连亏的坡度一眼可见</h3><canvas id="eq"></canvas>
+<div class="note">9月的下坡 = 频率55笔×胜率25.5%。坡度最陡处就是你自审的"仓位没降+脑子发热"叠加区。</div></div>
+
+<div class="chart-box"><h3>② 逐笔心电图 —— 持有天数 vs 盈亏%</h3><canvas id="sc"></canvas>
+<div class="note">右上的绿色孤岛（&gt;30天）是有理由的长持，+66%胜率。中间红色沼泽是7-15天的"不止损死扛"。<b>区别只有一刀：买入理由还在不在。</b></div></div>
+
+<div class="chart-box"><h3>③ 月度胜率×笔数 —— 9月的死亡组合</h3><canvas id="mo"></canvas>
+<div class="note">25.5%胜率+55笔=月亏4.85万的算术。行情差不是不做的理由，是<b>减频率的理由</b>。</div></div>
+
+<div class="chart-box"><h3>④ 出血点TOP8 / 盈利TOP5</h3><canvas id="st"></canvas>
+<div class="note">微芯-32,717是"没止损"的账；聆达/梦天/沃森是信号失效期的正常成本。<b>前者体系外，后者体系内</b>——体系内的亏该认，体系外的亏该断。</div></div>
+
+<script>
+fetch('data/audit_20261030.json?t='+Date.now()).then(r=>r.json()).then(D=>{
+document.getElementById('c-total').textContent=(D.total/10000).toFixed(1)+'万';
+document.getElementById('c-wr').textContent=D.win_rate+'%';
+document.getElementById('c-win30').textContent='+'+D.win30.toLocaleString();
+document.getElementById('c-loss30').textContent=D.loss30.toLocaleString();
+const C={grid:{color:'#21262d'},ticks:{color:'#8b949e',font:{size:10}}};
+const TT={backgroundColor:'#161b22',borderColor:'#30363d',borderWidth:1,titleColor:'#f0f6fc',bodyColor:'#c9d1d9',font:{size:11}};
+
+new Chart(eq,{type:'line',data:{labels:D.equity.map(p=>p.d),datasets:[{data:D.equity.map(p=>p.v),borderColor:'#f85149',borderWidth:2,pointRadius:0,fill:true,backgroundColor:'rgba(248,81,73,.08)',tension:.3}]},options:{plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>'累计 '+c.parsed.y.toLocaleString()+' 元'}}},scales:{x:{...C,ticks:{...C.ticks,maxTicksLimit:10}},y:C}}});
+
+new Chart(sc,{type:'scatter',data:{datasets:[
+ {label:'盈利',data:D.scatter.filter(p=>p.win),backgroundColor:'#3fb95099',pointRadius:5},
+ {label:'亏损',data:D.scatter.filter(p=>!p.win),backgroundColor:'#f8514999',pointRadius:5}]},
+ options:{plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{...TT,callbacks:{label:c=>`${c.raw.n} ${c.raw.d} 持有${c.raw.x}天 ${c.raw.y>0?'+':''}${c.raw.y}%`}}}},
+ scales:{x:{...C,title:{display:true,text:'持有天数',color:'#8b949e',font:{size:10}}},y:{...C,title:{display:true,text:'盈亏%',color:'#8b949e',font:{size:10}}}}}});
+
+new Chart(mo,{data:{labels:D.monthly.map(m=>m.month),datasets:[
+ {type:'bar',label:'月盈亏(元)',data:D.monthly.map(m=>m.盈亏),backgroundColor:D.monthly.map(m=>m.盈亏<0?'#f85149aa':'#3fb950aa'),yAxisID:'y'},
+ {type:'line',label:'胜率%',data:D.monthly.map(m=>m.胜率),borderColor:'#d29922',yAxisID:'y1',pointBackgroundColor:'#d29922'}]},
+ options:{plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:TT},
+ scales:{x:C,y:{...C,position:'left'},y1:{...C,position:'right',min:0,max:60,grid:{display:false}}}}});
+
+const all=[...D.tops.map(t=>({...t,c:'#f85149aa'})),...D.topw.slice().reverse().map(t=>({...t,c:'#3fb950aa'}))];
+new Chart(st,{type:'bar',data:{labels:all.map(s=>s.n),datasets:[{data:all.map(s=>s.v),backgroundColor:all.map(s=>s.c)}]},
+ options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>c.parsed.x.toLocaleString()+' 元'}}},scales:{x:{...C,ticks:{...C.ticks,callback:v=>(v/1000)+'k'}},y:{...C,ticks:{...C.ticks,font:{size:10}}}}}});
+});
+</script>
+</body>
+</html>
