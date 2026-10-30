@@ -210,23 +210,7 @@ td{color:#c9d1d9}
     </div>
   </div>
 
-  <div class="fusion-out">
-    <div class="fusion-out-title">合成输出 → 次日预判</div>
-    <div class="fusion-grid">
-      <div class="fusion-item"><div class="k">方向定级</div><div class="v" id="fu-dir">--</div></div>
-      <div class="fusion-item"><div class="k">置信度</div><div class="v warn" id="fu-conf">--</div></div>
-      <div class="fusion-item"><div class="k">形态</div><div class="v" id="fu-form">--</div></div>
-      <div class="fusion-item"><div class="k">对账</div><div class="v" id="fu-hit">--</div></div>
-    </div>
-    <div class="fusion-verdict" id="fu-verdict">--</div>
-  </div>
-
   <div class="detail" id="fu-detail" style="display:none"></div>
-
-  <div style="margin-top:14px">
-    <div class="section-label">历史对账（每次验证点亮一格）</div>
-    <table><thead><tr><th>日期</th><th>信号(v₀×a×q)</th><th>预测</th><th>实际</th><th>判定</th><th>所在格</th></tr></thead><tbody id="fu-history"></tbody></table>
-  </div>
 
   <div class="todo"><div class="todo-title">⚠ V0.1 已知不完整处</div><ul class="todo-list" id="fu-todo"></ul></div>
 </div>
@@ -264,6 +248,24 @@ td{color:#c9d1d9}
     <div class="detail-sub" id="dd-sub">--</div>
     <div id="dd-body"></div>
   </div>
+
+  <div class="fusion-out" style="margin-top:14px">
+    <div class="fusion-out-title">合成输出 → 次日预判结论</div>
+    <div class="fusion-grid">
+      <div class="fusion-item"><div class="k">方向定级</div><div class="v" id="fu-dir">--</div></div>
+      <div class="fusion-item"><div class="k">置信度</div><div class="v warn" id="fu-conf">--</div></div>
+      <div class="fusion-item"><div class="k">形态</div><div class="v" id="fu-form">--</div></div>
+      <div class="fusion-item"><div class="k">对账</div><div class="v" id="fu-hit">--</div></div>
+    </div>
+    <div class="fusion-verdict" id="fu-verdict">--</div>
+  </div>
+
+  <div style="margin-top:14px">
+    <div class="section-label">历史对账（每次验证点亮一格）</div>
+    <table><thead><tr><th>日期</th><th>信号(v₀×a×q)</th><th>预测</th><th>实际</th><th>判定</th><th>所在格</th></tr></thead><tbody id="fu-history"></tbody></table>
+  </div>
+
+  <div class="todo"><div class="todo-title">⚠ 跟踪待办</div><ul class="todo-list" id="fu-todo"></ul></div>
 </div>
 
 <script>
