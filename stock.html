@@ -446,7 +446,7 @@ function renderGene(){
   document.getElementById('gene-summary').innerHTML=`
     <div class="gene-stat"><div class="num lit">${g.total_lit}</div><div class="lbl">已点亮</div></div>
     <div class="gene-stat"><div class="num part">${g.total_partial}</div><div class="lbl">半亮</div></div>
-    <div class="gene-stat"><div class="num none">${g.total_vars-g.total_lit-g.total_partial}</div><div class="lbl">未点亮</div></div>
+    <div class="gene-stat"><div class="num none">${(g.total_vars||0)-g.total_lit-g.total_partial}</div><div class="lbl">未点亮</div></div>
     <div class="gene-stat"><div class="num" style="color:#bc8cff;font-size:16px">${g.top_pattern||'--'}</div><div class="lbl">最接近模式</div></div>`;
   document.getElementById('gene-patterns').innerHTML=(g.patterns||[]).map(p=>{
     const pct=Math.round(p.lit_vars/p.total_vars*100);
