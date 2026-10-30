@@ -35,6 +35,30 @@
       "last_zone": "退潮",
       "last_gene": "模式5景气共振+模式3技术概念",
       "last_grade": "偏弱"
+    },
+    {
+      "code": "300908",
+      "name": "仲景食品",
+      "last_date": "2026-10-30",
+      "count": 1,
+      "dates": [
+        "20261030"
+      ],
+      "last_zone": "横盘整理",
+      "last_gene": "模式5景气共振(弱)",
+      "last_grade": "中性偏强"
+    },
+    {
+      "code": "300770",
+      "name": "新媒股份",
+      "last_date": "2026-10-30",
+      "count": 1,
+      "dates": [
+        "20261030"
+      ],
+      "last_zone": "横盘整理",
+      "last_gene": "模式5景气共振(弱,类债现金牛)",
+      "last_grade": "偏弱"
     }
   ]
 }
