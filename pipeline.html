@@ -357,6 +357,15 @@ qimen: {
       ${clStr?`<p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道说明：</b>${clStr}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`:`<p class="note">明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`}`;
     }
     /* fallback：旧版对象数组格式时前端计算 */
+    /* 10-29起：layer_synthesis为对象且含formula → 直接展示预测端公式（与string分支同逻辑，避免前端重算层归属不一致） */
+    const lsObj=(d.qimen&&d.qimen.layer_synthesis);
+    if(typeof lsObj==='object'&&lsObj!==null&&lsObj.formula){
+      const clRaw2=(d.qimen&&d.qimen.channel_legend);
+      const clStr2=(typeof clRaw2==='string')?clRaw2:'';
+      const fn2=(d.qimen&&d.qimen.formula_note)||'';
+      return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：\n${lsObj.formula}\n─────────────────\n→ 表2-D → 奇门a（映射压缩在融合节点①）</div>
+      ${clStr2?`<p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道说明：</b>${clStr2}<br>${fn2}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`:`<p class="note">明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`}`;
+    }
     const YL={'日干':'核心','时干':'核心','值符':'核心','值使门':'核心','值使':'核心','庚':'力量','乙奇':'力量','戊':'力量','生门':'力量','开门':'力量','景门':'衍生','九天':'衍生','九地':'衍生','天蓬':'衍生','玄武':'衍生'};
     /* layer_coef：10-29起预测端输出字符串"核心1.5/力量1.0/衍生0.5（...）" → 正则提取为对象 */
     let LC=(d.qimen&&d.qimen.layer_coef);
