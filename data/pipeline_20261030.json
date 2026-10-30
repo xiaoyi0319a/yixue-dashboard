@@ -894,7 +894,8 @@
     "body_grade": "微偏阴",
     "amplitude_grade": "中档",
     "three_value_label": "−1~+1小幅震荡区",
-    "note": "缺口×实体×振幅×路径合成；无方向日降级合成（骨架V1.0，只标注不改定级）"
+    "note": "缺口×实体×振幅×路径合成；无方向日降级合成（骨架V1.0，只标注不改定级）",
+    "close_label": "小幅震荡区（−1~+1小幅震荡区）"
   },
   "flip": {
     "direction": "bear段→fading确认后向上",
