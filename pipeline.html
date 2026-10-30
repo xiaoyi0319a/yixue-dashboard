@@ -358,7 +358,13 @@ qimen: {
     }
     /* fallback：旧版对象数组格式时前端计算 */
     const YL={'日干':'核心','时干':'核心','值符':'核心','值使门':'核心','值使':'核心','庚':'力量','乙奇':'力量','戊':'力量','生门':'力量','开门':'力量','景门':'衍生','九天':'衍生','九地':'衍生','天蓬':'衍生','玄武':'衍生'};
-    const LC=(d.qimen&&d.qimen.layer_coef)||{'核心':1.5,'力量':1.0,'衍生':0.5};
+    /* layer_coef：10-29起预测端输出字符串"核心1.5/力量1.0/衍生0.5（...）" → 正则提取为对象 */
+    let LC=(d.qimen&&d.qimen.layer_coef);
+    if(typeof LC==='string'){
+      const m1=LC.match(/核心([\d.]+)/),m2=LC.match(/力量([\d.]+)/),m3=LC.match(/衍生([\d.]+)/);
+      LC={'核心':m1?parseFloat(m1[1]):1.5,'力量':m2?parseFloat(m2[1]):1.0,'衍生':m3?parseFloat(m3[1]):0.5};
+    }
+    if(!LC) LC={'核心':1.5,'力量':1.0,'衍生':0.5};
     const layerOf=s=>{const c=(s.cell||'').split('×')[0].trim();return YL[c]||null;};
     const num=v=>{const n=parseFloat(v);return isNaN(n)?0:n;};
     const all=[...(q.attack_plus_signals||[]).map(s=>typeof s==='string'?{g:s,cell:(s.match(/^[A-Z]\d+(.+?)×/)||[])[1]||'',base:parseFloat((s.match(/(\d+(?:\.\d+)?)$/)||[])[1])||0,ch:'攻多',color:'#3fb950'}:{...s,ch:'攻多',color:'#3fb950'}),
@@ -374,8 +380,23 @@ qimen: {
     const term=(ch,ly,v)=>v?`${LC[ly]}×${ly}(${expand(ch,ly)}=${v})`:'';
     const formula=ch=>{const o=ch==='攻多'?ap:ch==='攻空'?am:st;
       return [term(ch,'核心',o.c),term(ch,'力量',o.f),term(ch,'衍生',o.d)].filter(Boolean).join(' + ')||'0';};
+    /* channel_legend：字符串格式"攻多=xxx/攻空=xxx/结构=xxx" → 按/分割解析 */
     const clRaw=(d.qimen&&d.qimen.channel_legend);
-    const cl=(typeof clRaw==='object'&&clRaw!==null)?clRaw:{攻多:typeof clRaw==='string'?clRaw:'—',攻空:'',结构:''};
+    let cl;
+    if(typeof clRaw==='object'&&clRaw!==null){
+      cl=clRaw;
+    }else if(typeof clRaw==='string'){
+      cl={攻多:'',攻空:'',结构:''};
+      clRaw.split('/').forEach(p=>{
+        const eq=p.indexOf('=');
+        if(eq>0){
+          const k=p.slice(0,eq).trim(),v=p.slice(eq+1).trim();
+          if(k==='攻多')cl.攻多=v;else if(k==='攻空')cl.攻空=v;else if(k==='结构')cl.结构=v;
+        }
+      });
+    }else{
+      cl={攻多:'—',攻空:'—',结构:'—'};
+    }
   const fn=(d.qimen&&d.qimen.formula_note)||'';
   return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：
 攻多a_raw = ${formula('攻多')} = ${ap.v>0?'+':''}${ap.v}
