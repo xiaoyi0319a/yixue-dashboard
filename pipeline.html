@@ -207,8 +207,12 @@ qimen: {
       if(md.r) return {c:md.c||md.columns||[], r:md.r};
       const ROWS13=['庚','乙奇','日干','时干','生门','戊','值符','值使门','景门','开门','九天','九地','天蓬'];
       const COLS8=md.columns||['旺/相','休囚/死·废','四害','四喜','凶格临宫','吉格临宫','空亡','得生/受克'];
-      return {c:COLS8, r:ROWS13.map(n=>[n])};
+      /* 第14行「全局」4格列归属：G89伏吟→四害 / G90反吟→凶格临宫 / G91马星动→四喜 / G92空亡集中→空亡 */
+      const GLOB_ROW=['全局','','','G89伏吟','G91马星动','G90反吟','','G92空亡集中',''];
+      return {c:COLS8, r:[...ROWS13.map(n=>[n]), GLOB_ROW]};
     })();
+    /* 全局行4格列归属（与GLOB_ROW定义一致） */
+    const GLOB_MAP={'伏吟':'四害','反吟':'凶格临宫','马星动':'四喜','空亡集中':'空亡'};
     const colMap=st=>{
       if(/四害|门迫|击刑|入墓/.test(st))return '四害';
       if(/四喜|门生|临禄|通气|实支/.test(st))return '四喜';
@@ -276,19 +280,18 @@ qimen: {
         const parts=rawCell.split('×');
         if(parts.length>=2){
           const ys=parts[0].trim(),col=colMap(parts[1]||'');
-          if(ys==='全局'){globalFromDrop.push(m);return;}
-          if(ys&&col&&MV1ROWS.indexOf(ys)>=0){litMap[ys+'|'+col]={...m,state:m.state||'●'};return;}
+          if(ys==='全局'){const gcol=GLOB_MAP[(parts[1]||'').trim()];if(gcol)litMap['全局|'+gcol]={...m,state:m.state||'●'};else globalFromDrop.push(m);return;}
         }
       }
       const rawCell=(m.cell||'').replace(/^(G|A)\d+\s*/,'');
       const parts=rawCell.split('×');
       if(parts.length<2){unmapped.push(m);return;}
       const ys=parts[0].trim(), col=colMap(parts[1]||'');
-      if(ys==='全局'){globalFromDrop.push(m);return;}
+      if(ys==='全局'){const gcol=GLOB_MAP[(parts[1]||'').trim()];if(gcol)litMap['全局|'+gcol]=m;else globalFromDrop.push(m);return;}
       if(ys&&col&&MV1ROWS.indexOf(ys)>=0)litMap[ys+'|'+col]=m;
       else unmapped.push(m);
     });
-    const mainLit=Object.keys(litMap).length, globLit=globalFromDrop.length, litCnt=mainLit+globLit;
+    const mainLit=Object.keys(litMap).filter(k=>!k.startsWith('全局|')).length, globLit=Object.keys(litMap).filter(k=>k.startsWith('全局|')).length, litCnt=mainLit+globLit;
     const scoreCnt=Object.values(litMap).filter(v=>!v.__observe&&(v.state||'').charAt(0)==='●').length;
     const mmRaw=(d.qimen&&d.qimen.matrix_meta);
     const mm=(typeof mmRaw==='object'&&mmRaw!==null)?mmRaw:{穷举口径:108,说明:(typeof mmRaw==='string'?mmRaw:'13用神×8状态104格+全局行4格')};
@@ -705,6 +708,8 @@ function renderPipeline(d){
 
 /* ==================== 数据加载 ==================== */
 let pipelineData=null;
+/* ⭐schema_version（2026-10-30方案B）：当前前端适配的数据格式版本，预测端格式变更时同步递增 */
+const SCHEMA_VERSION='2.0';
 
 /* ⭐schema 归一化（V3.0-patch16，2026-10-20权威切换配套）——**旧schema→新schema**单向转换：
    权威=预测端V4.0-patch29直写格式（老师裁定"按新的"）；新数据直通，旧归档（≤10-19）转换后渲染 */
@@ -1018,6 +1023,13 @@ async function loadData(){
         <p>请确认 data/pipeline_latest.json 已推送，或联系管理员。</p>`;
       return;
     }
+  }
+  /* ⭐schema_version 检测（2026-10-30方案B）：预测端格式变更感知——版本不匹配时顶部黄色警告条 */
+  if(pipelineData.schema_version&&pipelineData.schema_version!==SCHEMA_VERSION){
+    const warn=document.createElement('div');
+    warn.style.cssText='background:#d29922;color:#0d1117;padding:8px 16px;font-size:13px;font-weight:600;text-align:center';
+    warn.textContent=`⚠️ 数据格式版本不匹配：数据端=${pipelineData.schema_version} / 看板适配=${SCHEMA_VERSION}——计算字段可能显示异常，请同步前端后刷新`;
+    document.body.insertBefore(warn,document.body.firstChild);
   }
   document.getElementById('footer').innerHTML=`预测管线看板 V0.3+patch19（形态合成+翻段预警骨架）｜ 数据日期：${pipelineData.date||'未知'} ｜ 规则版本：MACD融合规则 ${pipelineData.rule_version||'V3.0'}<br>⚠️ 仅为内部规则可视化工具，不构成投资建议`;
   renderPipeline(pipelineData);
