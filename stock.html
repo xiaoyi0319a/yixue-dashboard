@@ -556,12 +556,12 @@ function renderLayers(){
   document.getElementById('lc-L1').innerHTML=
     `<span class=k>原型:</span> <span class=v>${l1.prototype?.match||'--'}</span><br>
      <span class=k>基因:</span> <span class=v>${l1.gene?.pattern||'--'}</span><br>
-     <span class=k>说明:</span> 首诊后填入`;
+     <span class=k>说明:</span> <span class=v>${D.view_state?.note||D.matrix_grid?.note||'--'}</span>`;
   const l2=D.matrix_L2||{};
   const rs=l2.active_risks||[];
   document.getElementById('lc-L2').innerHTML=
     `<span class=k>风险:</span> ${rs.length?rs.map(r=>`<span class="badge risk">${r}</span>`).join(' '):'<span class="badge on">无</span>'}<br>
-     <span class=k>否决:</span> ${(l2.vetoes||[]).join('、')||'无'}`;
+     <span class=k>否决:</span> ${(l2.vetoes||[]).join('、')||'无'}<div style="font-size:9px;color:#484f58;margin-top:3px">否决=一票作废项——ST/财务造假/审计非标/清仓减持/日成交<500万，触发任何一条本诊断作废</div>`;
   const f=D.fusion||{}, v=D.verification;
   const de=document.getElementById('fu-dir');de.textContent=f.direction||'--';
   de.className='v '+(f.direction?.includes('偏强')||f.direction?.includes('偏多')?'pos':f.direction?.includes('偏弱')||f.direction?.includes('偏空')?'neg':'');
