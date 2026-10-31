@@ -200,27 +200,10 @@ td{color:#c9d1d9}
     <div id="timeline-detail" style="display:none;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;margin-top:8px;font-size:12px"></div>
   </div>
 
-  <div class="matrix-explain">
-    <b style="color:#58a6ff">立体矩阵 = 状态地图：横轴定位股票在牛熊循环的位置，纵轴读取当下多空力量，格子是这个组合的剧本。</b><br>
-    横轴 = 区间定位（底部区→退潮，L1状态层）· 纵轴 = 力量定级（偏多→偏空）· <b>点击任意格子看组合剧本</b>（这个位置+这个力量通常讲什么故事、盯什么变量）。<br>
-    蓝框 = 当前位置 · 黄虚线 = 上次诊断位置（仅最近两次足迹）· 格内小字 = 本票在此格的历史足迹。命中率统计已退役（点播制下样本不再积累）。
-  </div>
+  <div class="matrix-grid-wrap" id="mg-grid-wrap" style="display:none"><div class="matrix-grid" id="mg-grid" style="grid-template-columns:80px repeat(5,1fr)"></div></div>
 
-  <div class="mg-legend">
-    <span><span class="mg-dot" style="border:2px solid #58a6ff;background:#1f6feb22"></span>当前位置</span>
-    <span><span class="mg-dot" style="border:1.5px dashed #d29922;background:#d2992215"></span>上次位置</span>
-    <span><span class="mg-dot" style="background:#161b22"></span>其他组合（点击看剧本）</span>
-  </div>
-
-  <div class="matrix-grid-wrap"><div class="matrix-grid" id="mg-grid" style="grid-template-columns:80px repeat(5,1fr)"></div></div>
-
-  <!-- ⭐目标价摘要条（V1.2——矩阵维度合成输出；点击展开/收起三源详情，V1.2-patch2从次日预判移回矩阵） -->
-  <div id="mg-target" style="margin:14px 24px 0;padding:10px 14px;background:#161b22;border:1px solid #30363d;border-radius:8px;font-size:12px;cursor:pointer;display:none" onclick="togglePricing()">
-    <span style="color:#8b949e">加载目标价...</span>
-  </div>
-
-  <!-- ⭐三源目标价详情（矩阵视图内展开，V1.2-patch2） -->
-  <div id="mg-pricing-detail" style="margin:8px 24px 0;display:none">
+<!-- ⭐三源目标价详情（V1.2-patch3——默认直接展开露出，verdict已写核心目标价故删摘要条） -->
+  <div id="mg-pricing-detail" style="margin:12px 24px 0;display:block">
     <div class="card" style="margin-bottom:10px">
       <div class="card-title">🎯 三源目标价</div>
       <div id="mg-tp-sources"></div>
@@ -497,8 +480,7 @@ function renderTargetPrice(){
   const srcEl=document.getElementById('mg-tp-sources');
   const ovEl=document.getElementById('mg-tp-overlap');
   const dvEl=document.getElementById('mg-tp-divergence');
-  const mgEl=document.getElementById('mg-target');
-  if(!tp||!tp.sources||!tp.sources.length){if(mgEl)mgEl.style.display='none';const pd=document.getElementById('mg-pricing-detail');if(pd)pd.style.display='none';return}
+  if(!tp||!tp.sources||!tp.sources.length){const pd=document.getElementById('mg-pricing-detail');if(pd)pd.style.display='none';return}
   const colors=['#58a6ff','#3fb950','#bc8cff'];
   srcEl.innerHTML=tp.sources.map((s,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #21262d;font-size:12px"><span style="min-width:90px;color:${colors[i%3]};font-weight:600">${s.source}</span><span style="min-width:110px;color:#c9d1d9;font-weight:700">${s.range}</span><span style="color:#8b949e;font-size:11px;flex:1">${s.basis}</span></div>`).join('');
   if(tp.overlap_zone){ovEl.style.display='block';ovEl.innerHTML=`✅ 重叠区（核心目标）：<b style="color:#3fb950">${tp.overlap_zone}</b> <span style="color:#8b949e">置信度：${tp.confidence||'--'}</span>`}
@@ -509,12 +491,6 @@ function renderTargetPrice(){
   if(tmEl)tmEl.parentElement.style.display='block';
   const row=(icon,label,txt,color)=>txt?`<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #21262d;font-size:12px"><span>${icon}</span><span style="min-width:70px;color:${color};font-weight:600">${label}</span><span style="color:#c9d1d9;flex:1">${txt}</span></div>`:'';
   tmEl.innerHTML=row('⏱','时机窗口',tm.timing_window,'#58a6ff')+row('💪','力量校验',tm.strength_check,'#3fb950')+row('🚨','尾部预警',tm.tail_risk,'#f85149');
-
-  if(mgEl&&tp.overlap_zone){
-    const tmShort=tm&&tm.timing_window?tm.timing_window.split('（')[0].split('；')[0]:'';
-    mgEl.style.display='block';
-    mgEl.innerHTML=`🎯 <b style="color:#3fb950">核心目标区：${tp.overlap_zone}</b><span style="color:#8b949e;margin:0 10px">｜</span>⏱ ${tmShort}<span style="color:#8b949e;margin:0 10px">｜</span>置信度：${tp.confidence||'--'}<span style="float:right;color:#58a6ff" id="mg-tp-caret">▸ 点击展开三源</span>`;
-  }else if(mgEl){mgEl.style.display='none'}
 }
 
 /* ===== 核心：立体矩阵格网图 ===== */
