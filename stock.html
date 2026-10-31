@@ -124,8 +124,8 @@ td{color:#c9d1d9}
 .zone .zone-range{font-size:9px;margin-top:2px;opacity:.7}
 .zone.current{color:#f0f6fc;border-color:#58a6ff;background:rgba(88,166,255,.1)}
 .zone.passed{color:#3fb950;border-color:rgba(63,185,80,.3)}
-.zone-arrow-wrap{text-align:center;margin-bottom:12px}
-#zone-arrow{display:inline-block;color:#58a6ff;font-size:16px;transition:margin-left .3s}
+.zone-arrow-wrap{position:relative;height:20px;margin-bottom:12px}
+#zone-arrow{position:absolute;left:0;transform:translateX(-50%);color:#58a6ff;font-size:16px;transition:left .3s}
 .transition-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #21262d;font-size:12px}
 .transition-row:last-child{border-bottom:none}
 .transition-arrow{color:#58a6ff;font-weight:700;flex-shrink:0}
@@ -522,7 +522,7 @@ function renderMatrix(){
   });
   document.getElementById('mg-grid').innerHTML=h;
   const za=document.getElementById('zone-arrow');
-  if(za&&D.view_state)za.style.marginLeft=(100*(D.view_state.current_idx+0.5)/zones.length)+'%';
+  if(za&&D.view_state){za.style.left=(100*(D.view_state.current_idx+0.5)/zones.length)+'%';za.style.transform='translateX(-50%)';}
   showCell(cur.z,cur.g);
 }
 function showCell(zi,gi){
