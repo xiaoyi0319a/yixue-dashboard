@@ -64,7 +64,7 @@ new Chart(eq,{type:'line',data:{labels:D.equity.map(p=>p.d),datasets:[{data:D.eq
 new Chart(sc,{type:'scatter',data:{datasets:[
  {label:'盈利',data:D.scatter.filter(p=>p.win),backgroundColor:'#3fb95099',pointRadius:5},
  {label:'亏损',data:D.scatter.filter(p=>!p.win),backgroundColor:'#f8514999',pointRadius:5}]},
- options:{plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{...TT,callbacks:{label:c=>`${c.raw.n} ${c.raw.d} 持有${c.raw.x}天 ${c.raw.y>0?'+':''}${c.raw.y}%`}}}},
+ options:{plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{...TT,callbacks:{label:c=>`${c.raw.n} ${c.raw.d} 持有${c.raw.x}天 ${c.raw.y>0?'+':''}${c.raw.y}%`}}},
  scales:{x:{...C,title:{display:true,text:'持有天数',color:'#8b949e',font:{size:10}}},y:{...C,title:{display:true,text:'盈亏%',color:'#8b949e',font:{size:10}}}}}});
 
 new Chart(mo,{data:{labels:D.monthly.map(m=>m.month),datasets:[
