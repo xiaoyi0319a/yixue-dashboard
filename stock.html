@@ -183,6 +183,14 @@ td{color:#c9d1d9}
 <!-- ============ 视图0: 立体矩阵（核心格网图） ============ -->
 <div class="view active" id="view-fusion">
 
+  <!-- ⭐诊断综合结论（V1.3——四维度独立输出后按逻辑合成，置顶=诊断报告核心） -->
+  <div id="verdict-card" style="margin:16px 24px 0;padding:14px;background:#1c2129;border:1px solid #58a6ff44;border-radius:10px;display:none">
+    <div style="color:#58a6ff;font-weight:700;font-size:13px;margin-bottom:8px">📋 诊断综合结论</div>
+    <div id="verdict-summary" style="color:#c9d1d9;font-size:12px;line-height:1.8"></div>
+    <div id="verdict-dims" style="margin-top:10px;padding-top:10px;border-top:1px solid #30363d"></div>
+    <div id="verdict-risk-track" style="margin-top:10px;font-size:12px"></div>
+  </div>
+
   <!-- ⭐timeline 事件链置顶（V1.2调整：事件链=整个事件的状态脉络[时间维度]，矩阵图=当下状态[空间维度]） -->
   <div id="timeline-section" style="margin:16px 0 0;padding:0 24px">
     <div class="section-label">⏱ 事件链<span style="font-size:10px;color:#484f58;margin-left:8px">点击节点展开四维度判断</span></div>
@@ -368,7 +376,7 @@ function renderAll(){
   document.getElementById('h-stock').textContent=D.stock||'300142';
   document.getElementById('h-date').textContent=D.date||'--';
   document.getElementById('h-ver').textContent=D.version||'';
-  renderMatrix();renderLayers();renderGene();renderState();renderDaily();renderCompare();renderTimeline();renderReport();renderTargetPrice();
+  renderMatrix();renderLayers();renderGene();renderState();renderDaily();renderCompare();renderTimeline();renderReport();renderTargetPrice();renderVerdict();
   getScripts().then(s=>{SCRIPT_CACHE=s;renderMatrix();});
 }
 
@@ -459,6 +467,22 @@ function renderCompare(){
   };
   const inds=(p.indicators||[]).filter(i=>i.changed).map(i=>`<span style="margin-right:12px;color:#d29922">${i.name} ${i.prev}→${i.current}（${i.delta}）</span>`).join('');
   bar.innerHTML=`<span style="color:#58a6ff;font-weight:700;margin-right:14px">对比上次诊断（${p.days_ago}天前 @${p.date}）</span>${item('区间定位',p.zone)}${item('翻倍基因',p.gene)}${item('力量定级',p.grade)}${item('目标价区间',p.target_price)}${item('时机窗口',p.timing)}${inds}${p.summary?`<div style="margin-top:6px;color:#8b949e">${p.summary}</div>`:''}`;
+}
+
+/* ===== ⭐诊断综合结论渲染（V1.3） ===== */
+function renderVerdict(){
+  const v=D.verdict;
+  const card=document.getElementById('verdict-card');
+  if(!card)return;
+  if(!v){card.style.display='none';return}
+  card.style.display='block';
+  document.getElementById('verdict-summary').innerHTML=v.summary||'--';
+  const dims=v.dims_oneliner||{};
+  const icons={gene:'🧬',state:'📍',report:'📋',forecast:'🔮'};
+  const labels={gene:'基因',state:'状态',report:'报告',forecast:'预判'};
+  document.getElementById('verdict-dims').innerHTML=Object.keys(icons).map(k=>dims[k]?`<div style="display:flex;gap:8px;padding:3px 0;font-size:11px"><span>${icons[k]}</span><span style="min-width:36px;color:#8b949e;font-weight:600">${labels[k]}</span><span style="color:#c9d1d9;flex:1">${dims[k]}</span></div>`:'').join('');
+  const rt=document.getElementById('verdict-risk-track');
+  rt.innerHTML=`<div style="display:flex;gap:8px;padding:4px 0"><span>⚠️</span><span style="color:#d29922;flex:1">${v.key_risk||'--'}</span></div><div style="display:flex;gap:8px;padding:4px 0"><span>📌</span><span style="color:#3fb950;flex:1">${v.tracking||'--'}</span></div>`;
 }
 
 /* ===== ⭐三源目标价+奇门双因子渲染（V1.2-patch2——矩阵维度，数据读D.pricing顶层） ===== */
