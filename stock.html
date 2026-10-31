@@ -249,27 +249,11 @@ td{color:#c9d1d9}
 
 <!-- ============ 视图3.5: 个股报告（第四维度） ============ -->
 <div class="view" id="view-report">
-  <div class="section-label">个股分析报告 · 推演层五要素</div>
+  <div class="section-label">个股分析报告 · 完整报告块</div>
   <div id="report-body" style="padding:0 24px">
     <div class="card" style="margin-bottom:12px">
       <div class="card-title">报告信息</div>
       <div id="rep-meta" style="font-size:12px;color:#8b949e">--</div>
-    </div>
-    <div class="card" style="margin-bottom:12px">
-      <div class="card-title">🔮 推演层</div>
-      <div id="rep-thesis" class="formula">--</div>
-    </div>
-    <div class="card" style="margin-bottom:12px">
-      <div class="card-title">催化剂追踪</div>
-      <div id="rep-catalysts">--</div>
-    </div>
-    <div class="card" style="margin-bottom:12px">
-      <div class="card-title">证伪信号</div>
-      <div id="rep-falsify">--</div>
-    </div>
-    <div class="card" style="margin-bottom:12px">
-      <div class="card-title">与其他维度交叉</div>
-      <div id="rep-cross" style="font-size:12px">--</div>
     </div>
   </div>
 </div>
@@ -395,22 +379,56 @@ function renderTimeline(){
   });
 }
 
-/* ===== ⭐个股报告维度渲染（V1.1第四维度） ===== */
+/* ===== ⭐个股报告维度渲染（V1.2——完整报告块，非专业人士可读） ===== */
 function renderReport(){
   const r=(D.matrix_L1||{}).report;
   const meta=document.getElementById('rep-meta');
-  const th=document.getElementById('rep-thesis');
-  const cat=document.getElementById('rep-catalysts');
-  const fal=document.getElementById('rep-falsify');
-  const cross=document.getElementById('rep-cross');
-  if(!r){meta.textContent='暂无分析报告（诊断时自动调用个股分析工作流生成）';th.textContent='--';cat.textContent='--';fal.textContent='--';cross.textContent='--';return}
-  meta.innerHTML=`报告日期：<b style="color:#58a6ff">${r.date||'--'}</b> ｜ 假设状态：<b style="color:${r.standing&&r.standing.includes('成立')?'#3fb950':'#d29922'}">${r.standing||'--'}</b>`;
-  th.innerHTML=`核心假设：${r.core_thesis||'--'}<br>预期差：${r.catalyst?''+r.catalyst:''}<br>验证节点：${r.valid_node||'--'}`;
-  cat.innerHTML=r.catalyst?`<div style="padding:6px 0;border-bottom:1px solid #21262d">${r.catalyst}</div>`:'--';
-  fal.innerHTML=r.falsify?`<div style="padding:6px 0">${r.falsify}</div>`:'--';
+  const body=document.getElementById('report-body');
+  if(!r){meta.textContent='暂无分析报告（诊断时自动调用个股分析工作流生成）';body.innerHTML='';return}
+
   const g=(D.matrix_L1||{}).gene||{};
   const p=(D.matrix_L1||{}).prototype||{};
-  cross.innerHTML=`基因维度：${g.pattern||'--'}<br>状态维度：${p.match||'--'}`;
+  const pq=r.plain_qa||{};
+  const vs=r.valuation_split||[];
+  const sc=r.scenarios||[];
+  const wr=r.weight_ranking||[];
+  const cats=r.catalysts||[];
+  const fal=r.falsify||{};
+  const vn=r.valid_nodes||[];
+
+  meta.innerHTML=`报告日期：<b style="color:#58a6ff">${r.date||'--'}</b> ｜ 假设状态：<b style="color:${r.standing&&r.standing.includes('成立')?'#3fb950':'#d29922'}">${r.standing||'--'}</b>`;
+
+  const qaItem=(q,a,icon)=>a?`<div style="padding:10px 0;border-bottom:1px solid #21262d"><div style="color:#58a6ff;font-weight:700;font-size:13px;margin-bottom:4px">${icon} ${q}</div><div style="color:#c9d1d9;line-height:1.7">${a}</div></div>`:'';
+
+  const vsRows=vs.map(v=>`<tr${v.highlight?' style="background:#d2992215"':''}><td style="padding:6px 10px 6px 0;color:#c9d1d9;white-space:nowrap">${v.part}${v.highlight?' ⭐':''}</td><td style="padding:6px 10px;color:#58a6ff;font-weight:600;white-space:nowrap">${v.value}</td><td style="padding:6px 0;color:#8b949e">${v.basis}</td></tr>`).join('');
+
+  const scRows=sc.map(s=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #21262d"><div style="min-width:60px;font-weight:700;color:${s.most_likely?'#58a6ff':'#8b949e'}">${s.name}${s.most_likely?' ◄':''}</div><div style="min-width:50px;color:#8b949e">${s.prob}</div><div style="min-width:110px;color:#c9d1d9;font-weight:600">${s.range}</div><div style="color:#8b949e;font-size:11px;flex:1">${s.trigger}</div></div>`).join('');
+
+  const wrRows=wr.map(w=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #21262d;font-size:12px"><span style="min-width:140px;color:#c9d1d9">${w.change}</span><span style="min-width:36px;text-align:center;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:700;background:${w.level==='底'?'#3fb95022':w.level==='顶'?'#bc8cff22':w.level==='噪'?'#d2992222':'#8b949e22'};color:${w.level==='底'?'#3fb950':w.level==='顶'?'#bc8cff':w.level==='噪'?'#d29922':'#8b949e'}">${w.level}</span><span style="color:#8b949e">${w.contribution}</span></div>`).join('');
+
+  const catStatus=(s)=>{const st=(s||'');if(st.includes('✅')||st.includes('兑现'))return '#3fb950';if(st.includes('❌')||st.includes('证伪'))return '#f85149';return '#d29922'};
+  const catRows=cats.map(c=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #21262d"><div style="flex:1"><div style="color:#c9d1d9">${c.text}</div>${c.note?`<div style="color:#8b949e;font-size:11px;margin-top:2px">${c.note}</div>`:''}</div><span style="white-space:nowrap;font-size:11px;font-weight:700;color:${catStatus(c.status)}">${c.status}</span></div>`).join('');
+
+  const vnRows=vn.map(v=>`<tr><td style="padding:6px 10px 6px 0;color:#58a6ff;white-space:nowrap;font-weight:600">${v.time}</td><td style="padding:6px 10px;color:#c9d1d9;white-space:nowrap">${v.event}</td><td style="padding:6px 10px;color:#8b949e">${v.verify}</td><td style="padding:6px 0;color:#d29922;font-size:11px">${v.miss_action}</td></tr>`).join('');
+
+  body.innerHTML=`
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">🔥 大白话四问</div>
+      ${qaItem('这公司是干嘛的？',pq.what,'🏭')}
+      ${qaItem('贵不贵？',pq.expensive,'💰')}
+      ${qaItem('有没有故事？',pq.story,'📖')}
+      ${qaItem('最坏会怎样？',pq.worst,'⚠️')}
+    </div>
+    ${vsRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">💰 估值拆解（市值=几块）</div><table>${vsRows}</table></div>`:''}
+    ${scRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">⚖️ 三情景</div>${scRows}${r.current_price_note?`<div style="margin-top:8px;padding:8px;background:#58a6ff15;border-radius:6px;color:#58a6ff;font-size:12px">📍 ${r.current_price_note}</div>`:''}</div>`:''}
+    ${wrRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">🎯 变化权重（底=基石/顶=想象/噪=水分/雾=易散）</div>${wrRows}</div>`:''}
+    ${catRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">🚀 催化剂追踪</div>${catRows}</div>`:''}
+    ${fal.condition?`<div class="card" style="margin-bottom:12px"><div class="card-title">🛑 证伪信号</div><div style="padding:6px 0"><span style="color:#c9d1d9">${fal.condition}</span> <span style="color:${fal.status&&fal.status.includes('未触发')?'#3fb950':'#f85149'};font-size:11px;font-weight:700">${fal.status}</span></div></div>`:''}
+    ${vnRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">📅 验证节点</div><table><tr><th>时间</th><th>事件</th><th>验证什么</th><th>miss怎么办</th></tr>${vnRows}</table></div>`:''}
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">🔗 与其他维度交叉</div>
+      <div style="font-size:12px;color:#8b949e">🧬 基因维度：${g.pattern||'--'}<br>📍 状态维度：${p.match||'--'}</div>
+    </div>`;
 }
 function renderCompare(){
   const bar=document.getElementById('compareBar');
