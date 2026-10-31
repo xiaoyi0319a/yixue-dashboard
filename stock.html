@@ -206,9 +206,23 @@ td{color:#c9d1d9}
 
   <div class="matrix-grid-wrap"><div class="matrix-grid" id="mg-grid" style="grid-template-columns:80px repeat(5,1fr)"></div></div>
 
-  <!-- ⭐目标价摘要条（V1.2——矩阵默认页一眼看空间） -->
-  <div id="mg-target" style="margin:14px 24px 0;padding:10px 14px;background:#161b22;border:1px solid #30363d;border-radius:8px;font-size:12px;display:none">
+  <!-- ⭐目标价摘要条（V1.2——矩阵维度合成输出；点击展开/收起三源详情，V1.2-patch2从次日预判移回矩阵） -->
+  <div id="mg-target" style="margin:14px 24px 0;padding:10px 14px;background:#161b22;border:1px solid #30363d;border-radius:8px;font-size:12px;cursor:pointer;display:none" onclick="togglePricing()">
     <span style="color:#8b949e">加载目标价...</span>
+  </div>
+
+  <!-- ⭐三源目标价详情（矩阵视图内展开，V1.2-patch2） -->
+  <div id="mg-pricing-detail" style="margin:8px 24px 0;display:none">
+    <div class="card" style="margin-bottom:10px">
+      <div class="card-title">🎯 三源目标价</div>
+      <div id="mg-tp-sources"></div>
+      <div id="mg-tp-overlap" style="margin-top:8px;padding:8px;background:#3fb95015;border-radius:6px;font-size:12px;display:none"></div>
+      <div id="mg-tp-divergence" style="margin-top:6px;color:#8b949e;font-size:11px;display:none"></div>
+    </div>
+    <div class="card" style="margin-bottom:10px">
+      <div class="card-title">⏱ 奇门时机注记</div>
+      <div id="mg-timing"></div>
+    </div>
   </div>
 
   <div class="layers-row">
@@ -283,20 +297,6 @@ td{color:#c9d1d9}
       <div class="fusion-item"><div class="k">对账</div><div class="v" id="fu-hit">--</div></div>
     </div>
     <div class="fusion-verdict" id="fu-verdict">--</div>
-  </div>
-
-  <!-- ⭐三源目标价（V1.2） -->
-  <div class="fusion-out" style="margin-top:14px" id="fu-tp-block">
-    <div class="fusion-out-title">🎯 三源目标价</div>
-    <div id="fu-tp-sources"></div>
-    <div id="fu-tp-overlap" style="margin-top:8px;padding:8px;background:#3fb95015;border-radius:6px;font-size:12px;display:none"></div>
-    <div id="fu-tp-divergence" style="margin-top:6px;color:#8b949e;font-size:11px;display:none"></div>
-  </div>
-
-  <!-- ⭐奇门双因子（V1.2） -->
-  <div class="fusion-out" style="margin-top:14px" id="fu-timing-block">
-    <div class="fusion-out-title">⏱ 奇门时机注记</div>
-    <div id="fu-timing"></div>
   </div>
 
   <div style="margin-top:14px">
@@ -461,33 +461,32 @@ function renderCompare(){
   bar.innerHTML=`<span style="color:#58a6ff;font-weight:700;margin-right:14px">对比上次诊断（${p.days_ago}天前 @${p.date}）</span>${item('区间定位',p.zone)}${item('翻倍基因',p.gene)}${item('力量定级',p.grade)}${item('目标价区间',p.target_price)}${item('时机窗口',p.timing)}${inds}${p.summary?`<div style="margin-top:6px;color:#8b949e">${p.summary}</div>`:''}`;
 }
 
-/* ===== ⭐三源目标价+奇门双因子渲染（V1.2） ===== */
+/* ===== ⭐三源目标价+奇门双因子渲染（V1.2-patch2——矩阵维度，数据读D.pricing顶层） ===== */
+function togglePricing(){const d=document.getElementById('mg-pricing-detail');if(d)d.style.display=d.style.display==='none'?'block':'none'}
 function renderTargetPrice(){
-  const tp=(D.fusion||{}).target_price;
-  const tm=(D.fusion||{}).timing;
-  const srcEl=document.getElementById('fu-tp-sources');
-  const ovEl=document.getElementById('fu-tp-overlap');
-  const dvEl=document.getElementById('fu-tp-divergence');
-  const blk=document.getElementById('fu-tp-block');
-  if(!tp||!tp.sources||!tp.sources.length){if(blk)blk.style.display='none';return}
-  if(blk)blk.style.display='block';
+  const pr=D.pricing||{};
+  const tp=pr.target_price;
+  const tm=pr.timing;
+  const srcEl=document.getElementById('mg-tp-sources');
+  const ovEl=document.getElementById('mg-tp-overlap');
+  const dvEl=document.getElementById('mg-tp-divergence');
+  const mgEl=document.getElementById('mg-target');
+  if(!tp||!tp.sources||!tp.sources.length){if(mgEl)mgEl.style.display='none';const pd=document.getElementById('mg-pricing-detail');if(pd)pd.style.display='none';return}
   const colors=['#58a6ff','#3fb950','#bc8cff'];
   srcEl.innerHTML=tp.sources.map((s,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #21262d;font-size:12px"><span style="min-width:90px;color:${colors[i%3]};font-weight:600">${s.source}</span><span style="min-width:110px;color:#c9d1d9;font-weight:700">${s.range}</span><span style="color:#8b949e;font-size:11px;flex:1">${s.basis}</span></div>`).join('');
   if(tp.overlap_zone){ovEl.style.display='block';ovEl.innerHTML=`✅ 重叠区（核心目标）：<b style="color:#3fb950">${tp.overlap_zone}</b> <span style="color:#8b949e">置信度：${tp.confidence||'--'}</span>`}
   else{ovEl.style.display='none'}
   if(tp.divergence_note){dvEl.style.display='block';dvEl.textContent='⚠ '+tp.divergence_note}else{dvEl.style.display='none'}
-  const tmBlk=document.getElementById('fu-timing-block');
-  const tmEl=document.getElementById('fu-timing');
-  if(!tm){if(tmBlk)tmBlk.style.display='none';return}
-  if(tmBlk)tmBlk.style.display='block';
+  const tmEl=document.getElementById('mg-timing');
+  if(!tm){if(tmEl)tmEl.parentElement.style.display='none';return}
+  if(tmEl)tmEl.parentElement.style.display='block';
   const row=(icon,label,txt,color)=>txt?`<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #21262d;font-size:12px"><span>${icon}</span><span style="min-width:70px;color:${color};font-weight:600">${label}</span><span style="color:#c9d1d9;flex:1">${txt}</span></div>`:'';
   tmEl.innerHTML=row('⏱','时机窗口',tm.timing_window,'#58a6ff')+row('💪','力量校验',tm.strength_check,'#3fb950')+row('🚨','尾部预警',tm.tail_risk,'#f85149');
 
-  const mgEl=document.getElementById('mg-target');
   if(mgEl&&tp.overlap_zone){
     const tmShort=tm&&tm.timing_window?tm.timing_window.split('（')[0].split('；')[0]:'';
     mgEl.style.display='block';
-    mgEl.innerHTML=`🎯 <b style="color:#3fb950">核心目标区：${tp.overlap_zone}</b><span style="color:#8b949e;margin:0 10px">｜</span>⏱ ${tmShort}<span style="color:#8b949e;margin:0 10px">｜</span>置信度：${tp.confidence||'--'}`;
+    mgEl.innerHTML=`🎯 <b style="color:#3fb950">核心目标区：${tp.overlap_zone}</b><span style="color:#8b949e;margin:0 10px">｜</span>⏱ ${tmShort}<span style="color:#8b949e;margin:0 10px">｜</span>置信度：${tp.confidence||'--'}<span style="float:right;color:#58a6ff" id="mg-tp-caret">▸ 点击展开三源</span>`;
   }else if(mgEl){mgEl.style.display='none'}
 }
 
