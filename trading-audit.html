@@ -50,7 +50,8 @@ canvas{max-height:260px}
 <div class="note">微芯-32,717是"没止损"的账；聆达/梦天/沃森是信号失效期的正常成本。<b>前者体系外，后者体系内</b>——体系内的亏该认，体系外的亏该断。</div></div>
 
 <script>
-fetch('data/audit_20261030.json?t='+Date.now()).then(r=>r.json()).then(D=>{
+function loadAudit(retries){
+fetch('data/audit_20261030.json?t='+Date.now()).then(r=>{if(!r.ok)throw new Error('HTTP'+r.status);return r.json()}).then(D=>{
 document.getElementById('c-total').textContent=(D.total/10000).toFixed(1)+'万';
 document.getElementById('c-wr').textContent=D.win_rate+'%';
 document.getElementById('c-win30').textContent='+'+D.win30.toLocaleString();
@@ -75,7 +76,9 @@ new Chart(mo,{data:{labels:D.monthly.map(m=>m.month),datasets:[
 const all=[...D.tops.map(t=>({...t,c:'#f85149aa'})),...D.topw.slice().reverse().map(t=>({...t,c:'#3fb950aa'}))];
 new Chart(st,{type:'bar',data:{labels:all.map(s=>s.n),datasets:[{data:all.map(s=>s.v),backgroundColor:all.map(s=>s.c)}]},
  options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>c.parsed.x.toLocaleString()+' 元'}}},scales:{x:{...C,ticks:{...C.ticks,callback:v=>(v/1000)+'k'}},y:{...C,ticks:{...C.ticks,font:{size:10}}}}}});
-});
+}).catch(e=>{ if(retries>0) setTimeout(()=>loadAudit(retries-1),2500); });
+}
+loadAudit(2);
 </script>
 </body>
 </html>
