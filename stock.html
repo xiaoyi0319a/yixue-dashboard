@@ -315,7 +315,7 @@ function diagStatus(t){const e=document.getElementById('diagStatus');if(e)e.text
 function showEmpty(){
   D=null;
   const es=document.getElementById('empty-state');if(es)es.style.display='block';
-  ['verdict-card','timeline-section','mg-pricing-detail','layers-row','fu-detail','compareBar'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none'});
+  ['verdict-card','timeline-section','mg-pricing-detail','fu-detail','compareBar'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none'});const lr=document.querySelector('.layers-row');if(lr)lr.style.display='none';
   const gw=document.getElementById('mg-grid-wrap');if(gw)gw.style.display='none';
   const cs=document.getElementById('curStock');if(cs)cs.textContent='';
   const hs=document.getElementById('h-stock');if(hs)hs.textContent='未选择个股';
@@ -371,7 +371,7 @@ document.addEventListener('click',e=>{
 function selectStock(code){CUR.code=code;document.getElementById('stockListPanel').style.display='none';document.getElementById('searchDrop').style.display='none';loadFor(code)}
 function loadFor(code){
  const u='data/diagnose_'+code+'.json';
- fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;const es=document.getElementById('empty-state');if(es)es.style.display='none';['timeline-section','layers-row'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display=''});renderAll();const s=IDX.stocks.find(x=>x.code===code);document.getElementById('curStock').textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{showEmpty();document.getElementById('h-date').textContent='档案不存在'});
+ fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;const es=document.getElementById('empty-state');if(es)es.style.display='none';const tl=document.getElementById('timeline-section');if(tl)tl.style.display='';const lr2=document.querySelector('.layers-row');if(lr2)lr2.style.display='';renderAll();const s=IDX.stocks.find(x=>x.code===code);document.getElementById('curStock').textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{showEmpty();document.getElementById('h-date').textContent='档案不存在'});
 }
 function load(){IDX={stocks:[]};CUR={code:null};loadSwitcher();setInterval(loadSwitcher,300000)}
 let IDX={stocks:[]},CUR={code:null};
