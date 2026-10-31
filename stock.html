@@ -183,6 +183,13 @@ td{color:#c9d1d9}
 <!-- ============ 视图0: 立体矩阵（核心格网图） ============ -->
 <div class="view active" id="view-fusion">
 
+  <!-- ⭐空状态（V1.3-patch1——首次打开未选个股时显示，选中后隐藏） -->
+  <div id="empty-state" style="margin:32px 24px;padding:44px 20px;text-align:center;border:1px dashed #30363d;border-radius:12px;display:none">
+    <div style="font-size:15px;color:#c9d1d9;margin-bottom:6px">未选择个股</div>
+    <div style="font-size:12px;color:#8b949e;margin-bottom:20px">点击下面的档案标签，或输入代码搜索</div>
+    <div id="empty-stocks" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"></div>
+  </div>
+
   <!-- ⭐诊断综合结论（V1.3——四维度独立输出后按逻辑合成，置顶=诊断报告核心） -->
   <div id="verdict-card" style="margin:16px 24px 0;padding:14px;background:#1c2129;border:1px solid #58a6ff44;border-radius:10px;display:none">
     <div style="color:#58a6ff;font-weight:700;font-size:13px;margin-bottom:8px">📋 诊断综合结论</div>
@@ -305,11 +312,23 @@ td{color:#c9d1d9}
 const DATA_URL='data/stock_pipeline_latest.json';
 let D=null;
 function diagStatus(t){const e=document.getElementById('diagStatus');if(e)e.textContent=t}
+function showEmpty(){
+  D=null;
+  const es=document.getElementById('empty-state');if(es)es.style.display='block';
+  ['verdict-card','timeline-section','mg-pricing-detail','layers-row','fu-detail','compareBar'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none'});
+  const gw=document.getElementById('mg-grid-wrap');if(gw)gw.style.display='none';
+  const cs=document.getElementById('curStock');if(cs)cs.textContent='';
+  const hs=document.getElementById('h-stock');if(hs)hs.textContent='未选择个股';
+  document.getElementById('h-date').textContent='--';
+  const chips=(IDX.stocks||[]).map(s=>`<span onclick="selectStock('${s.code}')" style="padding:6px 12px;background:#21262d;border-radius:16px;cursor:pointer;font-size:12px;color:#58a6ff;border:1px solid #30363d">${s.code} ${s.name}</span>`).join('');
+  document.getElementById('empty-stocks').innerHTML=chips||'<span style="color:#484f58;font-size:12px">暂无档案——对话中发送"诊断 {代码}"创建首诊</span>';
+}
 function loadSwitcher(){
  fetch('data/diagnoses_index.json?t='+Date.now()).then(r=>r.json()).then(idx=>{
   IDX=idx;
   document.getElementById('stockCount').textContent=idx.stocks.length;
   fillListPanel();
+  if(!D)showEmpty();
  }).catch(()=>{});
 }
 function stockRow(s){
@@ -352,10 +371,10 @@ document.addEventListener('click',e=>{
 function selectStock(code){CUR.code=code;document.getElementById('stockListPanel').style.display='none';document.getElementById('searchDrop').style.display='none';loadFor(code)}
 function loadFor(code){
  const u='data/diagnose_'+code+'.json';
- fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;renderAll();const s=IDX.stocks.find(x=>x.code===code);document.getElementById('curStock').textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{document.getElementById('h-date').textContent='暂无数据'});
+ fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;const es=document.getElementById('empty-state');if(es)es.style.display='none';['timeline-section','layers-row'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display=''});renderAll();const s=IDX.stocks.find(x=>x.code===code);document.getElementById('curStock').textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{showEmpty();document.getElementById('h-date').textContent='档案不存在'});
 }
-function load(){IDX={stocks:[]};CUR={code:'300142'};loadSwitcher();loadFor(CUR.code);setInterval(loadSwitcher,300000)}
-let IDX={stocks:[]},CUR={code:'300142'};
+function load(){IDX={stocks:[]};CUR={code:null};loadSwitcher();setInterval(loadSwitcher,300000)}
+let IDX={stocks:[]},CUR={code:null};
 function showView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v))}
 
 function renderAll(){
