@@ -182,6 +182,16 @@ td{color:#c9d1d9}
 
 <!-- ============ 视图0: 立体矩阵（核心格网图） ============ -->
 <div class="view active" id="view-fusion">
+
+  <!-- ⭐timeline 事件链置顶（V1.2调整：事件链=整个事件的状态脉络[时间维度]，矩阵图=当下状态[空间维度]） -->
+  <div id="timeline-section" style="margin:16px 0 0;padding:0 24px">
+    <div class="section-label">⏱ 事件链<span style="font-size:10px;color:#484f58;margin-left:8px">点击节点展开四维度判断</span></div>
+    <div id="timeline-track" style="display:flex;gap:0;overflow-x:auto;padding:16px 0 8px;position:relative">
+      <div style="color:#484f58;font-size:12px;padding:20px">加载中...</div>
+    </div>
+    <div id="timeline-detail" style="display:none;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;margin-top:8px;font-size:12px"></div>
+  </div>
+
   <div class="matrix-explain">
     <b style="color:#58a6ff">立体矩阵 = 状态地图：横轴定位股票在牛熊循环的位置，纵轴读取当下多空力量，格子是这个组合的剧本。</b><br>
     横轴 = 区间定位（底部区→退潮，L1状态层）· 纵轴 = 力量定级（偏多→偏空）· <b>点击任意格子看组合剧本</b>（这个位置+这个力量通常讲什么故事、盯什么变量）。<br>
@@ -196,18 +206,9 @@ td{color:#c9d1d9}
 
   <div class="matrix-grid-wrap"><div class="matrix-grid" id="mg-grid" style="grid-template-columns:80px repeat(5,1fr)"></div></div>
 
-  <!-- ⭐目标价摘要条（V1.2——矩阵默认页一眼看空间，点击跳次日预判看详情） -->
-  <div id="mg-target" style="margin:14px 24px 0;padding:10px 14px;background:#161b22;border:1px solid #30363d;border-radius:8px;font-size:12px;cursor:pointer;display:none" onclick="showView('daily')">
+  <!-- ⭐目标价摘要条（V1.2——矩阵默认页一眼看空间） -->
+  <div id="mg-target" style="margin:14px 24px 0;padding:10px 14px;background:#161b22;border:1px solid #30363d;border-radius:8px;font-size:12px;display:none">
     <span style="color:#8b949e">加载目标价...</span>
-  </div>
-
-  <!-- ⭐timeline 事件链（V1.1新增） -->
-  <div id="timeline-section" style="margin-top:20px;padding:0 24px">
-    <div class="section-label">⏱ 事件链<span style="font-size:10px;color:#484f58;margin-left:8px">点击节点展开四维度判断</span></div>
-    <div id="timeline-track" style="display:flex;gap:0;overflow-x:auto;padding:16px 0 8px;position:relative">
-      <div style="color:#484f58;font-size:12px;padding:20px">加载中...</div>
-    </div>
-    <div id="timeline-detail" style="display:none;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;margin-top:8px;font-size:12px"></div>
   </div>
 
   <div class="layers-row">
@@ -486,7 +487,7 @@ function renderTargetPrice(){
   if(mgEl&&tp.overlap_zone){
     const tmShort=tm&&tm.timing_window?tm.timing_window.split('（')[0].split('；')[0]:'';
     mgEl.style.display='block';
-    mgEl.innerHTML=`🎯 <b style="color:#3fb950">核心目标区：${tp.overlap_zone}</b><span style="color:#8b949e;margin:0 10px">｜</span>⏱ ${tmShort}<span style="color:#8b949e;margin:0 10px">｜</span>置信度：${tp.confidence||'--'}<span style="float:right;color:#58a6ff">展开三源详情 →</span>`;
+    mgEl.innerHTML=`🎯 <b style="color:#3fb950">核心目标区：${tp.overlap_zone}</b><span style="color:#8b949e;margin:0 10px">｜</span>⏱ ${tmShort}<span style="color:#8b949e;margin:0 10px">｜</span>置信度：${tp.confidence||'--'}`;
   }else if(mgEl){mgEl.style.display='none'}
 }
 
