@@ -481,6 +481,7 @@ function renderTargetPrice(){
   const ovEl=document.getElementById('mg-tp-overlap');
   const dvEl=document.getElementById('mg-tp-divergence');
   if(!tp||!tp.sources||!tp.sources.length){const pd=document.getElementById('mg-pricing-detail');if(pd)pd.style.display='none';return}
+  const pdEl=document.getElementById('mg-pricing-detail');if(pdEl)pdEl.style.display='block';
   const colors=['#58a6ff','#3fb950','#bc8cff'];
   srcEl.innerHTML=tp.sources.map((s,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #21262d;font-size:12px"><span style="min-width:90px;color:${colors[i%3]};font-weight:600">${s.source}</span><span style="min-width:110px;color:#c9d1d9;font-weight:700">${s.range}</span><span style="color:#8b949e;font-size:11px;flex:1">${s.basis}</span></div>`).join('');
   if(tp.overlap_zone){ovEl.style.display='block';ovEl.innerHTML=`✅ 重叠区（核心目标）：<b style="color:#3fb950">${tp.overlap_zone}</b> <span style="color:#8b949e">置信度：${tp.confidence||'--'}</span>`}
