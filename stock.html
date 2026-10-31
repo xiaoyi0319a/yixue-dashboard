@@ -196,6 +196,11 @@ td{color:#c9d1d9}
 
   <div class="matrix-grid-wrap"><div class="matrix-grid" id="mg-grid" style="grid-template-columns:80px repeat(5,1fr)"></div></div>
 
+  <!-- ⭐目标价摘要条（V1.2——矩阵默认页一眼看空间，点击跳次日预判看详情） -->
+  <div id="mg-target" style="margin:14px 24px 0;padding:10px 14px;background:#161b22;border:1px solid #30363d;border-radius:8px;font-size:12px;cursor:pointer;display:none" onclick="showView('daily')">
+    <span style="color:#8b949e">加载目标价...</span>
+  </div>
+
   <!-- ⭐timeline 事件链（V1.1新增） -->
   <div id="timeline-section" style="margin-top:20px;padding:0 24px">
     <div class="section-label">⏱ 事件链<span style="font-size:10px;color:#484f58;margin-left:8px">点击节点展开四维度判断</span></div>
@@ -476,6 +481,13 @@ function renderTargetPrice(){
   if(tmBlk)tmBlk.style.display='block';
   const row=(icon,label,txt,color)=>txt?`<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #21262d;font-size:12px"><span>${icon}</span><span style="min-width:70px;color:${color};font-weight:600">${label}</span><span style="color:#c9d1d9;flex:1">${txt}</span></div>`:'';
   tmEl.innerHTML=row('⏱','时机窗口',tm.timing_window,'#58a6ff')+row('💪','力量校验',tm.strength_check,'#3fb950')+row('🚨','尾部预警',tm.tail_risk,'#f85149');
+
+  const mgEl=document.getElementById('mg-target');
+  if(mgEl&&tp.overlap_zone){
+    const tmShort=tm&&tm.timing_window?tm.timing_window.split('（')[0].split('；')[0]:'';
+    mgEl.style.display='block';
+    mgEl.innerHTML=`🎯 <b style="color:#3fb950">核心目标区：${tp.overlap_zone}</b><span style="color:#8b949e;margin:0 10px">｜</span>⏱ ${tmShort}<span style="color:#8b949e;margin:0 10px">｜</span>置信度：${tp.confidence||'--'}<span style="float:right;color:#58a6ff">展开三源详情 →</span>`;
+  }else if(mgEl){mgEl.style.display='none'}
 }
 
 /* ===== 核心：立体矩阵格网图 ===== */
