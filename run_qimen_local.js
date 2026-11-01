@@ -95,7 +95,7 @@ gongOrder.forEach(gongNum => {
 // 保存JSON到规范路径
 const outDir = '/root/.openclaw/workspace/memory/奇门预测/起盘数据';
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-const outFile = path.join(outDir, `qimen_data_${targetDate.replace(/-/g, '')}.json`);
+const outFile = path.join(outDir, `qimen_data_${targetDate.replace(/-/g, '')}_${targetTime.replace(/:/g, '')}.json`);
 fs.writeFileSync(outFile, JSON.stringify(data, null, 2));
 console.log('');
 console.log('数据已保存到', outFile);
