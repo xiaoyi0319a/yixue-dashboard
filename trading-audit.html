@@ -14,7 +14,7 @@ h1{font-size:19px;color:#f0f6fc;margin-bottom:2px}
 .stat{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px;text-align:center}
 .stat .n{font-size:22px;font-weight:800}
 .stat .l{font-size:11px;color:#8b949e;margin-top:2px}
-.neg{color:#f85149}.pos{color:#3fb950}.warn{color:#d29922}
+.neg{color:#3fb950}.pos{color:#f85149}.warn{color:#d29922}
 .chart-box{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;margin-bottom:14px}
 .chart-box h3{font-size:13px;color:#f0f6fc;margin-bottom:10px}
 .chart-box .note{font-size:11px;color:#8b949e;margin-top:8px;line-height:1.7}
@@ -62,18 +62,18 @@ const TT={backgroundColor:'#161b22',borderColor:'#30363d',borderWidth:1,titleCol
 new Chart(eq,{type:'line',data:{labels:D.equity.map(p=>p.d),datasets:[{data:D.equity.map(p=>p.v),borderColor:'#f85149',borderWidth:2,pointRadius:0,fill:true,backgroundColor:'rgba(248,81,73,.08)',tension:.3}]},options:{plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>'累计 '+c.parsed.y.toLocaleString()+' 元'}}},scales:{x:{...C,ticks:{...C.ticks,maxTicksLimit:10}},y:C}}});
 
 new Chart(sc,{type:'scatter',data:{datasets:[
- {label:'盈利',data:D.scatter.filter(p=>p.win),backgroundColor:'#3fb95099',pointRadius:5},
- {label:'亏损',data:D.scatter.filter(p=>!p.win),backgroundColor:'#f8514999',pointRadius:5}]},
+ {label:'盈利',data:D.scatter.filter(p=>p.win),backgroundColor:'#f8514999',pointRadius:5},
+ {label:'亏损',data:D.scatter.filter(p=>!p.win),backgroundColor:'#3fb95099',pointRadius:5}]},
  options:{plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{...TT,callbacks:{label:c=>`${c.raw.n} ${c.raw.d} 持有${c.raw.x}天 ${c.raw.y>0?'+':''}${c.raw.y}%`}}},
  scales:{x:{...C,title:{display:true,text:'持有天数',color:'#8b949e',font:{size:10}}},y:{...C,title:{display:true,text:'盈亏%',color:'#8b949e',font:{size:10}}}}}});
 
 new Chart(mo,{data:{labels:D.monthly.map(m=>m.month),datasets:[
- {type:'bar',label:'月盈亏(元)',data:D.monthly.map(m=>m.盈亏),backgroundColor:D.monthly.map(m=>m.盈亏<0?'#f85149aa':'#3fb950aa'),yAxisID:'y'},
+ {type:'bar',label:'月盈亏(元)',data:D.monthly.map(m=>m.盈亏),backgroundColor:D.monthly.map(m=>m.盈亏<0?'#3fb950aa':'#f85149aa'),yAxisID:'y'},
  {type:'line',label:'胜率%',data:D.monthly.map(m=>m.胜率),borderColor:'#d29922',yAxisID:'y1',pointBackgroundColor:'#d29922'}]},
  options:{plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:TT},
  scales:{x:C,y:{...C,position:'left'},y1:{...C,position:'right',min:0,max:60,grid:{display:false}}}}});
 
-const all=[...D.tops.map(t=>({...t,c:'#f85149aa'})),...D.topw.slice().reverse().map(t=>({...t,c:'#3fb950aa'}))];
+const all=[...D.tops.map(t=>({...t,c:'#3fb950aa'})),...D.topw.slice().reverse().map(t=>({...t,c:'#f85149aa'}))];
 new Chart(st,{type:'bar',data:{labels:all.map(s=>s.n),datasets:[{data:all.map(s=>s.v),backgroundColor:all.map(s=>s.c)}]},
  options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:c=>c.parsed.x.toLocaleString()+' 元'}}},scales:{x:{...C,ticks:{...C.ticks,callback:v=>(v/1000)+'k'}},y:{...C,ticks:{...C.ticks,font:{size:10}}}}}});
 }).catch(e=>{ if(retries>0) setTimeout(()=>loadAudit(retries-1),2500); });
