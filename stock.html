@@ -38,6 +38,7 @@ th{color:#8b949e;font-weight:500;font-size:11px}
 td{color:#c9d1d9}
 .k{color:#8b949e}.v{color:#f0f6fc;font-weight:600}
 .pos{color:#3fb950;font-weight:600}.neg{color:#f85149;font-weight:600}.warn{color:#d29922;font-weight:600}
+.dir-up{color:#f85149;font-weight:600}.dir-down{color:#3fb950;font-weight:600}
 .note{font-size:11px;color:#8b949e;line-height:1.7;margin-top:8px}
 .formula{font-family:"SF Mono",Monaco,monospace;font-size:11px;background:#0d1117;padding:8px 10px;border-radius:6px;border:1px solid #21262d;color:#a5d6ff;line-height:1.8;white-space:pre-wrap;margin-top:6px}
 .badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:8px;font-weight:600}
@@ -463,7 +464,7 @@ function renderReport(){
 function renderCompare(){
   const bar=document.getElementById('compareBar');
   const p=D.prev_diagnose;
-  if(!p){bar.style.display='none';return}
+  if(!p||!p.date){bar.style.display='none';return}
   bar.style.display='block';
   const item=(label,o)=>{
     if(!o)return'';
@@ -583,7 +584,7 @@ function renderLayers(){
      <span class=k>否决:</span> ${(l2.vetoes||[]).join('、')||'无'}<div style="font-size:9px;color:#484f58;margin-top:3px">否决=一票作废项——ST/财务造假/审计非标/清仓减持/日成交<500万，触发任何一条本诊断作废</div>`;
   const f=D.fusion||{}, v=D.verification;
   const de=document.getElementById('fu-dir');de.textContent=f.direction||'--';
-  de.className='v '+(f.direction?.includes('偏强')||f.direction?.includes('偏多')?'pos':f.direction?.includes('偏弱')||f.direction?.includes('偏空')?'neg':'');
+  de.className='v '+(f.direction?.includes('偏强')||f.direction?.includes('偏多')?'dir-up':f.direction?.includes('偏弱')||f.direction?.includes('偏空')?'dir-down':'');
   document.getElementById('fu-conf').textContent=f.confidence||'--';
   document.getElementById('fu-form').textContent=f.form||'--';
   document.getElementById('fu-hit').innerHTML=v?`<span class="${v.hit==='✅'?'pos':v.hit==='❌'?'neg':''}">${v.hit}</span>`:'--';
