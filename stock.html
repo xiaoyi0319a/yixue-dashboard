@@ -465,6 +465,7 @@ function renderCompare(){
   const bar=document.getElementById('compareBar');
   const p=D.prev_diagnose;
   if(!p||!p.date){bar.style.display='none';return}
+  const daysAgo=p.days_ago??Math.max(0,Math.round((new Date(D.date||Date.now())-new Date(p.date))/86400000));
   bar.style.display='block';
   const item=(label,o)=>{
     if(!o)return'';
@@ -472,7 +473,7 @@ function renderCompare(){
     return `<span style="margin-right:18px">${label}：<b style="color:${c?'#d29922':'#8b949e'}">${o.prev} → ${o.current}${c?' 🆕':''}</b></span>`;
   };
   const inds=(p.indicators||[]).filter(i=>i.changed).map(i=>`<span style="margin-right:12px;color:#d29922">${i.name} ${i.prev}→${i.current}（${i.delta}）</span>`).join('');
-  bar.innerHTML=`<span style="color:#58a6ff;font-weight:700;margin-right:14px">对比上次诊断（${p.days_ago}天前 @${p.date}）</span>${item('区间定位',p.zone)}${item('翻倍基因',p.gene)}${item('力量定级',p.grade)}${item('目标价区间',p.target_price)}${item('时机窗口',p.timing)}${inds}${p.summary?`<div style="margin-top:6px;color:#8b949e">${p.summary}</div>`:''}`;
+  bar.innerHTML=`<span style="color:#58a6ff;font-weight:700;margin-right:14px">对比上次诊断（${daysAgo}天前 @${p.date}）</span>${item('区间定位',p.zone)}${item('翻倍基因',p.gene)}${item('力量定级',p.grade)}${item('目标价区间',p.target_price)}${item('时机窗口',p.timing)}${inds}${p.summary?`<div style="margin-top:6px;color:#8b949e">${p.summary}</div>`:''}`;
 }
 
 /* ===== ⭐诊断综合结论渲染（V1.3） ===== */
