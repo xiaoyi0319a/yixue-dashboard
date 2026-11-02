@@ -591,7 +591,7 @@ function renderLayers(){
   de.className='v '+(f.direction?.includes('偏强')||f.direction?.includes('偏多')?'dir-up':f.direction?.includes('偏弱')||f.direction?.includes('偏空')?'dir-down':'');
   document.getElementById('fu-conf').textContent=f.confidence||'--';
   document.getElementById('fu-form').textContent=f.form||'--';
-  document.getElementById('fu-hit').innerHTML=v?`<span class="${v.hit==='✅'?'pos':v.hit==='❌'?'neg':''}">${v.hit}</span>`:'--';
+  document.getElementById('fu-hit').innerHTML=v?`<span class="${v.hit==='✅'?'pos':v.hit==='❌'?'neg':''}" title="${(v.note||'').replace(/"/g,'')}">${v.hit}</span>`:'<span style="color:#484f58;font-size:11px">首诊·无对账</span>';
   document.getElementById('fu-verdict').textContent=f.verdict||'--';
   if(D.todo_list)document.getElementById('fu-todo').innerHTML=D.todo_list.map(t=>`<li>${t}</li>`).join('');
   if(D.history)document.getElementById('fu-history').innerHTML=D.history.map(h=>{
