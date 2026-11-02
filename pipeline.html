@@ -728,6 +728,8 @@ function normalizeSchema(d){
         if(GRADE_RENAME[s.grade]) s.grade=GRADE_RENAME[s.grade];
         if(!s.slot&&s.time) s.slot=s.time.charAt(0);
         if((!s.time||s.time.indexOf('-')<0)&&SLOT_TIME_MAP[s.slot]) s.time=SLOT_TIME_MAP[s.slot];
+        /* ⭐11-02判语列修复：生产端7.5直写verdict违反patch17红线(schema权威=note)致看板"时段判语"列空2天(10-30起)；新格式分支原地补note兼容历史数据 */
+        if(!s.note&&s.verdict) s.note=s.verdict;
       });
     }
     /* matrix_drop：预测端V4.1-patch10（10-22起）cell="攻多"（纯渠道名），格信息在 read（"G30日干旺+2"）
@@ -836,7 +838,7 @@ function normalizeSchema(d){
     open_scenario:'',
     overnight_precheck:null
   };
-  /* four_slots：name→slot，补 dim；⭐11-02判语列修复——生产端7.5直写verdict违反patch17红线(schema权威=note)，归一化层双读兼容历史数据(10-30起) */
+  /* four_slots：name→slot，补 dim（旧格式分支——新格式分支的note兼容见723行forEach内） */
   if(Array.isArray(d.four_slots)){
     d.four_slots=d.four_slots.map(s=>({
       slot:s.slot||s.name,
