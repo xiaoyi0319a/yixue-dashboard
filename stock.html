@@ -321,7 +321,7 @@ function showEmpty(){
   const cs=document.getElementById('curStock');if(cs)cs.textContent='';
   const hs=document.getElementById('h-stock');if(hs)hs.textContent='未选择个股';
   document.getElementById('h-date').textContent='--';
-  const chips=(IDX.stocks||[]).slice().sort((a,b)=>(b.last_date||'').localeCompare(a.last_date||'')).map(s=>{const c=window._gc(s.last_grade);const nw=window._fresh(s.last_date)?' <span style="font-size:9px;color:#f0883e;font-weight:700">NEW</span>':'';return `<span onclick="selectStock('${s.code}')" style="padding:6px 12px;background:${c[0]};border-radius:16px;cursor:pointer;font-size:12px;color:${c[2]};border:1px solid ${c[1]}">${s.code} ${s.name}${nw}</span>`}).join('');
+  const chips=(IDX.stocks||[]).slice().sort((a,b)=>(b.last_date||'').localeCompare(a.last_date||'')).map(s=>{const c=window._gc(s.last_grade);return `<span onclick="selectStock('${s.code}')" style="padding:6px 12px;background:${c[0]};border-radius:16px;cursor:pointer;font-size:12px;color:${c[2]};border:1px solid ${c[1]}">${s.code} ${s.name}</span>`}).join('');
   document.getElementById('empty-stocks').innerHTML=chips||'<span style="color:#484f58;font-size:12px">暂无档案——对话中发送"诊断 {代码}"创建首诊</span>';
 }
 function loadSwitcher(){
@@ -334,12 +334,10 @@ function loadSwitcher(){
 }
 const GC={bull:['#f8514918','#f8514966','#ff9b94'],neutral:['#8b949e18','#8b949e55','#b6bec9'],bear:['#3fb95015','#3fb95066','#7ee2a8']};
 window._gc=function(g){g=g||'';if(/偏弱|偏空/.test(g))return GC.bear;if(/中性/.test(g))return GC.neutral;if(/偏多|偏强/.test(g))return GC.bull;return GC.neutral};
-window._fresh=function(d){if(!d)return false;const t=(d+'').replace(/-/g,'');const diff=(Date.now()-new Date(t.slice(0,4),+t.slice(4,6)-1,t.slice(6,8)).getTime())/864e5;return diff<=7};
 function stockRow(s){
  const z=s.last_zone||'';
  const c=window._gc(s.last_grade);
- const nw=window._fresh(s.last_date)?' <span style="font-size:9px;color:#f0883e;font-weight:700">NEW</span>':'';
- return `<div onclick="selectStock('${s.code}')" style="padding:8px 12px;cursor:pointer;border-bottom:1px solid #21262d;border-left:3px solid ${c[1]};display:flex;justify-content:space-between;gap:10px" onmouseover="this.style.background='#1c2129'" onmouseout="this.style.background=''"><span><b style="color:#58a6ff">${s.code}</b> ${s.name}${nw}</span><span style="color:#8b949e;font-size:11px">${s.last_date||''}${z?' · '+z:''}</span></div>`;
+ return `<div onclick="selectStock('${s.code}')" style="padding:8px 12px;cursor:pointer;border-bottom:1px solid #21262d;border-left:3px solid ${c[1]};display:flex;justify-content:space-between;gap:10px" onmouseover="this.style.background='#1c2129'" onmouseout="this.style.background=''"><span><b style="color:#58a6ff">${s.code}</b> ${s.name}</span><span style="color:#8b949e;font-size:11px">${s.last_date||''}${z?' · '+z:''}</span></div>`;
 }
 function fillListPanel(){
  const p=document.getElementById('stockListPanel');
