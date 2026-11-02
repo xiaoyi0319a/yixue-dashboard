@@ -655,7 +655,7 @@ slots: {
           b.tweak?'微调:'+b.tweak:null,
           b.amplitude?'振幅:'+b.amplitude:null
         ].filter(Boolean).join(' ｜ '):'';
-        return `<tr><td>${s.slot||'—'} ${s.time||''}</td><td style="color:${GRADE_COLOR(GRADE_VAL[s.grade]||0)};font-weight:600">${s.grade}</td><td class="note">${bTxt||'—（11-03起随预测端basis结构化输出）'}</td></tr>`}).join('')}
+        return `<tr><td>${s.slot||'—'} ${s.time||''}</td><td style="color:${GRADE_COLOR(GRADE_VAL[s.grade]||0)};font-weight:600">${s.grade}</td><td class="note">${bTxt||'—'}</td></tr>`}).join('')}
     </table></div>
     ${d.four_slots_summary?`<div class="detail-section"><h4>全天特征</h4><p class="note">${d.four_slots_summary}</p></div>`:''}`;
   }
