@@ -836,14 +836,14 @@ function normalizeSchema(d){
     open_scenario:'',
     overnight_precheck:null
   };
-  /* four_slots：name→slot，补 dim */
+  /* four_slots：name→slot，补 dim；⭐11-02判语列修复——生产端7.5直写verdict违反patch17红线(schema权威=note)，归一化层双读兼容历史数据(10-30起) */
   if(Array.isArray(d.four_slots)){
     d.four_slots=d.four_slots.map(s=>({
       slot:s.slot||s.name,
       time:s.time||SLOT_TIME_MAP[s.slot||s.name]||'',
       grade:s.grade||'无方向',
       dim:s.dim||'',
-      note:s.note||''
+      note:s.note||s.verdict||''
     }));
   }
   /* accel：pred→grade，divergence→divergence_note */
