@@ -299,6 +299,7 @@ td{color:#c9d1d9}
       <div class="fusion-item"><div class="k">对账</div><div class="v" id="fu-hit">--</div></div>
     </div>
     <div class="fusion-verdict" id="fu-verdict">--</div>
+    <div id="fu-verify-note" style="margin-top:6px;font-size:11px;line-height:1.6"></div>
   </div>
 
   <div style="margin-top:14px">
@@ -591,7 +592,9 @@ function renderLayers(){
   de.className='v '+(f.direction?.includes('偏强')||f.direction?.includes('偏多')?'dir-up':f.direction?.includes('偏弱')||f.direction?.includes('偏空')?'dir-down':'');
   document.getElementById('fu-conf').textContent=f.confidence||'--';
   document.getElementById('fu-form').textContent=f.form||'--';
-  document.getElementById('fu-hit').innerHTML=v?`<span class="${v.hit==='✅'?'pos':v.hit==='❌'?'neg':''}" title="${(v.note||'').replace(/"/g,'')}">${v.hit}</span>`:'<span style="color:#484f58;font-size:11px">首诊·无对账</span>';
+  document.getElementById('fu-hit').innerHTML=v?`<span class="${v.hit==='✅'?'pos':v.hit==='❌'?'neg':''}">${v.hit}</span>`:'<span style="color:#484f58;font-size:11px">无对账</span>';
+  const vn=document.getElementById('fu-verify-note');
+  if(vn)vn.innerHTML=(v&&v.note)?`<span style="color:#8b949e">对账：${v.note}</span>`:'';
   document.getElementById('fu-verdict').textContent=f.verdict||'--';
   if(D.todo_list)document.getElementById('fu-todo').innerHTML=D.todo_list.map(t=>`<li>${t}</li>`).join('');
   if(D.history)document.getElementById('fu-history').innerHTML=D.history.map(h=>{
