@@ -315,6 +315,7 @@ qimen: {
     }).join('')}
     </table></div>
     ${(()=>{const gs=[...(d.matrix_global||[]),...globalFromDrop.map(m=>({signal:(m.g?m.g+' ':'')+(m.read||(m.cell||'').split('×')[1]||''),dest:m.dest||''}))];return gs.length?`<p style="color:#c9d1d9;font-size:12px;margin-top:6px">全局项（格网外）：${gs.map(g=>`${g.signal} → ${g.dest}`).join('；')}</p>`:'';})()}
+    ${d.matrix_drop_note?`<p style="color:#d29922;font-size:12px;margin-top:6px">📋 ${d.matrix_drop_note}（格明细未结构化，矩阵格网今日暂停点亮显示）</p>`:''}
     ${d.matrix_missing&&d.matrix_missing.length?`<p style="color:#f85149;font-size:12px;margin-top:4px">缺格（⚠️当日登记）：${d.matrix_missing.map(m=>`${m.yongshen||m.用神||'—'}·${m.state||m.组合||''}`).join('；')}</p>`:''}
     ${d.matrix_missing_note?`<p style="color:#d29922;font-size:11px;margin-top:2px">📋 ${d.matrix_missing_note}</p>`:''}
     <div style="margin-top:8px;border-top:1px solid #30363d;padding-top:8px">
@@ -357,7 +358,7 @@ qimen: {
       const clStr=(typeof clRaw==='string')?clRaw:'';
       const fn=(d.qimen&&d.qimen.formula_note)||'';
       return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：\n${ls}\n─────────────────\n→ 表2-D → 奇门a（映射压缩在融合节点①）</div>
-      ${clStr?`<p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道说明：</b>${clStr}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`:`<p class="note">明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`}`;
+      ${clStr?`<p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道说明：</b>${clStr}<br>${fn}；${d.matrix_drop_note?`<span style="color:#d29922">📋 ${d.matrix_drop_note}</span>`:`明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）`}</p>`:`<p class="note">${d.matrix_drop_note?`<span style="color:#d29922">📋 ${d.matrix_drop_note}</span>`:`明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）`}</p>`}`;
     }
     /* fallback：旧版对象数组格式时前端计算 */
     /* 10-29起：layer_synthesis为对象且含formula → 直接展示预测端公式（与string分支同逻辑，避免前端重算层归属不一致） */
@@ -367,7 +368,7 @@ qimen: {
       const clStr2=(typeof clRaw2==='string')?clRaw2:'';
       const fn2=(d.qimen&&d.qimen.formula_note)||'';
       return `<div class="formula" style="margin-top:8px">⭐层内加总×层系数·三渠道合成（格存基础分·层间才加权）：\n${lsObj.formula}\n─────────────────\n→ 表2-D → 奇门a（映射压缩在融合节点①）</div>
-      ${clStr2?`<p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道说明：</b>${clStr2}<br>${fn2}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`:`<p class="note">明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）</p>`}`;
+      ${clStr2?`<p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道说明：</b>${clStr2}<br>${fn2}；${d.matrix_drop_note?`<span style="color:#d29922">📋 ${d.matrix_drop_note}</span>`:`明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）`}</p>`:`<p class="note">${d.matrix_drop_note?`<span style="color:#d29922">📋 ${d.matrix_drop_note}</span>`:`明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）`}</p>`}`;
     }
     const YL={'日干':'核心','时干':'核心','值符':'核心','值使门':'核心','值使':'核心','庚':'力量','乙奇':'力量','戊':'力量','生门':'力量','开门':'力量','景门':'衍生','九天':'衍生','九地':'衍生','天蓬':'衍生','玄武':'衍生'};
     /* layer_coef：10-29起预测端输出字符串"核心1.5/力量1.0/衍生0.5（...）" → 正则提取为对象 */
@@ -416,7 +417,7 @@ qimen: {
 结构a_raw = ${formula('结构')} = ${st.v>0?'+':''}${st.v}
 ─────────────────
 a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇门a（映射压缩在融合节点①）</div>
-  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=${cl.攻多}<br><span style="color:#f85149">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）${q.reread_note?`<br><span style="color:#d29922">📋 重读备注：${q.reread_note}</span>`:''}</p>`;
+  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=${cl.攻多}<br><span style="color:#f85149">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；${d.matrix_drop_note?`<span style="color:#d29922">📋 ${d.matrix_drop_note}</span>`:`明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）`}${q.reread_note?`<br><span style="color:#d29922">📋 重读备注：${q.reread_note}</span>`:''}</p>`;
   })()}
   </div>`
 
@@ -727,6 +728,15 @@ const GRADE_LABEL_MAP={'-3':'强空','-2':'中空','-1':'略偏空','0':'无方�
 function normalizeSchema(d){
   if(!d||typeof d!=='object') return d;
   const has=(o,k)=>o&&Object.prototype.hasOwnProperty.call(o,k);
+  /* ⭐11-05数据防御：生产端matrix_drop输出字符串说明（格明细未结构化，今日22格）→置[]并保留note供渲染层展示；
+     final_grade数字编码（11-03起，如1=略偏多）→档位映射，indexOf类字符串操作不再崩 */
+  if(typeof d.matrix_drop==='string'){d.matrix_drop_note=d.matrix_drop;d.matrix_drop=[];}
+  else if(d.matrix_drop&&typeof d.matrix_drop==='object'&&!Array.isArray(d.matrix_drop)){d.matrix_drop_note=JSON.stringify(d.matrix_drop);d.matrix_drop=[];}
+  if(d.fusion&&typeof d.fusion.final_grade==='number'){
+    const FG={'-3':'强空','-2':'中空','-1':'略偏空','0':'无方向','1':'略偏多','2':'中多','3':'强多'};
+    const k=String(d.fusion.final_grade);
+    d.fusion.final_grade=has(FG,k)?FG[k]:k;
+  }
   const isOld=has(d.v0,'bar_score');
   if(!isOld){
     /* 新格式：four_slots 补 slot/time——新schema time="巳 09:30"单时点，slot缺省；渲染与SVG需要旧式范围（巳 09:30-10:30），用SLOT_TIME_MAP补齐 */
