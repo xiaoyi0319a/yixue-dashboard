@@ -1,0 +1,391 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://yixue-dashboard.local/pipeline.schema.json",
+  "title": "预测管线看板数据契约 schema2.0",
+  "description": "组装器组装产物的验收基准。基线=2026-11-05数据口径；历史数据兼容由前端normalize负责，schema只卡组装产物。漂移高发点=matrix_drop/final_grade/four_slots.grade/layer_synthesis 四事故区。",
+  "type": "object",
+  "required": ["schema_version", "date", "path", "ganzhi", "dun", "macd", "qimen", "fusion", "four_slots", "palace_table", "matrix_drop", "shape", "volatility"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "macd_date": {"type": "string"},
+    "date_display": {"type": "string"},
+    "ganzhi": {"type": "string", "minLength": 1},
+    "dun": {"type": "string", "minLength": 1},
+    "path": {"type": "string", "pattern": "^[ABCD]", "description": "顶层path必填（11-04事故防线）——路径族A/B/C/D急停并存（'C维持'/'C-维持'/'D急停-W'），模式锁首字符"},
+    "rule_version": {"type": "string"},
+
+    "macd": {
+      "type": "object",
+      "required": ["dif", "dea", "bar"],
+      "additionalProperties": true,
+      "properties": {
+        "dif": {"type": "number"},
+        "dea": {"type": "number"},
+        "bar": {"type": "number"},
+        "prev_bar": {"type": "number"},
+        "prev2_bar": {"type": "number"},
+        "bar_delta": {"type": ["number", "string"]},
+        "dead_cross_day": {"type": "integer"},
+        "state": {"type": "string"},
+        "trend": {"type": "string"},
+        "note": {"type": "string"},
+        "precheck_note": {"type": "string"},
+        "legend": {"type": "string"},
+        "grade_label_map": {
+          "type": "object",
+          "description": "七档+深水扩展标签图（组装器常量）",
+          "additionalProperties": {"type": "string"}
+        }
+      }
+    },
+
+    "v0": {
+      "description": "旧三维口径（≤10-24归档），新数据用matrix块",
+      "type": ["object", "string"],
+      "additionalProperties": true,
+      "properties": {
+        "cross": {"type": "integer"}, "bar_strength": {"type": "integer"},
+        "dif_pos": {"type": "integer"}, "raw_score": {"type": "number"},
+        "precal": {"type": "integer"}, "weak_base_guard": {"type": "string"}
+      }
+    },
+
+    "matrix": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["score"],
+      "properties": {
+        "score": {"type": ["number", "integer"]},
+        "l1": {"type": "string"}, "l2": {"type": "string"}, "l3": {"type": "string"},
+        "l1_cell": {"type": "string"}, "l2_state": {"type": "string"},
+        "l1_abc": {"type": "array"},
+        "ratio": {"type": ["string", "number"]},
+        "note": {"type": "string"}, "signal": {"type": "string"},
+        "side": {"type": "string"}, "seg_day": {"type": "integer"},
+        "base": {"type": ["number", "string"]}, "l2_adj": {"type": ["number", "string"]}, "l3_adj": {"type": ["number", "string"]}
+      }
+    },
+
+    "qimen": {
+      "type": "object",
+      "required": ["a_raw", "a_discrete", "a_total", "attack_plus", "attack_minus", "structure"],
+      "additionalProperties": true,
+      "properties": {
+        "a_raw": {"type": ["number", "integer"]},
+        "a_discrete": {"type": "integer"},
+        "a_total": {"type": "integer"},
+        "attack_plus": {"type": ["number", "integer"]},
+        "attack_minus": {"type": ["number", "integer"]},
+        "structure": {"type": ["number", "integer"]},
+        "attack_plus_signals": {"type": ["array", "string"], "items": {"type": ["string", "object"]}},
+        "attack_minus_signals": {"type": ["array", "string"], "items": {"type": ["string", "object"]}},
+        "structure_signals": {"type": ["array", "string"], "items": {"type": ["string", "object"]}},
+        "trial_signals": {"type": ["array", "string"]},
+        "a_meaning": {
+          "type": "object",
+          "description": "五档状态文案（⭐键名=不带符号整数字符串）",
+          "required": ["2", "1", "0", "-1", "-2"],
+          "additionalProperties": {"type": "string"}
+        },
+        "layer_coef": {"type": ["object", "string"]},
+        "layer_synthesis": {
+          "type": ["object", "string"],
+          "description": "三层合成明细；对象形态时formula键优先",
+          "properties": {"formula": {"type": "string"}},
+          "additionalProperties": true
+        },
+        "channel_legend": {"type": "string"},
+        "formula_note": {"type": "string"},
+        "roles_legend": {"type": ["object", "string"]},
+        "matrix_meta": {"type": ["object", "string"]},
+        "matrix_def": {"type": ["object", "string"]},
+        "reread_note": {"type": "string"},
+        "r_threshold": {"type": ["string", "number"]},
+        "r_triggered": {"type": "boolean"}
+      }
+    },
+
+    "palace_table": {
+      "type": "array",
+      "minItems": 9,
+      "description": "用神落宫表（⭐每行note必填——话术源=判语日志第十五章）",
+      "items": {
+        "type": "object",
+        "required": ["palace", "star", "god", "door", "sky_ground", "month_state", "note"],
+        "additionalProperties": true,
+        "properties": {
+          "palace": {"type": "string", "minLength": 1},
+          "star": {"type": "string"},
+          "god": {"type": "string"},
+          "door": {"type": "string"},
+          "sky_ground": {"type": "string"},
+          "month_state": {"type": "string"},
+          "note": {"type": "string", "minLength": 1},
+          "yongshen": {"type": "string"},
+          "gods": {"type": "array", "items": {"type": "string"}},
+          "harms": {"type": ["array", "string"], "items": {"type": "string"}}
+        }
+      }
+    },
+
+    "matrix_drop": {
+      "type": "array",
+      "minItems": 1,
+      "description": "⭐11-05事故区：格亮即计分，必须是结构化数组，禁止字符串/对象（'见报告第N节'类偷懒拦截）",
+      "items": {
+        "type": "object",
+        "required": ["cell", "state", "dest"],
+        "anyOf": [
+          {"required": ["g"], "properties": {"cell": {"type": "string", "pattern": "^[^×]+×[^×]+$", "description": "旧格式：用神×状态列"}}},
+          {"required": ["read"], "properties": {"cell": {"type": "string", "minLength": 1, "description": "V4.1-patch10格式：cell=渠道名，格信息在read"}}}
+        ],
+        "properties": {
+          "cell": {"type": "string", "minLength": 1},
+          "g": {"type": "string", "pattern": "^[GA]\\d+"},
+          "state": {"type": "string", "enum": ["●", "⊙", "◌", "⚠️"]},
+          "dest": {"type": "string", "pattern": "^(攻多|攻空|结构)"},
+          "signal": {"type": "string"},
+          "read": {"type": "string"},
+          "note": {"type": "string"},
+          "base": {"type": ["number", "integer", "string"]},
+          "score": {"type": ["number", "integer"]},
+          "channel": {"type": "string"},
+          "grid": {"type": "string"},
+          "status": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+
+    "matrix_missing": {"type": ["array", "null"]},
+    "matrix_missing_note": {"type": "string"},
+    "matrix_global": {"type": "array"},
+
+    "fusion": {
+      "type": "object",
+      "required": ["v0", "v0_int", "a_total", "b_value", "v_cross", "v_final", "final_grade", "path"],
+      "additionalProperties": true,
+      "properties": {
+        "v0": {"type": ["number", "integer"]},
+        "v0_int": {"type": "integer"},
+        "v0_src": {"type": "string"},
+        "a_macd": {"type": "integer"},
+        "qimen_a": {"type": "integer"},
+        "a_raw": {"type": ["number", "integer"]},
+        "a_total_raw": {"type": ["number", "integer"]},
+        "weak_base_clamp": {"type": "string"},
+        "b_raw": {"type": "integer"},
+        "b_value": {"type": "integer"},
+        "b_note": {"type": "string"},
+        "v_cross": {"type": "integer"},
+        "v_final": {"type": "integer"},
+        "final_grade": {
+          "type": "string",
+          "enum": ["强空", "中空", "略偏空", "无方向", "略偏多", "中多", "强多"],
+          "description": "⭐11-05事故区：必须是表4-A档名字符串，禁止数字编码"
+        },
+        "path": {"type": "string", "pattern": "^[ABC]"},
+        "combo_lookup": {"type": "string"},
+        "cross_desc": {"type": "string"},
+        "r_prime": {"type": "integer"},
+        "r_triggered": {"type": "boolean"},
+        "r_trigger": {"type": ["object", "string"]},
+        "v_reversed": {"type": "integer"}
+      }
+    },
+
+    "four_slots": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "⭐patch24：basis判定层依据五要素随four_slots直写",
+      "items": {
+        "type": "object",
+        "required": ["slot", "grade"],
+        "additionalProperties": true,
+        "properties": {
+          "slot": {"type": "string", "pattern": "^(巳|午|未|申)", "description": "生产端口径=时段+时间（'巳 09:30'），模式锁首字，前端normalize兼容补全"},
+          "grade": {
+            "type": "string",
+            "enum": ["强空", "中空", "偏弱", "偏空", "略偏空", "微偏弱", "中性偏弱", "无方向", "中性", "中性偏强", "微偏强", "略偏多", "偏多", "偏强", "中多", "强多"],
+            "description": "GRADE_VAL全集+九档交集（旧档名中性偏强/中性偏弱由前端normalize归一）"
+          },
+          "time": {"type": "string"},
+          "note": {"type": "string"},
+          "verdict": {"type": "string"},
+          "start": {"type": ["number", "integer"]},
+          "end": {"type": ["number", "integer"]},
+          "pattern": {"type": "string"},
+          "basis": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "trigger": {"type": "string"},
+              "wuxing": {"type": "string"},
+              "ceiling": {"type": "string"},
+              "tweak": {"type": "string"},
+              "amplitude": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+
+    "shape": {
+      "type": "object",
+      "required": ["close_label", "pattern", "body_grade", "amplitude_grade"],
+      "additionalProperties": true,
+      "properties": {
+        "close_label": {"type": "string", "minLength": 1},
+        "pattern": {"type": "string"},
+        "body_grade": {"type": "string"},
+        "amplitude_grade": {"type": "string"},
+        "three_value_label": {"type": "string"},
+        "day_pattern": {"type": "string"},
+        "note": {"type": "string"}
+      }
+    },
+
+    "volatility": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "grade": {"type": "string"},
+        "synthesis": {"type": "string"},
+        "net_displacement_marker": {"type": "string"},
+        "evidence": {"type": "object", "additionalProperties": {"type": "string"}}
+      }
+    },
+
+    "flip": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "properties": {
+        "direction": {"type": "string"}, "stage": {"type": "string"},
+        "seg_day": {"type": "integer"}, "next_trigger": {"type": "string"},
+        "hit_rate": {"type": "string"}
+      }
+    },
+
+    "accel": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "properties": {
+        "grade": {"type": "string"}, "macd_side": {"type": "string"},
+        "qimen_side": {"type": "string"}, "conflict": {"type": "string"},
+        "context": {"type": "string"}, "divergence_note": {"type": "string"}
+      }
+    },
+
+    "strong_bottom": {"type": ["string", "null"]},
+    "strong_bottom_note": {"type": "string"},
+
+    "output": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "grade": {"type": "string"},
+        "direction_note": {"type": "string"},
+        "open_scenario": {"type": "string"},
+        "overnight_precheck": {"type": "object", "additionalProperties": true},
+        "three_d": {
+          "type": "object",
+          "properties": {
+            "overnight": {"type": "string"},
+            "intraday": {"type": "string"},
+            "daily": {"type": "string"}
+          }
+        }
+      }
+    },
+
+    "nine_fields": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "v0_grade": {"type": "integer"}, "a_macd": {"type": "integer"},
+        "qimen_a": {"type": "integer"}, "a_raw": {"type": ["number", "integer"]},
+        "b_value": {"type": "integer"}, "path": {"type": "string"},
+        "final_grade": {"type": "integer"},
+        "grade_label": {"type": "string"},
+        "weak_base_dir": {"type": "integer"},
+        "r_prime": {"type": "integer"},
+        "cal_A": {"type": "string"}, "cal_B": {"type": "string"}, "cal_C": {"type": "string"},
+        "deep_water_conf": {"type": "string"}
+      }
+    },
+
+    "adjust": {
+      "type": ["object", "string"],
+      "additionalProperties": true,
+      "properties": {
+        "circuit_breaker": {"type": "string"}, "deep_water": {"type": "string"},
+        "fan_yin": {"type": "string"}, "patch_track": {"type": "string"},
+        "policy_window": {"type": "string"}, "wubi": {"type": "string"}
+      }
+    },
+
+    "calibration": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "cal_A": {"type": ["boolean", "string"]}, "cal_B": {"type": ["boolean", "string"]},
+        "cal_C": {"type": ["boolean", "string"]}, "r_threshold": {"type": "integer"},
+        "note": {"type": "string"}
+      }
+    },
+
+    "four_slots_4p": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slot": {"type": "string"}, "a_p": {"type": "integer"},
+          "v0p": {"type": "integer"}, "pred_4p": {"type": "string"},
+          "path_4p": {"type": "string"}
+        }
+      }
+    },
+    "four_slots_summary": {"type": "string"},
+
+    "actual_curve": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "properties": {
+        "date": {"type": "string"},
+        "note": {"type": "string"},
+        "points": {"type": "array", "items": {"type": "object", "required": ["t", "v"], "properties": {"t": {"type": "number"}, "v": {"type": "number"}}}}
+      }
+    },
+
+    "verification": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "status": {"type": "string"},
+        "pending": {"type": "boolean"},
+        "date": {"type": "string"},
+        "grade_match": {"type": "string"},
+        "path_verdict": {"type": "string"},
+        "pattern_match": {"type": "string"},
+        "pattern_actual": {"type": "string"},
+        "volatility_pred": {"type": "string"},
+        "volatility_actual": {"type": "string"},
+        "volatility_hit": {"type": "string"},
+        "changes": {"type": "string"},
+        "note": {"type": "string"},
+        "morning": {"type": "object", "additionalProperties": true},
+        "actual": {"type": "object", "additionalProperties": true},
+        "binary": {"type": "object", "additionalProperties": true},
+        "four_slots": {"type": "object", "additionalProperties": true},
+        "three_d": {"type": "object", "additionalProperties": true},
+        "reversal": {"type": "object", "additionalProperties": true},
+        "matrix": {"type": "object", "additionalProperties": true},
+        "accel": {"type": "object", "additionalProperties": true},
+        "bias_modes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}
