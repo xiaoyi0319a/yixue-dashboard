@@ -86,10 +86,15 @@ def check_arithmetic(d):
         except (TypeError, ValueError): return None
     v0, at, bx, vf = num(f.get("v0_int")), num(f.get("a_total")), num(f.get("b_value")), num(f.get("v_final"))
     vc = num(f.get("v_cross"))
-    if None not in (v0, at, vc) and abs((v0 + at) - vc) > 0.01:
-        errs.append(f"v_cross({vc}) ≠ v0_int({v0})+a_total({at})")
-    if None not in (vc, bx, vf) and abs((vc + bx) - vf) > 0.01:
-        errs.append(f"v_final({vf}) ≠ v_cross({vc})+b_value({bx})")
+    # 表3-A/表3-D：v_cross=clip(v0+a总,±4)，v_final=clip(v_cross+b,±4)——恒等式必须含限幅（11-06首个clip案例实锤）
+    if None not in (v0, at, vc):
+        exp_vc = max(-4, min(4, v0 + at))
+        if abs(exp_vc - vc) > 0.01:
+            errs.append(f"v_cross({vc}) ≠ clip(v0_int({v0})+a_total({at}),±4)={exp_vc}")
+    if None not in (vc, bx, vf):
+        exp_vf = max(-4, min(4, vc + bx))
+        if abs(exp_vf - vf) > 0.01:
+            errs.append(f"v_final({vf}) ≠ clip(v_cross({vc})+b_value({bx}),±4)={exp_vf}")
     qa, am = num(q.get("a_total")), num(f.get("a_macd"))
     if None not in (qa, am) and f.get("a_total") is not None and abs(qa - num(f.get("a_total"))) > 0.01:
         errs.append(f"fusion.a_total({f.get('a_total')}) ≠ qimen.a_total({qa})")

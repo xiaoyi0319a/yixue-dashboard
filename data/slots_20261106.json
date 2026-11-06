@@ -20,7 +20,8 @@
     "ratio": "深水（DIF-52.31，§2.10-b双注强制）",
     "node_score": "+2（=+1+1×(0.5+0.5)，深水低置信）",
     "signal": "金叉第3日站稳确认中（S4确认中）；金叉日坐标系连续第2日（哨兵登记待周复盘）",
-    "note": "推演：价涨动能扩+初段加速，方向偏多无疑义；深水修复级高度打折，底座方向记账偏多"
+    "note": "推演：价涨动能扩+初段加速，方向偏多无疑义；深水修复级高度打折，底座方向记账偏多",
+    "score": 2
   },
   "v0": "矩阵节点分+2（格3收高柱放阳+多段初段+0.5+加速deep净+0.5；深水低置信双注）",
   "qimen": {
@@ -28,7 +29,7 @@
     "attack_minus": 10.5,
     "structure": 14.0,
     "a_raw": 33.5,
-    "a_discrete": "+2",
+    "a_discrete": 2,
     "a_total": 2,
     "r_triggered": false,
     "r_threshold": "攻空25.75≥10（对面攻方口径）",
@@ -105,7 +106,7 @@
     }
   },
   "fusion": {
-    "v0": "+2（格3+多段初段+0.5+加速deep净+0.5；深水低置信）",
+    "v0": 2,
     "v0_src": "Step4.12矩阵节点分",
     "v0_int": 2,
     "a_macd": 0,
@@ -376,7 +377,7 @@
       "sky_ground": "辛（寄坤二）",
       "month_state": "",
       "harms": [],
-      "note": ""
+      "note": "中五寄坤二，天盘辛随行——枢纽随坤二而论，不独立断"
     }
   ],
   "matrix_drop": [
@@ -549,7 +550,7 @@
       "note": "朱雀投江（剧震带煞）"
     },
     {
-      "cell": "马星动",
+      "cell": "马星×动",
       "g": "G91",
       "state": "●",
       "dest": "结构+1.5",
@@ -618,6 +619,7 @@
   ],
   "four_slots_summary": "日内路径主叙事：低开开局底盘承接修复推升（巳）→空方帅午禄伺机制衡防急回（午）→午后土时底盘再聚收敛渐显（未）→金气当令卖方禄地试压回归偏多定型（申）｜有方向·正常输出（中波动偏上沿），形态标签=拉锯震荡",
   "verification": {
+    "status": "pending",
     "morning": {
       "grade": "偏多",
       "path": "C维持",
@@ -625,16 +627,7 @@
       "kline": "阳线",
       "close": "收涨"
     },
-    "actual": null,
-    "binary": null,
-    "four_slots": null,
-    "grade_match": null,
-    "changes": null,
-    "volatility_pred": "中波动偏上沿",
-    "volatility_actual": null,
-    "volatility_hit": null,
-    "path_verdict": null,
-    "pattern_match": null
+    "volatility_pred": "中波动偏上沿"
   },
   "actual_curve": null
 }
