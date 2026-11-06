@@ -1004,7 +1004,7 @@ function slotsSVG(slots,w,h,actualCurve){
 /* ==================== 验证对比渲染 ==================== */
 function renderVerification(v){
   if(!v) return '<p class="note">暂无验证数据</p>';
-  if(v.status==='pending'){
+  if(v.status==='pending'&&!v.actual){
     return `<div style="text-align:center;padding:24px 0">
       <div style="font-size:32px;margin-bottom:8px">⏳</div>
       <div style="font-size:14px;color:#c9d1d9;margin-bottom:4px">待收盘验证</div>
