@@ -376,7 +376,11 @@
         "volatility_hit": {"type": "string"},
         "changes": {"type": "string"},
         "note": {"type": "string"},
-        "morning": {"type": "object", "additionalProperties": true},
+        "morning": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "⭐11-06语义定义（三维术语锚定2026-10-21老师口径，波形图5锚点查表依据源）：open=隔夜动能=缺口方向（开vs昨收：低开/平开/高开，驱动P0锚）｜kline=日内方向（收vs开：阳线/阴线，与P0-P4无关）｜close=全天趋势=涨跌（收vs昨收：收涨/平收/收跌，驱动P4锚定昨收）｜grade=全天定级（压级后档名）｜path=路径标签。映射规则：偏强/偏多/略偏多→收涨；无方向→平收；略偏空/偏空/偏弱→收跌（表4-A档位=收vs昨收区间定义，天然决定）"
+        },
         "actual": {"type": "object", "additionalProperties": true},
         "binary": {"type": "object", "additionalProperties": true},
         "four_slots": {"type": "object", "additionalProperties": true},
