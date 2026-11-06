@@ -912,9 +912,9 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
   ctx=ctx||{};
   const gv=g=>GRADE_VAL[g]!==undefined?GRADE_VAL[g]:0;
   const clampV=v=>Math.max(-3,Math.min(3,v));
-  /* ⭐示意路径5锚点查表制（2026-11-06老师15:20定稿——映射表登记于《看板数据同步工作流》D节）：
-     纵轴=相对昨收，定级每级±0.5累加；P0(9:30)=缺口锚（低开-1/平开0/高开+1）
-     P1(10:30)=P0+0.5×巳｜P2(11:30=13:00)=P1+0.5×午｜P3(14:00)=P2+0.5×未｜P4(15:00)=P3+0.5×申，再锚定昨收：收涨→≥+0.5/收跌→≤-0.5/平收不动（限幅±3） */
+  /* ⭐示意路径5锚点查表制（2026-11-06老师15:20定稿+15:30语义纠正——点位高度=定级档本身，非累积；映射表登记于《看板数据同步工作流》D节）：
+     纵轴=相对昨收，限幅±3；P0(9:30)=缺口锚（低开-1/平开0/高开+1）
+     P1(10:30)=0.5×巳定级｜P2(11:30=13:00同位)=0.5×午定级｜P3(14:00)=0.5×未定级｜P4(15:00)=0.5×申定级，再锚定昨收：收涨→≥+0.5/收跌→≤-0.5/平收不动 */
   const openGap=ctx.open==='低开'?-1:ctx.open==='高开'?1:0;
   const K=0.5;
 
@@ -951,14 +951,16 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
     return 0.5+Math.min(1,(t-PM_START)/(PM_END-PM_START))*0.5;
   }
 
-  /* 累积价路径：cum[0]=P0缺口锚，cum[i+1]=cum[i]+K×时段定级（限幅±3） */
-  const cum=[openGap];
-  for(let i=0;i<n;i++) cum.push(clampV(cum[i]+K*gv(slots[i].grade)));
-  /* P4收盘锚定昨收（老师15:20定稿）：收涨必须收在昨收上方+0.5/收跌必须收在下方-0.5，平收不动 */
-  if(ctx.close==='收涨'&&cum[n]<0.5) cum[n]=0.5;
-  if(ctx.close==='收跌'&&cum[n]>-0.5) cum[n]=-0.5;
-  const endVals=cum.slice(1);
-  const A=cum[0];
+  /* 5锚点值：P0=缺口锚；P1~P3=0.5×定级值（点位高度=定级档本身）；P4=0.5×申定级后锚定昨收（收涨≥+0.5/收跌≤-0.5/平收不动） */
+  const endVals=slots.map((s,i)=>{
+    let v=clampV(K*gv(s.grade));
+    if(i===n-1){
+      if(ctx.close==='收涨'&&v<0.5) v=0.5;
+      if(ctx.close==='收跌'&&v>-0.5) v=-0.5;
+    }
+    return v;
+  });
+  const A=openGap;
 
   /* legs构建：每段fx边界取自time（缺省i/n），段末值=endVals；首段起点=开盘锚；末段按关键字一拆二（先抑后扬/先扬后抑） */
   const rawPts=[];
