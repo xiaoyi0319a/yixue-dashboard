@@ -641,7 +641,7 @@ slots: {
       ?`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #d29922;background:#d2992215"><b style="color:#d29922">▶ 无方向 · 全天波动小</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，<0.8%低波动</b> → 四时段全部输出无方向，不验证准确率</p>`
       :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，≥0.8%中波动起步</b> → 四时段正常方向解释，收盘后验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
-    <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意路径=开盘缺口+时段定级累积·机械化映射（纵轴≈相对昨收，时段定级=每小时涨跌倾向；9:30为缺口锚、15:00为累积终点，非点位预测）</p>
+    <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意路径=5锚点查表（映射表见看板数据同步工作流D节）：9:30缺口锚（低开-1/高开+1）→每时段累加0.5×定级→15:00锚定昨收（收涨≥+0.5/收跌≤-0.5）；纵轴=相对昨收，非点位预测</p>
     ${modeTag}
     ${slotsSVG(d.four_slots,520,190,d.actual_curve,slotCtx(d))}
     </div>
@@ -902,27 +902,20 @@ function showDetail(key){
 /* ==================== 四时段SVG折线图 ==================== */
 const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'中性偏弱':-1,'强空':-3,'中空':-2,'无方向':0,'中性':0,'中性偏强':1,'微偏强':1,'略偏多':1,'偏多':2,'中多':2,'偏强':3,'强多':3};
 const GRADE_COLOR=v=>v>0?'#3fb950':v<0?'#f85149':'#8b949e';
-/* ⭐示意路径上下文（2026-11-06老师14:42提议配套）：开盘情景/收盘预期/申时微调=机械化映射输入，禁止语义手绘 */
+/* ⭐示意路径上下文（2026-11-06老师15:20定稿5锚点查表制）：开盘情景/收盘预期=查表输入，纯机械化无手绘 */
 function slotCtx(d){
   const m=(d.verification&&d.verification.morning)||{};
-  const fs=d.four_slots||[];
-  const last=fs[fs.length-1]||{};
-  const b=last.basis||{};
-  return {open:m.open,close:m.close,tailTweak:[b.tweak,b.trigger,last.note].filter(Boolean).join(' ')};
+  return {open:m.open,close:m.close};
 }
 function slotsSVG(slots,w,h,actualCurve,ctx){
   if(!slots||!slots.length) return '';
   ctx=ctx||{};
   const gv=g=>GRADE_VAL[g]!==undefined?GRADE_VAL[g]:0;
   const clampV=v=>Math.max(-3,Math.min(3,v));
-  /* ⭐示意路径=开盘缺口+时段定级累积（2026-11-06老师14:42提议+15:04语义纠正——时段定级=每小时涨跌倾向=增量，非绝对水位；纵轴≈相对昨收）：
-     9:30锚=缺口（低开-1/平开0/高开+1，昨收下方/上方）｜此后每段累加0.5×定级值（偏强+1.5/微偏强+0.5/无方向0）
-     申段内形态=时段依据关键字映射（试压/回落/回归→先抑后扬V，拉升/冲高/单边→先扬后抑∧，无关键字→直进）
-     收盘预期仅矛盾调和：收涨必须收在开盘上方/收跌必须收在下方（非矛盾日不动数值） */
+  /* ⭐示意路径5锚点查表制（2026-11-06老师15:20定稿——映射表登记于《看板数据同步工作流》D节）：
+     纵轴=相对昨收，定级每级±0.5累加；P0(9:30)=缺口锚（低开-1/平开0/高开+1）
+     P1(10:30)=P0+0.5×巳｜P2(11:30=13:00)=P1+0.5×午｜P3(14:00)=P2+0.5×未｜P4(15:00)=P3+0.5×申，再锚定昨收：收涨→≥+0.5/收跌→≤-0.5/平收不动（限幅±3） */
   const openGap=ctx.open==='低开'?-1:ctx.open==='高开'?1:0;
-  const tailText=ctx.tailTweak||'';
-  const tailDip=/试压|回落|回归|下压|回踩/.test(tailText);
-  const tailPeak=!tailDip&&/拉升|冲高|单边|飙升/.test(tailText);
   const K=0.5;
 
   /* ⭐防裁切布局（2026-10-28修复）：顶部容纳点位标签文字（y-9）+呼吸空间，底部容纳时间轴文字
@@ -958,12 +951,12 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
     return 0.5+Math.min(1,(t-PM_START)/(PM_END-PM_START))*0.5;
   }
 
-  /* 累积价路径：cum[0]=9:30缺口锚，cum[i+1]=cum[i]+K×时段定级（限幅±3） */
+  /* 累积价路径：cum[0]=P0缺口锚，cum[i+1]=cum[i]+K×时段定级（限幅±3） */
   const cum=[openGap];
   for(let i=0;i<n;i++) cum.push(clampV(cum[i]+K*gv(slots[i].grade)));
-  /* 收盘预期矛盾调和（仅矛盾介入）：收涨须收在开盘上方/收跌须收在下方 */
-  if(ctx.close==='收涨'&&cum[n]<=cum[0]) cum[n]=clampV(cum[0]+0.75);
-  if(ctx.close==='收跌'&&cum[n]>=cum[0]) cum[n]=clampV(cum[0]-0.75);
+  /* P4收盘锚定昨收（老师15:20定稿）：收涨必须收在昨收上方+0.5/收跌必须收在下方-0.5，平收不动 */
+  if(ctx.close==='收涨'&&cum[n]<0.5) cum[n]=0.5;
+  if(ctx.close==='收跌'&&cum[n]>-0.5) cum[n]=-0.5;
   const endVals=cum.slice(1);
   const A=cum[0];
 
@@ -981,26 +974,12 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
   }
   for(let i=0;i<n;i++){
     const vStart=i===0?A:endVals[i-1];
-    const isLast=i===n-1;
-    if(isLast&&(tailDip||tailPeak)){
-      const fxMid=(legFx[i]+legFx[i+1])/2;
-      const midV=tailDip?Math.min(vStart,endVals[i])-0.5:Math.max(vStart,endVals[i])+0.5;
-      [[legFx[i],fxMid,vStart,midV],[fxMid,legFx[i+1],midV,endVals[i]]].forEach(([x0,x1,v0,v1])=>{
-        const px0=pad.l+iw*x0, px1=pad.l+iw*x1;
-        for(let j=0;j<SEG_PTS;j++){
-          const t=j/SEG_PTS;
-          const ease=t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-          rawPts.push({x:px0+(px1-px0)*ease, y:zeroY-(v0+(v1-v0)*t)*stepY});
-        }
-      });
-    }else{
-      const px0=pad.l+iw*legFx[i], px1=pad.l+iw*legFx[i+1];
-      const v0=vStart, v1=endVals[i];
-      for(let j=0;j<SEG_PTS;j++){
-        const t=j/SEG_PTS;
-        const ease=t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-        rawPts.push({x:px0+(px1-px0)*ease, y:zeroY-(v0+(v1-v0)*t)*stepY});
-      }
+    const px0=pad.l+iw*legFx[i], px1=pad.l+iw*legFx[i+1];
+    const v0=vStart, v1=endVals[i];
+    for(let j=0;j<SEG_PTS;j++){
+      const t=j/SEG_PTS;
+      const ease=t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+      rawPts.push({x:px0+(px1-px0)*ease, y:zeroY-(v0+(v1-v0)*t)*stepY});
     }
   }
   rawPts.push({x:pad.l+iw*legFx[n], y:zeroY-endVals[n-1]*stepY});
@@ -1046,7 +1025,7 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
 
   const curveDate=actualCurve&&actualCurve.date?actualCurve.date:'';
   const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-52}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际${curveDate?' '+curveDate:''}</text>`:
-    `<text x="${pad.l}" y="${pad.t-8}" text-anchor="start" fill="#484f58" font-size="9">示意=缺口+定级累积（相对昨收）</text>`;
+    `<text x="${pad.l}" y="${pad.t-8}" text-anchor="start" fill="#484f58" font-size="9">示意=5锚点·相对昨收·每级±0.5</text>`;
 
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
     <line x1="${pad.l}" y1="${zeroY}" x2="${w-pad.r}" y2="${zeroY}" stroke="#30363d" stroke-dasharray="4,3"/>
