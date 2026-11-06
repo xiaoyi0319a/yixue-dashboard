@@ -641,8 +641,9 @@ slots: {
       ?`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #d29922;background:#d2992215"><b style="color:#d29922">▶ 无方向 · 全天波动小</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，<0.8%低波动</b> → 四时段全部输出无方向，不验证准确率</p>`
       :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，≥0.8%中波动起步</b> → 四时段正常方向解释，收盘后验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
+    <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意路径=时段定级×开盘情景×尾盘微调·机械化映射（9:30/15:00两锚点随情景高低变化，非点位预测）</p>
     ${modeTag}
-    ${slotsSVG(d.four_slots,520,190,d.actual_curve)}
+    ${slotsSVG(d.four_slots,520,190,d.actual_curve,slotCtx(d))}
     </div>
     <div class="detail-section"><h4>时段依据</h4>
     <table>
@@ -699,7 +700,7 @@ function renderPipeline(d){
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span>${d.nine_fields&&d.nine_fields.weak_base_dir?`<br><span class="k" style="color:#d29922">-W底座方向记账</span> <span class="v">${d.nine_fields.weak_base_dir<0?'偏空':d.nine_fields.weak_base_dir>0?'偏多':'中性'}（弱底座·低置信·修正层剥离）</span>`:''}<br>
       <span class="path-label">路径：${d.path}</span>${d.shape?`<br><span class="k">${d.shape.close_label||d.shape.three_value_label||'—'}</span> ｜ <span class="k">形态</span> <span class="v">${d.shape.pattern||'—'}</span> ｜ <span class="k">实体</span> <span class="v">${d.shape.body_grade||'—'}</span> ｜ <span class="k">振幅</span> <span class="v">${d.shape.amplitude_grade||'—'}</span>`:''}`},
-    ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve)}]:[])
+    ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve,slotCtx(d))}]:[])
   ];
 
   const names={macd:'MACD 数据',v0:'MACD矩阵底座',qimen:'奇门层',fusion:'叉积融合',adjust:'微调修正（b）',output:'定级输出',slots:'⏰ 四时段'};
@@ -896,10 +897,30 @@ function showDetail(key){
 }
 
 /* ==================== 四时段SVG折线图 ==================== */
-const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'中性偏弱':-1,'无方向':0,'中性偏强':1,'微偏强':1,'略偏多':1,'偏多':2,'偏强':3};
+const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'中性偏弱':-1,'强空':-3,'中空':-2,'无方向':0,'中性':0,'中性偏强':1,'微偏强':1,'略偏多':1,'偏多':2,'中多':2,'偏强':3,'强多':3};
 const GRADE_COLOR=v=>v>0?'#3fb950':v<0?'#f85149':'#8b949e';
-function slotsSVG(slots,w,h,actualCurve){
+/* ⭐示意路径上下文（2026-11-06老师14:42提议配套）：开盘情景/收盘预期/申时微调=机械化映射输入，禁止语义手绘 */
+function slotCtx(d){
+  const m=(d.verification&&d.verification.morning)||{};
+  const fs=d.four_slots||[];
+  const last=fs[fs.length-1]||{};
+  const b=last.basis||{};
+  return {open:m.open,close:m.close,tailTweak:[b.tweak,b.trigger,last.note].filter(Boolean).join(' ')};
+}
+function slotsSVG(slots,w,h,actualCurve,ctx){
   if(!slots||!slots.length) return '';
+  ctx=ctx||{};
+  const gv=g=>GRADE_VAL[g]!==undefined?GRADE_VAL[g]:0;
+  const clampV=v=>Math.max(-3,Math.min(3,v));
+  /* ⭐示意路径锚点机械化映射（解释层渲染，判定层=时段定级不变）：
+     9:30锚=巳段定级+开盘情景偏移（低开-1/高开+1/平开0）｜15:00锚=申段定级+收盘预期微调（收涨+0.5/收跌-0.5）
+     申段内形态=时段依据关键字映射（试压/回落/回归→先抑后扬V，拉升/冲高/单边→先扬后抑∧，无关键字→直进） */
+  const openGap=ctx.open==='低开'?-1:ctx.open==='高开'?1:0;
+  const closeAdj=ctx.close==='收涨'?0.5:ctx.close==='收跌'?-0.5:0;
+  const tailText=ctx.tailTweak||'';
+  const tailDip=/试压|回落|回归|下压|回踩/.test(tailText);
+  const tailPeak=!tailDip&&/拉升|冲高|单边|飙升/.test(tailText);
+
   /* ⭐防裁切布局（2026-10-28修复）：顶部容纳点位标签文字（y-9）+呼吸空间，底部容纳时间轴文字
      stepY取三者最小：满量程ih/4 vs 顶部余量/3 vs 底部余量/3——±3档+文字永远在viewBox内 */
   const pad={l:30,r:12,t:Math.max(22,Math.round(h*0.17)),b:Math.max(20,Math.round(h*0.12))};
@@ -922,7 +943,6 @@ function slotsSVG(slots,w,h,actualCurve){
     return d;
   }
 
-  /* 段内插值：每段按 start→end 生成密集点（有走势形态），拼接后整体平滑 */
   /* ⭐交易时间归一化（2026-10-16修复）：09:30→0, 11:30→0.5, 13:00→0.5, 15:00→1（午休压缩为零宽度，与actual_curve的t同口径） */
   function timeX(timeStr){
     if(!timeStr) return null;
@@ -933,36 +953,58 @@ function slotsSVG(slots,w,h,actualCurve){
     if(t<=AM_END) return Math.max(0,(t-AM_START)/(AM_END-AM_START))*0.5;
     return 0.5+Math.min(1,(t-PM_START)/(PM_END-PM_START))*0.5;
   }
+
+  /* 段终点值：前n-1段=各自定级；末段=定级+收盘微调（3点锚点随收盘预期变化） */
+  const endVals=slots.map((s,i)=>i===n-1?clampV(gv(s.grade)+closeAdj):gv(s.grade));
+  const A=clampV(gv(slots[0].grade)+openGap);
+
+  /* legs构建：每段fx边界取自time（缺省i/n），段末值=endVals；首段起点=开盘锚；末段按关键字一拆二（先抑后扬/先扬后抑） */
   const rawPts=[];
   const SEG_PTS=8;
-  slots.forEach((s,i)=>{
-    const ts=s.time?s.time.split('-'):null;
-    const fx0=(ts&&timeX(ts[0])!==null)?timeX(ts[0]):(n>1?i/n:0.5);
-    const fx1=(ts&&ts.length>1&&timeX(ts[1])!==null)?timeX(ts[1]):(n>1?(i+1)/n:0.5);
-    const x0=pad.l+iw*fx0;
-    const x1=pad.l+iw*fx1;
-    const v0=s.start!==undefined?s.start:(GRADE_VAL[s.grade]||0);
-    const v1=s.end!==undefined?s.end:(GRADE_VAL[s.grade]||0);
-    for(let j=0;j<SEG_PTS;j++){
-      const t=j/SEG_PTS;
-      const ease=t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
-      rawPts.push({x:x0+(x1-x0)*ease, y:zeroY-(v0+(v1-v0)*t)*stepY});
+  const legFx=[];
+  for(let i=0;i<=n;i++){
+    if(i===0) legFx.push(0);
+    else{
+      const ts=slots[i-1].time?slots[i-1].time.split('-'):null;
+      const fx=(ts&&ts.length>1&&timeX(ts[1])!==null)?timeX(ts[1]):i/n;
+      legFx.push(fx);
     }
-  });
-  const lastV=slots[n-1].end!==undefined?slots[n-1].end:(GRADE_VAL[slots[n-1].grade]||0);
-  rawPts.push({x:pad.l+iw, y:zeroY-lastV*stepY});
+  }
+  for(let i=0;i<n;i++){
+    const vStart=i===0?A:endVals[i-1];
+    const isLast=i===n-1;
+    if(isLast&&(tailDip||tailPeak)){
+      const fxMid=(legFx[i]+legFx[i+1])/2;
+      const midV=tailDip?Math.min(vStart,endVals[i])-0.5:Math.max(vStart,endVals[i])+0.5;
+      [[legFx[i],fxMid,vStart,midV],[fxMid,legFx[i+1],midV,endVals[i]]].forEach(([x0,x1,v0,v1])=>{
+        const px0=pad.l+iw*x0, px1=pad.l+iw*x1;
+        for(let j=0;j<SEG_PTS;j++){
+          const t=j/SEG_PTS;
+          const ease=t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+          rawPts.push({x:px0+(px1-px0)*ease, y:zeroY-(v0+(v1-v0)*t)*stepY});
+        }
+      });
+    }else{
+      const px0=pad.l+iw*legFx[i], px1=pad.l+iw*legFx[i+1];
+      const v0=vStart, v1=endVals[i];
+      for(let j=0;j<SEG_PTS;j++){
+        const t=j/SEG_PTS;
+        const ease=t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+        rawPts.push({x:px0+(px1-px0)*ease, y:zeroY-(v0+(v1-v0)*t)*stepY});
+      }
+    }
+  }
+  rawPts.push({x:pad.l+iw*legFx[n], y:zeroY-endVals[n-1]*stepY});
 
   const predPath=smoothPath(rawPts);
-  const anchorPts=slots.map((s,i)=>{
-    const ts=s.time?s.time.split('-'):null;
-    const fx=(ts&&timeX(ts[0])!==null)?timeX(ts[0]):(n>1?i/n:0.5);
-    return{
-      x:pad.l+iw*fx,
-      y:zeroY-(GRADE_VAL[s.grade]||0)*stepY,
-      ...s
-    };
-  });
-  const predColor=anchorPts.length>0?GRADE_COLOR(GRADE_VAL[anchorPts[0].grade]||0):'#8b949e';
+  /* 点位=时段终点（巳10:30/午11:30/未14:00/申15:00），首锚点09:30=空心开盘情景点 */
+  const anchorPts=slots.map((s,i)=>({
+    x:pad.l+iw*legFx[i+1],
+    y:zeroY-endVals[i]*stepY,
+    ...s
+  }));
+  const predColor=anchorPts.length>0?GRADE_COLOR(gv(anchorPts[0].grade)):'#8b949e';
+  const openPt={x:pad.l+iw*legFx[0], y:zeroY-A*stepY};
 
   /* 实际分时曲线（收盘后传入） */
   let actualSVG='';
@@ -978,17 +1020,22 @@ function slotsSVG(slots,w,h,actualCurve){
   }
 
   const dots=anchorPts.map(p=>{
-    const v=GRADE_VAL[p.grade]||0, c=GRADE_COLOR(v);
-    const timeStart=p.time?p.time.split('-')[0]:'';
+    const v=gv(p.grade), c=GRADE_COLOR(v);
+    const ts=p.time?p.time.split('-'):null;
+    const timeEnd=ts&&ts.length>1?ts[1]:(p.slot||'');
     return `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${c}" stroke="#0d1117" stroke-width="2"/>
     <text x="${p.x}" y="${p.y-9}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700">${p.grade}</text>
-    <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.slot||p.name} ${timeStart}</text>`;
+    <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.slot||p.name} ${timeEnd}</text>`;
   }).join('');
 
-  /* 收盘终点刻度 15:00（修复：原末点标注为申段起点14:00且右侧裁切，误读为曲线只到2点） */
-  const endTick=`<text x="${w-pad.r}" y="${h-4}" text-anchor="end" fill="#8b949e" font-size="9">15:00</text>`;
+  /* 开盘锚点（空心）：9:30位置=巳段定级+开盘情景偏移（低开低/高开高），老师11-06提议 */
+  const openDot=openGap!==0?`<circle cx="${openPt.x}" cy="${openPt.y}" r="4" fill="none" stroke="#d29922" stroke-width="1.8" stroke-dasharray="3,2"/>
+    <text x="${openPt.x}" y="${h-4}" text-anchor="middle" fill="#d29922" font-size="9">09:30${ctx.open==='低开'?' 低开':ctx.open==='高开'?' 高开':''}</text>
+    <text x="${openPt.x}" y="${openPt.y+(A>=0?16:-8)}" text-anchor="middle" fill="#d29922" font-size="9">开${A>0?'+':''}${A}</text>`:'';
+
   const curveDate=actualCurve&&actualCurve.date?actualCurve.date:'';
-  const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-52}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际${curveDate?' '+curveDate:''}</text>`:'';
+  const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-52}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际${curveDate?' '+curveDate:''}</text>`:
+    `<text x="${pad.l}" y="${pad.t-8}" text-anchor="start" fill="#484f58" font-size="9">示意=定级×情景机械映射</text>`;
 
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
     <line x1="${pad.l}" y1="${zeroY}" x2="${w-pad.r}" y2="${zeroY}" stroke="#30363d" stroke-dasharray="4,3"/>
@@ -996,8 +1043,8 @@ function slotsSVG(slots,w,h,actualCurve){
     ${legend}
     <path d="${predPath}" fill="none" stroke="${predColor}" stroke-width="2" opacity="0.9"/>
     ${actualSVG}
+    ${openDot}
     ${dots}
-    ${endTick}
   </svg>`;
 }
 
