@@ -657,7 +657,8 @@ slots: {
           b.tweak?'微调:'+b.tweak:null,
           b.amplitude?'振幅:'+b.amplitude:null
         ].filter(Boolean).join(' ｜ '):'';
-        return `<tr><td>${s.slot||'—'} ${s.time||''}</td><td style="color:${GRADE_COLOR(GRADE_VAL[s.grade]||0)};font-weight:600">${s.grade}</td><td class="note">${bTxt||'—'}</td></tr>`}).join('')}
+        const sk=(s.slot||'').charAt(0);
+        return `<tr><td>${sk||s.slot||'—'} ${s.time||''}</td><td style="color:${GRADE_COLOR(GRADE_VAL[s.grade]||0)};font-weight:600">${s.grade}</td><td class="note">${bTxt||'—'}</td></tr>`}).join('')}
     </table></div>
     ${d.four_slots_summary?`<div class="detail-section"><h4>全天特征</h4><p class="note">${d.four_slots_summary}</p></div>`:''}`;
   }
@@ -747,7 +748,9 @@ function normalizeSchema(d){
       d.four_slots.forEach(s=>{
         if(GRADE_RENAME[s.grade]) s.grade=GRADE_RENAME[s.grade];
         if(!s.slot&&s.time) s.slot=s.time.charAt(0);
-        if((!s.time||s.time.indexOf('-')<0)&&SLOT_TIME_MAP[s.slot]) s.time=SLOT_TIME_MAP[s.slot];
+        /* ⭐11-06修复：生产端slot="巳 09:30"携带时间（schema口径），须取首字查表，否则SLOT_TIME_MAP['巳 09:30']落空致time永远补不上 */
+        const slotKey=s.slot?s.slot.charAt(0):'';
+        if((!s.time||s.time.indexOf('-')<0)&&SLOT_TIME_MAP[slotKey]) s.time=SLOT_TIME_MAP[slotKey];
         /* ⭐11-02判语列修复：生产端7.5直写verdict违反patch17红线(schema权威=note)致看板"时段判语"列空2天(10-30起)；新格式分支原地补note兼容历史数据 */
         if(!s.note&&s.verdict) s.note=s.verdict;
       });
@@ -1022,10 +1025,12 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
   const dots=anchorPts.map(p=>{
     const v=gv(p.grade), c=GRADE_COLOR(v);
     const ts=p.time?p.time.split('-'):null;
-    const timeEnd=ts&&ts.length>1?ts[1]:(p.slot||'');
+    const slotName=(p.slot||p.name||'').charAt(0);
+    const slotKey=SLOT_TIME_MAP[slotName]?slotName:'';
+    const timeEnd=ts&&ts.length>1?ts[1]:(slotKey?SLOT_TIME_MAP[slotKey].split('-')[1]:(p.slot||''));
     return `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${c}" stroke="#0d1117" stroke-width="2"/>
     <text x="${p.x}" y="${p.y-9}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700">${p.grade}</text>
-    <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${p.slot||p.name} ${timeEnd}</text>`;
+    <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${slotName} ${timeEnd}</text>`;
   }).join('');
 
   /* 开盘锚点（空心）：9:30位置=巳段定级+开盘情景偏移（低开低/高开高），老师11-06提议 */
