@@ -544,15 +544,17 @@ output: {
     const grade=f.final_grade;
     const grades=[['+4','偏强','≥ +1.0%'],['+3','偏多','+0.5% ~ +1.0%'],['+2','略偏多','+0.2% ~ +0.5%'],['+1','无方向（V3.0区·上沿）','-0.2% ~ +0.2%'],['0','无方向（区·中枢）','-0.2% ~ +0.2%'],['-1','无方向（V3.0区·下沿）','-0.2% ~ +0.2%'],['-2','略偏空','-0.5% ~ -0.2%'],['-3','偏空','-1.0% ~ -0.5%'],['-4','偏弱','≤ -1.0%']];
     const vMap={'+4':'+4','+3':'+3','+2':'+2','+1':'+1','0':'0','-1':'-1','-2':'-2','-3':'-3','-4':'-4'};
-    const vKey=(vF>0?'+':'')+String(vF);
+    /* ⭐11-07高亮口径修正：表4-A高亮=生效定级（九字段final_grade=压级/升档后），无九字段时回退v_final——原vKey纯用v_final致压级日高亮机制值行（11-06实锤：v_final+4高亮偏强，但生效偏多） */
+    const vEff=(d.nine_fields&&typeof d.nine_fields.final_grade==='number')?d.nine_fields.final_grade:vF;
+    const vKey=(vEff>0?'+':'')+String(vEff);
     const rp0=f.r_prime||0;
     return `
   <div class="detail-section"><h4>v_final 合成链（怎么来的）</h4>
   <div class="formula">v（④叉积=v₀+a总）= ${f.v_cross>0?'+':''}${f.v_cross}
 ${rp0>0?`→ R′=${rp0} 反转锁档：v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}（path加-R）`:'→ 反转层 R′=0 不触发·v 原样'}
 → b 微调（⑥表3-D）= ${f.b_value>0?'+':''}${f.b_value} ${f.b_value===0?'→ 不生效':'→ 生效'}
-─────────────
-＝ v_final = <b>${vF>0?'+':''}${vF}</b> → 查表4-A → <b>${grade}</b></div></div>
+${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.nine_fields.final_grade:null;const cl=f.combo_lookup||'';if(nf!==null&&nf!==vF&&/压|升档|调整/.test(cl))return `→ ${cl.match(/[压升].*?档|压一级|升档/)?cl.match(/[压升][^；]*/)[0].slice(0,20):'组合调整'}：${vF>0?'+':''}${vF} → ${nf>0?'+':''}${nf}（生效）\n`;return '';})()}─────────────
+＝ v_final = <b>${vF>0?'+':''}${vF}</b> → 表4-A → <b>${grade}</b></div></div>
   ${o.three_d?`<div class="detail-section"><h4>三维输出</h4>
   <div class="formula">隔夜尺度：${o.three_d.overnight} ｜ 日内尺度：${o.three_d.intraday} ｜ 全天尺度：${o.three_d.daily}</div></div>`:''}
   ${o.open_scenario?`<div class="detail-section"><h4>开盘情景</h4>
@@ -699,7 +701,7 @@ function renderPipeline(d){
       <span class="k">b = ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} ${d.fusion.b_value===0?'→ 不生效':'→ 生效'}</span><br>
       <span class="k">v_final = ${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross} + ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>`},
     {key:'output',active:true,html:`
-      <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span> <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span>${d.nine_fields&&d.nine_fields.weak_base_dir?`<br><span class="k" style="color:#d29922">-W底座方向记账</span> <span class="v">${d.nine_fields.weak_base_dir<0?'偏空':d.nine_fields.weak_base_dir>0?'偏多':'中性'}（弱底座·低置信·修正层剥离）</span>`:''}<br>
+      <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.nine_fields.final_grade:null;const cl=d.fusion.combo_lookup||'';if(nf!==null&&nf!==d.fusion.v_final&&/压|升档|调整/.test(cl))return ` <span class="k" style="color:#d29922">→ ${nf>0?'+':''}${nf} 生效</span>`;return '';})()} <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span>${d.nine_fields&&d.nine_fields.weak_base_dir?`<br><span class="k" style="color:#d29922">-W底座方向记账</span> <span class="v">${d.nine_fields.weak_base_dir<0?'偏空':d.nine_fields.weak_base_dir>0?'偏多':'中性'}（弱底座·低置信·修正层剥离）</span>`:''}<br>
       <span class="path-label">路径：${d.path}</span>${d.shape?`<br><span class="k">${d.shape.close_label||d.shape.three_value_label||'—'}</span> ｜ <span class="k">形态</span> <span class="v">${d.shape.pattern||'—'}</span> ｜ <span class="k">实体</span> <span class="v">${d.shape.body_grade||'—'}</span> ｜ <span class="k">振幅</span> <span class="v">${d.shape.amplitude_grade||'—'}</span>`:''}`},
     ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve,slotCtx(d))}]:[])
   ];
