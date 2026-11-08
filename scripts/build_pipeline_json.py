@@ -68,8 +68,18 @@ def assemble(slots):
         nf = out.get("nine_fields")
         if isinstance(nf, dict):
             for src, dst in [("v0_grade", None), ("a_macd", None), ("qimen_a", None), ("b_value", "b_value"), ("path", None)]:
-                if src in nf and dst and dst not in out["fusion"]:
+                # dst=None 表示同名同步（11-09修复：原 dst=None 被 falsy 跳过，整层冗余失效）
+                dst = dst or src
+                if src in nf and dst not in out["fusion"]:
                     out["fusion"][dst] = nf[src]
+    # matrix_drop 全局行命名规范化（11-09修复：LLM槽位直写"马星动"缺"全局×"前缀→schema旧格式分支拦截）
+    # 仅修旧格式分支（无read字段）且g为G9x全局行且cell无×的项；read格式（V4.1-patch10）不碰
+    for it in out.get("matrix_drop", []):
+        if isinstance(it, dict) and "read" not in it:
+            g = str(it.get("g", ""))
+            cell = str(it.get("cell", ""))
+            if g.startswith("G9") and "×" not in cell:
+                it["cell"] = "全局×" + cell
     # shape兜底（缺块时补空壳，schema required会再卡内容）
     out.setdefault("shape", {})
     out.setdefault("volatility", {})
