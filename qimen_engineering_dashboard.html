@@ -1,0 +1,1044 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>奇门工程看板·七空间</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#0d1117;color:#e6edf3;padding:24px;max-width:1560px;margin:0 auto}
+h1{font-size:22px} .sub{color:#8b949e;font-size:13px;margin-bottom:18px}
+.cards{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0}
+.card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:12px 18px;min-width:150px}
+.card .n{font-size:26px;font-weight:700} .card .t{font-size:12px;color:#8b949e}
+.card .bar{height:6px;background:#30363d;border-radius:3px;margin-top:8px;width:140px} .card .bar i{display:block;height:100%;border-radius:3px;background:#58a6ff}
+section{margin-top:26px} h2{font-size:16px;border-left:4px solid #58a6ff;padding-left:10px}
+h2 small{color:#8b949e;font-weight:400;font-size:12px;margin-left:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px}
+.cell{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:8px 10px;font-size:11px;cursor:pointer;line-height:1.5}
+.cell:hover{border-color:#58a6ff} .cv{display:block;color:#c9d1d9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cell.ok{border-left:4px solid #3fb950} .cell.watch{border-left:4px solid #d29922}
+.cell.cand{border-left:4px solid #a371f7} .cell.todo{border-left:4px solid #6e7681} .cell.na{border-left:4px solid #30363d}
+.legend span{margin-right:16px;font-size:12px} .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px}
+.op{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:12px}
+.opcard{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px}
+.opcard b{color:#58a6ff} .opcard .role{font-size:11px;color:#f0883e;margin:4px 0} .opcard p{font-size:12px;color:#c9d1d9;line-height:1.6}
+table.log{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px} table.log th,table.log td{border:1px solid #30363d;padding:7px 9px;text-align:left}
+table.log th{background:#161b22} table.log td{color:#c9d1d9}
+.tooltip{position:fixed;background:#161b22;border:1px solid #58a6ff;padding:12px 16px;border-radius:8px;font-size:12px;max-width:440px;display:none;z-index:99;box-shadow:0 4px 20px rgba(0,0,0,.6);line-height:1.6;white-space:pre-wrap}
+</style></head><body>
+<h1>奇门工程看板 · 七空间+算子层</h1>
+<div class="sub">立体矩阵 v2.6 ｜ 空间遍历表 V1.0 ｜ 数据源：《空间遍历表_V1.0.md》+《工程改进日志.md》｜ 生成后重跑 build_dashboard.py 即更新</div>
+<div class="cards"><div class="card"><div class="n" style="color:#3fb950">100%</div><div class="t">S1 用神×状态</div><div class="bar"><i style="width:100%;background:#3fb950"></i></div><div class="t">108/108 坐标</div></div><div class="card"><div class="n" style="color:#d29922">15%</div><div class="t">S2 全局格局</div><div class="bar"><i style="width:15%;background:#d29922"></i></div><div class="t">4/27 坐标</div></div><div class="card"><div class="n" style="color:#f85149">0%</div><div class="t">S3 星门神吉凶</div><div class="bar"><i style="width:0%;background:#f85149"></i></div><div class="t">0/26 坐标</div></div><div class="card"><div class="n" style="color:#f85149">5%</div><div class="t">S4 宫间生克</div><div class="bar"><i style="width:5%;background:#f85149"></i></div><div class="t">8/156 坐标</div></div><div class="card"><div class="n" style="color:#d29922">17%</div><div class="t">S5 十干克应</div><div class="bar"><i style="width:17%;background:#d29922"></i></div><div class="t">14/81 坐标</div></div><div class="card"><div class="n" style="color:#f85149">0%</div><div class="t">S6 宫位属性</div><div class="bar"><i style="width:0%;background:#f85149"></i></div><div class="t">0/36 坐标</div></div><div class="card"><div class="n" style="color:#f85149">0%</div><div class="t">S7 扩展用神</div><div class="bar"><i style="width:0%;background:#f85149"></i></div><div class="t">0/40 坐标</div></div><div class="card" style="border-color:#58a6ff"><div class="n" style="color:#58a6ff">28%</div><div class="t">总覆盖</div><div class="bar"><i style="width:28%"></i></div><div class="t">134/474</div></div></div><div class="legend"><span><span class="sw" style="background:#3fb950"></span>●正式</span><span><span class="sw" style="background:#d29922"></span>◌观察</span><span><span class="sw" style="background:#a371f7"></span>📋候选</span><span><span class="sw" style="background:#6e7681"></span>⬚待译/未建模</span></div><section><h2>S1 用神×状态 <small>100% · 遍历表=《立体矩阵v2.md》，108格零空格 · 唯一计分空间</small></h2>
+<div class="grid"><div class="cell na" onclick='showTip({"编号": "G27"})'><b>G27</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G28"})'><b>G28</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G29"})'><b>G29</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G30"})'><b>G30</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G31"})'><b>G31</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G32"})'><b>G32</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G33"})'><b>G33</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G34"})'><b>G34</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G35"})'><b>G35</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G36"})'><b>G36</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G37"})'><b>G37</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G38"})'><b>G38</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G39"})'><b>G39</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G40"})'><b>G40</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G41"})'><b>G41</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G42"})'><b>G42</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G43"})'><b>G43</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G44"})'><b>G44</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G45"})'><b>G45</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G46"})'><b>G46</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G47"})'><b>G47</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G48"})'><b>G48</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G49"})'><b>G49</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G50"})'><b>G50</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G51"})'><b>G51</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G52"})'><b>G52</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G53"})'><b>G53</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G54"})'><b>G54</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G55"})'><b>G55</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G56"})'><b>G56</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G57"})'><b>G57</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G58"})'><b>G58</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G59"})'><b>G59</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G60"})'><b>G60</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G61"})'><b>G61</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G62"})'><b>G62</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G63"})'><b>G63</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G64"})'><b>G64</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G65"})'><b>G65</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G66"})'><b>G66</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G67"})'><b>G67</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G68"})'><b>G68</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G69"})'><b>G69</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G70"})'><b>G70</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G71"})'><b>G71</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G72"})'><b>G72</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G73"})'><b>G73</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G74"})'><b>G74</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G75"})'><b>G75</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G76"})'><b>G76</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G77"})'><b>G77</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G78"})'><b>G78</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G79"})'><b>G79</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G80"})'><b>G80</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G81"})'><b>G81</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G82"})'><b>G82</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G83"})'><b>G83</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G84"})'><b>G84</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G85"})'><b>G85</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G86"})'><b>G86</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G87"})'><b>G87</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G88"})'><b>G88</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G89"})'><b>G89</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G90"})'><b>G90</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G91"})'><b>G91</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G92"})'><b>G92</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G93"})'><b>G93</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G94"})'><b>G94</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G95"})'><b>G95</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G96"})'><b>G96</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G97"})'><b>G97</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G98"})'><b>G98</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G99"})'><b>G99</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G100"})'><b>G100</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G101"})'><b>G101</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G102"})'><b>G102</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G103"})'><b>G103</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G104"})'><b>G104</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G105"})'><b>G105</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G106"})'><b>G106</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G107"})'><b>G107</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G108"})'><b>G108</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G109"})'><b>G109</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G110"})'><b>G110</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G111"})'><b>G111</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G112"})'><b>G112</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G113"})'><b>G113</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G114"})'><b>G114</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G115"})'><b>G115</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G116"})'><b>G116</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G117"})'><b>G117</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G118"})'><b>G118</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G119"})'><b>G119</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G120"})'><b>G120</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G121"})'><b>G121</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G122"})'><b>G122</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G123"})'><b>G123</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G124"})'><b>G124</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G125"})'><b>G125</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G126"})'><b>G126</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G127"})'><b>G127</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G128"})'><b>G128</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G129"})'><b>G129</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G130"})'><b>G130</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G131"})'><b>G131</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G132"})'><b>G132</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G133"})'><b>G133</b>
+</div>
+<div class="cell na" onclick='showTip({"编号": "G134"})'><b>G134</b>
+</div></div></section><section><h2>S2 全局格局 <small>4/27 · 多元素组合格局</small></h2><div class="grid"><div class="cell na" onclick='showTip({"编号": "J1", "格局": "伏吟", "交易读法": "天盘干=地盘干（任一同字含寄宫）", "状态": "波幅收窄·时间拉长·方向确定后单边"})'><b>J1</b>
+<span class="cv">伏吟</span>
+<span class="cv">天盘干=地盘干（任一同字含寄宫）</span>
+<span class="cv">波幅收窄·时间拉长·方向确定后单边</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J2", "格局": "反吟", "交易读法": "星/门落对冲宫", "状态": "双向剧烈波动·日内逆转风险高"})'><b>J2</b>
+<span class="cv">反吟</span>
+<span class="cv">星/门落对冲宫</span>
+<span class="cv">双向剧烈波动·日内逆转风险高</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J3", "格局": "马星动", "交易读法": "马星临用神宫/冲动", "状态": "急动放大波动"})'><b>J3</b>
+<span class="cv">马星动</span>
+<span class="cv">马星临用神宫/冲动</span>
+<span class="cv">急动放大波动</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J4", "格局": "空亡集中", "交易读法": "用神空亡≥2处", "状态": "信号虚化拉锯=低波动"})'><b>J4</b>
+<span class="cv">空亡集中</span>
+<span class="cv">用神空亡≥2处</span>
+<span class="cv">信号虚化拉锯=低波动</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J5", "格局": "五不遇时", "交易读法": "时干克日干·阴阳同·隔五位", "状态": "百事不利·事多阻碍"})'><b>J5</b>
+<span class="cv">五不遇时</span>
+<span class="cv">时干克日干·阴阳同·隔五位</span>
+<span class="cv">百事不利·事多阻碍</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J6", "格局": "天显时格", "交易读法": "六甲时辰伏吟例外（5组时辰表）", "状态": "伏吟不为凶反为吉"})'><b>J6</b>
+<span class="cv">天显时格</span>
+<span class="cv">六甲时辰伏吟例外（5组时辰表）</span>
+<span class="cv">伏吟不为凶反为吉</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J7", "格局": "天遁", "交易读法": "丙+丁+生门", "状态": "诸事吉利（交易泛吉）"})'><b>J7</b>
+<span class="cv">天遁</span>
+<span class="cv">丙+丁+生门</span>
+<span class="cv">诸事吉利（交易泛吉）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J8", "格局": "地遁", "交易读法": "乙+己+开门", "状态": "藏兵立寨·建仓修造"})'><b>J8</b>
+<span class="cv">地遁</span>
+<span class="cv">乙+己+开门</span>
+<span class="cv">藏兵立寨·建仓修造</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J9", "格局": "人遁", "交易读法": "丁+休门+太阴", "状态": "隐形保身·密探设伏"})'><b>J9</b>
+<span class="cv">人遁</span>
+<span class="cv">丁+休门+太阴</span>
+<span class="cv">隐形保身·密探设伏</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J10", "格局": "神遁", "交易读法": "丙+杜门+九天", "状态": "祭祀祈神（交易映射弱）"})'><b>J10</b>
+<span class="cv">神遁</span>
+<span class="cv">丙+杜门+九天</span>
+<span class="cv">祭祀祈神（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J11", "格局": "风遁", "交易读法": "乙+休/生/开门+巽四宫", "状态": "顺水推舟"})'><b>J11</b>
+<span class="cv">风遁</span>
+<span class="cv">乙+休/生/开门+巽四宫</span>
+<span class="cv">顺水推舟</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J12", "格局": "云遁", "交易读法": "乙+辛+休/生/开门", "状态": "暗中算计不易发现"})'><b>J12</b>
+<span class="cv">云遁</span>
+<span class="cv">乙+辛+休/生/开门</span>
+<span class="cv">暗中算计不易发现</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J13", "格局": "龙遁", "交易读法": "乙+癸+吉门/坎一宫", "状态": "水战祈雨（交易映射弱）"})'><b>J13</b>
+<span class="cv">龙遁</span>
+<span class="cv">乙+癸+吉门/坎一宫</span>
+<span class="cv">水战祈雨（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J14", "格局": "虎遁", "交易读法": "乙+辛+吉门+艮八/庚+开门+兑七", "状态": "据险守隘"})'><b>J14</b>
+<span class="cv">虎遁</span>
+<span class="cv">乙+辛+吉门+艮八/庚+开门+兑七</span>
+<span class="cv">据险守隘</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J15", "格局": "鬼遁", "交易读法": "丁+杜门/开门+九地", "状态": "伏击探查（交易映射弱）"})'><b>J15</b>
+<span class="cv">鬼遁</span>
+<span class="cv">丁+杜门/开门+九地</span>
+<span class="cv">伏击探查（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J16", "格局": "乙奇得使", "交易读法": "天盘乙+地盘己/辛", "状态": "日奇恍惚如神（多向助力）"})'><b>J16</b>
+<span class="cv">乙奇得使</span>
+<span class="cv">天盘乙+地盘己/辛</span>
+<span class="cv">日奇恍惚如神（多向助力）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J17", "格局": "丙奇得使", "交易读法": "天盘丙+地盘戊/庚", "状态": "月奇天威·丙火熔金"})'><b>J17</b>
+<span class="cv">丙奇得使</span>
+<span class="cv">天盘丙+地盘戊/庚</span>
+<span class="cv">月奇天威·丙火熔金</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J18", "格局": "丁奇得使", "交易读法": "天盘丁+地盘壬/癸", "状态": "玉女匿踪·利机密"})'><b>J18</b>
+<span class="cv">丁奇得使</span>
+<span class="cv">天盘丁+地盘壬/癸</span>
+<span class="cv">玉女匿踪·利机密</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J19", "格局": "玉女守门", "交易读法": "值使门+地盘丁奇+坎一宫", "状态": "宴会喜乐（交易映射弱）"})'><b>J19</b>
+<span class="cv">玉女守门</span>
+<span class="cv">值使门+地盘丁奇+坎一宫</span>
+<span class="cv">宴会喜乐（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J20", "格局": "真诈", "交易读法": "开休生+乙丙丁+太阴", "状态": "施恩德求师（交易映射弱）"})'><b>J20</b>
+<span class="cv">真诈</span>
+<span class="cv">开休生+乙丙丁+太阴</span>
+<span class="cv">施恩德求师（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J21", "格局": "重诈", "交易读法": "开休生+乙丙丁+九地", "状态": "添进人口进财"})'><b>J21</b>
+<span class="cv">重诈</span>
+<span class="cv">开休生+乙丙丁+九地</span>
+<span class="cv">添进人口进财</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J22", "格局": "休诈", "交易读法": "开休生+乙丙丁+六合", "状态": "配药驱邪（交易映射弱）"})'><b>J22</b>
+<span class="cv">休诈</span>
+<span class="cv">开休生+乙丙丁+六合</span>
+<span class="cv">配药驱邪（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J23", "格局": "天假", "交易读法": "景门+三奇+九天", "状态": "进求谒见"})'><b>J23</b>
+<span class="cv">天假</span>
+<span class="cv">景门+三奇+九天</span>
+<span class="cv">进求谒见</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J24", "格局": "地假", "交易读法": "杜门+丁己癸+九地/太阴/六合", "状态": "埋伏侦察·避难"})'><b>J24</b>
+<span class="cv">地假</span>
+<span class="cv">杜门+丁己癸+九地/太阴/六合</span>
+<span class="cv">埋伏侦察·避难</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J25", "格局": "人假", "交易读法": "惊门+壬+九天", "状态": "逃亡（交易映射弱）"})'><b>J25</b>
+<span class="cv">人假</span>
+<span class="cv">惊门+壬+九天</span>
+<span class="cv">逃亡（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J26", "格局": "神假", "交易读法": "伤门+丁己癸+九地", "状态": "埋葬（交易映射弱）"})'><b>J26</b>
+<span class="cv">神假</span>
+<span class="cv">伤门+丁己癸+九地</span>
+<span class="cv">埋葬（交易映射弱）</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "J27", "格局": "鬼假", "交易读法": "死门+丁己癸+九地", "状态": "超度（交易映射弱）"})'><b>J27</b>
+<span class="cv">鬼假</span>
+<span class="cv">死门+丁己癸+九地</span>
+<span class="cv">超度（交易映射弱）</span>
+</div></div></section><section><h2>S3 星门神吉凶 <small>0/26 · 判语层 · 庚行争议阻塞落格</small></h2><div class="grid"><div class="cell na" onclick='showTip({"用神": "用神", "吉临": "吉临", "凶临": "凶临", "状态": "状态"})'><b>用神</b>
+<span class="cv">吉临</span>
+<span class="cv">凶临</span>
+<span class="cv">状态</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "庚", "吉临": "空（敌得助）⚠️", "凶临": "多（敌自乱）⚠️", "状态": "规则表存在·未落格"})'><b>庚</b>
+<span class="cv">空（敌得助）⚠️</span>
+<span class="cv">多（敌自乱）⚠️</span>
+<span class="cv">规则表存在·未落格</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "乙奇", "吉临": "多（买盘得力）", "凶临": "空（承接带凶）", "状态": "同上"})'><b>乙奇</b>
+<span class="cv">多（买盘得力）</span>
+<span class="cv">空（承接带凶）</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell watch" onclick='showTip({"用神": "日干", "吉临": "多（价格有护）", "凶临": "空（价格带伤）", "状态": "同上·◌10-16实证天柱临身"})'><b>日干</b>
+<span class="cv">多（价格有护）</span>
+<span class="cv">空（价格带伤）</span>
+<span class="cv">同上·◌10-16实证天柱临身</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "时干", "吉临": "空（敌方得吉助）", "凶临": "多（敌方带凶）", "状态": "同上"})'><b>时干</b>
+<span class="cv">空（敌方得吉助）</span>
+<span class="cv">多（敌方带凶）</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "生门", "吉临": "多（利润得力）", "凶临": "空（利润带伤）", "状态": "同上"})'><b>生门</b>
+<span class="cv">多（利润得力）</span>
+<span class="cv">空（利润带伤）</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "戊", "吉临": "多（资金得力）", "凶临": "空（资金带伤）", "状态": "同上"})'><b>戊</b>
+<span class="cv">多（资金得力）</span>
+<span class="cv">空（资金带伤）</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "值符", "吉临": "多（吉气压凶）⊙", "凶临": "空警（虚惊）◌", "状态": "同上"})'><b>值符</b>
+<span class="cv">多（吉气压凶）⊙</span>
+<span class="cv">空警（虚惊）◌</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "开门", "吉临": "多（通道得力）", "凶临": "空（通道带伤）", "状态": "同上"})'><b>开门</b>
+<span class="cv">多（通道得力）</span>
+<span class="cv">空（通道带伤）</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "景门", "吉临": "多（情绪高且正）", "凶临": "空（恐慌情绪）◌", "状态": "同上"})'><b>景门</b>
+<span class="cv">多（情绪高且正）</span>
+<span class="cv">空（恐慌情绪）◌</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "九天", "吉临": "多（涨能得力）", "凶临": "—", "状态": "同上"})'><b>九天</b>
+<span class="cv">多（涨能得力）</span>
+<span class="cv">—</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "九地", "吉临": "—", "凶临": "空（跌势得力）", "状态": "同上"})'><b>九地</b>
+<span class="cv">—</span>
+<span class="cv">空（跌势得力）</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell na" onclick='showTip({"用神": "天蓬", "吉临": "多（流入得力）", "凶临": "—", "状态": "同上"})'><b>天蓬</b>
+<span class="cv">多（流入得力）</span>
+<span class="cv">—</span>
+<span class="cv">同上</span>
+</div>
+<div class="cell todo" onclick='showTip({"用神": "值使门", "吉临": "—（待定义）", "凶临": "—（待定义）", "状态": "⬚"})'><b>值使门</b>
+<span class="cv">—（待定义）</span>
+<span class="cv">—（待定义）</span>
+<span class="cv">⬚</span>
+</div></div></section><section><h2>S4 宫间生克·实用8对 <small>8/156 · 判语层使用率100%（近30份报告）</small></h2><div class="grid"><div class="cell na" onclick='showTip({"对": "对", "关系": "关系", "读法": "读法", "状态": "状态"})'><b>对</b>
+<span class="cv">关系</span>
+<span class="cv">读法</span>
+<span class="cv">状态</span>
+</div>
+<div class="cell ok" onclick='showTip({"对": "时干×日干", "关系": "A1/A2", "读法": "生=空(M4)/克=多(M4)", "状态": "●正式"})'><b>时干×日干</b>
+<span class="cv">A1/A2</span>
+<span class="cv">生=空(M4)/克=多(M4)</span>
+<span class="cv">●正式</span>
+</div>
+<div class="cell cand" onclick='showTip({"对": "庚×乙奇", "关系": "候选G27/G28", "读法": "敌生我谋=多/敌克我谋=空", "状态": "📋候选"})'><b>庚×乙奇</b>
+<span class="cv">候选G27/G28</span>
+<span class="cv">敌生我谋=多/敌克我谋=空</span>
+<span class="cv">📋候选</span>
+</div>
+<div class="cell cand" onclick='showTip({"对": "生门×日干", "关系": "—", "读法": "利润养价格=多", "状态": "📋候选"})'><b>生门×日干</b>
+<span class="cv">—</span>
+<span class="cv">利润养价格=多</span>
+<span class="cv">📋候选</span>
+</div>
+<div class="cell cand" onclick='showTip({"对": "戊×生门", "关系": "—", "读法": "资金养利润=多", "状态": "📋候选"})'><b>戊×生门</b>
+<span class="cv">—</span>
+<span class="cv">资金养利润=多</span>
+<span class="cv">📋候选</span>
+</div>
+<div class="cell cand" onclick='showTip({"对": "值符×日干", "关系": "候选G29", "读法": "大势托价格=多", "状态": "📋候选"})'><b>值符×日干</b>
+<span class="cv">候选G29</span>
+<span class="cv">大势托价格=多</span>
+<span class="cv">📋候选</span>
+</div>
+<div class="cell cand" onclick='showTip({"对": "开门×日干", "关系": "部分并入G4", "读法": "通道利价格=多", "状态": "📋候选"})'><b>开门×日干</b>
+<span class="cv">部分并入G4</span>
+<span class="cv">通道利价格=多</span>
+<span class="cv">📋候选</span>
+</div>
+<div class="cell cand" onclick='showTip({"对": "九天×日干", "关系": "观察族", "读法": "涨能助价格=多/落空亡=虚高G24", "状态": "📋候选"})'><b>九天×日干</b>
+<span class="cv">观察族</span>
+<span class="cv">涨能助价格=多/落空亡=虚高G24</span>
+<span class="cv">📋候选</span>
+</div>
+<div class="cell cand" onclick='showTip({"对": "九地×日干", "关系": "观察族", "读法": "跌势压价格=空", "状态": "📋候选"})'><b>九地×日干</b>
+<span class="cv">观察族</span>
+<span class="cv">跌势压价格=空</span>
+<span class="cv">📋候选</span>
+</div></div></section><section><h2>S5 十干克应 <small>14/81 · K1~K81全表 · 使用率80%</small></h2><div class="grid"><div class="cell todo" onclick='showTip({"编号": "K1", "组合": "乙+乙", "格名": "日奇伏吟", "交易读法": "求名求利不可求·曲折多进度慢", "状态": "⬚待译"})'><b>K1</b>
+<span class="cv">乙+乙</span>
+<span class="cv">日奇伏吟</span>
+<span class="cv">求名求利不可求·曲折多进度慢</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K2", "组合": "乙+丙", "格名": "奇仪顺遂", "交易读法": "吉星加官·凶星反目·木火通明", "状态": "⬚待译"})'><b>K2</b>
+<span class="cv">乙+丙</span>
+<span class="cv">奇仪顺遂</span>
+<span class="cv">吉星加官·凶星反目·木火通明</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K3", "组合": "乙+丁", "格名": "奇仪相佐", "交易读法": "最利文书考试·百事可为", "状态": "⬚待译"})'><b>K3</b>
+<span class="cv">乙+丁</span>
+<span class="cv">奇仪相佐</span>
+<span class="cv">最利文书考试·百事可为</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K4", "组合": "乙+戊", "格名": "阴害阳门", "交易读法": "利阴人阴事·不利公开", "状态": "⬚待译"})'><b>K4</b>
+<span class="cv">乙+戊</span>
+<span class="cv">阴害阳门</span>
+<span class="cv">利阴人阴事·不利公开</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K5", "组合": "乙+己", "格名": "日奇入墓", "交易读法": "希望渺茫空想·门凶事必凶", "状态": "⬚待译"})'><b>K5</b>
+<span class="cv">乙+己</span>
+<span class="cv">日奇入墓</span>
+<span class="cv">希望渺茫空想·门凶事必凶</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K6", "组合": "乙+庚", "格名": "日奇被刑", "交易读法": "争讼财产·夫妻异志", "状态": "⬚待译"})'><b>K6</b>
+<span class="cv">乙+庚</span>
+<span class="cv">日奇被刑</span>
+<span class="cv">争讼财产·夫妻异志</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K7", "组合": "乙+辛", "格名": "青龙逃走", "交易读法": "人亡财破·百事皆凶", "状态": "谋士逃亡→攻空"})'><b>K7</b>
+<span class="cv">乙+辛</span>
+<span class="cv">青龙逃走</span>
+<span class="cv">人亡财破·百事皆凶</span>
+<span class="cv">谋士逃亡→攻空</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K8", "组合": "乙+壬", "格名": "日奇入地", "交易读法": "尊卑悖乱·官讼是非", "状态": "⬚待译"})'><b>K8</b>
+<span class="cv">乙+壬</span>
+<span class="cv">日奇入地</span>
+<span class="cv">尊卑悖乱·官讼是非</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K9", "组合": "乙+癸", "格名": "华盖逢星", "交易读法": "宜退不宜进·隐匿藏形", "状态": "⬚待译"})'><b>K9</b>
+<span class="cv">乙+癸</span>
+<span class="cv">华盖逢星</span>
+<span class="cv">宜退不宜进·隐匿藏形</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K10", "组合": "丙+乙", "格名": "日月并行", "交易读法": "公谋私为皆为吉·利合作", "状态": "⬚待译"})'><b>K10</b>
+<span class="cv">丙+乙</span>
+<span class="cv">日月并行</span>
+<span class="cv">公谋私为皆为吉·利合作</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K11", "组合": "丙+丙", "格名": "月奇悖师", "交易读法": "文书逼迫·破耗遗失", "状态": "⬚待译"})'><b>K11</b>
+<span class="cv">丙+丙</span>
+<span class="cv">月奇悖师</span>
+<span class="cv">文书逼迫·破耗遗失</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K12", "组合": "丙+丁", "格名": "星奇朱雀", "交易读法": "贵人文书吉利·得三吉门为天遁", "状态": "⬚待译"})'><b>K12</b>
+<span class="cv">丙+丁</span>
+<span class="cv">星奇朱雀</span>
+<span class="cv">贵人文书吉利·得三吉门为天遁</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K13", "组合": "丙+戊", "格名": "飞鸟跌穴", "交易读法": "事业可为·不费力即成", "状态": "吉临关键宫→攻多"})'><b>K13</b>
+<span class="cv">丙+戊</span>
+<span class="cv">飞鸟跌穴</span>
+<span class="cv">事业可为·不费力即成</span>
+<span class="cv">吉临关键宫→攻多</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K14", "组合": "丙+己", "格名": "火悖入刑", "交易读法": "囚人刑杖·表里不一小人", "状态": "⬚待译"})'><b>K14</b>
+<span class="cv">丙+己</span>
+<span class="cv">火悖入刑</span>
+<span class="cv">囚人刑杖·表里不一小人</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K15", "组合": "丙+庚", "格名": "荧入太白", "交易读法": "贼必去·利主不利客·利卖货", "状态": "空方自损→攻多"})'><b>K15</b>
+<span class="cv">丙+庚</span>
+<span class="cv">荧入太白</span>
+<span class="cv">贼必去·利主不利客·利卖货</span>
+<span class="cv">空方自损→攻多</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K16", "组合": "丙+辛", "格名": "月奇相和", "交易读法": "谋事成就·权威之合", "状态": "⬚待译"})'><b>K16</b>
+<span class="cv">丙+辛</span>
+<span class="cv">月奇相和</span>
+<span class="cv">谋事成就·权威之合</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K17", "组合": "丙+壬", "格名": "火入天罗", "交易读法": "为客不利·是非颇多·越进越乱", "状态": "⬚待译"})'><b>K17</b>
+<span class="cv">丙+壬</span>
+<span class="cv">火入天罗</span>
+<span class="cv">为客不利·是非颇多·越进越乱</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K18", "组合": "丙+癸", "格名": "华盖悖师", "交易读法": "阴人害事·灾祸频生", "状态": "⬚待译"})'><b>K18</b>
+<span class="cv">丙+癸</span>
+<span class="cv">华盖悖师</span>
+<span class="cv">阴人害事·灾祸频生</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K19", "组合": "丁+乙", "格名": "玉女奇生", "交易读法": "贵人加官·常人婚姻财帛有喜", "状态": "⬚待译"})'><b>K19</b>
+<span class="cv">丁+乙</span>
+<span class="cv">玉女奇生</span>
+<span class="cv">贵人加官·常人婚姻财帛有喜</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K20", "组合": "丁+丙", "格名": "星随月转", "交易读法": "贵人高升·常人乐极生悲", "状态": "⬚待译"})'><b>K20</b>
+<span class="cv">丁+丙</span>
+<span class="cv">星随月转</span>
+<span class="cv">贵人高升·常人乐极生悲</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K21", "组合": "丁+丁", "格名": "奇入太阴", "交易读法": "文书即至·喜事从心·唯一伏吟仍吉", "状态": "⬚待译"})'><b>K21</b>
+<span class="cv">丁+丁</span>
+<span class="cv">奇入太阴</span>
+<span class="cv">文书即至·喜事从心·唯一伏吟仍吉</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K22", "组合": "丁+戊", "格名": "青龙转光", "交易读法": "官人升迁·先难后易有转机", "状态": "⬚待译"})'><b>K22</b>
+<span class="cv">丁+戊</span>
+<span class="cv">青龙转光</span>
+<span class="cv">官人升迁·先难后易有转机</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K23", "组合": "丁+己", "格名": "火入勾陈", "交易读法": "奸私仇怨·事因女人", "状态": "⬚待译"})'><b>K23</b>
+<span class="cv">丁+己</span>
+<span class="cv">火入勾陈</span>
+<span class="cv">奸私仇怨·事因女人</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K24", "组合": "丁+庚", "格名": "文书受阻", "交易读法": "行人必归·事回起点", "状态": "⬚待译"})'><b>K24</b>
+<span class="cv">丁+庚</span>
+<span class="cv">文书受阻</span>
+<span class="cv">行人必归·事回起点</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K25", "组合": "丁+辛", "格名": "朱雀入狱", "交易读法": "罪人失囚·官人失位·消息失实", "状态": "⬚待译"})'><b>K25</b>
+<span class="cv">丁+辛</span>
+<span class="cv">朱雀入狱</span>
+<span class="cv">罪人失囚·官人失位·消息失实</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K26", "组合": "丁+壬", "格名": "奇仪相合", "交易读法": "贵人恩诏·测婚苟合", "状态": "⬚待译"})'><b>K26</b>
+<span class="cv">丁+壬</span>
+<span class="cv">奇仪相合</span>
+<span class="cv">贵人恩诏·测婚苟合</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K27", "组合": "丁+癸", "格名": "朱雀投江", "交易读法": "文书口舌·音信沉溺·卖货无人要", "状态": "凶临关键宫→攻空"})'><b>K27</b>
+<span class="cv">丁+癸</span>
+<span class="cv">朱雀投江</span>
+<span class="cv">文书口舌·音信沉溺·卖货无人要</span>
+<span class="cv">凶临关键宫→攻空</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K28", "组合": "戊+乙", "格名": "青龙和会", "交易读法": "三吉门吉·主\"多\"宜合作聚集", "状态": "⬚待译"})'><b>K28</b>
+<span class="cv">戊+乙</span>
+<span class="cv">青龙和会</span>
+<span class="cv">三吉门吉·主"多"宜合作聚集</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K29", "组合": "戊+丙", "格名": "青龙返首", "交易读法": "大吉·投资回本发财·要债能回", "状态": "吉临关键宫→攻多"})'><b>K29</b>
+<span class="cv">戊+丙</span>
+<span class="cv">青龙返首</span>
+<span class="cv">大吉·投资回本发财·要债能回</span>
+<span class="cv">吉临关键宫→攻多</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K30", "组合": "戊+丁", "格名": "青龙耀明", "交易读法": "总体吉利·宜见上级·重大机遇", "状态": "⬚待译"})'><b>K30</b>
+<span class="cv">戊+丁</span>
+<span class="cv">青龙耀明</span>
+<span class="cv">总体吉利·宜见上级·重大机遇</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K31", "组合": "戊+戊", "格名": "青龙伏吟", "交易读法": "凡事不利·宜静·投资需双倍", "状态": "⬚待译"})'><b>K31</b>
+<span class="cv">戊+戊</span>
+<span class="cv">青龙伏吟</span>
+<span class="cv">凡事不利·宜静·投资需双倍</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K32", "组合": "戊+己", "格名": "贵人入狱", "交易读法": "公私皆不利·破财·钱不到位", "状态": "大势带资金同困"})'><b>K32</b>
+<span class="cv">戊+己</span>
+<span class="cv">贵人入狱</span>
+<span class="cv">公私皆不利·破财·钱不到位</span>
+<span class="cv">大势带资金同困</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K33", "组合": "戊+庚", "格名": "值符飞宫", "交易读法": "吉事不吉·动格主换", "状态": "⬚待译"})'><b>K33</b>
+<span class="cv">戊+庚</span>
+<span class="cv">值符飞宫</span>
+<span class="cv">吉事不吉·动格主换</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K34", "组合": "戊+辛", "格名": "青龙折足", "交易读法": "破财·半途而废·最忌投资", "状态": "⬚待译"})'><b>K34</b>
+<span class="cv">戊+辛</span>
+<span class="cv">青龙折足</span>
+<span class="cv">破财·半途而废·最忌投资</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K35", "组合": "戊+壬", "格名": "青龙天牢", "交易读法": "阴阳皆不吉·钱收不回", "状态": "⬚待译"})'><b>K35</b>
+<span class="cv">戊+壬</span>
+<span class="cv">青龙天牢</span>
+<span class="cv">阴阳皆不吉·钱收不回</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K36", "组合": "戊+癸", "格名": "青龙华盖", "交易读法": "逢吉门招福·合格主合伙", "状态": "资金得吉→攻多+3"})'><b>K36</b>
+<span class="cv">戊+癸</span>
+<span class="cv">青龙华盖</span>
+<span class="cv">逢吉门招福·合格主合伙</span>
+<span class="cv">资金得吉→攻多+3</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K37", "组合": "己+乙", "格名": "墓神不明", "交易读法": "事不明确·前途渺茫", "状态": "⬚待译"})'><b>K37</b>
+<span class="cv">己+乙</span>
+<span class="cv">墓神不明</span>
+<span class="cv">事不明确·前途渺茫</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K38", "组合": "己+丙", "格名": "火悖地户", "交易读法": "凶格·合作不成反遭麻烦", "状态": "⬚待译"})'><b>K38</b>
+<span class="cv">己+丙</span>
+<span class="cv">火悖地户</span>
+<span class="cv">凶格·合作不成反遭麻烦</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K39", "组合": "己+丁", "格名": "朱雀入墓", "交易读法": "先曲后直·先凶后吉", "状态": "⬚待译"})'><b>K39</b>
+<span class="cv">己+丁</span>
+<span class="cv">朱雀入墓</span>
+<span class="cv">先曲后直·先凶后吉</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K40", "组合": "己+戊", "格名": "犬遇青龙", "交易读法": "门吉谋望遂意·贵人相帮", "状态": "⬚待译"})'><b>K40</b>
+<span class="cv">己+戊</span>
+<span class="cv">犬遇青龙</span>
+<span class="cv">门吉谋望遂意·贵人相帮</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K41", "组合": "己+己", "格名": "地户逢鬼", "交易读法": "病者发凶·百事不遂", "状态": "⬚待译"})'><b>K41</b>
+<span class="cv">己+己</span>
+<span class="cv">地户逢鬼</span>
+<span class="cv">病者发凶·百事不遂</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K42", "组合": "己+庚", "格名": "刑格返名", "交易读法": "词讼先动者不利·测什么受伤", "状态": "价格带刑格微伤"})'><b>K42</b>
+<span class="cv">己+庚</span>
+<span class="cv">刑格返名</span>
+<span class="cv">词讼先动者不利·测什么受伤</span>
+<span class="cv">价格带刑格微伤</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K43", "组合": "己+辛", "格名": "游魂入墓", "交易读法": "易招阴邪·犯小人捣鬼", "状态": "⬚待译"})'><b>K43</b>
+<span class="cv">己+辛</span>
+<span class="cv">游魂入墓</span>
+<span class="cv">易招阴邪·犯小人捣鬼</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K44", "组合": "己+壬", "格名": "地网高张", "交易读法": "凡事不吉·暗中冲克", "状态": "⬚待译"})'><b>K44</b>
+<span class="cv">己+壬</span>
+<span class="cv">地网高张</span>
+<span class="cv">凡事不吉·暗中冲克</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K45", "组合": "己+癸", "格名": "地刑玄武", "交易读法": "疾病垂危·口舌是非·上当受骗", "状态": "⬚待译"})'><b>K45</b>
+<span class="cv">己+癸</span>
+<span class="cv">地刑玄武</span>
+<span class="cv">疾病垂危·口舌是非·上当受骗</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K46", "组合": "庚+乙", "格名": "太白逢星", "交易读法": "退吉进凶·主牵绊", "状态": "⬚待译"})'><b>K46</b>
+<span class="cv">庚+乙</span>
+<span class="cv">太白逢星</span>
+<span class="cv">退吉进凶·主牵绊</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K47", "组合": "庚+丙", "格名": "太白入荧", "交易读法": "贼必来·为客进利为主破财", "状态": "凶临关键宫→攻空"})'><b>K47</b>
+<span class="cv">庚+丙</span>
+<span class="cv">太白入荧</span>
+<span class="cv">贼必来·为客进利为主破财</span>
+<span class="cv">凶临关键宫→攻空</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K48", "组合": "庚+丁", "格名": "亭亭之格", "交易读法": "私匿官司·门吉有救", "状态": "⬚待译"})'><b>K48</b>
+<span class="cv">庚+丁</span>
+<span class="cv">亭亭之格</span>
+<span class="cv">私匿官司·门吉有救</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K49", "组合": "庚+戊", "格名": "天乙伏宫", "交易读法": "百事不可谋·大凶·唯一出路换", "状态": "⬚待译"})'><b>K49</b>
+<span class="cv">庚+戊</span>
+<span class="cv">天乙伏宫</span>
+<span class="cv">百事不可谋·大凶·唯一出路换</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K50", "组合": "庚+己", "格名": "官府刑格", "交易读法": "官司口舌·经商破财·出行患病", "状态": "⬚待译"})'><b>K50</b>
+<span class="cv">庚+己</span>
+<span class="cv">官府刑格</span>
+<span class="cv">官司口舌·经商破财·出行患病</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K51", "组合": "庚+庚", "格名": "太白同宫·战格", "交易读法": "官灾横祸·伏不住必打", "状态": "⬚待译"})'><b>K51</b>
+<span class="cv">庚+庚</span>
+<span class="cv">太白同宫·战格</span>
+<span class="cv">官灾横祸·伏不住必打</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K52", "组合": "庚+辛", "格名": "白虎干格", "交易读法": "不宜远行·求财大凶·以静待劳", "状态": "⬚待译"})'><b>K52</b>
+<span class="cv">庚+辛</span>
+<span class="cv">白虎干格</span>
+<span class="cv">不宜远行·求财大凶·以静待劳</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K53", "组合": "庚+壬", "格名": "小格·移荡格", "交易读法": "事情有变·音信难通·利客", "状态": "⬚待译"})'><b>K53</b>
+<span class="cv">庚+壬</span>
+<span class="cv">小格·移荡格</span>
+<span class="cv">事情有变·音信难通·利客</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K54", "组合": "庚+癸", "格名": "大格", "交易读法": "大阻碍百事皆凶·车祸不测", "状态": "抛压通道受阻"})'><b>K54</b>
+<span class="cv">庚+癸</span>
+<span class="cv">大格</span>
+<span class="cv">大阻碍百事皆凶·车祸不测</span>
+<span class="cv">抛压通道受阻</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K55", "组合": "辛+乙", "格名": "白虎猖狂", "交易读法": "家败人亡·主客两伤·远行多灾", "状态": "凶临关键宫→攻空"})'><b>K55</b>
+<span class="cv">辛+乙</span>
+<span class="cv">白虎猖狂</span>
+<span class="cv">家败人亡·主客两伤·远行多灾</span>
+<span class="cv">凶临关键宫→攻空</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K56", "组合": "辛+丙", "格名": "干合悖师", "交易读法": "占事必因财致讼·合作生乱", "状态": "⬚待译"})'><b>K56</b>
+<span class="cv">辛+丙</span>
+<span class="cv">干合悖师</span>
+<span class="cv">占事必因财致讼·合作生乱</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K57", "组合": "辛+丁", "格名": "狱神得奇", "交易读法": "经商获利倍增·意外收获", "状态": "⬚待译"})'><b>K57</b>
+<span class="cv">辛+丁</span>
+<span class="cv">狱神得奇</span>
+<span class="cv">经商获利倍增·意外收获</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K58", "组合": "辛+戊", "格名": "困龙被伤", "交易读法": "官司破财·妄动招祸", "状态": "情绪面暗流"})'><b>K58</b>
+<span class="cv">辛+戊</span>
+<span class="cv">困龙被伤</span>
+<span class="cv">官司破财·妄动招祸</span>
+<span class="cv">情绪面暗流</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K59", "组合": "辛+己", "格名": "入狱自刑", "交易读法": "有苦难伸·错误皆因私欲", "状态": "⬚待译"})'><b>K59</b>
+<span class="cv">辛+己</span>
+<span class="cv">入狱自刑</span>
+<span class="cv">有苦难伸·错误皆因私欲</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K60", "组合": "辛+庚", "格名": "白虎出力", "交易读法": "刀刃相交·主客相残·宜静", "状态": "⬚待译"})'><b>K60</b>
+<span class="cv">辛+庚</span>
+<span class="cv">白虎出力</span>
+<span class="cv">刀刃相交·主客相残·宜静</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K61", "组合": "辛+辛", "格名": "伏吟天庭", "交易读法": "公废私就·错误自造", "状态": "⬚待译"})'><b>K61</b>
+<span class="cv">辛+辛</span>
+<span class="cv">伏吟天庭</span>
+<span class="cv">公废私就·错误自造</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K62", "组合": "辛+壬", "格名": "凶蛇入狱", "交易读法": "两男争女·讼狱不息", "状态": "⬚待译"})'><b>K62</b>
+<span class="cv">辛+壬</span>
+<span class="cv">凶蛇入狱</span>
+<span class="cv">两男争女·讼狱不息</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K63", "组合": "辛+癸", "格名": "天牢华盖", "交易读法": "日月失明·误入天网·判断失误", "状态": "⬚待译"})'><b>K63</b>
+<span class="cv">辛+癸</span>
+<span class="cv">天牢华盖</span>
+<span class="cv">日月失明·误入天网·判断失误</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K64", "组合": "壬+乙", "格名": "小蛇得势", "交易读法": "困境中忽得帮助·以柔克刚", "状态": "⬚待译"})'><b>K64</b>
+<span class="cv">壬+乙</span>
+<span class="cv">小蛇得势</span>
+<span class="cv">困境中忽得帮助·以柔克刚</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K65", "组合": "壬+丙", "格名": "水蛇入火", "交易读法": "两败俱伤·忙中出乱", "状态": "⬚待译"})'><b>K65</b>
+<span class="cv">壬+丙</span>
+<span class="cv">水蛇入火</span>
+<span class="cv">两败俱伤·忙中出乱</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K66", "组合": "壬+丁", "格名": "干合蛇刑", "交易读法": "文书牵连·利合作谈判", "状态": "⬚待译"})'><b>K66</b>
+<span class="cv">壬+丁</span>
+<span class="cv">干合蛇刑</span>
+<span class="cv">文书牵连·利合作谈判</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K67", "组合": "壬+戊", "格名": "小蛇化龙", "交易读法": "男人发达·企业上台阶·利投资", "状态": "⬚待译"})'><b>K67</b>
+<span class="cv">壬+戊</span>
+<span class="cv">小蛇化龙</span>
+<span class="cv">男人发达·企业上台阶·利投资</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K68", "组合": "壬+己", "格名": "反吟蛇刑", "交易读法": "官司败诉·大祸将至·防陷阱", "状态": "⬚待译"})'><b>K68</b>
+<span class="cv">壬+己</span>
+<span class="cv">反吟蛇刑</span>
+<span class="cv">官司败诉·大祸将至·防陷阱</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K69", "组合": "壬+庚", "格名": "太白擒蛇", "交易读法": "刑狱公平·做事有阻邪正分明", "状态": "⬚待译"})'><b>K69</b>
+<span class="cv">壬+庚</span>
+<span class="cv">太白擒蛇</span>
+<span class="cv">刑狱公平·做事有阻邪正分明</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K70", "组合": "壬+辛", "格名": "腾蛇相缠", "交易读法": "纵得吉门亦不能安·麻烦缠身", "状态": "⬚待译"})'><b>K70</b>
+<span class="cv">壬+辛</span>
+<span class="cv">腾蛇相缠</span>
+<span class="cv">纵得吉门亦不能安·麻烦缠身</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K71", "组合": "壬+壬", "格名": "蛇入地罗", "交易读法": "求谋无成·祸起内部·没有秩序的乱", "状态": "⬚待译"})'><b>K71</b>
+<span class="cv">壬+壬</span>
+<span class="cv">蛇入地罗</span>
+<span class="cv">求谋无成·祸起内部·没有秩序的乱</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K72", "组合": "壬+癸", "格名": "幼女奸淫", "交易读法": "家丑外扬·事未做问题一堆", "状态": "⬚待译"})'><b>K72</b>
+<span class="cv">壬+癸</span>
+<span class="cv">幼女奸淫</span>
+<span class="cv">家丑外扬·事未做问题一堆</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K73", "组合": "癸+乙", "格名": "华盖逢星", "交易读法": "贵人禄位·常人平安·宜含蓄", "状态": "⬚待译"})'><b>K73</b>
+<span class="cv">癸+乙</span>
+<span class="cv">华盖逢星</span>
+<span class="cv">贵人禄位·常人平安·宜含蓄</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K74", "组合": "癸+丙", "格名": "华盖悖师", "交易读法": "贵贱皆不利·易犯小人", "状态": "⬚待译"})'><b>K74</b>
+<span class="cv">癸+丙</span>
+<span class="cv">华盖悖师</span>
+<span class="cv">贵贱皆不利·易犯小人</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell na" onclick='showTip({"编号": "K75", "组合": "癸+丁", "格名": "螣蛇夭矫", "交易读法": "文书官司·虚惊不宁·合作必散", "状态": "凶临关键宫→攻空"})'><b>K75</b>
+<span class="cv">癸+丁</span>
+<span class="cv">螣蛇夭矫</span>
+<span class="cv">文书官司·虚惊不宁·合作必散</span>
+<span class="cv">凶临关键宫→攻空</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K76", "组合": "癸+戊", "格名": "天乙合会", "交易读法": "吉门宜求财·婚姻喜美·合作牵连", "状态": "⬚待译"})'><b>K76</b>
+<span class="cv">癸+戊</span>
+<span class="cv">天乙合会</span>
+<span class="cv">吉门宜求财·婚姻喜美·合作牵连</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K77", "组合": "癸+己", "格名": "华盖地户", "交易读法": "音信皆阻·安静等待退守则吉", "状态": "⬚待译"})'><b>K77</b>
+<span class="cv">癸+己</span>
+<span class="cv">华盖地户</span>
+<span class="cv">音信皆阻·安静等待退守则吉</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K78", "组合": "癸+庚", "格名": "太白入网", "交易读法": "暴力争讼·凡事无成·吉事易空", "状态": "⬚待译"})'><b>K78</b>
+<span class="cv">癸+庚</span>
+<span class="cv">太白入网</span>
+<span class="cv">暴力争讼·凡事无成·吉事易空</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K79", "组合": "癸+辛", "格名": "网盖天牢", "交易读法": "官司败诉·测病大凶", "状态": "⬚待译"})'><b>K79</b>
+<span class="cv">癸+辛</span>
+<span class="cv">网盖天牢</span>
+<span class="cv">官司败诉·测病大凶</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell todo" onclick='showTip({"编号": "K80", "组合": "癸+壬", "格名": "复见腾蛇", "交易读法": "嫁娶重婚·此事一再不成功", "状态": "⬚待译"})'><b>K80</b>
+<span class="cv">癸+壬</span>
+<span class="cv">复见腾蛇</span>
+<span class="cv">嫁娶重婚·此事一再不成功</span>
+<span class="cv">⬚待译</span>
+</div>
+<div class="cell cand" onclick='showTip({"编号": "K81", "组合": "癸+癸", "格名": "天网四张", "交易读法": "行人失伴·不可谋事只宜退避·1-4网低/6-9网高", "状态": "📋候选→S2（M5-③c）"})'><b>K81</b>
+<span class="cv">癸+癸</span>
+<span class="cv">天网四张</span>
+<span class="cv">行人失伴·不可谋事只宜退避·1-4网低/6-9网高</span>
+<span class="cv">📋候选→S2（M5-③c）</span>
+</div></div></section><section><h2>S6 宫位属性 <small>0/36 · 使用率3% · 优先级最低</small></h2><div class="grid"><div class="cell na" onclick='showTip({"宫位": "宫位", "五行": "五行", "板块对应": "板块对应", "支撑/压力角色": "支撑/压力角色", "状态": "状态"})'><b>宫位</b>
+<span class="cv">五行</span>
+<span class="cv">板块对应</span>
+<span class="cv">支撑/压力角色</span>
+<span class="cv">状态</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "坎一", "五行": "水", "板块对应": "物流·贸易·水利", "支撑/压力角色": "—", "状态": "⬚未建模"})'><b>坎一</b>
+<span class="cv">水</span>
+<span class="cv">物流·贸易·水利</span>
+<span class="cv">—</span>
+<span class="cv">⬚未建模</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "坤二", "五行": "土", "板块对应": "资源·农业·地产", "支撑/压力角色": "—", "状态": "⬚"})'><b>坤二</b>
+<span class="cv">土</span>
+<span class="cv">资源·农业·地产</span>
+<span class="cv">—</span>
+<span class="cv">⬚</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "震三", "五行": "木", "板块对应": "创新药·教育·文化（主升）", "支撑/压力角色": "—", "状态": "⬚"})'><b>震三</b>
+<span class="cv">木</span>
+<span class="cv">创新药·教育·文化（主升）</span>
+<span class="cv">—</span>
+<span class="cv">⬚</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "巽四", "五行": "木", "板块对应": "医药·科技·文化", "支撑/压力角色": "—", "状态": "⬚"})'><b>巽四</b>
+<span class="cv">木</span>
+<span class="cv">医药·科技·文化</span>
+<span class="cv">—</span>
+<span class="cv">⬚</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "中五", "五行": "土", "板块对应": "转化·枢纽", "支撑/压力角色": "—", "状态": "⬚"})'><b>中五</b>
+<span class="cv">土</span>
+<span class="cv">转化·枢纽</span>
+<span class="cv">—</span>
+<span class="cv">⬚</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "乾六", "五行": "金", "板块对应": "金融·银行（强劲上升）", "支撑/压力角色": "**压力位**（压力难破则乾宫受制）", "状态": "⬚"})'><b>乾六</b>
+<span class="cv">金</span>
+<span class="cv">金融·银行（强劲上升）</span>
+<span class="cv">**压力位**（压力难破则乾宫受制）</span>
+<span class="cv">⬚</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "兑七", "五行": "金", "板块对应": "消费·传媒·娱乐", "支撑/压力角色": "—", "状态": "⬚"})'><b>兑七</b>
+<span class="cv">金</span>
+<span class="cv">消费·传媒·娱乐</span>
+<span class="cv">—</span>
+<span class="cv">⬚</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "艮八", "五行": "土", "板块对应": "地产·基建·周期", "支撑/压力角色": "**支撑位**（艮为止，支撑有效则艮宫旺相）", "状态": "⬚"})'><b>艮八</b>
+<span class="cv">土</span>
+<span class="cv">地产·基建·周期</span>
+<span class="cv">**支撑位**（艮为止，支撑有效则艮宫旺相）</span>
+<span class="cv">⬚</span>
+</div>
+<div class="cell todo" onclick='showTip({"宫位": "离九", "五行": "火", "板块对应": "传媒·AI·能源（波动大）", "支撑/压力角色": "—", "状态": "⬚"})'><b>离九</b>
+<span class="cv">火</span>
+<span class="cv">传媒·AI·能源（波动大）</span>
+<span class="cv">—</span>
+<span class="cv">⬚</span>
+</div></div></section><section><h2>S7 扩展用神 <small>0/40 · 玄武/月干/伤门/螣蛇/太阴 × 8状态全空 · 使用率23%</small></h2>
+<div class="op"><div class="opcard"><b>玄武</b><div class="role">投机/短线 · 层系数衍生0.5有权重但矩阵无行——S1/S7边界悬置</div><p>升格路径：频率≥10次/季度 → 数据裁决立◌观察行 → n≥10+命中率≥0.5 → 试用轨转正（◎级升格108口径需老师立项）</p></div>
+<div class="opcard"><b>月干 / 伤门</b><div class="role">对手盘 / 做空力量（张志春增补）</div><p>未建模，判语层随用随查。月干=同行竞争者/对手盘，伤门=砸盘资金。</p></div>
+<div class="opcard"><b>螣蛇 / 太阴</b><div class="role">假利好 / 主力潜伏（辅助用神）</div><p>判语层使用中（螣蛇假利好描述常见），无机判定SOP前不落格。</p></div></div></section><section><h2>算子层 <small>不是空间，是作用于空间的算子</small></h2><div class="op">
+<div class="opcard"><b>T1 月令</b><div class="role">参数注入 · 驱动S1旺衰列取值</div><p>数学角色：G = G(D, T1) 的内部参数。月令换则点亮集合变。机制：月令底盘强制声明（矩阵v2.2）。</p></div>
+<div class="opcard"><b>T2 时辰 ⭐唯一改分算子</b><div class="role">重跑算子 · 四时段引动修正</div><p>G_t = G ⊕ A_t（空亡逢值→移除/逢冲→恢复/得禄三检→反转）。A_t=引动修正集，9.4.2d四问产物。改分口子收敛于此一处，回测盯这里。</p></div>
+<div class="opcard"><b>T3 跨日</b><div class="role">比较算子 · 判语层 · 使用率100%</div><p>今日D vs 昨日D的变化检测——"庚金由旺入墓=旧力衰竭"。反转思辨框架/D11/K11。零分效应，只进叙事。</p></div>
+<div class="opcard"><b>L1 外部三维</b><div class="role">限幅算子 · 输出端微调 · 使用率100%</div><p>隔夜动能/全天趋势/日内方向——非盘局信息，R1~R5微调（只改措辞交接，不改级）。单向依赖：不回灌任何空间。</p></div></div></section><section><h2>改进日志 <small>周复盘/补格每次改进留痕 · 数据源《工程改进日志.md》</small></h2><table class="log"><tr><th>日期</th><th>版本</th><th>空间</th><th>改进内容</th><th>依据</th></tr><tr><td>2026-11-08</td><td>—</td><td>任务链</td><td>周复盘cron嵌入Step0.5框架前置；补格cron升三层分工（统计/归因/审计）</td><td style="color:#8b949e">老师"免得写了框架没有任务调用"</td></tr><tr><td>2026-11-08</td><td>—</td><td>输入源</td><td>extractor_S1 v0.1 建成（D.json→13×8点亮表），0609/1106双盘验证</td><td style="color:#8b949e">D.json库300+份发现，批量回填障碍清除</td></tr><tr><td>2026-11-08</td><td>—</td><td>算子</td><td>算子层形式化：T1参数注入/T2重跑+引动(唯一改分)/T3比较/L1限幅</td><td style="color:#8b949e">设计文档公式链</td></tr><tr><td>2026-11-08</td><td>V1.0</td><td>全框架</td><td>七空间坐标系立项：474坐标全集穷举+遍历表+覆盖审计</td><td style="color:#8b949e">老师"奇门是多空间坐标规则吗"追问</td></tr><tr><td>2026-11-08</td><td>v2.6</td><td>治理</td><td>挂账两案数据裁决关闭（原"待老师裁决"作废）</td><td style="color:#8b949e">老师指令"用数据裁决"，准则51落地</td></tr><tr><td>2026-11-08</td><td>v2.6</td><td>S1</td><td>A7凶格临关键宫信号级改结构渠道（格级读法不动）</td><td style="color:#8b949e">120天重算n=22：空占47%距对半差1天，无显著方向</td></tr><tr><td>2026-11-08</td><td>v2.6</td><td>S5</td><td>轴10立4条◌观察格（S1大格/S2贵人入狱/S3困龙被伤/S4刑格）</td><td style="color:#8b949e">频率数据：106份报告中出现23/10/7/5次，阈值≥5</td></tr></table></section><div class="tooltip" id="tip"></div>
+<script>
+function showTip(d){const t=document.getElementById('tip');t.textContent=JSON.stringify(d,null,1);t.style.display='block';t.style.left=Math.min(event.clientX+14,innerWidth-460)+'px';t.style.top=(event.clientY+14)+'px'}
+document.addEventListener('click',e=>{if(!e.target.closest('.cell'))document.getElementById('tip').style.display='none'})
+</script></body></html>
