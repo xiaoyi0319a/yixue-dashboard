@@ -155,6 +155,18 @@
    "last_zone": "横盘整理",
    "last_gene": "无明确模式可归(近模式7)",
    "last_grade": "偏弱"
+  },
+  {
+   "code": "300523",
+   "name": "辰安科技",
+   "last_date": "20261109",
+   "count": 1,
+   "dates": [
+    "20261109"
+   ],
+   "last_zone": "横盘整理",
+   "last_gene": "模式8首亮+模式5骨架",
+   "last_grade": "偏弱"
   }
  ]
 }
