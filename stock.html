@@ -374,9 +374,24 @@ document.addEventListener('click',e=>{
  if(!e.target.closest('#archiveBar')){document.getElementById('searchDrop').style.display='none';document.getElementById('stockListPanel').style.display='none'}
 });
 function selectStock(code){CUR.code=code;document.getElementById('stockListPanel').style.display='none';document.getElementById('searchDrop').style.display='none';loadFor(code)}
+const STOCK_CACHE={};
+const STOCK_CACHE_TTL=5*60*1000;
 function loadFor(code){
+ const curStockEl=document.getElementById('curStock');
+ const cached=STOCK_CACHE[code];
+ if(cached&&Date.now()-cached.ts<STOCK_CACHE_TTL){
+   D=cached.data;
+   const es=document.getElementById('empty-state');if(es)es.style.display='none';
+   const tl=document.getElementById('timeline-section');if(tl)tl.style.display='';
+   const lr2=document.querySelector('.layers-row');if(lr2)lr2.style.display='';
+   renderAll();
+   const s=IDX.stocks.find(x=>x.code===code);
+   curStockEl.textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code);
+   return;
+ }
+ curStockEl.textContent='加载中…';
  const u='data/diagnose_'+code+'.json';
- fetch(u+'?t='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{D=d;const es=document.getElementById('empty-state');if(es)es.style.display='none';const tl=document.getElementById('timeline-section');if(tl)tl.style.display='';const lr2=document.querySelector('.layers-row');if(lr2)lr2.style.display='';renderAll();const s=IDX.stocks.find(x=>x.code===code);document.getElementById('curStock').textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{showEmpty();document.getElementById('h-date').textContent='档案不存在'});
+ fetch(u).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{STOCK_CACHE[code]={data:d,ts:Date.now()};D=d;const es=document.getElementById('empty-state');if(es)es.style.display='none';const tl=document.getElementById('timeline-section');if(tl)tl.style.display='';const lr2=document.querySelector('.layers-row');if(lr2)lr2.style.display='';renderAll();const s=IDX.stocks.find(x=>x.code===code);curStockEl.textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{showEmpty();document.getElementById('h-date').textContent='档案不存在'});
 }
 function load(){IDX={stocks:[]};CUR={code:null};loadSwitcher();setInterval(loadSwitcher,300000)}
 let IDX={stocks:[]},CUR={code:null};
