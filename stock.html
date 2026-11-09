@@ -407,7 +407,8 @@ function renderAll(){
 function renderAllKeepScroll(){
   const sy=window.scrollY;
   renderAll();
-  requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,sy)));
+  setTimeout(()=>window.scrollTo(0,sy),50);
+  setTimeout(()=>window.scrollTo(0,sy),200);
 }
 
 /* ===== ⭐timeline 事件链渲染（V1.1） ===== */
