@@ -384,14 +384,14 @@ function loadFor(code){
    const es=document.getElementById('empty-state');if(es)es.style.display='none';
    const tl=document.getElementById('timeline-section');if(tl)tl.style.display='';
    const lr2=document.querySelector('.layers-row');if(lr2)lr2.style.display='';
-   renderAll();
+   renderAllKeepScroll();
    const s=IDX.stocks.find(x=>x.code===code);
    curStockEl.textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code);
    return;
  }
  curStockEl.textContent='加载中…';
  const u='data/diagnose_'+code+'.json';
- fetch(u).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{STOCK_CACHE[code]={data:d,ts:Date.now()};D=d;const es=document.getElementById('empty-state');if(es)es.style.display='none';const tl=document.getElementById('timeline-section');if(tl)tl.style.display='';const lr2=document.querySelector('.layers-row');if(lr2)lr2.style.display='';renderAll();const s=IDX.stocks.find(x=>x.code===code);curStockEl.textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{showEmpty();document.getElementById('h-date').textContent='档案不存在'});
+ fetch(u).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{STOCK_CACHE[code]={data:d,ts:Date.now()};D=d;const es=document.getElementById('empty-state');if(es)es.style.display='none';const tl=document.getElementById('timeline-section');if(tl)tl.style.display='';const lr2=document.querySelector('.layers-row');if(lr2)lr2.style.display='';renderAllKeepScroll();const s=IDX.stocks.find(x=>x.code===code);curStockEl.textContent=s?('当前：'+s.name+' '+code+(s.count>1?'（已诊断'+s.count+'次）':'')):(code)}).catch(()=>{showEmpty();document.getElementById('h-date').textContent='档案不存在'});
 }
 function load(){IDX={stocks:[]};CUR={code:null};loadSwitcher();setInterval(loadSwitcher,300000)}
 let IDX={stocks:[]},CUR={code:null};
@@ -403,6 +403,11 @@ function renderAll(){
   document.getElementById('h-ver').textContent=D.version||'';
   renderMatrix();renderLayers();renderGene();renderState();renderDaily();renderCompare();renderTimeline();renderReport();renderTargetPrice();renderVerdict();
   getScripts().then(s=>{SCRIPT_CACHE=s;renderMatrix();});
+}
+function renderAllKeepScroll(){
+  const sy=window.scrollY;
+  renderAll();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,sy)));
 }
 
 /* ===== ⭐timeline 事件链渲染（V1.1） ===== */
