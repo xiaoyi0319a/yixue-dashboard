@@ -441,6 +441,8 @@ function renderReport(){
   const catStatus=(s)=>{const st=(s||'');if(st.includes('✅')||st.includes('兑现'))return '#3fb950';if(st.includes('❌')||st.includes('证伪'))return '#f85149';return '#d29922'};
   const catRows=cats.map(c=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #21262d"><div style="flex:1"><div style="color:#c9d1d9">${c.text}</div>${c.note?`<div style="color:#8b949e;font-size:11px;margin-top:2px">${c.note}</div>`:''}</div><span style="white-space:nowrap;font-size:11px;font-weight:700;color:${catStatus(c.status)}">${c.status}</span></div>`).join('');
   const vnRows=vn.map(v=>`<tr><td style="padding:6px 10px 6px 0;color:#58a6ff;white-space:nowrap;font-weight:600">${v.time}</td><td style="padding:6px 10px;color:#c9d1d9;white-space:nowrap">${v.event}</td><td style="padding:6px 10px;color:#8b949e">${v.verify}</td><td style="padding:6px 0;color:#d29922;font-size:11px">${v.miss_action}</td></tr>`).join('');
+  const evs=r.event_analysis||[];
+  const evRows=evs.map(e=>`<div style="padding:10px 0;border-bottom:1px solid #21262d"><div style="color:#c9d1d9;font-weight:700">${e.event}</div><div style="margin-top:6px;font-size:12px;color:#8b949e;line-height:1.8"><span style="color:#58a6ff">是什么：</span>${e.what}<br><span style="color:#d29922">基本面账本：</span>${e.impact}<br><span style="color:#3fb950">交易含义：</span>${e.trade_logic}</div></div>`).join('');
 
   body.innerHTML=`
     <div class="card" style="margin-bottom:12px">
@@ -457,6 +459,7 @@ function renderReport(){
     ${vsRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">💰 估值拆解（市值=几块）</div><table>${vsRows}</table></div>`:''}
     ${scRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">⚖️ 三情景</div>${scRows}${r.current_price_note?`<div style="margin-top:8px;padding:8px;background:#58a6ff15;border-radius:6px;color:#58a6ff;font-size:12px">📍 ${r.current_price_note}</div>`:''}</div>`:''}
     ${wrRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">🎯 变化权重（底=基石/顶=想象/噪=水分/雾=易散）</div>${wrRows}</div>`:''}
+    ${evRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">🔍 事件深挖（是什么→账本影响→交易含义）</div>${evRows}</div>`:''}
     ${catRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">🚀 催化剂追踪</div>${catRows}</div>`:''}
     ${fal.condition?`<div class="card" style="margin-bottom:12px"><div class="card-title">🛑 证伪信号</div><div style="padding:6px 0"><span style="color:#c9d1d9">${fal.condition}</span> <span style="color:${fal.status&&fal.status.includes('未触发')?'#3fb950':'#f85149'};font-size:11px;font-weight:700">${fal.status}</span></div></div>`:''}
     ${vnRows?`<div class="card" style="margin-bottom:12px"><div class="card-title">📅 验证节点</div><table><tr><th>时间</th><th>事件</th><th>验证什么</th><th>miss怎么办</th></tr>${vnRows}</table></div>`:''}
@@ -469,7 +472,7 @@ function renderCompare(){
   const bar=document.getElementById('compareBar');
   const p=D.prev_diagnose;
   if(!p||!p.date){bar.style.display='none';return}
-  const daysAgo=p.days_ago??Math.max(0,Math.round((new Date(D.date||Date.now())-new Date(p.date))/86400000));
+  const daysAgo=p.days_ago??(()=>{const pd=s=>{if(!s)return null;if(/^\d{8}$/.test(s))return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));return new Date(s)};const a=pd(D.date)||new Date();const b=pd(p.date);return b?Math.max(0,Math.round((a-b)/86400000)):'--'})();
   bar.style.display='block';
   const item=(label,o)=>{
     if(!o)return'';
