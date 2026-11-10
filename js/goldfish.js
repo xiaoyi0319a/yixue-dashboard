@@ -7,7 +7,7 @@
     'use strict';
     var cv = document.createElement('canvas');
     cv.id = 'fishbg';
-    cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;';
+    cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:60;pointer-events:none;opacity:.86;';
     document.body.insertBefore(cv, document.body.firstChild);
     var style = document.createElement('style');
     style.textContent = '.container,.footer{position:relative;z-index:1}';
@@ -31,13 +31,14 @@
     };
 
     function bodyPath(c) {
+        /* 文种胖金鱼：蛋形身段，腹深背拱 */
         c.beginPath();
-        c.moveTo(54, 0);                                   /* 吻端 */
-        c.bezierCurveTo(46, -16, 18, -24, -8, -19);        /* 背弧 */
-        c.bezierCurveTo(-28, -15.5, -42, -8, -46, -3);   /* 尾柄上 */
-        c.bezierCurveTo(-48, 2, -44, 8, -34, 12);         /* 尾柄下 */
-        c.bezierCurveTo(-16, 20, 20, 18, 38, 12);          /* 腹弧 */
-        c.bezierCurveTo(50, 8, 55, 4, 54, 0);
+        c.moveTo(58, 0);                                    /* 吻端 */
+        c.bezierCurveTo(50, -22, 14, -32, -12, -26);      /* 背弧 */
+        c.bezierCurveTo(-33, -21, -47, -10, -50, -3);     /* 尾柄上 */
+        c.bezierCurveTo(-52, 3, -46, 12, -34, 17);        /* 尾柄下 */
+        c.bezierCurveTo(-13, 27, 26, 27, 44, 17);         /* 腹（胖） */
+        c.bezierCurveTo(56, 11, 59, 5, 58, 0);
         c.closePath();
     }
 
@@ -82,18 +83,19 @@
         ctx.save();
         ctx.translate(F.x, F.y);
         ctx.rotate(F.ang);
+        ctx.scale(1.26, 1.26);
         /* 柔光 */
         ctx.shadowColor = 'rgba(255,170,60,.45)';
         ctx.shadowBlur = 14;
 
         /* 尾鳍（后画，层在身体下先画） */
-        ribbon(ctx, -42, -1, 74, 26, 0.0, 'rgba(255,140,40,.85)', 'rgba(255,190,90,.15)', 0.8, -1);
-        ribbon(ctx, -42, 3, 74, 26, 1.7, 'rgba(255,140,40,.85)', 'rgba(255,190,90,.15)', 0.8, 1);
+        ribbon(ctx, -45, -1, 78, 31, 0.0, 'rgba(255,140,40,.85)', 'rgba(255,190,90,.15)', 0.8, -1);
+        ribbon(ctx, -45, 4, 78, 31, 1.7, 'rgba(255,140,40,.85)', 'rgba(255,190,90,.15)', 0.8, 1);
         ctx.shadowBlur = 0;
 
         /* 身体 */
         bodyPath(ctx);
-        var g = ctx.createLinearGradient(0, -24, 0, 22);
+        var g = ctx.createLinearGradient(0, -30, 0, 28);
         g.addColorStop(0, '#ff8c2e');
         g.addColorStop(0.45, '#ffb14e');
         g.addColorStop(0.8, '#ffd98f');
@@ -104,9 +106,9 @@
         ctx.strokeStyle = 'rgba(190,84,15,.75)';
         ctx.lineWidth = 1.6;
         ctx.beginPath();
-        ctx.moveTo(54, 0);
-        ctx.bezierCurveTo(46, -16, 18, -24, -8, -19);
-        ctx.bezierCurveTo(-28, -15.5, -42, -8, -46, -3);
+        ctx.moveTo(58, 0);
+        ctx.bezierCurveTo(50, -22, 14, -32, -12, -26);
+        ctx.bezierCurveTo(-33, -21, -47, -10, -50, -3);
         ctx.stroke();
         /* 鳞光 */
         ctx.save();
@@ -117,58 +119,58 @@
         for (var r = 0; r < 4; r++) {
             ctx.beginPath();
             for (var q = 0; q < 5; q++) {
-                var sx = 26 - q * 14, sy = -12 + r * 9;
-                ctx.arc(sx, sy, 7, Math.PI * 0.15, Math.PI * 0.85);
+                var sx = 28 - q * 15, sy = -14 + r * 10;
+                ctx.arc(sx, sy, 8, Math.PI * 0.15, Math.PI * 0.85);
             }
             ctx.stroke();
         }
         /* 侧身高光 */
-        var hg = ctx.createRadialGradient(16, -4, 2, 16, -4, 30);
+        var hg = ctx.createRadialGradient(18, -4, 2, 18, -4, 33);
         hg.addColorStop(0, 'rgba(255,255,255,.30)');
         hg.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.fillStyle = hg;
-        ctx.fillRect(-50, -26, 110, 52);
+        ctx.fillRect(-54, -32, 116, 62);
         ctx.restore();
 
         /* 背鳍 + 腹鳍（飘带） */
         ctx.shadowColor = 'rgba(255,170,60,.4)'; ctx.shadowBlur = 8;
-        ribbon(ctx, 6, -19, 34, 10, 0.9, 'rgba(255,150,50,.8)', 'rgba(255,200,110,.12)', 0.75, -1);
-        ribbon(ctx, -6, 15, 42, 9, 2.6, 'rgba(255,150,50,.75)', 'rgba(255,200,110,.10)', 0.7, 1);
-        ribbon(ctx, 2, 17, 34, 7, 4.1, 'rgba(255,150,50,.7)', 'rgba(255,200,110,.10)', 0.65, 1);
+        ribbon(ctx, 6, -24, 36, 12, 0.9, 'rgba(255,150,50,.8)', 'rgba(255,200,110,.12)', 0.75, -1);
+        ribbon(ctx, -8, 19, 46, 11, 2.6, 'rgba(255,150,50,.75)', 'rgba(255,200,110,.10)', 0.7, 1);
+        ribbon(ctx, 0, 21, 37, 8, 4.1, 'rgba(255,150,50,.7)', 'rgba(255,200,110,.10)', 0.65, 1);
         ctx.shadowBlur = 0;
         /* 胸鳍扑动 */
         var pec = Math.sin(F.t * 6.2) * 6;
         ctx.save();
-        ctx.translate(26, 6);
+        ctx.translate(28, 7);
         ctx.rotate(0.5 + pec * 0.02);
         ctx.fillStyle = 'rgba(255,170,70,.75)';
         ctx.beginPath();
-        ctx.ellipse(0, 6, 4.5, 11, 0.3, 0, Math.PI * 2);
+        ctx.ellipse(0, 7, 5, 13, 0.3, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
         /* 眼 */
         ctx.fillStyle = '#2a1503';
-        ctx.beginPath(); ctx.arc(32, -7, 3.4, 0, 7); ctx.fill();
+        ctx.beginPath(); ctx.arc(35, -9, 3.8, 0, 7); ctx.fill();
         ctx.fillStyle = 'rgba(255,255,255,.9)';
-        ctx.beginPath(); ctx.arc(33, -8, 1.2, 0, 7); ctx.fill();
+        ctx.beginPath(); ctx.arc(36, -10, 1.3, 0, 7); ctx.fill();
         /* 腮红 */
         ctx.fillStyle = 'rgba(255,110,60,.20)';
-        ctx.beginPath(); ctx.arc(40, 4, 6, 0, 7); ctx.fill();
+        ctx.beginPath(); ctx.arc(44, 5, 7, 0, 7); ctx.fill();
         /* 须（两条，摆动） */
         ctx.strokeStyle = 'rgba(255,214,140,.85)';
         ctx.lineWidth = 1.1;
         for (var w = 0; w < 2; w++) {
             var ph = Math.sin(F.t * 2.4 + w * 1.9) * 5;
             ctx.beginPath();
-            ctx.moveTo(52, 3 + w * 2.5);
-            ctx.quadraticCurveTo(64, 8 + w * 4 + ph, 74, 14 + w * 6 + ph * 1.4);
+            ctx.moveTo(55, 4 + w * 2.5);
+            ctx.quadraticCurveTo(68, 9 + w * 4 + ph, 78, 15 + w * 6 + ph * 1.4);
             ctx.stroke();
         }
         /* 嘴 */
         ctx.strokeStyle = 'rgba(160,70,20,.8)';
         ctx.lineWidth = 1.2;
-        ctx.beginPath(); ctx.arc(53, 1, 2.2, -0.9, 0.9); ctx.stroke();
+        ctx.beginPath(); ctx.arc(56, 1, 2.4, -0.9, 0.9); ctx.stroke();
         ctx.restore();
     }
 
