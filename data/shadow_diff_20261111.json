@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-11",
+  "shadow": "data/pipeline_shadow_20261111.json",
+  "direct": "data/pipeline_20261111.json",
+  "summary": "442/445 字段一致 ｜ 仅shadow有 1 ｜ 仅直写有 2 ｜ 值不同 0",
+  "only_shadow": [
+    {"path": "fusion.v0_grade", "value": 1, "note": "组装器冗余字段，直写版无此键（fusion.v0已含同值）"}
+  ],
+  "only_direct": [
+    {"path": "actual_curve", "value": null, "note": "verify模式才写的null占位，predict日正常"},
+    {"path": "strong_bottom", "value": null, "note": "模块已删(V4.1-patch1)的null占位，直写层规范要求"}
+  ],
+  "value_mismatch": [],
+  "verdict": "差异全部为已知无害占位/冗余，影子对账通过（灰度第5日）"
+}
