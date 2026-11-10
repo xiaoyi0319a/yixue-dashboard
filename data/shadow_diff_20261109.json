@@ -1,0 +1,5 @@
+对账结果：468/470 字段一致 ｜ 仅A有 2 ｜ 仅B有 0 ｜ 值不同 0
+
+--- 仅A有 ---
+  A: actual_curve = None
+  A: strong_bottom = None
