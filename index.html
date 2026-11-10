@@ -1,25 +1,213 @@
+<!--
+================================================================================
+羿学天天看 - 网站模板（3D遁甲盘版 V2）
+版本: 2.0（2026-11-10——老师"改成3D网页"指令落地：奇门九宫全息盘hero）
+设计参考：科幻全息指挥台 HUD × 道家遁甲盘（暗色玻璃拟态+洛书九宫浮盘）
+占位符: 2026-11-10 2026年11月10日 周二 丙午年 己亥月 戊子日 | 立冬 阴遁9局 值符天辅·杜门 <div class="qimen-hexagram">
+                <h4>📊 卦象</h4>
+                <p>阴九寒局水当权，戊土奄奄带伤眠。<br>青龙华盖身相护，虚禄临而举若悬。<br>朱雀投江惊值符，大势虚惊托未全。<br>丁帅入墓逢空锁，兵临禄地帅无钤。<br>乙木仓皇带伤走，蓬星旺动暗流潺。<br>马动乾宫性偏急，前扬后抑收偏多。</p>
+            </div>
+            <div class="qimen-verdict">
+                <h4>📜 大势判语</h4>
+                <p><i>这几天盘面先砸后稳，周一低位收住一颗小阳。今天夜里外盘集体大涨，美股三个指数都涨了两个多点，A50夜盘跟了一个点，开局不会冷。低位修复走到第五天，拐头的劲一拱一拱往上续，这是修复进行时。可深跌之后下行动能虽然在衰减，泡在水里的修复从来只能当修复看，高度别指望，这不怪咱们自己。空头主帅被困，群龙无首，兵是壮的，可令发不出来，压而不决。大势带着点虚惊，托而不健。多头买盘带伤，好在暗流涌动，钱其实在往里流。多空拉通了看，托底的多，举旗的少。今天高开之后，上午承接不缺，两边一个方向往前走，没有额外变量搅局。唯一的变数在午后，空头缓过劲来补弹药。可帅弱兵孤，出来也是强弩之末。全天是个前扬后抑的修复市，收在偏多一侧，别贪高度。上方虚压未散，下方承接有人，磨字未尽，站多方而不贪高度。</i></p>
+            </div>
+            <div class="qimen-time">
+                <h4>⏰ 时辰推演</h4>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第1时段</span>
+                        <span class="time-range">09:30 - 10:30</span>
+                    </div>
+                    <div class="time-verdict up">巳时微偏强：开局气顺，承接不缺。高开之后资金和价格都得力，卖盘被压着打。这份助力是真的，可带着点伤，冲高后看持续性，防脉冲急回。续力能否守住，看午火。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第2时段</span>
+                        <span class="time-range">10:30 - 11:30</span>
+                    </div>
+                    <div class="time-verdict up">午时微偏强：上午的修复续住了，势头最旺的时候卖盘最难受。可惜利润端被锁着，多方手里没实锚，高度打不满。空方主帅看似得了时运，却是虚的，锁着出不来。午后有变数。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第3时段</span>
+                        <span class="time-range">13:00 - 14:00</span>
+                    </div>
+                    <div class="time-verdict down">未时微偏弱：午后空方主帅脱困，卖方重新有了头目。可这位帅自身难保，出来也是强弩之末，压制有而力不足。两边拉扯，多空分不出大胜。变数在尾盘。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第4时段</span>
+                        <span class="time-range">14:00 - 15:00</span>
+                    </div>
+                    <div class="time-verdict down">申时微偏弱：空方兵力补上弹药，该发力了。可这一轮是出清，不是开战。帅弱兵孤，砸也是收摊性质。全天收在谁手里，看这一笔落墨，偏多一些。</div>
+                </div>
+            </div>
+        </div>（清洗规则不变，见网站更新工作流）
+数据: data/pipeline_latest.json（palace_table九宫/four_slots/ganzhi/dun——缺失时3D自动降级，页面永不白屏）
+================================================================================
+-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta property="og:title" content="羿学天天看 | 2026-11-10">
-    <meta property="og:description" content="🔮 阴遁9局·偏多（高开局，前扬后抑的修复市，收在偏多一侧，别贪高度）| 📈📰 方向整理已暂停（09-27指令）">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://xiaoyi0319a.github.io/yixue-dashboard/">
-    <meta name="twitter:card" content="summary_large_image">
     <title>羿学天天看 | 2026-11-10</title>
     <link rel="stylesheet" href="css/style.css">
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <style>
+    /* ============ 3D遁甲盘主题（body.v3d作用域，不污染旧页面） ============ */
+    body.v3d { background: radial-gradient(ellipse at 50% -20%, #0d1830 0%, #05080f 55%, #03050a 100%) !important; color: #d7e3f4; min-height: 100vh; }
+    body.v3d .container { max-width: 1200px; margin: 0 auto; padding: 0 16px 40px; }
+    body.v3d .header { text-align: center; padding: 28px 0 6px; border-bottom: 1px solid rgba(120,160,220,.12); }
+    body.v3d .header h1 { margin: 0; font-size: 1.7em; letter-spacing: .18em; color: #e8f1ff; text-shadow: 0 0 24px rgba(90,150,255,.35); }
+    body.v3d .header .date { color: #9db4d4; margin-top: 6px; font-size: .95em; }
+    body.v3d .header .ganzhi { color: #c9a86a; margin-top: 4px; font-size: .9em; letter-spacing: .1em; }
+
+    /* ---- 3D hero ---- */
+    #pand-hero { position: relative; height: 68vh; min-height: 430px; margin: 18px 0 8px; border-radius: 16px; overflow: hidden;
+        background: radial-gradient(ellipse at 50% 120%, rgba(38,70,140,.25), transparent 60%); border: 1px solid rgba(120,160,220,.10); }
+    #pand-canvas { position: absolute; inset: 0; }
+    #pand-canvas canvas { display: block; }
+    .pand-badge { position: absolute; top: 12px; left: 14px; z-index: 5; display: flex; gap: 8px; flex-wrap: wrap; }
+    .pand-badge span { background: rgba(10,20,40,.72); border: 1px solid rgba(150,190,255,.25); color: #bcd6ff;
+        padding: 4px 12px; border-radius: 999px; font-size: .82em; backdrop-filter: blur(6px); }
+    .pand-badge .b-dun { color: #e8c987; border-color: rgba(220,180,110,.35); }
+    .pand-hint { position: absolute; bottom: 10px; right: 14px; z-index: 5; color: #5f789c; font-size: .75em; letter-spacing: .08em; }
+    /* 2D兜底盘（WebGL/CDN失败时） */
+    #pand-fallback { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; padding: 18px; }
+    #pand-fallback.show { display: flex; }
+    .pand-grid { display: grid; grid-template-columns: repeat(3, minmax(120px, 170px)); grid-auto-rows: 1fr; gap: 8px; }
+    .pg-cell { background: rgba(14,26,50,.85); border-radius: 10px; padding: 8px 10px; font-size: .78em; line-height: 1.5;
+        border: 1px solid rgba(120,160,220,.18); border-top: 3px solid var(--dc, #889); }
+    .pg-cell .p1 { color: #e8f1ff; font-weight: 600; }
+    .pg-cell .p2 { color: #9db4d4; }
+    .pg-cell .p3 { color: #c9a86a; font-size: .86em; }
+    .pg-cell.zhifu { box-shadow: 0 0 18px rgba(230,190,110,.35); border-color: rgba(230,190,110,.55); }
+
+    /* ---- 内容区块（沿用旧class名，<div class="qimen-hexagram">
+                <h4>📊 卦象</h4>
+                <p>阴九寒局水当权，戊土奄奄带伤眠。<br>青龙华盖身相护，虚禄临而举若悬。<br>朱雀投江惊值符，大势虚惊托未全。<br>丁帅入墓逢空锁，兵临禄地帅无钤。<br>乙木仓皇带伤走，蓬星旺动暗流潺。<br>马动乾宫性偏急，前扬后抑收偏多。</p>
+            </div>
+            <div class="qimen-verdict">
+                <h4>📜 大势判语</h4>
+                <p><i>这几天盘面先砸后稳，周一低位收住一颗小阳。今天夜里外盘集体大涨，美股三个指数都涨了两个多点，A50夜盘跟了一个点，开局不会冷。低位修复走到第五天，拐头的劲一拱一拱往上续，这是修复进行时。可深跌之后下行动能虽然在衰减，泡在水里的修复从来只能当修复看，高度别指望，这不怪咱们自己。空头主帅被困，群龙无首，兵是壮的，可令发不出来，压而不决。大势带着点虚惊，托而不健。多头买盘带伤，好在暗流涌动，钱其实在往里流。多空拉通了看，托底的多，举旗的少。今天高开之后，上午承接不缺，两边一个方向往前走，没有额外变量搅局。唯一的变数在午后，空头缓过劲来补弹药。可帅弱兵孤，出来也是强弩之末。全天是个前扬后抑的修复市，收在偏多一侧，别贪高度。上方虚压未散，下方承接有人，磨字未尽，站多方而不贪高度。</i></p>
+            </div>
+            <div class="qimen-time">
+                <h4>⏰ 时辰推演</h4>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第1时段</span>
+                        <span class="time-range">09:30 - 10:30</span>
+                    </div>
+                    <div class="time-verdict up">巳时微偏强：开局气顺，承接不缺。高开之后资金和价格都得力，卖盘被压着打。这份助力是真的，可带着点伤，冲高后看持续性，防脉冲急回。续力能否守住，看午火。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第2时段</span>
+                        <span class="time-range">10:30 - 11:30</span>
+                    </div>
+                    <div class="time-verdict up">午时微偏强：上午的修复续住了，势头最旺的时候卖盘最难受。可惜利润端被锁着，多方手里没实锚，高度打不满。空方主帅看似得了时运，却是虚的，锁着出不来。午后有变数。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第3时段</span>
+                        <span class="time-range">13:00 - 14:00</span>
+                    </div>
+                    <div class="time-verdict down">未时微偏弱：午后空方主帅脱困，卖方重新有了头目。可这位帅自身难保，出来也是强弩之末，压制有而力不足。两边拉扯，多空分不出大胜。变数在尾盘。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第4时段</span>
+                        <span class="time-range">14:00 - 15:00</span>
+                    </div>
+                    <div class="time-verdict down">申时微偏弱：空方兵力补上弹药，该发力了。可这一轮是出清，不是开战。帅弱兵孤，砸也是收摊性质。全天收在谁手里，看这一笔落墨，偏多一些。</div>
+                </div>
+            </div>
+        </div>结构兼容） ---- */
+    body.v3d .qimen-section { margin-top: 10px; }
+    body.v3d .qimen-section h2 { color: #e8f1ff; font-size: 1.15em; letter-spacing: .1em; border-left: 3px solid #c9a86a; padding-left: 10px; }
+    body.v3d .qimen-hexagram, body.v3d .qimen-verdict, body.v3d .qimen-time {
+        background: rgba(13,24,46,.66); border: 1px solid rgba(120,160,220,.14); border-radius: 14px;
+        padding: 14px 18px; margin: 12px 0; backdrop-filter: blur(8px); box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+    body.v3d .qimen-hexagram h4, body.v3d .qimen-verdict h4, body.v3d .qimen-time h4 { color: #c9a86a; margin: 0 0 8px; font-size: .95em; letter-spacing: .12em; }
+    body.v3d .qimen-hexagram p { color: #bcd0ea; line-height: 1.9; margin: 0; font-size: .95em; }
+    body.v3d .qimen-verdict p { color: #d7e3f4; line-height: 1.95; margin: 0; }
+    body.v3d .qimen-verdict p i { color: #d7e3f4 !important; }
+    body.v3d .time-slot { background: rgba(10,20,40,.5); border: 1px solid rgba(120,160,220,.12); border-radius: 10px; padding: 10px 14px; margin: 8px 0; }
+    body.v3d .time-header { display: flex; justify-content: space-between; color: #9db4d4; font-size: .85em; margin-bottom: 6px; }
+    body.v3d .time-verdict { line-height: 1.85; font-size: .93em; }
+    body.v3d .time-verdict.up { color: #e8a0a0; }
+    body.v3d .time-verdict.down { color: #9ec5f0; }
+    body.v3d .footer { margin-top: 26px; padding-top: 14px; border-top: 1px solid rgba(120,160,220,.10); color: #6d84a5; font-size: .82em; text-align: center; line-height: 1.9; }
+
+    @media (max-width: 768px) {
+        #pand-hero { height: 46vh; min-height: 330px; }
+        .pand-grid { grid-template-columns: repeat(3, 1fr); width: 100%; }
+        .pg-cell { font-size: .68em; padding: 6px; }
+    }
+    </style>
 </head>
-<body>
+<body class="v3d">
     <div class="container">
         <div class="header">
             <h1>羿学天天看</h1>
             <div class="date">2026年11月10日 周二</div>
             <div class="ganzhi">丙午年 己亥月 戊子日 | 立冬 阴遁9局 值符天辅·杜门</div>
         </div>
+
+        <!-- ============ 3D遁甲盘 hero（数据自加载，失败自动降级/隐藏） ============ -->
+        <div id="pand-hero">
+            <div id="pand-canvas"></div>
+            <div class="pand-badge">
+                <span class="b-dun" id="pb-dun">遁甲盘加载中…</span>
+                <span id="pb-ganzhi"></span>
+                <span id="pb-date"></span>
+            </div>
+            <div class="pand-hint">拖拽旋转 · 滚轮缩放</div>
+            <div id="pand-fallback"><div class="pand-grid" id="pand-grid2d"></div></div>
+        </div>
+
+        <!-- 奇门预测（<div class="qimen-hexagram">
+                <h4>📊 卦象</h4>
+                <p>阴九寒局水当权，戊土奄奄带伤眠。<br>青龙华盖身相护，虚禄临而举若悬。<br>朱雀投江惊值符，大势虚惊托未全。<br>丁帅入墓逢空锁，兵临禄地帅无钤。<br>乙木仓皇带伤走，蓬星旺动暗流潺。<br>马动乾宫性偏急，前扬后抑收偏多。</p>
+            </div>
+            <div class="qimen-verdict">
+                <h4>📜 大势判语</h4>
+                <p><i>这几天盘面先砸后稳，周一低位收住一颗小阳。今天夜里外盘集体大涨，美股三个指数都涨了两个多点，A50夜盘跟了一个点，开局不会冷。低位修复走到第五天，拐头的劲一拱一拱往上续，这是修复进行时。可深跌之后下行动能虽然在衰减，泡在水里的修复从来只能当修复看，高度别指望，这不怪咱们自己。空头主帅被困，群龙无首，兵是壮的，可令发不出来，压而不决。大势带着点虚惊，托而不健。多头买盘带伤，好在暗流涌动，钱其实在往里流。多空拉通了看，托底的多，举旗的少。今天高开之后，上午承接不缺，两边一个方向往前走，没有额外变量搅局。唯一的变数在午后，空头缓过劲来补弹药。可帅弱兵孤，出来也是强弩之末。全天是个前扬后抑的修复市，收在偏多一侧，别贪高度。上方虚压未散，下方承接有人，磨字未尽，站多方而不贪高度。</i></p>
+            </div>
+            <div class="qimen-time">
+                <h4>⏰ 时辰推演</h4>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第1时段</span>
+                        <span class="time-range">09:30 - 10:30</span>
+                    </div>
+                    <div class="time-verdict up">巳时微偏强：开局气顺，承接不缺。高开之后资金和价格都得力，卖盘被压着打。这份助力是真的，可带着点伤，冲高后看持续性，防脉冲急回。续力能否守住，看午火。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第2时段</span>
+                        <span class="time-range">10:30 - 11:30</span>
+                    </div>
+                    <div class="time-verdict up">午时微偏强：上午的修复续住了，势头最旺的时候卖盘最难受。可惜利润端被锁着，多方手里没实锚，高度打不满。空方主帅看似得了时运，却是虚的，锁着出不来。午后有变数。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第3时段</span>
+                        <span class="time-range">13:00 - 14:00</span>
+                    </div>
+                    <div class="time-verdict down">未时微偏弱：午后空方主帅脱困，卖方重新有了头目。可这位帅自身难保，出来也是强弩之末，压制有而力不足。两边拉扯，多空分不出大胜。变数在尾盘。</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-header">
+                        <span class="time-name">第4时段</span>
+                        <span class="time-range">14:00 - 15:00</span>
+                    </div>
+                    <div class="time-verdict down">申时微偏弱：空方兵力补上弹药，该发力了。可这一轮是出清，不是开战。帅弱兵孤，砸也是收摊性质。全天收在谁手里，看这一笔落墨，偏多一些。</div>
+                </div>
+            </div>
+        </div> = 卦象/大势判语/时辰推演，清洗规则见工作流） -->
         <div class="qimen-section">
             <h2>🔮 奇门君今日预测</h2>
             <div class="qimen-hexagram">
@@ -62,12 +250,209 @@
                 </div>
             </div>
         </div>
+        </div>
+
+        <!-- 方向整理系统状态区块：暂停模式（2026-09-27起）由生成端按需注入，模板不再内置 -->
+
         <div class="footer">
-            <p>📅 更新于 2026-11-10 08:10 | 数据来源：同花顺/iFinD/东方财富</p>
+            <p>📅 更新于 2026-11-10 21:05 | 数据来源：同花顺/iFinD/东方财富</p>
             <p>⚠️ 本页面仅为信息整理，不构成投资建议。股市有风险，投资需谨慎。</p>
             <p>🔮 奇门预测基于传统术数，仅供娱乐参考，请勿作为交易依据。</p>
             <p>📊 访问统计：<span id="busuanzi_container_site_pv">本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span> | <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv"></span> 人</span></p>
         </div>
     </div>
+
+    <script>
+    /* 洛书九宫坐标：巽4 离9 坤2 / 震3 中5 兑7 / 艮8 坎1 乾6 */
+    (function () {
+        var LUOSHU = { '巽四': [-1, -1], '巽4': [-1, -1], '四': [-1, -1], '4': [-1, -1],
+            '离九': [0, -1], '离9': [0, -1], '九': [0, -1], '9': [0, -1],
+            '坤二': [1, -1], '坤2': [1, -1], '二': [1, -1], '2': [1, -1],
+            '震三': [-1, 0], '震3': [-1, 0], '三': [-1, 0], '3': [-1, 0],
+            '中五': [0, 0], '中5': [0, 0], '五': [0, 0], '5': [0, 0],
+            '兑七': [1, 0], '兑7': [1, 0], '七': [1, 0], '7': [1, 0],
+            '艮八': [-1, 1], '艮8': [-1, 1], '八': [-1, 1], '8': [-1, 1],
+            '坎一': [0, 1], '坎1': [0, 1], '一': [0, 1], '1': [0, 1],
+            '乾六': [1, 1], '乾6': [1, 1], '六': [1, 1], '6': [1, 1] };
+        var DOOR_COLOR = { '休门': '#3aa0ff', '生门': '#d4a017', '伤门': '#2fbf71', '杜门': '#57c785', '景门': '#ff5a3c', '死门': '#8a7a4a', '惊门': '#e8e8f0', '开门': '#e8e8f0' };
+
+        function normPalace(name) {
+            if (!name) return null;
+            var m = String(name).match(/[巽离坤震中兑艮坎乾四五九二三七八六一]+/);
+            if (!m) return null;
+            return LUOSHU[m[0]] ? m[0] : (LUOSHU[name] ? name : null);
+        }
+        function posOf(name) { var k = normPalace(name); return k ? LUOSHU[k] : null; }
+
+        fetch('data/pipeline_latest.json', { cache: 'no-store' }).then(function (r) {
+            if (!r.ok) throw new Error('http ' + r.status); return r.json();
+        }).then(function (d) {
+            var pt = d && d.palace_table;
+            if (!pt || !pt.length) throw new Error('no palace_table');
+            init(pt, d);
+        }).catch(function () {
+            var hero = document.getElementById('pand-hero');
+            if (hero) hero.style.display = 'none';   /* 数据缺失：隐藏hero，经典布局兜底 */
+        });
+
+        function init(palaces, data) {
+            /* badge */
+            if (data.dun) document.getElementById('pb-dun').textContent = data.dun;
+            if (data.ganzhi) document.getElementById('pb-ganzhi').textContent = data.ganzhi;
+            if (data.date_display) document.getElementById('pb-date').textContent = data.date_display;
+
+            loadScripts([
+                'https://unpkg.com/three@0.152.2/build/three.min.js',
+                'https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js'
+            ], function () {
+                loadScripts([
+                    'https://unpkg.com/three@0.152.2/examples/js/controls/OrbitControls.js',
+                    'https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/controls/OrbitControls.js'
+                ], function () { start3D(palaces); }, function () { fallback2D(palaces); });
+            }, function () { fallback2D(palaces); });
+        }
+
+        function loadScripts(urls, ok, fail) {
+            var i = 0;
+            (function next() {
+                if (i >= urls.length) { fail && fail(); return; }
+                var s = document.createElement('script');
+                s.src = urls[i++]; s.onload = ok; s.onerror = next;
+                document.head.appendChild(s);
+            })();
+        }
+
+        /* ---------- 2D 兜底盘 ---------- */
+        function fallback2D(palaces) {
+            var g = document.getElementById('pand-grid2d');
+            if (!g) return;
+            palaces.forEach(function (p) {
+                var div = document.createElement('div');
+                div.className = 'pg-cell' + (p.god === '值符' ? ' zhifu' : '');
+                div.style.setProperty('--dc', DOOR_COLOR[p.door] || '#889');
+                div.innerHTML = '<div class="p1">' + (p.palace || '') + ' · ' + (p.star || '') + '</div>' +
+                    '<div class="p2">' + (p.door || '') + ' / ' + (p.god || '') + ' / ' + (p.sky_ground || '') + '</div>' +
+                    '<div class="p3">' + (p.note || '') + '</div>';
+                g.appendChild(div);
+            });
+            document.getElementById('pand-fallback').classList.add('show');
+            document.getElementById('pand-canvas').style.display = 'none';
+        }
+
+        /* ---------- 3D 遁甲盘 ---------- */
+        function tileTexture(p, isZhifu) {
+            var c = document.createElement('canvas'); c.width = 512; c.height = 512;
+            var x = c.getContext('2d');
+            x.fillStyle = isZhifu ? 'rgba(46,36,16,.95)' : 'rgba(12,22,44,.92)';
+            x.fillRect(0, 0, 512, 512);
+            x.strokeStyle = 'rgba(150,190,255,.35)'; x.lineWidth = 6; x.strokeRect(8, 8, 496, 496);
+            x.textAlign = 'center';
+            x.fillStyle = '#e8f1ff'; x.font = 'bold 64px "Noto Serif SC", "SimSun", serif';
+            x.fillText(p.palace || '', 256, 92);
+            x.fillStyle = '#c9a86a'; x.font = '40px "Noto Serif SC", "SimSun", serif';
+            x.fillText(p.star || '', 256, 168);
+            x.fillStyle = DOOR_COLOR[p.door] || '#9db4d4'; x.font = 'bold 52px "Noto Serif SC", "SimSun", serif';
+            x.fillText(p.door || '', 190, 262);
+            x.fillStyle = '#9db4d4'; x.font = '46px "Noto Serif SC", "SimSun", serif';
+            x.fillText(p.god || '', 330, 262);
+            x.fillStyle = '#bcd6ff'; x.font = 'bold 44px "Noto Serif SC", "SimSun", serif';
+            x.fillText(p.sky_ground || '', 256, 348);
+            x.fillStyle = '#7d94b8'; x.font = '30px sans-serif';
+            var gods = (p.gods || []).join('·');
+            if (gods) x.fillText(gods, 256, 408);
+            var note = p.note || ''; x.fillStyle = '#8fa8cc';
+            for (var i = 0; i < Math.min(2, Math.ceil(note.length / 15)); i++)
+                x.fillText(note.substr(i * 15, 15), 256, 452 + i * 36);
+            var t = new THREE.CanvasTexture(c); t.anisotropy = 4; return t;
+        }
+
+        function start3D(palaces) {
+            var box = document.getElementById('pand-canvas');
+            var W = box.clientWidth, H = box.clientHeight;
+            var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(W, H); box.appendChild(renderer.domElement);
+
+            var scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x05080f, 0.028);
+            var camera = new THREE.PerspectiveCamera(46, W / H, 0.1, 200);
+            camera.position.set(0, 8.5, 11.5);
+
+            scene.add(new THREE.AmbientLight(0x8fa8cc, 0.5));
+            var dir = new THREE.DirectionalLight(0xffffff, 0.9); dir.position.set(4, 12, 6); scene.add(dir);
+
+            var board = new THREE.Group(); scene.add(board);
+            var zhifuTile = null;
+
+            palaces.forEach(function (p) {
+                var pos = posOf(p.palace); if (!pos) return;
+                var isCenter = pos[0] === 0 && pos[1] === 0;
+                var isZhifu = p.god === '值符';
+                var size = isCenter ? 1.7 : 2.6;
+                var geo = new THREE.BoxGeometry(size, 0.22, size);
+                var mat = new THREE.MeshStandardMaterial({ color: isZhifu ? 0x2a2113 : 0x0d1830, metalness: 0.55, roughness: 0.35 });
+                if (isZhifu) mat.emissive = new THREE.Color(0x3a2c10);
+                var tile = new THREE.Mesh(geo, mat);
+                var dc = DOOR_COLOR[p.door] || '#8899aa';
+                var edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo),
+                    new THREE.LineBasicMaterial({ color: new THREE.Color(dc), transparent: true, opacity: isZhifu ? 1 : 0.75 }));
+                edges.scale.setScalar(1.001); tile.add(edges);
+                var tex = tileTexture(p, isZhifu);
+                var top = new THREE.Mesh(new THREE.PlaneGeometry(size * 0.97, size * 0.97),
+                    new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
+                top.rotation.x = -Math.PI / 2; top.position.y = 0.115; tile.add(top);
+                tile.position.set(pos[0] * 3.0, isCenter ? -0.5 : 0, pos[1] * 3.0);
+                board.add(tile);
+                if (isZhifu) {
+                    zhifuTile = tile;
+                    var pl = new THREE.PointLight(0xe6be6e, 1.6, 9); pl.position.set(0, 1.6, 0); tile.add(pl);
+                }
+            });
+
+            /* 太极环 */
+            var ring = new THREE.Group();
+            var rGeo = new THREE.TorusGeometry(6.4, 0.045, 8, 120);
+            var rMat = new THREE.MeshBasicMaterial({ color: 0xc9a86a, transparent: true, opacity: 0.5 });
+            var t1 = new THREE.Mesh(rGeo, rMat); t1.rotation.x = Math.PI / 2;
+            var t2 = new THREE.Mesh(rGeo, new THREE.MeshBasicMaterial({ color: 0x3aa0ff, transparent: true, opacity: 0.35 }));
+            t2.rotation.x = Math.PI / 2; t2.scale.setScalar(0.86);
+            ring.add(t1); ring.add(t2); ring.position.y = -1.2; board.add(ring);
+
+            /* 星尘 */
+            var N = 700, pts = new Float32Array(N * 3);
+            for (var i = 0; i < N; i++) {
+                var r = 22 + Math.random() * 26, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+                pts[i * 3] = r * Math.sin(ph) * Math.cos(th); pts[i * 3 + 1] = Math.abs(r * Math.cos(ph)) * 0.5 - 4; pts[i * 3 + 2] = r * Math.sin(ph) * Math.sin(th);
+            }
+            var pGeo = new THREE.BufferGeometry(); pGeo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
+            scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x9db4d4, size: 0.07, transparent: true, opacity: 0.65 })));
+
+            /* 地板网格 */
+            var grid = new THREE.PolarGridHelper(15, 12, 6, 48, 0x1c3050, 0x142238);
+            grid.position.y = -1.35; scene.add(grid);
+
+            var controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true; controls.dampingFactor = 0.06;
+            controls.enablePan = false; controls.minDistance = 7; controls.maxDistance = 24;
+            controls.maxPolarAngle = 1.25; controls.autoRotate = true; controls.autoRotateSpeed = 0.55;
+            controls.target.set(0, 0, 0);
+
+            var clock = new THREE.Clock();
+            (function loop() {
+                requestAnimationFrame(loop);
+                var t = clock.getElapsedTime();
+                board.position.y = Math.sin(t * 0.7) * 0.14;
+                ring.rotation.y = t * 0.12;
+                if (zhifuTile) { var s = 1 + Math.sin(t * 2.2) * 0.025; zhifuTile.scale.set(s, 1, s); }
+                controls.update(); renderer.render(scene, camera);
+            })();
+
+            window.addEventListener('resize', function () {
+                var w = box.clientWidth, h = box.clientHeight;
+                camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.setSize(w, h);
+            });
+        }
+    })();
+    </script>
 </body>
 </html>
