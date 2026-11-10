@@ -43,6 +43,7 @@
             </div>
         </div>
         </div>
+        </div>
         </div>（清洗规则不变，见网站更新工作流）
 增强：运行时JS对生成产物渐进增强（竖排拆分/时间轴/滚动显现），JS失效则退化为基础样式，永不白屏
 ================================================================================
@@ -124,6 +125,27 @@
     .tl .now .tag { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-size: .7em;
         color: #ff8a75; letter-spacing: .2em; white-space: nowrap; }
     @keyframes pulse { 50% { box-shadow: 0 0 22px rgba(255,106,85,1); } }
+    /* 流光脉冲：能量束沿轴奔流 */
+    .tl-flow { position: absolute; left: 0; right: 0; top: -7px; height: 17px; border-radius: 9px; pointer-events: none;
+        background: linear-gradient(90deg, transparent, rgba(255,244,224,.95) 50%, transparent);
+        background-size: 24% 100%; mix-blend-mode: screen; filter: blur(3px); opacity: .6;
+        animation: tlflow 4.4s linear infinite; }
+    @keyframes tlflow { from { background-position: -30% 0; } to { background-position: 130% 0; } }
+    /* 节点心跳涟漪 */
+    .tl .node::before { content: ""; position: absolute; inset: -7px; border-radius: 50%;
+        border: 1.5px solid rgba(205,217,238,.7); opacity: 0;
+        animation: ping 2.8s ease-out infinite; animation-delay: var(--pd, 0s); }
+    @keyframes ping { 0% { transform: scale(.55); opacity: .85; } 80%, 100% { transform: scale(1.85); opacity: 0; } }
+    .tl .node.live { border-color: #ffd9a0; background: #241505;
+        box-shadow: 0 0 16px rgba(255,200,120,.95); }
+    .tl .node.live::before { border-color: rgba(255,210,140,.9); }
+    /* 分时描线（5锚点：开盘+巳午未申+收盘预期，数据驱动） */
+    .tl-curve { position: absolute; left: 0; right: 0; top: -40px; height: 62px; width: 100%; overflow: visible; pointer-events: none; }
+    .tc-path { fill: none; stroke: url(#tlgrad); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+        filter: drop-shadow(0 0 6px rgba(255,200,120,.4)); stroke-dasharray: 1600; stroke-dashoffset: 1600;
+        transition: stroke-dashoffset 2.6s cubic-bezier(.4,0,.2,1); }
+    .tl.drawn .tc-path { stroke-dashoffset: 0; }
+    .tc-dot-head { filter: drop-shadow(0 0 6px rgba(255,255,255,.9)); }
     .slot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .slot-card { background: linear-gradient(165deg, rgba(18,28,52,.7), rgba(8,13,26,.55));
         border: 1px solid rgba(140,170,230,.13); border-top: 2px solid #8899aa; border-radius: 12px;
@@ -197,6 +219,7 @@
             </div>
         </div>
         </div>
+        </div>
         </div> = 卦象/大势判语/时辰推演，清洗规则见工作流；下为运行时渐进增强） -->
         <div class="qimen-section">
             <div class="qimen-hexagram">
@@ -242,9 +265,10 @@
         </div>
         </div>
         </div>
+        </div>
 
         <div class="footer">
-            <p>📅 更新于 2026-11-10 22:10 | 数据来源：同花顺/iFinD/东方财富</p>
+            <p>📅 更新于 2026-11-10 22:40 | 数据来源：同花顺/iFinD/东方财富</p>
             <p>⚠️ 本页面仅为信息整理，不构成投资建议。股市有风险，投资需谨慎。</p>
             <p>🔮 奇门预测基于传统术数，仅供娱乐参考，请勿作为交易依据。</p>
             <p>📊 访问统计：<span id="busuanzi_container_site_pv">本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span> | <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv"></span> 人</span></p>
@@ -313,6 +337,15 @@
                 slots.map(function (s, i) { return '<span class="chip" style="left:' + pos[i] + '%">' + chips[i] + '</span>' +
                     '<span class="node" style="left:' + pos[i] + '%"></span>'; }).join('') +
                 '<span class="now" id="tl-now"><span class="diamond"></span><span class="tag">现在</span></span>' +
+                '<span class="tl-flow"></span>' +
+                '<svg class="tl-curve" viewBox="0 0 1000 62" preserveAspectRatio="none"><defs>' +
+                '<linearGradient id="tlgrad" x1="0" y1="0" x2="1" y2="0">' +
+                '<stop offset="0" stop-color="#ff8f6b"/><stop offset="35%" stop-color="#e6c987"/>' +
+                '<stop offset="55%" stop-color="#aab6c8"/><stop offset="100%" stop-color="#6ea8ff"/>' +
+                '</linearGradient></defs>' +
+                '<path class="tc-path" id="tc-path" d=""/>' +
+                '<circle class="tc-dot-head" id="tc-head" r="4" fill="#fff3dd" opacity="0"/>' +
+                '</svg>' +
                 '</div>' +
                 '<div class="slot-grid">' + cards.join('') + '</div>';
             sec.parentNode.insertBefore(wrap, sec);
@@ -335,6 +368,59 @@
             }
             function parseTime(s) { var hm = s.split(':'); return (+hm[0]) * 60 + (+hm[1] || 0); }
             placeNow(); setInterval(placeNow, 30000);
+            /* 节点心跳错峰 + 当前时段高亮 */
+            document.querySelectorAll('.tl .node').forEach(function (n, i) {
+                n.style.setProperty('--pd', (i * 0.65) + 's');
+            });
+            (function markLive() {
+                var d = new Date(), m = d.getHours() * 60 + d.getMinutes();
+                var spans = [[570, 630], [630, 690], [780, 840], [840, 900]];
+                document.querySelectorAll('.tl .node').forEach(function (n, i) {
+                    n.classList.toggle('live', m >= spans[i][0] && m < spans[i][1]);
+                });
+                setInterval(markLive, 30000);
+            })();
+            /* 分时描线：5锚点映射（D节定级值表），数据缺失则静默跳过 */
+            fetch('data/pipeline_latest.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
+                var VAL = { '强空': -3, '偏弱': -3, '中空': -2, '偏空': -2, '略偏空': -1, '微偏弱': -1, '中性偏弱': -1, '无方向': 0, '中性': 0, '略偏多': 1, '微偏强': 1, '中性偏强': 1, '偏多': 2, '中多': 2, '偏强': 3, '强多': 3 };
+                var fs = d.four_slots || [], out = d.output || {}, fu = d.fusion || {};
+                var g = function (i) { return VAL[(fs[i] && fs[i].grade) || ''] || 0; };
+                var p0 = /高/.test(out.open_scenario || '') ? 1 : /低/.test(out.open_scenario || '') ? -1 : 0;
+                var p1 = 0.5 * g(0), p2 = 0.5 * g(1), p3 = 0.5 * g(2);
+                var p4 = 0.5 * g(3);
+                var fg = fu.final_grade || '';
+                if (/偏强|偏多|略偏多/.test(fg)) p4 = Math.max(p4, 0.5);
+                else if (/略偏空|偏空|偏弱/.test(fg)) p4 = Math.min(p4, -0.5);
+                else if (fg === '无方向') p4 = p4 || 0;
+                var X = [4, 34, 63, 88, 96], V = [p0, p1, p2, p3, p4];
+                var y = function (v) { return 44 - Math.max(-1.6, Math.min(1.6, v)) * 16; };
+                var pts = X.map(function (x, i) { return [x * 10, y(V[i])]; });
+                var dd = 'M' + pts[0][0] + ',' + pts[0][1];
+                for (var i = 1; i < pts.length; i++) {
+                    var xc = (pts[i - 1][0] + pts[i][0]) / 2, yc = (pts[i - 1][1] + pts[i][1]) / 2;
+                    dd += ' Q' + pts[i - 1][0] + ',' + pts[i - 1][1] + ' ' + xc + ',' + yc;
+                }
+                dd += ' L' + pts[pts.length - 1][0] + ',' + pts[pts.length - 1][1];
+                var path = document.getElementById('tc-path');
+                if (!path) return;
+                path.setAttribute('d', dd);
+                var tl = document.querySelector('.tl');
+                setTimeout(function () { tl.classList.add('drawn'); }, 500);
+                /* 巡游能量点：描线后沿线循环 */
+                var head = document.getElementById('tc-head');
+                if (head && path.getTotalLength) {
+                    head.setAttribute('opacity', 0.95);
+                    var L = path.getTotalLength();
+                    (function ride(t) {
+                        requestAnimationFrame(ride);
+                        if (!document.body.contains(path)) return;
+                        var ph = ((t / 60) % (L * 2)) / L;         /* 去1回1 */
+                        var frac = ph <= 1 ? ph : 2 - ph;
+                        var pt = path.getPointAtLength(frac * L);
+                        head.setAttribute('cx', pt.x); head.setAttribute('cy', pt.y);
+                    })(0);
+                }
+            }).catch(function () {});
         }
 
         /* 判语 → 编辑长文包装 */
