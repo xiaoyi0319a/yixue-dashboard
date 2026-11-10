@@ -168,7 +168,7 @@
         for (var k in DEITIES) defs.innerHTML += DEITIES[k].svg;
         defs.innerHTML += GATE;
 
-        var root = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'xMidYMid slice', 'class': 'stage' }, host);
+        var root = el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'xMidYMid meet', 'class': 'stage' }, host);
         root.setAttribute('width', '100%'); root.setAttribute('height', '100%');
 
         /* 夜空（按日期播种的星点，日不同图） */
@@ -216,13 +216,13 @@
             var pos = LUOSHU_POS[key];
             var gP = el('g', { transform: 'translate(' + pos.x + ',' + pos.y + ') scale(' + pos.s + ')' }, root);
             var dc = DOOR_COLOR[p.door] || '#8899aa';
-            /* 门楼 */
-            var gate = el('g', { color: dc, opacity: 0.35 }, gP);
+            /* 门楼（退为布景，别抢戏） */
+            var gate = el('g', { color: dc, opacity: 0.28 }, gP);
             el('use', { href: '#dy-gate', x: -40, y: -58, width: 80, height: 80 }, gate);
             /* 神将 */
             var deity = DEITIES[p.god] ? p.god : null;
-            var fig = el('g', { color: deity ? DEITIES[deity].color : '#8899aa', opacity: 0.13, 'class': 'dy-fig' }, gP);
-            if (deity) el('use', { href: '#dy-' + ({ '值符': 'zhifu', '螣蛇': 'tengshe', '太阴': 'taiyin', '六合': 'liuhe', '白虎': 'baihu', '玄武': 'xuanwu', '九地': 'jiudi', '九天': 'jiutian' })[deity], x: -36, y: -52, width: 72, height: 72 }, fig);
+            var fig = el('g', { color: deity ? DEITIES[deity].color : '#8899aa', opacity: 0.3, 'class': 'dy-fig' }, gP);
+            if (deity) el('use', { href: '#dy-' + ({ '值符': 'zhifu', '螣蛇': 'tengshe', '太阴': 'taiyin', '六合': 'liuhe', '白虎': 'baihu', '玄武': 'xuanwu', '九地': 'jiudi', '九天': 'jiutian' })[deity], x: -43, y: -60, width: 86, height: 86 }, fig);
             /* 星光 */
             var spark = el('path', { d: 'M0,-7 L2,-2 L7,0 L2,2 L0,7 L-2,2 L-7,0 L-2,-2 Z', fill: '#c9d8f0', opacity: 0.25, transform: 'translate(26,-46)' }, gP);
             actors[key] = { g: gP, gate: gate, fig: fig, spark: spark, god: p.god, door: p.door, star: p.star, pos: pos };
@@ -235,16 +235,17 @@
         var halo = null;
         if (zhifu) {
             zhifu.fig.setAttribute('opacity', 1);
+            zhifu.fig.setAttribute('transform', 'scale(1.22)');
             zhifu.gate.setAttribute('opacity', 0.8);
             zhifu.spark.setAttribute('opacity', 0.9);
-            halo = el('circle', { cx: 0, cy: -12, r: 52, fill: 'none', stroke: '#e6be6e', 'stroke-width': 1.6, 'stroke-dasharray': '6 5', opacity: 0.8 }, zhifu.g);
+            halo = el('circle', { cx: 0, cy: -14, r: 58, fill: 'none', stroke: '#e6be6e', 'stroke-width': 1.6, 'stroke-dasharray': '6 5', opacity: 0.8 }, zhifu.g);
         }
 
         /* 字幕条 */
         var capG = el('g', { 'class': 'cap' }, root);
-        var capBg = el('rect', { x: 120, y: 566, width: 960, height: 72, rx: 10, fill: '#050a16', opacity: 0.72 }, capG);
-        var capTitle = el('text', { x: 600, y: 592, 'text-anchor': 'middle', fill: '#c9a86a', 'font-size': 15, 'letter-spacing': 4, opacity: 0 }, capG);
-        var capText = el('text', { x: 600, y: 620, 'text-anchor': 'middle', fill: '#e8f1ff', 'font-size': 21, opacity: 0 }, capG);
+        var capBg = el('rect', { x: 120, y: 528, width: 960, height: 74, rx: 10, fill: '#050a16', opacity: 0.72 }, capG);
+        var capTitle = el('text', { x: 600, y: 556, 'text-anchor': 'middle', fill: '#c9a86a', 'font-size': 15, 'letter-spacing': 4, opacity: 0 }, capG);
+        var capText = el('text', { x: 600, y: 586, 'text-anchor': 'middle', fill: '#e8f1ff', 'font-size': 21, opacity: 0 }, capG);
         capTitle.style.fontFamily = capText.style.fontFamily = '"Noto Serif SC","Songti SC","SimSun",serif';
 
         /* 控制台 */
@@ -297,7 +298,7 @@
                     if (!a.god || a === zhifu) continue;
                     var side = (a.god === '九天' || a.god === '六合' || a.god === '值符') ? 1 : (a.god === '白虎' || a.god === '玄武') ? -1 : 0;
                     var boost = (side !== 0 && Math.sign(h) === side) ? Math.abs(h) : 0;
-                    var idle = 0.13;
+                    var idle = 0.3;
                     var pulse = boost ? (Math.sin(localMs / 260) * 0.5 + 0.5) * boost : 0;
                     a.fig.setAttribute('opacity', Math.min(0.95, idle + pulse * 0.75).toFixed(3));
                 }
@@ -305,7 +306,7 @@
                 warmL.setAttribute('opacity', 0); coldL.setAttribute('opacity', 0);
             } else if (sc.type === 'final') {
                 warmL.setAttribute('opacity', 0.05); coldL.setAttribute('opacity', 0.05);
-                for (var k3 in actors) actors[k3].fig.setAttribute('opacity', 0.22);
+                for (var k3 in actors) actors[k3].fig.setAttribute('opacity', 0.4);
                 if (zhifu) zhifu.fig.setAttribute('opacity', 1);
             } else if (sc.type === 'poem') {
                 warmL.setAttribute('opacity', 0); coldL.setAttribute('opacity', 0);
