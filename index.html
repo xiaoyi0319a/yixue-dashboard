@@ -136,6 +136,7 @@ body.daily4 {
 .poem-v .h1, .poem-v .h2 { display: inline; font-style: normal; }
 .poem-v { opacity: 0; transition: opacity .5s ease .1s; }
 .poem-v.on { opacity: 1; }
+.poem-v .pl.static { animation: none; }
 .poem-v .pl { display: block;
     text-shadow: 0 0 20px rgba(232,196,106,.3);
     animation: plIn 1s cubic-bezier(.2,.6,.2,1) both; animation-delay: calc(var(--i, 0) * 0.35s); }
@@ -439,7 +440,7 @@ body.daily4 {
         sec.parentNode.insertBefore(wrap, sec);
         sec.style.display = 'none';
         var pv = wrap.querySelector('.poem-v'), sw = wrap.querySelector('.scroll-wrap');
-        var MODE = null, LASTFS = null;
+        var MODE = null, LASTFS = null, REVEALED = false;
         function build(mode, fs) {
             var fsR = fs ? Math.round(fs * 2) / 2 : null;   /* 0.5px粒度,防抖动重建 */
             if (mode === MODE && fsR === LASTFS) return;
@@ -449,8 +450,9 @@ body.daily4 {
                 if (mode === 'wide') cols.push(h.join(''));
                 else { cols.push(h[0]); if (h[1]) cols.push(h[1]); }
             });
+            var cls = REVEALED ? 'pl static' : 'pl';
             pv.innerHTML = cols.map(function (c, i) {
-                return '<span class="pl" style="--i:' + i + '">' + wu(c) + '</span>';
+                return '<span class="' + cls + '" style="--i:' + i + '">' + wu(c) + '</span>';
             }).join('');
             MODE = mode; LASTFS = fsR;
         }
@@ -479,9 +481,12 @@ body.daily4 {
         fitPoem();
         /* 揭幕：首帧渲染后揭面纱（双rAF保渲染提交） */
         requestAnimationFrame(function () { requestAnimationFrame(function () { pv.classList.add('on'); }); });
-        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPoem);
+        /* 入场动画每页只演一次：4.5s后标记揭幕，此后重建一律静态（滚动/字体切片加载不再重播） */
+        setTimeout(function () {
+            REVEALED = true;
+            pv.querySelectorAll('.pl').forEach(function (e) { e.style.animation = 'none'; e.style.opacity = '1'; e.style.transform = 'none'; });
+        }, 4500);
         window.addEventListener('resize', fitSoon);
-        if (window.ResizeObserver) new ResizeObserver(fitSoon).observe(sw);
         /* 兜底：5s后强制终态（防低端设备动画卡顿留隐） */
         setTimeout(function () {
             pv.querySelectorAll('.pl').forEach(function (e) { e.style.animation = 'none'; e.style.opacity = '1'; e.style.transform = 'none'; });
