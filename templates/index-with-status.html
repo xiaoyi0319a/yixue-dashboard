@@ -133,10 +133,12 @@ body.daily4 {
 .poem-v { writing-mode: vertical-rl; height: 21.5em; margin: 0 auto; position: relative;
     font-family: var(--serif); font-size: clamp(17px, 2.6vw, 27px); line-height: 2.2; letter-spacing: .3em; color: #f2ead2; }
 .poem-v .h1, .poem-v .h2 { display: inline; font-style: normal; }
-.poem-v .pl { display: block; opacity: 1; transform: none;
+.poem-v { opacity: 0; transition: opacity .5s ease .1s; }
+.poem-v.on { opacity: 1; }
+.poem-v .pl { display: block;
     text-shadow: 0 0 20px rgba(232,196,106,.3);
-    animation: plIn 1s cubic-bezier(.2,.6,.2,1); animation-delay: calc(0.15s + var(--i, 0) * 0.35s); }
-@keyframes plIn { from { opacity: 0; transform: translateY(12px); } }
+    animation: plIn 1s cubic-bezier(.2,.6,.2,1) both; animation-delay: calc(var(--i, 0) * 0.35s); }
+@keyframes plIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 /* 五行高亮 */
 .wu-huo { color: #ff7a5c; text-shadow: 0 0 14px rgba(255,110,80,.55); font-weight: 700; }
 .wu-tu  { color: #e0b35c; text-shadow: 0 0 14px rgba(224,179,92,.5); font-weight: 700; }
@@ -436,8 +438,10 @@ body.daily4 {
         sec.parentNode.insertBefore(wrap, sec);
         sec.style.display = 'none';
         var pv = wrap.querySelector('.poem-v'), sw = wrap.querySelector('.scroll-wrap');
-        var MODE = null;
+        var MODE = null, LASTFS = null;
         function build(mode, fs) {
+            var fsR = fs ? Math.round(fs * 2) / 2 : null;   /* 0.5px粒度,防抖动重建 */
+            if (mode === MODE && fsR === LASTFS) return;
             pv.style.fontSize = fs ? fs + 'px' : '';
             var cols = [];
             halves.forEach(function (h, i) {
@@ -447,7 +451,7 @@ body.daily4 {
             pv.innerHTML = cols.map(function (c, i) {
                 return '<span class="pl" style="--i:' + i + '">' + wu(c) + '</span>';
             }).join('');
-            MODE = mode;
+            MODE = mode; LASTFS = fsR;
         }
         function needW() {
             var r = pv.getBoundingClientRect(), left = r.right;
@@ -472,6 +476,8 @@ body.daily4 {
         }
         function fitSoon() { clearTimeout(fitTimer); fitTimer = setTimeout(fitPoem, 120); }
         fitPoem();
+        /* 揭幕：首帧渲染后揭面纱（双rAF保渲染提交） */
+        requestAnimationFrame(function () { requestAnimationFrame(function () { pv.classList.add('on'); }); });
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPoem);
         window.addEventListener('resize', fitSoon);
         if (window.ResizeObserver) new ResizeObserver(fitSoon).observe(sw);
