@@ -114,7 +114,7 @@ body.daily4 {
 
 /* ---------- 卦象：竖排卷轴（鎏金） ---------- */
 .scroll-sec { padding: 44px 0 10px; }
-.scroll-wrap { position: relative; height: 320px;
+.scroll-wrap { position: relative; height: clamp(300px, 35vw, 520px);
     background: linear-gradient(160deg, rgba(24,30,58,.72), rgba(10,13,28,.82));
     border: 1px solid rgba(232,196,106,.18); border-radius: 18px; padding: 38px 32px 32px; overflow: hidden;
     box-shadow: 0 24px 60px rgba(0,0,0,.5); scrollbar-width: thin; scrollbar-color: rgba(232,196,106,.3) transparent; }
@@ -208,7 +208,6 @@ body.daily4 {
 
 @media (max-width: 860px) {
     .slot-grid { grid-template-columns: repeat(2,1fr); }
-    .scroll-wrap { height: 260px; }
     .poem-v { font-size: clamp(17px,4.6vw,22px); }
     .header { padding: 64px 0 30px; }
 }
