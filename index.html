@@ -114,7 +114,7 @@ body.daily4 {
 
 /* ---------- 卦象：竖排卷轴（鎏金） ---------- */
 .scroll-sec { padding: 44px 0 10px; }
-.scroll-wrap { position: relative;
+.scroll-wrap { position: relative; height: 480px;
     background: linear-gradient(160deg, rgba(24,30,58,.72), rgba(10,13,28,.82));
     border: 1px solid rgba(232,196,106,.18); border-radius: 18px; padding: 38px 32px 32px; overflow: hidden;
     box-shadow: 0 24px 60px rgba(0,0,0,.5); scrollbar-width: thin; scrollbar-color: rgba(232,196,106,.3) transparent; }
@@ -131,7 +131,7 @@ body.daily4 {
       linear-gradient(var(--gold),var(--gold)) right bottom/14px 1px,
       linear-gradient(var(--gold),var(--gold)) right bottom/1px 14px;
     background-repeat: no-repeat; }
-.poem-v { writing-mode: vertical-rl; height: 21.5em; margin: 0 auto; position: relative;
+.poem-v { writing-mode: vertical-rl; height: 100%; margin: 0 auto; position: relative;
     font-family: var(--serif); font-size: clamp(17px, 2.6vw, 27px); line-height: 2.2; letter-spacing: .3em; color: #f2ead2; }
 .poem-v .h1, .poem-v .h2 { display: inline; font-style: normal; }
 .poem-v { opacity: 0; transition: opacity .5s ease .1s; }
@@ -208,7 +208,8 @@ body.daily4 {
 
 @media (max-width: 860px) {
     .slot-grid { grid-template-columns: repeat(2,1fr); }
-    .poem-v { height: 12em; font-size: clamp(17px,4.6vw,22px); }
+    .scroll-wrap { height: 380px; }
+    .poem-v { font-size: clamp(17px,4.6vw,22px); }
     .header { padding: 64px 0 30px; }
 }
 @media (max-width: 520px) {
@@ -462,18 +463,43 @@ body.daily4 {
             pv.querySelectorAll('.pl').forEach(function (c) { var cr = c.getBoundingClientRect(); if (cr.left < left) left = cr.left; });
             return r.right - left;
         }
+        function getMaxColHeight() {
+            var h = 0;
+            pv.querySelectorAll('.pl').forEach(function (c) { h = Math.max(h, c.getBoundingClientRect().height); });
+            return h;
+        }
         var fitTimer = null;
         function fitPoem() {
-            var avail = sw.clientWidth - 70;
-            var fsCap = Math.min(27, Math.max(17, window.innerWidth * 0.026));
-            /* 先试宽模式(整句)，装不下再降级逗号半句+收缩字号 */
-            var fs = fsCap, guard = 40;
+            var availW = sw.clientWidth - 70;
+            var availH = sw.clientHeight - 20;
+            var fsCap = Math.min(36, Math.max(17, window.innerWidth * 0.026));
+            var maxLenW = 0, maxLenN = 0;
+            halves.forEach(function (h) {
+                var w = h.join('').length;
+                if (w > maxLenW) maxLenW = w;
+                if (h[0].length > maxLenN) maxLenN = h[0].length;
+                if (h[1] && h[1].length > maxLenN) maxLenN = h[1].length;
+            });
+            /* 高度优先：根据最长列字数反推能填满容器高度的字号 */
+            var fsW = Math.min(fsCap, (availH * 0.92) / maxLenW);
+            var fsN = Math.min(fsCap, (availH * 0.92) / maxLenN);
+            /* 优先宽模式（列少字大） */
+            if (fsW >= 17) {
+                build('wide', fsW);
+                if (needW() <= availW) return;
+            }
+            /* 宽模式放不下，试窄模式 */
+            if (fsN >= 17) {
+                build('narrow', fsN);
+                if (needW() <= availW) return;
+            }
+            /* 都超宽，从宽模式开始缩字号 */
+            var fs = Math.max(fsW, 17), guard = 40;
             while (guard-- > 0) {
                 build('wide', fs);
-                if (needW() <= avail) return;
-                var wNeed = needW();
+                if (needW() <= availW) return;
                 build('narrow', fs);
-                if (needW() <= avail) return;
+                if (needW() <= availW) return;
                 fs -= 1;
                 if (fs <= 11) { build('narrow', 11); return; }
             }
