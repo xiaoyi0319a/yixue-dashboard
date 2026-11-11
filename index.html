@@ -469,7 +469,7 @@ body.daily4 {
         }
         var fitTimer = null;
         function fitPoem() {
-            var availW = sw.clientWidth - 70;
+            var availW = sw.clientWidth - 90;
             var availH = sw.clientHeight - 20;
             var fsCap = Math.min(36, Math.max(17, window.innerWidth * 0.026));
             var maxLenW = 0, maxLenN = 0;
@@ -505,6 +505,13 @@ body.daily4 {
         }
         function fitSoon() { clearTimeout(fitTimer); fitTimer = setTimeout(fitPoem, 120); }
         fitPoem();
+        /* 网络字体加载后重新适配（fallback字体宽度偏差曾致左侧列被裁），强制静态防动画重播 */
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function () {
+                fitPoem();
+                pv.querySelectorAll('.pl').forEach(function (e) { e.style.animation = 'none'; e.style.opacity = '1'; e.style.transform = 'none'; });
+            });
+        }
         /* 揭幕：首帧渲染后揭面纱（双rAF保渲染提交） */
         requestAnimationFrame(function () { requestAnimationFrame(function () { pv.classList.add('on'); }); });
         /* 入场动画每页只演一次：4.5s后标记揭幕，此后重建一律静态（滚动/字体切片加载不再重播） */
