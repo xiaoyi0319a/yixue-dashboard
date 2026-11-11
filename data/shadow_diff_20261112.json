@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-12",
+  "shadow": "data/pipeline_shadow_20261112.json",
+  "direct": "data/pipeline_20261112.json",
+  "summary": "529/534 字段一致 ｜ 仅shadow有 1 ｜ 仅直写有 4 ｜ 值不同 0",
+  "only_shadow": [
+    {
+      "path": "fusion.v0_grade",
+      "value": 1,
+      "note": "组装器冗余字段，直写版无此键（fusion.v0已含同值）"
+    }
+  ],
+  "only_direct": [
+    {
+      "path": "date_display",
+      "value": "11-12 周四",
+      "note": "直写层展示字段，组装器不产出，无害"
+    },
+    {
+      "path": "four_slots_summary",
+      "value": "日内路径主叙事：平开开局偏扬（巳）→火最旺卖盘最难受修复推进（午）→土时空方缓过劲升势放缓（未）→金气禄逢值而帅困无的抛压出清反为承接（申）｜有方向·正常输出",
+      "note": "直写层叙事摘要，组装器不产出，无害"
+    },
+    {
+      "path": "matrix_missing_note",
+      "value": "今日盘局108格组合均有对应读法格，无矩阵缺格",
+      "note": "直写层缺格说明，组装器不产出，无害"
+    },
+    {
+      "path": "strong_bottom",
+      "value": null,
+      "note": "模块已删(V4.1-patch1)的null占位，直写层规范要求"
+    }
+  ],
+  "value_mismatch": [],
+  "verdict": "差异全部为已知无害占位/冗余，影子对账通过（灰度第6日）"
+}
