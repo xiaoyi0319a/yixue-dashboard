@@ -334,7 +334,7 @@ function loadSwitcher(){
  }).catch(()=>{});
 }
 const GC={bull:['#f8514918','#f8514966','#ff9b94'],neutral:['#8b949e18','#8b949e55','#b6bec9'],bear:['#3fb95015','#3fb95066','#7ee2a8']};
-window._gc=function(g){g=g||'';if(/偏弱|偏空/.test(g))return GC.bear;if(/中性/.test(g))return GC.neutral;if(/偏多|偏强/.test(g))return GC.bull;return GC.neutral};
+window._gc=function(g){g=g||'';if(/偏弱|偏空/.test(g))return GC.bear;if(/偏强|偏多/.test(g))return GC.bull;return GC.neutral};
 function stockRow(s){
  const z=s.last_zone||'';
  const c=window._gc(s.last_grade);
