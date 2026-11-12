@@ -218,6 +218,18 @@
       "last_zone": "横盘整理",
       "last_gene": "模式5 景气共振型(75%)",
       "last_grade": "无方向"
+    },
+    {
+      "code": "300519",
+      "name": "新光药业",
+      "last_date": "20261112",
+      "count": 1,
+      "dates": [
+        "20261112"
+      ],
+      "last_zone": "横盘整理",
+      "last_gene": "模式5弱匹配(2/5)",
+      "last_grade": "中性偏强"
     }
   ]
 }
