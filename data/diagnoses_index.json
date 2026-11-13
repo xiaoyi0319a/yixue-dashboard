@@ -76,14 +76,15 @@
   {
    "code": "002129",
    "name": "TCL中环",
-   "last_date": "20261031",
-   "count": 1,
+   "last_date": "20261113",
+   "count": 2,
    "dates": [
-    "20261031"
+    "20261031",
+    "20261113"
    ],
    "last_zone": "横盘整理",
-   "last_gene": "模式7周期反转型",
-   "last_grade": "微偏强"
+   "last_gene": "模式1+模式7双主",
+   "last_grade": "偏强"
   },
   {
    "code": "920122",
