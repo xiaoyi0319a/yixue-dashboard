@@ -1,0 +1,7 @@
+对账结果：528/530 字段一致 ｜ 仅A有 1 ｜ 仅B有 1 ｜ 值不同 0
+
+--- 仅A有 ---
+  A: fusion.v0_grade = -3
+
+--- 仅B有 ---
+  B: strong_bottom = None
