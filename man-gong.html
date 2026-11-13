@@ -128,6 +128,19 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; }
 
+/* 三因子齐备精选卡片区 */
+.elite-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.elite-card { border: 1px solid rgba(232,196,106,.4); border-radius: 12px; padding: 14px 16px;
+    background: linear-gradient(160deg, rgba(232,196,106,.1), rgba(10,13,28,.8));
+    box-shadow: 0 0 22px rgba(232,196,106,.1); transition: all .25s; }
+.elite-card:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(232,196,106,.22); border-color: var(--gold); }
+.ec-head { display: flex; justify-content: space-between; align-items: baseline; }
+.ec-name { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--gold-bright); }
+.ec-code { font-family: "SF Mono",Consolas,monospace; font-size: 12px; color: var(--cyan); }
+.ec-theme { font-size: 12px; color: #b9b6c8; margin: 6px 0; line-height: 1.6; }
+.ec-meta { font-size: 11px; color: var(--text-dim); font-family: "SF Mono",Consolas,monospace; }
+.ec-meta b { color: var(--gold-bright); }
+
 /* ---------- 汇总与页脚 ---------- */
 .summary { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
 .sum-card { flex: 1; min-width: 200px; padding: 16px 22px; text-align: center;
@@ -288,6 +301,21 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
         }).join('');
         html += '<div class="kicker">集群分布<span class="cnt">共 ' + total + ' 只入集群</span></div>' +
                 '<div class="clusters">' + chips + '</div>';
+
+        /* ---- 三因子齐备·置顶精选区 ---- */
+        var elite = d.elite || [];
+        if (elite.length) {
+            html += '<div class="kicker">三因子齐备 · 今日精选<span class="cnt">题材集群×底部位置×资金点火俱全·每日盘前更新</span></div>';
+            html += '<div class="elite-grid">';
+            elite.forEach(function (s) {
+                html += '<div class="elite-card">' +
+                    '<div class="ec-head"><span class="ec-name">' + s.name + '</span><span class="ec-code">' + s.code + '</span></div>' +
+                    '<div class="ec-theme">' + s.theme + '</div>' +
+                    '<div class="ec-meta">距低点 <b>' + fmt(s.dist_low) + '%</b> · 市值 ' + fmt(s.mcap) + '亿 · 量比 ' + fmt(s.volr, 2) + ' · 试盘涨停 ' + s.limit_up + '</div>' +
+                    '</div>';
+            });
+            html += '</div>';
+        }
 
         /* ---- 主体表格 ---- */
         var rows = d.strong || [];
