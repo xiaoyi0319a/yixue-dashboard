@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
+<title>满弓名单 | 羿学天天看</title>
+<style>
+/* ============================================================
+   满弓名单 · 与首页"鎏金星河版"同一设计语言
+   主色：鎏金 + 深空蓝底；字体：霞鹜文楷标题 + 系统正文
+   数据：data/man_gong.json（每周日20:07自动更新）
+   ============================================================ */
+:root {
+    --gold: #e8c46a;
+    --gold-bright: #ffd98a;
+    --gold-deep: #b8860b;
+    --cyan: #56d8e4;
+    --bg: #05060e;
+    --text: #ece7d6;
+    --text-dim: #9a97a8;
+    --serif: "LXGW WenKai","KaiTi","STKaiti","Noto Serif SC","Songti SC","STSong","SimSun",serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-family: "Microsoft YaHei","PingFang SC",sans-serif;
+    overflow-x: hidden;
+    line-height: 1.9;
+}
+::selection { background: rgba(232,196,106,.35); color: #fff; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #070912; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#3a2f14,#1a3a3f); border-radius: 6px; border: 2px solid #070912; }
+
+/* ---------- 背景层（与首页一致） ---------- */
+#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.nebula { position: fixed; border-radius: 50%; filter: blur(90px); opacity: .5; z-index: 0; pointer-events: none; }
+.nebula-1 { width: 55vw; height: 55vw; top: -18vw; left: -12vw;
+    background: radial-gradient(circle, rgba(38,52,120,.55), transparent 65%); }
+.nebula-2 { width: 48vw; height: 48vw; bottom: -15vw; right: -10vw;
+    background: radial-gradient(circle, rgba(18,78,84,.5), transparent 65%); }
+.grain { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- 容器与头部 ---------- */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 20px 48px; position: relative; z-index: 2; }
+.header { text-align: center; padding: 64px 0 26px; position: relative; }
+.header::after { content: ""; display: block; width: 260px; height: 1px; margin: 28px auto 0;
+    background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent); opacity: .55; }
+.header h1 { margin: 0; font-size: clamp(34px,6vw,52px); letter-spacing: .3em; text-indent: .3em;
+    font-family: var(--serif); font-weight: 700; display: inline-block;
+    background: linear-gradient(135deg,#fff6dd 8%,var(--gold-bright) 32%,var(--gold-deep) 55%,var(--gold-bright) 78%,#fff2c8 96%);
+    background-size: 220% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 6px 26px rgba(232,196,106,.35)); }
+.header .sub { color: var(--text-dim); margin-top: 14px; font-size: .95em; letter-spacing: .18em; }
+.header .env { display: inline-block; margin-top: 10px; font-size: .85em; letter-spacing: .1em;
+    color: var(--cyan); border: 1px solid rgba(86,216,228,.35); border-radius: 999px; padding: 3px 16px;
+    background: rgba(86,216,228,.06); }
+.header .note { max-width: 720px; margin: 14px auto 0; font-size: .82em; color: #b9b6a8; line-height: 1.9;
+    font-family: var(--serif); }
+
+/* ---------- 页面导航 ---------- */
+.nav { display: flex; justify-content: center; gap: 14px; margin: 22px 0 8px; flex-wrap: wrap; }
+.nav a { color: var(--gold); text-decoration: none; font-size: .85em; letter-spacing: .12em;
+    padding: 7px 18px; border: 1px solid rgba(232,196,106,.3); border-radius: 999px;
+    background: rgba(232,196,106,.05); transition: all .25s; font-family: var(--serif); }
+.nav a:hover { background: rgba(232,196,106,.16); border-color: var(--gold); box-shadow: 0 0 18px rgba(232,196,106,.25); }
+
+/* ---------- 区块标题 ---------- */
+.kicker { display: flex; align-items: center; gap: 14px; color: var(--gold); font-size: .95em;
+    letter-spacing: .5em; font-family: var(--serif); margin: 40px 0 20px;
+    text-shadow: 0 0 18px rgba(232,196,106,.45); }
+.kicker::before { content: ""; width: 34px; height: 1px; background: var(--gold); opacity: .8;
+    box-shadow: 0 0 10px rgba(232,196,106,.7); }
+.kicker::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(232,196,106,.55), transparent); }
+.kicker .cnt { letter-spacing: .1em; font-size: .8em; color: var(--text-dim); text-shadow: none; font-family: "Microsoft YaHei","PingFang SC",sans-serif; }
+
+/* ---------- 集群标签云 ---------- */
+.clusters { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { display: inline-flex; align-items: baseline; gap: 8px; padding: 7px 16px;
+    border: 1px solid rgba(232,196,106,.26); border-radius: 10px;
+    background: linear-gradient(160deg, rgba(24,30,58,.55), rgba(10,13,28,.7));
+    font-size: .85em; color: var(--text); transition: all .25s; }
+.chip:hover { border-color: var(--gold); box-shadow: 0 0 16px rgba(232,196,106,.18); transform: translateY(-2px); }
+.chip .cname { font-family: var(--serif); letter-spacing: .08em; }
+.chip .cnum { color: var(--gold-bright); font-weight: 700; font-family: "SF Mono",Consolas,monospace; }
+
+/* ---------- 主体表格 ---------- */
+.table-wrap { overflow-x: auto; border: 1px solid rgba(232,196,106,.18); border-radius: 14px;
+    background: linear-gradient(160deg, rgba(24,30,58,.5), rgba(10,13,28,.75));
+    box-shadow: 0 24px 60px rgba(0,0,0,.45); -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 980px; }
+thead th { position: sticky; top: 0; background: rgba(14,18,38,.97); color: var(--gold);
+    font-family: var(--serif); font-weight: 700; letter-spacing: .12em; font-size: 12px;
+    padding: 12px 10px; text-align: right; border-bottom: 1px solid rgba(232,196,106,.3); white-space: nowrap; }
+thead th.l, tbody td.l { text-align: left; }
+tbody td { padding: 10px; text-align: right; border-bottom: 1px solid rgba(232,196,106,.08);
+    color: #d8d4c4; white-space: nowrap; font-family: "SF Mono",Consolas,"Microsoft YaHei",monospace; }
+tbody tr { transition: background .2s; }
+tbody tr:hover { background: rgba(232,196,106,.06); }
+tbody tr:last-child td { border-bottom: none; }
+td.name-cell { font-family: var(--serif); font-size: 14px; color: var(--text); font-weight: 700; }
+td.theme-cell { font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 12px; color: #b9b6c8; white-space: normal; min-width: 150px; line-height: 1.6; }
+td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,196,106,.4); font-weight: 600; }
+.code-link { color: var(--cyan); text-decoration: none; }
+.code-link:hover { text-shadow: 0 0 10px rgba(86,216,228,.6); }
+
+/* 信号配色 */
+.pos { color: #7ed491; font-weight: 600; }
+.neg { color: #ff7a5c; font-weight: 600; }
+.volr-low { color: #7ed491; font-weight: 700; }   /* 缩量偏多 */
+.volr-high { color: #f0a35c; font-weight: 700; }  /* 放量试盘 */
+.lu-badge { display: inline-block; min-width: 22px; padding: 1px 7px; border-radius: 999px;
+    background: rgba(232,196,106,.14); color: var(--gold-bright); font-weight: 700; text-align: center; }
+.lu-badge.hot { background: rgba(200,80,60,.25); color: #ffab8f; box-shadow: 0 0 12px rgba(255,122,92,.3); }
+
+/* 档位徽标 */
+.grade { display: inline-block; padding: 2px 12px; border-radius: 8px; font-size: 12px;
+    font-family: var(--serif); letter-spacing: .08em; white-space: nowrap; }
+.grade-a { background: rgba(232,196,106,.16); color: var(--gold-bright); border: 1px solid rgba(232,196,106,.45); }
+.grade-b { background: rgba(86,216,228,.1); color: var(--cyan); border: 1px solid rgba(86,216,228,.35); }
+
+/* 新徽标 */
+.new-badge { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 6px;
+    background: rgba(200,70,55,.85); color: #ffe9e4; font-size: 10px; font-weight: 700;
+    font-family: var(--serif); vertical-align: 2px; box-shadow: 0 0 10px rgba(200,70,55,.5); }
+
+/* 图例 */
+.legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 12px; font-size: .78em; color: var(--text-dim); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; }
+
+/* ---------- 汇总与页脚 ---------- */
+.summary { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+.sum-card { flex: 1; min-width: 200px; padding: 16px 22px; text-align: center;
+    border: 1px solid rgba(232,196,106,.2); border-radius: 12px;
+    background: linear-gradient(160deg, rgba(24,30,58,.5), rgba(10,13,28,.72)); }
+.sum-card .n { font-size: 30px; font-weight: 700; font-family: "SF Mono",Consolas,monospace; }
+.sum-card .t { font-size: .8em; color: var(--text-dim); letter-spacing: .2em; font-family: var(--serif); }
+.sum-card.gold .n { color: var(--gold-bright); text-shadow: 0 0 18px rgba(232,196,106,.45); }
+.sum-card.cyan .n { color: var(--cyan); }
+.sum-card.dim .n { color: #8b8fa5; }
+
+.footer { margin-top: 52px; padding-top: 24px; border-top: 1px solid rgba(232,196,106,.14);
+    color: #7a7f96; font-size: .8em; text-align: center; line-height: 2.1; position: relative; z-index: 2; }
+.footer .taiji { display: inline-block; font-size: 22px; margin-bottom: 6px; animation: spin 14s linear infinite;
+    filter: drop-shadow(0 0 10px rgba(86,216,228,.5)); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.attr-note { color: #6d7186; font-size: .78em; margin-top: 4px; }
+.attr-note code { color: var(--cyan); background: rgba(86,216,228,.08); padding: 1px 7px; border-radius: 6px; font-size: .95em; }
+
+/* ---------- 空数据/异常态 ---------- */
+.empty-state { text-align: center; padding: 90px 20px; color: var(--text-dim); font-family: var(--serif); font-size: 1.05em; letter-spacing: .25em; }
+.empty-state .icon { font-size: 44px; display: block; margin-bottom: 18px; opacity: .6; }
+.error-detail { font-size: .75em; color: #6d7186; letter-spacing: .05em; margin-top: 10px; font-family: monospace; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 860px) {
+    .header { padding: 48px 0 20px; }
+    .container { padding: 0 14px 40px; }
+    table { font-size: 12px; }
+}
+@media (max-width: 520px) {
+    .header h1 { letter-spacing: .2em; text-indent: .2em; }
+    .chip { padding: 6px 12px; font-size: .8em; }
+    .sum-card { min-width: 45%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01s !important; transition-duration: .2s !important; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+<div class="grain"></div>
+
+<div class="container">
+
+    <div class="header">
+        <h1>满弓名单</h1>
+        <div class="sub" id="mg-date">数据加载中…</div>
+        <div><span class="env" id="mg-env"></span></div>
+        <p class="note" id="mg-note"></p>
+    </div>
+
+    <div class="nav">
+        <a href="index.html">🏠 返回首页</a>
+        <a href="stock.html">📊 个股诊断</a>
+        <a href="reports.html">📚 报告库</a>
+    </div>
+
+    <div id="mg-content">
+        <div class="empty-state">
+            <span class="icon">🏹</span>
+            正在拉取满弓数据…
+        </div>
+    </div>
+
+    <div class="footer">
+        <span class="taiji">☯</span>
+        <p id="mg-footer-line">⏰ 每周日 20:07 自动更新（满弓扫描V1.0）</p>
+        <p>⚠️ 满弓名单仅为模式匹配候选，不构成投资建议。股市有风险，投资需谨慎。</p>
+        <p class="attr-note">归因库入口：每只标的的归因记录存于 <code id="mg-attr">memory/满弓/归因库.jsonl</code>（复盘用，非公开页面）</p>
+    </div>
+</div>
+
+<script>
+/* ============================================================
+   星空背景：与首页同一套 3D 粒子星野（失败则静默跳过，保底可读）
+   ============================================================ */
+(function () {
+    try { starfield(); } catch (e) {}
+    function starfield(){
+        var cv = document.getElementById('stars');
+        if (!cv) return;
+        var ctx = cv.getContext('2d');
+        var W, H, CX, CY, N = 200, stars = [], i;
+        var mouseX = 0, mouseY = 0, rx = 0, ry = 0, t = 0;
+        function resize(){
+            W = cv.width = innerWidth * devicePixelRatio;
+            H = cv.height = innerHeight * devicePixelRatio;
+            cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
+            CX = W / 2; CY = H / 2;
+        }
+        resize(); addEventListener('resize', resize);
+        for (i = 0; i < N; i++) stars.push({
+            x:(Math.random()-.5)*2, y:(Math.random()-.5)*2, z:Math.random(),
+            tw:Math.random()*Math.PI*2, gold:Math.random()<.3, size:.5+Math.random()*1.6
+        });
+        addEventListener('mousemove', function (e){
+            mouseX = e.clientX / innerWidth - .5; mouseY = e.clientY / innerHeight - .5;
+        });
+        (function frame(){
+            t += .008;
+            ctx.clearRect(0, 0, W, H);
+            ry += (mouseX * .5 - ry) * .04; rx += (mouseY * .35 - rx) * .04;
+            var cosY = Math.cos(ry + t * .1), sinY = Math.sin(ry + t * .1);
+            var cosX = Math.cos(rx), sinX = Math.sin(rx), D = 1.15;
+            for (i = 0; i < N; i++){
+                var s = stars[i]; s.z -= .0006;
+                if (s.z <= .02) { s.z = 1; s.x = (Math.random()-.5)*2; s.y = (Math.random()-.5)*2; }
+                var x = s.x * cosY, z = s.x * sinY + s.z;
+                var y = s.y * cosX - z * sinX * .3;
+                z = s.y * sinX * .3 + z * cosX;
+                var p = D / (z + .0001);
+                var sx = CX + x * p * CX * .9, sy = CY + y * p * CY * .9;
+                if (sx < -50 || sx > W + 50 || sy < -50 || sy > H + 50) continue;
+                var depth = Math.max(0, Math.min(1, 1 - z));
+                var alpha = depth * (.35 + .65 * Math.abs(Math.sin(s.tw + t * 3)));
+                var r = s.size * depth * devicePixelRatio;
+                ctx.beginPath();
+                ctx.arc(sx, sy, r, 0, Math.PI * 2);
+                ctx.fillStyle = s.gold ? 'rgba(232,196,106,' + alpha + ')' : 'rgba(' + (140+depth*60|0) + ',' + (200+depth*30|0) + ',230,' + (alpha*.85) + ')';
+                ctx.shadowBlur = depth * 14;
+                ctx.shadowColor = s.gold ? 'rgba(232,196,106,.8)' : 'rgba(120,210,235,.7)';
+                ctx.fill(); ctx.shadowBlur = 0;
+            }
+            requestAnimationFrame(frame);
+        })();
+    }
+})();
+
+/* ============================================================
+   数据渲染：data/man_gong.json
+   ============================================================ */
+(function () {
+    var box = document.getElementById('mg-content');
+
+    function fmt(v, digits) {
+        if (v === null || v === undefined || isNaN(v)) return '—';
+        return Number(v).toFixed(digits === undefined ? 1 : digits);
+    }
+    function cls(v) { return v > 0 ? 'pos' : (v < 0 ? 'neg' : ''); }
+
+    function emptyState(msg, detail) {
+        box.innerHTML = '<div class="empty-state"><span class="icon">🏹</span>' + msg +
+            (detail ? '<div class="error-detail">' + detail + '</div>' : '') + '</div>';
+    }
+
+    function render(d) {
+        document.getElementById('mg-date').textContent = '数据日期 ' + d.date;
+        document.getElementById('mg-env').textContent = d.env || '';
+        document.getElementById('mg-note').textContent = d.note || '';
+        if (d.attr_log) document.getElementById('mg-attr').textContent = d.attr_log;
+
+        var html = '';
+
+        /* ---- 集群统计条 ---- */
+        var cl = d.clusters || {}, total = 0;
+        var chips = Object.keys(cl).map(function (k) {
+            total += cl[k];
+            return '<span class="chip"><span class="cname">' + k + '</span><span class="cnum">' + cl[k] + '</span></span>';
+        }).join('');
+        html += '<div class="kicker">集群分布<span class="cnt">共 ' + total + ' 只入集群</span></div>' +
+                '<div class="clusters">' + chips + '</div>';
+
+        /* ---- 主体表格 ---- */
+        var rows = d.strong || [];
+        html += '<div class="kicker">强信号名单<span class="cnt">' + rows.length + ' 只 · A档在前B档在后</span></div>';
+        if (rows.length) {
+            html += '<div class="table-wrap"><table><thead><tr>' +
+                '<th class="l">代码</th><th class="l">名称</th><th class="l">题材</th>' +
+                '<th>市值(亿)</th><th>现价</th><th>距低点%</th><th>回撤%</th>' +
+                '<th>20日%</th><th>量比</th><th>涨停数</th><th class="l">档位</th>' +
+                '</tr></thead><tbody>';
+            rows.forEach(function (s) {
+                var isA = (s.grade || '').charAt(0) === 'A';
+                var volrCls = s.volr < 0.83 ? 'volr-low' : (s.volr > 1.2 ? 'volr-high' : '');
+                var hotTheme = s.limit_up >= 2;
+                html += '<tr>' +
+                    '<td class="l"><a class="code-link" href="stock.html">' + s.code + '</a></td>' +
+                    '<td class="l name-cell">' + s.name + (s.is_new ? '<span class="new-badge">新</span>' : '') + '</td>' +
+                    '<td class="l theme-cell' + (hotTheme ? ' hot' : '') + '">' + s.theme + '</td>' +
+                    '<td>' + fmt(s.mcap) + '</td>' +
+                    '<td>' + fmt(s.last, 2) + '</td>' +
+                    '<td class="' + cls(s.dist_low) + '">' + fmt(s.dist_low) + '</td>' +
+                    '<td class="' + cls(s.dist_high) + '">' + fmt(s.dist_high) + '</td>' +
+                    '<td class="' + cls(s.ret20) + '">' + fmt(s.ret20) + '</td>' +
+                    '<td class="' + volrCls + '">' + fmt(s.volr, 2) + '</td>' +
+                    '<td><span class="lu-badge' + (hotTheme ? ' hot' : '') + '">' + s.limit_up + '</span></td>' +
+                    '<td class="l"><span class="grade ' + (isA ? 'grade-a' : 'grade-b') + '">' + s.grade + '</span></td>' +
+                    '</tr>';
+            });
+            html += '</tbody></table></div>';
+            html += '<div class="legend">' +
+                '<span><i style="background:#7ed491"></i>量比&lt;0.83 缩量偏多</span>' +
+                '<span><i style="background:#f0a35c"></i>量比&gt;1.2 放量试盘</span>' +
+                '<span><i style="background:#ffd98a"></i>涨停数≥2 题材高亮</span>' +
+                '<span><i style="background:#c84637"></i>新=本周新入</span>' +
+                '</div>';
+        }
+
+        /* ---- 汇总卡 ---- */
+        html += '<div class="summary">' +
+            '<div class="sum-card gold"><div class="n">' + rows.length + '</div><div class="t">强信号</div></div>' +
+            '<div class="sum-card cyan"><div class="n">' + (d.mid_count || 0) + '</div><div class="t">中信号</div></div>' +
+            '<div class="sum-card dim"><div class="n">' + (d.weak_count || 0) + '</div><div class="t">弱信号</div></div>' +
+            '</div>';
+
+        box.innerHTML = html;
+    }
+
+    fetch('data/man_gong.json', { cache: 'no-store' })
+        .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        })
+        .then(function (d) {
+            if (!d || !Array.isArray(d.strong) || d.strong.length === 0) {
+                emptyState('本周扫描未产生数据');
+                return;
+            }
+            render(d);
+        })
+        .catch(function (e) {
+            emptyState('本周扫描未产生数据', String(e && e.message || e));
+        });
+})();
+</script>
+</body>
+</html>

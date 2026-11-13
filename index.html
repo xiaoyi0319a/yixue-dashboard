@@ -89,6 +89,13 @@ body.daily4 {
 .header::after { content: ""; display: block; width: 260px; height: 1px; margin: 36px auto 0;
     background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent); opacity: .55; }
 
+/* ---------- 页面导航（跨页入口） ---------- */
+.page-nav { display: flex; justify-content: center; gap: 14px; margin: 4px 0 10px; flex-wrap: wrap; }
+.page-nav a { color: var(--gold); text-decoration: none; font-size: .85em; letter-spacing: .12em;
+    padding: 7px 18px; border: 1px solid rgba(232,196,106,.3); border-radius: 999px;
+    background: rgba(232,196,106,.05); transition: all .25s; font-family: var(--serif); }
+.page-nav a:hover { background: rgba(232,196,106,.16); border-color: var(--gold); box-shadow: 0 0 18px rgba(232,196,106,.25); }
+
 /* ---------- 滚动显现 ---------- */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity .9s cubic-bezier(.2,.6,.2,1), transform .9s cubic-bezier(.2,.6,.2,1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -253,6 +260,10 @@ body.daily4 {
         <h1>羿学天天看</h1>
         <div class="date">2026年11月13日 周五</div>
         <div class="ganzhi">丙午年 己亥月 辛卯日 | 立冬 阴遁3局 值符天蓬·休门</div>
+    </div>
+
+    <div class="page-nav">
+        <a href="man-gong.html">🏹 满弓名单</a>
     </div>
 
     <!-- 每日生成工作流注入的内容（结构与清洗规则不变） -->
