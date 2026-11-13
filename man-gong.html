@@ -64,13 +64,6 @@ body {
 .header .note { max-width: 720px; margin: 14px auto 0; font-size: .82em; color: #b9b6a8; line-height: 1.9;
     font-family: var(--serif); }
 
-/* ---------- 页面导航 ---------- */
-.nav { display: flex; justify-content: center; gap: 14px; margin: 22px 0 8px; flex-wrap: wrap; }
-.nav a { color: var(--gold); text-decoration: none; font-size: .85em; letter-spacing: .12em;
-    padding: 7px 18px; border: 1px solid rgba(232,196,106,.3); border-radius: 999px;
-    background: rgba(232,196,106,.05); transition: all .25s; font-family: var(--serif); }
-.nav a:hover { background: rgba(232,196,106,.16); border-color: var(--gold); box-shadow: 0 0 18px rgba(232,196,106,.25); }
-
 /* ---------- 区块标题 ---------- */
 .kicker { display: flex; align-items: center; gap: 14px; color: var(--gold); font-size: .95em;
     letter-spacing: .5em; font-family: var(--serif); margin: 40px 0 20px;
@@ -189,12 +182,6 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
         <div class="sub" id="mg-date">数据加载中…</div>
         <div><span class="env" id="mg-env"></span></div>
         <p class="note" id="mg-note"></p>
-    </div>
-
-    <div class="nav">
-        <a href="index.html">🏠 返回首页</a>
-        <a href="stock.html">📊 个股诊断</a>
-        <a href="reports.html">📚 报告库</a>
     </div>
 
     <div id="mg-content">
@@ -331,6 +318,9 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
             });
             html += '</tbody></table></div>';
             html += '<div class="legend">' +
+                '<span style="flex-basis:100%;color:#c9c4b0;font-family:var(--serif);letter-spacing:.06em">' +
+                '🏹 A底部候选＝距年内低点&lt;15%的刚抬头位置（80样本：启动中位约17个交易日，慢但天花板最高）· ' +
+                'B平台候选＝距低点15~40%的平台蓄势位（启动中位约14天，已走出底部一截）</span>' +
                 '<span><i style="background:#7ed491"></i>量比&lt;0.83 缩量偏多</span>' +
                 '<span><i style="background:#f0a35c"></i>量比&gt;1.2 放量试盘</span>' +
                 '<span><i style="background:#ffd98a"></i>涨停数≥2 题材高亮</span>' +
