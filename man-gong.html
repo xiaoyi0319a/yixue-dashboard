@@ -141,6 +141,46 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
 .ec-meta { font-size: 11px; color: var(--text-dim); font-family: "SF Mono",Consolas,monospace; }
 .ec-meta b { color: var(--gold-bright); }
 
+/* ---------- 诊断分层区（V2.0·周更链条跑到终点） ---------- */
+.diag-tier { margin-bottom: 26px; }
+.dt-head { font-family: var(--serif); letter-spacing: .12em; font-size: .98em; margin: 22px 0 12px;
+    display: flex; align-items: center; gap: 10px; }
+.dt-head .n { display: inline-block; min-width: 22px; padding: 0 9px; border-radius: 999px;
+    font-family: "SF Mono",Consolas,monospace; font-size: .82em; font-weight: 700; }
+.tier-first .dt-head { color: var(--gold-bright); text-shadow: 0 0 14px rgba(232,196,106,.5); }
+.tier-first .dt-head .n { background: rgba(232,196,106,.2); color: var(--gold-bright); border: 1px solid rgba(232,196,106,.55); }
+.tier-watch .dt-head { color: var(--cyan); text-shadow: 0 0 14px rgba(86,216,228,.4); }
+.tier-watch .dt-head .n { background: rgba(86,216,228,.12); color: var(--cyan); border: 1px solid rgba(86,216,228,.45); }
+.tier-drop .dt-head { color: #8b8fa5; }
+.tier-drop .dt-head .n { background: rgba(139,143,165,.12); color: #8b8fa5; border: 1px solid rgba(139,143,165,.4); }
+.diag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.diag-card { border-radius: 12px; padding: 14px 16px; transition: all .25s; position: relative;
+    background: linear-gradient(160deg, rgba(24,30,58,.55), rgba(10,13,28,.78)); }
+.diag-card:hover { transform: translateY(-3px); }
+.tier-first .diag-card { border: 1px solid rgba(232,196,106,.5); box-shadow: 0 0 20px rgba(232,196,106,.12); }
+.tier-first .diag-card:hover { box-shadow: 0 0 30px rgba(232,196,106,.25); border-color: var(--gold-bright); }
+.tier-watch .diag-card { border: 1px solid rgba(86,216,228,.3); box-shadow: 0 0 14px rgba(86,216,228,.07); }
+.tier-watch .diag-card:hover { box-shadow: 0 0 24px rgba(86,216,228,.18); border-color: var(--cyan); }
+.tier-drop .diag-card { border: 1px solid rgba(139,143,165,.22); opacity: .85; }
+.tier-drop .diag-card:hover { border-color: rgba(139,143,165,.5); box-shadow: 0 0 18px rgba(139,143,165,.12); }
+.dc-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.dc-name { font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.tier-first .dc-name { color: var(--gold-bright); }
+.tier-watch .dc-name { color: #a8ecf2; }
+.tier-drop .dc-name { color: #b9bdd0; }
+.dc-code { font-family: "SF Mono",Consolas,monospace; font-size: 11px; color: var(--cyan); }
+.dc-mode { font-size: 12px; color: #d8d4c4; margin: 3px 0; }
+.dc-mode b { font-family: var(--serif); }
+.tier-first .dc-mode b { color: var(--gold-bright); }
+.tier-watch .dc-mode b { color: var(--cyan); }
+.tier-drop .dc-mode b { color: #9aa0b8; }
+.dc-row { font-size: 11px; color: var(--text-dim); font-family: "SF Mono",Consolas,monospace; margin: 2px 0; }
+.dc-target { font-size: 12px; color: #7ed491; font-family: "SF Mono",Consolas,monospace; margin: 5px 0 3px; }
+.dc-short { font-size: 11.5px; color: #e8b08a; line-height: 1.65; margin: 3px 0; }
+.dc-trigger { font-size: 11px; color: #9a97a8; border-top: 1px dashed rgba(154,151,168,.25); padding-top: 6px; margin-top: 7px; line-height: 1.6; }
+.dc-trigger b { color: var(--cyan); font-weight: 600; }
+.diag-note { font-size: .78em; color: #7a7f96; margin-top: 10px; line-height: 1.8; }
+
 /* ---------- 汇总与页脚 ---------- */
 .summary { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
 .sum-card { flex: 1; min-width: 200px; padding: 16px 22px; text-align: center;
@@ -285,7 +325,7 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
             (detail ? '<div class="error-detail">' + detail + '</div>' : '') + '</div>';
     }
 
-    function render(d) {
+    function render(d, diag) {
         document.getElementById('mg-date').textContent = '数据日期 ' + d.date;
         document.getElementById('mg-env').textContent = d.env || '';
         document.getElementById('mg-note').textContent = d.note || '';
@@ -315,6 +355,36 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
                     '</div>';
             });
             html += '</div>';
+        }
+
+        /* ---- 诊断分层区（V2.0·周更链条跑到终点：模块A+B批量解剖三档） ---- */
+        if (diag && Array.isArray(diag.stocks) && diag.stocks.length) {
+            var tierDefs = [
+                { key: 'first', label: '第一梯队', desc: '结构完整 · 只差启动点', icon: '🥇' },
+                { key: 'watch', label: '观察档', desc: '骨架成立 · 等一个可验证信号', icon: '👀' },
+                { key: 'drop', label: '掉档', desc: '精选资格需重估', icon: '↓' }
+            ];
+            html += '<div class="kicker">诊断分层<span class="cnt">个股诊断模块A+B批量解剖 · ' + (diag.date || '') + ' · 启动点判断=人工</span></div>';
+            tierDefs.forEach(function (t) {
+                var list = diag.stocks.filter(function (s) { return s.tier === t.key; });
+                if (!list.length) return;
+                html += '<div class="diag-tier tier-' + t.key + '">' +
+                    '<div class="dt-head"><span class="n">' + list.length + '</span>' + t.icon + ' ' + t.label +
+                    '<span style="font-size:.8em;color:var(--text-dim);letter-spacing:.06em;font-family:sans-serif">' + t.desc + '</span></div>' +
+                    '<div class="diag-grid">';
+                list.forEach(function (s) {
+                    html += '<div class="diag-card">' +
+                        '<div class="dc-head"><span class="dc-name">' + s.name + '</span><span class="dc-code">' + s.code + '</span></div>' +
+                        '<div class="dc-mode"><b>' + s.mode + '</b> · ' + s.match + '</div>' +
+                        '<div class="dc-row">' + s.proto + ' · 距低 ' + s.dist_low + ' · 量比 ' + s.volr + '</div>' +
+                        '<div class="dc-target">量度目标 ' + s.target + '</div>' +
+                        '<div class="dc-short">短板：' + s.shortboard + '</div>' +
+                        '<div class="dc-trigger">触发器：<b>' + (s.trigger || '—') + '</b></div>' +
+                        '</div>';
+                });
+                html += '</div></div>';
+            });
+            if (diag.note) html += '<div class="diag-note">' + diag.note + '</div>';
         }
 
         /* ---- 主体表格 ---- */
@@ -366,21 +436,34 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
         box.innerHTML = html;
     }
 
+    var mainData = null, diagData = null;
+    function tryRender() {
+        if (!mainData) return;
+        if (!mainData.strong || !mainData.strong.length) {
+            emptyState('本周扫描未产生数据');
+            return;
+        }
+        render(mainData, diagData);
+    }
+
     fetch('data/man_gong.json', { cache: 'no-store' })
         .then(function (r) {
             if (!r.ok) throw new Error('HTTP ' + r.status);
             return r.json();
         })
         .then(function (d) {
-            if (!d || !Array.isArray(d.strong) || d.strong.length === 0) {
-                emptyState('本周扫描未产生数据');
-                return;
-            }
-            render(d);
+            mainData = d;
+            tryRender();
         })
         .catch(function (e) {
             emptyState('本周扫描未产生数据', String(e && e.message || e));
         });
+
+    /* 诊断分层数据：失败静默跳过（诊断块不显示），不影响主数据 */
+    fetch('data/man_gong_diagnose.json', { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { diagData = d; tryRender(); })
+        .catch(function () { /* 无诊断数据时静默 */ });
 })();
 </script>
 </body>
