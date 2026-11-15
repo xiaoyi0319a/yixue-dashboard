@@ -1,0 +1,30 @@
+{
+  "date": "20261116",
+  "compared": {
+    "A_shadow": "data/pipeline_shadow_20261116.json",
+    "B_direct": "data/pipeline_20261116.json"
+  },
+  "summary": {
+    "total_fields": 620,
+    "same": 618,
+    "only_a": 1,
+    "only_b": 1,
+    "value_diff": 0
+  },
+  "only_a": [
+    {
+      "path": "fusion.v0_grade",
+      "value": -3,
+      "note": "影子版有 v0_grade，直写版未冗余该字段"
+    }
+  ],
+  "only_b": [
+    {
+      "path": "strong_bottom",
+      "value": null,
+      "note": "直写版写入 strong_bottom=null（空键占位），影子版无此键"
+    }
+  ],
+  "value_diff": [],
+  "verdict": "语义全等（差异仅为冗余键/空键占位，0值差异）"
+}
