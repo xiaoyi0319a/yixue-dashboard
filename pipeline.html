@@ -648,7 +648,8 @@ ${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.ni
   <div class="detail-section"><h4>九字段输出（报告必含）</h4>
   <div class="formula">v0_grade: ${d.nine_fields.v0_grade>0?'+':''}${d.nine_fields.v0_grade}     cal_A: ${d.nine_fields.cal_A}     cal_B: ${d.nine_fields.cal_B}${d.nine_fields.cal_C?'     cal_C: '+d.nine_fields.cal_C:''}
 a_macd: ${d.nine_fields.a_macd>0?'+':''}${d.nine_fields.a_macd}        qimen_a: ${d.nine_fields.qimen_a}       a_raw: ${d.nine_fields.a_raw}
-b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: ${d.nine_fields.path}   final_grade: ${grade}</div></div>
+b_value: ${d.nine_fields.b_value>0?'+':''}${d.nine_fields.b_value}       path: ${d.nine_fields.path}   final_grade: ${grade}
+${d.nine_fields.r_prime!==undefined?`r_prime: ${d.nine_fields.r_prime>0?'+':''}${d.nine_fields.r_prime}（${d.nine_fields.r_prime!==0?(typeof (d.fusion||{}).r_trigger==='string'?(d.fusion||{}).r_trigger:'反转'):'未触发'}）`:''}${d.nine_fields.panjun_power?`     盘局力量档: ${d.nine_fields.panjun_power}`:''}</div></div>
   ${d.verification?`<div class="detail-section"><h4>验证对比（${d.verification.date||d.date}预测·当日收盘验证）</h4>
   ${renderVerification(d.verification)}
   </div>`:''}`

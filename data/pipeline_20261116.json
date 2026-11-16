@@ -21,7 +21,8 @@
   "final_grade": -4,
   "grade_label": "偏弱（状态反转油门R′=-2注入·空方反转·金叉衰竭将转死叉）",
   "r_prime": -2,
-  "deep_water_conf": "low"
+  "deep_water_conf": "low",
+  "panjun_power": "明显偏空（v₀-3+R′-2·门宽第四输入档）"
  },
  "v0": "矩阵节点分-3.0直入（L1格6基分-2+L2多段中段0+L3衰竭转向×deep-1.0；深水低置信·|v₀|=3非弱底座·金叉第10日）",
  "macd": {
