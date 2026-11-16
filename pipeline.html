@@ -986,6 +986,7 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
     }
     endVals.push(acc);
   });
+  const A=openGap;
 
   /* legs构建：每段fx边界取自time（缺省i/n），段末值=endVals；首段起点=开盘锚；末段按关键字一拆二（先抑后扬/先扬后抑） */
   const rawPts=[];
