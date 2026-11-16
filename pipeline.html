@@ -533,7 +533,7 @@ v = ${fmtV(v0v)} + ${aT>0?'+':''}${aT} = <b>${vX>0?'+':''}${vX}</b> ｜ |v| ≤ 
   <div class="formula" style="margin-top:6px">→ 两条岔路均未走，本日直通过：v = ${vX>0?'+':''}${vX}
 送 Step 4 微调（见⑥节点）${f.combo_lookup?'｜'+f.combo_lookup:''}</div></div>
   ${d.accel?`<div class="detail-section"><h4>动能加速度（试点·第三正交维度）</h4>
-  <div class="formula">语境：${d.accel.context}｜预测：${d.accel.grade}
+  <div class="formula">语境：${d.accel.context}｜预测：${d.accel.forecast||d.accel.grade}
 MACD侧：${d.accel.macd_side}｜盘局侧：${d.accel.qimen_side}${d.accel.conflict&&d.accel.conflict!=='无'?'｜<span style="color:#d29922">'+d.accel.conflict+'</span>':''}
 ${d.accel.divergence_note?'背离观察：'+d.accel.divergence_note:''}</div></div>`:''}
   ${d.volatility?`<div class="detail-section"><h4>日内波动率（试点·净位移外第二维度）</h4>
