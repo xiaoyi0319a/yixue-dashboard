@@ -491,6 +491,9 @@ a总 = ${(typeof f.r_trigger==='string'&&f.r_prime!==0)?((f.r_prime>0?'+':'')+f.
     ${d2Rows.map(r=>`<tr><td style="${r[3]?HL2:''};text-align:center">${r[0]}${r[3]?' ◀':''}</td><td style="${r[3]?HL2:''};text-align:center" class="${r[1]>0?'pos':r[1]<0?'neg':'zero'}">${r[1]>0?'+':''}${r[1]}</td><td style="${r[3]?'font-weight:700':''}">${r[2]}</td></tr>`).join('')}</table>`;
   })()}
   ${(()=>{
+    if(typeof f.r_trigger==='string'&&f.r_prime!==0){
+      return `<p class="note" style="margin-top:6px;color:#8b949e">MACD侧：a_macd 位今日由反转层 <b style="color:#d29922">R′=${f.r_prime}</b>（${f.r_trigger}）取代注入——表2-F（柱线惯性查表）今日不适用·a总见上行合成</p>`;
+    }
     const b=d.macd.bar, pb=d.macd.prev_bar, p2=d.macd.prev2_bar;
     let fIdx=4;
     if(b>0&&pb>0&&p2>0){ if(b>pb&&pb>p2)fIdx=0; else if(b<pb&&pb<p2)fIdx=1; }
