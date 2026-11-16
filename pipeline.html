@@ -667,7 +667,7 @@ slots: {
       :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，≥0.8%中波动起步</b> → 四时段正常方向解释，收盘后验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
     ${d.generated&&String(d.generated).indexOf('V4.0重算')>=0?`<div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.4);color:#3fb950;font-size:11px;padding:6px 10px;border-radius:6px;margin-bottom:8px">✅ 本节四时段已按V4.0重推（底色=偏弱·9.4规则重跑：伏吟日中性化+空亡逢值引动修正）——旧档存档于预测报告MD</div>`:''}
-    <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意路径=5锚点查表（映射表见看板数据同步工作流D节）：9:30缺口锚（低开-1/高开+1）→每时段累加0.5×定级→15:00锚定昨收（收涨≥+0.5/收跌≤-0.5）；纵轴=相对昨收，非点位预测</p>
+    <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意路径=速度语义5锚点（V2.1老师23:52拍板）：段定级=段内位移速度（微偏强=上行/中性=零位移横盘不跌/偏弱=下行），落点=从开盘锚累加的相对位置；P0缺口锚（低开-1/平开0/高开+1/偏低-0.5）→每段累加0.5×定级→P4收盘锚强制回归（收涨≥+0.5/收跌≤-0.5）；纵轴=相对昨收，非点位预测</p>
     ${modeTag}
     ${slotsSVG(d.four_slots,520,190,d.actual_curve,slotCtx(d))}
     </div>
@@ -938,9 +938,7 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
   ctx=ctx||{};
   const gv=g=>GRADE_VAL[g]!==undefined?GRADE_VAL[g]:0;
   const clampV=v=>Math.max(-3,Math.min(3,v));
-  /* ⭐示意路径5锚点查表制（2026-11-06老师15:20定稿+15:30语义纠正——点位高度=定级档本身，非累积；映射表登记于《看板数据同步工作流》D节）：
-     纵轴=相对昨收，限幅±3；P0(9:30)=缺口锚（低开-1/平开0/高开+1）
-     P1(10:30)=0.5×巳定级｜P2(11:30=13:00同位)=0.5×午定级｜P3(14:00)=0.5×未定级｜P4(15:00)=0.5×申定级，再锚定昨收：收涨→≥+0.5/收跌→≤-0.5/平收不动 */
+  /* ⭐⭐示意路径5锚点·速度语义（V2.1·2026-11-16老师23:52拍板——段定级=段内位移速度：微偏强=上行/中性=零位移横盘不跌/偏弱=下行；落点=累加相对位置（P_i=P_{i-1}+0.5×段定级，限幅±3）；P0=开盘锚（低开-1/平开0/高开+1/偏低-0.5/偏高+0.5）；P4=收盘锚强制回归（收涨≥+0.5/收跌≤-0.5/平收不动）——映射表=《看板数据同步工作流》D节"每时段累加"口径 */
   const openGap=ctx.open==='低开'?-1:ctx.open==='高开'?1:(ctx.open&&ctx.open.indexOf('偏低')>=0?-0.5:(ctx.open&&ctx.open.indexOf('偏高')>=0?0.5:0));
   const K=0.5;
 
@@ -977,16 +975,17 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
     return 0.5+Math.min(1,(t-PM_START)/(PM_END-PM_START))*0.5;
   }
 
-  /* 5锚点值：P0=缺口锚；P1~P3=0.5×定级值（点位高度=定级档本身）；P4=0.5×申定级后锚定昨收（收涨≥+0.5/收跌≤-0.5/平收不动） */
-  const endVals=slots.map((s,i)=>{
-    let v=clampV(K*gv(s.grade));
+  /* 5锚点值·速度累加制：段i位移=0.5×段定级值（中性=0位移横盘），落点从开盘锚起累加，限幅±3；P4=收盘锚强制（收涨≥+0.5/收跌≤-0.5/平收不动） */
+  const endVals=[];
+  let acc=openGap;
+  slots.forEach((s,i)=>{
+    acc=clampV(acc+K*gv(s.grade));
     if(i===n-1){
-      if(ctx.close==='收涨'&&v<0.5) v=0.5;
-      if(ctx.close==='收跌'&&v>-0.5) v=-0.5;
+      if(ctx.close==='收涨'&&acc<0.5) acc=0.5;
+      if(ctx.close==='收跌'&&acc>-0.5) acc=-0.5;
     }
-    return v;
+    endVals.push(acc);
   });
-  const A=openGap;
 
   /* legs构建：每段fx边界取自time（缺省i/n），段末值=endVals；首段起点=开盘锚；末段按关键字一拆二（先抑后扬/先扬后抑） */
   const rawPts=[];
