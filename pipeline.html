@@ -180,6 +180,37 @@ v0: {
 ─────────────
 ＝ 节点分　<b>${m.score>0?'+':''}${m.score}</b>（限幅±3）</div>
     <p class="note" style="margin-top:6px">状态：${segZh}${l2zh[m.l2_state.split('_')[1]]}·${rateZh[m.l3.rate]}·${m.l3.pos==='deep'?'深水修复级':m.l3.pos==='mid'?'中位区':'浅水区'}${m.score>0?'偏多':m.score<0?'偏空':'中性'}</p>
+  ${(()=>{
+    const f=(d&&d.fusion)||{};
+    const rp=f.r_prime;
+    if(rp===undefined||rp===null) return '';
+    const trig=f.r_trigger;
+    /* ⭐V4.0（2026-11-16老师"现在就改"）：r_trigger=字符串→MACD状态反转检测器（注油门不翻定级）；旧格式r_trigger=对象（三件套）→11-16及更早历史存档渲染 */
+    if(typeof trig==='string'||trig===null||trig===undefined){
+      const active=rp!==0;
+      const dirTxt=rp<0?'空方反转——金叉状态衰竭，将向死叉掉头（偏空信号）':'多方反转——死叉状态衰竭，将向金叉掉头（偏多信号）';
+      return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（V4.0·MACD状态反转检测器）</h4>
+  <table style="font-size:12px">
+    <tr><th>触发条件</th><th>判定</th><th>口径</th></tr>
+    <tr><td>①MACD当前状态</td><td style="text-align:center;color:${active?'#3fb950':'#484f58'};font-weight:700">${active?(rp<0?'金叉·红柱期 ✓':'死叉·绿柱期 ✓'):'—'}</td><td style="color:#8b949e;font-size:11px">DIF vs DEA（金叉/死叉状态）</td></tr>
+    <tr><td>②柱线衰竭 L3 fading</td><td style="text-align:center;color:${active?'#3fb950':'#484f58'};font-weight:700">${active?'✓':'✗'}</td><td style="color:#8b949e;font-size:11px">连缩≥2日+累计幅度≥20%</td></tr>
+  </table>
+  <div class="formula" style="margin-top:6px">R′ = ${rp>0?'+':''}${rp}${active?` → <b>${dirTxt}</b><br>动作：a总 = R′ + 奇门a（R′取代a_macd位注入，v 照常合成，不翻定级、无锁档）`:' → 未触发·a总 = a_macd + 奇门a（原样）'}</div>
+  <p class="note">V4.0语义（老师2026-11-16拍板）：反转=针对MACD现在状态的反转——金叉衰竭→偏空、死叉衰竭→偏多，两侧对称；旧翻转型机制已停用存档</p></div>`;
+    }
+    const items=[
+      ['①MACD减速强度（L3衰竭转向）',trig.decel,'连缩≥2日+累计幅度≥20%'],
+      ['②对面攻方能量≥10',trig.energy,'反转方向攻方渠道a_raw'],
+      ['③深跌位置 DIF≤−5',trig.deep,'场景E深水口径']];
+    const active=rp>0;
+    return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（V3.7旧机制·历史存档≤11-16）</h4>
+  <table style="font-size:12px">
+    <tr><th>三件套</th><th>判定</th><th>口径</th></tr>
+    ${items.map(([n,ok,c])=>`<tr><td>${n}</td><td style="text-align:center;color:${ok?'#3fb950':'#484f58'};font-weight:700">${ok?'✓':'✗'}</td><td style="color:#8b949e;font-size:11px">${c}</td></tr>`).join('')}
+  </table>
+  <div class="formula" style="margin-top:6px">R′ = ${rp>0?'+':''}${rp}${active?` → v_final ${f.v_final}>0?'+':''}${f.v_final} → <b>反转锁档 v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}</b>（path加-R）`:' → 不触发·v_final原样'}</div>
+  ${active?'<p class="note">反转触发：三件套成立·方向取反锁档（表2-E形态）</p>':'<p class="note">三件套未齐·R′=0·定级链不受反转影响</p>'}<p class="note" style="color:#d29922">⚠️ 旧V3.7翻转型机制已停用（2026-11-16老师裁定：反转=MACD状态反转检测器）——此块仅历史数据存档渲染</p></div>`;
+  })()}
     ${d.flip?`<div class="detail-section" style="margin-top:10px"><h4>波段翻段预警（Step 4.15·骨架V1.0）</h4>
     <div class="formula">方向：<b>${d.flip.direction}</b> ｜ 阶段：${d.flip.stage}（第${d.flip.seg_day}日）<br>下一触发：${d.flip.next_trigger}<br>翻段率：${d.flip.hit_rate}</div></div>`:''}</div>`;
   })():''}
@@ -578,36 +609,6 @@ ${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.ni
     <tr><th>今开情景</th><th>推演（定级=${g}）</th></tr>
     ${rows.map(([a,b])=>`<tr><td style="white-space:nowrap"><b>${a}</b></td><td>${b}</td></tr>`).join('')}
   </table></div>`;
-  })()}
-  ${(()=>{
-    const rp=f.r_prime;
-    if(rp===undefined||rp===null) return '';
-    const trig=f.r_trigger;
-    /* ⭐V4.0（2026-11-16老师"现在就改"）：r_trigger=字符串→MACD状态反转检测器（注油门不翻定级）；旧格式r_trigger=对象（三件套）→11-16及更早历史存档渲染 */
-    if(typeof trig==='string'||trig===null||trig===undefined){
-      const active=rp!==0;
-      const dirTxt=rp<0?'空方反转——金叉状态衰竭，将向死叉掉头（偏空信号）':'多方反转——死叉状态衰竭，将向金叉掉头（偏多信号）';
-      return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（V4.0·MACD状态反转检测器）</h4>
-  <table style="font-size:12px">
-    <tr><th>触发条件</th><th>判定</th><th>口径</th></tr>
-    <tr><td>①MACD当前状态</td><td style="text-align:center;color:${active?'#3fb950':'#484f58'};font-weight:700">${active?(rp<0?'金叉·红柱期 ✓':'死叉·绿柱期 ✓'):'—'}</td><td style="color:#8b949e;font-size:11px">DIF vs DEA（金叉/死叉状态）</td></tr>
-    <tr><td>②柱线衰竭 L3 fading</td><td style="text-align:center;color:${active?'#3fb950':'#484f58'};font-weight:700">${active?'✓':'✗'}</td><td style="color:#8b949e;font-size:11px">连缩≥2日+累计幅度≥20%</td></tr>
-  </table>
-  <div class="formula" style="margin-top:6px">R′ = ${rp>0?'+':''}${rp}${active?` → <b>${dirTxt}</b><br>动作：a总 = R′ + 奇门a（R′取代a_macd位注入，v 照常合成，不翻定级、无锁档）`:' → 未触发·a总 = a_macd + 奇门a（原样）'}</div>
-  <p class="note">V4.0语义（老师2026-11-16拍板）：反转=针对MACD现在状态的反转——金叉衰竭→偏空、死叉衰竭→偏多，两侧对称；旧翻转型机制已停用存档</p></div>`;
-    }
-    const items=[
-      ['①MACD减速强度（L3衰竭转向）',trig.decel,'连缩≥2日+累计幅度≥20%'],
-      ['②对面攻方能量≥10',trig.energy,'反转方向攻方渠道a_raw'],
-      ['③深跌位置 DIF≤−5',trig.deep,'场景E深水口径']];
-    const active=rp>0;
-    return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（V3.7旧机制·历史存档≤11-16）</h4>
-  <table style="font-size:12px">
-    <tr><th>三件套</th><th>判定</th><th>口径</th></tr>
-    ${items.map(([n,ok,c])=>`<tr><td>${n}</td><td style="text-align:center;color:${ok?'#3fb950':'#484f58'};font-weight:700">${ok?'✓':'✗'}</td><td style="color:#8b949e;font-size:11px">${c}</td></tr>`).join('')}
-  </table>
-  <div class="formula" style="margin-top:6px">R′ = ${rp>0?'+':''}${rp}${active?` → v_final ${f.v_final}>0?'+':''}${f.v_final} → <b>反转锁档 v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}</b>（path加-R）`:' → 不触发·v_final原样'}</div>
-  ${active?'<p class="note">反转触发：三件套成立·方向取反锁档（表2-E形态）</p>':'<p class="note">三件套未齐·R′=0·定级链不受反转影响</p>'}<p class="note" style="color:#d29922">⚠️ 旧V3.7翻转型机制已停用（2026-11-16老师裁定：反转=MACD状态反转检测器）——此块仅历史数据存档渲染</p></div>`;
   })()}
   <div class="detail-section"><h4>最终映射（表4-A）</h4>
   <table>
