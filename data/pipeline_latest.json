@@ -18,9 +18,9 @@
   "a_raw": 25.5,
   "b_value": 0,
   "path": "C维持-R",
-  "final_grade": 2,
-  "grade_label": "略偏多（反转层R′+2强反转翻档·深水低置信·fading柱放撤销待验）",
-  "r_prime": 2,
+  "final_grade": -4,
+  "grade_label": "偏弱（状态反转油门R′=-2注入·空方反转·金叉衰竭将转死叉）",
+  "r_prime": -2,
   "deep_water_conf": "low"
  },
  "v0": "矩阵节点分-3.0直入（L1格6基分-2+L2多段中段0+L3衰竭转向×deep-1.0；深水低置信·|v₀|=3非弱底座·金叉第10日）",
@@ -55,22 +55,23 @@
   "a_macd": -1,
   "qimen_a": 1,
   "a_raw": 25.5,
-  "a_total": 0,
-  "a_total_raw": 0,
+  "a_total": -1,
+  "a_total_raw": -1,
   "weak_base_clamp": "未触发（|v₀|=3≠1弱底座区）",
   "b_raw": 0,
   "b_value": 0,
   "b_note": "D8乙奇相+1 − K1日干衰（落宫死+长生墓绝）-1=0→b=0（D7飞鸟跌穴落空亡不入）",
-  "v_cross": -3,
-  "v_final": -3,
-  "final_grade": "略偏多",
+  "v_cross": -4,
+  "v_final": -4,
+  "final_grade": "偏弱",
   "combo_lookup": "深水家族查表：(v₀=-3,a总=0,C维持-R,深水)→①v₀负深水C维持家族（11-10⚠️/11-11✅W/11-12❌W/11-13✅）+②C维持-R反转层家族（10-23⚠️/10-28❌/11-13❌——底座对/翻档错模式固化）→判语强制保守化+不确定性标注；与反转层输出一致，不二次改级",
-  "r_prime": 2,
-  "r_trigger": "①L3 fading✓（11-13收盘确认·连缩2日累计22.7%；⭐今日|bar|>15.16即撤销待验）②攻多33.5≥10✓（底盘+四喜占69%·11-13总量口径反转教训同源·审慎）③DIF-38.42≤-5✓→R′=+2强反转（规则7豁免不适用|v₀|=3）",
+  "r_prime": -2,
+  "r_trigger": "空方反转",
   "r_triggered": true,
-  "v_reversed": 2,
-  "cross_desc": "空底座×无油门（a总0），无油门输入，纯底座运行 → 净推力偏空（表4-A偏空区）·深水低置信——反转层R′+2翻至略偏多",
-  "path": "C维持-R"
+  "v_reversed": -1,
+  "cross_desc": "空底座×空油门，同向共振，推力放大 → 净推力偏空",
+  "path": "C维持-R",
+  "r_note": "V4.0：空方反转——金叉状态(第9日)+红柱衰竭(连缩3日累计54.9%)→R′=-2取代a_macd位注入，不翻v_final"
  },
  "qimen": {
   "attack_plus": 33.5,
@@ -78,7 +79,7 @@
   "structure": 10.25,
   "a_raw": 25.5,
   "a_discrete": 1,
-  "a_total": 0,
+  "a_total": -1,
   "r_triggered": true,
   "r_threshold": "对面攻方a_raw≥10（今日攻多20.75·反转层4.13口径）",
   "attack_plus_signals": [
@@ -819,11 +820,11 @@
   }
  ],
  "shape": {
-  "close_label": "收高概率大",
-  "pattern": "平开震荡修复（拉锯震荡）",
-  "body_grade": "中小阳实体",
+  "close_label": "收低概率大",
+  "pattern": "平开震荡偏弱（拉锯震荡）",
+  "body_grade": "中小阴实体",
   "amplitude_grade": "中档（0.8-1.6%）",
-  "three_value_label": "收高概率大（v_final′=+2·边界档·深水低置信·fading撤销待验）",
+  "three_value_label": "收低概率大（V4.0重算v_final=-4·状态反转油门注入）",
   "day_pattern": "拉锯震荡",
   "gap": "0±0.2%（平开预估，未达缺口档）",
   "note": "缺口0×实体日内略偏多×振幅中波动×路径三段微偏强+收官无方向——开局马星小脉冲后拉锯修复，禄地出清收官"
@@ -868,11 +869,11 @@
  "verification": {
   "status": "done",
   "morning": {
-   "grade": "略偏多",
+   "grade": "偏弱",
    "path": "C维持-R",
    "open": "平开",
-   "kline": "小阳",
-   "close": "收高概率大"
+   "kline": "阴线",
+   "close": "收跌"
   },
   "actual": {
    "grade": "偏空",
@@ -884,21 +885,21 @@
   },
   "binary": {
    "open": "❌",
-   "kline": "❌",
-   "close": "❌",
-   "score": "0/3"
+   "kline": "✅",
+   "close": "✅",
+   "score": "2/3"
   },
   "four_slots": {
    "strict": "2/4",
    "lenient": "2.5/4"
   },
-  "grade_match": "❌错",
-  "changes": "反转层R′+2翻多被空方续跌否决（B反转误触发·C维持-R家族第4次）+隔夜情景误判（平开→低开-0.63%）",
+  "grade_match": "✅对（V4.0重算）",
+  "changes": "V4.0重算：旧机制翻正判略偏多（二元0/3全错·定级❌）→新机制空方反转R′=-2→偏弱（二元2/3·定级✅）；四时段/形态为旧机制产物保留原样",
   "three_d": {
    "predict": {
     "overnight": "无方向",
-    "full_day": "略偏多",
-    "intraday": "略偏多"
+    "full_day": "偏弱",
+    "intraday": "偏弱"
    },
    "actual": {
     "overnight": "偏空",
@@ -907,11 +908,11 @@
    },
    "verdict": {
     "overnight": "❌",
-    "full_day": "❌",
-    "intraday": "❌"
+    "full_day": "✓",
+    "intraday": "⚠️"
    }
   },
-  "path_verdict": "C维持断言✅（sign(v₀)=-3空 vs 实际-0.87%空，底座方向记账对）；反转层R′=+2翻多❌（反转失败·fading未撤销但空方续跌）",
+  "path_verdict": "V4.0口径：C维持断言=底座方向(空) vs 实际(空-0.87%)→✅命中（反转层改注油门后路径按v₀/v分类）",
   "volatility_pred": "中波动（0.8~1.2%）",
   "volatility_actual": "1.01%/中",
   "volatility_hit": "✅",
@@ -1114,5 +1115,6 @@
    }
   ],
   "note": "低开-0.63%探底3596→上午修复3621→午后下杀3588→尾盘回拉3602收-0.87%；蓝线在上-53.63第三日"
- }
+ },
+ "generated": "【V4.0重算·2026-11-16晚】按老师\"现在就改\"裁定以新规则重排本日预测：反转=MACD状态反转检测器（金叉衰竭→空方反转R′=-2注油门，不翻定级）；旧V3.7输出（略偏多0/3全错）存档于奇门预测_20261116.md与联合验证报告"
 }

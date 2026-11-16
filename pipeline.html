@@ -548,10 +548,15 @@ output: {
     const vEff=(d.nine_fields&&typeof d.nine_fields.final_grade==='number')?d.nine_fields.final_grade:vF;
     const vKey=(vEff>0?'+':'')+String(vEff);
     const rp0=f.r_prime||0;
+    const revLine0=(()=>{
+      if(rp0===0) return '→ 反转层 R′=0 不触发·v 原样';
+      if(typeof f.r_trigger==='string') return `→ R′=${rp0} ${rp0<0?'空方反转（金叉衰竭·将转死叉）':'多方反转（死叉衰竭·将转金叉）'}：注油门取代a_macd·不翻定级（V4.0）`;
+      return `→ R′=${rp0} 反转锁档（旧V3.7机制·11-16前历史存档）：v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}（path加-R）`;
+    })();
     return `
   <div class="detail-section"><h4>v_final 合成链（怎么来的）</h4>
   <div class="formula">v（④叉积=v₀+a总）= ${f.v_cross>0?'+':''}${f.v_cross}
-${rp0>0?`→ R′=${rp0} 反转锁档：v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}（path加-R）`:'→ 反转层 R′=0 不触发·v 原样'}
+${revLine0}
 → b 微调（⑥表3-D）= ${f.b_value>0?'+':''}${f.b_value} ${f.b_value===0?'→ 不生效':'→ 生效'}
 ${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.nine_fields.final_grade:null;const cl=f.combo_lookup||'';if(nf!==null&&nf!==vF&&/压|升档|调整/.test(cl))return `→ ${cl.match(/[压升].*?档|压一级|升档/)?cl.match(/[压升][^；]*/)[0].slice(0,20):'组合调整'}：${vF>0?'+':''}${vF} → ${nf>0?'+':''}${nf}（生效）\n`;return '';})()}─────────────
 ＝ v_final = <b>${vF>0?'+':''}${vF}</b> → 表4-A → <b>${grade}</b></div></div>
@@ -577,19 +582,32 @@ ${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.ni
   ${(()=>{
     const rp=f.r_prime;
     if(rp===undefined||rp===null) return '';
-    const trig=f.r_trigger||{};
+    const trig=f.r_trigger;
+    /* ⭐V4.0（2026-11-16老师"现在就改"）：r_trigger=字符串→MACD状态反转检测器（注油门不翻定级）；旧格式r_trigger=对象（三件套）→11-16及更早历史存档渲染 */
+    if(typeof trig==='string'||trig===null||trig===undefined){
+      const active=rp!==0;
+      const dirTxt=rp<0?'空方反转——金叉状态衰竭，将向死叉掉头（偏空信号）':'多方反转——死叉状态衰竭，将向金叉掉头（偏多信号）';
+      return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（V4.0·MACD状态反转检测器）</h4>
+  <table style="font-size:12px">
+    <tr><th>触发条件</th><th>判定</th><th>口径</th></tr>
+    <tr><td>①MACD当前状态</td><td style="text-align:center;color:${active?'#3fb950':'#484f58'};font-weight:700">${active?(rp<0?'金叉·红柱期 ✓':'死叉·绿柱期 ✓'):'—'}</td><td style="color:#8b949e;font-size:11px">DIF vs DEA（金叉/死叉状态）</td></tr>
+    <tr><td>②柱线衰竭 L3 fading</td><td style="text-align:center;color:${active?'#3fb950':'#484f58'};font-weight:700">${active?'✓':'✗'}</td><td style="color:#8b949e;font-size:11px">连缩≥2日+累计幅度≥20%</td></tr>
+  </table>
+  <div class="formula" style="margin-top:6px">R′ = ${rp>0?'+':''}${rp}${active?` → <b>${dirTxt}</b><br>动作：a总 = R′ + 奇门a（R′取代a_macd位注入，v 照常合成，不翻定级、无锁档）`:' → 未触发·a总 = a_macd + 奇门a（原样）'}</div>
+  <p class="note">V4.0语义（老师2026-11-16拍板）：反转=针对MACD现在状态的反转——金叉衰竭→偏空、死叉衰竭→偏多，两侧对称；旧翻转型机制已停用存档</p></div>`;
+    }
     const items=[
       ['①MACD减速强度（L3衰竭转向）',trig.decel,'连缩≥2日+累计幅度≥20%'],
       ['②对面攻方能量≥10',trig.energy,'反转方向攻方渠道a_raw'],
       ['③深跌位置 DIF≤−5',trig.deep,'场景E深水口径']];
     const active=rp>0;
-    return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（4.13定级输出层）</h4>
+    return `<div class="detail-section"><h4>${active?'⚡':'·'} 反转判定（V3.7旧机制·历史存档≤11-16）</h4>
   <table style="font-size:12px">
     <tr><th>三件套</th><th>判定</th><th>口径</th></tr>
     ${items.map(([n,ok,c])=>`<tr><td>${n}</td><td style="text-align:center;color:${ok?'#3fb950':'#484f58'};font-weight:700">${ok?'✓':'✗'}</td><td style="color:#8b949e;font-size:11px">${c}</td></tr>`).join('')}
   </table>
   <div class="formula" style="margin-top:6px">R′ = ${rp>0?'+':''}${rp}${active?` → v_final ${f.v_final}>0?'+':''}${f.v_final} → <b>反转锁档 v′ = ${f.v_reversed>0?'+':''}${f.v_reversed}</b>（path加-R）`:' → 不触发·v_final原样'}</div>
-  ${active?'<p class="note">反转触发：三件套成立·方向取反锁档（表2-E形态）</p>':'<p class="note">三件套未齐·R′=0·定级链不受反转影响</p>'}</div>`;
+  ${active?'<p class="note">反转触发：三件套成立·方向取反锁档（表2-E形态）</p>':'<p class="note">三件套未齐·R′=0·定级链不受反转影响</p>'}<p class="note" style="color:#d29922">⚠️ 旧V3.7翻转型机制已停用（2026-11-16老师裁定：反转=MACD状态反转检测器）——此块仅历史数据存档渲染</p></div>`;
   })()}
   <div class="detail-section"><h4>最终映射（表4-A）</h4>
   <table>
@@ -609,15 +627,16 @@ ${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.ni
     const P=d.path||'';
     const rows=[
       ['A中性主导','v₀=0 → 奇门油门单独接管方向','MACD没方向，今天由盘局单独说了算','v₀='+(v0v>0?'+':'')+v0v+(v0v===0?' ✓':' ✗')],
-      ['B反转','R′>0 三件套触发 → 锁档取反','原有方向被证据证伪，要翻','R′='+(rp>0?'+':'')+rp+(rp>0?' ✓':' ✗')],
-      ['C维持','v₀≠0 且 v与v₀同向 且 R′=0（底座方向被维持）','底座方向今天继续有效，油门只加减速','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+(v0v!==0&&sameS(v0v,vF2)&&rp===0?' ✓':' ✗')],
+      ['B反转（V4.0语义已改）','R′≠0=状态反转油门注入（金叉衰竭→空方R′-2/死叉衰竭→多方R′+2，取代a_macd位，不翻v_final）','反转=针对MACD现在状态的反转（老师2026-11-16拍板）；旧"三件套→锁档取反"已停用存档','R′='+(rp>0?'+':'')+rp+(rp!==0?' ✓注入':' ✗')],
+      ['C维持','v₀≠0 且 v与v₀同向（V4.0起R′=0读作"无翻转型动作"）','底座方向今天继续有效，油门只加减速','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+(v0v!==0&&sameS(v0v,vF2)&&(typeof d.fusion.r_trigger==='string'||rp===0)?' ✓':' ✗')],
+      ['C维持-R','v₀≠0 且 v与v₀同向，同时状态反转油门注入（R′=∓2·V4.0第六类）','v与v₀同向维持+反转油门注入不改路径不翻定级','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+' / R′'+(rp!==0?'✓注入':'—')+(v0v!==0&&sameS(v0v,vF2)&&rp!==0?' ✓':' ✗')],
       ['C跨零','v₀≠0 且 v与v₀异号（油门推过零轴翻向）','油门大力把分数推过中线翻了向——翻了但无证据','v₀与v '+(v0v!==0&&vF2!==0&&!sameS(v0v,vF2)?'异号 ✓':'同号/零 ✗')],
-      ['D急停','v₀≠0 且 v=0 且 R′=0（油门完全抵消底座）','油门恰好抵消底座，今天没方向','v='+(vF2>0?'+':'')+vF2+(v0v!==0&&vF2===0&&rp===0?' ✓':' ✗')]
+      ['D急停','v₀≠0 且 v=0 且 无翻转型动作（V4.0：R′注入日v≠0，互斥）','油门恰好抵消底座，今天没方向','v='+(vF2>0?'+':'')+vF2+(v0v!==0&&vF2===0&&rp===0?' ✓':' ✗')]
     ];
-    return `<div class="detail-section"><h4>路径分类（表3-E·五选一·权威=融合规则表3-E）</h4>
+    return `<div class="detail-section"><h4>路径分类（表3-E·V4.0六类·权威=融合规则表3-E+附注）</h4>
     <table style="font-size:12px">
       <tr><th>路径</th><th>数值阈值</th><th>它说什么</th><th>今日代入</th><th></th></tr>
-      ${rows.map(r=>{const on=P.indexOf(r[0])===0;return `<tr class="${on?'hl':''}"><td style="white-space:nowrap"><b>${r[0]}</b></td><td style="color:#8b949e;font-size:11px">${r[1]}</td><td style="color:#c9d1d9;font-size:11px">${r[2]}</td><td>${r[3]}</td><td>${on?'◀ 命中':''}</td></tr>`;}).join('')}
+      ${rows.map(r=>{const on=P===r[0]||(P.indexOf(r[0])===0&&(r[0]!=='C维持'||!P.startsWith('C维持-R')));return `<tr class="${on?'hl':''}"><td style="white-space:nowrap"><b>${r[0]}</b></td><td style="color:#8b949e;font-size:11px">${r[1]}</td><td style="color:#c9d1d9;font-size:11px">${r[2]}</td><td>${r[3]}</td><td>${on?'◀ 命中':''}</td></tr>`;}).join('')}
     </table>
     <p class="note" style="margin-top:4px">路径=这单预测的形成方式。验证块的"路径·断言判定"判的是它暗含的方向断言（C维持判底座v₀方向），不是标签本身——标签永远是机械正确的。</p>
     ${f.combo_lookup?`<p class="note" style="margin-top:4px">组合查表4.8：${f.combo_lookup}</p>`:''}</div>`;
