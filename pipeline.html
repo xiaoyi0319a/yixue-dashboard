@@ -446,9 +446,9 @@ fusion: {
     return `
   <div class="detail-section"><h4>Step 1 会师——两侧加速度汇合</h4>
   <div class="formula">┌ 奇门侧：a_raw ${ar>0?'+':''}${ar} ÷总能量 → r=${rr} → 表2-D（点亮行）→ 奇门a = ${qa>0?'+':''}${qa}
-└ MACD侧：柱线惯性 → 表2-F（点亮行）→ a_macd = ${am>0?'+':''}${am}
+${(typeof f.r_trigger==='string'&&f.r_prime!==0)?`└ 反转层（V4.0）：R′=${f.r_prime} ${f.r_trigger}——状态反转油门**取代a_macd位**注入（不翻定级）`:`└ MACD侧：柱线惯性 → 表2-F（点亮行）→ a_macd = ${am>0?'+':''}${am}`}
 ─────────────────
-a总 = ${am>0?'+':''}${am} + ${qa>0?'+':''}${qa} = <b>${aT>0?'+':''}${aT}</b> ｜ 限幅±2 ✓</div>
+a总 = ${(typeof f.r_trigger==='string'&&f.r_prime!==0)?((f.r_prime>0?'+':'')+f.r_prime):((am>0?'+':'')+am)} + ${qa>0?'+':''}${qa} = <b>${aT>0?'+':''}${aT}</b> ｜ 限幅±2 ✓</div>
   ${(()=>{
     const d2Rows=[
       ['r ≥ 0.45',+2,'加速（强烈同向推动）',rr>=0.45],
