@@ -631,7 +631,7 @@ ${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.ni
     const P=d.path||'';
     const rows=[
       ['A中性主导','v₀=0 → 奇门油门单独接管方向','MACD没方向，今天由盘局单独说了算','v₀='+(v0v>0?'+':'')+v0v+(v0v===0?' ✓':' ✗')],
-      ['B反转（V4.0语义已改）','R′≠0=状态反转油门注入（金叉衰竭→空方R′-2/死叉衰竭→多方R′+2，取代a_macd位，不翻v_final）','反转=针对MACD现在状态的反转（老师2026-11-16拍板）；旧"三件套→锁档取反"已停用存档','R′='+(rp>0?'+':'')+rp+(rp!==0?' ✓注入':' ✗')],
+      ['B反转（V4.0已停用）','旧语义=R′>0三件套→锁档取反翻v_final——随V4.0翻转型机制停用（反转油门注入归C维持-R家族）','（存档）旧机制下"原有方向被证伪要翻"的翻赌路径','— 已停用'],
       ['C维持','v₀≠0 且 v与v₀同向（V4.0起R′=0读作"无翻转型动作"）','底座方向今天继续有效，油门只加减速','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+(v0v!==0&&sameS(v0v,vF2)&&(typeof d.fusion.r_trigger==='string'||rp===0)?' ✓':' ✗')],
       ['C维持-R','v₀≠0 且 v与v₀同向，同时状态反转油门注入（R′=∓2·V4.0第六类）','v与v₀同向维持+反转油门注入不改路径不翻定级','v₀='+(v0v>0?'+':'')+v0v+' / v='+(vF2>0?'+':'')+vF2+' / R′'+(rp!==0?'✓注入':'—')+(v0v!==0&&sameS(v0v,vF2)&&rp!==0?' ✓':' ✗')],
       ['C跨零','v₀≠0 且 v与v₀异号（油门推过零轴翻向）','油门大力把分数推过中线翻了向——翻了但无证据','v₀与v '+(v0v!==0&&vF2!==0&&!sameS(v0v,vF2)?'异号 ✓':'同号/零 ✗')],
@@ -666,6 +666,7 @@ slots: {
       ?`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #d29922;background:#d2992215"><b style="color:#d29922">▶ 无方向 · 全天波动小</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，<0.8%低波动</b> → 四时段全部输出无方向，不验证准确率</p>`
       :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，≥0.8%中波动起步</b> → 四时段正常方向解释，收盘后验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
+    ${d.generated&&String(d.generated).indexOf('V4.0重算')>=0?`<div style="background:rgba(210,153,34,.1);border:1px solid rgba(210,153,34,.4);color:#d29922;font-size:11px;padding:6px 10px;border-radius:6px;margin-bottom:8px">⚠️ 本节四时段为旧机制产物（底色 v_final=+2 时代推演）——V4.0重算只重推全天定级链、未重推时段级判定；时段定级与叙事仅供旧档对照，以全天定级（偏弱）为准</div>`:''}
     <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意路径=5锚点查表（映射表见看板数据同步工作流D节）：9:30缺口锚（低开-1/高开+1）→每时段累加0.5×定级→15:00锚定昨收（收涨≥+0.5/收跌≤-0.5）；纵轴=相对昨收，非点位预测</p>
     ${modeTag}
     ${slotsSVG(d.four_slots,520,190,d.actual_curve,slotCtx(d))}
