@@ -368,7 +368,7 @@
    "volr": 1.65,
    "limit_up": 1,
    "grade": "B平台候选·点火",
-   "is_new": true
+   "is_new": false
   },
   {
    "code": "000410",
@@ -382,7 +382,7 @@
    "volr": 1.9,
    "limit_up": 3,
    "grade": "B平台候选·点火",
-   "is_new": true
+   "is_new": false
   },
   {
    "code": "300217",
