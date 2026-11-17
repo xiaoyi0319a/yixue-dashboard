@@ -349,7 +349,7 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
             html += '<div class="elite-grid">';
             elite.forEach(function (s) {
                 html += '<div class="elite-card">' +
-                    '<div class="ec-head"><span class="ec-name">' + s.name + '</span><span class="ec-code">' + s.code + '</span></div>' +
+                    '<div class="ec-head"><span class="ec-name">' + s.name + (s.is_new ? '<span class="new-badge">新</span>' : '') + '</span><span class="ec-code">' + s.code + '</span></div>' +
                     '<div class="ec-theme">' + s.theme + '</div>' +
                     '<div class="ec-meta">距低点 <b>' + fmt(s.dist_low) + '%</b> · 市值 ' + fmt(s.mcap) + '亿 · 量比 ' + fmt(s.volr, 2) + ' · 试盘涨停 ' + s.limit_up + '</div>' +
                     '</div>';
