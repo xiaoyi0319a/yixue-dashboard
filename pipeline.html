@@ -113,9 +113,9 @@ macd: {
   <div class="detail-section"><h4>原始数据（${d.macd_date||d.date} 收盘 · 预测T-1基准）</h4>
   <table>
     <tr><th>指标</th><th>值</th><th>说明</th></tr>
-    <tr><td>DIF</td><td style="color:${d.macd.dif<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.dif}</td><td>DIF 值</td></tr>
-    <tr><td>DEA</td><td style="color:${d.macd.dea<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.dea}</td><td>DEA 值</td></tr>
-    <tr><td>柱 (DIF−DEA)×2</td><td style="color:${d.macd.bar<0?'#f85149':'#3fb950'};font-weight:600">${d.macd.bar}</td><td>${Math.abs(d.macd.bar)>20?'|柱|>20 极值档（柱体±3）':Math.abs(d.macd.bar)>10?'|柱|10~20（柱体±2）':Math.abs(d.macd.bar)>3?'|柱|3~10（柱体±1）':'|柱|<3（柱体0）'}</td></tr>
+    <tr><td>DIF</td><td style="color:${d.macd.dif<0?'#3fb950':'#f85149'};font-weight:600">${d.macd.dif}</td><td>DIF 值</td></tr>
+    <tr><td>DEA</td><td style="color:${d.macd.dea<0?'#3fb950':'#f85149'};font-weight:600">${d.macd.dea}</td><td>DEA 值</td></tr>
+    <tr><td>柱 (DIF−DEA)×2</td><td style="color:${d.macd.bar<0?'#3fb950':'#f85149'};font-weight:600">${d.macd.bar}</td><td>${Math.abs(d.macd.bar)>20?'|柱|>20 极值档（柱体±3）':Math.abs(d.macd.bar)>10?'|柱|10~20（柱体±2）':Math.abs(d.macd.bar)>3?'|柱|3~10（柱体±1）':'|柱|<3（柱体0）'}</td></tr>
     <tr class="hl"><td>交叉状态</td><td>${d.macd.dead_cross_day?('死叉延续 第'+d.macd.dead_cross_day+'日'):'非延续期'}</td><td>${d.macd.dead_cross_day?'非交叉首日 → 交叉分计 0':'交叉首日 → 查表1-A评分'}</td></tr>
   </table></div>
   <p class="note" style="margin-top:8px">${d.macd.precheck_note||''}</p>`
@@ -411,8 +411,8 @@ qimen: {
     if(!LC) LC={'核心':1.5,'力量':1.0,'衍生':0.5};
     const layerOf=s=>{const c=(s.cell||'').split('×')[0].trim();return YL[c]||null;};
     const num=v=>{const n=parseFloat(v);return isNaN(n)?0:n;};
-    const all=[...(q.attack_plus_signals||[]).map(s=>typeof s==='string'?{g:s,cell:(s.match(/^[A-Z]\d+(.+?)×/)||[])[1]||'',base:parseFloat((s.match(/(\d+(?:\.\d+)?)$/)||[])[1])||0,ch:'攻多',color:'#3fb950'}:{...s,ch:'攻多',color:'#3fb950'}),
-               ...(q.attack_minus_signals||[]).map(s=>typeof s==='string'?{g:s,cell:(s.match(/^[A-Z]\d+(.+?)×/)||[])[1]||'',base:parseFloat((s.match(/(\d+(?:\.\d+)?)$/)||[])[1])||0,ch:'攻空',color:'#f85149'}:{...s,ch:'攻空',color:'#f85149'}),
+    const all=[...(q.attack_plus_signals||[]).map(s=>typeof s==='string'?{g:s,cell:(s.match(/^[A-Z]\d+(.+?)×/)||[])[1]||'',base:parseFloat((s.match(/(\d+(?:\.\d+)?)$/)||[])[1])||0,ch:'攻多',color:'#f85149'}:{...s,ch:'攻多',color:'#f85149'}),
+               ...(q.attack_minus_signals||[]).map(s=>typeof s==='string'?{g:s,cell:(s.match(/^[A-Z]\d+(.+?)×/)||[])[1]||'',base:parseFloat((s.match(/(\d+(?:\.\d+)?)$/)||[])[1])||0,ch:'攻空',color:'#3fb950'}:{...s,ch:'攻空',color:'#3fb950'}),
                ...(q.structure_signals||[]).map(s=>typeof s==='string'?{g:s,cell:(s.match(/^[A-Z]\d+(.+?)×/)||[])[1]||'',base:parseFloat((s.match(/(\d+(?:\.\d+)?)$/)||[])[1])||0,ch:'结构',color:'#58a6ff'}:{...s,ch:'结构',color:'#58a6ff'})];
     all.forEach(s=>{s.layer=layerOf(s);});
     const sum=(ch,ly)=>all.filter(x=>x.ch===ch&&x.layer===ly).reduce((a,x)=>a+num(x.base),0);
@@ -448,7 +448,7 @@ qimen: {
 结构a_raw = ${formula('结构')} = ${st.v>0?'+':''}${st.v}
 ─────────────────
 a_raw = 攻多 − 攻空 + 结构 = ${aRaw>0?'+':''}${aRaw} → 表2-D → 奇门a（映射压缩在融合节点①）</div>
-  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#3fb950">攻多</span>=${cl.攻多}<br><span style="color:#f85149">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；${d.matrix_drop_note?`<span style="color:#d29922">📋 ${d.matrix_drop_note}</span>`:`明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）`}${q.reread_note?`<br><span style="color:#d29922">📋 重读备注：${q.reread_note}</span>`:''}</p>`;
+  <p class="note" style="margin-top:6px;line-height:1.8"><b>三渠道成员说明：</b><br><span style="color:#f85149">攻多</span>=${cl.攻多}<br><span style="color:#3fb950">攻空</span>=${cl.攻空}<br><span style="color:#58a6ff">结构</span>=${cl.结构}<br>${fn}；${d.matrix_drop_note?`<span style="color:#d29922">📋 ${d.matrix_drop_note}</span>`:`明细清单在JSON matrix_drop（${(d.matrix_drop||[]).length}条全量）`}${q.reread_note?`<br><span style="color:#d29922">📋 重读备注：${q.reread_note}</span>`:''}</p>`;
   })()}
   </div>`
 
@@ -516,7 +516,7 @@ v = ${fmtV(v0v)} + ${aT>0?'+':''}${aT} = <b>${vX>0?'+':''}${vX}</b> ｜ |v| ≤ 
     <tr><th>v₀＼a</th>${aCols.map((c,i)=>`<th style="${i===aIdx?ROWHL:''}">${c}</th>`).join('')}</tr>
     ${Object.keys(CROSS).map(v0=>{
       const isRow=fmtV(v0v)===v0;
-      return `<tr><td style="color:${v0>0?'#3fb950':v0<0?'#f85149':'#8b949e'};${isRow?ROWHL+';font-weight:700':''}">${v0}${isRow?' ◀':''}</td>${CROSS[v0].map((val,i)=>{
+      return `<tr><td style="color:${v0>0?'#f85149':v0<0?'#3fb950':'#8b949e'};${isRow?ROWHL+';font-weight:700':''}">${v0}${isRow?' ◀':''}</td>${CROSS[v0].map((val,i)=>{
         const isHit=isRow&&i===aIdx;
         const isCol=i===aIdx;
         return `<td class="${isHit?'hit':''}" style="${isHit?'':isRow?ROWHL:isCol?COLHL:''}">${val>0?'+':''}${val}</td>`;
@@ -928,7 +928,7 @@ function showDetail(key){
 
 /* ==================== 四时段SVG折线图 ==================== */
 const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'中性偏弱':-1,'强空':-3,'中空':-2,'无方向':0,'中性':0,'中性偏强':1,'微偏强':1,'略偏多':1,'偏多':2,'中多':2,'偏强':3,'强多':3};
-const GRADE_COLOR=v=>v>0?'#3fb950':v<0?'#f85149':'#8b949e';
+const GRADE_COLOR=v=>v>0?'#f85149':v<0?'#3fb950':'#8b949e';
 /* ⭐示意路径上下文（2026-11-06老师15:20定稿5锚点查表制）：开盘情景/收盘预期=查表输入，纯机械化无手绘 */
 function slotCtx(d){
   const m=(d.verification&&d.verification.morning)||{};
