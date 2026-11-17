@@ -939,7 +939,7 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
   ctx=ctx||{};
   const gv=g=>GRADE_VAL[g]!==undefined?GRADE_VAL[g]:0;
   const clampV=v=>Math.max(-3,Math.min(3,v));
-  /* ⭐⭐示意路径5锚点·速度语义（V2.1·2026-11-16老师23:52拍板——段定级=段内位移速度：微偏强=上行/中性=零位移横盘不跌/偏弱=下行；落点=累加相对位置（P_i=P_{i-1}+0.5×段定级，限幅±3）；P0=开盘锚（低开-1/平开0/高开+1/偏低-0.5/偏高+0.5）；P4=收盘锚强制回归（收涨≥+0.5/收跌≤-0.5/平收不动）——映射表=《看板数据同步工作流》D节"每时段累加"口径 */
+  /* ⭐⭐示意路径5锚点·强弱档水位语义（V3.0·2026-11-17老师12:25"开工"拍板——纵轴=强弱档（0=无方向档）非价格%；点位=该时辰全天相对强弱水平=0.5×时段定级档，不累加；同档同高；P0=开盘情景档（缺口档）；P4=全天定级落点（fusion.final_grade档×0.5，申时定级不定点、只定14:00→15:00段走向）；段斜率=两时点档差（水平对比，跨级对比=高度差÷0.5）；段内怎么动归引动/振幅/判语；映射表=《看板数据同步工作流》D节"强弱档水位"口径 */
   const openGap=ctx.open==='低开'?-1:ctx.open==='高开'?1:(ctx.open&&ctx.open.indexOf('偏低')>=0?-0.5:(ctx.open&&ctx.open.indexOf('偏高')>=0?0.5:0));
   const K=0.5;
 
@@ -976,16 +976,11 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
     return 0.5+Math.min(1,(t-PM_START)/(PM_END-PM_START))*0.5;
   }
 
-  /* 5锚点值·速度累加制：段i位移=0.5×段定级值（中性=0位移横盘），落点从开盘锚起累加，限幅±3；P4=收盘锚强制（收涨≥+0.5/收跌≤-0.5/平收不动） */
-  const endVals=[];
-  let acc=openGap;
-  slots.forEach((s,i)=>{
-    acc=clampV(acc+K*gv(s.grade));
-    if(i===n-1){
-      if(ctx.close==='收涨'&&acc<0.5) acc=0.5;
-      if(ctx.close==='收跌'&&acc>-0.5) acc=-0.5;
-    }
-    endVals.push(acc);
+  /* 水位语义锚点值：P1~P3=0.5×时段定级档（水平）；P4=全天定级落点（final_grade档×0.5，缺数据时回退申档） */
+  const fg=(typeof pipelineData!=='undefined'&&pipelineData&&pipelineData.fusion&&pipelineData.fusion.final_grade)?pipelineData.fusion.final_grade:null;
+  const endVals=slots.map((s,i)=>{
+    if(i===n-1) return clampV(K*(fg!==null?gv(fg):gv(s.grade)));
+    return clampV(K*gv(s.grade));
   });
   const A=openGap;
 
@@ -1023,27 +1018,26 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
   const predColor=anchorPts.length>0?GRADE_COLOR(gv(anchorPts[0].grade)):'#8b949e';
   const openPt={x:pad.l+iw*legFx[0], y:zeroY-A*stepY};
 
-  /* 实际分时曲线（收盘后传入） */
+  /* 实际分时曲线（收盘后传入）：v=%净涨跌→强弱档近似映射（|v|<0.2→0档/<0.6→±1档/<1.0→±2档/≥1.0→±3档——显示层近似，判定对账以《四时段验证标准》表为准） */
   let actualSVG='';
   if(actualCurve&&actualCurve.points&&actualCurve.points.length>1){
-    const vals=actualCurve.points.map(p=>p.v);
-    const vMax=Math.max(...vals,0.5), vMin=Math.min(...vals,-0.5);
-    const vRange=Math.max(Math.abs(vMax),Math.abs(vMin));
+    const pct2g=v=>{const a=Math.abs(v);return a<0.2?0:(a<0.6?1:(a<1.0?2:3));};
     const actPts=actualCurve.points.map(p=>({
       x:pad.l+iw*p.t,
-      y:zeroY-(p.v/vRange)*stepY*0.9
+      y:zeroY-K*pct2g(p.v)*(p.v<0?-1:1)*stepY
     }));
     actualSVG=`<path d="${smoothPath(actPts)}" fill="none" stroke="#d29922" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.9"/>`;
   }
 
-  const dots=anchorPts.map(p=>{
+  const dots=anchorPts.map((p,i)=>{
     const v=gv(p.grade), c=GRADE_COLOR(v);
+    const lbl=(i===n-1&&fg)?fg:p.grade;
     const ts=p.time?p.time.split('-'):null;
     const slotName=(p.slot||p.name||'').charAt(0);
     const slotKey=SLOT_TIME_MAP[slotName]?slotName:'';
     const timeEnd=ts&&ts.length>1?ts[1]:(slotKey?SLOT_TIME_MAP[slotKey].split('-')[1]:(p.slot||''));
     return `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${c}" stroke="#0d1117" stroke-width="2"/>
-    <text x="${p.x}" y="${p.y-9}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700">${p.grade}</text>
+    <text x="${p.x}" y="${p.y-9}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700">${lbl}</text>
     <text x="${p.x}" y="${h-4}" text-anchor="middle" fill="#8b949e" font-size="9">${slotName} ${timeEnd}</text>`;
   }).join('');
 
@@ -1054,11 +1048,11 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
 
   const curveDate=actualCurve&&actualCurve.date?actualCurve.date:'';
   const legend=actualCurve&&actualCurve.points?`<text x="${w-pad.r}" y="${pad.t-8}" text-anchor="end" fill="#3fb950" font-size="9">— 预测</text><text x="${w-pad.r-52}" y="${pad.t-8}" text-anchor="end" fill="#d29922" font-size="9">- - 实际${curveDate?' '+curveDate:''}</text>`:
-    `<text x="${pad.l}" y="${pad.t-8}" text-anchor="start" fill="#484f58" font-size="9">示意=5锚点·相对昨收·每级±0.5</text>`;
+    `<text x="${pad.l}" y="${pad.t-8}" text-anchor="start" fill="#484f58" font-size="9">示意=5锚点·强弱档·每档±0.5（0=无方向档）</text>`;
 
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block">
     <line x1="${pad.l}" y1="${zeroY}" x2="${w-pad.r}" y2="${zeroY}" stroke="#30363d" stroke-dasharray="4,3"/>
-    <text x="${pad.l-4}" y="${zeroY+3}" text-anchor="end" fill="#484f58" font-size="8">昨收</text>
+    <text x="${pad.l-4}" y="${zeroY+3}" text-anchor="end" fill="#484f58" font-size="8">0档</text>
     ${legend}
     <path d="${predPath}" fill="none" stroke="${predColor}" stroke-width="2" opacity="0.9"/>
     ${actualSVG}
