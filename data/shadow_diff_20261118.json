@@ -1,0 +1,20 @@
+对账结果：502/517 字段一致 ｜ 仅A有 1 ｜ 仅B有 14 ｜ 值不同 0
+
+--- 仅A有 ---
+  A: fusion.v0_grade = -3
+
+--- 仅B有 ---
+  B: actual_curve = None
+  B: generated = 【2026-11-18 06:30】V4.0反转油门连续第2日触发（R′=-2·金叉第13日+红柱连缩4日累计85.3%）+五不遇时日（癸克丙对冲归零）+门伏吟
+  B: layer_synthesis.core_minus = 5.5
+  B: layer_synthesis.core_plus = 10.5
+  B: layer_synthesis.core_struct = 2.0
+  B: layer_synthesis.derived_minus = 6.0
+  B: layer_synthesis.derived_plus = 6.5
+  B: layer_synthesis.derived_struct = 8.0
+  B: layer_synthesis.formula = 攻多/攻空/结构各=1.5×核心小计+1.0×力量小计+0.5×衍生小计；a_raw=攻多−攻空+结构
+  B: layer_synthesis.power_minus = 13.0
+  B: layer_synthesis.power_plus = 18.0
+  B: layer_synthesis.power_struct = 0.0
+  B: layer_synthesis.r = 0.289
+  B: strong_bottom = None
