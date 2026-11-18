@@ -668,7 +668,7 @@ slots: {
       :`<p class="note" style="margin:0 0 8px;padding:6px 10px;border-left:3px solid #3fb950;background:#3fb95015"><b style="color:#3fb950">▶ 有方向 · 正常输出</b> ｜ 触发阈值：<b>振幅预判=${volGrade}，≥0.8%中波动起步</b> → 四时段正常方向解释，收盘后验证准确率</p>`):'';
     return `<div class="detail-section"><h4>时段走势</h4>
     ${d.generated&&String(d.generated).indexOf('V4.0重算')>=0?`<div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.4);color:#3fb950;font-size:11px;padding:6px 10px;border-radius:6px;margin-bottom:8px">✅ 本节四时段已按V4.0重推（底色=偏弱·9.4规则重跑：伏吟日中性化+空亡逢值引动修正）——旧档存档于预测报告MD</div>`:''}
-    <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意路径=速度语义5锚点（V2.1老师23:52拍板）：段定级=段内位移速度（微偏强=上行/中性=零位移横盘不跌/偏弱=下行），落点=从开盘锚累加的相对位置；P0缺口锚（低开-1/平开0/高开+1/偏低-0.5）→每段累加0.5×定级→P4收盘锚强制回归（收涨≥+0.5/收跌≤-0.5）；纵轴=相对昨收，非点位预测</p>
+    <p class="note" style="margin:2px 0 6px;font-size:11px;color:#8b949e">示意=5锚点·强弱档水位（V3.0·11-17拍板）：点位=该时辰全天相对强弱水平（0.5×定级档·同档同高·不累加）；P0=开盘情景缺口档（低开-1/平开0/高开+1）；P4=全天定级落点；段内怎么动归引动/振幅/判语</p>
     ${modeTag}
     ${slotsSVG(d.four_slots,520,190,d.actual_curve,slotCtx(d))}
     </div>
@@ -940,7 +940,8 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
   const gv=g=>GRADE_VAL[g]!==undefined?GRADE_VAL[g]:0;
   const clampV=v=>Math.max(-3,Math.min(3,v));
   /* ⭐⭐示意路径5锚点·强弱档水位语义（V3.0·2026-11-17老师12:25"开工"拍板——纵轴=强弱档（0=无方向档）非价格%；点位=该时辰全天相对强弱水平=0.5×时段定级档，不累加；同档同高；P0=开盘情景档（缺口档）；P4=全天定级落点（fusion.final_grade档×0.5，申时定级不定点、只定14:00→15:00段走向）；段斜率=两时点档差（水平对比，跨级对比=高度差÷0.5）；段内怎么动归引动/振幅/判语；映射表=《看板数据同步工作流》D节"强弱档水位"口径 */
-  const openGap=ctx.open==='低开'?-1:ctx.open==='高开'?1:(ctx.open&&ctx.open.indexOf('偏低')>=0?-0.5:(ctx.open&&ctx.open.indexOf('偏高')>=0?0.5:0));
+  const openBase=(ctx.open||'').replace(/（[^）]*）|\([^)]*\)/g,'').trim();
+  const openGap=openBase==='低开'?-1:openBase==='高开'?1:openBase==='偏低'?-0.5:openBase==='偏高'?0.5:0;
   const K=0.5;
 
   /* ⭐防裁切布局（2026-10-28修复）：顶部容纳点位标签文字（y-9）+呼吸空间，底部容纳时间轴文字
@@ -1043,7 +1044,7 @@ function slotsSVG(slots,w,h,actualCurve,ctx){
 
   /* 开盘锚点（空心）：9:30位置=巳段定级+开盘情景偏移（低开低/高开高），老师11-06提议 */
   const openDot=openGap!==0?`<circle cx="${openPt.x}" cy="${openPt.y}" r="4" fill="none" stroke="#d29922" stroke-width="1.8" stroke-dasharray="3,2"/>
-    <text x="${openPt.x}" y="${h-4}" text-anchor="middle" fill="#d29922" font-size="9">09:30${ctx.open==='低开'?' 低开':ctx.open==='高开'?' 高开':''}</text>
+    <text x="${openPt.x}" y="${h-4}" text-anchor="middle" fill="#d29922" font-size="9">09:30${openBase==='低开'?' 低开':openBase==='高开'?' 高开':''}</text>
     <text x="${openPt.x}" y="${openPt.y+(A>=0?16:-8)}" text-anchor="middle" fill="#d29922" font-size="9">开${A>0?'+':''}${A}</text>`:'';
 
   const curveDate=actualCurve&&actualCurve.date?actualCurve.date:'';
