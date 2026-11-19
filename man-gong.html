@@ -374,7 +374,7 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
                     '<div class="diag-grid">';
                 list.forEach(function (s) {
                     html += '<div class="diag-card">' +
-                        '<div class="dc-head"><span class="dc-name">' + s.name + '</span><span class="dc-code">' + s.code + '</span></div>' +
+                        '<div class="dc-head"><span class="dc-name">' + s.name + (s.is_new ? '<span class="new-badge">新</span>' : '') + '</span><span class="dc-code">' + s.code + '</span></div>' +
                         '<div class="dc-mode"><b>' + s.mode + '</b> · ' + s.match + '</div>' +
                         '<div class="dc-row">' + s.proto + ' · 距低 ' + s.dist_low + ' · 量比 ' + s.volr + '</div>' +
                         '<div class="dc-target">量度目标 ' + s.target + '</div>' +
@@ -422,7 +422,7 @@ td.theme-cell.hot { color: var(--gold-bright); text-shadow: 0 0 12px rgba(232,19
                 '<span><i style="background:#7ed491"></i>量比&lt;0.83 缩量偏多</span>' +
                 '<span><i style="background:#f0a35c"></i>量比&gt;1.2 放量试盘</span>' +
                 '<span><i style="background:#ffd98a"></i>涨停数≥2 题材高亮</span>' +
-                '<span><i style="background:#c84637"></i>新=本周新入</span>' +
+                '<span><i style="background:#c84637"></i>新=当日有变动（新入档/升降档）</span>' +
                 '</div>';
         }
 
