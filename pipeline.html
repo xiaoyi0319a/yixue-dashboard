@@ -811,17 +811,14 @@ function normalizeSchema(d){
       const dataMMDD=String(d.date).slice(5); /* "2026-10-22"→"10-22" */
       if(d.actual_curve.date!==dataMMDD) d.actual_curve=null;
     }
-    /* matrix：预测端V4.1-patch10（10-22起）拍平格式 → 渲染层期望字段（l1_cell/side/l2_state/l3{rate,pos}）
-       新：l1="格6（…）基分-2" l2="bear_mid（死叉第15日）" l3="fading×deep（…）" signal="【转向预警】"
-       渲染层用 l1_cell.split('（')[0]、side、l2_state.split('_')、l3.rate、l3.pos → 缺字段时 TypeError 卡加载 */
-    if(d.matrix&&d.matrix.l1_cell===undefined){
+    /* matrix：逐字段补缺拍平（2026-11-14 生产端可能写出半新半旧混合数据[如l2_state已拍但l1_cell/side=null]，
+       逐字段独立补缺比整体判断更稳；渲染层期望 l1_cell/side/l2_state/l3{rate,pos}）*/
+    if(d.matrix){
       const m=d.matrix;
-      if(m.l1!==undefined) m.l1_cell=String(m.l1).split('基分')[0];
-      const l2m=String(m.l2||'').match(/^(bear|bull)_([a-z]+)/);
-      m.side=l2m?l2m[1]:(m.score>0?'bull':m.score<0?'bear':'bull');
-      m.l2_state=l2m?(l2m[1]+'_'+l2m[2]):'bull_mid';
-      const l3m=String(m.l3||'').match(/^([a-z]+)×([a-z]+)/);
-      m.l3={rate:l3m?l3m[1]:'flat',pos:l3m?l3m[2]:'mid'};
+      if(m.l1_cell==null&&m.l1!==undefined) m.l1_cell=String(m.l1).split('基分')[0];
+      if(m.side==null){ const sm=String(m.l2||'').match(/^(bear|bull)_([a-z]+)/); m.side=sm?sm[1]:(m.score>0?'bull':m.score<0?'bear':'bull'); }
+      if(m.l2_state==null){ const l2m=String(m.l2||'').match(/^(bear|bull)_([a-z]+)/); m.l2_state=l2m?(l2m[1]+'_'+l2m[2]):'bull_mid'; }
+      if(typeof m.l3==='string'||m.l3==null){ const l3m=String(m.l3||'').match(/^([a-z]+)×([a-z]+)/); m.l3={rate:l3m?l3m[1]:'flat',pos:l3m?l3m[2]:'mid'}; }
       if(typeof m.signal==='string') m.signal=m.signal.replace(/【|】/g,'');
     }
     return d;
