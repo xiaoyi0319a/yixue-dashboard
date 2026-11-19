@@ -818,7 +818,12 @@ function normalizeSchema(d){
       if(m.l1_cell==null&&m.l1!==undefined) m.l1_cell=String(m.l1).split('基分')[0];
       if(m.side==null){ const sm=String(m.l2||'').match(/^(bear|bull)_([a-z]+)/); m.side=sm?sm[1]:(m.score>0?'bull':m.score<0?'bear':'bull'); }
       if(m.l2_state==null){ const l2m=String(m.l2||'').match(/^(bear|bull)_([a-z]+)/); m.l2_state=l2m?(l2m[1]+'_'+l2m[2]):'bull_mid'; }
-      if(typeof m.l3==='string'||m.l3==null){ const l3m=String(m.l3||'').match(/^([a-z]+)×([a-z]+)/); m.l3={rate:l3m?l3m[1]:'flat',pos:l3m?l3m[2]:'mid'}; }
+      if(typeof m.l3==='string'||m.l3==null){
+        const RATE_ZH2EN={'加速':'accel','减速':'decel','衰竭转向':'fading'};
+        let l3m=String(m.l3||'').match(/^([a-z]+)×([a-z]+)/);
+        if(!l3m){ const zm=String(m.l3||'').match(/^([^×\s]+)×([a-z]+)/); if(zm&&RATE_ZH2EN[zm[1]]) l3m=[zm[0],RATE_ZH2EN[zm[1]],zm[2]]; }
+        m.l3={rate:l3m?l3m[1]:'flat',pos:l3m?l3m[2]:'mid'};
+      }
       if(typeof m.signal==='string') m.signal=m.signal.replace(/【|】/g,'');
     }
     return d;
