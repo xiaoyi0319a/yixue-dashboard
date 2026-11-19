@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-20",
+  "compared_at": "2026-11-20 06:52:00 +0800",
+  "shadow_source": "data/pipeline_shadow_20261120.json (scripts/build_pipeline_json.py 组装自 data/slots_20261120.json)",
+  "direct_source": "data/pipeline_20261120.json (LLM源头直写)",
+  "summary": {
+    "total_fields": 551,
+    "consistent": 548,
+    "only_shadow": 1,
+    "only_direct": 2,
+    "value_diff": 0,
+    "semantically_equal": false
+  },
+  "only_shadow": [
+    {"path": "fusion.v0_grade", "value": -3}
+  ],
+  "only_direct": [
+    {"path": "date_display", "value": "11-20 周五"},
+    {"path": "matrix_missing_note", "value": "无缺格；S系观察格2条命中（S8/S10·判语层）"}
+  ],
+  "value_diffs": [],
+  "note": "值不同0条，差异均为单边缺字段：影子版多fusion.v0_grade（组装器冗余层补写），直写版多date_display/matrix_missing_note（槽位未含此二字段）。不构成语义冲突，灰度继续观察。"
+}
