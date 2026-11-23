@@ -260,7 +260,10 @@
   "key_risk": "扣非亏损+经营现金流为负，题材熄火即现原形",
   "tracking": "①6.46放量站稳与否（次日确认）②V4.7报告回填③2026年报扣非能否真扭亏"
  },
- "verification": null,
+ "verification": {
+  "hit": "❌",
+  "note": "批量回填：历史1次对账 ✅0/⚠️0/❌1"
+ },
  "view_gene": {
   "total_lit": 5,
   "total_partial": 4,
@@ -503,8 +506,8 @@
    "a_macd": 0,
    "q_bias": 0,
    "pred": "中性偏强",
-   "actual": "--",
-   "hit": "待回填",
+   "actual": "-7.93%(偏空)",
+   "hit": "❌",
    "cell": "1_2"
   }
  ],

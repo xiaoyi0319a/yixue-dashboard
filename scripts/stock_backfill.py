@@ -18,6 +18,36 @@
 """
 import json, os, sys, glob, re
 
+
+def sync_archives(code):
+    """双写一致性维护：live history 已回填的 actual/hit 同步到该 code 全部日期存档。
+    只升级不降级：live 未回填的行不动存档；verification 仅当 live 有值时镜像。"""
+    f = os.path.join(DATA, f'diagnose_{code}.json')
+    if not os.path.exists(f):
+        return
+    live = json.load(open(f))
+    lhist = {str(h.get('date')): h for h in live.get('history', [])}
+    ver = live.get('verification')
+    for fn in sorted(glob.glob(os.path.join(DATA, f'diagnose_{code}_*.json'))):
+        d = json.load(open(fn))
+        changed = False
+        for h in d.get('history', []):
+            lh = lhist.get(str(h.get('date')))
+            if lh is None:
+                continue
+            if str(lh.get('actual', '')) in ('--', '待回填', ''):
+                continue  # live 未回填，不动存档
+            for k in ('actual', 'hit'):
+                if h.get(k) != lh.get(k):
+                    h[k] = lh[k]
+                    changed = True
+        if ver and d.get('verification') != ver:
+            d['verification'] = ver
+            changed = True
+        if changed:
+            json.dump(d, open(fn, 'w'), ensure_ascii=False, indent=1)
+            print(f'SYNC {os.path.basename(fn)}')
+
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
 GRADES = ["偏多", "偏强", "中性偏强", "无方向", "中性偏弱", "偏弱", "偏空"]
 BANDS = [  # (下界, 上界, 档)
@@ -84,8 +114,9 @@ def write(code, hist_date, actual_str, hit):
     done = False
     for h in d.get('history', []):
         if str(h.get('date')) == str(hist_date):
-            if str(h.get('actual')) not in ('--', '待回填', ''):
+            if str(h.get('actual', '')) not in ('--', '待回填', ''):
                 print(f'SKIP {code} {hist_date} 已回填')
+                sync_archives(code)
                 return 0
             h['actual'] = actual_str
             h['hit'] = hit
@@ -102,6 +133,7 @@ def write(code, hist_date, actual_str, hit):
     }
     json.dump(d, open(f, 'w'), ensure_ascii=False, indent=1)
     print(f'OK {code} {hist_date} → {actual_str} {hit}')
+    sync_archives(code)
     return 0
 
 

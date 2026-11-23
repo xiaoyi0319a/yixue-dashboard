@@ -282,7 +282,10 @@
   "key_risk": "净利连降+应收+31.69%——拐点若迟迟不来，红利股也会阴跌",
   "tracking": "2027-01业绩预告(Q4回款+全年净利)/年报分红率/破5.605与否"
  },
- "verification": null,
+ "verification": {
+  "hit": "⚠️",
+  "note": "批量回填：历史1次对账 ✅0/⚠️1/❌0"
+ },
  "view_gene": {
   "total_lit": 0,
   "total_partial": 0,
@@ -480,8 +483,8 @@
    "a_macd": 0,
    "q_bias": -1,
    "pred": "无方向",
-   "actual": "--",
-   "hit": "待回填",
+   "actual": "-1.69%(中性偏弱)",
+   "hit": "⚠️",
    "cell": "1_3"
   }
  ],

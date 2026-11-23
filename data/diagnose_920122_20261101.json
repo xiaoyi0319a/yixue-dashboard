@@ -226,7 +226,10 @@
   "key_risk": "减持计划未完毕+明示未来12个月继续——筹码悬顶压制一切修复",
   "tracking": "①减持实施完毕公告(门票) ②11-13股东会 ③Q4预告拐点终验 ④20/19支撑"
  },
- "verification": null,
+ "verification": {
+  "hit": "❌",
+  "note": "批量回填：历史1次对账 ✅0/⚠️0/❌1"
+ },
  "view_gene": {
   "total_lit": 3,
   "total_partial": 2,
@@ -460,8 +463,8 @@
    "a_macd": -1,
    "q_bias": -3,
    "pred": "偏弱",
-   "actual": "--",
-   "hit": "待回填",
+   "actual": "+2.40%(偏强)",
+   "hit": "❌",
    "cell": "4_5"
   }
  ],

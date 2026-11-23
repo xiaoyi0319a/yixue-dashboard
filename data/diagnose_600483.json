@@ -250,7 +250,10 @@
   "key_risk": "煤价Q4不见顶→盈利继续下修，反转逻辑后移一年",
   "tracking": "①煤价跌破850 ②12月电价谈判 ③Q4风电电量 ④放量过11.2右侧信号"
  },
- "verification": null,
+ "verification": {
+  "hit": "❌",
+  "note": "批量回填：历史1次对账 ✅0/⚠️0/❌1"
+ },
  "view_gene": {
   "total_lit": 5,
   "total_partial": 2,
@@ -480,8 +483,8 @@
    "a_macd": 1,
    "q_bias": -1,
    "pred": "中性偏强",
-   "actual": "--",
-   "hit": "待回填",
+   "actual": "-2.96%(偏弱)",
+   "hit": "❌",
    "cell": "1_2"
   }
  ],
