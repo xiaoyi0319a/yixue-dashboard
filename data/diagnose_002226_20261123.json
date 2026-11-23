@@ -1,214 +1,598 @@
 {
-  "stock": "002226 江南化工",
-  "date": "20261123",
-  "generated": "个股诊断V1.3-patch10·复诊(距上次1天·模块C补齐+模式8修正)",
-  "version": "立体矩阵V0.1 · 诊断V1.3-patch10 · 看板V2",
-
-  "diagnose_meta": {
-    "snapshot_time": "20261123",
-    "snapshot_price": 5.11,
-    "snapshot_pct": 0.39,
-    "close": 5.11,
-    "change_pct": 0.39,
-    "market_cap": "134亿",
-    "pe_ttm": 31.7,
-    "pb": 1.39,
-    "trigger": "复诊(距上次1天·20261122满弓B组)",
-    "followed_qimen_version": "V4.1-patch44",
-    "baseline_ref": "20261122",
-    "prev_diagnose": {"date": "20261122", "direction": "无模块C(B组未跑)", "note": "z=1横盘多次试盘未突破·观察档"},
-    "note": "24h无新事件沿用11-22结论；模式8修正1/5观察中(实控人拟变更+紫金EB换股期卖压)"
+ "stock": "002226 江南化工",
+ "date": "20261123",
+ "generated": "个股诊断V1.3-patch10·复诊(距上次1天·模块C补齐+模式8修正)",
+ "version": "立体矩阵V0.1 · 诊断V1.3-patch10 · 看板V2",
+ "diagnose_meta": {
+  "snapshot_time": "20261123",
+  "snapshot_price": 5.13,
+  "snapshot_pct": 0.79,
+  "close": 5.13,
+  "change_pct": 0.79,
+  "market_cap": "134亿",
+  "pe_ttm": 31.7,
+  "pb": 1.39,
+  "trigger": "复诊(同日内第2次·22:18亥时点播·patch12首演)",
+  "followed_qimen_version": "V4.1-patch44",
+  "baseline_ref": "20261122",
+  "prev_diagnose": {
+   "date": "20261122",
+   "direction": "无模块C(B组未跑)",
+   "note": "z=1横盘多次试盘未突破·观察档"
   },
-
-  "matrix_grid": {
-    "zones": ["底部区", "横盘整理", "放量突破", "主升", "退潮"],
-    "grades": ["偏多", "偏强", "中性偏强", "无方向", "中性偏弱", "偏弱", "偏空"],
-    "current": {"z": 1, "g": 4, "label": "横盘整理(4.78-5.52·下沿悬停) × 中性偏弱"},
-    "cells": {},
-    "note": "涨停脉冲退潮后平台下沿第2日企稳，MA5/20/60三线压顶，等外力事件"
+  "note": "夜诊：收盘5.13/+0.79%无新事件沿用；丁亥时盘四问断局首演：时干落乾六杜门芮禽=所问之股堵塞带病沉滞，马星亥同宫想动被堵，启动时机绑死政策落地"
+ },
+ "matrix_grid": {
+  "zones": [
+   "底部区",
+   "横盘整理",
+   "放量突破",
+   "主升",
+   "退潮"
+  ],
+  "grades": [
+   "偏多",
+   "偏强",
+   "中性偏强",
+   "无方向",
+   "中性偏弱",
+   "偏弱",
+   "偏空"
+  ],
+  "current": {
+   "z": 1,
+   "g": 4,
+   "label": "横盘整理(4.78-5.52·下沿悬停) × 中性偏弱"
   },
-
-  "matrix_L0": {
-    "v0": {"value": 0, "grade": "中性偏弱", "detail": "大盘死叉(偏空)×平台下沿企稳(平)=0"},
-    "a_macd": {"value": 0, "detail": "平量+0.39%无柱体变化"},
-    "q_bias": -1,
-    "q_detail": "时干乙巽四=死门(政策未落地)+螣蛇(预期缠绕)+天英(脉冲余晖)",
-    "cell": {"key": "1_4 横盘下沿×中性偏弱"}
+  "cells": {},
+  "note": "涨停脉冲退潮后平台下沿第2日企稳，MA5/20/60三线压顶，等外力事件"
+ },
+ "matrix_L0": {
+  "v0": {
+   "value": 0,
+   "grade": "中性偏弱",
+   "detail": "大盘死叉(偏空)×平台下沿企稳(平)=0"
   },
-
-  "matrix_L1": {
-    "prototype": {
-      "match": "沿用11-22：B平台突破型候选·多次试盘未突破·z1下沿悬停",
-      "score_detail": "距低18.4%/量比回落/三线压制/平台下沿企稳",
-      "full_detail": "4.78-5.52平台一月；11-17涨停5.45未站稳；今日5.11在MA5=5.26/MA20=5.15/MA60=5.14下方"
-    },
-    "gene": {
-      "pattern": "模式7周期反转(55-60%左侧博弈·沿用)+模式4困境消息(50%·沿用)+模式8观察中(1/5·新增)",
-      "match_detail": "🆕模式8从0→1/5：实控人拟变更在案(2026-05-19公告·兵器装备分立重组推进)+紫金矿业持股20.17%(第二大股东)且紫金投资上海质押1.8亿股+可交换债2026-03-12进换股期(渐进卖压)",
-      "full_detail": "78号文(矿安2026-78号)已发布但细则落地节奏=2027-05/2028-05两个deadline，民爆调价函/雅下订单/Q4毛利率三个验证点全部在前方；奥信化工注入承诺延期至2030-12"
-    },
-    "report_update": {"type": "refresh", "trigger": "模式8变量补录(紫金EB+实控人变更)+模块C首跑", "prev_date": "20261122", "changed_fields": ["gene(模式8新增)", "fusion(首跑)"]},
-    "report": {
-      "date": "20261122",
-      "standing": "左侧博弈骨架成立(行业底部+政策供给收缩+需求预期+机构北向背书)，等可验证信号清单不变：78号文细则/调价函/Q4毛利率修复/雅下订单；🆕新增监视项：紫金EB换股进度+央企重组公告",
-      "plain_qa": {
-        "what": "民爆龙头(炸药雷管+爆破工程一体化，央企兵器工业背景)+新能源发电副业；国内产能最大品种最全",
-        "expensive": "PE(TTM)31.6/PB1.39——利润底PE虚高，PB接近净资产有底",
-        "story": "真故事=78号文非煤矿山施工队伍规范化→中小出清→'双一级'资质(四家单位)集中度提升+雅下水电民爆需求",
-        "worst": "最坏=政策落地不及预期+调价传导持续不畅+Q4毛利率不修复→平台破4.78看4.3"
-      },
-      "valuation_split": [
-        {"part": "民爆主业(常态化)", "value": "120-140亿", "basis": "2027E EPS 0.32×18x≈国泰海通目标5.76元"}
-      ],
-      "scenarios": [
-        {"name": "乐观", "prob": "30%", "range": "5.52-6.26元", "trigger": "78号文细则+调价函落地", "most_likely": false},
-        {"name": "基准", "prob": "50%", "range": "4.78-5.52元", "trigger": "政策真空期平台延续", "most_likely": true},
-        {"name": "悲观", "prob": "20%", "range": "4.3-4.78元", "trigger": "Q4毛利率不修复+重组无进展"}
-      ],
-      "current_price_note": "现价5.11=平台中下部，MA60=5.14第一压力，紫金EB换股价区5.3-5.5为渐进天花板",
-      "weight_ranking": [
-        {"change": "78号文细则+民爆调价函", "level": "底", "contribution": "左侧博弈→右侧确认的唯一路径"},
-        {"change": "紫金EB换股/央企重组", "level": "顶", "contribution": "上方渐进卖压+治理变量"}
-      ],
-      "catalysts": [
-        {"text": "78号文实施细则+矿山托管订单", "status": "⏳", "note": "2027-05/2028-05两个deadline"},
-        {"text": "民爆产品调价函", "status": "⏳", "note": "Q4毛利率修复前提"},
-        {"text": "雅下水电民爆订单公告", "status": "⏳", "note": "题材收入化"},
-        {"text": "实控人变更/奥信注入进展", "status": "⏳观察", "note": "模式8激活条件"}
-      ],
-      "falsify": {"condition": "Q4毛利率不修复 或 破4.78", "status": "未触发"},
-      "valid_nodes": [
-        {"time": "2027-01", "event": "年报预告+Q4毛利率", "verify": "调价传导是否兑现", "miss_action": "证伪→降级"},
-        {"time": "滚动", "event": "5.52平台突破", "verify": "放量+次日确认", "miss_action": "三不过继续磨"},
-        {"time": "月度", "event": "紫金EB换股进展公告", "verify": "换股数量/价格", "miss_action": "卖压压制突破"}
-      ]
+  "a_macd": {
+   "value": 0,
+   "detail": "平量+0.39%无柱体变化"
+  },
+  "q_bias": -1,
+  "q_detail": "时干乙巽四=死门(政策未落地)+螣蛇(预期缠绕)+天英(脉冲余晖)",
+  "cell": {
+   "key": "1_4 横盘下沿×中性偏弱"
+  }
+ },
+ "matrix_L1": {
+  "prototype": {
+   "match": "沿用11-22：B平台突破型候选·多次试盘未突破·z1下沿悬停",
+   "score_detail": "距低18.4%/量比回落/三线压制/平台下沿企稳",
+   "full_detail": "4.78-5.52平台一月；11-17涨停5.45未站稳；今日5.11在MA5=5.26/MA20=5.15/MA60=5.14下方"
+  },
+  "gene": {
+   "pattern": "模式7周期反转(55-60%左侧博弈·沿用)+模式4困境消息(50%·沿用)+模式8观察中(1/5·新增)",
+   "match_detail": "🆕模式8从0→1/5：实控人拟变更在案(2026-05-19公告·兵器装备分立重组推进)+紫金矿业持股20.17%(第二大股东)且紫金投资上海质押1.8亿股+可交换债2026-03-12进换股期(渐进卖压)",
+   "full_detail": "78号文(矿安2026-78号)已发布但细则落地节奏=2027-05/2028-05两个deadline，民爆调价函/雅下订单/Q4毛利率三个验证点全部在前方；奥信化工注入承诺延期至2030-12"
+  },
+  "report_update": {
+   "type": "refresh",
+   "trigger": "模式8变量补录(紫金EB+实控人变更)+模块C首跑",
+   "prev_date": "20261122",
+   "changed_fields": [
+    "gene(模式8新增)",
+    "fusion(首跑)"
+   ]
+  },
+  "report": {
+   "date": "20261122",
+   "standing": "左侧博弈骨架成立(行业底部+政策供给收缩+需求预期+机构北向背书)，等可验证信号清单不变：78号文细则/调价函/Q4毛利率修复/雅下订单；🆕新增监视项：紫金EB换股进度+央企重组公告",
+   "plain_qa": {
+    "what": "民爆龙头(炸药雷管+爆破工程一体化，央企兵器工业背景)+新能源发电副业；国内产能最大品种最全",
+    "expensive": "PE(TTM)31.6/PB1.39——利润底PE虚高，PB接近净资产有底",
+    "story": "真故事=78号文非煤矿山施工队伍规范化→中小出清→'双一级'资质(四家单位)集中度提升+雅下水电民爆需求",
+    "worst": "最坏=政策落地不及预期+调价传导持续不畅+Q4毛利率不修复→平台破4.78看4.3"
+   },
+   "valuation_split": [
+    {
+     "part": "民爆主业(常态化)",
+     "value": "120-140亿",
+     "basis": "2027E EPS 0.32×18x≈国泰海通目标5.76元"
     }
-  },
-
-  "matrix_L2": {
-    "active_risks": ["Q3单季-53.85%降幅扩大", "78号文属预期博弈未落地", "紫金EB换股渐进卖压(上方天花板)", "Q4毛利率修复未确认", "民爆调价传导不畅"],
-    "vetoes": [],
-    "extreme_day": false
-  },
-
-  "fusion": {
-    "direction": "中性偏弱",
-    "confidence": "中(平台悬停+政策未落地)",
-    "form": "脉冲退潮后平台下沿横盘，等外力",
-    "verdict": "v₀=0+a=0+q=-1=-1→中性偏弱（模块C首跑）"
-  },
-
-  "pricing": {
-    "target_price": {
-      "sources": [
-        {"source": "基本面估值", "range": "5.76元", "basis": "国泰海通2027年EPS0.32×18x"},
-        {"source": "启动特征量度", "range": "6.26元", "basis": "B平台4.78-5.52×1:1量度（维持打折）"},
-        {"source": "翻倍基因先例", "range": "参考系", "basis": "模式7左侧案例1-4个月/消息证伪回落快（金螳螂警示）"}
-      ],
-      "overlap_zone": "5.5-6.0（突破5.52后生效，紫金EB区压制）",
-      "divergence_note": "量度目标维持但中性偏弱力量下打折兑现",
-      "confidence": "中低（事件驱动型）"
+   ],
+   "scenarios": [
+    {
+     "name": "乐观",
+     "prob": "30%",
+     "range": "5.52-6.26元",
+     "trigger": "78号文细则+调价函落地",
+     "most_likely": false
     },
-    "timing": {
-      "timing_window": "外力事件驱动型：78号文细则/调价函/重组公告任一落地即变盘；无内部时间窗",
-      "strength_check": "中性偏弱→6.26打折",
-      "tail_risk": "红星发展教训：工程需求包装成概念，退潮快；紫金EB加速换股=上方重压力"
+    {
+     "name": "基准",
+     "prob": "50%",
+     "range": "4.78-5.52元",
+     "trigger": "政策真空期平台延续",
+     "most_likely": true
+    },
+    {
+     "name": "悲观",
+     "prob": "20%",
+     "range": "4.3-4.78元",
+     "trigger": "Q4毛利率不修复+重组无进展"
     }
-  },
-
-  "verdict": {
-    "summary": "24h无实质变化，沿用11-22左侧博弈结论：78号文预期驱动+业绩反向（Q3-53.85%）+平台多次试盘未突破。新增两项监视变量：紫金矿业EB换股期渐进卖压（5.3-5.5天花板）+实控人拟变更在案（模式8从0升1/5观察中）。今日问事局首跑中性偏弱：政策死门未落地+预期缠绕，平台悬停等外力——78号文细则/调价函/重组公告任一落地才变盘。坐标z=1下沿×中性偏弱，观察档不变。",
-    "dims_oneliner": {
-      "gene": "模式7左侧博弈55-60%沿用+模式8新增1/5观察（紫金EB+实控人变更）",
-      "state": "z=1平台下沿悬停，三线压顶等外力",
-      "report": "验证信号清单不变：78号文细则/调价函/Q4毛利率/雅下订单+新增紫金EB监视",
-      "forecast": "中性偏弱（模块C首跑）：政策未落地=死门，变盘等公告"
+   ],
+   "current_price_note": "现价5.11=平台中下部，MA60=5.14第一压力，紫金EB换股价区5.3-5.5为渐进天花板",
+   "weight_ranking": [
+    {
+     "change": "78号文细则+民爆调价函",
+     "level": "底",
+     "contribution": "左侧博弈→右侧确认的唯一路径"
     },
-    "key_risk": "紫金EB加速换股=上方渐进卖压压死突破空间；政策真空期磨人",
-    "tracking": "①78号文细则②调价函③紫金EB换股月报④央企重组公告"
+    {
+     "change": "紫金EB换股/央企重组",
+     "level": "顶",
+     "contribution": "上方渐进卖压+治理变量"
+    }
+   ],
+   "catalysts": [
+    {
+     "text": "78号文实施细则+矿山托管订单",
+     "status": "⏳",
+     "note": "2027-05/2028-05两个deadline"
+    },
+    {
+     "text": "民爆产品调价函",
+     "status": "⏳",
+     "note": "Q4毛利率修复前提"
+    },
+    {
+     "text": "雅下水电民爆订单公告",
+     "status": "⏳",
+     "note": "题材收入化"
+    },
+    {
+     "text": "实控人变更/奥信注入进展",
+     "status": "⏳观察",
+     "note": "模式8激活条件"
+    }
+   ],
+   "falsify": {
+    "condition": "Q4毛利率不修复 或 破4.78",
+    "status": "未触发"
+   },
+   "valid_nodes": [
+    {
+     "time": "2027-01",
+     "event": "年报预告+Q4毛利率",
+     "verify": "调价传导是否兑现",
+     "miss_action": "证伪→降级"
+    },
+    {
+     "time": "滚动",
+     "event": "5.52平台突破",
+     "verify": "放量+次日确认",
+     "miss_action": "三不过继续磨"
+    },
+    {
+     "time": "月度",
+     "event": "紫金EB换股进展公告",
+     "verify": "换股数量/价格",
+     "miss_action": "卖压压制突破"
+    }
+   ]
   },
-
-  "verification": {"hit": "--", "note": "上次为B组A+B诊断无模块C预判；24h无对账意义"},
-
-  "view_gene": {
-    "total_lit": 9,
-    "total_partial": 3,
-    "total_vars": 16,
-    "top_pattern": "模式7周期反转型",
-    "note": "模式7主55-60%左侧+模式4次50%沿用+模式8新增1/5观察（紫金EB/实控人变更）",
-    "patterns": [
-      {"id": "模式7", "name": "周期反转型", "top": true, "lit_vars": 4, "total_vars": 5, "vars": [
-        {"status": "lit", "name": "行业周期底部", "evidence": "民爆行业利润-24.65%底部区"},
-        {"status": "lit", "name": "供给端收缩", "evidence": "78号文资质门槛→中小出清"},
-        {"status": "lit", "name": "需求端回暖", "evidence": "雅下水电+新疆保供(预期级)"},
-        {"status": "lit", "name": "成本/资质优势", "evidence": "四家双一级资质"},
-        {"status": "none", "name": "价格拐点确认", "evidence": "调价传导不畅未确认"}
-      ]},
-      {"id": "模式4", "name": "困境消息型", "top": false, "lit_vars": 3, "total_vars": 6, "vars": [
-        {"status": "lit", "name": "公司困境", "evidence": "归母-47.3%利润端困境"},
-        {"status": "part", "name": "估值极低", "evidence": "PB1.39偏低/PE31.6不低"},
-        {"status": "lit", "name": "突发消息", "evidence": "78号文预期(11-17涨停催化)"},
-        {"status": "lit", "name": "情绪饥渴", "evidence": "板块冷清后脉冲"},
-        {"status": "lit", "name": "股价极低", "evidence": "5.11元绝对低价"},
-        {"status": "part", "name": "消息真实性", "evidence": "政策方向真实但细则未落地"}
-      ]},
-      {"id": "模式8", "name": "控股股东变更型", "top": false, "lit_vars": 1, "total_vars": 5, "vars": [
-        {"status": "part", "name": "控制权变更", "evidence": "实控人拟变更公告在案(2026-05-19·兵器重组推进)未落地"},
-        {"status": "none", "name": "新主注入资产", "evidence": "奥信化工承诺延期至2030-12"},
-        {"status": "none", "name": "新主业方向", "evidence": "无"},
-        {"status": "none", "name": "原主业剥离", "evidence": "无"},
-        {"status": "none", "name": "市场情绪", "evidence": "无"}
-      ]}
+  "qimen_reading": {
+   "pan_time": "2026-11-23 22:00 丁亥时盘",
+   "gene": {
+    "palace": "时干丁·乾六·杜门芮禽九地+地盘庚",
+    "reading": "模式7之路杜门堵塞：78号文细则未落地前故事无人接力；开门巽四带太阴=政策之门在暗处运作非公开亮相——左侧博弈定位不变，堵而有望",
+    "conflict": "✓与模块A左侧博弈沿用一致"
+   },
+   "launch": {
+    "palace": "值使生门·坤二值符·马星亥落乾宫逢杜",
+    "reading": "启动之机（生门）握在值符（权威/政策）手中，马星逢杜=有动念动不了——启动时机绑死政策落地日，政策不来底盘不动",
+    "conflict": "✓与模块B等外力变盘一致"
+   },
+   "report": {
+    "palace": "日干辛·坤二值符生门 vs 时干丁·乾六杜门芮禽",
+    "reading": "日干宫生时干宫（坤土生乾金）=养着它但耗自己；芮=报告假设带病未愈（Q3-53.85%待Q4修复）——假设可守不加仓",
+    "conflict": "✓与模块D验证信号清单一致"
+   },
+   "direction": {
+    "palace": "时干杜门+地盘庚",
+    "reading": "明日力量胶着堵塞：杜门+庚=横盘中枢无方向，外力公告前5.0-5.3窄幅",
+    "conflict": "✓与fusion中性偏弱一致"
+   }
+  }
+ },
+ "matrix_L2": {
+  "active_risks": [
+   "Q3单季-53.85%降幅扩大",
+   "78号文属预期博弈未落地",
+   "紫金EB换股渐进卖压(上方天花板)",
+   "Q4毛利率修复未确认",
+   "民爆调价传导不畅"
+  ],
+  "vetoes": [],
+  "extreme_day": false
+ },
+ "fusion": {
+  "direction": "中性偏弱",
+  "confidence": "中(平台悬停+政策未落地)",
+  "form": "脉冲退潮后平台下沿横盘，等外力",
+  "verdict": "v₀=0+a=0+q=-1=-1→中性偏弱（模块C首跑）"
+ },
+ "pricing": {
+  "target_price": {
+   "sources": [
+    {
+     "source": "基本面估值",
+     "range": "5.76元",
+     "basis": "国泰海通2027年EPS0.32×18x"
+    },
+    {
+     "source": "启动特征量度",
+     "range": "6.26元",
+     "basis": "B平台4.78-5.52×1:1量度（维持打折）"
+    },
+    {
+     "source": "翻倍基因先例",
+     "range": "参考系",
+     "basis": "模式7左侧案例1-4个月/消息证伪回落快（金螳螂警示）"
+    }
+   ],
+   "overlap_zone": "5.5-6.0（突破5.52后生效，紫金EB区压制）",
+   "divergence_note": "量度目标维持但中性偏弱力量下打折兑现",
+   "confidence": "中低（事件驱动型）"
+  },
+  "timing": {
+   "timing_window": "外力事件驱动型：78号文细则/调价函/重组公告任一落地即变盘；无内部时间窗",
+   "strength_check": "中性偏弱→6.26打折",
+   "tail_risk": "红星发展教训：工程需求包装成概念，退潮快；紫金EB加速换股=上方重压力"
+  }
+ },
+ "verdict": {
+  "summary": "24h无实质变化，沿用11-22左侧博弈结论：78号文预期驱动+业绩反向（Q3-53.85%）+平台多次试盘未突破。新增两项监视变量：紫金矿业EB换股期渐进卖压（5.3-5.5天花板）+实控人拟变更在案（模式8从0升1/5观察中）。今日问事局首跑中性偏弱：政策死门未落地+预期缠绕，平台悬停等外力——78号文细则/调价函/重组公告任一落地才变盘。坐标z=1下沿×中性偏弱，观察档不变。",
+  "dims_oneliner": {
+   "gene": "模式7左侧博弈55-60%沿用+模式8新增1/5观察（紫金EB+实控人变更）",
+   "state": "z=1平台下沿悬停，三线压顶等外力",
+   "report": "验证信号清单不变：78号文细则/调价函/Q4毛利率/雅下订单+新增紫金EB监视",
+   "forecast": "中性偏弱（模块C首跑）：政策未落地=死门，变盘等公告"
+  },
+  "key_risk": "紫金EB加速换股=上方渐进卖压压死突破空间；政策真空期磨人",
+  "tracking": "①78号文细则②调价函③紫金EB换股月报④央企重组公告"
+ },
+ "verification": {
+  "hit": "--",
+  "note": "上次为B组A+B诊断无模块C预判；24h无对账意义"
+ },
+ "view_gene": {
+  "total_lit": 9,
+  "total_partial": 3,
+  "total_vars": 16,
+  "top_pattern": "模式7周期反转型",
+  "note": "模式7主55-60%左侧+模式4次50%沿用+模式8新增1/5观察（紫金EB/实控人变更）",
+  "patterns": [
+   {
+    "id": "模式7",
+    "name": "周期反转型",
+    "top": true,
+    "lit_vars": 4,
+    "total_vars": 5,
+    "vars": [
+     {
+      "status": "lit",
+      "name": "行业周期底部",
+      "evidence": "民爆行业利润-24.65%底部区"
+     },
+     {
+      "status": "lit",
+      "name": "供给端收缩",
+      "evidence": "78号文资质门槛→中小出清"
+     },
+     {
+      "status": "lit",
+      "name": "需求端回暖",
+      "evidence": "雅下水电+新疆保供(预期级)"
+     },
+     {
+      "status": "lit",
+      "name": "成本/资质优势",
+      "evidence": "四家双一级资质"
+     },
+     {
+      "status": "none",
+      "name": "价格拐点确认",
+      "evidence": "调价传导不畅未确认"
+     }
     ]
-  },
-
-  "view_state": {
-    "current_idx": 1,
-    "zones": [
-      {"name": "底部区", "range": "低位区（4.78下方）"},
-      {"name": "横盘整理区", "range": "4.78-5.52平台（当前·下沿悬停）"},
-      {"name": "放量突破区", "range": "5.52+次日确认"},
-      {"name": "主升区", "range": "6.26量度路径"},
-      {"name": "退潮区", "range": "破4.78看4.3"}
-    ],
-    "judgment": [
-      {"dim": "价量维", "status": "part", "value": "下沿企稳平量", "evidence": "5.11/0.39%/缩量"},
-      {"dim": "资金维", "status": "part", "value": "机构北向背书+紫金EB卖压", "evidence": "11-17龙虎榜净买8813万 vs EB换股期"},
-      {"dim": "基本面维", "status": "none", "value": "Q3单季-53.85%反向", "evidence": "调价传导不畅+新疆开工不足"},
-      {"dim": "题材维", "status": "part", "value": "78号文预期(未落地)", "evidence": "雅下概念收入未量化"},
-      {"dim": "环境维", "status": "none", "value": "大盘死叉段", "evidence": "同前"},
-      {"dim": "筹码维", "status": "part", "value": "三线压顶+EB天花板", "evidence": "MA60=5.14/EB区5.3-5.5"},
-      {"dim": "事件维", "status": "part", "value": "外力事件驱动型", "evidence": "等78号文细则/调价函/重组"}
-    ],
-    "transitions": [
-      {"from": "横盘下沿", "to": "放量突破", "conditions": [{"text": "政策/订单外力+放量站5.52", "met": false}]},
-      {"from": "横盘下沿", "to": "退潮", "conditions": [{"text": "破4.78", "met": false}]}
-    ],
-    "note": "悬停等外力，两个方向条件均未触发"
-  },
-
-  "daily_chain": [
-    {"name": "① MACD底座", "tag": "v₀", "output": "0", "formula": "死叉×平台企稳=对冲", "note": null},
-    {"name": "② 柱体油门", "tag": "a_macd", "output": "0", "note": "平量无变化"},
-    {"name": "③ 奇门修正", "tag": "q_bias", "output": "-1", "formula": "死门(政策未落地)+螣蛇", "note": "模块C首跑"},
-    {"name": "④ 合成定级", "tag": "fusion", "output": "中性偏弱", "formula": "0+0-1=-1", "note": null},
-    {"name": "⑤ 三源目标价", "tag": "pricing", "output": "5.76-6.26(打折)", "note": "紫金EB区压制"},
-    {"name": "⑥ 对账回填", "tag": "verification", "output": "--", "note": "24h无对账意义"}
-  ],
-
-  "todo_list": ["78号文实施细则落地跟踪", "民爆调价函", "Q4毛利率修复(年报预告)", "雅下民爆订单公告", "紫金EB换股进度月报", "央企重组/奥信注入进展"],
-
-  "history": [
-    {"date": "20261122", "v0": 0, "a_macd": 0, "q_bias": 0, "pred": "无(B组未跑C)", "actual": "--", "hit": "--", "cell": "1_3"},
-    {"date": "20261123", "v0": 0, "a_macd": 0, "q_bias": -1, "pred": "中性偏弱", "actual": "待回填", "hit": "待回填", "cell": "1_4"}
-  ],
-
-  "prev_diagnose": {"prev_z": 1, "prev_g": 3},
-
-  "timeline": [
-    {"date": "20261117", "type": "policy", "event": "涨停+10.1%（78号文预期+龙虎榜机构北向净买8813万）", "dims": {"gene": "模式7左侧激活", "state": "试盘平台上沿", "forecast": null, "report": null}},
-    {"date": "20261120", "type": "diagnose", "event": "脉冲退潮-5.04%回落至5.09", "dims": {"gene": null, "state": "平台下沿", "forecast": null, "report": null}},
-    {"date": "20261122", "type": "diagnose", "event": "满弓B组首诊：模式7左侧55-60%+模式4·z1多次试盘未突破→观察档", "dims": {"gene": "模式7+模式4", "state": "z=1", "forecast": null, "report": "A+B模块"}},
-    {"date": "20261123", "type": "diagnose", "event": "复诊：24h无变化沿用；模式8升1/5(紫金EB+实控人变更)；模块C首跑中性偏弱", "dims": {"gene": "沿用+模式8观察", "state": "z=1下沿悬停", "forecast": "中性偏弱", "report": "等外力"}}
+   },
+   {
+    "id": "模式4",
+    "name": "困境消息型",
+    "top": false,
+    "lit_vars": 3,
+    "total_vars": 6,
+    "vars": [
+     {
+      "status": "lit",
+      "name": "公司困境",
+      "evidence": "归母-47.3%利润端困境"
+     },
+     {
+      "status": "part",
+      "name": "估值极低",
+      "evidence": "PB1.39偏低/PE31.6不低"
+     },
+     {
+      "status": "lit",
+      "name": "突发消息",
+      "evidence": "78号文预期(11-17涨停催化)"
+     },
+     {
+      "status": "lit",
+      "name": "情绪饥渴",
+      "evidence": "板块冷清后脉冲"
+     },
+     {
+      "status": "lit",
+      "name": "股价极低",
+      "evidence": "5.11元绝对低价"
+     },
+     {
+      "status": "part",
+      "name": "消息真实性",
+      "evidence": "政策方向真实但细则未落地"
+     }
+    ]
+   },
+   {
+    "id": "模式8",
+    "name": "控股股东变更型",
+    "top": false,
+    "lit_vars": 1,
+    "total_vars": 5,
+    "vars": [
+     {
+      "status": "part",
+      "name": "控制权变更",
+      "evidence": "实控人拟变更公告在案(2026-05-19·兵器重组推进)未落地"
+     },
+     {
+      "status": "none",
+      "name": "新主注入资产",
+      "evidence": "奥信化工承诺延期至2030-12"
+     },
+     {
+      "status": "none",
+      "name": "新主业方向",
+      "evidence": "无"
+     },
+     {
+      "status": "none",
+      "name": "原主业剥离",
+      "evidence": "无"
+     },
+     {
+      "status": "none",
+      "name": "市场情绪",
+      "evidence": "无"
+     }
+    ]
+   }
   ]
+ },
+ "view_state": {
+  "current_idx": 1,
+  "zones": [
+   {
+    "name": "底部区",
+    "range": "低位区（4.78下方）"
+   },
+   {
+    "name": "横盘整理区",
+    "range": "4.78-5.52平台（当前·下沿悬停）"
+   },
+   {
+    "name": "放量突破区",
+    "range": "5.52+次日确认"
+   },
+   {
+    "name": "主升区",
+    "range": "6.26量度路径"
+   },
+   {
+    "name": "退潮区",
+    "range": "破4.78看4.3"
+   }
+  ],
+  "judgment": [
+   {
+    "dim": "价量维",
+    "status": "part",
+    "value": "下沿企稳平量",
+    "evidence": "5.11/0.39%/缩量"
+   },
+   {
+    "dim": "资金维",
+    "status": "part",
+    "value": "机构北向背书+紫金EB卖压",
+    "evidence": "11-17龙虎榜净买8813万 vs EB换股期"
+   },
+   {
+    "dim": "基本面维",
+    "status": "none",
+    "value": "Q3单季-53.85%反向",
+    "evidence": "调价传导不畅+新疆开工不足"
+   },
+   {
+    "dim": "题材维",
+    "status": "part",
+    "value": "78号文预期(未落地)",
+    "evidence": "雅下概念收入未量化"
+   },
+   {
+    "dim": "环境维",
+    "status": "none",
+    "value": "大盘死叉段",
+    "evidence": "同前"
+   },
+   {
+    "dim": "筹码维",
+    "status": "part",
+    "value": "三线压顶+EB天花板",
+    "evidence": "MA60=5.14/EB区5.3-5.5"
+   },
+   {
+    "dim": "事件维",
+    "status": "part",
+    "value": "外力事件驱动型",
+    "evidence": "等78号文细则/调价函/重组"
+   }
+  ],
+  "transitions": [
+   {
+    "from": "横盘下沿",
+    "to": "放量突破",
+    "conditions": [
+     {
+      "text": "政策/订单外力+放量站5.52",
+      "met": false
+     }
+    ]
+   },
+   {
+    "from": "横盘下沿",
+    "to": "退潮",
+    "conditions": [
+     {
+      "text": "破4.78",
+      "met": false
+     }
+    ]
+   }
+  ],
+  "note": "悬停等外力，两个方向条件均未触发"
+ },
+ "daily_chain": [
+  {
+   "name": "① MACD底座",
+   "tag": "v₀",
+   "output": "0",
+   "formula": "死叉×平台企稳=对冲",
+   "note": null
+  },
+  {
+   "name": "② 柱体油门",
+   "tag": "a_macd",
+   "output": "0",
+   "note": "平量无变化"
+  },
+  {
+   "name": "③ 奇门修正",
+   "tag": "q_bias",
+   "output": "-1",
+   "formula": "死门(政策未落地)+螣蛇",
+   "note": "模块C首跑"
+  },
+  {
+   "name": "④ 合成定级",
+   "tag": "fusion",
+   "output": "中性偏弱",
+   "formula": "0+0-1=-1",
+   "note": null
+  },
+  {
+   "name": "⑤ 三源目标价",
+   "tag": "pricing",
+   "output": "5.76-6.26(打折)",
+   "note": "紫金EB区压制"
+  },
+  {
+   "name": "⑥ 对账回填",
+   "tag": "verification",
+   "output": "--",
+   "note": "24h无对账意义"
+  }
+ ],
+ "todo_list": [
+  "78号文实施细则落地跟踪",
+  "民爆调价函",
+  "Q4毛利率修复(年报预告)",
+  "雅下民爆订单公告",
+  "紫金EB换股进度月报",
+  "央企重组/奥信注入进展"
+ ],
+ "history": [
+  {
+   "date": "20261122",
+   "v0": 0,
+   "a_macd": 0,
+   "q_bias": 0,
+   "pred": "无(B组未跑C)",
+   "actual": "--",
+   "hit": "--",
+   "cell": "1_3"
+  },
+  {
+   "date": "20261123",
+   "v0": 0,
+   "a_macd": 0,
+   "q_bias": -1,
+   "pred": "中性偏弱",
+   "actual": "待回填",
+   "hit": "待回填",
+   "cell": "1_4"
+  }
+ ],
+ "prev_diagnose": {
+  "prev_z": 1,
+  "prev_g": 3
+ },
+ "timeline": [
+  {
+   "date": "20261117",
+   "type": "policy",
+   "event": "涨停+10.1%（78号文预期+龙虎榜机构北向净买8813万）",
+   "dims": {
+    "gene": "模式7左侧激活",
+    "state": "试盘平台上沿",
+    "forecast": null,
+    "report": null
+   }
+  },
+  {
+   "date": "20261120",
+   "type": "diagnose",
+   "event": "脉冲退潮-5.04%回落至5.09",
+   "dims": {
+    "gene": null,
+    "state": "平台下沿",
+    "forecast": null,
+    "report": null
+   }
+  },
+  {
+   "date": "20261122",
+   "type": "diagnose",
+   "event": "满弓B组首诊：模式7左侧55-60%+模式4·z1多次试盘未突破→观察档",
+   "dims": {
+    "gene": "模式7+模式4",
+    "state": "z=1",
+    "forecast": null,
+    "report": "A+B模块"
+   }
+  },
+  {
+   "date": "20261123",
+   "type": "diagnose",
+   "event": "复诊：24h无变化沿用；模式8升1/5(紫金EB+实控人变更)；模块C首跑中性偏弱",
+   "dims": {
+    "gene": "沿用+模式8观察",
+    "state": "z=1下沿悬停",
+    "forecast": "中性偏弱",
+    "report": "等外力"
+   }
+  }
+ ]
 }
