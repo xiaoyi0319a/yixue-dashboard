@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-24",
+  "compared": {
+    "A": "data/pipeline_shadow_20261124.json",
+    "B": "data/pipeline_20261124.json"
+  },
+  "summary": {
+    "total_fields": 432,
+    "consistent": 429,
+    "only_in_A": 1,
+    "only_in_B": 2,
+    "value_diff": 0
+  },
+  "only_in_A": {
+    "fusion.v0_grade": 2
+  },
+  "only_in_B": {
+    "date_display": "11-24 周二",
+    "matrix_missing_note": "无缺格；S系观察格1条命中（S4己+庚刑格@乾六·非用神宫，判语层参考）；两吉格落空亡不计（G88青龙华盖@震三空+刑/G66飞鸟跌穴@艮八空）"
+  },
+  "value_diff": {},
+  "assessment": "429/432字段语义全等；3处差异均为展示层/旧版融合字段，非数据冲突（A=影子组装版含旧fusion.v0_grade；B=LLM直写版含展示字段date_display与matrix_missing_note）"
+}
