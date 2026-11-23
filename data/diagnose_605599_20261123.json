@@ -1,0 +1,206 @@
+{
+  "stock": "605599 菜百股份",
+  "date": "20261123",
+  "generated": "个股诊断V1.3-patch10·首诊四模块（问事局13:00乙未时盘·现场版+V4.7补跑排期）",
+  "version": "立体矩阵V0.1 · 诊断V1.3-patch10 · 看板V2",
+
+  "diagnose_meta": {
+    "snapshot_time": "20261123",
+    "snapshot_price": 14.93,
+    "snapshot_pct": 6.18,
+    "close": 14.93,
+    "change_pct": 6.18,
+    "market_cap": "116.2亿",
+    "pe_ttm": 11.62,
+    "pb": 2.57,
+    "trigger": "首诊(无历史档案)",
+    "followed_qimen_version": "V4.1-patch44",
+    "baseline_ref": null,
+    "prev_diagnose": null,
+    "note": "高股息(5.2%)+金价双向暴露的脉冲平台票;Q3归母-59%但扣非-1.9%=主业未伤,利润塌方源于金价波动(减值/套保);今日+6.18%放量2.5倍=金价暴跌后买跌抢购逻辑;二股东明牌16.2%持股质押53.6%=暗雷"
+  },
+
+  "matrix_grid": {
+    "zones": ["底部区", "横盘整理", "放量突破", "主升", "退潮"],
+    "grades": ["偏多", "偏强", "中性偏强", "无方向", "中性偏弱", "偏弱", "偏空"],
+    "current": {"z": 1, "g": 3, "label": "横盘整理(13.81-15.14平台) × 无方向"},
+    "cells": {},
+    "note": "今日倍量大阳一阳穿三线收复平台中轴，测试上沿15.14；方向取决于金价不取决于自身"
+  },
+
+  "matrix_L0": {
+    "v0": {"value": 0, "grade": "无方向", "detail": "大盘死叉(偏空)×板块脉冲(偏多)=对冲"},
+    "a_macd": {"value": 1, "detail": "倍量大阳+6.18%穿三线，量能2.5倍"},
+    "q_bias": -1,
+    "q_detail": "时干乙巽四=死门(金价暴跌)+螣蛇(双向缠绕)+天英(脉冲亮)",
+    "cell": {"key": "1_3 平台脉冲×无方向"}
+  },
+
+  "matrix_L1": {
+    "prototype": {
+      "match": "B平台型·今日倍量中轴上穿测试上沿",
+      "score_detail": "量比2.5倍脉冲✓/一阳穿三线✓/股息底✓/金价双向暴露△/质押暗雷✗",
+      "full_detail": "13.81-15.14平台两周；今日14.93站上MA5/20/60全部均线；距上沿15.14仅1.4%；PE11.6+股息5.2%打底"
+    },
+    "gene": {
+      "pattern": "模式4困境(2/6弱)+模式9情绪(1/5弱)复合",
+      "match_detail": "Q3归母-59%困境✅/PE低✅/板块β✅；非低价/非低关注/无突发消息——均不达强匹配",
+      "full_detail": "特殊结构=金价双向暴露+高股息类债底：金价跌→投资金买跌放量(Q3营收+29%验证)但减值+套保亏利润表挨打(Q3归母-59%)；扣非-1.9%=主业实稳；5.2%股息率=下跌段承接盘；明牌实业质押6750万股(占其持股53.6%)=脉冲后深跌的放大器"
+    },
+    "report_update": {"type": "regenerate", "trigger": "首诊4.5c触发·现场版先行，V4.7全量分析排期2026-11-24早间(第5只同批)", "prev_date": null, "changed_fields": []},
+    "report": {
+      "date": "20261123",
+      "standing": "金价高位震荡下扣非稳增+买跌放量假设成立中；利润表被金价绑架是已知缺陷；质押风险监视中（现场版，V4.7明早补跑）",
+      "plain_qa": {
+        "what": "北京黄金珠宝全直营老字号：投资金条走量+黄金饰品赚钱+文化IP；华北82.5%",
+        "expensive": "PE(TTM)11.6/PB2.57；股息率5.2%——类债属性明显",
+        "story": "真故事=金价下跌时的买跌抢购（营收+29%已验证）+股息底；预期差=扣非-1.9% vs 归母-59%的利润质量误读",
+        "worst": "最坏=金价趋势性下跌>15%（存货减值扩大）+明牌质押平仓（脉冲后深跌触发）"
+      },
+      "valuation_split": [
+        {"part": "主业（饰品+文化产品）", "value": "110-125亿", "basis": "PE12-13×扣非9-10亿"},
+        {"part": "股息底", "value": "隐含支撑", "basis": "5.2%股息率对标理财收益"}
+      ],
+      "scenarios": [
+        {"name": "乐观", "prob": "30%", "range": "16.0-16.5元", "trigger": "金价企稳+贺岁旺季+突破15.14"},
+        {"name": "基准", "prob": "50%", "range": "14.0-15.1元", "trigger": "金价震荡+平台磨", "most_likely": true},
+        {"name": "悲观", "prob": "20%", "range": "13.0-13.8元", "trigger": "金价续崩+减值扩大+质押风险"}
+      ],
+      "current_price_note": "现价14.93：上沿15.14仅-1.4%（11-17套牢区），突破→16.5；回落→13.8-15.1平台",
+      "weight_ranking": [
+        {"change": "金价方向", "level": "底", "contribution": "决定营收弹性vs减值压力的双刃剑"},
+        {"change": "明牌质押风险", "level": "顶", "contribution": "脉冲后深跌的放大器，唯一结构性暗雷"}
+      ],
+      "catalysts": [
+        {"text": "金价反弹（减值回转+脉冲逻辑续命）", "status": "⏳外部", "note": "双向变量"},
+        {"text": "年末贺岁金销售", "status": "⏳季节", "note": "12-1月"},
+        {"text": "2026年报分红", "status": "⏳", "note": "股息率维持=承接盘"},
+        {"text": "明牌质押变动", "status": "⏳监视", "note": "解押=暗雷拆除"}
+      ],
+      "falsify": {"condition": "金价趋势跌>15% 或 收盘破13.81", "status": "未触发"},
+      "valid_nodes": [
+        {"time": "滚动", "event": "15.14平台突破", "verify": "放量站稳", "miss_action": "三不过回落平台"},
+        {"time": "月度", "event": "金价走势", "verify": "涨跌决定脉冲逻辑存续", "miss_action": "金价反弹=脉冲结束"},
+        {"time": "季度", "event": "年报减值计提", "verify": "金价均价vs存货成本", "miss_action": "减值扩大→悲观剧本"}
+      ]
+    }
+  },
+
+  "matrix_L2": {
+    "active_risks": ["金价续跌致存货减值扩大", "明牌质押平仓(脉冲后深跌触发)", "利润表被金价波动绑架", "11-17平台套牢盘15.14压力"],
+    "vetoes": [],
+    "extreme_day": false
+  },
+
+  "fusion": {
+    "direction": "无方向",
+    "confidence": "中(脉冲质量六诊第二但虚火属性明确)",
+    "form": "平台中轴倍量上穿，测试上沿15.14",
+    "verdict": "v₀=0+a=+1(倍量)+q=-1(虚火)=0→无方向"
+  },
+
+  "pricing": {
+    "target_price": {
+      "sources": [
+        {"source": "基本面估值", "range": "15.4~16.7元", "basis": "PE12-13×2026E净利9-10亿"},
+        {"source": "启动特征量度", "range": "16.5元(突破前提)", "basis": "平台13.81-15.14×1:1量度（与源1重合）"},
+        {"source": "翻倍基因先例", "range": "参考低", "basis": "弱匹配不量度"}
+      ],
+      "overlap_zone": "15.1~16.5（现价14.93在区间下沿，突破15.14才生效）",
+      "divergence_note": "基本面锚与量度锚重合度高=突破后空间清晰",
+      "confidence": "中"
+    },
+    "timing": {
+      "timing_window": "金价方向选择前无内部时间窗；年末贺岁季12-1月",
+      "strength_check": "无方向→量度打折；5.2%股息=下跌段承接",
+      "tail_risk": "明牌质押平仓线=脉冲后深跌的放大器"
+    }
+  },
+
+  "verdict": {
+    "summary": "六诊中量能最足但虚火属性也最明确的一只。高股息类债底（5.2%）+金价双向暴露：金价跌→买跌抢购放量（Q3营收+29%验证）但利润表被减值套保绑架（归母-59%）；扣非-1.9%说明主业实稳。今日+6.18%倍量穿三线是金价暴跌后的板块脉冲，方向在金价不在自身。焦点双变量：①15.14平台上沿（放量站稳→15.4-16.5）②金价方向（续跌=脉冲逻辑续命但利润挨打，反弹=脉冲结束）。暗雷=二股东明牌质押53.6%。坐标z=1平台×无方向，观察档。",
+    "dims_oneliner": {
+      "gene": "模式4+模式9弱复合——金价双向暴露+高股息类债底特殊结构",
+      "state": "z=1平台中轴上穿，测试上沿15.14",
+      "report": "扣非-1.9%主业实稳被误读；质押风险监视中（V4.7明早补跑）",
+      "forecast": "无方向：脉冲方向由金价决定，不由自身决定"
+    },
+    "key_risk": "明牌质押平仓+金价续跌双杀：脉冲后深跌→质押放大跌幅",
+    "tracking": "①15.14攻防②金价方向③明牌质押变动④12月贺岁销售"
+  },
+
+  "verification": null,
+
+  "view_gene": {
+    "total_lit": 5,
+    "total_partial": 0,
+    "total_vars": 11,
+    "top_pattern": "模式4困境反转型",
+    "note": "弱复合结构，金价双向暴露特殊——非标准9模式",
+    "patterns": [
+      {"id": "模式4", "name": "困境反转型", "top": true, "lit_vars": 2, "total_vars": 6, "vars": [
+        {"status": "lit", "name": "业绩困境", "evidence": "Q3归母-59.4%"},
+        {"status": "lit", "name": "估值极低", "evidence": "PE11.6"},
+        {"status": "none", "name": "突发消息", "evidence": "无"},
+        {"status": "none", "name": "情绪饥渴", "evidence": "老字号机构覆盖"},
+        {"status": "none", "name": "股价极低", "evidence": "14.93元"},
+        {"status": "none", "name": "消息真实性", "evidence": "无"}
+      ]},
+      {"id": "模式9", "name": "游资情绪驱动型", "top": false, "lit_vars": 2, "total_vars": 5, "vars": [
+        {"status": "lit", "name": "板块热点", "evidence": "黄金板块联动+6.18%"},
+        {"status": "lit", "name": "脉冲形式", "evidence": "量比2.5倍"},
+        {"status": "none", "name": "小市值", "evidence": "116亿>50亿"},
+        {"status": "none", "name": "低关注度", "evidence": "否"},
+        {"status": "none", "name": "无基本面", "evidence": "扣非-1.9%有底"}
+      ]}
+    ]
+  },
+
+  "view_state": {
+    "current_idx": 1,
+    "zones": [
+      {"name": "底部区", "range": "低位区（13.81下方）"},
+      {"name": "横盘整理区", "range": "13.81-15.14平台（当前·中轴上穿）"},
+      {"name": "放量突破区", "range": "15.14+放量站稳"},
+      {"name": "主升区", "range": "16.5量度路径"},
+      {"name": "退潮区", "range": "破13.81"}
+    ],
+    "judgment": [
+      {"dim": "价量维", "status": "lit", "value": "倍量穿三线", "evidence": "量比2.5倍/一阳穿三线"},
+      {"dim": "资金维", "status": "part", "value": "板块脉冲+股息底", "evidence": "黄金板块联动/5.2%股息承接"},
+      {"dim": "基本面维", "status": "part", "value": "营收强利润弱", "evidence": "+29%/-20.7%，扣非-1.9%"},
+      {"dim": "题材维", "status": "lit", "value": "买跌抢购+高股息", "evidence": "金价跌营收放量验证"},
+      {"dim": "环境维", "status": "part", "value": "金价暴跌后板块反弹", "evidence": "外部变量主导"},
+      {"dim": "筹码维", "status": "none", "value": "上沿套牢+明牌质押", "evidence": "15.14/11-17套牢+质押53.6%"},
+      {"dim": "事件维", "status": "part", "value": "贺岁季+金价方向", "evidence": "12-1月/外部"}
+    ],
+    "transitions": [
+      {"from": "平台中轴", "to": "放量突破", "conditions": [{"text": "放量站稳15.14", "met": false}, {"text": "金价企稳配合", "met": false}]},
+      {"from": "平台中轴", "to": "退潮", "conditions": [{"text": "破13.81 或 质押平仓", "met": false}]}
+    ],
+    "note": "中轴上穿待方向，突破与退潮条件均未触发"
+  },
+
+  "daily_chain": [
+    {"name": "① MACD底座", "tag": "v₀", "output": "0", "formula": "死叉×板块脉冲=对冲", "note": null},
+    {"name": "② 柱体油门", "tag": "a_macd", "output": "+1", "note": "倍量大阳2.5倍量"},
+    {"name": "③ 奇门修正", "tag": "q_bias", "output": "-1", "formula": "死门(金价跌)+螣蛇+天英(脉冲)", "note": "虚火=方向在金价"},
+    {"name": "④ 合成定级", "tag": "fusion", "output": "无方向", "formula": "0+1-1=0", "note": null},
+    {"name": "⑤ 三源目标价", "tag": "pricing", "output": "15.1~16.5(突破后)", "note": "源1源2重合"},
+    {"name": "⑥ 对账回填", "tag": "verification", "output": "首诊无回填", "note": null}
+  ],
+
+  "todo_list": ["15.14平台上沿攻防", "金价方向跟踪（脉冲逻辑存续条件）", "明牌质押变动（暗雷）", "12月贺岁金销售数据", "年报减值计提幅度", "V4.7全量分析补跑（11-24早间·五只同批）"],
+
+  "history": [
+    {"date": "20261123", "v0": 0, "a_macd": 1, "q_bias": -1, "pred": "无方向", "actual": "待回填", "hit": "待回填", "cell": "1_3"}
+  ],
+
+  "prev_diagnose": null,
+
+  "timeline": [
+    {"date": "20261028", "type": "earnings", "event": "三季报：营收+29%/归母-20.7%/Q3单季-59%；金价波动致减值+套保亏损", "dims": {"gene": "金价双向", "state": "利润表挨打", "forecast": null, "report": "扣非-1.9%主业稳"}},
+    {"date": "20261121", "type": "policy", "event": "纽约期金-4%（美股暴跌联动）——金价方向选择点", "dims": {"gene": null, "state": "平台下沿13.81", "forecast": null, "report": "买跌逻辑启动条件"}},
+    {"date": "20261123", "type": "diagnose", "event": "首诊：金价暴跌后+6.18%倍量脉冲×无方向→观察档（z1×g3）", "dims": {"gene": "模式4+9弱复合", "state": "z=1中轴上穿", "forecast": "无方向", "report": "V4.7排期11-24同批"}}
+  ]
+}
