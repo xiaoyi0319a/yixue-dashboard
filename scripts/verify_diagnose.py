@@ -161,6 +161,24 @@ def check_judgment_fresh(d, code, date, errs):
             )
 
 
+def check_index_sync(code, errs):
+    """⭐索引同步断言（11-23 300541页面缺失事故防线）——diagnoses_index.json必须含该code"""
+    idx_file = os.path.join(DATA, "diagnoses_index.json")
+    if not os.path.exists(idx_file):
+        errs.append("⭐索引:diagnoses_index.json不存在")
+        return
+    try:
+        idx = json.load(open(idx_file))
+        codes = [s.get("code") for s in idx.get("stocks", [])]
+        if code not in codes:
+            errs.append(
+                f"⭐索引:diagnoses_index.json不含{code}——档案列表不显示该票"
+                "（11-23事故：诊断JSON合格但索引未写，页面静默缺失）"
+            )
+    except Exception as e:
+        errs.append(f"⭐索引:diagnoses_index.json解析失败:{e}")
+
+
 def check_git(code, errs):
     r = subprocess.run(
         ["git", "-C", ROOT, "log", "origin/gh-pages..gh-pages", "--oneline",
@@ -183,6 +201,7 @@ def main():
         check_gate(d, errs)
         check_schema(d, errs)
         check_consistency(d, errs)
+        check_index_sync(code, errs)
         check_judgment_fresh(d, code, date, errs)
     check_git(code, errs)
     if errs:
