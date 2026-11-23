@@ -463,6 +463,10 @@ function renderReport(){
   const catRows=cats.map(c=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #21262d"><div style="flex:1"><div style="color:#c9d1d9">${c.text}</div>${c.note?`<div style="color:#8b949e;font-size:11px;margin-top:2px">${c.note}</div>`:''}</div><span style="white-space:nowrap;font-size:11px;font-weight:700;color:${catStatus(c.status)}">${c.status}</span></div>`).join('');
   const vnRows=vn.map(v=>`<tr><td style="padding:6px 10px 6px 0;color:#58a6ff;white-space:nowrap;font-weight:600">${v.time}</td><td style="padding:6px 10px;color:#c9d1d9;white-space:nowrap">${v.event}</td><td style="padding:6px 10px;color:#8b949e">${v.verify}</td><td style="padding:6px 0;color:#d29922;font-size:11px">${v.miss_action}</td></tr>`).join('');
   const evs=r.event_analysis||[];
+  const qr=(D.matrix_L1||{}).qimen_reading;
+  const QR_LABEL={gene:'🧬 基因 · 走哪条路',launch:'🚀 启动 · 在哪一格何时动',report:'📋 报告 · 假设成立否',direction:'🧭 方向 · 次日力量'};
+  const qrCard=(k)=>{const q=(qr||{})[k];if(!q)return '';const cf=String(q.conflict||'');const cc=cf.startsWith('⚠️')?'#d29922':cf.startsWith('❌')?'#f85149':'#3fb950';return `<div style="padding:10px 0;border-bottom:1px solid #21262d"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap"><span style="color:#58a6ff;font-weight:700;font-size:13px;white-space:nowrap">${QR_LABEL[k]}</span><span style="font-size:10px;color:#8b949e">${q.palace||''}</span><span style="margin-left:auto;font-size:10px;color:${cc};font-weight:600;white-space:nowrap">${cf}</span></div><div style="color:#c9d1d9;line-height:1.7;font-size:12px">${q.reading||''}</div></div>`};
+  const qrSection=(qr&&qr.gene)?`<div class="card" style="margin-bottom:12px"><div class="card-title">问事局四问断局 <span style="font-size:10px;color:#8b949e;font-weight:400">旁证层 · 数据主判奇门旁证 · ${qr.pan_time||''}</span></div>${qrCard('gene')}${qrCard('launch')}${qrCard('report')}${qrCard('direction')}</div>`:'';
   const evRows=evs.map(e=>`<div style="padding:10px 0;border-bottom:1px solid #21262d"><div style="color:#c9d1d9;font-weight:700">${e.event}</div><div style="margin-top:6px;font-size:12px;color:#8b949e;line-height:1.8"><span style="color:#58a6ff">是什么：</span>${e.what}<br><span style="color:#d29922">基本面账本：</span>${e.impact}<br><span style="color:#3fb950">交易含义：</span>${e.trade_logic}</div></div>`).join('');
 
   body.innerHTML=`
@@ -470,6 +474,7 @@ function renderReport(){
       <div class="card-title">报告信息</div>
       <div style="font-size:12px;color:#8b949e">报告日期：<b style="color:#58a6ff">${r.date||'--'}</b> ｜ 假设状态：<b style="color:${r.standing&&r.standing.includes('成立')?'#3fb950':'#d29922'}">${r.standing||'--'}</b></div>
     </div>
+    ${qrSection}
     <div class="card" style="margin-bottom:12px">
       <div class="card-title">🔥 大白话四问</div>
       ${qaItem('这公司是干嘛的？',pq.what,'🏭')}
