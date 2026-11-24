@@ -1,0 +1,207 @@
+{
+  "stock": "300504 天邑股份",
+  "date": "20261124",
+  "generated": "首诊：三季报扭亏（营收+30%/归母9800万）托底+光通信题材弹性，箱体15-18.3放量反弹冲关中；双骨架=模式3技术概念4/6+模式5景气共振3.5/5",
+  "version": "立体矩阵V0.1 · 诊断V1.3-patch12 · 看板V2",
+  "diagnose_meta": {
+    "snapshot_time": "20261124",
+    "snapshot_price": 17.29,
+    "snapshot_pct": 10.27,
+    "close": 15.68,
+    "change_pct": 4.53,
+    "market_cap": "46.9亿",
+    "pe_ttm": 82.14,
+    "pb": 2.08,
+    "trigger": "首诊(无历史档案)",
+    "followed_qimen_version": "见CURRENT_INDEX",
+    "baseline_ref": null,
+    "prev_diagnose": null,
+    "note": "11-24盘中+10.27%至17.29，半日换手7.47%放量；52周区间11.67-20.89，距低+48%"
+  },
+  "matrix_grid": {
+    "zones": ["底部区","横盘整理","放量突破","主升","退潮"],
+    "grades": ["偏多","偏强","中性偏强","无方向","中性偏弱","偏弱","偏空"],
+    "current": { "z": 1, "g": 2, "label": "横盘整理偏强 × 中性偏强" },
+    "cells": {},
+    "note": "箱体15.0-18.29中偏上，今日放量冲关18.29前夜；收盘站17.5+则跃迁条件齐备"
+  },
+  "matrix_L0": {
+    "v0":     { "value": 1, "grade": "正贡献", "detail": "放量站回MA20/MA60上方+箱体中段偏上" },
+    "a_macd": { "value": 1.5, "detail": "11-23小阳+11-24放量大阳，柱体伸展中" },
+    "q_bias": -0.7,
+    "q_detail": "攻多1.52(D1壬旺); 攻空2.22(K4资金受制)——大盘纯分微偏空；个股盘局买盘宫带生门九天=个股层打正",
+    "cell": { "key": "1_2 横盘整理偏强×中性偏强" }
+  },
+  "matrix_L1": {
+    "prototype": { "match": "z=1横盘整理偏强·B平台突破型候选", "score_detail": "七维全量（首诊）", "full_detail": "抬高双底14.74/15.00+箱体上沿18.29；今日放量17.3冲关前夜；距低+48%否决底部区" },
+    "gene":      { "pattern": "模式3技术概念型(4/6,主)+模式5景气共振型(3.5/5,主)+模式9情绪(3/5,次)", "match_detail": "模式3:概念热度✓应用想象✓主业不亏损✓(扭亏)技术突破△(MPO开拓中)；模式5:细分地位✓拐点✓(扭亏+营收30%)景气△；与纯情绪票分水岭=业绩拐点已确认", "full_detail": "见档案模块A：9模式逐项匹配；风险=扣非PE113倍扭亏质量待验+MPO无收入证据" },
+    "report_update": { "type": "regenerate", "trigger": "首诊点播当次全量V4.7（4.5c）", "prev_date": null, "changed_fields": ["全部五要素"] },
+    "report":    {
+      "date": "20261124",
+      "standing": "扭亏逻辑真实（营收+30%/归母9800万），假设成立；兑现质量待年报扣非验证",
+      "plain_qa": {
+        "what": "做宽带接入设备的：光猫（PON网关）、FTTR全屋组网设备、光纤连接器光缆接头盒这些，客户是国内电信运营商；正开拓MPO跳线（数据中心光互联用的）。",
+        "expensive": "PE 82倍是历史93%分位——贵；PB 1.89倒温和。市场已经在预支扭亏后的成长，扣非利润薄（扣非PE 113倍）说明利润质量一般。",
+        "story": "故事=F5G光改+算力光互联（MPO跳线从接入网切进数据中心）+华为链；真预期差=MPO若放量，估值从通信设备切光互联；反预期差=扣非若难看，扭亏成色打折。",
+        "worst": "最坏=光通信情绪退潮+年报扣非证伪，跌回15元双底，PE高位的戴维斯双杀。"
+      },
+      "valuation_split": [
+        { "part": "主业估值", "value": "PB 1.89口径净资产厚", "basis": "PON网关/FTTR传统业务PE中枢25-47倍（历史30/70分位）" },
+        { "part": "情绪段量度", "value": "18.29第一压 / 21.6量度位", "basis": "箱体15.0-18.29高3.29×1:1=21.6；前高20.89" }
+      ],
+      "scenarios": [
+        { "name": "乐观", "prob": "25%", "range": "20.9-21.6元", "trigger": "收盘站稳17.5+明日放量破18.29，箱体突破走量度" },
+        { "name": "基准", "prob": "50%", "range": "16.5-18.3元", "trigger": "箱体震荡消化，等年报扣非/MPO订单催化再择向", "most_likely": true },
+        { "name": "悲观", "prob": "25%", "range": "15-16元", "trigger": "光通信退潮+冲关失败，回落双底再受考验" }
+      ],
+      "current_price_note": "盘中17.29在基准区间上沿附近，18.29门前一步",
+      "weight_ranking": [
+        { "change": "光通信/MPO题材持续性", "level": "顶", "contribution": "决定箱体突破与否" },
+        { "change": "年报扣非质量", "level": "底", "contribution": "决定扭亏逻辑真伪，1月验证" },
+        { "change": "MPO跳线放量订单", "level": "底", "contribution": "估值切换开关，未出现" }
+      ],
+      "catalysts": [
+        { "text": "光通信/算力板块行情", "status": "进行中", "note": "11-24算力租赁+2.95%佐证科技线活跃" },
+        { "text": "MPO跳线订单公告", "status": "未出现", "note": "10-21互动易'开拓中'" },
+        { "text": "年报预告扣非转正", "status": "待验证", "note": "2027年1月" }
+      ],
+      "falsify": { "condition": "收盘跌破16.8（MA20/MA60）或年报扣非亏损", "status": "未触发（盘中17.29）" },
+      "valid_nodes": [
+        { "time": "11-24收盘", "event": "收盘强弱定级", "verify": "17.5上方=强/16.8下方=弱", "miss_action": "跌回箱体下半部" },
+        { "time": "11-25", "event": "18.29争夺", "verify": "放量+站稳=突破成立", "miss_action": "冲关失败回17" },
+        { "time": "2027-01", "event": "年报预告", "verify": "扣非是否转正", "miss_action": "扭亏质量证伪" }
+      ]
+    }
+  },
+  "matrix_L2": {
+    "active_risks": ["PE82倍93%历史分位估值高","扣非PE113倍利润质量打折","MPO无收入证据","18.29套牢盘强压","11月A杀记忆(-18%两日)"],
+    "vetoes": [],
+    "extreme_day": false
+  },
+  "fusion": {
+    "direction": "中性偏强",
+    "confidence": "中(放量反弹+扭亏托底vs18.29未破+估值高位)",
+    "form": "箱体中偏上放量反弹，冲关18.29需补量",
+    "verdict": "v0(+1·站回全均线上方)×a(+1.5·柱体伸展)×q(-0.7·大盘微偏空但个股买盘带生门)→中性偏强：收盘17.5上方则冲关有效，破18.29打开21.6"
+  },
+  "pricing": {
+    "target_price": {
+      "sources": [
+        { "source": "基本面估值", "range": "参考区间25-47倍PE(历史30/70分位)", "basis": "扭亏后PE中枢待年报扣非定锚；当前82倍已超70分位" },
+        { "source": "启动特征量度", "range": "18.29第一压 / 21.6量度位", "basis": "B平台突破1:1量度15.0+3.29×2=21.6；前高20.89" },
+        { "source": "翻倍基因先例", "range": "21-25元", "basis": "模式5案例底部涨幅中位+100%~+150%(3-6月)；模式3脉冲段+50%~+80%(6-12交易日,A杀同速)" }
+      ],
+      "overlap_zone": "20.9-21.6（量度与前高重叠区）",
+      "divergence_note": "量度/先例收敛于21-22元区，但需先破18.29+题材持续+年报验证三关",
+      "confidence": "中低（三关未过）"
+    },
+    "timing": {
+      "timing_window": "本轮=超卖修复反弹窗（1-3交易日）；箱体突破窗口看11-25-11-27量能配合；质变窗口=年报预告（2027-01）",
+      "strength_check": "扭亏底盘真实但估值已预支——21.6量度位需MPO订单或年报扣非双印证，力量打折",
+      "tail_risk": "伤门在时干：冲关易带伤回落；光通信情绪退潮=无承接回落15-16"
+    }
+  },
+  "verdict": {
+    "summary": "一句话：天邑是真扭亏+真题材的票，基本面托底在、弹性靠光通信，但现在正站在18.29这道门前。焦点=今天收盘17.5上方站稳、明天补量破18.29——破了看21.6，不破回箱体16.5-18.3继续磨。两个剧本：量来+题材续=突破走量度；量不来=等年报扣非和MPO订单两个真催化。坐标：横盘整理偏强×中性偏强。",
+    "dims_oneliner": {
+      "gene": "模式3技术概念4/6+模式5景气共振3.5/5双骨架，业绩拐点已确认（与纯情绪票分水岭）",
+      "state": "z=1箱体偏强，放量冲关18.29前夜，收盘17.5定强弱",
+      "report": "扭亏真实但扣非质量待验（PE113倍⚠️），基准50%=箱体震荡",
+      "forecast": "中性偏强，冲关需补量，破18.29才打开21.6量度"
+    },
+    "key_risk": "18.29冲关失败+情绪退潮=回落15-16；年报扣非证伪=扭亏逻辑坍塌",
+    "tracking": "今日收盘17.5强弱线→明日18.29争夺量能→2027-01年报扣非→MPO订单公告"
+  },
+  "qimen_reading": {
+    "pan_time": "20261124 13:00 丁未时盘",
+    "gene":   {"palace": "乾六·九地+芮禽+伤门+地盘庚", "reading": "存量扎实(九地)但带病运行(芮禽)，伤门+庚=转型路上有伤有阻——MPO新故事未修成", "conflict": "✓与模块A模式3技术突破△一致"},
+    "launch": {"palace": "值使休门坤二·马星申逢值·值符同宫", "reading": "马星逢值=动象已至(今日放量应象)，休门=动而未发(箱体未破)，值符=扭亏正统背书；收盘站17.5+则休门转开门", "conflict": "✓与模块B跃迁前夜一致"},
+    "report": {"palace": "日干壬坤二(休门)生时干丁乾六(伤门)", "reading": "养着看——基本面向好供养股价(生)，但兑现路上有伤(扣非质量/MPO验证两伤点未愈)，18.29未破不宜追高", "conflict": "✓与模块D分歧核心一致"},
+    "direction": {"palace": "乙奇兑七·生门九天 vs 庚艮八·白虎景门", "reading": "买盘带生门九天(高远有气)，卖盘带白虎(凶)——冲高动能存在但伤门=易带伤回落；18.29门前震荡难免", "conflict": "✓与fusion中性偏强一致"}
+  },
+  "view_gene": {
+    "total_lit": 11,
+    "total_partial": 3,
+    "total_vars": 16,
+    "top_pattern": "模式3技术概念型+模式5景气共振型",
+    "note": "双骨架主归属：业绩拐点已确认+概念热度强；模式9为情绪层次归属",
+    "patterns": [
+      {
+        "id": "模式3", "name": "技术概念型", "top": true,
+        "lit_vars": 4, "total_vars": 6,
+        "vars": [
+          { "status": "lit", "name": "概念热度", "evidence": "F5G/WiFi6/MPO/华为/边缘计算多标签，光纤/5G走势最相关✓" },
+          { "status": "lit", "name": "应用想象", "evidence": "MPO跳线切入数据中心光互联✓" },
+          { "status": "lit", "name": "主业不亏损", "evidence": "2026Q3扭亏✓（与纯情绪票分水岭）" },
+          { "status": "part", "name": "技术突破", "evidence": "MPO'开拓中'无放量证据△" },
+          { "status": "part", "name": "参股映射", "evidence": "理湃光晶AI眼镜小额权益△" }
+        ]
+      },
+      {
+        "id": "模式5", "name": "景气共振型", "top": true,
+        "lit_vars": 3, "total_vars": 5,
+        "vars": [
+          { "status": "lit", "name": "细分地位", "evidence": "PON网关/FTTR运营商卡位✓" },
+          { "status": "lit", "name": "业绩拐点", "evidence": "前三季营收+30.4%/归母9798万扭亏✓" },
+          { "status": "part", "name": "下游景气", "evidence": "F5G建设+光改+算力互联△" },
+          { "status": "part", "name": "国产替代", "evidence": "华为链标签△" }
+        ]
+      },
+      {
+        "id": "模式9", "name": "游资情绪驱动型", "top": false,
+        "lit_vars": 3, "total_vars": 5,
+        "vars": [
+          { "status": "lit", "name": "小市值<50亿", "evidence": "42-47亿✓" },
+          { "status": "lit", "name": "板块热点", "evidence": "光通信/算力轮动✓" },
+          { "status": "none", "name": "无基本面支撑", "evidence": "已扭亏✗（本项卡掉，非主归属）" }
+        ]
+      }
+    ]
+  },
+  "view_state": {
+    "current_idx": 1,
+    "zones": [
+      { "name": "底部区", "range": "距低<15%·缩量平台" },
+      { "name": "横盘整理区", "range": "箱体15.0-18.29" },
+      { "name": "放量突破区", "range": "放量破18.29+次日确认" },
+      { "name": "主升区", "range": "站稳21.6后" },
+      { "name": "退潮区", "range": "A杀回15/破14.74" }
+    ],
+    "judgment": [
+      { "dim": "价量", "status": "lit", "value": "超卖修复放量大阳", "evidence": "RSI 19.6→34.7→今日；半日换手7.47%超昨全天" },
+      { "dim": "资金", "status": "part", "value": "反弹资金回流", "evidence": "龙虎榜未验；股东户数-1.05%微集中" },
+      { "dim": "基本面", "status": "lit", "value": "扭亏为盈", "evidence": "营收+30.4%/归母9798万；扣非薄⚠️" },
+      { "dim": "题材", "status": "lit", "value": "光通信/F5G/MPO", "evidence": "10-27涨停归因光通信；11-24算力线活跃" },
+      { "dim": "环境", "status": "part", "value": "大盘无方向+科技线活跃", "evidence": "v_final=+1；算力租赁+2.95%" },
+      { "dim": "筹码", "status": "part", "value": "双底抬高+上方套牢", "evidence": "14.74/15.00双底；18.29下方11-12套牢盘" },
+      { "dim": "估值", "status": "none", "value": "PE82倍93%分位", "evidence": "扣非PE113倍；PB1.89温和" }
+    ],
+    "transitions": [
+      { "from": "横盘整理区", "to": "放量突破区", "conditions": [{ "text": "收盘站稳17.5+次日放量破18.29", "met": false }] },
+      { "from": "横盘整理区", "to": "底部区", "conditions": [{ "text": "跌破15.0双底", "met": false }] },
+      { "from": "横盘整理区", "to": "退潮区", "conditions": [{ "text": "板块退潮+跌回14.74", "met": false }] }
+    ],
+    "note": "箱体中偏上，18.29门前一步，收盘定强弱"
+  },
+  "daily_chain": [
+    { "name": "① MACD底座", "tag": "v₀", "output": "+1 放量站回MA20/MA60上方", "formula": "位置交叉项" },
+    { "name": "② 柱体油门", "tag": "a_macd", "output": "+1.5 两连阳柱体伸展", "formula": "近3日柱判定" },
+    { "name": "③ 奇门修正", "tag": "q_bias", "output": "-0.7 大盘微偏空；个股买盘带生门九天打正", "note": "丁未时盘" },
+    { "name": "④ 合成定级", "tag": "fusion", "output": "中性偏强", "formula": "v0×a×q装置" },
+    { "name": "⑤ 三源目标价", "tag": "pricing", "output": "短期18.29第一压/21.6量度；基本面锚25-47倍PE", "note": "三关未过=18.29+题材持续+年报验证" },
+    { "name": "⑥ 对账回填", "tag": "verification", "output": "首诊无对账基线", "note": "下次点播回填今日预判" }
+  ],
+  "todo_list": ["今日收盘17.5强弱线验证","明日18.29争夺量能观察","龙虎榜机构/游资结构","2027-01年报扣非验证","MPO跳线订单公告检索"],
+  "history": [
+    { "date": "20261124", "v0": 1, "a_macd": 1.5, "q_bias": -0.7, "pred": "中性偏强", "actual": "待收盘", "hit": "待回填", "cell": "1_2" }
+  ],
+  "prev_diagnose": null,
+  "timeline": [
+    { "date": "20260721", "type": "event", "event": "52周低点11.67元（6-4见顶20.89后-44%深跌见底）", "dims": { "gene": null, "state": "底部区", "forecast": null, "report": null } },
+    { "date": "20261026", "type": "event", "event": "区间低点14.74元（第一波反弹起点）", "dims": { "gene": null, "state": "反弹起点", "forecast": null, "report": null } },
+    { "date": "20261027", "type": "event", "event": "涨停：三季报扭亏+通信设备+MPO跳线+费半光通信映射", "dims": { "gene": "模式5拐点初现", "state": "放量反弹", "forecast": null, "report": null } },
+    { "date": "20261112", "type": "event", "event": "反弹高点18.29元", "dims": { "gene": null, "state": "箱体上沿形成", "forecast": null, "report": null } },
+    { "date": "20261120", "type": "event", "event": "两日-13.5%A杀至15.00（RSI 19.58超卖）", "dims": { "gene": null, "state": "双底15.00", "forecast": null, "report": null } },
+    { "date": "20261124", "type": "diagnose", "event": "首诊：z=1箱体偏强·模式3+模式5双骨架·中性偏强·冲关18.29前夜", "dims": { "gene": "模式3(4/6)+模式5(3.5/5)双骨架", "state": "横盘整理偏强", "forecast": "中性偏强", "report": "扭亏真实待验/基准箱体震荡" } }
+  ]
+}
