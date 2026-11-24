@@ -248,7 +248,10 @@
   "key_risk": "明牌质押平仓+金价续跌双杀：脉冲后深跌→质押放大跌幅",
   "tracking": "①15.14攻防②金价方向③明牌质押变动④12月贺岁销售"
  },
- "verification": null,
+ "verification": {
+  "hit": "✅",
+  "note": "批量回填：历史1次对账 ✅1/⚠️0/❌0"
+ },
  "view_gene": {
   "total_lit": 5,
   "total_partial": 0,
@@ -483,8 +486,8 @@
    "a_macd": 1,
    "q_bias": -1,
    "pred": "无方向",
-   "actual": "待回填",
-   "hit": "待回填",
+   "actual": "+0.20%(无方向)",
+   "hit": "✅",
    "cell": "1_3"
   }
  ],

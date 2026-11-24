@@ -267,7 +267,10 @@
   "key_risk": "Q4证伪拐点=升档逻辑崩塌；养老金松动=平台结构性风险",
   "tracking": "①29.30攻防②Q4业绩③回购月报④养老金持仓变动(季报)"
  },
- "verification": null,
+ "verification": {
+  "hit": "❌",
+  "note": "批量回填：历史1次对账 ✅0/⚠️0/❌1"
+ },
  "view_gene": {
   "total_lit": 3,
   "total_partial": 2,
@@ -463,8 +466,8 @@
    "a_macd": 1,
    "q_bias": -1,
    "pred": "中性偏强",
-   "actual": "待回填",
-   "hit": "待回填",
+   "actual": "-0.65%(中性偏弱)",
+   "hit": "❌",
    "cell": "1_2"
   }
  ],
