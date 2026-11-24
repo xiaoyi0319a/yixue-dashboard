@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-25",
+  "compared": {
+    "A": "data/pipeline_shadow_20261125.json",
+    "B": "data/pipeline_20261125.json"
+  },
+  "summary": {
+    "total_fields": 416,
+    "consistent": 412,
+    "only_in_A": 1,
+    "only_in_B": 3,
+    "value_diff": 0
+  },
+  "only_in_A": {
+    "fusion.v0_grade": 2
+  },
+  "only_in_B": {
+    "actual_curve": null,
+    "date_display": "11-25 周三",
+    "matrix_missing_note": "今日无矩阵缺格"
+  },
+  "value_diff": {},
+  "assessment": "412/416字段语义全等；4处差异均为展示层/旧版融合字段，非数据冲突（A=影子组装版含旧fusion.v0_grade；B=LLM直写版含展示字段date_display、matrix_missing_note及actual_curve占位null——验证状态pending收盘后回填）"
+}
