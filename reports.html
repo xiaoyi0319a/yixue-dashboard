@@ -239,21 +239,6 @@
             </div>
             <div class="filter-tags" id="filterTags">
                 <span class="filter-tag active" data-tag="all">全部</span>
-                <span class="filter-tag" data-tag="业绩拐点">业绩拐点</span>
-                <span class="filter-tag" data-tag="国产替代">国产替代</span>
-                <span class="filter-tag" data-tag="并购重组专题">并购重组</span>
-                <span class="filter-tag" data-tag="创新药">创新药</span>
-                <span class="filter-tag" data-tag="人形机器人">人形机器人</span>
-                <span class="filter-tag" data-tag="核电">核电</span>
-                <span class="filter-tag" data-tag="汽车智能化">汽车智能化</span>
-                <span class="filter-tag" data-tag="新能源连接器">新能源连接器</span>
-                <span class="filter-tag" data-tag="精密零组件">精密零组件</span>
-                <span class="filter-tag" data-tag="多肽原料药">多肽原料药</span>
-                <span class="filter-tag" data-tag="GLP-1">GLP-1</span>
-                <span class="filter-tag" data-tag="疫苗龙头">疫苗</span>
-                <span class="filter-tag" data-tag="中价值">中价值</span>
-                <span class="filter-tag" data-tag="困境反转">困境反转</span>
-                <span class="filter-tag" data-tag="北交所">北交所</span>
             </div>
         </div>
 
@@ -297,12 +282,39 @@
             return tagStyles[tag] || 'tag-normal';
         }
 
+        const MAX_FILTER_TAGS = 15;
+        const MIN_TAG_FREQ = 2;
+
+        // 从 reports.json 统计标签频次，动态生成筛选按钮
+        function buildFilterTags() {
+            const freq = {};
+            allReports.forEach(r => {
+                const tags = Array.isArray(r.tags) ? r.tags : [];
+                tags.forEach(t => {
+                    if (t && t !== '待补充' && t !== '待评级') {
+                        freq[t] = (freq[t] || 0) + 1;
+                    }
+                });
+            });
+            const sorted = Object.entries(freq)
+                .filter(([, count]) => count >= MIN_TAG_FREQ)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, MAX_FILTER_TAGS);
+            const container = document.getElementById('filterTags');
+            let html = '<span class="filter-tag active" data-tag="all">全部</span>';
+            sorted.forEach(([tag, count]) => {
+                html += `<span class="filter-tag" data-tag="${tag}">${tag} ${count}</span>`;
+            });
+            container.innerHTML = html;
+        }
+
         async function loadReports() {
             try {
                 const response = await fetch('reports.json?t=' + Date.now());
                 allReports = await response.json();
                 // 按日期倒序
                 allReports.sort((a, b) => new Date(b.date) - new Date(a.date));
+                buildFilterTags();
                 applyFilters();
             } catch (e) {
                 console.error('加载 reports.json 失败:', e);

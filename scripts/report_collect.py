@@ -54,6 +54,37 @@ def extract_code_date(path):
     return None, None
 
 
+def extract_tags_from_report(text):
+    """从报告内容自动提取标签：subtitle 分片 + 价值等级"""
+    tags = []
+    # 1. 从 YAML subtitle 提取（· 或 ：分隔，取前3-4个核心短语）
+    m = re.search(r'^subtitle:\s*["\']?(.+?)["\']?\s*$', text, re.M)
+    if m:
+        sub = m.group(1).strip()
+        if sub and sub != '待补充':
+            # 按 · 或 ： 分隔
+            parts = re.split(r'[·：:，,]', sub)
+            for p in parts:
+                p = p.strip().strip('·')
+                if p and len(p) > 2 and not p.startswith('待'):
+                    # 截断过长的片段
+                    if len(p) > 15:
+                        p = p[:15]
+                    tags.append(p)
+                if len(tags) >= 4:
+                    break
+    # 2. 从正文提取价值等级
+    m2 = re.search(r'\*\*投资价值(?:评估)?\*\*\s*[：:]\s*([高低无][-中高低]*价值)', text)
+    if m2:
+        tags.append(m2.group(1))
+    else:
+        # 宽松匹配
+        m3 = re.search(r'投资价值[：:]\s*([高低无][-中高低]*价值)', text)
+        if m3:
+            tags.append(m3.group(1))
+    return tags if tags else ["待补充", "待评级"]
+
+
 def load_name_map():
     try:
         idx = json.load(open(INDEX_F))
@@ -127,9 +158,12 @@ def main():
             open(dst_md, 'w', encoding='utf-8').write(
                 ensure_yaml(text, code, date, names))
         if need_json:
+            # 从报告内容自动提取标签
+            text = open(dst_md, encoding='utf-8').read()
+            auto_tags = extract_tags_from_report(text)
             entry = {"code": code, "name": names.get(code, code), "date": date,
                      "file": f"/yixue-dashboard/stock-{code}.html",
-                     "tags": ["待补充", "待评级"]}
+                     "tags": auto_tags}
             if code in by_code:
                 items[items.index(by_code[code])] = entry
             else:
