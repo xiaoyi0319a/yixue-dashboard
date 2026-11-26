@@ -38,6 +38,12 @@ def main():
         slots = [s.get("grade") for s in data.get("four_slots", []) if isinstance(s, dict)]
         if not quiet:
             print(f"✅ schema 校验通过 ｜ matrix_drop {len(md)}格 ｜ final_grade={fg} ｜ 四时段={'/'.join(str(s) for s in slots)}")
+        # ⭐11-26 warn（patch46）：shape实体/振幅档幅度标注检查——不fail仅日志暴露（11-23起生产端文本退化两档）
+        shape = data.get("shape") or {}
+        for k, label in (("body_grade", "实体档"), ("amplitude_grade", "振幅档")):
+            v = shape.get(k)
+            if v and "%" not in str(v):
+                print(f"  ⚠️ warn: shape.{k}（{label}）缺幅度标注（patch46红线）: {v}")
         sys.exit(0)
 
     # 错误分组报告
