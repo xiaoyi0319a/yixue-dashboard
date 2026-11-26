@@ -727,7 +727,7 @@ function renderPipeline(d){
       <span class="k">v_final = ${d.fusion.v_cross>0?'+':''}${d.fusion.v_cross} + ${d.fusion.b_value>0?'+':''}${d.fusion.b_value} = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>`},
     {key:'output',active:true,html:`
       <span class="k">v_final = </span><span class="v ${d.fusion.v_final>0?'pos':d.fusion.v_final<0?'neg':'zero'}">${d.fusion.v_final>0?'+':''}${d.fusion.v_final}</span>${(()=>{const nf=d.nine_fields&&typeof d.nine_fields.final_grade==='number'?d.nine_fields.final_grade:null;const cl=d.fusion.combo_lookup||'';if(nf!==null&&nf!==d.fusion.v_final&&/压|升档|调整/.test(cl))return ` <span class="k" style="color:#d29922">→ ${nf>0?'+':''}${nf} 生效</span>`;return '';})()} <span class="k">→ 表4-A →</span> <span class="v ${d.fusion.v_final<0?'neg':'pos'}" style="font-size:14px">${d.fusion.final_grade}</span>${d.nine_fields&&d.nine_fields.weak_base_dir?`<br><span class="k" style="color:#d29922">-W底座方向记账</span> <span class="v">${d.nine_fields.weak_base_dir<0?'偏空':d.nine_fields.weak_base_dir>0?'偏多':'中性'}（弱底座·低置信·修正层剥离）</span>`:''}<br>
-      <span class="path-label">路径：${d.path}</span>${d.shape?`<br><span class="k">${d.shape.close_label||d.shape.three_value_label||'—'}</span> ｜ <span class="k">形态</span> <span class="v">${d.shape.pattern||'—'}</span> ｜ <span class="k">实体</span> <span class="v">${d.shape.body_grade||'—'}</span> ｜ <span class="k">振幅</span> <span class="v">${d.shape.amplitude_grade||'—'}</span>`:''}`},
+      <span class="path-label">路径：${d.path}</span>${d.shape?`<br><span class="k">${d.shape.close_label||d.shape.three_value_label||'—'}</span> ｜ <span class="k">形态</span> <span class="v">${d.shape.pattern||'—'}</span> ｜ <span class="k">实体</span> <span class="v">${d.shape.body_grade||'—'}</span> ｜ <span class="k">振幅</span> <span class="v">${fmtAmpGrade(d.shape.amplitude_grade,(d.volatility&&d.volatility.range)||'')}</span>`:''}`},
     ...(d.four_slots?[{key:'slots',active:true,html:slotsSVG(d.four_slots,340,105,d.actual_curve,slotCtx(d))}]:[])
   ];
 
@@ -931,6 +931,13 @@ function showDetail(key){
 /* ==================== 四时段SVG折线图 ==================== */
 const GRADE_VAL={'偏弱':-3,'偏空':-2,'略偏空':-1,'微偏弱':-1,'中性偏弱':-1,'强空':-3,'中空':-2,'无方向':0,'中性':0,'中性偏强':1,'微偏强':1,'略偏多':1,'偏多':2,'中多':2,'偏强':3,'强多':3};
 const GRADE_COLOR=v=>v>0?'#f85149':v<0?'#3fb950':'#8b949e';
+/* ⭐11-26归一化：振幅档缺幅度兜底——生产端11-23起amplitude_grade退化为裸档名（"中"），幅度源=当日volatility.range（口径精确一致）；body_grade（实体净位移口径）无机械源不兜底，靠数据端规范 */
+const fmtAmpGrade=(g,range)=>{
+  if(!g) return '—';
+  const gs=String(g);
+  if(gs.includes('%')||!range) return gs;
+  return gs+'（'+String(range).replace('%~','~')+'）';
+};
 /* ⭐示意路径上下文（2026-11-06老师15:20定稿5锚点查表制）：开盘情景/收盘预期=查表输入，纯机械化无手绘 */
 function slotCtx(d){
   const m=(d.verification&&d.verification.morning)||{};
