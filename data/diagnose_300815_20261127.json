@@ -1,0 +1,31 @@
+{
+ "stock": "300815 玉禾田",
+ "date": "20261127",
+ "version": "V1.3-patch13首诊",
+ "matrix_grid": {
+  "current": {
+   "z": 0,
+   "g": 1
+  }
+ },
+ "fusion": {
+  "direction": "中性偏强",
+  "target_price": {
+   "overlap_zone": "17.15(近)/28(远)"
+  },
+  "timing": {
+   "grade": "底部区启动尝试·回踩14.8-15.1参与"
+  }
+ },
+ "verdict": "启动尝试不追·回踩14.8-15.1介入·14.18止损·16.05站稳升级",
+ "history": [
+  {
+   "date": "2026-11-27",
+   "pred": "中性偏强",
+   "actual": "--",
+   "hit": "首诊待回填",
+   "cell": "0_1"
+  }
+ ],
+ "prev_diagnose": null
+}
