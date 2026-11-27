@@ -38,6 +38,8 @@ def find_queue():
             continue
         ru = d.get('matrix_L1', {}).get('report_update', {})
         report = d.get('matrix_L1', {}).get('report', {})
+        if not isinstance(ru, dict) or not isinstance(report, dict):
+            continue  # 结构非标准的旧档/坏档，不入队列
         trigger = str(ru.get('trigger', ''))
         standing = str(report.get('standing', ''))
         if 'V4.7' in trigger and '现场版' in standing:
